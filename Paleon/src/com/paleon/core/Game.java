@@ -77,9 +77,9 @@ public class Game {
 	}
 	
 	public void update(float dt) {
-		/*if(Mouse.isButtonDown(1)) {
+		if(Mouse.isButtonDown(1)) {
 			world.getTile(MousePicker.getX(), MousePicker.getY()).addEntity(new Pine());
-		}*/
+		}
 		
 		if(Mouse.isButtonDown(0)) {
 			Tile tile = world.getTile(MousePicker.getX(), MousePicker.getY());

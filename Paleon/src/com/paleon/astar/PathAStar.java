@@ -13,7 +13,10 @@ public class PathAStar {
 	
 	private Stack<Tile> path;
 	
+	private World world;
+	
 	public PathAStar(World world, Tile tileStart, Tile tileEnd) {
+		this.world = world;
 		if(world.getTileGraph() == null) {
 			world.setTileGraph(new PathTileGraph(world));
 		}
@@ -45,6 +48,10 @@ public class PathAStar {
 				Node<Tile> neighbourNode = nodes.get(n);
 				
 				if(n == null) {
+					continue;
+				}
+				
+				if(isClippingCorner(currentNode.data, n)) {
 					continue;
 				}
 				
@@ -99,6 +106,23 @@ public class PathAStar {
 		} else {
 			return 14 * dstX + 10 * (dstY - dstX);
 		}
+	}
+	
+	private boolean isClippingCorner(Tile curr, Tile neigh) {
+		int dX = curr.getX() - neigh.getX();
+		int dY = curr.getY() - neigh.getY();
+		
+		if(Math.abs(dX) + Math.abs(dY) == 2) {
+			if(world.getTile(curr.getX() - dX, curr.getY()).getMovementCost() == 0) {
+				return true;
+			}
+			
+			if(world.getTile(curr.getX(), curr.getY() - dY).getMovementCost() == 0) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 }

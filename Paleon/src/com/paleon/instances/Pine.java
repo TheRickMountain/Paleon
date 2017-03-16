@@ -11,6 +11,7 @@ public class Pine extends Entity {
 		super(ResourceManager.getTexture("pine"));
 		setTag("tree");
 		addComponent(new InfoComponent(this, InfoType.TREE));
+		setMovementCost(0);
 	}
 
 }

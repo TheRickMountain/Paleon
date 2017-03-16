@@ -2,6 +2,7 @@ package com.paleon.core;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import org.lwjgl.opengl.GL11;
 
@@ -35,7 +36,7 @@ public class World {
 	
 	private Tile[][] tiles;
 	
-	public List<Job> jobList = new ArrayList<>();
+	public Stack<Job> jobList = new Stack<>();
 	public List<Entity> settlersList = new ArrayList<>();
 	
 	private Game game;

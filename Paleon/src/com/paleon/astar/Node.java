@@ -12,8 +12,6 @@ public class Node<T> extends IHeapItem<Node<T>> {
 	
 	public Node<T> parent;
 	
-	public PathEdge<T>[] edges;
-	
 	private int heapIndex;
 	
 	public int getfCost() {

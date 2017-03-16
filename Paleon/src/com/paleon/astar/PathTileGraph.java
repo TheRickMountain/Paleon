@@ -1,8 +1,6 @@
 package com.paleon.astar;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.paleon.core.World;
@@ -23,27 +21,6 @@ public class PathTileGraph {
 				n.data = t;
 				nodes.put(t, n);
 			}
-		}
-	
-		for(Tile t : nodes.keySet()) {
-			Node<Tile> n = nodes.get(t);
-			
-			List<PathEdge<Tile>> edges = new ArrayList<>();
-			
-			List<Tile> neighbours = t.getNeighbours();
-			
-			for(Tile tile : neighbours) {
-				if(tile != null && tile.getMovementCost() > 0) {
-					PathEdge<Tile> e = new PathEdge<>();
-					e.cost = tile.getMovementCost();
-					e.node = nodes.get(tile);
-					
-					edges.add(e);
-				}
-			}
-			
-			n.edges = new PathEdge[edges.size()];
-			n.edges = edges.toArray(n.edges);
 		}
 		
 	}

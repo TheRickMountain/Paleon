@@ -41,7 +41,7 @@ public class PathAStar {
 				return;
 			}
 			
-			for(Tile n : currentNode.data.getNeighbours()) {
+			for(Tile n : currentNode.data.getNeighbours(true)) {
 				Node<Tile> neighbourNode = nodes.get(n);
 				
 				if(n == null) {
@@ -75,10 +75,6 @@ public class PathAStar {
 		while(!currentNode.equals(startNode)) {
 			path.push(currentNode.data);
 			currentNode = currentNode.parent;
-		}
-		
-		for(Tile t : path) {
-			t.setId(1);
 		}
 	}
 	

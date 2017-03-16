@@ -9,11 +9,13 @@ import com.paleon.blueprints.StoneBlueprint;
 import com.paleon.blueprints.WoodBlueprint;
 import com.paleon.components.Job;
 import com.paleon.ecs.Entity;
+import com.paleon.input.Mouse;
+import com.paleon.instances.Pine;
 import com.paleon.instances.Settler;
-import com.paleon.instances.Stone;
 import com.paleon.math.Vector2f;
 import com.paleon.terrain.Tile;
 import com.paleon.textures.Texture;
+import com.paleon.utils.MousePicker;
 import com.paleon.utils.MyFile;
 
 public class Game {
@@ -32,7 +34,7 @@ public class Game {
 	private Vector2f secondSelection;
 	private Entity selection;
 	
-	private Job.JobType jobType = Job.JobType.GATHERING;
+	//private Job.JobType jobType = Job.JobType.GATHERING;
 	
 	private StoneBlueprint stoneBp = new StoneBlueprint();
 	private WoodBlueprint woodBp = new WoodBlueprint();
@@ -65,16 +67,26 @@ public class Game {
 		
 		
 		world.addEntity(new Settler(world.getTile(10, 15)));
-		world.addEntity(new Settler(world.getTile(16, 2)));
-		world.addEntity(new Settler(world.getTile(2, 2)));
+		/*world.addEntity(new Settler(world.getTile(16, 2)));
+		world.addEntity(new Settler(world.getTile(2, 2)));*/
 		
-		world.getTile(4, 2).addEntity(new Stone());
-		world.getTile(5, 2).addEntity(new Stone());
-		world.getTile(6, 2).addEntity(new Stone());
-		world.getTile(7, 2).addEntity(new Stone());
+		world.getTile(4, 2).addEntity(new Pine());
+		world.getTile(5, 6).addEntity(new Pine());
+		world.getTile(6, 8).addEntity(new Pine());
+		world.getTile(2, 5).addEntity(new Pine());
 	}
 	
 	public void update(float dt) {
+		/*if(Mouse.isButtonDown(1)) {
+			world.getTile(MousePicker.getX(), MousePicker.getY()).addEntity(new Pine());
+		}*/
+		
+		if(Mouse.isButtonDown(0)) {
+			Tile tile = world.getTile(MousePicker.getX(), MousePicker.getY());
+			if(tile.isHasEntity()) {
+				world.jobList.push(new Job(tile, 0.5f));
+			}
+		}
 		
 		/*if(Keyboard.isKeyDown(Key.KEY_1)) {
 			jobType = Job.JobType.GATHERING;

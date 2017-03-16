@@ -84,7 +84,7 @@ public class Tile {
 				(diag && (Math.abs(this.x - tile.x) == 1 && Math.abs(this.y - tile.y) == 1));
 	}
 	
-	public List<Tile> getNeighbours() {
+	public List<Tile> getNeighbours(boolean diags) {
 		List<Tile> neighbours = new ArrayList<>();
 		
 		neighbours.add(terrain.getTile(x, y + 1));
@@ -92,10 +92,12 @@ public class Tile {
 		neighbours.add(terrain.getTile(x, y - 1));
 		neighbours.add(terrain.getTile(x - 1, y));
 		
-		neighbours.add(terrain.getTile(x + 1, y + 1));
-		neighbours.add(terrain.getTile(x + 1, y - 1));
-		neighbours.add(terrain.getTile(x - 1, y - 1));
-		neighbours.add(terrain.getTile(x - 1, y + 1));
+		if(diags) {
+			neighbours.add(terrain.getTile(x + 1, y + 1));
+			neighbours.add(terrain.getTile(x + 1, y - 1));
+			neighbours.add(terrain.getTile(x - 1, y - 1));
+			neighbours.add(terrain.getTile(x - 1, y + 1));
+		}
 		
 		return neighbours;
 	}

@@ -13,6 +13,7 @@ import com.paleon.blueprints.WoodBlueprint;
 import com.paleon.components.InfoComponent;
 import com.paleon.components.InfoType;
 import com.paleon.components.Job;
+import com.paleon.components.SettlerComponent;
 import com.paleon.ecs.ComponentType;
 import com.paleon.ecs.Entity;
 import com.paleon.input.Key;
@@ -93,7 +94,6 @@ public class Game {
 	}
 	
 	public void update(float dt) {
-		
 		if(Keyboard.isKeyDown(Key.KEY_1)) {
 			jobType = JobType.GATHERING;
 		} else if(Keyboard.isKeyDown(Key.KEY_2)) {
@@ -113,11 +113,12 @@ public class Game {
 			storageSelection();
 			break;
 		case BUILDING:
+			buildingSelection();
 			break;
 		}
 	}
 	
-	private void area(Tile t1, Tile t2, List<Tile> list, Blueprint blueprint, Color color) {
+	private void area(Tile t1, Tile t2, List<Tile> list, Blueprint blueprint, Color color, boolean prototype) {
 		int maxX = Math.max(t1.getX(), t2.getX());
 		int maxY = Math.max(t1.getY(), t2.getY());
 		
@@ -133,7 +134,11 @@ public class Game {
 				} else {
 					entity.getColor().set(1.0f, 0.5f, 0.5f, 0.5f);
 				}
-				tile.addPrototype(entity);
+				if(prototype) {
+					tile.addPrototype(entity);
+				} else {
+					tile.addEntityToWorld(entity);
+				}
 				list.add(tile);
 			}
 		}
@@ -219,7 +224,7 @@ public class Game {
 					
 					// Select new area
 					area(firstTile, secondTile, selectedTiles, entityBp, 
-							new Color(82, 22, 180, 64).convert());
+							new Color(82, 22, 180, 64).convert(), true);
 					
 					lastTile = secondTile;
 				}
@@ -237,13 +242,53 @@ public class Game {
 			lastTile = null;
 			
 			selectedTiles.clear();
-			
-			System.out.println(storageTiles.size());
 		}
 	}
 	
 	private void buildingSelection() {
+		if(Mouse.isButtonDown(0)) {
+			firstTile = world.getTile(MousePicker.getX(), MousePicker.getY());
+		}
 		
+		if(Mouse.isButton(0)) {
+			if(firstTile != null) {
+				secondTile = world.getTile(MousePicker.getX(), MousePicker.getY());
+				
+				if(!secondTile.equals(lastTile)) {
+					// Unselect early area
+					if(lastTile != null) {
+						for(Tile tile : selectedTiles) {
+							tile.removeEntityFromWorld();
+						}
+						selectedTiles.clear();
+					}
+					
+					// Select new area
+					area(firstTile, secondTile, selectedTiles, stoneBp, 
+							new Color(0.5f, 1.0f, 0.5f, 0.5f), false);
+					
+					lastTile = secondTile;
+				}
+				
+			}
+		}
+		
+		if(Mouse.isButtonUp(0)) {
+			for(Tile tile : selectedTiles) {
+				world.jobList.add(new Job(tile, 0.5f, jobType, new Stone()));
+			}
+			
+			firstTile = null;
+			secondTile = null;
+			lastTile = null;
+			
+			for(Entity entity : world.settlersList) {
+				SettlerComponent sc = (SettlerComponent) entity.getComponent(ComponentType.SETTLER);
+				sc.updatePathfinding();
+			}
+			
+			selectedTiles.clear();
+		}
 	}
 	
 }

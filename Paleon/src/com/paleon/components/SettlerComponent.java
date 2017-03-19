@@ -72,11 +72,24 @@ public class SettlerComponent extends Component {
 									Game.storageTiles.put(destTile, 1);
 								}
 							}
+						} else if(job.getType().equals(JobType.BUILDING)) {
+							job.getTarget().removeEntityFromWorld();
+							job.getTarget().addEntityToWorld(job.getResultEntity());
+							job = null;
 						}
 						
 						timer.reset();
 					}
 				}
+			}
+		}
+	}
+	
+	public void updatePathfinding() {
+		if(pathAStar != null) {
+			PathAStar tempPathAStar = new PathAStar(World.getInstance(), currTile, destTile);
+			if(tempPathAStar.getLength() > 0) {
+				pathAStar = tempPathAStar;
 			}
 		}
 	}
@@ -103,6 +116,17 @@ public class SettlerComponent extends Component {
 				if(pathAStar.getLength() > 0) {
 					job = jobList.pop();
 					destTile = tile;
+				}
+			} else if(tempJob.getType().equals(JobType.BUILDING)) {
+				for(Tile tile : tempJob.getTarget().getNeighbours(false)) {
+					if(tile != null && !tile.isHasEntity()) {
+						pathAStar = new PathAStar(World.getInstance(), currTile, tile);
+						if(pathAStar.getLength() > 0) {
+							job = jobList.pop();
+							destTile = tile;
+							break;
+						}
+					}
 				}
 			}
 		}

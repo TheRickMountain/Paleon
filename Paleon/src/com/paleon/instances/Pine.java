@@ -1,5 +1,6 @@
 package com.paleon.instances;
 
+import com.paleon.blueprints.WoodBlueprint;
 import com.paleon.components.InfoComponent;
 import com.paleon.components.InfoType;
 import com.paleon.core.ResourceManager;
@@ -10,7 +11,7 @@ public class Pine extends Entity {
 	public Pine() {
 		super(ResourceManager.getTexture("pine"));
 		setTag("tree");
-		addComponent(new InfoComponent(this, InfoType.TREE));
+		addComponent(new InfoComponent(this, InfoType.PRODUCTION, new WoodBlueprint()));
 		setMovementCost(0);
 	}
 

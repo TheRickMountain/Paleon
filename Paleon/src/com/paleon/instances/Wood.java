@@ -10,7 +10,7 @@ public class Wood extends Entity {
 	public Wood() {
 		super(ResourceManager.getTexture("wood"));
 		setTag("wood");
-		addComponent(new InfoComponent(this, InfoType.RESOURCE));
+		addComponent(new InfoComponent(this, InfoType.GATHERING, null));
 	}
 
 }

@@ -3,6 +3,8 @@ package com.paleon.components;
 import java.util.Stack;
 
 import com.paleon.astar.PathAStar;
+import com.paleon.core.Game;
+import com.paleon.core.JobType;
 import com.paleon.core.World;
 import com.paleon.ecs.Component;
 import com.paleon.ecs.ComponentType;
@@ -26,6 +28,8 @@ public class SettlerComponent extends Component {
 	private TimeUtil timer;
 	private Job job;
 	
+	private Entity resourceInHand;
+	
 	public SettlerComponent(Tile tile, Entity parent) {
 		super(parent);
 		currTile = destTile = nextTile = tile;
@@ -35,25 +39,43 @@ public class SettlerComponent extends Component {
 	}
 	
 	@Override
-	public void update(float dt) {
-		/*if(Mouse.isButtonDown(0)) {
-			Tile tile = World.getInstance().getTile(MousePicker.getX(), MousePicker.getY());
-			pathAStar = new PathAStar(World.getInstance(), currTile, tile);
-			
-			if(pathAStar.getLength() > 0) {
-				destTile = tile;
-			}
-		}*/
-		
-		if(job == null) {
-			chooseJob();
-		} else {
-			// Character have reached destination tile
+	public void update(float dt) {	
+		// Settler can't choose the job until his hands aren't empty
+		if(resourceInHand != null) {
 			if(move(dt)) {
-				if(timer.getTime() > job.getTime()) {
-					job.getTarget().removeEntity();
-					job = null;
-					timer.reset();
+				destTile.addEntityToTile(resourceInHand);
+				resourceInHand = null;
+			} else {
+				resourceInHand.setPosition(getParent().getX(), getParent().getY());
+			}
+		} else {
+			if(job == null) {
+				chooseJob();
+			} else {
+				if(move(dt)) {
+					// Character have reached destination tile
+					if(timer.getTime() > job.getTime()) {
+						if(job.getType().equals(JobType.PRODUCTION)) {
+							job.getTarget().removeEntityFromWorld();
+							job.getTarget().addEntityToWorld(job.getResultEntity());
+							job = null;
+						} else if(job.getType().equals(JobType.GATHERING)) {
+							resourceInHand = job.getTarget().getEntity();
+							job.getTarget().removeEntityFromTile();
+							job = null;
+							
+							Tile tile = chooseStorage();
+							if(tile != null) {
+								pathAStar = new PathAStar(World.getInstance(), currTile, tile);
+								if(pathAStar.getLength() > 0) {
+									destTile = tile;
+									Game.storageTiles.put(destTile, 1);
+								}
+							}
+						}
+						
+						timer.reset();
+					}
 				}
 			}
 		}
@@ -63,19 +85,40 @@ public class SettlerComponent extends Component {
 		Stack<Job> jobList = World.getInstance().jobList;
 		if(!jobList.empty()) {
 			Job tempJob = jobList.peek();
-			for(Tile tile : tempJob.getTarget().getNeighbours(false)) {
-				if(tile != null && !tile.isHasEntity()) {
-					pathAStar = new PathAStar(World.getInstance(), currTile, tile);
-					if(pathAStar.getLength() > 0) {
-						job = jobList.pop();
-						destTile = tile;
-						break;
+			
+			if(tempJob.getType().equals(JobType.PRODUCTION)) {
+				for(Tile tile : tempJob.getTarget().getNeighbours(false)) {
+					if(tile != null && !tile.isHasEntity()) {
+						pathAStar = new PathAStar(World.getInstance(), currTile, tile);
+						if(pathAStar.getLength() > 0) {
+							job = jobList.pop();
+							destTile = tile;
+							break;
+						}
 					}
+				}
+			} else if(tempJob.getType().equals(JobType.GATHERING)) {
+				Tile tile = tempJob.getTarget();
+				pathAStar = new PathAStar(World.getInstance(), currTile, tile);
+				if(pathAStar.getLength() > 0) {
+					job = jobList.pop();
+					destTile = tile;
 				}
 			}
 		}
 	}
 
+	private Tile chooseStorage() {
+		for(Tile tile : Game.storageTiles.keySet()) {
+			int count = Game.storageTiles.get(tile);
+			if(count == 0) {
+				return tile;
+			}
+		}
+		
+		return null;
+	}
+	
 	private boolean move(float dt) {
 		if(currTile.equals(destTile)) {
 			pathAStar = null;

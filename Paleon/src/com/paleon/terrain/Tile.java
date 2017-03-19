@@ -15,6 +15,7 @@ public class Tile {
 	private int y;
 	private int id;
 	private Entity entity;
+	private Entity prototype;
 	private boolean hasEntity;
 	
 	public Tile(Chunk chunk, int x, int y, int id) {
@@ -48,20 +49,42 @@ public class Tile {
 		return entity;
 	}
 
-	public void addEntity(Entity entity) {
-		this.entity = entity;
-		this.entity.setPosition(x, y);
-		if(this.entity != null) {
-			hasEntity = true;
-		}
+	public void addEntityToWorld(Entity entity) {
+		addEntityToTile(entity);
 		
-		World.getInstance().addEntity(this.entity);
+		World.getInstance().addEntity(entity);
 	}
 	
-	public void removeEntity() {
+	public void addEntityToTile(Entity entity) {
+		this.entity = entity;
+		this.entity.setPosition(x, y);
+		hasEntity = true;
+	}
+	
+	public void removeEntityFromWorld() {
 		this.entity.remove();
+		removeEntityFromTile();
+	}
+	
+	public void removeEntityFromTile() {
 		this.entity = null;
 		hasEntity = false;
+	}
+	
+	public Entity getPrototype() {
+		return prototype;
+	}
+	
+	public void addPrototype(Entity prototype) {
+		this.prototype = prototype;
+		this.prototype.setPosition(x, y);
+		
+		World.getInstance().addEntity(this.prototype);
+	}
+	
+	public void removePrototype() {
+		this.prototype.remove();
+		this.prototype = null;
 	}
 	
 	public boolean isHasEntity() {

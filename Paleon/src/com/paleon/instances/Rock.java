@@ -10,7 +10,7 @@ public class Rock extends Entity {
 	public Rock() {
 		super(ResourceManager.getTexture("rock"));
 		setTag("rock");
-		addComponent(new InfoComponent(this, InfoType.RESOURCE));
+		addComponent(new InfoComponent(this, InfoType.GATHERING, null));
 	}
 
 }

@@ -48,7 +48,7 @@ public class Game {
 	
 	private EntityBlueprint entityBp = new EntityBlueprint();
 	
-	private JobType jobType = JobType.PRODUCTION;
+	public static JobType jobType = JobType.PRODUCTION;
 	
 	public Game() {
 		world = World.getInstance();
@@ -72,6 +72,24 @@ public class Game {
 				.normalMipMap().build());
 		
 		ResourceManager.loadTexture("rock", Texture.newTexture(new MyFile("sprites/rock.png"))
+				.normalMipMap().build());
+		
+		ResourceManager.loadTexture("building", Texture.newTexture(new MyFile("gui/building.png"))
+				.normalMipMap().build());
+		
+		ResourceManager.loadTexture("chopping", Texture.newTexture(new MyFile("gui/chopping.png"))
+				.normalMipMap().build());
+		
+		ResourceManager.loadTexture("gardening", Texture.newTexture(new MyFile("gui/gardening.png"))
+				.normalMipMap().build());
+		
+		ResourceManager.loadTexture("gathering", Texture.newTexture(new MyFile("gui/gathering.png"))
+				.normalMipMap().build());
+		
+		ResourceManager.loadTexture("mining", Texture.newTexture(new MyFile("gui/mining.png"))
+				.normalMipMap().build());
+		
+		ResourceManager.loadTexture("storage", Texture.newTexture(new MyFile("gui/storage.png"))
 				.normalMipMap().build());
 		
 		
@@ -103,20 +121,22 @@ public class Game {
 			jobType = JobType.GARDEN;
 		}
 		
-		switch(jobType){
-		case GATHERING:
-		case PRODUCTION:
-			entitySelection();
-			break;
-		case STORAGE:
-			storageSelection();
-			break;
-		case BUILDING:
-			buildingSelection();
-			break;
-		case GARDEN:
-			gardenSelection();
-			break;
+		if(!Mouse.isActiveInGUI()) {
+			switch(jobType){
+			case GATHERING:
+			case PRODUCTION:
+				entitySelection();
+				break;
+			case STORAGE:
+				storageSelection();
+				break;
+			case BUILDING:
+				buildingSelection();
+				break;
+			case GARDEN:
+				gardenSelection();
+				break;
+			}
 		}
 	}
 	
@@ -166,43 +186,45 @@ public class Game {
 		}
 		
 		if(Mouse.isButtonUp(0)) {
-			int maxX = (int) Math.max(firstSelection.x, secondSelection.x);
-			int maxY = (int) Math.max(firstSelection.y, secondSelection.y);
-			
-			int minX = (int) Math.min(firstSelection.x, secondSelection.x);
-			int minY = (int) Math.min(firstSelection.y, secondSelection.y);
-			
-			for(int x = minX; x <= maxX; x++) {
-				for(int y = minY; y <= maxY; y++) {
-					Tile tile = world.getTile(x, y);
-					if(tile.isHasEntity()) {
-						InfoComponent ic = (InfoComponent)tile.getEntity().getComponent(ComponentType.INFO);
-						switch(jobType) {
-						case PRODUCTION:
-							if(ic.getInfoType().equals(InfoType.PRODUCTION)) {
-								world.jobList.add(new Job(tile, 0.5f, jobType, ic.getProductionResource()));
+			if(firstSelection != null) {
+				int maxX = (int) Math.max(firstSelection.x, secondSelection.x);
+				int maxY = (int) Math.max(firstSelection.y, secondSelection.y);
+				
+				int minX = (int) Math.min(firstSelection.x, secondSelection.x);
+				int minY = (int) Math.min(firstSelection.y, secondSelection.y);
+				
+				for(int x = minX; x <= maxX; x++) {
+					for(int y = minY; y <= maxY; y++) {
+						Tile tile = world.getTile(x, y);
+						if(tile.isHasEntity()) {
+							InfoComponent ic = (InfoComponent)tile.getEntity().getComponent(ComponentType.INFO);
+							switch(jobType) {
+							case PRODUCTION:
+								if(ic.getInfoType().equals(InfoType.PRODUCTION)) {
+									world.jobList.add(new Job(tile, 0.5f, jobType, ic.getProductionResource()));
+								}
+								break;
+							case GATHERING:
+								if(ic.getInfoType().equals(InfoType.GATHERING)) {
+									world.jobList.add(new Job(tile, 0.0f, jobType, null));
+								}
+								break;
+							case BUILDING:
+								break;
+							case STORAGE:
+								break;
+							default:
+								break;
 							}
-							break;
-						case GATHERING:
-							if(ic.getInfoType().equals(InfoType.GATHERING)) {
-								world.jobList.add(new Job(tile, 0.0f, jobType, null));
-							}
-							break;
-						case BUILDING:
-							break;
-						case STORAGE:
-							break;
-						default:
-							break;
 						}
 					}
 				}
+				
+				firstSelection = null;
+				secondSelection = null;
+				selection.remove();
+				selection = null;
 			}
-			
-			firstSelection = null;
-			secondSelection = null;
-			selection.remove();
-			selection = null;
 		}
 	}
 	
@@ -235,15 +257,17 @@ public class Game {
 		}
 		
 		if(Mouse.isButtonUp(0)) {
-			for(Tile tile : selectedTiles) {
-				storageTiles.put(tile, 0);
-			}
-			
-			firstTile = null;
-			secondTile = null;
-			lastTile = null;
-			
-			selectedTiles.clear();
+			if(firstTile != null) {
+				for(Tile tile : selectedTiles) {
+					storageTiles.put(tile, 0);
+				}
+				
+				firstTile = null;
+				secondTile = null;
+				lastTile = null;
+				
+				selectedTiles.clear();
+				}
 		}
 	}
 	
@@ -276,20 +300,22 @@ public class Game {
 		}
 		
 		if(Mouse.isButtonUp(0)) {
-			for(Tile tile : selectedTiles) {
-				world.jobList.add(new Job(tile, 0.5f, jobType, new Stone()));
+			if(firstTile != null) {
+				for(Tile tile : selectedTiles) {
+					world.jobList.add(new Job(tile, 0.5f, jobType, new Stone()));
+				}
+				
+				firstTile = null;
+				secondTile = null;
+				lastTile = null;
+				
+				for(Entity entity : world.settlersList) {
+					SettlerComponent sc = (SettlerComponent) entity.getComponent(ComponentType.SETTLER);
+					sc.updatePathfinding();
+				}
+				
+				selectedTiles.clear();
 			}
-			
-			firstTile = null;
-			secondTile = null;
-			lastTile = null;
-			
-			for(Entity entity : world.settlersList) {
-				SettlerComponent sc = (SettlerComponent) entity.getComponent(ComponentType.SETTLER);
-				sc.updatePathfinding();
-			}
-			
-			selectedTiles.clear();
 		}
 	}
 	
@@ -322,15 +348,17 @@ public class Game {
 		}
 		
 		if(Mouse.isButtonUp(0)) {
-			for(Tile tile : selectedTiles) {
-				gardenTiles.add(tile);
+			if(firstTile != null) {
+				for(Tile tile : selectedTiles) {
+					gardenTiles.add(tile);
+				}
+				
+				firstTile = null;
+				secondTile = null;
+				lastTile = null;
+				
+				selectedTiles.clear();
 			}
-			
-			firstTile = null;
-			secondTile = null;
-			lastTile = null;
-			
-			selectedTiles.clear();
 		}
 	}
 	

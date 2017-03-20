@@ -7,6 +7,8 @@ public class Color {
 	public float b;
 	public float a;
 	
+	public static final Color WHITE = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+	
 	public Color() {
 		set(1.0f, 1.0f, 1.0f, 1.0f);
 	}

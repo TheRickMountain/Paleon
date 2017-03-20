@@ -79,8 +79,8 @@ public class World {
 	public void update(float dt) {
 		MousePicker.update();
 		camera.update(dt);
-		game.update(dt);
 		gui.update(dt);
+		game.update(dt);
 		
 		if(!entitiesToAdd.isEmpty()) {
 			entities.addAll(entitiesToAdd);

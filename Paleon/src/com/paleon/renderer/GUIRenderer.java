@@ -5,9 +5,10 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
 import com.paleon.core.Display;
-import com.paleon.ecs.Entity;
 import com.paleon.graph.Mesh;
+import com.paleon.instances.GUITexture;
 import com.paleon.math.Matrix4f;
+import com.paleon.utils.Color;
 import com.paleon.utils.MathUtils;
 
 public class GUIRenderer {
@@ -44,16 +45,14 @@ public class GUIRenderer {
 		shader.stop();
 	}
 	
-	public void render(Entity entity) {
+	public void render(GUITexture entity) {
 		shader.modelMatrix.loadMatrix(
 				MathUtils.getModelMatrix(modelMatrix, 
-						entity.getX(), entity.getY(), 0, entity.getScaleX(), entity.getScaleY()));
-		shader.color.loadColor(entity.getColor());
-		shader.hasTexture.loadInt(entity.isHasTexture() ? 1 : 0);
+						entity.rect.x, entity.rect.y, 0, entity.rect.width, entity.rect.height));
+		shader.color.loadColor(Color.WHITE);
+		shader.hasTexture.loadInt(1);
 
-		if(entity.isHasTexture()) {
-			entity.getTexture().bindToUnit(0);
-		}
+		entity.texture.bindToUnit(0);
 
 		GL11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0, mesh.getVertexCount());
 	}

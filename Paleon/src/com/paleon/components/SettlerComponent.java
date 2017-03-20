@@ -5,6 +5,7 @@ import java.util.Stack;
 import com.paleon.astar.PathAStar;
 import com.paleon.core.Game;
 import com.paleon.core.JobType;
+import com.paleon.core.PlantInfo;
 import com.paleon.core.World;
 import com.paleon.ecs.Component;
 import com.paleon.ecs.ComponentType;
@@ -76,6 +77,15 @@ public class SettlerComponent extends Component {
 							job.getTarget().removeEntityFromWorld();
 							job.getTarget().addEntityToWorld(job.getResultEntity());
 							job = null;
+						} else if(job.getType().equals(JobType.GARDEN)) {
+							Tile tile = job.getTarget();
+							PlantInfo pi = Game.gardenTiles.get(tile);
+							if(!pi.isPlowed()) {
+								tile.setId(1);
+								pi.setPlowed(true);
+							} else {
+								job = null;
+							}
 						}
 						
 						timer.reset();
@@ -127,6 +137,13 @@ public class SettlerComponent extends Component {
 							break;
 						}
 					}
+				}
+			} else if(tempJob.getType().equals(JobType.GARDEN)) {
+				Tile tile = tempJob.getTarget();
+				pathAStar = new PathAStar(World.getInstance(), currTile, tile);
+				if(pathAStar.getLength() > 0) {
+					job = jobList.pop();
+					destTile = tile;
 				}
 			}
 		}

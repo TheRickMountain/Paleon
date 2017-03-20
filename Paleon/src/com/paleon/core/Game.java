@@ -38,7 +38,7 @@ public class Game {
 	
 	private List<Tile> selectedTiles = new ArrayList<Tile>();
 	public static Map<Tile, Integer> storageTiles = new HashMap<>();
-	public static List<Tile> gardenTiles = new ArrayList<>();
+	public static Map<Tile, PlantInfo> gardenTiles = new HashMap<>();
 	
 	private Vector2f firstSelection;
 	private Vector2f secondSelection;
@@ -350,7 +350,8 @@ public class Game {
 		if(Mouse.isButtonUp(0)) {
 			if(firstTile != null) {
 				for(Tile tile : selectedTiles) {
-					gardenTiles.add(tile);
+					world.jobList.add(new Job(tile, 0.5f, jobType, null));
+					gardenTiles.put(tile, new PlantInfo());
 				}
 				
 				firstTile = null;

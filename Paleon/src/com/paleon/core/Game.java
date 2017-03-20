@@ -7,9 +7,7 @@ import java.util.Map;
 
 import com.paleon.blueprints.Blueprint;
 import com.paleon.blueprints.EntityBlueprint;
-import com.paleon.blueprints.RockBlueprint;
 import com.paleon.blueprints.StoneBlueprint;
-import com.paleon.blueprints.WoodBlueprint;
 import com.paleon.components.InfoComponent;
 import com.paleon.components.InfoType;
 import com.paleon.components.Job;
@@ -40,14 +38,13 @@ public class Game {
 	
 	private List<Tile> selectedTiles = new ArrayList<Tile>();
 	public static Map<Tile, Integer> storageTiles = new HashMap<>();
+	public static List<Tile> gardenTiles = new ArrayList<>();
 	
 	private Vector2f firstSelection;
 	private Vector2f secondSelection;
 	private Entity selection;
 	
 	private StoneBlueprint stoneBp = new StoneBlueprint();
-	private WoodBlueprint woodBp = new WoodBlueprint();
-	private RockBlueprint rockBp = new RockBlueprint();
 	
 	private EntityBlueprint entityBp = new EntityBlueprint();
 	
@@ -102,6 +99,8 @@ public class Game {
 			jobType = JobType.STORAGE;
 		} else if(Keyboard.isKeyDown(Key.KEY_4)) {
 			jobType = JobType.BUILDING;
+		} else if(Keyboard.isKeyDown(Key.KEY_5)) {
+			jobType = JobType.GARDEN;
 		}
 		
 		switch(jobType){
@@ -114,6 +113,9 @@ public class Game {
 			break;
 		case BUILDING:
 			buildingSelection();
+			break;
+		case GARDEN:
+			gardenSelection();
 			break;
 		}
 	}
@@ -286,6 +288,47 @@ public class Game {
 				SettlerComponent sc = (SettlerComponent) entity.getComponent(ComponentType.SETTLER);
 				sc.updatePathfinding();
 			}
+			
+			selectedTiles.clear();
+		}
+	}
+	
+	private void gardenSelection() {
+		if(Mouse.isButtonDown(0)) {
+			firstTile = world.getTile(MousePicker.getX(), MousePicker.getY());
+		}
+		
+		if(Mouse.isButton(0)) {
+			if(firstTile != null) {
+				secondTile = world.getTile(MousePicker.getX(), MousePicker.getY());
+				
+				if(!secondTile.equals(lastTile)) {
+					// Unselect early area
+					if(lastTile != null) {
+						for(Tile tile : selectedTiles) {
+							tile.removePrototype();
+						}
+						selectedTiles.clear();
+					}
+					
+					// Select new area
+					area(firstTile, secondTile, selectedTiles, entityBp, 
+							new Color(0.5f, 1.0f, 0.5f, 0.15f), true);
+					
+					lastTile = secondTile;
+				}
+				
+			}
+		}
+		
+		if(Mouse.isButtonUp(0)) {
+			for(Tile tile : selectedTiles) {
+				gardenTiles.add(tile);
+			}
+			
+			firstTile = null;
+			secondTile = null;
+			lastTile = null;
 			
 			selectedTiles.clear();
 		}

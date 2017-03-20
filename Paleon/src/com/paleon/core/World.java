@@ -10,6 +10,7 @@ import com.paleon.astar.PathTileGraph;
 import com.paleon.components.Job;
 import com.paleon.ecs.ComponentType;
 import com.paleon.ecs.Entity;
+import com.paleon.renderer.GUIRenderer;
 import com.paleon.renderer.SpriteRenderer;
 import com.paleon.renderer.TerrainRenderer;
 import com.paleon.terrain.Terrain;
@@ -24,10 +25,11 @@ public class World {
 	
 	private TerrainRenderer terrainRenderer;
 	private SpriteRenderer spriteRenderer;
+	private GUIRenderer guiRenderer;
 	
-	private List<Entity> entities = new ArrayList<Entity>();
-	private List<Entity> entitiesToRemove = new ArrayList<Entity>();
-	private List<Entity> entitiesToAdd = new ArrayList<Entity>();
+	private List<Entity> entities = new ArrayList<>();
+	private List<Entity> entitiesToRemove = new ArrayList<>();
+	private List<Entity> entitiesToAdd = new ArrayList<>();
 	
 	private int width = 2;
 	private int height = 2;
@@ -40,6 +42,7 @@ public class World {
 	public List<Entity> settlersList = new ArrayList<>();
 	
 	private Game game;
+	private GUI gui;
 	
 	private PathTileGraph tileGraph;
 	
@@ -59,6 +62,7 @@ public class World {
 		
 		terrainRenderer = new TerrainRenderer(camera);
 		spriteRenderer = new SpriteRenderer(camera);
+		guiRenderer = new GUIRenderer();
 		
 		terrain = new Terrain(width, height);
 		tiles = new Tile[getWidth()][getHeight()];
@@ -69,12 +73,14 @@ public class World {
 		}
 		
 		game = new Game();
+		gui = new GUI(guiRenderer);
 	}
 	
 	public void update(float dt) {
 		MousePicker.update();
 		camera.update(dt);
 		game.update(dt);
+		gui.update(dt);
 		
 		if(!entitiesToAdd.isEmpty()) {
 			entities.addAll(entitiesToAdd);
@@ -98,6 +104,9 @@ public class World {
 	public void render() {
 		terrainRenderer.render(terrain);
 		spriteRenderer.render(entities);
+		guiRenderer.start();
+		gui.render();
+		guiRenderer.finish();
 	}
 	
 	public void addEntity(Entity entity) {

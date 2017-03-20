@@ -4,5 +4,6 @@ public enum JobType {
 	PRODUCTION,
 	GATHERING,
 	STORAGE,
-	BUILDING
+	BUILDING,
+	GARDEN
 }

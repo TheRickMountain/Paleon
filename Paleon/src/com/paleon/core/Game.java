@@ -43,6 +43,8 @@ public class Game {
 	private boolean plowed = true;
 	public static Map<Tile, PlantInfo> gardenTiles = new HashMap<>();
 	
+	private Map<Integer, Texture> wheat = new HashMap<>();
+	
 	private Vector2f firstSelection;
 	private Vector2f secondSelection;
 	private Entity selection;
@@ -98,12 +100,9 @@ public class Game {
 		for(int i = 0; i < 8; i++) {
 			ResourceManager.loadTexture("wheat_stage_" + i, Texture.newTexture(new MyFile("wheat/wheat_stage_" + i + ".png"))
 					.normalMipMap().build());
-		}
-		
-		PlantInfo pi = new PlantInfo();
-		for(int i = 0; i < 8; i++) {
-			pi.addStage(ResourceManager.getTexture("wheat_stage_" + i), i);
-		}
+			// Wheat stages initialization
+			wheat.put(i, ResourceManager.getTexture("wheat_stage_" + i));
+		}		
 		
 		world.addEntity(new Settler(world.getTile(2, 2)));
 		world.addEntity(new Settler(world.getTile(16, 2)));
@@ -385,7 +384,7 @@ public class Game {
 			if(firstTile != null) {
 				for(Tile tile : selectedTiles) {
 					world.jobList.add(new Job(tile, 0.5f, jobType, null));
-					gardenTiles.put(tile, new PlantInfo());
+					gardenTiles.put(tile, new PlantInfo(wheat));
 				}
 				
 				firstTile = null;

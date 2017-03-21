@@ -1,6 +1,5 @@
 package com.paleon.core;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.paleon.textures.Texture;
@@ -12,12 +11,16 @@ public class PlantInfo {
 	private int currentStage;
 	private Texture currentTexture;
 	
-	private Map<Integer, Texture> stages = new HashMap<>();
+	private Map<Integer, Texture> stages;
 	
 	private boolean ready;
 	private boolean plowed;
 	
-	public PlantInfo() {
+	public PlantInfo(Map<Integer, Texture> stages) {
+		this.stages = stages;
+		
+		// First stage texture initialization
+		currentTexture = this.stages.get(currentStage);
 	}
 	
 	public int getStagesAmount() {
@@ -50,7 +53,7 @@ public class PlantInfo {
 	}
 	
 	public Texture getTexture() {
-		return ResourceManager.getTexture("wheat_stage_0");
+		return currentTexture;
 	}
 	
 	public void setPlowed(boolean value) {

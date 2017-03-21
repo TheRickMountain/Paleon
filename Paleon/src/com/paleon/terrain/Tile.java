@@ -96,7 +96,7 @@ public class Tile {
 		// 0 - unwalkable
 		
 		if(entity != null) {
-			return entity.getMovementCost();
+			return entity.isWalkable() ? 1 : 0;
 		}
 		
 		return 1;

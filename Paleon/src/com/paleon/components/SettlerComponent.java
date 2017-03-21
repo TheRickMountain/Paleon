@@ -86,6 +86,9 @@ public class SettlerComponent extends Component {
 							} else {
 								job = null;
 							}
+						} else if(job.getType().equals(JobType.SEEDING)) {
+							job.getTarget().addEntityToWorld(job.getResultEntity());
+							job = null;
 						}
 						
 						timer.reset();
@@ -139,6 +142,13 @@ public class SettlerComponent extends Component {
 					}
 				}
 			} else if(tempJob.getType().equals(JobType.GARDEN)) {
+				Tile tile = tempJob.getTarget();
+				pathAStar = new PathAStar(World.getInstance(), currTile, tile);
+				if(pathAStar.getLength() > 0) {
+					job = jobList.pop();
+					destTile = tile;
+				}
+			} else if(tempJob.getType().equals(JobType.SEEDING)) {
 				Tile tile = tempJob.getTarget();
 				pathAStar = new PathAStar(World.getInstance(), currTile, tile);
 				if(pathAStar.getLength() > 0) {

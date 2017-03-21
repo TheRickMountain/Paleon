@@ -12,7 +12,7 @@ public class Stone extends Entity {
 		super(ResourceManager.getTexture("stone"));
 		setTag("stone");
 		addComponent(new InfoComponent(this, InfoType.PRODUCTION, new RockBlueprint()));
-		setMovementCost(0.0f);
+		setWalkable(false);
 	}
 
 }

@@ -24,7 +24,7 @@ public class Entity {
 	
 	private boolean removed;
 	
-	private float movementCost = 1.0f;
+	private boolean walkable = true;
 	
 	public Entity(Texture texture) {
 		this(texture, new Color());
@@ -143,12 +143,12 @@ public class Entity {
 		removed = true;
 	}
 
-	public float getMovementCost() {
-		return movementCost;
+	public boolean isWalkable() {
+		return walkable;
 	}
 
-	public void setMovementCost(float movementCost) {
-		this.movementCost = movementCost;
+	public void setWalkable(boolean value) {
+		this.walkable = value;
 	}
 	
 }

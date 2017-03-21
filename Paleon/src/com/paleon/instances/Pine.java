@@ -12,7 +12,7 @@ public class Pine extends Entity {
 		super(ResourceManager.getTexture("pine"));
 		setTag("tree");
 		addComponent(new InfoComponent(this, InfoType.PRODUCTION, new WoodBlueprint()));
-		setMovementCost(0);
+		setWalkable(false);
 	}
 
 }

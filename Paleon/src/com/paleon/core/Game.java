@@ -38,6 +38,9 @@ public class Game {
 	
 	private List<Tile> selectedTiles = new ArrayList<Tile>();
 	public static Map<Tile, Integer> storageTiles = new HashMap<>();
+	
+	private boolean sowed = false;
+	private boolean plowed = true;
 	public static Map<Tile, PlantInfo> gardenTiles = new HashMap<>();
 	
 	private Vector2f firstSelection;
@@ -92,6 +95,15 @@ public class Game {
 		ResourceManager.loadTexture("storage", Texture.newTexture(new MyFile("gui/storage.png"))
 				.normalMipMap().build());
 		
+		for(int i = 0; i < 8; i++) {
+			ResourceManager.loadTexture("wheat_stage_" + i, Texture.newTexture(new MyFile("wheat/wheat_stage_" + i + ".png"))
+					.normalMipMap().build());
+		}
+		
+		PlantInfo pi = new PlantInfo();
+		for(int i = 0; i < 8; i++) {
+			pi.addStage(ResourceManager.getTexture("wheat_stage_" + i), i);
+		}
 		
 		world.addEntity(new Settler(world.getTile(2, 2)));
 		world.addEntity(new Settler(world.getTile(16, 2)));
@@ -111,14 +123,19 @@ public class Game {
 	public void update(float dt) {
 		if(Keyboard.isKeyDown(Key.KEY_1)) {
 			jobType = JobType.GATHERING;
+			System.out.println(jobType);
 		} else if(Keyboard.isKeyDown(Key.KEY_2)) {
 			jobType = JobType.PRODUCTION;
+			System.out.println(jobType);
 		} else if(Keyboard.isKeyDown(Key.KEY_3)) {
 			jobType = JobType.STORAGE;
+			System.out.println(jobType);
 		} else if(Keyboard.isKeyDown(Key.KEY_4)) {
 			jobType = JobType.BUILDING;
+			System.out.println(jobType);
 		} else if(Keyboard.isKeyDown(Key.KEY_5)) {
 			jobType = JobType.GARDEN;
+			System.out.println(jobType);
 		}
 		
 		if(!Mouse.isActiveInGUI()) {
@@ -136,6 +153,23 @@ public class Game {
 			case GARDEN:
 				gardenSelection();
 				break;
+			}
+		}
+		
+		if(gardenTiles.size() > 0) {
+			plowed = true;
+			for(PlantInfo pi : gardenTiles.values()) {
+				if(!pi.isPlowed()) plowed = false;
+			}
+	
+			if(plowed) {
+				if(!sowed) {
+					for(Tile t : gardenTiles.keySet()) {
+						PlantInfo pi = gardenTiles.get(t);
+						world.jobList.add(new Job(t, 0.5f, JobType.SEEDING, new Entity(pi.getTexture())));
+					}
+					sowed = true;	
+				}
 			}
 		}
 	}

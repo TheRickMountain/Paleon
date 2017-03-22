@@ -34,7 +34,7 @@ public class GUI {
 		if(Mouse.isButtonDown(0)) {
 			if(gardening.rect.isMouseOvered()) {
 				Mouse.setActiveInGUI(true);
-				Game.jobType = JobType.GARDEN;
+				Game.jobType = JobType.PLOWING;
 			} else if(storage.rect.isMouseOvered()) {
 				Mouse.setActiveInGUI(true);
 				Game.jobType = JobType.STORAGE;

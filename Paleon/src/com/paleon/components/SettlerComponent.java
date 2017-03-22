@@ -1,11 +1,10 @@
 package com.paleon.components;
 
-import java.util.Stack;
+import java.util.List;
 
 import com.paleon.astar.PathAStar;
 import com.paleon.core.Game;
 import com.paleon.core.JobType;
-import com.paleon.core.PlantInfo;
 import com.paleon.core.World;
 import com.paleon.ecs.Component;
 import com.paleon.ecs.ComponentType;
@@ -77,15 +76,10 @@ public class SettlerComponent extends Component {
 							job.getTarget().removeEntityFromWorld();
 							job.getTarget().addEntityToWorld(job.getResultEntity());
 							job = null;
-						} else if(job.getType().equals(JobType.GARDEN)) {
+						} else if(job.getType().equals(JobType.PLOWING)) {
 							Tile tile = job.getTarget();
-							PlantInfo pi = Game.gardenTiles.get(tile);
-							if(!pi.isPlowed()) {
-								tile.setId(1);
-								pi.setPlowed(true);
-							} else {
-								job = null;
-							}
+							tile.setId(1);
+							job = null;
 						} else if(job.getType().equals(JobType.SEEDING)) {
 							job.getTarget().addEntityToWorld(job.getResultEntity());
 							job = null;
@@ -108,16 +102,16 @@ public class SettlerComponent extends Component {
 	}
 	
 	private void chooseJob() {
-		Stack<Job> jobList = World.getInstance().jobList;
-		if(!jobList.empty()) {
-			Job tempJob = jobList.peek();
+		List<Job> jobList = World.getInstance().jobList;
+		if(!jobList.isEmpty()) {
+			Job tempJob = jobList.get(0);
 			
 			if(tempJob.getType().equals(JobType.PRODUCTION)) {
 				for(Tile tile : tempJob.getTarget().getNeighbours(false)) {
 					if(tile != null && !tile.isHasEntity()) {
 						pathAStar = new PathAStar(World.getInstance(), currTile, tile);
 						if(pathAStar.getLength() > 0) {
-							job = jobList.pop();
+							job = jobList.remove(0);
 							destTile = tile;
 							break;
 						}
@@ -127,7 +121,7 @@ public class SettlerComponent extends Component {
 				Tile tile = tempJob.getTarget();
 				pathAStar = new PathAStar(World.getInstance(), currTile, tile);
 				if(pathAStar.getLength() > 0) {
-					job = jobList.pop();
+					job = jobList.remove(0);
 					destTile = tile;
 				}
 			} else if(tempJob.getType().equals(JobType.BUILDING)) {
@@ -135,24 +129,24 @@ public class SettlerComponent extends Component {
 					if(tile != null && !tile.isHasEntity()) {
 						pathAStar = new PathAStar(World.getInstance(), currTile, tile);
 						if(pathAStar.getLength() > 0) {
-							job = jobList.pop();
+							job = jobList.remove(0);
 							destTile = tile;
 							break;
 						}
 					}
 				}
-			} else if(tempJob.getType().equals(JobType.GARDEN)) {
+			} else if(tempJob.getType().equals(JobType.PLOWING)) {
 				Tile tile = tempJob.getTarget();
 				pathAStar = new PathAStar(World.getInstance(), currTile, tile);
 				if(pathAStar.getLength() > 0) {
-					job = jobList.pop();
+					job = jobList.remove(0);
 					destTile = tile;
 				}
 			} else if(tempJob.getType().equals(JobType.SEEDING)) {
 				Tile tile = tempJob.getTarget();
 				pathAStar = new PathAStar(World.getInstance(), currTile, tile);
 				if(pathAStar.getLength() > 0) {
-					job = jobList.pop();
+					job = jobList.remove(0);
 					destTile = tile;
 				}
 			}

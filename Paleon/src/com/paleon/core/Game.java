@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.paleon.blueprints.Blueprint;
 import com.paleon.blueprints.EntityBlueprint;
@@ -22,6 +23,7 @@ import com.paleon.instances.Settler;
 import com.paleon.instances.Stone;
 import com.paleon.math.Vector2f;
 import com.paleon.terrain.Tile;
+import com.paleon.terrain.TimeUtil;
 import com.paleon.textures.Texture;
 import com.paleon.utils.Color;
 import com.paleon.utils.MousePicker;
@@ -39,11 +41,10 @@ public class Game {
 	private List<Tile> selectedTiles = new ArrayList<Tile>();
 	public static Map<Tile, Integer> storageTiles = new HashMap<>();
 	
-	private boolean sowed = false;
-	private boolean plowed = true;
-	public static Map<Tile, PlantInfo> gardenTiles = new HashMap<>();
 	
-	private Map<Integer, Texture> wheat = new HashMap<>();
+	public List<Garden> gardens = new ArrayList<>();
+
+	public static Map<Integer, Texture> wheat = new HashMap<>();
 	
 	private Vector2f firstSelection;
 	private Vector2f secondSelection;
@@ -133,7 +134,7 @@ public class Game {
 			jobType = JobType.BUILDING;
 			System.out.println(jobType);
 		} else if(Keyboard.isKeyDown(Key.KEY_5)) {
-			jobType = JobType.GARDEN;
+			jobType = JobType.PLOWING;
 			System.out.println(jobType);
 		}
 		
@@ -149,27 +150,14 @@ public class Game {
 			case BUILDING:
 				buildingSelection();
 				break;
-			case GARDEN:
+			case PLOWING:
 				gardenSelection();
 				break;
 			}
 		}
 		
-		if(gardenTiles.size() > 0) {
-			plowed = true;
-			for(PlantInfo pi : gardenTiles.values()) {
-				if(!pi.isPlowed()) plowed = false;
-			}
-	
-			if(plowed) {
-				if(!sowed) {
-					for(Tile t : gardenTiles.keySet()) {
-						PlantInfo pi = gardenTiles.get(t);
-						world.jobList.add(new Job(t, 0.5f, JobType.SEEDING, new Entity(pi.getTexture())));
-					}
-					sowed = true;	
-				}
-			}
+		for(Garden garden : gardens) {
+			garden.update();
 		}
 	}
 	
@@ -382,11 +370,8 @@ public class Game {
 		
 		if(Mouse.isButtonUp(0)) {
 			if(firstTile != null) {
-				for(Tile tile : selectedTiles) {
-					world.jobList.add(new Job(tile, 0.5f, jobType, null));
-					gardenTiles.put(tile, new PlantInfo(wheat));
-				}
-				
+				gardens.add(new Garden(selectedTiles));
+		
 				firstTile = null;
 				secondTile = null;
 				lastTile = null;

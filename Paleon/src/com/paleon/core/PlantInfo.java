@@ -15,6 +15,7 @@ public class PlantInfo {
 	
 	private boolean ready;
 	private boolean plowed;
+	private boolean sowed;
 	
 	public PlantInfo(Map<Integer, Texture> stages) {
 		this.stages = stages;
@@ -64,6 +65,14 @@ public class PlantInfo {
 		return plowed;
 	}
 	
+	public boolean isSowed() {
+		return sowed;
+	}
+
+	public void setSowed(boolean sowed) {
+		this.sowed = sowed;
+	}
+
 	public boolean isReady() {
 		return ready;
 	}

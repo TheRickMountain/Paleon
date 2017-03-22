@@ -38,7 +38,7 @@ public class World {
 	
 	private Tile[][] tiles;
 	
-	public Stack<Job> jobList = new Stack<>();
+	public List<Job> jobList = new ArrayList<>();
 	public List<Entity> settlersList = new ArrayList<>();
 	
 	private Game game;

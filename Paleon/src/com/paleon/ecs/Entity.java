@@ -12,7 +12,7 @@ public class Entity {
 	
 	private List<Component> components = new ArrayList<Component>();
 	
-	private final Texture texture;	
+	private Texture texture;	
 	private final Color color;
 	private boolean hasTexture = true;
 
@@ -54,6 +54,10 @@ public class Entity {
 
 	public void setTag(String name) {
 		this.tag = name;
+	}
+	
+	public void setTexture(Texture texture) {
+		this.texture = texture;
 	}
 
 	public Component addComponent(Component component) {

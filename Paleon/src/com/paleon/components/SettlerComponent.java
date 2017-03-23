@@ -155,61 +155,7 @@ public class SettlerComponent extends Component {
 		if(!jobList.isEmpty()) {
 			Job tempJob = jobList.get(0);
 			
-			if(tempJob.getType().equals(JobType.PRODUCTION)) {
-				for(Tile tile : tempJob.getTarget().getNeighbours(false)) {
-					if(tile != null && !tile.isHasEntity()) {
-						pathAStar = new PathAStar(World.getInstance(), currTile, tile);
-						if(pathAStar.getLength() > 0) {
-							job = jobList.remove(0);
-							destTile = tile;
-							break;
-						}
-					}
-				}
-			} else if(tempJob.getType().equals(JobType.GATHERING)) {
-				Tile tile = tempJob.getTarget();
-				pathAStar = new PathAStar(World.getInstance(), currTile, tile);
-				if(pathAStar.getLength() > 0) {
-					job = jobList.remove(0);
-					destTile = tile;
-				}
-			} else if(tempJob.getType().equals(JobType.BUILDING)) {
-				for(Tile tile : tempJob.getTarget().getNeighbours(false)) {
-					if(tile != null) {
-						boolean walkable = false;
-						if(tile.isHasEntity()) {
-							if(tile.getEntity().isWalkable()) {
-								walkable = true;
-							}
-						} else {
-							walkable = true;
-						}
-						
-						if(walkable) {
-							pathAStar = new PathAStar(World.getInstance(), currTile, tile);
-							if(pathAStar.getLength() > 0) {
-								job = jobList.remove(0);
-								destTile = tile;
-								break;
-							}
-						}
-					}
-				}
-			} else if(tempJob.getType().equals(JobType.PLOWING)) {
-				Tile tile = tempJob.getTarget();
-				pathAStar = new PathAStar(World.getInstance(), currTile, tile);
-				if(pathAStar.getLength() > 0) {
-					job = jobList.remove(0);
-					destTile = tile;
-				}
-			} else if(tempJob.getType().equals(JobType.SEEDING)) {
-				Tile tile = tempJob.getTarget();
-				pathAStar = new PathAStar(World.getInstance(), currTile, tile);
-				if(pathAStar.getLength() > 0) {
-					job = jobList.remove(0);
-					destTile = tile;
-				}
-			} else if(tempJob.getType().equals(JobType.FISHING)) {
+			if(tempJob.getTarget().getMovementCost() == 0.0f) {
 				for(Tile tile : tempJob.getTarget().getNeighbours(false)) {
 					if(tile != null) {
 						boolean walkable = false;
@@ -234,6 +180,13 @@ public class SettlerComponent extends Component {
 							}
 						}
 					}
+				}
+			} else {
+				Tile tile = tempJob.getTarget();
+				pathAStar = new PathAStar(World.getInstance(), currTile, tile);
+				if(pathAStar.getLength() > 0) {
+					job = jobList.remove(0);
+					destTile = tile;
 				}
 			}
 		}

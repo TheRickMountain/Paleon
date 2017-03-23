@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.paleon.blueprints.Blueprint;
 import com.paleon.blueprints.EntityBlueprint;
@@ -23,7 +22,6 @@ import com.paleon.instances.Settler;
 import com.paleon.instances.Stone;
 import com.paleon.math.Vector2f;
 import com.paleon.terrain.Tile;
-import com.paleon.terrain.TimeUtil;
 import com.paleon.textures.Texture;
 import com.paleon.utils.Color;
 import com.paleon.utils.MousePicker;
@@ -40,7 +38,6 @@ public class Game {
 	
 	private List<Tile> selectedTiles = new ArrayList<Tile>();
 	public static Map<Tile, Integer> storageTiles = new HashMap<>();
-	
 	
 	public List<Garden> gardens = new ArrayList<>();
 
@@ -98,6 +95,12 @@ public class Game {
 		ResourceManager.loadTexture("storage", Texture.newTexture(new MyFile("gui/storage.png"))
 				.normalMipMap().build());
 		
+		ResourceManager.loadTexture("fishing", Texture.newTexture(new MyFile("gui/fishing.png"))
+				.normalMipMap().build());
+		
+		ResourceManager.loadTexture("fish", Texture.newTexture(new MyFile("sprites/fish.png"))
+				.normalMipMap().build());
+		
 		for(int i = 0; i < 8; i++) {
 			ResourceManager.loadTexture("wheat_stage_" + i, Texture.newTexture(new MyFile("wheat/wheat_stage_" + i + ".png"))
 					.normalMipMap().build());
@@ -105,7 +108,13 @@ public class Game {
 			wheat.put(i, ResourceManager.getTexture("wheat_stage_" + i));
 		}		
 		
-		world.addEntity(new Settler(world.getTile(2, 2)));
+		for(int i = 18; i < 25; i++) {
+			for(int j = 18; j < 25; j++) {
+				world.getTile(i, j).setId(5);
+			}
+		}
+		
+		world.addEntity(new Settler(world.getTile(18, 16)));
 		world.addEntity(new Settler(world.getTile(16, 2)));
 		world.addEntity(new Settler(world.getTile(10, 2)));
 		
@@ -120,24 +129,7 @@ public class Game {
 		world.getTile(12, 15).addEntityToWorld(new Stone());
 	}
 	
-	public void update(float dt) {
-		if(Keyboard.isKeyDown(Key.KEY_1)) {
-			jobType = JobType.GATHERING;
-			System.out.println(jobType);
-		} else if(Keyboard.isKeyDown(Key.KEY_2)) {
-			jobType = JobType.PRODUCTION;
-			System.out.println(jobType);
-		} else if(Keyboard.isKeyDown(Key.KEY_3)) {
-			jobType = JobType.STORAGE;
-			System.out.println(jobType);
-		} else if(Keyboard.isKeyDown(Key.KEY_4)) {
-			jobType = JobType.BUILDING;
-			System.out.println(jobType);
-		} else if(Keyboard.isKeyDown(Key.KEY_5)) {
-			jobType = JobType.PLOWING;
-			System.out.println(jobType);
-		}
-		
+	public void update(float dt) {		
 		if(!Mouse.isActiveInGUI()) {
 			switch(jobType){
 			case GATHERING:
@@ -152,6 +144,9 @@ public class Game {
 				break;
 			case PLOWING:
 				gardenSelection();
+				break;
+			case FISHING:
+				waterSelection();
 				break;
 			}
 		}
@@ -377,6 +372,15 @@ public class Game {
 				lastTile = null;
 				
 				selectedTiles.clear();
+			}
+		}
+	}
+	
+	private void waterSelection() {
+		if(Mouse.isButtonDown(0)) {
+			Tile tile = world.getTile(MousePicker.getX(), MousePicker.getY());
+			if(tile.getId() == 5) {
+				world.jobList.add(new Job(tile, 0.0f, JobType.FISHING, null));
 			}
 		}
 	}

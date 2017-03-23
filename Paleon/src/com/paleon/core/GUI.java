@@ -15,6 +15,7 @@ public class GUI {
 	private GUITexture chopping;
 	private GUITexture mining;
 	private GUITexture building;
+	private GUITexture fishing;
 	
 	public GUI(GUIRenderer renderer) {
 		this.renderer = renderer;
@@ -25,6 +26,7 @@ public class GUI {
 		chopping = new GUITexture(ResourceManager.getTexture("chopping"), 	new Rect(192, 0, 64, 64));
 		mining = new GUITexture(ResourceManager.getTexture("mining"), 		new Rect(256, 0, 64, 64));
 		building = new GUITexture(ResourceManager.getTexture("building"), 	new Rect(320, 0, 64, 64));
+		fishing = new GUITexture(ResourceManager.getTexture("fishing"), 	new Rect(384, 0, 64, 64));
 
 	}
 	
@@ -50,6 +52,9 @@ public class GUI {
 			} else if(building.rect.isMouseOvered()) {
 				Mouse.setActiveInGUI(true);
 				Game.jobType = JobType.BUILDING;
+			} else if(fishing.rect.isMouseOvered()) {
+				Mouse.setActiveInGUI(true);
+				Game.jobType = JobType.FISHING;
 			}
 			
 			System.out.println(Game.jobType.toString());
@@ -63,6 +68,7 @@ public class GUI {
 		renderer.render(chopping);
 		renderer.render(mining);
 		renderer.render(building);
+		renderer.render(fishing);
 	}
 
 }

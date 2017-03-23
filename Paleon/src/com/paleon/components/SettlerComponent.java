@@ -9,6 +9,7 @@ import com.paleon.core.World;
 import com.paleon.ecs.Component;
 import com.paleon.ecs.ComponentType;
 import com.paleon.ecs.Entity;
+import com.paleon.instances.Fish;
 import com.paleon.terrain.Tile;
 import com.paleon.terrain.TimeUtil;
 import com.paleon.utils.MathUtils;
@@ -25,7 +26,8 @@ public class SettlerComponent extends Component {
 	private float movementPerc;	
 	private float speed = 2f;
 	
-	private TimeUtil timer;
+	private TimeUtil firstTimer;
+	private TimeUtil secondTimer;
 	private Job job;
 	
 	private Entity resourceInHand;
@@ -35,16 +37,47 @@ public class SettlerComponent extends Component {
 		currTile = destTile = nextTile = tile;
 		parent.setPosition(tile.getX(), tile.getY());	
 		
-		timer = new TimeUtil();
+		firstTimer = new TimeUtil();
+		secondTimer = new TimeUtil();
 	}
 	
 	@Override
-	public void update(float dt) {	
+	public void update(float dt) {		
 		// Settler can't choose the job until his hands aren't empty
 		if(resourceInHand != null) {
 			if(move(dt)) {
 				destTile.addEntityToTile(resourceInHand);
 				resourceInHand = null;
+				
+				if(job != null) {
+					if(job.getType().equals(JobType.FISHING)) {
+						for(Tile tile : job.getTarget().getNeighbours(false)) {
+							if(tile != null) {
+								boolean walkable = false;
+								if(tile.isHasEntity()) {
+									if(tile.getEntity().isWalkable()) {
+										walkable = true;
+									}
+								} else {
+									walkable = true;
+								}
+								
+								if(tile.getId() == 5) {
+									walkable = true;
+								}
+								
+								if(walkable) {
+									pathAStar = new PathAStar(World.getInstance(), currTile, tile);
+									if(pathAStar.getLength() > 0) {
+										destTile = tile;
+										break;
+									}
+								}
+							}
+						}
+					}
+				}
+				
 			} else {
 				resourceInHand.setPosition(getParent().getX(), getParent().getY());
 			}
@@ -54,7 +87,7 @@ public class SettlerComponent extends Component {
 			} else {
 				if(move(dt)) {
 					// Character have reached destination tile
-					if(timer.getTime() > job.getTime()) {
+					if(firstTimer.getTime() > job.getTime()) {
 						if(job.getType().equals(JobType.PRODUCTION)) {
 							job.getTarget().removeEntityFromWorld();
 							job.getTarget().addEntityToWorld(job.getResultEntity());
@@ -83,9 +116,25 @@ public class SettlerComponent extends Component {
 						} else if(job.getType().equals(JobType.SEEDING)) {
 							job.getTarget().addEntityToWorld(job.getResultEntity());
 							job = null;
+						} else if(job.getType().equals(JobType.FISHING)) {	
+							if(secondTimer.getTime() > 5) {
+								secondTimer.reset();
+								
+								resourceInHand = new Fish();
+								World.getInstance().addEntity(resourceInHand);
+								
+								Tile tile = chooseStorage();
+								if(tile != null) {
+									pathAStar = new PathAStar(World.getInstance(), currTile, tile);
+									if(pathAStar.getLength() > 0) {
+										destTile = tile;
+										Game.storageTiles.put(destTile, 1);
+									}
+								}
+							}
 						}
 						
-						timer.reset();
+						firstTimer.reset();
 					}
 				}
 			}
@@ -159,6 +208,32 @@ public class SettlerComponent extends Component {
 				if(pathAStar.getLength() > 0) {
 					job = jobList.remove(0);
 					destTile = tile;
+				}
+			} else if(tempJob.getType().equals(JobType.FISHING)) {
+				for(Tile tile : tempJob.getTarget().getNeighbours(false)) {
+					if(tile != null) {
+						boolean walkable = false;
+						if(tile.isHasEntity()) {
+							if(tile.getEntity().isWalkable()) {
+								walkable = true;
+							}
+						} else {
+							walkable = true;
+						}
+						
+						if(tile.getId() == 5) {
+							walkable = true;
+						}
+						
+						if(walkable) {
+							pathAStar = new PathAStar(World.getInstance(), currTile, tile);
+							if(pathAStar.getLength() > 0) {
+								job = jobList.remove(0);
+								destTile = tile;
+								break;
+							}
+						}
+					}
 				}
 			}
 		}

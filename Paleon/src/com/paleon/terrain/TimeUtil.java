@@ -12,11 +12,11 @@ public class TimeUtil {
 	}
 	
 	public double getTime(){
-		setPreviouseTime();
+		setPreviousTime();
 		return GLFW.glfwGetTime() - previousTime;
 	}
 	
-	private void setPreviouseTime(){
+	private void setPreviousTime(){
 		if(!ptReceived){
 			previousTime = GLFW.glfwGetTime();
 			ptReceived = true;

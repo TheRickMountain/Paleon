@@ -95,6 +95,11 @@ public class Tile {
 		// 1 - walkable
 		// 0 - unwalkable
 		
+		// Water
+		if(id == 5) {
+			return 0;
+		}
+		
 		if(entity != null) {
 			return entity.isWalkable() ? 1 : 0;
 		}

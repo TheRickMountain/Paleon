@@ -51,29 +51,9 @@ public class SettlerComponent extends Component {
 				
 				if(job != null) {
 					if(job.getType().equals(JobType.FISHING)) {
-						for(Tile tile : job.getTarget().getNeighbours(false)) {
-							if(tile != null) {
-								boolean walkable = false;
-								if(tile.isHasEntity()) {
-									if(tile.getEntity().isWalkable()) {
-										walkable = true;
-									}
-								} else {
-									walkable = true;
-								}
-								
-								if(tile.getId() == 5) {
-									walkable = true;
-								}
-								
-								if(walkable) {
-									pathAStar = new PathAStar(World.getInstance(), currTile, tile);
-									if(pathAStar.getLength() > 0) {
-										destTile = tile;
-										break;
-									}
-								}
-							}
+						Tile tile = getPath(job.getTarget().getNeighbours(false));
+						if(tile != null) {
+							destTile = tile;
 						}
 					}
 				}
@@ -155,31 +135,12 @@ public class SettlerComponent extends Component {
 		if(!jobList.isEmpty()) {
 			Job tempJob = jobList.get(0);
 			
+			// If tile is unwalkable, then choose one available tile from neighbours
 			if(tempJob.getTarget().getMovementCost() == 0.0f) {
-				for(Tile tile : tempJob.getTarget().getNeighbours(false)) {
-					if(tile != null) {
-						boolean walkable = false;
-						if(tile.isHasEntity()) {
-							if(tile.getEntity().isWalkable()) {
-								walkable = true;
-							}
-						} else {
-							walkable = true;
-						}
-						
-						if(tile.getId() == 5) {
-							walkable = true;
-						}
-						
-						if(walkable) {
-							pathAStar = new PathAStar(World.getInstance(), currTile, tile);
-							if(pathAStar.getLength() > 0) {
-								job = jobList.remove(0);
-								destTile = tile;
-								break;
-							}
-						}
-					}
+				Tile tile = getPath(tempJob.getTarget().getNeighbours(false));
+				if(tile != null) {
+					job = jobList.remove(0);
+					destTile = tile;
 				}
 			} else {
 				Tile tile = tempJob.getTarget();
@@ -235,6 +196,34 @@ public class SettlerComponent extends Component {
 		return false;
 	}
 
+	private Tile getPath(List<Tile> neighbours) {
+		for(Tile tile : neighbours) {
+			if(tile != null) {
+				boolean walkable = false;
+				if(tile.isHasEntity()) {
+					if(tile.getEntity().isWalkable()) {
+						walkable = true;
+					}
+				} else {
+					walkable = true;
+				}
+				
+				if(tile.getId() == 5) {
+					walkable = true;
+				}
+				
+				if(walkable) {
+					pathAStar = new PathAStar(World.getInstance(), currTile, tile);
+					if(pathAStar.getLength() > 0) {
+						return tile;
+					}
+				}
+			}
+		}
+		
+		return null;
+	}
+	
 	@Override
 	public ComponentType getType() {
 		return ComponentType.SETTLER;

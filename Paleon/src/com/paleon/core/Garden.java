@@ -61,6 +61,15 @@ public class Garden {
 				}
 			}
 		}
+		
+		if(harvestingInJobList) {
+			if(isHarvested()) {
+				sowingInJobList = false;
+				harvestingInJobList = false;
+				stage = 0;
+				
+			}
+		}
 	}
 	
 	public boolean isPlowed() {
@@ -73,6 +82,14 @@ public class Garden {
 	public boolean isSowed() {
 		for(Tile tile : tiles) {
 			if(!tile.isHasEntity()) return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean isHarvested() {
+		for(Tile tile : tiles) {
+			if(tile.isHasEntity()) return false;
 		}
 		
 		return true;

@@ -126,12 +126,23 @@ public class SettlerComponent extends Component {
 				}
 			} else if(tempJob.getType().equals(JobType.BUILDING)) {
 				for(Tile tile : tempJob.getTarget().getNeighbours(false)) {
-					if(tile != null && !tile.isHasEntity()) {
-						pathAStar = new PathAStar(World.getInstance(), currTile, tile);
-						if(pathAStar.getLength() > 0) {
-							job = jobList.remove(0);
-							destTile = tile;
-							break;
+					if(tile != null) {
+						boolean walkable = false;
+						if(tile.isHasEntity()) {
+							if(tile.getEntity().isWalkable()) {
+								walkable = true;
+							}
+						} else {
+							walkable = true;
+						}
+						
+						if(walkable) {
+							pathAStar = new PathAStar(World.getInstance(), currTile, tile);
+							if(pathAStar.getLength() > 0) {
+								job = jobList.remove(0);
+								destTile = tile;
+								break;
+							}
 						}
 					}
 				}

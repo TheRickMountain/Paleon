@@ -17,6 +17,7 @@ import com.paleon.ecs.Entity;
 import com.paleon.input.Key;
 import com.paleon.input.Keyboard;
 import com.paleon.input.Mouse;
+import com.paleon.instances.Bed;
 import com.paleon.instances.Pine;
 import com.paleon.instances.Settler;
 import com.paleon.instances.Stone;
@@ -42,6 +43,8 @@ public class Game {
 	public List<Garden> gardens = new ArrayList<>();
 
 	public static Map<Integer, Texture> wheat = new HashMap<>();
+	
+	public static Map<Bed, Settler> beds = new HashMap<>();
 	
 	private Vector2f firstSelection;
 	private Vector2f secondSelection;
@@ -101,6 +104,9 @@ public class Game {
 		ResourceManager.loadTexture("fish", Texture.newTexture(new MyFile("sprites/fish.png"))
 				.normalMipMap().build());
 		
+		ResourceManager.loadTexture("bed", Texture.newTexture(new MyFile("sprites/bed.png"))
+				.normalMipMap().build());
+		
 		for(int i = 0; i < 8; i++) {
 			ResourceManager.loadTexture("wheat_stage_" + i, Texture.newTexture(new MyFile("wheat/wheat_stage_" + i + ".png"))
 					.normalMipMap().build());
@@ -114,9 +120,10 @@ public class Game {
 			}
 		}
 		
+		
 		world.addEntity(new Settler(world.getTile(18, 16)));
-		world.addEntity(new Settler(world.getTile(16, 2)));
-		world.addEntity(new Settler(world.getTile(10, 2)));
+		//world.addEntity(new Settler(world.getTile(16, 2)));
+		//world.addEntity(new Settler(world.getTile(10, 2)));
 		
 		world.getTile(4, 2).addEntityToWorld(new Pine());
 		world.getTile(5, 6).addEntityToWorld(new Pine());
@@ -127,6 +134,7 @@ public class Game {
 		world.getTile(15, 16).addEntityToWorld(new Stone());
 		world.getTile(16, 18).addEntityToWorld(new Stone());
 		world.getTile(12, 15).addEntityToWorld(new Stone());
+		
 	}
 	
 	public void update(float dt) {		
@@ -148,7 +156,15 @@ public class Game {
 			case FISHING:
 				waterSelection();
 				break;
+			case FURNITURE:
+				furniturePlace();
 			}
+		}
+		
+		// TODO: Rewrite
+		if(Keyboard.isKeyDown(Key.KEY_H)) {
+			jobType = JobType.FURNITURE;
+			System.out.println(jobType.toString());
 		}
 		
 		for(Garden garden : gardens) {
@@ -381,6 +397,27 @@ public class Game {
 			Tile tile = world.getTile(MousePicker.getX(), MousePicker.getY());
 			if(tile.getId() == 5) {
 				world.jobList.add(new Job(tile, 0.0f, JobType.FISHING, null));
+			}
+		}
+	}
+	
+	private void furniturePlace() {
+		if(Mouse.isButtonDown(0)) {
+			Tile tile = world.getTile(MousePicker.getX(), MousePicker.getY());
+			if(tile.getId() != 5 && !tile.isHasEntity()) {
+				Bed bed = new Bed();
+				tile.addEntityToWorld(bed);
+				
+				Settler settler = null;
+				for(Entity e : world.settlersList) {
+					SettlerComponent sc = (SettlerComponent) e.getComponent(ComponentType.SETTLER);
+					if(sc.getBed() == null) {
+						sc.setBed(bed);
+						settler = (Settler) e;
+					}
+				}
+				
+				beds.put(bed, settler);
 			}
 		}
 	}

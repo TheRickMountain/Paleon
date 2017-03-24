@@ -4,6 +4,6 @@ public enum ComponentType {
 
 	SETTLER,
 	INFO,
-	NONE
+	NONE,
 	
 }

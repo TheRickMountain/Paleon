@@ -7,5 +7,6 @@ public enum JobType {
 	BUILDING,
 	PLOWING,
 	SEEDING,
-	FISHING
+	FISHING,
+	FURNITURE
 }

@@ -2,14 +2,11 @@ package com.paleon.core;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 import org.lwjgl.opengl.GL11;
 
 import com.paleon.astar.PathTileGraph;
-import com.paleon.components.Job;
-import com.paleon.ecs.ComponentType;
-import com.paleon.ecs.Entity;
+import com.paleon.instances.Entity;
 import com.paleon.renderer.GUIRenderer;
 import com.paleon.renderer.SpriteRenderer;
 import com.paleon.renderer.TerrainRenderer;
@@ -21,7 +18,7 @@ public class World {
 	
 	private static final World INSTANCE = new World();
 	
-	private Camera camera;
+	public Camera camera;
 	
 	private TerrainRenderer terrainRenderer;
 	private SpriteRenderer spriteRenderer;
@@ -38,13 +35,12 @@ public class World {
 	
 	private Tile[][] tiles;
 	
-	public List<Job> jobList = new ArrayList<>();
-	public List<Entity> settlersList = new ArrayList<>();
-	
 	private Game game;
 	private GUI gui;
 	
 	private PathTileGraph tileGraph;
+	
+	public List<Job> jobList = new ArrayList<>();
 	
 	private World() {}
 	
@@ -110,10 +106,6 @@ public class World {
 	}
 	
 	public void addEntity(Entity entity) {
-		if(entity.hasComponent(ComponentType.SETTLER)) {
-			settlersList.add(entity);
-		}
-		
 		entitiesToAdd.add(entity);
 	}
 	

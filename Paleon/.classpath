@@ -24,5 +24,9 @@
 	<classpathentry kind="lib" path="D:/GitHub/Paleon/Paleon/Paleon/libs/lwjgl-opengl-sources.jar"/>
 	<classpathentry kind="lib" path="D:/GitHub/Paleon/Paleon/Paleon/libs/lwjgl-sources.jar"/>
 	<classpathentry kind="lib" path="D:/GitHub/Paleon/Paleon/Paleon/libs/PNGDecoder.jar"/>
+	<classpathentry kind="lib" path="D:/GitHub/Paleon/Paleon/Paleon/libs/lwjgl-stb.jar"/>
+	<classpathentry kind="lib" path="D:/GitHub/Paleon/Paleon/Paleon/libs/lwjgl-stb-javadoc.jar"/>
+	<classpathentry kind="lib" path="D:/GitHub/Paleon/Paleon/Paleon/libs/lwjgl-stb-natives-windows.jar"/>
+	<classpathentry kind="lib" path="D:/GitHub/Paleon/Paleon/Paleon/libs/lwjgl-stb-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

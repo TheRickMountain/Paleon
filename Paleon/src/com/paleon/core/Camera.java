@@ -85,6 +85,11 @@ public class Camera {
 	public float getY() {
 		return y;
 	}
+	
+	public void setPosition(float x, float y) {
+		this.x = x;
+		this.y = y;
+	}
 
 	public Matrix4f getProjectionMatrix() {
 		return projectionMatrix;

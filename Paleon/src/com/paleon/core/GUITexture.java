@@ -1,4 +1,4 @@
-package com.paleon.instances;
+package com.paleon.core;
 
 import com.paleon.textures.Texture;
 import com.paleon.utils.Rect;

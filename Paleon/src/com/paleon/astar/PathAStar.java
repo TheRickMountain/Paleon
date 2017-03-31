@@ -87,7 +87,7 @@ public class PathAStar {
 	
 	public int getLength() {
 		if(path == null) {
-			return 0;
+			return -1;
 		}
 		
 		return path.size();

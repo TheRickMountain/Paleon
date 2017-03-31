@@ -3,7 +3,7 @@ package com.paleon.core;
 public enum JobType {
 	PRODUCTION,
 	GATHERING,
-	STORAGE,
+	STOCKPILE,
 	BUILDING,
 	PLOWING,
 	SEEDING,

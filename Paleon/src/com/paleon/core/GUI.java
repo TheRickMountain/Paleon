@@ -1,7 +1,6 @@
 package com.paleon.core;
 
 import com.paleon.input.Mouse;
-import com.paleon.instances.GUITexture;
 import com.paleon.renderer.GUIRenderer;
 import com.paleon.utils.Rect;
 
@@ -33,7 +32,7 @@ public class GUI {
 	public void update(float dt) {
 		Mouse.setActiveInGUI(false);
 		
-		if(Mouse.isButtonDown(0)) {
+		/*if(Mouse.isButtonDown(0)) {
 			if(gardening.rect.isMouseOvered()) {
 				Mouse.setActiveInGUI(true);
 				Game.jobType = JobType.PLOWING;
@@ -58,7 +57,7 @@ public class GUI {
 			}
 			
 			System.out.println(Game.jobType.toString());
-		}
+		}*/
 	}
 	
 	public void render() {

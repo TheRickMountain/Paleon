@@ -7,8 +7,8 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
 import com.paleon.core.Camera;
-import com.paleon.ecs.Entity;
 import com.paleon.graph.Mesh;
+import com.paleon.instances.Entity;
 import com.paleon.math.Matrix4f;
 import com.paleon.utils.MathUtils;
 

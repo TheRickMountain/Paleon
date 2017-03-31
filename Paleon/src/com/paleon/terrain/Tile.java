@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.paleon.core.World;
-import com.paleon.ecs.Entity;
+import com.paleon.instances.Entity;
 
 public class Tile {
 		

@@ -1,7 +1,4 @@
-package com.paleon.ecs;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.paleon.instances;
 
 import com.paleon.textures.Texture;
 import com.paleon.utils.Color;
@@ -9,8 +6,6 @@ import com.paleon.utils.Color;
 public class Entity {
 	
 	private String tag;
-	
-	private List<Component> components = new ArrayList<Component>();
 	
 	private Texture texture;	
 	private final Color color;
@@ -43,9 +38,7 @@ public class Entity {
 	}
 	
 	public void update(float dt) {
-		for(Component component : components) {
-			component.update(dt);
-		}
+		
 	}
 	
 	public String getTag() {
@@ -58,38 +51,6 @@ public class Entity {
 	
 	public void setTexture(Texture texture) {
 		this.texture = texture;
-	}
-
-	public Component addComponent(Component component) {
-		this.components.add(component);
-		return component;
-	}
-	
-	public Component getComponent(ComponentType type) {
-		for(Component component : components) {
-			if(component.getType().equals(type)) {
-				return component;
-			}
-		}
-		return null;
-	}
-	
-	public boolean hasComponent(ComponentType type) {
-		for(Component component : components) {
-			if(component.getType().equals(type)) {
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	public void removeComponent(ComponentType type) {
-		for(Component component : components) {
-			if(component.getType().equals(type)) {
-				components.remove(component);
-			}
-		}
 	}
 	
 	public Texture getTexture() {

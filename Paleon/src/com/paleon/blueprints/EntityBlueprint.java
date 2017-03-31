@@ -1,6 +1,6 @@
 package com.paleon.blueprints;
 
-import com.paleon.ecs.Entity;
+import com.paleon.instances.Entity;
 import com.paleon.utils.Color;
 
 public class EntityBlueprint implements Blueprint {

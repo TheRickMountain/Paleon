@@ -5,8 +5,8 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
 import com.paleon.core.Display;
+import com.paleon.core.GUITexture;
 import com.paleon.graph.Mesh;
-import com.paleon.instances.GUITexture;
 import com.paleon.math.Matrix4f;
 import com.paleon.utils.Color;
 import com.paleon.utils.MathUtils;

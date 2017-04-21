@@ -12,8 +12,6 @@ import com.paleon.engine.input.Mouse;
 import com.paleon.engine.items.Camera;
 import com.paleon.engine.items.GameObject;
 import com.paleon.engine.items.WaterTile;
-import com.paleon.engine.items.animals.Sheep;
-import com.paleon.engine.terrain.GrassRenderer;
 import com.paleon.engine.terrain.Terrain;
 import com.paleon.engine.terrain.TexturePack;
 import com.paleon.engine.toolbox.GameTime;
@@ -38,8 +36,6 @@ public class Game implements IScene {
 
 	public static GUI gui;
 	
-	GrassRenderer grassRenderer = new GrassRenderer();
-	
 	Random rand = new Random();
 	
 	@Override
@@ -54,7 +50,6 @@ public class Game implements IScene {
 		Terrain terrain1 = new Terrain(0, 0, "/biomes/heightmap.png", texturePack);
 		world.addTerrain(terrain1);
 		
-		grassRenderer.init(camera.getProjectionMatrix(), generatePositionsForGrass(10000));
 		
 		for(int i = 60; i < 840; i+= 120) {
 			for(int j = 60; j < 840; j+= 120) {
@@ -223,45 +218,13 @@ public class Game implements IScene {
 		gui.update();
 		
 		// Rendering
-		world.render(camera, grassRenderer);
+		world.render(camera);
 		gui.render();
 	}
 
 	@Override
 	public void clear() {
 		world.cleanup();
-		grassRenderer.cleanup();
-	}
-	
-	private float[] generatePositionsForGrass(int count) {
-		float[] offset = new float[count * 3];
-		
-		int temp = 0;
-		for(int i = 0; i < offset.length; i += 3) {
-			Vector3f pos = generatePosition();
-			if(!(pos.x == 0 && pos.y == 0 && pos.z == 0)) {
-				temp = i;
-				offset[temp] = pos.x;
-				temp++;
-				offset[temp] = pos.y;
-				temp++;
-				offset[temp] = pos.z;
-			}
-		}
-	
-		return offset;
-	}
-	
-	private Vector3f generatePosition() {
-		float x = rand.nextFloat() * 800;
-		float z = rand.nextFloat() * 800;
-		float y = world.getTerrainHeight(x, z);
-		if(y < 0) {
-			generatePosition();
-		} else {
-			return new Vector3f(x, y, z);
-		}
-		return new Vector3f(0, 0, 0);
 	}
 
 }

@@ -17,7 +17,6 @@ import com.paleon.engine.items.Camera;
 import com.paleon.engine.items.GameObject;
 import com.paleon.engine.items.Light;
 import com.paleon.engine.items.WaterTile;
-import com.paleon.engine.terrain.GrassRenderer;
 import com.paleon.engine.terrain.Terrain;
 import com.paleon.engine.terrain.TerrainBlock;
 import com.paleon.engine.toolbox.Color;
@@ -107,7 +106,7 @@ public class World {
 		}
 	}
 	
-	public void render(Camera camera, GrassRenderer grassRenderer) {		
+	public void render(Camera camera) {		
 		if(Display.wasResized()) {
 			camera.updateProjectionMatrix();
 		}
@@ -157,7 +156,6 @@ public class World {
 				renderEngine.render(skybox, weather.getFogColor(), camera);
 			}
 			renderEngine.render(waterTiles, sun, weather.getFogColor(), fbos, camera);
-			grassRenderer.render(camera, sun, weather.getFogColor());
 			
 			// Render to the screen
 			renderEngine.render(gameObjects);

@@ -19,6 +19,8 @@ public class Text extends Component {
     public int textMeshVao;
     public int vertexCount;
 	
+    private Mesh mesh;
+    
     public Text(String text, FontType font, float fontSize, Color color, float maxLineLength,
             boolean centered) {
         this.text = text;
@@ -29,7 +31,16 @@ public class Text extends Component {
         this.centered = centered;
         
         TextMeshData data = font.loadText(this);
-        Mesh mesh = new Mesh(data.getVertexPositions(), data.getTextureCoords());
+        mesh = new Mesh(data.getVertexPositions());
+        this.textMeshVao = mesh.getVaoId();
+        this.vertexCount = data.getVertexCount();
+    }
+    
+    public void setText(String text) {
+    	this.text = text;
+    	mesh.cleanup();
+    	TextMeshData data = font.loadText(this);
+        mesh = new Mesh(data.getVertexPositions());
         this.textMeshVao = mesh.getVaoId();
         this.vertexCount = data.getVertexCount();
     }

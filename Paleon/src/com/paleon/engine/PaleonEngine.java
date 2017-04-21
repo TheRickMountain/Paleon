@@ -54,7 +54,12 @@ public class PaleonEngine implements Runnable {
             Keyboard.startEventFrame();
     		Mouse.startEventFrame();
             
-    		update(Time.getDeltaTime());
+    		float deltaTime = Time.getDeltaTime();
+    		if(deltaTime >= 1){ 
+    			deltaTime = 0;
+    		}
+    		
+    		update(deltaTime);
            
             Keyboard.clearEventFrame();
             Mouse.clearEventFrame();

@@ -1,8 +1,5 @@
 package com.paleon.scenes;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 
 import com.paleon.engine.IScene;
@@ -11,22 +8,18 @@ import com.paleon.engine.Resources;
 import com.paleon.engine.components.MeshFilter;
 import com.paleon.engine.components.MeshRenderer;
 import com.paleon.engine.graph.gui.GUI;
-import com.paleon.engine.input.Key;
-import com.paleon.engine.input.Keyboard;
 import com.paleon.engine.input.Mouse;
 import com.paleon.engine.items.Camera;
 import com.paleon.engine.items.GameObject;
-import com.paleon.engine.items.Player;
 import com.paleon.engine.items.WaterTile;
-import com.paleon.engine.items.animals.IAnimal;
 import com.paleon.engine.items.animals.Sheep;
-import com.paleon.engine.items.animals.SheepModel;
 import com.paleon.engine.terrain.GrassRenderer;
 import com.paleon.engine.terrain.Terrain;
 import com.paleon.engine.terrain.TexturePack;
 import com.paleon.engine.toolbox.GameTime;
 import com.paleon.engine.toolbox.MathUtils;
 import com.paleon.engine.weather.Skybox;
+import com.paleon.engine.world.Player;
 import com.paleon.maths.vecmath.Vector3f;
 
 public class Game implements IScene {
@@ -34,14 +27,8 @@ public class Game implements IScene {
 	public static enum State {
 		GAME, INVENTORY
 	}
-
-	private boolean colorMode = false;
-	
-	private List<IAnimal> animals = new ArrayList<IAnimal>();
 	
 	private Camera camera;
-
-	private Player player;
 	
 	private World world;
 	
@@ -69,24 +56,11 @@ public class Game implements IScene {
 		
 		grassRenderer.init(camera.getProjectionMatrix(), generatePositionsForGrass(10000));
 		
-		player = new Player();
-		player.setPosition(400, world.getTerrainHeight(400, 400), 400);
-		player.add(world);
-		
 		for(int i = 60; i < 840; i+= 120) {
 			for(int j = 60; j < 840; j+= 120) {
 				world.addWaterTile(new WaterTile(j, waterHeight, i));
 			}
 		}
-		
-		SheepModel.init();
-		Sheep sheep1 = new Sheep(world, 394, world.getTerrainHeight(394, 178), 178);
-		sheep1.add(world);
-		animals.add(sheep1);
-		
-		Sheep sheep2 = new Sheep(world, 374, world.getTerrainHeight(374, 198), 198);
-		sheep2.add(world);
-		animals.add(sheep2);
 		
 		GameTime.init();
 		
@@ -94,7 +68,7 @@ public class Game implements IScene {
 		
 		Mouse.hide();
 		
-		GameTime.setTime(16, 00);
+		GameTime.setTime(6, 00);
 	
 		gui = new GUI();
 		gui.init(world);
@@ -109,9 +83,11 @@ public class Game implements IScene {
 			float z = rand.nextFloat() * 800;
 			if(world.getTerrainHeight(x,  z) > 0) {
 				GameObject gameObject = new GameObject();
-				gameObject.addComponent(new MeshFilter(ResourceManager.getMesh("bush")));
+				gameObject.addComponent(new MeshFilter(ResourceManager.getMesh("fern")));
 				gameObject.position.set(x, world.getTerrainHeight(x, z), z);
-				gameObject.setFurthestPoint(ResourceManager.getMesh("bush").getFurthestPoint());
+				gameObject.scale.set(1);
+				gameObject.setTextureIndex(rand.nextInt(4));
+				gameObject.setFurthestPoint(ResourceManager.getMesh("fern").getFurthestPoint());
 				gameObject.addComponent(new MeshRenderer());
 				world.addGameObject(gameObject);
 			}
@@ -128,7 +104,7 @@ public class Game implements IScene {
 				gameItem.scale.set(0.25f);
 				gameItem.setId(MathUtils.generateId());
 				gameItem.setItem(true);
-				gameItem.setGuiId(0);
+				gameItem.setGuiId(4);
 				gameItem.setFurthestPoint(ResourceManager.getMesh("flint").getFurthestPoint());
 				gameItem.addComponent(new MeshRenderer());
 				world.addGameObject(gameItem);
@@ -229,6 +205,9 @@ public class Game implements IScene {
 		}
 		
 		/*** *** ***/
+		
+		Player player = new Player(camera, world, gui.getInventory());	
+		world.addGameObject(player);
 	}
 
 	@Override
@@ -236,64 +215,11 @@ public class Game implements IScene {
 		// Updating
 		GameTime.update();
 		
-		world.update(dt);
-		
 		if(state == State.GAME) {
-			player.move(dt, camera);
-			player.setPosY(world.getTerrainHeight(player.getPosX(), player.getPosZ()) + 1.1f);
-			player.update();
-			
 			camera.update(dt);
-			camera.setPosition(player.getPosX(), player.getPosY() + 4.3f, player.getPosZ());
 		}
 	
-		Iterator<IAnimal> iaIter = animals.iterator();
-		while(iaIter.hasNext()){
-			IAnimal animal = iaIter.next();
-			animal.update(dt);
-			/*if(Mouse.isButtonDown(0)){
-				if(id == animal.getId()) {
-					if(animal.getTag().equals("Sheep")) {
-						if(Utils.getDistanceBetweenPoints(animal.getPosition(), player.getPosition()) < 7){
-							player.attack(animal);
-						}
-					}
-				} 
-			}*/
-			
-		}
-		
-		Iterator<GameObject> giIter = world.getMeshRendererComponents().iterator();
-		while(giIter.hasNext()){
-			GameObject gameObject = giIter.next();
-			gameObject.update();
-			if(Keyboard.isKeyDown(Key.E)){
-				if(world.getColorPickingId() == gameObject.getId()) {
-					if(gameObject.isItem()) {
-						if(MathUtils.getDistanceBetweenPoints(player.getPosition(), gameObject.position) <= 10) {
-							if(gui.getInventory().addItem(gameObject.getGuiId())){
-								gameObject.setRemove(true);
-							}
-						}
-					}
-				}
-			}
-			
-			if(MathUtils.getDistanceBetweenPoints(gameObject.position, camera.getPosition()) >= 400) {
-				gameObject.setFadeAway(true);
-			} else {
-				gameObject.setFadeAway(false);
-			}
-			
-			if(gameObject.isRemove()) {
-				giIter.remove();
-			}
-		}
-		
-		if(Keyboard.isKeyDown(Key.F6)) {
-			colorMode = !colorMode;
-		}
-		
+		world.update(dt);
 		gui.update();
 		
 		// Rendering

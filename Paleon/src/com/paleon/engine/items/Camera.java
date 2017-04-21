@@ -53,7 +53,7 @@ public class Camera {
 		frustum.updatePlanes();
 	}
 	
-	public void resized() {
+	public void updateProjectionMatrix() {
 		projectionMatrix = MathUtils.getPerspectiveProjectionMatrix(projectionMatrix, fieldOfView, 
 				Display.getWidth(), Display.getHeight(), nearPlane, farPlane);
 	}
@@ -83,9 +83,7 @@ public class Camera {
 	}
 	
 	public void setPosition(float x, float y, float z){
-		this.playerPosition.x = x;
-		this.playerPosition.y = y;
-		this.playerPosition.z = z;
+		this.playerPosition.set(x, y, z);
 	}
 
 	public float getPitch(){

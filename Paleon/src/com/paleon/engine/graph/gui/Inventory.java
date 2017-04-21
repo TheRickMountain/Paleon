@@ -5,21 +5,27 @@ import java.util.List;
 
 import com.paleon.engine.Display;
 import com.paleon.engine.ResourceManager;
+import com.paleon.engine.components.Text;
 import com.paleon.engine.graph.RenderEngine;
+import com.paleon.engine.graph.renderSystems.GUIRendererSystem;
 import com.paleon.engine.input.Key;
 import com.paleon.engine.input.Keyboard;
 import com.paleon.engine.input.Mouse;
-import com.paleon.engine.items.GameObject;
+import com.paleon.engine.toolbox.Color;
 import com.paleon.engine.toolbox.Rect;
 import com.paleon.scenes.Game;
 
-public class Inventory {
-	public int slotsX = 5, slotsY = 4;
+public class Inventory 
+{
+	public int slotsX = 4, slotsY = 5;
 	public List<Item> inventory = new ArrayList<Item>();
 	public List<Item> slots = new ArrayList<Item>();
 	private boolean showInventory;
 	private boolean showTooltip;
+	
 	private String tooltip;
+	private String food;
+	private String weight;
 	
 	private int slotSkin = ResourceManager.getTexture("ui_slot");
 	
@@ -27,7 +33,7 @@ public class Inventory {
 	private Item draggedItem;
 	private int draggedIndex;
 	
-	GameObject tooltipText;
+	public boolean action = false;
 	
 	public void init() 
 	{
@@ -36,6 +42,15 @@ public class Inventory {
 			slots.add(new Item());
 			inventory.add(new Item());
 		}
+		
+		addItem(1);
+		addItem(2);
+		addItem(3);
+		addItem(4);
+		addItem(4);
+		addItem(5);
+		addItem(6);
+		addItem(7);
 	}
 	
 	public void update() {
@@ -58,14 +73,26 @@ public class Inventory {
 		
 	}
 	
-	public void onGUI() 
+	public void onGUI(Crafting crafting) 
 	{
 		tooltip = "";
 		if(showInventory) 
 		{
+			action = false;
+			RenderEngine.renderGUI(new Rect(Display.getWidth() / 2, Display.getHeight() / 3 - 10, 250, 310), slotSkin);
 			drawInventory();
-			if(showTooltip) {
+			if(showTooltip) 
+			{
 				RenderEngine.renderGUI(new Rect(Mouse.getX() + 15f, Mouse.getY(), 200, 200), slotSkin);
+				RenderEngine.renderGUI(new Rect(Mouse.getX() + 25f, Mouse.getY() + 10, 50, 50), 
+						new Text(tooltip, GUIRendererSystem.primitiveFont, 1.25f, Color.BLACK, 1f, false));
+				RenderEngine.renderGUI(new Rect(Mouse.getX() + 25f, Mouse.getY() + 50, 50, 50), 
+						new Text(food, GUIRendererSystem.primitiveFont, 1f, Color.BLUE, 1f, false));
+				RenderEngine.renderGUI(new Rect(Mouse.getX() + 25f, Mouse.getY() + 70, 50, 50), 
+						new Text(weight, GUIRendererSystem.primitiveFont, 1f, Color.PURPLE, 1f, false));
+			}
+			if(action) {
+				crafting.updateListElements();
 			}
 		}
 		
@@ -82,7 +109,7 @@ public class Inventory {
 		{
 			for(int x = 0; x < slotsX; x++) 
 			{
-				Rect rect = new Rect((Display.getWidth() / 2) + (x * 60), (Display.getHeight() / 3)  + (y * 60), 50, 50);
+				Rect rect = new Rect((Display.getWidth() / 2) + (x * 60 + 10), (Display.getHeight() / 3)  + (y * 60), 50, 50);
 				
 				RenderEngine.renderGUI(rect, slotSkin);
 				slots.set(i, inventory.get(i));
@@ -93,7 +120,7 @@ public class Inventory {
 					if(Mouse.getX() >= rect.x && Mouse.getX() <= rect.x + rect.width &&
 							Mouse.getY() >= rect.y && Mouse.getY() <= rect.y + rect.height) 
 					{
-						tooltip = generateTooltip(slots.get(i));
+						generateTooltip(slots.get(i));
 						showTooltip = true;
 						if(Mouse.isButton(0) && !draggingItem)
 						{
@@ -101,6 +128,7 @@ public class Inventory {
 							draggedItem = item;
 							inventory.set(i, new Item());
 							draggedIndex = i;
+							action = true;
 						}
 						if(Mouse.isButtonUp(0) && draggingItem)
 						{
@@ -108,16 +136,20 @@ public class Inventory {
 							inventory.set(i, draggedItem);
 							draggingItem = false;
 							draggedItem = null;
+							action = true;
 						}
 						if(Mouse.isButtonDown(1) && !draggingItem)
 						{
 							if(item.itemType == Item.ItemType.CONSUMABLE)
 							{
 								useConsumable(slots.get(i), i);
+								action = true;
 							}
 						}
 					}
-				} else {
+				} 
+				else 
+				{
 					if(Mouse.getX() >= rect.x && Mouse.getX() <= rect.x + rect.width &&
 							Mouse.getY() >= rect.y && Mouse.getY() <= rect.y + rect.height) 
 					{
@@ -126,6 +158,7 @@ public class Inventory {
 							inventory.set(i, draggedItem);
 							draggingItem = false;
 							draggedItem = null;
+							action = true;
 						}
 					}
 				}
@@ -140,9 +173,11 @@ public class Inventory {
 		}
 	}
 	
-	private String generateTooltip(Item item) {
+	private void generateTooltip(Item item) 
+	{
 		tooltip = item.itemName;
-		return tooltip;
+		food = "Food: " + item.itemFood;
+		weight = "Weight: " + item.itemWeight;
 	}
 	
 	public void removeItem(int itemID) 
@@ -163,7 +198,8 @@ public class Inventory {
 		switch(item.itemID)
 		{
 		case 1:
-			if(Game.gui.hungerBar.getCurrentValue() != Game.gui.hungerBar.getMaxValue()) {
+			if(Game.gui.hungerBar.getCurrentValue() != Game.gui.hungerBar.getMaxValue()) 
+			{
 				Game.gui.hungerBar.increase(item.itemFood);
 				deleteItem = true;
 			}
@@ -191,6 +227,19 @@ public class Inventory {
 			}
 		}
 		return false;
+	}
+	
+	public int inventoryContainsCount(int id){
+		int count = 0;
+		
+		for(Item item : inventory) 
+		{
+			if(item.itemID == id) {
+				count++;
+			}
+		}
+		
+		return count;
 	}
 	
 	public boolean inventoryContains(int id) 

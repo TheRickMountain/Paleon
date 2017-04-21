@@ -265,7 +265,7 @@ public class ShaderProgram {
     		bind();
     	setUniform(uniformName, value);
         if(bindShader)
-    		bind();
+    		unbind();
     }
     
     public void createVertexShader(String shaderFile) throws Exception {

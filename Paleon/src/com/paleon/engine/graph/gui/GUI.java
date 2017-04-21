@@ -1,12 +1,8 @@
 package com.paleon.engine.graph.gui;
 
-import java.io.File;
-
 import com.paleon.engine.Display;
 import com.paleon.engine.ResourceManager;
 import com.paleon.engine.components.Image;
-import com.paleon.engine.components.Text;
-import com.paleon.engine.graph.font.FontType;
 import com.paleon.engine.items.GameObject;
 import com.paleon.engine.toolbox.Color;
 import com.paleon.scenes.World;
@@ -15,22 +11,27 @@ public class GUI {
 	
 	private Inventory inventory = new Inventory();
 	
+	private Crafting crafting = new Crafting();
+	
 	private GameObject cross;
 	
 	public Bar healthBar;
 	
 	public Bar hungerBar;
 	
+	GameObject currentHealthText;
+	
 	public void init(World world) {
 		ItemDatabase.init();
-		
-		inventory.init();
 		
 		cross = new GameObject();
 		cross.addComponent(new Image(ResourceManager.getTexture("ui_cross"), new Color(1.0f, 1.0f, 1.0f)));
 		cross.position.set((Display.getWidth() / 2) - 20, (Display.getHeight() / 2) - 20);
 		cross.scale.set(35, 35);
 		world.addGameObject(cross);
+		
+		inventory.init();
+		crafting.init(world, inventory);
 		
 		/*** Health bar ***/
 		GameObject healthBarBack = new GameObject();
@@ -53,20 +54,6 @@ public class GUI {
 		healthBarFront.scale.set(165, 30);
 		world.addGameObject(healthBarFront);
 		/*** *** ***/
-		
-		FontType font = new FontType(ResourceManager.getTexture("primitive_font"), new File("res/primitive_font.fnt"));
-		
-		GameObject currentHealthText = new GameObject();
-		currentHealthText.addComponent(new Text((int)healthBar.getCurrentValue() + "", 
-				font, 1.15f, new Color(1f, 1f, 1f), 1f, false));
-		currentHealthText.position.set(60, 10.5f);
-		world.addGameObject(currentHealthText);
-		
-		GameObject maxHealthText = new GameObject();
-		maxHealthText.addComponent(new Text((int)healthBar.getMaxValue() + "", 
-				font, 1.15f, new Color(1f, 1f, 1f), 1f, false));
-		maxHealthText.position.set(98, 10.5f);
-		world.addGameObject(maxHealthText);
 		
 		/*** Hunger bar ***/
 		GameObject hungerBarBack = new GameObject();
@@ -93,6 +80,7 @@ public class GUI {
 	
 	public void update() {
 		inventory.update();
+		crafting.update();
 		
 		if(healthBar.getCurrentValue() < healthBar.getMaxValue()) {
 			if(hungerBar.getCurrentValue() == 100) {
@@ -106,7 +94,7 @@ public class GUI {
 			cross.position.set((Display.getWidth() / 2) - 20, (Display.getHeight() / 2) - 20);
 		}
 		
-		inventory.onGUI();
+		inventory.onGUI(crafting);
 	}
 	
 	public Inventory getInventory() {

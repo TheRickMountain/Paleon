@@ -64,7 +64,7 @@ public class TerrainRendererSystem {
 		shader.unbind();
 	}
 	
-	public void render(Map<Terrain, List<TerrainBlock>> terrainBatches, Light light, Color fogColor, Camera camera) {
+	private void render(Map<Terrain, List<TerrainBlock>> terrainBatches, Light light, Color fogColor, Camera camera) {
 		for (List<TerrainBlock> blocks : terrainBatches.values()) {
 			for (TerrainBlock block : blocks) {
 				block.setStitching();

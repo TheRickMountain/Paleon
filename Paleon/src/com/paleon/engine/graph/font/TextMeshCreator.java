@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.paleon.engine.components.Text;
+import com.paleon.engine.toolbox.MathUtils;
 
 public class TextMeshCreator {
 
@@ -78,8 +79,9 @@ public class TextMeshCreator {
             }
             curserX = 0;
             curserY += LINE_HEIGHT * text.size;
-        }       
-        return new TextMeshData(listToArray(vertices), listToArray(textureCoords));
+        }      
+        
+        return new TextMeshData(MathUtils.joinArrays(listToArray(vertices), listToArray(textureCoords)));
     }
  
     private void addVerticesForCharacter(double curserX, double curserY, Character character, double fontSize,

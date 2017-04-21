@@ -82,9 +82,8 @@ public class Mesh {
 		//furthestPoint = getFurthestPoint(data);
 	}
 	
-	public Mesh(float[] vertices, float[] uvs) {
+	public Mesh(float[] vertices) {
 		this.vertices = vertices;
-		this.uvs = uvs;
 		
 		this.vertexCount = vertices.length;
 		
@@ -94,12 +93,7 @@ public class Mesh {
 		vVboId = GL15.glGenBuffers();
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vVboId);
 		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, OpenglUtils.dataToFloatBuffer(vertices), GL15.GL_STATIC_DRAW);
-		GL20.glVertexAttribPointer(0, 2, GL11.GL_FLOAT, false, 0, 0);
-		
-		uvVboId = GL15.glGenBuffers();
-		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, uvVboId);
-		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, OpenglUtils.dataToFloatBuffer(uvs), GL15.GL_STATIC_DRAW);
-		GL20.glVertexAttribPointer(1, 2, GL11.GL_FLOAT, false, 0, 0);
+		GL20.glVertexAttribPointer(0, 4, GL11.GL_FLOAT, false, 0, 0);
 		
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 		GL30.glBindVertexArray(0);

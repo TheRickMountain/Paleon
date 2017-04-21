@@ -20,6 +20,9 @@ public class Frustum {
 	private float farDistance;
 	private float heightFar;
 	private float widthFar;
+	
+	private float cameraX;
+	private float cameraZ;
 
 	public Frustum(Camera camera) {
 		frustum = new Plane[2];
@@ -44,16 +47,25 @@ public class Frustum {
 				calculatePlaneNormal(point, farPlaneCenter, right, up, widthFar / 2), point);
 		frustum[1] = new Plane(calculatePlaneNormal(point, farPlaneCenter, right, down,
 				-widthFar / 2), point);
+		
+		cameraX = camera.getPosition().x;
+		cameraZ = camera.getPosition().z;
 	}
 	
 	public boolean testEntityInView(GameObject entity) {
 		boolean render = true;
-		Vector3f point = new Vector3f(entity.position.getX(), entity.position
-				.getY(), entity.position.getZ());
-		for (Plane plane : frustum) {
-			float distance = plane.getSignedDistance(point);
-			if (distance < -entity.getFurthestPoint()) {
-				render = false;
+		float entityX = entity.position.x;
+		float entityZ = entity.position.z;
+		if(MathUtils.getDistanceBetweenPoints(entityX, entityZ, cameraX, cameraZ) >= 350) {
+			render = false;
+		} else {
+			Vector3f point = new Vector3f(entityX, entity.position
+					.getY(), entityZ);
+			for (Plane plane : frustum) {
+				float distance = plane.getSignedDistance(point);
+				if (distance < -entity.getFurthestPoint()) {
+					render = false;
+				}
 			}
 		}
 		return render;
@@ -61,11 +73,18 @@ public class Frustum {
 	
 	public boolean testTerrainInView(TerrainBlock terrain) {
 		boolean render = true;
-		Vector3f point = new Vector3f(terrain.getX(), 0, terrain.getZ());
-		for (Plane plane : frustum) {
-			float distance = plane.getSignedDistance(point);
-			if (distance < -terrain.getSize() * HALF_DIAGONAL) {
-				render = false;
+		float terrainX = terrain.getX();
+		float terrainZ = terrain.getZ();
+		if(MathUtils.getDistanceBetweenPoints(terrainX, terrainZ, 
+				cameraX, cameraZ) >= 350) {
+			render = false;
+		} else {
+			Vector3f point = new Vector3f(terrainX, 0, terrainZ);
+			for (Plane plane : frustum) {
+				float distance = plane.getSignedDistance(point);
+				if (distance < -terrain.getSize() * HALF_DIAGONAL) {
+					render = false;
+				}
 			}
 		}
 		return render;
@@ -73,13 +92,20 @@ public class Frustum {
 	
 	public boolean testWaterTileInView(WaterTile tile) {
 		boolean render = true;
-		Vector3f point = new Vector3f(tile.getX(), tile.getHeight(), tile.getZ());
-		for(Plane plane : frustum) {
-			float distance = plane.getSignedDistance(point);
-			if(distance < -(WaterTile.TILE_SIZE * 1.6f) * HALF_DIAGONAL) {
-				render = false;
+		float waterX = tile.getX();
+		float waterZ = tile.getZ();
+		if(MathUtils.getDistanceBetweenPoints(waterX, waterZ, 
+				cameraX, cameraZ) >= 350) {
+			render = false;
+		} else {
+			Vector3f point = new Vector3f(waterX, tile.getHeight(), waterZ);
+			for(Plane plane : frustum) {
+				float distance = plane.getSignedDistance(point);
+				if(distance < -(WaterTile.TILE_SIZE * 1.6f) * HALF_DIAGONAL) {
+					render = false;
+				}
 			}
-		}
+		}	
 		return render;
 	}
 	

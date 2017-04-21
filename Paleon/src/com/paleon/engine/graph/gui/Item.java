@@ -9,7 +9,7 @@ public class Item {
 	public String itemDesc;
 	public int itemIcon;
 	public int itemFood;
-	public int itemSpeed;
+	public float itemWeight;
 	public ItemType itemType;
 	
 	public enum ItemType {
@@ -22,14 +22,16 @@ public class Item {
 		
 	}
 
-	public Item(String itemName, int itemId, String itemDesc, int itemFood, int itemSpeed,
+	public Item(String itemName, int itemId, String itemDesc, int itemFood, float itemWeight,
 			ItemType itemType) {
 		this.itemName = itemName;
 		this.itemID = itemId;
 		this.itemDesc = itemDesc;
-		this.itemIcon = ResourceManager.getTexture("ui_" + itemName);
+		if(!itemName.isEmpty()) {
+			this.itemIcon = ResourceManager.getTexture("ui_" + itemName);
+		}
 		this.itemFood = itemFood;
-		this.itemSpeed = itemSpeed;
+		this.itemWeight = itemWeight;
 		this.itemType = itemType;
 	}
 	

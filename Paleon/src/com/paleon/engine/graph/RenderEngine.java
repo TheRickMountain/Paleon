@@ -5,9 +5,8 @@ import java.util.Map;
 
 import org.lwjgl.opengl.GL11;
 
-import com.paleon.engine.graph.font.FontType;
-import com.paleon.engine.graph.renderSystems.FontRendererSystem;
-import com.paleon.engine.graph.renderSystems.ImageRendererSystem;
+import com.paleon.engine.components.Text;
+import com.paleon.engine.graph.renderSystems.GUIRendererSystem;
 import com.paleon.engine.graph.renderSystems.MeshRendererSystem;
 import com.paleon.engine.graph.renderSystems.SkyboxRendererSystem;
 import com.paleon.engine.graph.renderSystems.TerrainRendererSystem;
@@ -24,7 +23,6 @@ import com.paleon.engine.toolbox.Rect;
 import com.paleon.engine.water.WaterFrameBuffers;
 import com.paleon.engine.weather.Skybox;
 import com.paleon.maths.vecmath.Vector4f;
-import com.paleon.scenes.World;
 
 public class RenderEngine {
 	
@@ -32,8 +30,7 @@ public class RenderEngine {
 	public TerrainRendererSystem terrainRendererSystem;
 	public SkyboxRendererSystem skyboxRendererSystem;
 	public WaterRendererSystem waterRendererSystem;
-	public static ImageRendererSystem imageRendererSystem;
-	public static FontRendererSystem fontRendererSystem;
+	public static GUIRendererSystem guiRendererSystem;
 	
 	private static RenderEngine instance;
 	
@@ -42,8 +39,7 @@ public class RenderEngine {
 		terrainRendererSystem = new TerrainRendererSystem(camera);
 		skyboxRendererSystem = new SkyboxRendererSystem(camera);
 		waterRendererSystem = new WaterRendererSystem(camera);
-		imageRendererSystem = new ImageRendererSystem();
-		fontRendererSystem = new FontRendererSystem();
+		guiRendererSystem = new GUIRendererSystem();
 		
 		OpenglUtils.cullFace(true);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -60,10 +56,6 @@ public class RenderEngine {
 		meshRendererSystem.update(deltaTime);
 		skyboxRendererSystem.update(deltaTime);
 		waterRendererSystem.update(deltaTime);
-	}
-	
-	public void colorRender(World world, Camera camera){
-		meshRendererSystem.colorRender(world.getMeshRendererComponents(), camera);
 	}
 	
 	public static void clear(float r, float g, float b) {
@@ -91,16 +83,16 @@ public class RenderEngine {
 		waterRendererSystem.render(waters, camera, light, fogColor, fbos);
 	}
 	
-	public void renderGUI(List<GameObject > gameObjects) {
-		imageRendererSystem.render(gameObjects);
+	public void render(List<GameObject> gameObjects) {
+		guiRendererSystem.render(gameObjects);
 	}
 	
 	public static void renderGUI(Rect rect, int textureId) {
-		imageRendererSystem.render(rect, textureId);
+		guiRendererSystem.render(rect, textureId);
 	}
 	
-	public void renderText(Map<FontType, List<GameObject>> texts) {
-		fontRendererSystem.render(texts);
+	public static void renderGUI(Rect rect, Text text) {
+		guiRendererSystem.render(rect, text);
 	}
 
 	public void cleanup(){
@@ -108,8 +100,7 @@ public class RenderEngine {
 		terrainRendererSystem.cleanup();
 		skyboxRendererSystem.cleanup();
 		waterRendererSystem.cleanup();
-		imageRendererSystem.cleanup();
-		fontRendererSystem.cleanup();
+		guiRendererSystem.cleanup();
 	}
 	
 }

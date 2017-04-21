@@ -1,7 +1,7 @@
 #version 330
-layout (location = 0) in vec3 position;
-layout (location = 1) in vec2 textureCoord;
-layout (location = 2) in vec3 normal;
+in vec3 position;
+in vec2 textureCoord;
+in vec3 normal;
 
 uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;

@@ -12,7 +12,7 @@ public class LodCalculator {
 	private final static float TERRAIN_LOG_INCREASE = (float) Math.log(2);
 	
 	public static void calculateTerrainLOD(TerrainBlock block, Camera camera) {
-		float distance = MathUtils.getDistanceBetweenPoints(camera.getPosition().x, camera.getPosition().z, block.getX(),
+		float distance = MathUtils.getDistance(camera.getPosition().x, camera.getPosition().z, block.getX(),
 				block.getZ());
 		block.setDisFromCamera(distance);
 		int lod;

@@ -56,7 +56,7 @@ public class Frustum {
 		boolean render = true;
 		float entityX = entity.position.x;
 		float entityZ = entity.position.z;
-		if(MathUtils.getDistanceBetweenPoints(entityX, entityZ, cameraX, cameraZ) >= 350) {
+		if(MathUtils.getDistance(entityX, entityZ, cameraX, cameraZ) >= 350) {
 			render = false;
 		} else {
 			Vector3f point = new Vector3f(entityX, entity.position
@@ -75,7 +75,7 @@ public class Frustum {
 		boolean render = true;
 		float terrainX = terrain.getX();
 		float terrainZ = terrain.getZ();
-		if(MathUtils.getDistanceBetweenPoints(terrainX, terrainZ, 
+		if(MathUtils.getDistance(terrainX, terrainZ, 
 				cameraX, cameraZ) >= 350) {
 			render = false;
 		} else {
@@ -94,7 +94,7 @@ public class Frustum {
 		boolean render = true;
 		float waterX = tile.getX();
 		float waterZ = tile.getZ();
-		if(MathUtils.getDistanceBetweenPoints(waterX, waterZ, 
+		if(MathUtils.getDistance(waterX, waterZ, 
 				cameraX, cameraZ) >= 350) {
 			render = false;
 		} else {

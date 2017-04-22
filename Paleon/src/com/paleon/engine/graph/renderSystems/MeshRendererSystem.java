@@ -7,7 +7,6 @@ import static org.lwjgl.opengl.GL11.glDrawElements;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
 
 import com.paleon.engine.Display;
 import com.paleon.engine.ResourceManager;
@@ -93,8 +92,7 @@ public class MeshRendererSystem {
 					shader.setUniform("numberOfRows", material.getNumberOfRows());
 					shader.setUniform("offset", new Vector2f(gameItem.getTextureXOffset(), gameItem.getTextureYOffset()));
 					
-					GL13.glActiveTexture(GL13.GL_TEXTURE0);
-					GL11.glBindTexture(GL11.GL_TEXTURE_2D, material.getTextureId());
+					material.texture.bindToUnit(0);
 					shader.setUniform("colorMode", 0);
 					
 					shader.setUniform("shineDamper", material.getShineDamper());

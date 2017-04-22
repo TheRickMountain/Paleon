@@ -1,10 +1,10 @@
 package com.paleon.engine.items.animals;
 
+import com.paleon.engine.ResourceManager;
 import com.paleon.engine.graph.Material;
 import com.paleon.engine.graph.Mesh;
 import com.paleon.engine.items.Entity;
 import com.paleon.engine.loaders.OBJLoader;
-import com.paleon.engine.loaders.TextureLoader;
 
 public class SheepModel {
 
@@ -12,7 +12,7 @@ public class SheepModel {
 	private static Mesh bodyMesh, frontLeftLegMesh, frontRightLegMesh, backLeftLegMesh, backRightLegMesh;
 	
 	public static void init() {
-		material = new Material(TextureLoader.load("/prefab/sheep.png"));
+		material = new Material(ResourceManager.getTexture("/prefab/sheep.png"));
 		
 		bodyMesh = OBJLoader.loadMesh("/prefab/chest.obj");
 		frontLeftLegMesh = OBJLoader.loadMesh("/prefab/leftFrontLeg.obj");

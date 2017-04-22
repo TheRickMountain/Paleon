@@ -1,14 +1,12 @@
 package com.paleon.engine.graph;
 
-import org.lwjgl.opengl.GL11;
-
 import com.paleon.engine.toolbox.Color;
+import com.paleon.textures.Texture;
 
 public class Material {
 	
 	public Color color;
-	
-	private int textureId;
+	public Texture texture;
 	
 	private float shineDamper = 1;
 	private float reflectivity = 0;
@@ -18,20 +16,12 @@ public class Material {
 	
 	private int numberOfRows = 1;
 	
-	public Material(int textureId) {
-		this.textureId = textureId;
+	public Material(Texture texture) {
+		this.texture = texture;
 	}
 
 	public boolean isTextured() {
-        return this.textureId != 0;
-    }
-
-    public int getTextureId() {
-        return textureId;
-    }
-
-    public void setTextureId(int textureId) {
-        this.textureId = textureId;
+        return this.texture != null;
     }
 
 	public float getShineDamper() {
@@ -75,7 +65,7 @@ public class Material {
 	}
 	
 	public void cleanup(){
-		GL11.glDeleteTextures(textureId);
+		texture.cleanup();
 	}
 	
 }

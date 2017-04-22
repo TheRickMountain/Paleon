@@ -31,6 +31,8 @@ public class Camera {
 	Vector3f playerPosition;
 	
 	private Matrix4f projectionMatrix = new Matrix4f();
+	private Matrix4f viewMatrix = new Matrix4f();
+	private Matrix4f projectionViewMatrix = new Matrix4f();
 	
 	public Camera(Vector3f position){
 		playerPosition = position;
@@ -156,11 +158,11 @@ public class Camera {
 	}
 	
 	public Matrix4f getViewMatrix() {
-		return MathUtils.getViewMatrix(this);
+		return MathUtils.getViewMatrix(viewMatrix, this);
 	}
 	
 	public Matrix4f getProjectionViewMatrix() {
-		return Matrix4f.mul(projectionMatrix, MathUtils.getViewMatrix(this), null);
+		return Matrix4f.mul(projectionMatrix, MathUtils.getViewMatrix(viewMatrix, this), projectionViewMatrix);
 	}
 	
 }

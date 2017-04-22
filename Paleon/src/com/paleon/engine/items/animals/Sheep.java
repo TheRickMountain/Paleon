@@ -52,7 +52,6 @@ public class Sheep implements IAnimal {
 		backRightLeg = SheepModel.getBackRightLeg();
 		backRightLeg.scale.set(1.25f);
 		
-		id = MathUtils.generateId();
 		body.setId(id);
 		frontLeftLeg.setId(id);
 		frontRightLeg.setId(id);
@@ -71,7 +70,7 @@ public class Sheep implements IAnimal {
 		if(targetPosition != null) {
 			moveAnimation(deltaTime);
 			translate(deltaTime);
-			float distance = MathUtils.getDistanceBetweenPoints(body.position.x, body.position.z, targetPosition.x, targetPosition.z);
+			float distance = MathUtils.getDistance(body.position.x, body.position.z, targetPosition.x, targetPosition.z);
 			if(distance <= 4f) {
 				targetPosition = null;
 				resetAnimation();

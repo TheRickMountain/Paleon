@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL32;
 
 import com.paleon.engine.Display;
@@ -99,16 +98,11 @@ public class TerrainRendererSystem {
 				0, 0, 0, 1));
 		
 		TexturePack texturePack = terrain.getTexture();
-		GL13.glActiveTexture(GL13.GL_TEXTURE0);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texturePack.getBlendMap());
-		GL13.glActiveTexture(GL13.GL_TEXTURE1);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texturePack.getaTexture());
-		GL13.glActiveTexture(GL13.GL_TEXTURE2);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texturePack.getrTexture());
-		GL13.glActiveTexture(GL13.GL_TEXTURE3);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texturePack.getgTexture());
-		GL13.glActiveTexture(GL13.GL_TEXTURE4);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texturePack.getbTexture());
+		texturePack.getBlendMap().bindToUnit(0);
+		texturePack.getaTexture().bindToUnit(1);
+		texturePack.getrTexture().bindToUnit(2);
+		texturePack.getgTexture().bindToUnit(3);
+		texturePack.getbTexture().bindToUnit(4);
 		
 		OpenglUtils.bindVAO(terrain.getVaoId());
 	}

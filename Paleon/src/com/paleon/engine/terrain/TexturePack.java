@@ -1,14 +1,15 @@
 package com.paleon.engine.terrain;
 
 import com.paleon.engine.ResourceManager;
+import com.paleon.textures.Texture;
 
 public class TexturePack {
 
-	int blendMap;
-	int aTexture;
-	int rTexture;
-	int gTexture;
-	int bTexture;
+	Texture blendMap;
+	Texture aTexture;
+	Texture rTexture;
+	Texture gTexture;
+	Texture bTexture;
 	
 	public TexturePack(String blendMap, String alpha, String red, String green, String blue) {
 		this.blendMap = ResourceManager.getTexture(blendMap);
@@ -18,23 +19,23 @@ public class TexturePack {
 		this.bTexture = ResourceManager.getTexture(blue);
 	}
 
-	public int getBlendMap() {
+	public Texture getBlendMap() {
 		return blendMap;
 	}
 
-	public int getaTexture() {
+	public Texture getaTexture() {
 		return aTexture;
 	}
 
-	public int getrTexture() {
+	public Texture getrTexture() {
 		return rTexture;
 	}
 
-	public int getgTexture() {
+	public Texture getgTexture() {
 		return gTexture;
 	}
 
-	public int getbTexture() {
+	public Texture getbTexture() {
 		return bTexture;
 	}
 	

@@ -19,6 +19,7 @@ import com.paleon.engine.toolbox.MathUtils;
 import com.paleon.engine.water.WaterFrameBuffers;
 import com.paleon.maths.vecmath.Matrix4f;
 import com.paleon.maths.vecmath.Vector3f;
+import com.paleon.textures.Texture;
 
 public class WaterRendererSystem {
 
@@ -27,8 +28,8 @@ public class WaterRendererSystem {
 	private ShaderProgram shader;
 	private Mesh mesh;
 	
-	private int dudvMap;
-	private int normalMap;
+	private Texture dudvMap;
+	private Texture normalMap;
 	
 	private float moveFactor = 0;
 	
@@ -91,7 +92,7 @@ public class WaterRendererSystem {
 	
 	public void prepareRender(Camera camera, Light light, Color fogColor, WaterFrameBuffers fbos){
 		shader.bind();
-		shader.setUniform("viewMatrix", MathUtils.getViewMatrix(camera));
+		shader.setUniform("viewMatrix", camera.getViewMatrix());
 		shader.setUniform("moveFactor", moveFactor);
 		shader.setUniform("cameraPosition", camera.getPosition());
 		shader.setUniform("lightPosition", light.getPosition());
@@ -101,10 +102,8 @@ public class WaterRendererSystem {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, fbos.getReflectionTexture());
 		GL13.glActiveTexture(GL13.GL_TEXTURE1);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, fbos.getRefractionTexture());
-		GL13.glActiveTexture(GL13.GL_TEXTURE2);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, dudvMap);
-		GL13.glActiveTexture(GL13.GL_TEXTURE3);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, normalMap);
+		dudvMap.bindToUnit(2);
+		normalMap.bindToUnit(3);
 		GL13.glActiveTexture(GL13.GL_TEXTURE4);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, fbos.getRefractionDepthTexture());
 		GL30.glBindVertexArray(mesh.getVAO());

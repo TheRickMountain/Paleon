@@ -10,11 +10,13 @@ import com.paleon.engine.graph.Mesh;
 import com.paleon.engine.graph.ShaderProgram;
 import com.paleon.engine.loaders.OBJLoader;
 import com.paleon.engine.loaders.TextureLoader;
+import com.paleon.textures.Texture;
 
 public class ResourceManager {
 
 	private static Map<String, ShaderProgram> shaders = new HashMap<String, ShaderProgram>();
-	private static Map<String, Integer> textures = new HashMap<String, Integer>();
+	private static Map<String, Texture> textures = new HashMap<String, Texture>();
+	private static Map<String, Integer> skyboxes = new HashMap<String, Integer>();
 	private static Map<String, Mesh> meshes = new HashMap<String, Mesh>();
 	
 	public static ShaderProgram loadShader(String shaderName) {
@@ -37,19 +39,11 @@ public class ResourceManager {
 		return shaders.get(shaderName);
 	}
 	
-	public static int loadTexture(String path, String name) {
-		int texture = 0;
-		try {
-			texture = TextureLoader.load(path);
-			textures.put(name, texture);
-		} catch (Exception e) {
-			System.err.println("Failed to load " + path + " texture");
-			e.printStackTrace();
-		}
-		return texture;
+	public static void loadTexture(Texture texture, String name) {
+		textures.put(name, texture);
 	}
 	
-	public static int getTexture(String name) {
+	public static Texture getTexture(String name) {
 		return textures.get(name);
 	}
 	
@@ -57,7 +51,7 @@ public class ResourceManager {
 		int texture = 0;
 		try {
 			texture = TextureLoader.loadCubemap(name);
-			textures.put(name, texture);
+			skyboxes.put(name, texture);
 			return texture;
 		} catch (Exception e) {
 			System.err.println("Failed to load " + name + " texture");
@@ -67,7 +61,7 @@ public class ResourceManager {
 	}
 	
 	public static int getSkybox(String name) {
-		return textures.get(name);
+		return skyboxes.get(name);
 	}
 	
 	public static Mesh loadMesh(String path, String name) {
@@ -91,7 +85,10 @@ public class ResourceManager {
 		for(Entry<String, ShaderProgram> entry : shaders.entrySet()) {
 			entry.getValue().cleanup();
 		}
-		for(Entry<String, Integer> entry : textures.entrySet()) {
+		for(Entry<String, Texture> entry : textures.entrySet()) {
+			entry.getValue().cleanup();
+		}
+		for(Entry<String, Integer> entry : skyboxes.entrySet()) {
 			GL11.glDeleteTextures(entry.getValue());
 		}
 		for(Entry<String, Mesh> entry : meshes.entrySet()) {

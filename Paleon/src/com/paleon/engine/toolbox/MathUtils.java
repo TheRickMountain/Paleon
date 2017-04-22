@@ -22,7 +22,6 @@ import com.paleon.maths.vecmath.Vector3f;
 public class MathUtils {
 	
 	public static double NANOSECOND = 1000000000;
-	private static List<Integer> idCache = new ArrayList<Integer>();
 	public static Random rand = new Random();
 	public static final float PI = 3.1415927f;
 	public static final float RADIANS_TO_DEGREES = 180f / PI;
@@ -139,8 +138,7 @@ public class MathUtils {
 		return matrix;
 	}
 	
-	public static Matrix4f getViewMatrix(Camera camera){
-		Matrix4f matrix = new Matrix4f();
+	public static Matrix4f getViewMatrix(Matrix4f matrix, Camera camera){
 		matrix.setIdentity();
 		Matrix4f.rotate((float) Math.toRadians(camera.getPitch()), new Vector3f(1, 0, 0), matrix, matrix);
 		Matrix4f.rotate((float) Math.toRadians(camera.getYaw()), new Vector3f(0, 1, 0), matrix, matrix);
@@ -204,21 +202,21 @@ public class MathUtils {
 		return (float) ((Math.atan2(z2 - z1, x2 - x1)) * RADIANS_TO_DEGREES);
 	}
 	
-	public static float getDistanceBetweenPoints(float x1, float y1, float x2, float y2) {
+	public static float getDistance(float x1, float y1, float x2, float y2) {
 		float dX = x1 - x2;
 		float dY = y1 - y2;
 		float distance = (float) Math.sqrt((dX * dX) + (dY * dY));
 		return distance;
 	}
 	
-	public static float getDistanceBetweenPoints(Vector2f pos1, Vector3f pos2) {
+	public static float getDistance(Vector2f pos1, Vector3f pos2) {
 		float dX = pos1.x - pos2.x;
 		float dY = pos1.y - pos2.z;
 		float distance = (float) Math.sqrt((dX * dX) + (dY * dY));
 		return distance;
 	}
 
-	public static float getDistanceBetweenPoints(float x1, float y1, float z1, float x2, float y2, float z2) {
+	public static float getDistance(float x1, float y1, float z1, float x2, float y2, float z2) {
 		float dX = x1 - x2;
 		float dY = y1 - y2;
 		float dZ = z1 - z2;
@@ -226,7 +224,7 @@ public class MathUtils {
 		return distance;
 	}
 	
-	public static float getDistanceBetweenPoints(Vector3f vec1, Vector3f vec2) {
+	public static float getDistance(Vector3f vec1, Vector3f vec2) {
 		float dX = vec1.x - vec2.x;
 		float dY = vec1.y - vec2.y;
 		float dZ = vec1.z - vec2.z;
@@ -259,16 +257,6 @@ public class MathUtils {
         }
         return floatArr;
     }
-	
-	public static int generateId(){
-		int id = getIdByColor(generateColor());
-		for(int temp : idCache){
-			if(id == temp){
-				generateId();
-			}
-		}
-		return id;
-	}
 	
 	public static Color generateColor(){
 		int r = rand.nextInt(256);

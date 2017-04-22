@@ -115,7 +115,7 @@ public class Skybox {
 	}
 	
 	public void render(ShaderProgram shader) {
-		GL30.glBindVertexArray(mesh.getVaoId());
+		GL30.glBindVertexArray(mesh.getVAO());
 		GL20.glEnableVertexAttribArray(0);
 		bindTextures(shader);
 		GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, mesh.getVertexCount());

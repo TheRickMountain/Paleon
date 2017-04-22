@@ -14,13 +14,12 @@ import com.paleon.engine.graph.RenderEngine;
 import com.paleon.engine.input.Key;
 import com.paleon.engine.input.Keyboard;
 import com.paleon.engine.items.Camera;
-import com.paleon.engine.items.GameObject;
+import com.paleon.engine.items.Entity;
 import com.paleon.engine.items.Light;
 import com.paleon.engine.items.WaterTile;
 import com.paleon.engine.terrain.Terrain;
 import com.paleon.engine.terrain.TerrainBlock;
 import com.paleon.engine.toolbox.Color;
-import com.paleon.engine.toolbox.ColorPicker;
 import com.paleon.engine.toolbox.GameTime;
 import com.paleon.engine.toolbox.OpenglUtils;
 import com.paleon.engine.water.WaterFrameBuffers;
@@ -40,7 +39,7 @@ public class World {
 	
 	private final TerrainBlock[][] terrainGrid;
 	
-	private final List<GameObject> gameObjects = new ArrayList<GameObject>();
+	private final List<Entity> gameObjects = new ArrayList<Entity>();
 	
 	private WaterFrameBuffers fbos;
 	private final List<WaterTile> waterTiles = new ArrayList<WaterTile>();
@@ -52,13 +51,8 @@ public class World {
 	public Light sun;
 	
 	private boolean wireframeMode = false;
-	private boolean colorMode = false;
 	
 	private float waterHeight = -1;
-	
-	private int colorPickingId = -1;
-	
-	private GameObject colorPickedObject;
 	
 	public World(Camera camera) {
 		fbos = new WaterFrameBuffers();
@@ -78,18 +72,10 @@ public class World {
 		sun.setDiffuse(weather.getSunLightColor());	
 		skybox.update(dt);
 		
-		Iterator<GameObject> goIter = gameObjects.iterator();
+		Iterator<Entity> goIter = gameObjects.iterator();
 		while(goIter.hasNext()){
-			GameObject gameObject = goIter.next();
+			Entity gameObject = goIter.next();
 			gameObject.update(dt);
-			
-			if(colorPickingId != 0) {
-				if(gameObject.getId() == colorPickingId) {
-					colorPickedObject = gameObject;
-				}
-			} else {
-				colorPickedObject = null;
-			}
 			
 			if(gameObject.isRemove()) {
 				goIter.remove();
@@ -100,10 +86,6 @@ public class World {
 			wireframeMode = !wireframeMode;
 			OpenglUtils.wireframeMode(wireframeMode);
 		}
-		
-		if(Keyboard.isKeyDown(Key.F6)) {
-			colorMode = !colorMode;
-		}
 	}
 	
 	public void render(Camera camera) {		
@@ -113,53 +95,47 @@ public class World {
 		
 		// Render in color mode
 		RenderEngine.clear(0, 0, 0);
-		renderEngine.renderColor(gameObjects, camera);
-		colorPickingId = ColorPicker.getId(Display.getWidth() / 2, Display.getHeight() / 2);
 		
-		if(!colorMode) {
-			GL11.glEnable(GL30.GL_CLIP_DISTANCE0);
-			
-			// Render reflection texture
-			fbos.bindReflectionFrameBuffer();
-			float distance = 2 * (camera.getPosition().y - waterHeight);
-			camera.getPosition().y -= distance;
-			camera.invertPitch();
-	
-			RenderEngine.clear(0.98f, 0.9f, 0.78f);
-			renderEngine.render(gameObjects, sun, weather.getFogColor(), new Vector4f(0, 1, 0, -waterHeight), camera);
-			renderEngine.render(terrains, sun, weather.getFogColor(), new Vector4f(0, 1, 0, -waterHeight), camera);
-			if(skybox != null) {
-				renderEngine.render(skybox, weather.getFogColor(), camera);
-			}
-	
-			camera.getPosition().y += distance;
-			camera.invertPitch();
-			
-			// Render refraction texture
-			fbos.bindRefractionFrameBuffer();
-	
-			RenderEngine.clear(0.98f, 0.9f, 0.78f);
-			renderEngine.render(gameObjects, sun, weather.getFogColor(), new Vector4f(0, -1, 0, waterHeight), camera);
-			renderEngine.render(terrains, sun, weather.getFogColor(), new Vector4f(0, -1, 0, waterHeight), camera);
-			if(skybox != null) {
-				renderEngine.render(skybox, weather.getFogColor(), camera);
-			}
-			
-			// Render to the world
-			GL11.glDisable(GL30.GL_CLIP_DISTANCE0);
-			fbos.unbindCurrentFrameBuffer();
-			RenderEngine.clear(0.98f, 0.9f, 0.78f);
-			
-			renderEngine.render(gameObjects, sun, weather.getFogColor(), new Vector4f(0, 1, 0, 100000), camera);
-			renderEngine.render(terrains, sun, weather.getFogColor(), new Vector4f(0, 1, 0, 100000), camera);
-			if(skybox != null) {
-				renderEngine.render(skybox, weather.getFogColor(), camera);
-			}
-			renderEngine.render(waterTiles, sun, weather.getFogColor(), fbos, camera);
-			
-			// Render to the screen
-			renderEngine.render(gameObjects);
+		GL11.glEnable(GL30.GL_CLIP_DISTANCE0);
+
+		// Render reflection texture
+		fbos.bindReflectionFrameBuffer();
+		float distance = 2 * (camera.getPosition().y - waterHeight);
+		camera.getPosition().y -= distance;
+		camera.invertPitch();
+
+		RenderEngine.clear(0.98f, 0.9f, 0.78f);
+		renderEngine.render(gameObjects, sun, weather.getFogColor(), new Vector4f(0, 1, 0, -waterHeight), camera);
+		renderEngine.render(terrains, sun, weather.getFogColor(), new Vector4f(0, 1, 0, -waterHeight), camera);
+		if(skybox != null) {
+			renderEngine.render(skybox, weather.getFogColor(), camera);
 		}
+
+		camera.getPosition().y += distance;
+		camera.invertPitch();
+
+		// Render refraction texture
+		fbos.bindRefractionFrameBuffer();
+
+		RenderEngine.clear(0.98f, 0.9f, 0.78f);
+		renderEngine.render(gameObjects, sun, weather.getFogColor(), new Vector4f(0, -1, 0, waterHeight), camera);
+		renderEngine.render(terrains, sun, weather.getFogColor(), new Vector4f(0, -1, 0, waterHeight), camera);
+		if(skybox != null) {
+			renderEngine.render(skybox, weather.getFogColor(), camera);
+		}
+
+		// Render to the world
+		GL11.glDisable(GL30.GL_CLIP_DISTANCE0);
+		fbos.unbindCurrentFrameBuffer();
+		RenderEngine.clear(0.98f, 0.9f, 0.78f);
+
+		renderEngine.render(gameObjects, sun, weather.getFogColor(), new Vector4f(0, 1, 0, 100000), camera);
+		renderEngine.render(terrains, sun, weather.getFogColor(), new Vector4f(0, 1, 0, 100000), camera);
+		if(skybox != null) {
+			renderEngine.render(skybox, weather.getFogColor(), camera);
+		}
+		renderEngine.render(waterTiles, sun, weather.getFogColor(), fbos, camera);
+
 	}
 	
 	public void addTerrain(Terrain terrain){
@@ -205,8 +181,8 @@ public class World {
 		return terrainGrid[terrain_i][terrain_j];
 	}
 
-	public void addGameObject(GameObject gameObject) {		
-		for(GameObject child : gameObject.getChildren()){
+	public void addGameObject(Entity gameObject) {		
+		for(Entity child : gameObject.getChildren()){
 			addGameObject(child);
 		}
 		
@@ -214,17 +190,17 @@ public class World {
 		gameObjects.add(gameObject);
 	}
 	
-	public void addGameObject(GameObject gameObject, boolean inverse) {		
+	public void addGameObject(Entity gameObject, boolean inverse) {		
 		gameObject.init();
 		gameObjects.add(gameObject);
 		
-		for(GameObject child : gameObject.getChildren()){
+		for(Entity child : gameObject.getChildren()){
 			addGameObject(child);
 		}
 	}
 	
-	public void removeGameObject(GameObject gameObject) {
-		for(GameObject child : gameObject.getChildren()){
+	public void removeGameObject(Entity gameObject) {
+		for(Entity child : gameObject.getChildren()){
 			removeGameObject(child);
 		}
 		
@@ -238,10 +214,6 @@ public class World {
 	public void setSkybox(Skybox skybox) {
 		this.skybox = skybox;
 	}
-	
-	public int getColorPickingId(){
-		return colorPickingId;
-	}
 
 	public void cleanup() {
 		fbos.cleanup();
@@ -251,10 +223,6 @@ public class World {
 		if(skybox != null) {
 			skybox.cleanup();
 		}
-	}
-	
-	public GameObject getColorPickedObject() {
-		return colorPickedObject;
 	}
 
 }

@@ -1,12 +1,12 @@
 package com.paleon.engine.behaviour;
 
 import com.paleon.engine.components.Behaviour;
-import com.paleon.engine.items.GameObject;
+import com.paleon.engine.items.Entity;
 
 public class CharacterAnimBh extends Behaviour {
 
-	private GameObject leftArm, leftForearm, rightArm, rightForearm;
-	private GameObject leftHip, leftShin, rightHip, rightShin;
+	private Entity leftArm, leftForearm, rightArm, rightForearm;
+	private Entity leftHip, leftShin, rightHip, rightShin;
 	
 	private boolean extremitiesState = false;
 	
@@ -110,7 +110,7 @@ public class CharacterAnimBh extends Behaviour {
 		resetRotationX(rightShin, dt);
 	}
 	
-	private void resetRotationX(GameObject gameObject, float dt) {
+	private void resetRotationX(Entity gameObject, float dt) {
 		if(gameObject.localRotation.x > 2) {
 			gameObject.localRotation.x -= animSpeed * dt;
 		} else if(gameObject.localRotation.x < -2) {

@@ -1,6 +1,6 @@
 package com.paleon.engine.items.animals;
 
-import com.paleon.engine.items.GameObject;
+import com.paleon.engine.items.Entity;
 import com.paleon.engine.toolbox.MathUtils;
 import com.paleon.engine.toolbox.TimeUtil;
 import com.paleon.maths.vecmath.Vector2f;
@@ -14,7 +14,7 @@ public class Sheep implements IAnimal {
 	
 	private int health = 40;
 	
-	private GameObject body, frontLeftLeg, frontRightLeg, backLeftLeg, backRightLeg;
+	private Entity body, frontLeftLeg, frontRightLeg, backLeftLeg, backRightLeg;
 	
 	public int animSpeed = 100;
 	

@@ -8,22 +8,17 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.GL20;
-import org.lwjgl.opengl.GL30;
 
 import com.paleon.engine.Display;
 import com.paleon.engine.ResourceManager;
-import com.paleon.engine.components.MeshFilter;
 import com.paleon.engine.graph.Material;
 import com.paleon.engine.graph.Mesh;
-import com.paleon.engine.graph.RenderEngine;
 import com.paleon.engine.graph.ShaderProgram;
 import com.paleon.engine.graph.Transform;
 import com.paleon.engine.items.Camera;
-import com.paleon.engine.items.GameObject;
+import com.paleon.engine.items.Entity;
 import com.paleon.engine.items.Light;
 import com.paleon.engine.toolbox.Color;
-import com.paleon.engine.toolbox.MathUtils;
 import com.paleon.engine.toolbox.OpenglUtils;
 import com.paleon.maths.vecmath.Vector2f;
 import com.paleon.maths.vecmath.Vector4f;
@@ -69,52 +64,7 @@ public class MeshRendererSystem {
 		waving = (float)Math.sin(temp) * 0.5f;
 	}
 	
-	public void colorRender(List<GameObject> gameItems, Camera camera){
-		OpenglUtils.cullFace(false);
-		
-		RenderEngine.clear(0, 0, 0);
-		
-		shader.bind();
-		shader.setUniform("viewMatrix", MathUtils.getViewMatrix(camera));
-		for(GameObject gameItem : gameItems){
-			if(gameItem.isActive()) {
-				Transform transform = gameItem.transform;
-				
-				if(camera.getFrusutmCuller().testEntityInView(gameItem)) {
-					if(!gameItem.isFadeAway()) {
-						MeshFilter meshFilter = gameItem.getComponent(MeshFilter.class);
-						if(meshFilter != null) {
-							if(meshFilter.enabled) {
-								Mesh mesh = meshFilter.mesh;	
-								
-								shader.setUniform("modelMatrix", transform.getModelMatrix());	
-								
-								shader.setUniform("colorMode", 1);
-								shader.setUniform("objectColor", MathUtils.getColorById(gameItem.getId()));
-								
-								GL30.glBindVertexArray(mesh.getVaoId());
-								GL20.glEnableVertexAttribArray(0);		
-								GL20.glEnableVertexAttribArray(1);
-								GL20.glEnableVertexAttribArray(2);
-								
-								glDrawElements(GL_TRIANGLES, mesh.getVertexCount(), GL_UNSIGNED_INT, 0);
-								
-								GL20.glDisableVertexAttribArray(0);
-								GL20.glDisableVertexAttribArray(1);
-								GL20.glDisableVertexAttribArray(2);
-								GL30.glBindVertexArray(0);
-							}
-						}
-					}
-				}
-			}
-		}
-		shader.unbind();
-		
-		OpenglUtils.cullFace(true);
-	}
-	
-	public void render(List<GameObject> gameItems, Light light, Color fogColor, Vector4f plane, Camera camera) {		
+	public void render(List<Entity> gameItems, Light light, Color fogColor, Vector4f plane, Camera camera) {		
 		shader.bind();
 		
 		if(Display.wasResized()) {
@@ -127,55 +77,44 @@ public class MeshRendererSystem {
 		shader.setUniform("fogColor", fogColor);
 		shader.setUniform("plane", plane);
 		
-		for(GameObject gameItem : gameItems){
+		for(Entity gameItem : gameItems){
 			Transform transform = gameItem.transform;
 			
 			if(camera.getFrusutmCuller().testEntityInView(gameItem)) {
 				if(!gameItem.isFadeAway()) {
-					MeshFilter meshFilter = gameItem.getComponent(MeshFilter.class);
-					if(meshFilter != null) {
-						if(meshFilter.enabled) {
-							shader.setUniform("modelMatrix", transform.getModelMatrix());
-							
-							shader.setUniform("useWaving", gameItem.isUseWaving());
-							shader.setUniform("wavingValue", waving);
-							
-							Mesh mesh = meshFilter.mesh;
-							Material material = mesh.getMaterial();
-							
-							shader.setUniform("numberOfRows", mesh.getMaterial().getNumberOfRows());
-							shader.setUniform("offset", new Vector2f(gameItem.getTextureXOffset(), gameItem.getTextureYOffset()));
-							
-							GL13.glActiveTexture(GL13.GL_TEXTURE0);
-							GL11.glBindTexture(GL11.GL_TEXTURE_2D, material.getTextureId());
-							shader.setUniform("colorMode", 0);
-							
-							shader.setUniform("shineDamper", material.getShineDamper());
-							shader.setUniform("reflectivity", material.getReflectivity());
-							
-							if(material.isHasTransparency()){
-								OpenglUtils.cullFace(false);
-							}
-							
-							shader.setUniform("useFakeLighting", material.isUseFakeLighting());
-							
-							GL30.glBindVertexArray(mesh.getVaoId());
-							GL20.glEnableVertexAttribArray(0);		
-							GL20.glEnableVertexAttribArray(1);
-							GL20.glEnableVertexAttribArray(2);
-							
-							glDrawElements(GL_TRIANGLES, mesh.getVertexCount(), GL_UNSIGNED_INT, 0);
-							
-							GL20.glDisableVertexAttribArray(0);
-							GL20.glDisableVertexAttribArray(1);
-							GL20.glDisableVertexAttribArray(2);
-							GL30.glBindVertexArray(0);
-							
-							GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
-							
-							OpenglUtils.cullFace(true);
-						}
+					shader.setUniform("modelMatrix", transform.getModelMatrix());
+					
+					shader.setUniform("useWaving", gameItem.isUseWaving());
+					shader.setUniform("wavingValue", waving);
+					
+					Mesh mesh = gameItem.getMesh();
+					Material material = gameItem.getMaterial();
+					
+					shader.setUniform("numberOfRows", material.getNumberOfRows());
+					shader.setUniform("offset", new Vector2f(gameItem.getTextureXOffset(), gameItem.getTextureYOffset()));
+					
+					GL13.glActiveTexture(GL13.GL_TEXTURE0);
+					GL11.glBindTexture(GL11.GL_TEXTURE_2D, material.getTextureId());
+					shader.setUniform("colorMode", 0);
+					
+					shader.setUniform("shineDamper", material.getShineDamper());
+					shader.setUniform("reflectivity", material.getReflectivity());
+					
+					if(material.isHasTransparency()){
+						OpenglUtils.cullFace(false);
 					}
+					
+					shader.setUniform("useFakeLighting", material.isUseFakeLighting());
+					
+					mesh.bind(0, 1, 2);
+					
+					glDrawElements(GL_TRIANGLES, mesh.getVertexCount(), GL_UNSIGNED_INT, 0);
+					
+					mesh.unbind(0, 1, 2);
+					
+					GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+					
+					OpenglUtils.cullFace(true);
 				}
 			}
 		}

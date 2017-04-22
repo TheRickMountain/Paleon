@@ -3,11 +3,11 @@ package com.paleon.engine.toolbox;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
+import org.lwjgl.system.MemoryUtil;
 
 public class OpenglUtils {
 
@@ -45,17 +45,48 @@ public class OpenglUtils {
 		}
 	}
 	
-	public static IntBuffer dataToIntBuffer(int[] data){
-		IntBuffer buffer = BufferUtils.createIntBuffer(data.length);
+	public static FloatBuffer toFloatBuffer(float[] data) {
+		FloatBuffer buffer = MemoryUtil.memAllocFloat(data.length);
 		buffer.put(data).flip();
 		return buffer;
 	}
 	
-	public static FloatBuffer dataToFloatBuffer(float[] data){
-		FloatBuffer buffer = BufferUtils.createFloatBuffer(data.length);
+	public static IntBuffer toIntBuffer(int[] data) {
+		IntBuffer buffer = MemoryUtil.memAllocInt(data.length);
 		buffer.put(data).flip();
 		return buffer;
 	}
+	
+	public static FloatBuffer toFloatBuffer(float[] vertices, float[] texCoords) {
+        FloatBuffer interleavedBuffer = MemoryUtil.memAllocFloat(vertices.length + texCoords.length);
+        int veticesPointer = 0;
+        int texturePointer = 0;
+        for (int i = 0; i < vertices.length / 2; i++) {
+            interleavedBuffer.put(new float[] { vertices[veticesPointer++],
+                    vertices[veticesPointer++] });
+            interleavedBuffer.put(new float[] { texCoords[texturePointer++],
+                    texCoords[texturePointer++] });
+        }
+        interleavedBuffer.flip();
+        return interleavedBuffer;
+    }
+	
+	public static FloatBuffer toFloatBuffer(float[] vertices, float[] texCoords, float[] normals) {
+        FloatBuffer interleavedBuffer = MemoryUtil.memAllocFloat(vertices.length + texCoords.length + normals.length);
+        int veticesPointer = 0;
+        int texturePointer = 0;
+        int normalsPointer = 0;
+        for (int i = 0; i < vertices.length / 3; i++) {
+            interleavedBuffer.put(new float[] { vertices[veticesPointer++],
+                    vertices[veticesPointer++], vertices[veticesPointer++] });
+            interleavedBuffer.put(new float[] { texCoords[texturePointer++],
+                    texCoords[texturePointer++] });
+            interleavedBuffer.put(new float[] { normals[normalsPointer++],
+                    normals[normalsPointer++], normals[normalsPointer++] });
+        }
+        interleavedBuffer.flip();
+        return interleavedBuffer;
+    }
 	
 	public static void bindVAO(int vaoID) {
 		GL30.glBindVertexArray(vaoID);

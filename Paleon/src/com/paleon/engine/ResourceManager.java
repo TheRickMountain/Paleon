@@ -6,7 +6,6 @@ import java.util.Map.Entry;
 
 import org.lwjgl.opengl.GL11;
 
-import com.paleon.engine.graph.Material;
 import com.paleon.engine.graph.Mesh;
 import com.paleon.engine.graph.ShaderProgram;
 import com.paleon.engine.loaders.OBJLoader;
@@ -38,67 +37,54 @@ public class ResourceManager {
 		return shaders.get(shaderName);
 	}
 	
-	public static int loadTexture(String texturePath, String textureName) {
+	public static int loadTexture(String path, String name) {
 		int texture = 0;
 		try {
-			texture = TextureLoader.load(texturePath);
-			textures.put(textureName, texture);
+			texture = TextureLoader.load(path);
+			textures.put(name, texture);
 		} catch (Exception e) {
-			System.err.println("Failed to load " + texturePath + " texture");
+			System.err.println("Failed to load " + path + " texture");
 			e.printStackTrace();
 		}
 		return texture;
 	}
 	
-	public static int loadSTBImage(String texturePath, String textureName) {
-		int texture = 0;
-		try {
-			texture = TextureLoader.load(texturePath);
-			textures.put(textureName, texture);
-		} catch (Exception e) {
-			System.err.println("Failed to load " + texturePath + " texture");
-			e.printStackTrace();
-		}
-		return texture;
+	public static int getTexture(String name) {
+		return textures.get(name);
 	}
 	
-	public static int getTexture(String textureName) {
-		return textures.get(textureName);
-	}
-	
-	public static int loadSkybox(String skyboxName) {
+	public static int loadSkybox(String name) {
 		int texture = 0;
 		try {
-			texture = TextureLoader.loadCubemap(skyboxName);
-			textures.put(skyboxName, texture);
+			texture = TextureLoader.loadCubemap(name);
+			textures.put(name, texture);
 			return texture;
 		} catch (Exception e) {
-			System.err.println("Failed to load " + skyboxName + " texture");
+			System.err.println("Failed to load " + name + " texture");
 			e.printStackTrace();
 		}
 		return texture;
 	}
 	
-	public static int getSkybox(String skyboxName) {
-		return textures.get(skyboxName);
+	public static int getSkybox(String name) {
+		return textures.get(name);
 	}
 	
-	public static Mesh loadMesh(String meshPath, String meshName, Material material) {
+	public static Mesh loadMesh(String path, String name) {
 		try {
 			Mesh mesh = null;
-			mesh = OBJLoader.loadMesh(meshPath);
-			mesh.setMaterial(material);
-			meshes.put(meshName, mesh);
+			mesh = OBJLoader.loadMesh(path);
+			meshes.put(name, mesh);
 			return mesh;
 		} catch (Exception e) {
-			System.err.println("Failed to load " + meshPath + " mesh");
+			System.err.println("Failed to load " + path + " mesh");
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	public static Mesh getMesh(String meshName) {
-		return meshes.get(meshName);
+	public static Mesh getMesh(String name) {
+		return meshes.get(name);
 	}
 	
 	public static void clear() {

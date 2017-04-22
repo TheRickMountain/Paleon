@@ -1,12 +1,12 @@
 package com.paleon.engine.components;
 
-import com.paleon.engine.items.GameObject;
+import com.paleon.engine.items.Entity;
 
 public abstract class Behaviour {
 	
-	protected GameObject gameObject;
+	protected Entity gameObject;
 	
-	public void setGameObject(GameObject gameObject) {
+	public void setGameObject(Entity gameObject) {
 		this.gameObject = gameObject;
 	}
 	

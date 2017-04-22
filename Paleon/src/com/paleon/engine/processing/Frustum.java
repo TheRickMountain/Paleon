@@ -2,7 +2,7 @@ package com.paleon.engine.processing;
 
 import com.paleon.engine.Display;
 import com.paleon.engine.items.Camera;
-import com.paleon.engine.items.GameObject;
+import com.paleon.engine.items.Entity;
 import com.paleon.engine.items.WaterTile;
 import com.paleon.engine.terrain.TerrainBlock;
 import com.paleon.engine.toolbox.MathUtils;
@@ -52,7 +52,7 @@ public class Frustum {
 		cameraZ = camera.getPosition().z;
 	}
 	
-	public boolean testEntityInView(GameObject entity) {
+	public boolean testEntityInView(Entity entity) {
 		boolean render = true;
 		float entityX = entity.position.x;
 		float entityZ = entity.position.z;

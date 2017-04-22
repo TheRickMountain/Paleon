@@ -107,7 +107,7 @@ public class WaterRendererSystem {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, normalMap);
 		GL13.glActiveTexture(GL13.GL_TEXTURE4);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, fbos.getRefractionDepthTexture());
-		GL30.glBindVertexArray(mesh.getVaoId());
+		GL30.glBindVertexArray(mesh.getVAO());
 		GL20.glEnableVertexAttribArray(0);
 		
 		GL11.glEnable(GL11.GL_BLEND);

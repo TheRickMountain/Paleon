@@ -1,6 +1,6 @@
 package com.paleon.engine.graph;
 
-import com.paleon.engine.items.GameObject;
+import com.paleon.engine.items.Entity;
 import com.paleon.engine.toolbox.MathUtils;
 import com.paleon.maths.vecmath.Matrix4f;
 import com.paleon.maths.vecmath.Vector3f;
@@ -13,11 +13,11 @@ public class Transform {
 	private Vector3f lastRotation;
 	private Vector3f lastScale;
 	
-	private GameObject gameObject;
+	private Entity gameObject;
 	
 	public boolean transformed = false;
 	
-	public Transform(GameObject gameObject) {
+	public Transform(Entity gameObject) {
 		this.gameObject = gameObject;
 		
 		lastPosition = new Vector3f();

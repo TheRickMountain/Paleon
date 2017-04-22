@@ -1,15 +1,15 @@
 package com.paleon.engine.components;
 
-import com.paleon.engine.items.GameObject;
+import com.paleon.engine.items.Entity;
 
 public abstract class Component {
 
 	public boolean enabled = true;
 	
-	protected GameObject gameObject;
+	protected Entity gameObject;
 	
-	public void setGameObject(GameObject gameObject) {
-		this.gameObject = gameObject;
+	public void setEntity(Entity entity) {
+		this.gameObject = entity;
 	}
 	
 }

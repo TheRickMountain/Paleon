@@ -65,6 +65,11 @@ public class TerrainRendererSystem {
 	}
 	
 	private void render(Map<Terrain, List<TerrainBlock>> terrainBatches, Light light, Color fogColor, Camera camera) {
+		shader.setUniform("viewMatrix", camera.getViewMatrix());
+		shader.setUniform("lightPosition", light.getPosition());
+		shader.setUniform("lightColor", light.getDiffuse());
+		shader.setUniform("fogColor", fogColor);
+		
 		for (List<TerrainBlock> blocks : terrainBatches.values()) {
 			for (TerrainBlock block : blocks) {
 				block.setStitching();
@@ -89,14 +94,9 @@ public class TerrainRendererSystem {
 		}
 	}
 	
-	private void prepareTerrainInstance(Terrain terrain, Camera camera, Light light, Color fogColor) {
-		shader.setUniform("viewMatrix", camera.getViewMatrix());
-		shader.setUniform("lightPosition", light.getPosition());
-		shader.setUniform("lightColor", light.getDiffuse());
-		shader.setUniform("fogColor", fogColor);
-		
-		shader.setUniform("modelMatrix", MathUtils.getEulerModelMatrix(new Vector3f(terrain.getX(), 0, terrain.getZ()), 
-				new Vector3f(), new Vector3f(1, 1, 1)));
+	private void prepareTerrainInstance(Terrain terrain, Camera camera, Light light, Color fogColor) {	
+		shader.setUniform("modelMatrix", MathUtils.getModelMatrix(new Vector3f(terrain.getX(), 0, terrain.getZ()), 
+				0, 0, 0, 1));
 		
 		TexturePack texturePack = terrain.getTexture();
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);

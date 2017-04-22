@@ -3,10 +3,10 @@ package com.paleon.engine.items;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.paleon.engine.components.Component;
-import com.paleon.engine.components.MeshFilter;
 import com.paleon.engine.components.Behaviour;
+import com.paleon.engine.components.Component;
 import com.paleon.engine.graph.Material;
+import com.paleon.engine.graph.Mesh;
 import com.paleon.engine.graph.Transform;
 import com.paleon.engine.toolbox.MathUtils;
 import com.paleon.engine.toolbox.ReflectionUtils;
@@ -14,7 +14,7 @@ import com.paleon.maths.vecmath.Matrix4f;
 import com.paleon.maths.vecmath.Vector3f;
 import com.paleon.maths.vecmath.Vector4f;
 
-public class GameObject {
+public class Entity {
 	
 	public String name;
 	
@@ -28,9 +28,12 @@ public class GameObject {
 	
 	private List<Component> components = new ArrayList<Component>();
 	private List<Behaviour> behaviours = new ArrayList<Behaviour>();
-	private List<GameObject> children = new ArrayList<GameObject>();
+	private List<Entity> children = new ArrayList<Entity>();
 	
-	private GameObject parent;
+	private Mesh mesh;
+	private Material material;
+	
+	private Entity parent;
 	
 	private boolean active = true;
 	
@@ -50,19 +53,17 @@ public class GameObject {
 	
 	private boolean removed = false;
 	
-	private boolean item = false;
-	
-	private int guiId = -1;
-	
 	private float furthestPoint = 1;
 	
-	public GameObject() {
-		this("");
+	public Entity(Mesh mesh, Material material) {
+		this("", mesh, material);
 	}
 	
-	public GameObject(String name) {
+	public Entity(String name, Mesh mesh, Material material) {
 		this.name = name;
 		this.transform = new Transform(this);
+		this.mesh = mesh;
+		this.material = material;
 	}
 	
 	public void init() {
@@ -85,7 +86,7 @@ public class GameObject {
 	}
 	
 	public void update(float deltaTime) {
-		for(GameObject child : children) {
+		for(Entity child : children) {
 			child.update(deltaTime);
 		}
 		
@@ -98,16 +99,12 @@ public class GameObject {
 		}
 	}
 	
-	public float getTextureXOffset(){
-		Material material = getComponent(MeshFilter.class).mesh.getMaterial();
-		
+	public float getTextureXOffset(){	
 		int column = textureIndex % material.getNumberOfRows();
 		return (float) column / (float) material.getNumberOfRows();
 	}
 	
 	public float getTextureYOffset(){
-		Material material = getComponent(MeshFilter.class).mesh.getMaterial();
-		
 		int row = textureIndex / material.getNumberOfRows();
 		return (float) row / (float)material.getNumberOfRows();
 	}
@@ -159,25 +156,9 @@ public class GameObject {
 	public void remove() {
 		this.removed = true;
 		
-		for(GameObject child : children) {
+		for(Entity child : children) {
 			child.remove();
 		}
-	}
-
-	public boolean isItem() {
-		return item;
-	}
-
-	public void setItem(boolean item) {
-		this.item = item;
-	}
-
-	public int getGuiId() {
-		return guiId;
-	}
-
-	public void setGuiId(int guiId) {
-		this.guiId = guiId;
 	}
 	
 	public void setFurthestPoint(float furthestPoint) {
@@ -189,22 +170,22 @@ public class GameObject {
 		return val;
 	}
 	
-	public void addChild(GameObject gameObject) {
+	public void addChild(Entity gameObject) {
 		gameObject.setParent(this);
 		children.add(gameObject);
 	}
 	
-	public void removeChild(GameObject gameObject) {
+	public void removeChild(Entity gameObject) {
 		gameObject.setParent(null);
 		children.remove(gameObject);
 	}
 	
-	public List<GameObject> getChildren() {
+	public List<Entity> getChildren() {
 		return children;
 	}
 	
-	public GameObject getChildByName(String name) {
-		for(GameObject gameObject : children) {
+	public Entity getChildByName(String name) {
+		for(Entity gameObject : children) {
 			if(gameObject.name == name) {
 				return gameObject;
 			}
@@ -213,7 +194,7 @@ public class GameObject {
 	}
 	
 	public void addComponent(Component component) {
-		component.setGameObject(this);
+		component.setEntity(this);
 		this.components.add(component);
 	}
 	
@@ -246,11 +227,11 @@ public class GameObject {
         return null;
     }
 	
-	public GameObject getParent() {
+	public Entity getParent() {
 		return parent;
 	}
 	
-	private void setParent(GameObject parent) {
+	private void setParent(Entity parent) {
 		this.parent = parent;
 	}
 
@@ -261,9 +242,25 @@ public class GameObject {
 	public void setActive(boolean active) {
 		this.active = active;
 		
-		for(GameObject child : children) {
+		for(Entity child : children) {
 			child.setActive(active);
 		}
+	}
+	
+	public Mesh getMesh() {
+		return mesh;
+	}
+	
+	public void setMesh(Mesh mesh) {
+		this.mesh = mesh;
+	}
+	
+	public Material getMaterial() {
+		return material;
+	}
+	
+	public void setMaterial(Material material) {
+		this.material = material;
 	}
 
 }

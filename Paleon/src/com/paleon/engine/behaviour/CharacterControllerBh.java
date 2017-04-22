@@ -1,7 +1,6 @@
 package com.paleon.engine.behaviour;
 
 import com.paleon.engine.components.Behaviour;
-import com.paleon.engine.graph.gui.Inventory;
 import com.paleon.engine.input.Key;
 import com.paleon.engine.input.Keyboard;
 import com.paleon.engine.items.Camera;
@@ -11,17 +10,15 @@ public class CharacterControllerBh extends Behaviour {
 
 	private Camera camera;
 	private World world;
-	private Inventory inventory;
 	private boolean moving = false;
 	
 	private float speed = 8;
 	
 	private CharacterAnimBh playerAnim;
 	
-	public CharacterControllerBh(Camera camera, World world, Inventory inventory) {
+	public CharacterControllerBh(Camera camera, World world) {
 		this.camera = camera;
 		this.world = world;
-		this.inventory = inventory;
 	}
 	
 	@Override
@@ -35,15 +32,15 @@ public class CharacterControllerBh extends Behaviour {
 		
 		gameObject.position.y = world.getTerrainHeight(gameObject.position.x, gameObject.position.z) + 2.25f;
 		
-		this.camera.setPosition(gameObject.position.x, gameObject.position.y + 4.5f, gameObject.position.z);
+		camera.setPosition(gameObject.position.x, gameObject.position.y + 4.5f, gameObject.position.z);
 		
-		if(Keyboard.isKeyDown(Key.E)) {
+		/*if(Keyboard.isKeyDown(Key.E)) {
 			if(world.getColorPickedObject() != null) {
 				if(inventory.addItem(world.getColorPickedObject().getGuiId())) {
 					world.getColorPickedObject().remove();
 				}
 			}
-		}
+		}*/
 		
 		float tempRotation = -camera.getYaw();
 		

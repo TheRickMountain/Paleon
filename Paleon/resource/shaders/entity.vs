@@ -7,7 +7,7 @@ uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
 uniform vec3 lightPosition;
-uniform int useWaving;
+uniform float useWaving;
 uniform float wavingValue;
 uniform int numberOfRows;
 uniform vec2 offset;

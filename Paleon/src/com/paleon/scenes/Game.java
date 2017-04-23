@@ -55,7 +55,7 @@ public class Game implements IScene {
 		
 		Mouse.hide();
 		
-		GameTime.setTime(19, 00);
+		GameTime.setTime(12, 00);
 	
 		world.setSkybox(new Skybox("sunset", "sunny2", "night"));
 		

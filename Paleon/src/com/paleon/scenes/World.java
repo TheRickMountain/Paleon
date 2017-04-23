@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL30;
 
 import com.paleon.engine.Display;
-import com.paleon.engine.graph.RenderEngine;
+import com.paleon.engine.graph.renderer.RenderEngine;
 import com.paleon.engine.input.Key;
 import com.paleon.engine.input.Keyboard;
 import com.paleon.engine.items.Camera;

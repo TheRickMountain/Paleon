@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL30;
 
 import com.paleon.engine.ResourceManager;
 import com.paleon.engine.graph.Mesh;
-import com.paleon.engine.graph.ShaderProgram;
+import com.paleon.engine.graph.renderer.SkyboxShader;
 import com.paleon.engine.toolbox.GameTime;
 
 public class Skybox {
@@ -114,7 +114,7 @@ public class Skybox {
 		} 
 	}
 	
-	public void render(ShaderProgram shader) {
+	public void render(SkyboxShader shader) {
 		GL30.glBindVertexArray(mesh.getVAO());
 		GL20.glEnableVertexAttribArray(0);
 		bindTextures(shader);
@@ -123,12 +123,12 @@ public class Skybox {
 		GL30.glBindVertexArray(0);
 	}
 	
-	private void bindTextures(ShaderProgram shader) {
+	private void bindTextures(SkyboxShader shader) {
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		GL11.glBindTexture(GL13.GL_TEXTURE_CUBE_MAP, texture1);
 		GL13.glActiveTexture(GL13.GL_TEXTURE1);
 		GL11.glBindTexture(GL13.GL_TEXTURE_CUBE_MAP, texture2);
-		shader.setUniform("blendFactor", blendFactor);
+		shader.blendFactor.loadFloat(blendFactor);
 	}
 	
 	public void cleanup(){

@@ -1,4 +1,4 @@
-package com.paleon.engine.graph.renderSystems;
+package com.paleon.engine.graph.renderer;
 
 import java.util.List;
 import java.util.Map;
@@ -21,11 +21,11 @@ import com.paleon.engine.toolbox.OpenglUtils;
 import com.paleon.maths.vecmath.Vector3f;
 import com.paleon.maths.vecmath.Vector4f;
 
-public class TerrainRendererSystem {
+public class TerrainRenderer {
 
 	private ShaderProgram shader;
 	
-	public TerrainRendererSystem(Camera camera) {
+	public TerrainRenderer(Camera camera) {
 		shader = ResourceManager.loadShader("terrain");
 		
 		shader.createUniform("modelMatrix");

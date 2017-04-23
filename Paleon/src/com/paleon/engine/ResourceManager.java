@@ -14,7 +14,6 @@ import com.paleon.textures.Texture;
 
 public class ResourceManager {
 
-	private static Map<String, ShaderProgram> shaders = new HashMap<String, ShaderProgram>();
 	private static Map<String, Texture> textures = new HashMap<String, Texture>();
 	private static Map<String, Integer> skyboxes = new HashMap<String, Integer>();
 	private static Map<String, Mesh> meshes = new HashMap<String, Mesh>();
@@ -26,17 +25,12 @@ public class ResourceManager {
 			shader.createVertexShader("/shaders/" + shaderName + ".vs");
 			shader.createFragmentShader("/shaders/" + shaderName + ".fs");
 			shader.link();
-			shaders.put(shaderName, shader);
 			return shader;
 		} catch (Exception e) {
 			System.err.println("Failed to load " + shaderName + " shader");
 			e.printStackTrace();
 		}
 		return null;
-	}
-	
-	public static ShaderProgram getShader(String shaderName) {
-		return shaders.get(shaderName);
 	}
 	
 	public static void loadTexture(Texture texture, String name) {
@@ -82,9 +76,6 @@ public class ResourceManager {
 	}
 	
 	public static void clear() {
-		for(Entry<String, ShaderProgram> entry : shaders.entrySet()) {
-			entry.getValue().cleanup();
-		}
 		for(Entry<String, Texture> entry : textures.entrySet()) {
 			entry.getValue().cleanup();
 		}

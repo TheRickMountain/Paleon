@@ -1,4 +1,4 @@
-package com.paleon.engine.graph.renderSystems;
+package com.paleon.engine.graph.renderer;
 
 import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
 import static org.lwjgl.opengl.GL11.GL_UNSIGNED_INT;
@@ -22,14 +22,14 @@ import com.paleon.engine.toolbox.OpenglUtils;
 import com.paleon.maths.vecmath.Vector2f;
 import com.paleon.maths.vecmath.Vector4f;
 
-public class MeshRendererSystem {
+public class MeshRenderer {
 
 	private ShaderProgram shader;
 	
 	private float waving;
 	private float temp = 0;
 	
-	public MeshRendererSystem(Camera camera) {
+	public MeshRenderer(Camera camera) {
 		shader = ResourceManager.loadShader("entity");
 		
 		shader.createUniform("modelMatrix");
@@ -43,7 +43,6 @@ public class MeshRendererSystem {
 		shader.createUniform("lightColor");
 		shader.createUniform("shineDamper");
 		shader.createUniform("reflectivity");
-		shader.createUniform("colorMode");
 		shader.createUniform("useFakeLighting");
 		shader.createUniform("useWaving");
 		shader.createUniform("wavingValue");
@@ -93,7 +92,6 @@ public class MeshRendererSystem {
 					shader.setUniform("offset", new Vector2f(gameItem.getTextureXOffset(), gameItem.getTextureYOffset()));
 					
 					material.texture.bindToUnit(0);
-					shader.setUniform("colorMode", 0);
 					
 					shader.setUniform("shineDamper", material.getShineDamper());
 					shader.setUniform("reflectivity", material.getReflectivity());

@@ -1,4 +1,4 @@
-package com.paleon.engine.graph.renderSystems;
+package com.paleon.engine.graph.renderer;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import com.paleon.maths.vecmath.Matrix4f;
 import com.paleon.maths.vecmath.Vector3f;
 import com.paleon.textures.Texture;
 
-public class WaterRendererSystem {
+public class WaterRenderer {
 
 	private static final float WAVE_SPEED = 0.03f;
 	
@@ -33,7 +33,7 @@ public class WaterRendererSystem {
 	
 	private float moveFactor = 0;
 	
-	public WaterRendererSystem(Camera camera) {
+	public WaterRenderer(Camera camera) {
 		shader = ResourceManager.loadShader("water");
 		
 		shader.createUniform("modelMatrix");

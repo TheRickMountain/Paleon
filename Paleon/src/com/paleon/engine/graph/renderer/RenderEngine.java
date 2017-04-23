@@ -1,14 +1,10 @@
-package com.paleon.engine.graph;
+package com.paleon.engine.graph.renderer;
 
 import java.util.List;
 import java.util.Map;
 
 import org.lwjgl.opengl.GL11;
 
-import com.paleon.engine.graph.renderSystems.MeshRendererSystem;
-import com.paleon.engine.graph.renderSystems.SkyboxRendererSystem;
-import com.paleon.engine.graph.renderSystems.TerrainRendererSystem;
-import com.paleon.engine.graph.renderSystems.WaterRendererSystem;
 import com.paleon.engine.items.Camera;
 import com.paleon.engine.items.Entity;
 import com.paleon.engine.items.Light;
@@ -23,18 +19,18 @@ import com.paleon.maths.vecmath.Vector4f;
 
 public class RenderEngine {
 	
-	public MeshRendererSystem meshRendererSystem;
-	public TerrainRendererSystem terrainRendererSystem;
-	public SkyboxRendererSystem skyboxRendererSystem;
-	public WaterRendererSystem waterRendererSystem;
+	public MeshRenderer meshRendererSystem;
+	public TerrainRenderer terrainRendererSystem;
+	public SkyboxRenderer skyboxRendererSystem;
+	public WaterRenderer waterRendererSystem;
 	
 	private static RenderEngine instance;
 	
 	private RenderEngine(Camera camera) {	
-		meshRendererSystem = new MeshRendererSystem(camera);
-		terrainRendererSystem = new TerrainRendererSystem(camera);
-		skyboxRendererSystem = new SkyboxRendererSystem(camera);
-		waterRendererSystem = new WaterRendererSystem(camera);
+		meshRendererSystem = new MeshRenderer(camera);
+		terrainRendererSystem = new TerrainRenderer(camera);
+		skyboxRendererSystem = new SkyboxRenderer(camera);
+		waterRendererSystem = new WaterRenderer(camera);
 		
 		OpenglUtils.cullFace(true);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);

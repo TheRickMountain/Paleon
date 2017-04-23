@@ -78,10 +78,6 @@ public class PaleonEngine implements Runnable {
     	Display.postUpdate();
     	Time.update();
     }
-
-    protected void render() {
-    	
-    }
     
     public void dispose() throws Exception{
     	SceneManager.change(null);

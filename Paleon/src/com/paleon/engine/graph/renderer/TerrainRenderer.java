@@ -7,8 +7,6 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL32;
 
 import com.paleon.engine.Display;
-import com.paleon.engine.ResourceManager;
-import com.paleon.engine.graph.ShaderProgram;
 import com.paleon.engine.items.Camera;
 import com.paleon.engine.items.Light;
 import com.paleon.engine.processing.LodCalculator;
@@ -23,52 +21,38 @@ import com.paleon.maths.vecmath.Vector4f;
 
 public class TerrainRenderer {
 
-	private ShaderProgram shader;
+	private Camera camera;
+	
+	private TerrainShader shader;
 	
 	public TerrainRenderer(Camera camera) {
-		shader = ResourceManager.loadShader("terrain");
+		this.camera = camera;
+		shader = new TerrainShader();
 		
-		shader.createUniform("modelMatrix");
-		shader.createUniform("viewMatrix");
-		shader.createUniform("projectionMatrix");
-		
-		shader.createUniform("blendMap");
-		shader.createUniform("aTexture");
-		shader.createUniform("rTexture");
-		shader.createUniform("gTexture");
-		shader.createUniform("bTexture");
-		
-		shader.createUniform("lightPosition");
-		shader.createUniform("lightColor");
-		shader.createUniform("fogColor");
-		
-		shader.createUniform("plane");
-		
-		shader.setUniform("blendMap", 0, true);
-		shader.setUniform("aTexture", 1, true);
-		shader.setUniform("rTexture", 2, true);
-		shader.setUniform("gTexture", 3, true);
-		shader.setUniform("bTexture", 4, true);
-		shader.setUniform("projectionMatrix", camera.getProjectionMatrix(), true);
+		shader.start();
+		shader.projectionMatrix.loadMatrix(camera.getProjectionMatrix());
+		shader.stop();
 	}
 
-	public void render(Map<Terrain, List<TerrainBlock>> terrainBatches, Light light, Color fogColor, Vector4f plane, Camera camera) {
+	public void render(Map<Terrain, List<TerrainBlock>> terrainBatches, Light light, Color fogColor, Vector4f plane) {
+		shader.start();
+		
 		if(Display.wasResized()) {
-			shader.setUniform("projectionMatrix", camera.getProjectionMatrix(), true);
+			shader.projectionMatrix.loadMatrix(camera.getProjectionMatrix());
 		}
 		
-		shader.bind();
-		shader.setUniform("plane", plane);
-		render(terrainBatches, light, fogColor, camera);
-		shader.unbind();
+		shader.plane.loadVec4(plane);
+		shader.viewMatrix.loadMatrix(camera.getViewMatrix());
+		shader.lightPosition.loadVec3(light.getPosition());
+		shader.lightColor.loadColor(light.getDiffuse());
+		shader.fogColor.loadColor(fogColor);
+		
+		render(terrainBatches);
+		
+		shader.stop();
 	}
 	
-	private void render(Map<Terrain, List<TerrainBlock>> terrainBatches, Light light, Color fogColor, Camera camera) {
-		shader.setUniform("viewMatrix", camera.getViewMatrix());
-		shader.setUniform("lightPosition", light.getPosition());
-		shader.setUniform("lightColor", light.getDiffuse());
-		shader.setUniform("fogColor", fogColor);
-		
+	private void render(Map<Terrain, List<TerrainBlock>> terrainBatches) {
 		for (List<TerrainBlock> blocks : terrainBatches.values()) {
 			for (TerrainBlock block : blocks) {
 				block.setStitching();
@@ -78,7 +62,7 @@ public class TerrainRenderer {
 		
 		OpenglUtils.cullFace(true);
 		for(Terrain terrain : terrainBatches.keySet()) {
-			prepareTerrainInstance(terrain, camera, light, fogColor);
+			prepareTerrainInstance(terrain);
 			List<TerrainBlock> batch = terrainBatches.get(terrain);
 			for(TerrainBlock terrainBlock : batch) {
 				if(camera.getFrusutmCuller().testTerrainInView(terrainBlock)) {
@@ -93,8 +77,8 @@ public class TerrainRenderer {
 		}
 	}
 	
-	private void prepareTerrainInstance(Terrain terrain, Camera camera, Light light, Color fogColor) {	
-		shader.setUniform("modelMatrix", MathUtils.getModelMatrix(new Vector3f(terrain.getX(), 0, terrain.getZ()), 
+	private void prepareTerrainInstance(Terrain terrain) {	
+		shader.modelMatrix.loadMatrix(MathUtils.getModelMatrix(new Vector3f(terrain.getX(), 0, terrain.getZ()), 
 				0, 0, 0, 1));
 		
 		TexturePack texturePack = terrain.getTexture();

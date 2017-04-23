@@ -105,10 +105,10 @@ public class World {
 		camera.invertPitch();
 
 		RenderEngine.clear(0.98f, 0.9f, 0.78f);
-		renderEngine.render(gameObjects, sun, weather.getFogColor(), new Vector4f(0, 1, 0, -waterHeight), camera);
-		renderEngine.render(terrains, sun, weather.getFogColor(), new Vector4f(0, 1, 0, -waterHeight), camera);
+		renderEngine.render(gameObjects, sun, weather.getFogColor(), new Vector4f(0, 1, 0, -waterHeight));
+		renderEngine.render(terrains, sun, weather.getFogColor(), new Vector4f(0, 1, 0, -waterHeight));
 		if(skybox != null) {
-			renderEngine.render(skybox, weather.getFogColor(), camera);
+			renderEngine.render(skybox, weather.getFogColor());
 		}
 
 		camera.getPosition().y += distance;
@@ -118,10 +118,10 @@ public class World {
 		fbos.bindRefractionFrameBuffer();
 
 		RenderEngine.clear(0.98f, 0.9f, 0.78f);
-		renderEngine.render(gameObjects, sun, weather.getFogColor(), new Vector4f(0, -1, 0, waterHeight), camera);
-		renderEngine.render(terrains, sun, weather.getFogColor(), new Vector4f(0, -1, 0, waterHeight), camera);
+		renderEngine.render(gameObjects, sun, weather.getFogColor(), new Vector4f(0, -1, 0, waterHeight));
+		renderEngine.render(terrains, sun, weather.getFogColor(), new Vector4f(0, -1, 0, waterHeight));
 		if(skybox != null) {
-			renderEngine.render(skybox, weather.getFogColor(), camera);
+			renderEngine.render(skybox, weather.getFogColor());
 		}
 
 		// Render to the world
@@ -129,12 +129,12 @@ public class World {
 		fbos.unbindCurrentFrameBuffer();
 		RenderEngine.clear(0.98f, 0.9f, 0.78f);
 
-		renderEngine.render(gameObjects, sun, weather.getFogColor(), new Vector4f(0, 1, 0, 100000), camera);
-		renderEngine.render(terrains, sun, weather.getFogColor(), new Vector4f(0, 1, 0, 100000), camera);
+		renderEngine.render(gameObjects, sun, weather.getFogColor(), new Vector4f(0, 1, 0, 100000));
+		renderEngine.render(terrains, sun, weather.getFogColor(), new Vector4f(0, 1, 0, 100000));
 		if(skybox != null) {
-			renderEngine.render(skybox, weather.getFogColor(), camera);
+			renderEngine.render(skybox, weather.getFogColor());
 		}
-		renderEngine.render(waterTiles, sun, weather.getFogColor(), fbos, camera);
+		renderEngine.render(waterTiles, sun, weather.getFogColor(), fbos);
 
 	}
 	

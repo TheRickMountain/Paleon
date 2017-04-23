@@ -7,8 +7,6 @@ uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
 uniform vec3 lightPosition;
-uniform float useWaving;
-uniform float wavingValue;
 uniform int numberOfRows;
 uniform vec2 offset;
 uniform vec4 plane;
@@ -23,15 +21,7 @@ const float density = 0.0035f;
 const float gradient = 5.0f;
 
 void main(){
-	vec4 pos = vec4(position, 1.0f);
-
-	if(useWaving == 1) {
-		if(pos.y > 0.5f) {
-			pos.x += wavingValue;
-		}
-	}
-
-	vec4 mPos = modelMatrix * pos;
+	vec4 mPos = modelMatrix * vec4(position, 1.0f);
 
 	gl_ClipDistance[0] = dot(mPos, plane);
 

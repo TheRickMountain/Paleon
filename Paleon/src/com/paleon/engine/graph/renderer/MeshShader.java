@@ -21,10 +21,7 @@ public class MeshShader extends ShaderProgram {
 	public UniformMatrix viewMatrix = new UniformMatrix("viewMatrix");
 	public UniformMatrix projectionMatrix = new UniformMatrix("projectionMatrix");
 	
-	public UniformColor objectColor = new UniformColor("objectColor");
 	public UniformVec3 lightPosition = new UniformVec3("lightPosition");
-	public UniformBoolean useWaving = new UniformBoolean("useWaving");
-	public UniformFloat wavingValue = new UniformFloat("wavingValue");
 	public UniformInt numberOfRows = new UniformInt("numberOfRows");
 	public UniformVec2 offset = new UniformVec2("offset");
 	public UniformVec4 plane = new UniformVec4("plane");
@@ -38,6 +35,9 @@ public class MeshShader extends ShaderProgram {
 	
 	public MeshShader() {
 		super(VERTEX, FRAGMENT, "position", "textureCoord", "normal");
+		storeAllUniformLocations(modelMatrix, viewMatrix, projectionMatrix, lightPosition,
+				numberOfRows, offset, plane, texture_sampler, lightColor, shineDamper, reflectivity,
+				useFakeLighting, fogColor);
 		connectTextureUnits();
 	}
 

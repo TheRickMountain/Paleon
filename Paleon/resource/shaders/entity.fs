@@ -10,7 +10,6 @@ uniform sampler2D texture_sampler;
 uniform vec4 lightColor;
 uniform float shineDamper;
 uniform float reflectivity;
-uniform vec4 objectColor;
 uniform float useFakeLighting;
 uniform vec4 fogColor;
 

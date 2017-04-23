@@ -9,10 +9,8 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import com.paleon.engine.Display;
-import com.paleon.engine.ResourceManager;
 import com.paleon.engine.graph.Material;
 import com.paleon.engine.graph.Mesh;
-import com.paleon.engine.graph.ShaderProgram;
 import com.paleon.engine.graph.Transform;
 import com.paleon.engine.items.Camera;
 import com.paleon.engine.items.Entity;
@@ -24,83 +22,55 @@ import com.paleon.maths.vecmath.Vector4f;
 
 public class MeshRenderer {
 
-	private ShaderProgram shader;
+	private Camera camera;
 	
-	private float waving;
-	private float temp = 0;
+	private MeshShader shader;
 	
 	public MeshRenderer(Camera camera) {
-		shader = ResourceManager.loadShader("entity");
+		this.camera = camera;
+		shader = new MeshShader();
 		
-		shader.createUniform("modelMatrix");
-		shader.createUniform("viewMatrix");
-		shader.createUniform("projectionMatrix");
-		
-		shader.createUniform("objectColor");
-		
-		shader.createUniform("texture_sampler");
-		shader.createUniform("lightPosition");
-		shader.createUniform("lightColor");
-		shader.createUniform("shineDamper");
-		shader.createUniform("reflectivity");
-		shader.createUniform("useFakeLighting");
-		shader.createUniform("useWaving");
-		shader.createUniform("wavingValue");
-		shader.createUniform("fogColor");
-		
-		shader.createUniform("numberOfRows");
-		shader.createUniform("offset");
-		
-		shader.createUniform("plane");
-		
-		shader.setUniform("texture_sampler", 0, true);
-		shader.setUniform("projectionMatrix", camera.getProjectionMatrix(), true);
+		shader.start();
+		shader.projectionMatrix.loadMatrix(camera.getProjectionMatrix());
+		shader.stop();
 	}
 	
-	public void update(float dt) {
-		temp += 0.5f * dt;
-		waving = (float)Math.sin(temp) * 0.5f;
-	}
-	
-	public void render(List<Entity> gameItems, Light light, Color fogColor, Vector4f plane, Camera camera) {		
-		shader.bind();
+	public void render(List<Entity> entities, Light light, Color fogColor, Vector4f plane) {		
+		shader.start();
 		
 		if(Display.wasResized()) {
-			shader.setUniform("projectionMatrix", camera.getProjectionMatrix(), true);
+			shader.projectionMatrix.loadMatrix(camera.getProjectionMatrix());
 		}
 		
-		shader.setUniform("viewMatrix", camera.getViewMatrix());
-		shader.setUniform("lightPosition", light.getPosition());
-		shader.setUniform("lightColor", light.getDiffuse());
-		shader.setUniform("fogColor", fogColor);
-		shader.setUniform("plane", plane);
+		shader.viewMatrix.loadMatrix(camera.getViewMatrix());
+		shader.lightPosition.loadVec3(light.getPosition());
+		shader.lightColor.loadColor(light.getDiffuse());
+		shader.fogColor.loadColor(fogColor);
+		shader.plane.loadVec4(plane);
 		
-		for(Entity gameItem : gameItems){
-			Transform transform = gameItem.transform;
+		for(Entity entity : entities){
+			Transform transform = entity.transform;
 			
-			if(camera.getFrusutmCuller().testEntityInView(gameItem)) {
-				if(!gameItem.isFadeAway()) {
-					shader.setUniform("modelMatrix", transform.getModelMatrix());
+			if(camera.getFrusutmCuller().testEntityInView(entity)) {
+				if(!entity.isFadeAway()) {
+					shader.modelMatrix.loadMatrix(transform.getModelMatrix());
 					
-					shader.setUniform("useWaving", gameItem.isUseWaving());
-					shader.setUniform("wavingValue", waving);
+					Mesh mesh = entity.getMesh();
+					Material material = entity.getMaterial();
 					
-					Mesh mesh = gameItem.getMesh();
-					Material material = gameItem.getMaterial();
-					
-					shader.setUniform("numberOfRows", material.getNumberOfRows());
-					shader.setUniform("offset", new Vector2f(gameItem.getTextureXOffset(), gameItem.getTextureYOffset()));
+					shader.numberOfRows.loadInt(material.getNumberOfRows());
+					shader.offset.loadVec2( new Vector2f(entity.getTextureXOffset(), entity.getTextureYOffset()));
 					
 					material.texture.bindToUnit(0);
 					
-					shader.setUniform("shineDamper", material.getShineDamper());
-					shader.setUniform("reflectivity", material.getReflectivity());
+					shader.shineDamper.loadFloat(material.getShineDamper());
+					shader.reflectivity.loadFloat(material.getReflectivity());
 					
 					if(material.isHasTransparency()){
 						OpenglUtils.cullFace(false);
 					}
 					
-					shader.setUniform("useFakeLighting", material.isUseFakeLighting());
+					shader.useFakeLighting.loadBoolean(material.isUseFakeLighting());
 					
 					mesh.bind(0, 1, 2);
 					
@@ -115,7 +85,7 @@ public class MeshRenderer {
 			}
 		}
 		
-		shader.unbind();
+		shader.stop();
 	}
 	
 	public void cleanup() {

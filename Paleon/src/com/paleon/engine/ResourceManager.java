@@ -7,7 +7,6 @@ import java.util.Map.Entry;
 import org.lwjgl.opengl.GL11;
 
 import com.paleon.engine.graph.Mesh;
-import com.paleon.engine.graph.ShaderProgram;
 import com.paleon.engine.loaders.OBJLoader;
 import com.paleon.engine.loaders.TextureLoader;
 import com.paleon.textures.Texture;
@@ -17,21 +16,6 @@ public class ResourceManager {
 	private static Map<String, Texture> textures = new HashMap<String, Texture>();
 	private static Map<String, Integer> skyboxes = new HashMap<String, Integer>();
 	private static Map<String, Mesh> meshes = new HashMap<String, Mesh>();
-	
-	public static ShaderProgram loadShader(String shaderName) {
-		ShaderProgram shader = null;
-		try {
-			shader = new ShaderProgram();
-			shader.createVertexShader("/shaders/" + shaderName + ".vs");
-			shader.createFragmentShader("/shaders/" + shaderName + ".fs");
-			shader.link();
-			return shader;
-		} catch (Exception e) {
-			System.err.println("Failed to load " + shaderName + " shader");
-			e.printStackTrace();
-		}
-		return null;
-	}
 	
 	public static void loadTexture(Texture texture, String name) {
 		textures.put(name, texture);

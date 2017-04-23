@@ -9,12 +9,15 @@ import com.paleon.maths.vecmath.Vector3f;
 
 public class SkyboxRenderer {
 
+	private Camera camera;
+	
 	private SkyboxShader shader;
 	
 	private static final float ROTATE_SPEED = 0.5f;
 	private float rotation = 0;
 	
 	public SkyboxRenderer(Camera camera) {
+		this.camera = camera;
 		shader = new SkyboxShader();
 		
 		shader.start();
@@ -26,7 +29,7 @@ public class SkyboxRenderer {
 		rotation += ROTATE_SPEED * dt;
 	}
 	
-	public void render(Skybox skybox, Color fogColor, Camera camera) {
+	public void render(Skybox skybox, Color fogColor) {
 		if(Display.wasResized()){
 			shader.projectionMatrix.loadMatrix(camera.getProjectionMatrix());
 		}
@@ -44,7 +47,7 @@ public class SkyboxRenderer {
 	}
 	
 	public void cleanup() {
-		shader.cleanUp();
+		shader.cleanup();
 	}
 	
 }

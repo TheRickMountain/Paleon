@@ -44,7 +44,6 @@ public class RenderEngine {
 	}
 	
 	public void update(float deltaTime) {
-		meshRendererSystem.update(deltaTime);
 		skyboxRendererSystem.update(deltaTime);
 		waterRendererSystem.update(deltaTime);
 	}
@@ -54,20 +53,20 @@ public class RenderEngine {
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 	}
 	
-	public void render(List<Entity> gameObjects, Light light, Color fogColor, Vector4f plane, Camera camera) {
-		meshRendererSystem.render(gameObjects, light, fogColor, plane, camera);
+	public void render(List<Entity> gameObjects, Light light, Color fogColor, Vector4f plane) {
+		meshRendererSystem.render(gameObjects, light, fogColor, plane);
 	}
 	
-	public void render(Map<Terrain, List<TerrainBlock>> terrains, Light light, Color fogColor, Vector4f plane, Camera camera) {
-		terrainRendererSystem.render(terrains, light, fogColor, plane, camera);
+	public void render(Map<Terrain, List<TerrainBlock>> terrains, Light light, Color fogColor, Vector4f plane) {
+		terrainRendererSystem.render(terrains, light, fogColor, plane);
 	}
 	
-	public void render(Skybox skybox, Color fogColor, Camera camera) {
-		skyboxRendererSystem.render(skybox, fogColor, camera);
+	public void render(Skybox skybox, Color fogColor) {
+		skyboxRendererSystem.render(skybox, fogColor);
 	}
 	
-	public void render(List<WaterTile> waters, Light light, Color fogColor, WaterFrameBuffers fbos, Camera camera) {
-		waterRendererSystem.render(waters, camera, light, fogColor, fbos);
+	public void render(List<WaterTile> waters, Light light, Color fogColor, WaterFrameBuffers fbos) {
+		waterRendererSystem.render(waters, light, fogColor, fbos);
 	}
 
 	public void cleanup(){

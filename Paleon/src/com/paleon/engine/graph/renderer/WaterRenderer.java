@@ -10,12 +10,12 @@ import org.lwjgl.opengl.GL30;
 import com.paleon.engine.Display;
 import com.paleon.engine.ResourceManager;
 import com.paleon.engine.graph.Mesh;
-import com.paleon.engine.graph.ShaderProgram;
 import com.paleon.engine.items.Camera;
 import com.paleon.engine.items.Light;
 import com.paleon.engine.items.WaterTile;
 import com.paleon.engine.toolbox.Color;
 import com.paleon.engine.toolbox.MathUtils;
+import com.paleon.engine.toolbox.OpenglUtils;
 import com.paleon.engine.water.WaterFrameBuffers;
 import com.paleon.maths.vecmath.Matrix4f;
 import com.paleon.maths.vecmath.Vector3f;
@@ -25,7 +25,9 @@ public class WaterRenderer {
 
 	private static final float WAVE_SPEED = 0.03f;
 	
-	private ShaderProgram shader;
+	private Camera camera;
+	
+	private WaterShader shader;
 	private Mesh mesh;
 	
 	private Texture dudvMap;
@@ -34,28 +36,12 @@ public class WaterRenderer {
 	private float moveFactor = 0;
 	
 	public WaterRenderer(Camera camera) {
-		shader = ResourceManager.loadShader("water");
+		this.camera = camera;
+		shader = new WaterShader();
 		
-		shader.createUniform("modelMatrix");
-		shader.createUniform("viewMatrix");
-		shader.createUniform("projectionMatrix");
-		shader.createUniform("reflectionTexture");
-		shader.createUniform("refractionTexture");
-		shader.createUniform("dudvMap");
-		shader.createUniform("normalMap");
-		shader.createUniform("depthMap");
-		shader.createUniform("moveFactor");
-		shader.createUniform("cameraPosition");
-		shader.createUniform("lightPosition");
-		shader.createUniform("lightColor");
-		shader.createUniform("fogColor");
-		
-		shader.setUniform("reflectionTexture", 0, true);
-		shader.setUniform("refractionTexture", 1, true);
-		shader.setUniform("dudvMap", 2, true);
-		shader.setUniform("normalMap", 3, true);
-		shader.setUniform("depthMap", 4, true);
-		shader.setUniform("projectionMatrix", camera.getProjectionMatrix(), true);
+		shader.start();
+		shader.projectionMatrix.loadMatrix(camera.getProjectionMatrix());
+		shader.stop();
 		
 		float[] vertices = { -1, -1, -1, 1, 1, -1, 1, -1, -1, 1, 1, 1 };
 		mesh = new Mesh(vertices, 2);
@@ -69,35 +55,36 @@ public class WaterRenderer {
 		moveFactor %= 1;
 	}
 	
-	public void render(List<WaterTile> waters, Camera camera, Light light, Color fogColor, WaterFrameBuffers fbos) {
+	public void render(List<WaterTile> waters, Light light, Color fogColor, WaterFrameBuffers fbos) {
+		shader.start();
+		
 		if(Display.wasResized()){
-			shader.setUniform("projectionMatrix", camera.getProjectionMatrix(), true);
+			shader.projectionMatrix.loadMatrix(camera.getProjectionMatrix());
 		}
 		
-		prepareRender(camera, light, fogColor, fbos);
+		prepareRender(light, fogColor, fbos);
 		
 		for(WaterTile waterTile : waters) {
 			if(camera.getFrusutmCuller().testWaterTileInView(waterTile)) {
 				Matrix4f modelMatrix = MathUtils.getModelMatrix(
 						new Vector3f(waterTile.getX(), waterTile.getHeight(), waterTile.getZ()), 0, 0, 0, WaterTile.TILE_SIZE);
-				shader.setUniform("modelMatrix", modelMatrix);
+				shader.modelMatrix.loadMatrix(modelMatrix);
 				GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, mesh.getVertexCount());
 			}
 		}
-		GL11.glDisable(GL11.GL_BLEND);
+		OpenglUtils.alphaBlending(false);
 		GL20.glDisableVertexAttribArray(0);
 		GL30.glBindVertexArray(0);
-		shader.unbind();
+		shader.stop();
 	}
 	
-	public void prepareRender(Camera camera, Light light, Color fogColor, WaterFrameBuffers fbos){
-		shader.bind();
-		shader.setUniform("viewMatrix", camera.getViewMatrix());
-		shader.setUniform("moveFactor", moveFactor);
-		shader.setUniform("cameraPosition", camera.getPosition());
-		shader.setUniform("lightPosition", light.getPosition());
-		shader.setUniform("lightColor", light.getDiffuse());
-		shader.setUniform("fogColor", fogColor);
+	public void prepareRender(Light light, Color fogColor, WaterFrameBuffers fbos){
+		shader.viewMatrix.loadMatrix(camera.getViewMatrix());
+		shader.moveFactor.loadFloat(moveFactor);
+		shader.cameraPosition.loadVec3(camera.getPosition());
+		shader.lightPosition.loadVec3(light.getPosition());
+		shader.lightColor.loadColor(light.getDiffuse());
+		shader.fogColor.loadColor(fogColor);
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, fbos.getReflectionTexture());
 		GL13.glActiveTexture(GL13.GL_TEXTURE1);
@@ -109,8 +96,7 @@ public class WaterRenderer {
 		GL30.glBindVertexArray(mesh.getVAO());
 		GL20.glEnableVertexAttribArray(0);
 		
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		OpenglUtils.alphaBlending(true);
 	}
 	
 	public void cleanup() {

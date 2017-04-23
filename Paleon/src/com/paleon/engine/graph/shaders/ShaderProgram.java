@@ -40,7 +40,7 @@ public abstract class ShaderProgram {
 		GL20.glUseProgram(0);
 	}
 
-	public void cleanUp() {
+	public void cleanup() {
 		stop();
 		GL20.glDeleteProgram(programID);
 	}

@@ -13,7 +13,6 @@ uniform sampler2D normalMap;
 uniform sampler2D depthMap;
 uniform vec4 lightColor;
 uniform vec4 fogColor;
-
 uniform float moveFactor;
 
 out vec4 out_Color;

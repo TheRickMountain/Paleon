@@ -39,8 +39,6 @@ public class Entity {
 	
 	public final Transform transform;
 	
-	private boolean useWaving;
-	
 	public boolean grass = false;
 	
 	private int textureIndex = 0;
@@ -107,14 +105,6 @@ public class Entity {
 	public float getTextureYOffset(){
 		int row = textureIndex / material.getNumberOfRows();
 		return (float) row / (float)material.getNumberOfRows();
-	}
-
-	public boolean isUseWaving() {
-		return useWaving;
-	}
-
-	public void setUseWaving(boolean useWaving) {
-		this.useWaving = useWaving;
 	}
 
 	public int getTextureIndex() {

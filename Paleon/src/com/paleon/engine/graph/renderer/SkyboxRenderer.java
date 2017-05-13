@@ -30,11 +30,12 @@ public class SkyboxRenderer {
 	}
 	
 	public void render(Skybox skybox, Color fogColor) {
+		shader.start();
+		
 		if(Display.wasResized()){
 			shader.projectionMatrix.loadMatrix(camera.getProjectionMatrix());
 		}
 		
-		shader.start();
 		Matrix4f viewMatrix = camera.getViewMatrix();
 		viewMatrix.m30 = 0;
 		viewMatrix.m31 = 0;

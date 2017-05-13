@@ -138,6 +138,15 @@ public class MathUtils {
 		return matrix;
 	}
 	
+	public static Matrix4f getModelMatrix(Matrix4f matrix, Vector3f offset, float rotX, float rotY, float rotZ, float scale){
+		Matrix4f.translate(offset, matrix, matrix);
+		Matrix4f.rotate(rotX * DEGREES_TO_RADIANS, new Vector3f(1, 0, 0), matrix, matrix);
+		Matrix4f.rotate(rotY * DEGREES_TO_RADIANS, new Vector3f(0, 1, 0), matrix, matrix);
+		Matrix4f.rotate(rotZ * DEGREES_TO_RADIANS, new Vector3f(0, 0, 1), matrix, matrix);
+		Matrix4f.scale(new Vector3f(scale, scale, scale), matrix, matrix);
+		return matrix;
+	}
+	
 	public static Matrix4f getViewMatrix(Matrix4f matrix, Camera camera){
 		matrix.setIdentity();
 		Matrix4f.rotate((float) Math.toRadians(camera.getPitch()), new Vector3f(1, 0, 0), matrix, matrix);

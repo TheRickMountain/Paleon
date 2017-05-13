@@ -59,7 +59,7 @@ public class MeshRenderer {
 					Material material = entity.getMaterial();
 					
 					shader.numberOfRows.loadInt(material.getNumberOfRows());
-					shader.offset.loadVec2( new Vector2f(entity.getTextureXOffset(), entity.getTextureYOffset()));
+					shader.offset.loadVec2(entity.getTextureXOffset(), entity.getTextureYOffset());
 					
 					material.texture.bindToUnit(0);
 					

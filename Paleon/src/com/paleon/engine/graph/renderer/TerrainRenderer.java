@@ -16,6 +16,7 @@ import com.paleon.engine.terrain.TexturePack;
 import com.paleon.engine.toolbox.Color;
 import com.paleon.engine.toolbox.MathUtils;
 import com.paleon.engine.toolbox.OpenglUtils;
+import com.paleon.maths.vecmath.Matrix4f;
 import com.paleon.maths.vecmath.Vector3f;
 import com.paleon.maths.vecmath.Vector4f;
 
@@ -24,6 +25,8 @@ public class TerrainRenderer {
 	private Camera camera;
 	
 	private TerrainShader shader;
+	
+	private Matrix4f modelMatrix = new Matrix4f();
 	
 	public TerrainRenderer(Camera camera) {
 		this.camera = camera;
@@ -78,7 +81,7 @@ public class TerrainRenderer {
 	}
 	
 	private void prepareTerrainInstance(Terrain terrain) {	
-		shader.modelMatrix.loadMatrix(MathUtils.getModelMatrix(new Vector3f(terrain.getX(), 0, terrain.getZ()), 
+		shader.modelMatrix.loadMatrix(MathUtils.getModelMatrix(modelMatrix, new Vector3f(terrain.getX(), 0, terrain.getZ()), 
 				0, 0, 0, 1));
 		
 		TexturePack texturePack = terrain.getTexture();

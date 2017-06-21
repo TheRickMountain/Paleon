@@ -1,0 +1,71 @@
+package com.paleon.graph;
+
+public class MeshData {
+
+	private static final int DIMENSIONS = 3;
+
+	private float[] vertices;
+	private float[] textureCoords;
+	private float[] normals;
+	private int[] indices;
+	private int[] jointIds;
+	private float[] vertexWeights;
+	private float furthestPoint;
+	private int vertexCount;
+
+	public MeshData(float[] vertices, float[] textureCoords, float[] normals, int[] indices,
+			int[] jointIds, float[] vertexWeights, float furthestPoint) {
+		this.vertices = vertices;
+		this.textureCoords = textureCoords;
+		this.normals = normals;
+		this.indices = indices;
+		this.jointIds = jointIds;
+		this.vertexWeights = vertexWeights;
+		this.furthestPoint = furthestPoint;
+		
+		this.vertexCount = vertices.length / DIMENSIONS;
+	}
+	
+	public MeshData(float[] vertices, float[] textureCoords, float[] normals, int[] indices, float furthestPoint) {
+		this.vertices = vertices;
+		this.textureCoords = textureCoords;
+		this.normals = normals;
+		this.indices = indices;
+		this.furthestPoint = furthestPoint;
+		
+		this.vertexCount = indices.length;
+	}
+
+	public int[] getJointIds() {
+		return jointIds;
+	}
+	
+	public float[] getVertexWeights(){
+		return vertexWeights;
+	}
+
+	public int getVertexCount() {
+		return vertexCount;
+	}
+
+	public float[] getVertices() {
+		return vertices;
+	}
+
+	public float[] getTextureCoords() {
+		return textureCoords;
+	}
+
+	public float[] getNormals() {
+		return normals;
+	}
+
+	public int[] getIndices() {
+		return indices;
+	}
+
+	public float getFurthestPoint() {
+		return furthestPoint;
+	}
+
+}

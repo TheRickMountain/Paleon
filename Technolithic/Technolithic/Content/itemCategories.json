@@ -1,0 +1,38 @@
+{
+  "0": {
+    "key": "culinary_ingredients"
+  },
+  "1":{
+    "key": "fertilizers"
+  },
+  "2":{
+    "key": "resources"
+  },
+  "4":{
+    "key": "settler_corpse"
+  },
+  "5":{
+    "key": "seeds"
+  },
+  "6":{
+    "key": "food"
+  },
+  "7":{
+    "key": "tools"
+  },
+  "8":{
+    "key": "clothes"
+  },
+  "9":{
+    "key": "containers"
+  },
+  "13":{
+    "key": "hay"
+  },
+  "14":{
+    "key": "weapon"
+  },
+  "15":{
+    "key": "medicine"
+  }
+}

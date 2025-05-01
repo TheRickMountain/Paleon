@@ -1,0 +1,118 @@
+{
+  "name_key": "mechanical_crusher",
+  "description_key": "used_to_crushing_resources",
+  "width": 2,
+  "height": 2,
+  "type": "Crafter",
+  "category": "Production",
+  "animated": true,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 35,
+  "EnergyConsumer": {
+    "RequiredPower": 10,
+    "EnergyType": "Kinetic"
+  },
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": true,
+    "recipes": [
+      {
+        "main_item": "crushed_copper_ore",
+        "time": 40,
+        "result": [
+          {
+            "item": "crushed_copper_ore",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "copper_ore",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "crushed_tin_ore",
+        "time": 40,
+        "result": [
+          {
+            "item": "crushed_tin_ore",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "tin_ore",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "crushed_iron_ore",
+        "time": 40,
+        "result": [
+          {
+            "item": "crushed_iron_ore",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "iron_ore",
+            "weight": 1
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "mechanical_crusher",
+    "width": 32,
+    "height": 32
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false
+    ],
+    [
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "stone",
+      "weight": 6
+    },
+    {
+      "item": "wood",
+      "weight": 6
+    }
+  ]
+}

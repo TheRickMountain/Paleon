@@ -1,0 +1,54 @@
+{
+    "key":  "wolf",
+    "kind":  "wolf",
+    "texture":  {
+                    "name":  "wolf_male_old",
+                    "width":  24,
+                    "height":  24
+                },
+    "attributes":  [
+                       {
+                           "name":  "Energy"
+                       },
+                       {
+                           "name":  "Health"
+                       }
+                   ],
+    "movementSpeed":  4.6,
+    "DomesticationData":  {
+                              "TamedForm":  "dog_male_old",
+                              "Chance":  10
+                          },
+    "canProtect":  true,
+    "isWild":  true,
+    "gender":  "M",
+    "health":  42,
+    "hunger":  100,
+    "energy":  100,
+    "DaysUntilAging":  7,
+    "damage":  3,
+    "defense":  0,
+    "ration":  [
+                   "raw_meat",
+                   "raw_fish"
+               ],
+    "drop":  [
+                 {
+                     "item":  "raw_meat",
+                     "count":  1
+                 },
+                 {
+                     "item":  "raw_skin",
+                     "count":  1
+                 },
+                 {
+                     "item":  "bone",
+                     "count":  1
+                 }
+             ],
+    "allowedLabors":  [
+
+                      ],
+    "attackChance":  "100",
+    "AgeState":  "Old"
+}

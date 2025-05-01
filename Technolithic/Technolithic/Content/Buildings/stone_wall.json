@@ -1,0 +1,25 @@
+{
+  "name_key": "stone_wall",
+  "description_key": "wall_description",
+  "type": "Wall",
+  "category": "Wall",
+  "tilesetOffset": 48,
+  "walkable": false,
+  "cloneable": true,
+  "connectWithOtherBlocks": true,
+  "letLight": false,
+  "destructible": true,
+  "movementSpeed": -1,
+  "constructionTime": 10,
+  "ingredients": [
+    {
+      "item": "stone",
+      "weight": 4
+    }
+  ],
+  "ground_pattern": [
+    [
+      "A"
+    ]
+  ]
+}

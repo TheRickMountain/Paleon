@@ -1,0 +1,53 @@
+{
+    "key":  "tarpan",
+    "kind":  "tarpan",
+    "texture":  {
+                    "name":  "tarpan_male_baby",
+                    "width":  24,
+                    "height":  24
+                },
+    "attributes":  [
+                       {
+                           "name":  "Energy"
+                       },
+                       {
+                           "name":  "Health"
+                       }
+                   ],
+    "movementSpeed":  4.2,
+    "DomesticationData":  {
+                              "TamedForm":  "horse_male_baby",
+                              "Chance":  100
+                          },
+    "canProtect":  false,
+    "isWild":  true,
+    "gender":  "M",
+    "health":  25,
+    "hunger":  100,
+    "energy":  100,
+    "DaysUntilAging":  6,
+    "damage":  8,
+    "defense":  0,
+    "ration":  [
+                   "hay"
+               ],
+    "drop":  [
+                 {
+                     "item":  "raw_meat",
+                     "count":  1
+                 },
+                 {
+                     "item":  "raw_skin",
+                     "count":  1
+                 },
+                 {
+                     "item":  "bone",
+                     "count":  1
+                 }
+             ],
+    "allowedLabors":  [
+
+                      ],
+    "attackChance":  0,
+    "AgeState":  "Baby"
+}

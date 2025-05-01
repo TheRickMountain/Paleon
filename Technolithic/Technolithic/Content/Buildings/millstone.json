@@ -1,0 +1,63 @@
+{
+  "name_key": "millstone",
+  "description_key": "used_for_quick_grinding_of_grain",
+  "width": 1,
+  "height": 1,
+  "type": "Crafter",
+  "category": "Production",
+  "animated": true,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 15,
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": false,
+    "recipes": [
+      {
+        "main_item": "flour",
+        "time": 30,
+        "result": [
+          {
+            "item": "flour",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "barley_seeds",
+            "weight": 1
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "millstone",
+    "width": 16,
+    "height": 19
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "stone",
+      "weight": 2
+    }
+  ]
+}

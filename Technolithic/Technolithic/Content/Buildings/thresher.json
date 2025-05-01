@@ -1,0 +1,146 @@
+{
+  "name_key": "thresher",
+  "description_key": "thresher_description",
+  "width": 2,
+  "height": 2,
+  "type": "Crafter",
+  "category": "Production",
+  "animated": true,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 25,
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": false,
+    "recipes": [
+      {
+        "id": 1000,
+        "main_item": "barley_seeds",
+        "time": 50,
+        "result": [
+          {
+            "item": "barley_seeds",
+            "weight": 2
+          },
+          {
+            "item": "hay",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "sheaf_of_barley",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "id": 1001,
+        "main_item": "pea_seeds",
+        "time": 50,
+        "result": [
+          {
+            "item": "pea_seeds",
+            "weight": 1
+          },
+          {
+            "item": "hay",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "bunch_of_peas",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "id": 1002,
+        "main_item": "hay",
+        "time": 50,
+        "result": [
+          {
+            "item": "hay",
+            "weight": 1
+          },
+          {
+            "item": "barley_seeds",
+            "weight": 2
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "sheaf_of_barley",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "id": 1003,
+        "main_item": "hay",
+        "time": 50,
+        "result": [
+          {
+            "item": "hay",
+            "weight": 1
+          },
+          {
+            "item": "pea_seeds",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "bunch_of_peas",
+            "weight": 1
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "thresher",
+    "width": 32,
+    "height": 32
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false
+    ],
+    [
+      false,
+      true
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "wood",
+      "weight": 2
+    }
+  ]
+}

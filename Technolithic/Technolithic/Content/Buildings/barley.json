@@ -1,0 +1,72 @@
+{
+  "name_key": "barley",
+  "description_key": "barley",
+  "width": 1,
+  "height": 1,
+  "type": "FarmPlot",
+  "category": "Agriculture",
+  "buildingLaborType": "Plant",
+  "buildingToolType": "Plowing",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": false,
+  "constructionTime": 30,
+  "movementSpeed": 75,
+  "plant": {
+    "key": "barley",
+    "growthSpeed": 10,
+    "toolType": "Harvesting",
+    "toolRequired": false,
+    "stages": 6,
+    "variations": 2,
+    "maxStrength": 30,
+    "isFlower": false,
+    "harvestable":
+    {
+      "harvest":
+      [
+        {
+          "item": "sheaf_of_barley",
+          "weight": 1
+        }
+      ],
+      "removeAfterHarvest": true
+    },
+    "texture": 
+    {
+      "name": "barley",
+      "width": 16,
+      "height": 16
+    },
+    "seasonsVariations":
+    {
+      "3": [0],
+      "0": [0],
+      "1": [0],
+      "2": [1]
+    }
+  },
+  "texture": {
+    "name": "barley",
+    "width": 16,
+    "height": 16
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A"
+    ]
+  ],
+  "ingredients": []
+}

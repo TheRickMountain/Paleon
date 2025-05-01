@@ -1,0 +1,78 @@
+{
+  "name_key": "skin_tent",
+  "description_key": "primitive_dwelling",
+  "width": 3,
+  "height": 2,
+  "type": "Hut",
+  "category": "Settlement",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "movementSpeed": 50,
+  "destructible": true,
+  "constructionTime": 30,
+  "assignable": {
+    "slots": 3,
+    "ApplyStatusEffect": "CozyTent"
+  },
+  "texture": {
+    "name": "skin_tent",
+    "width": 48,
+    "height": 54
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "wood",
+      "weight": 4
+    },
+    {
+      "item": "dry_skin",
+      "weight": 4
+    }
+  ],
+  "fuelConsumer": {
+    "fuel": [
+      "wood",
+      "charcoal",
+      "dry_manure_fuel"
+    ],
+    "energy_consumption": 0.06
+  }
+}

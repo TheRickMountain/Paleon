@@ -1,0 +1,137 @@
+{
+  "name_key": "animal_pen",
+  "description_key": "animal_pen_description",
+  "width": 4,
+  "height": 4,
+  "type": "AnimalPen",
+  "category": "Settlement",
+  "animated": true,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 50,
+  "animalPen": {
+    "filters": [
+      "cattle_male_baby",
+      "cattle_female_baby",
+      "cattle_male_adult",
+      "cattle_female_adult",
+      "cattle_male_old",
+      "cattle_female_old",
+
+      "sheep_male_baby",
+      "sheep_female_baby",
+      "sheep_male_adult",
+      "sheep_female_adult",
+      "sheep_male_old",
+      "sheep_female_old",
+
+      "horse_male_baby",
+      "horse_female_baby",
+      "horse_male_adult",
+      "horse_female_adult",
+      "horse_male_old",
+      "horse_female_old",
+
+      "pig_male_baby",
+      "pig_female_baby",
+      "pig_male_adult",
+      "pig_female_adult",
+      "pig_male_old",
+      "pig_female_old",
+    ],
+    "slots": 6
+  },
+  "texture": {
+    "name": "animal_pen",
+    "width": 64,
+    "height": 64
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A",
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A",
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A",
+      "A",
+      "A"
+    ],
+     [
+      "A",
+      "A",
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "wood",
+      "weight": 8
+    }
+  ],
+  "fuelConsumer": null
+}

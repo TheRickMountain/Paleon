@@ -1,0 +1,587 @@
+key,translation
+None,None
+Pick,Pioche
+a_wild_animal_is_about_to_attack_your_settlement,Un animal sauvage s'apprête à attaquer votre colonie !
+a_wild_bee_hive_has_appeared_near_you,Une ruche d'abeilles sauvages est apparue près de chez vous
+accept,Accepter
+achievement_unlocked,New achievement '{0}'!
+achievements,Achievements
+achievements_unlocked_x_slash_y,Achievements unlocked {0}/{1}
+achv_desc_ARE_YOU_SURE_IT_DOESNT_STINK,Cook food using dried manure as fuel
+achv_desc_BACK_TO_THE_FUTURE,Start the time machine and go back to the future
+achv_desc_BEST_FRIENDS_FOREVER,Send a settler with a dog to hunt
+achv_desc_CITY,Have 60 people or more in the settlement
+achv_desc_DENIED,Refuse to accept a nomad into the settlement
+achv_desc_ENGINE_OF_PROGRESS,Research all technologies
+achv_desc_FIRST_BREAD,Bake your first flatbread
+achv_desc_FIRST_BRONZE,Smelt your first bronze
+achv_desc_FIRST_CERAMIC,Fire your first ceramic pot
+achv_desc_FIRST_COPPER,Smelt your first copper
+achv_desc_FIRST_IRON,Forge your first iron
+achv_desc_HOMEMADE_PRODUCTION,Sell 10 units of bread
+achv_desc_I_SURVIVED_100_DAYS,Survive 100 days with at least one settler
+achv_desc_MULTITOOL,One of the settlers must equip at least 3 tools
+achv_desc_TRIBE,Have 15 people or more in the settlement
+achv_desc_VILLAGE,Have 30 people or more in the settlement
+achv_name_ARE_YOU_SURE_IT_DOESNT_STINK,Are you sure it doesn't stink?
+achv_name_BACK_TO_THE_FUTURE,Back to the future
+achv_name_BEST_FRIENDS_FOREVER,Best Friends Forever
+achv_name_CITY,City
+achv_name_DENIED,Denied
+achv_name_ENGINE_OF_PROGRESS,Engine of progress
+achv_name_FIRST_BREAD,First bread
+achv_name_FIRST_BRONZE,First bronze
+achv_name_FIRST_CERAMIC,First ceramic
+achv_name_FIRST_COPPER,First copper
+achv_name_FIRST_IRON,First iron
+achv_name_HOMEMADE_PRODUCTION,Homemade production
+achv_name_I_SURVIVED_100_DAYS,I survived 100 days
+achv_name_MULTITOOL,Multitool
+achv_name_TRIBE,Tribe
+achv_name_VILLAGE,Village
+adult,Adulte
+age,Âge
+agriculture,Agriculture
+alcoholic_drinks,Boissons alcoolisées
+all,Tout
+allows_creatures_to_move_faster,Permet de se déplacer plus rapidement
+animal_fat,Graisse animale
+animal_female,Femelle
+animal_filter,Filtre animalier
+animal_male,Mâle
+animal_pen,Enclos pour animaux
+animal_pen_description,Utilisé pour le repos et l'alimentation des animaux
+animals,Animaux
+animals_domestication,Domestication des animaux
+assign_a_pet,Attribuer un compagnon
+assign_a_settler,Assign a settler
+assign_to,Attribué à {0}
+assign_x_to_this_hut,Assign {0} to this hut
+assigned_to,Attribué à {0}
+attack,Attaquer
+aurochs,Aurochs
+automatically_mine_spawned_deposits,Miner automatiquement les gisements créés
+autumn,Automne
+back,Précédent
+barley,Orge
+barley_seeds,Graines d'orge
+barn,Grange
+base_speed,Vitesse de base
+basket,Panier
+bee_hive,Ruche d'abeilles
+bee_hive_description,Produit du miel deux fois plus efficacement qu'une ruche sauvage
+beekeeping,Apiculture
+beeswax,Cire d'abeille
+bloomery,Bas fourneau
+boar,Sanglier
+bone,Os
+bone_harpoon,Harpon en os
+bone_sickle,Faucille en os
+bone_spear,Lance en os
+bone_tools,Outils en os
+bow,Arc
+brewing,Brassage
+brick,Brique
+brick_floor,Sol en brique
+brick_wall,Mur en brique
+bridge,Pont
+bronze,Bronze
+bronze_age,Âge du Bronze
+bronze_axe,Hache en bronze
+bronze_harpoon,Harpon en bronze
+bronze_hoe,Houe en bronze
+bronze_pick,Pioche en bronze
+bronze_sickle,Faucille en bronze
+bronze_smelting,Fonderie de bronze
+bronze_spear,Lance en bronze
+build_irrigation_canal,Construire canal d'irrigation
+building,Construction
+bunch_of_peas,Botte de petits pois
+burial,Enterrement
+buying,Buying
+calm,Calme
+cancel,Annuler
+capacity,Capacité
+cattle,Vache
+causes,Raisons
+ceramic_pot,Jarre en céramique
+chainmail,Cotte de maille
+chalcolithic,Chalcolithique
+chance,Chance
+charcoal,Charbon
+charcoal_kiln,Four à charbon
+cheese,Fromage
+cheesemaking,Fabrication du fromage
+child,Enfant
+chop,Couper
+chop_completely,Couper complètement
+chop_now,Couper maintenant
+clay,Argile
+clay_barn,Grange en argile
+clay_deposit,Gisement d'argile
+clay_hut,Hutte en argile
+clay_oven,Four en argile
+clean_up_manure,Nettoyer fumier
+clone,Cloner
+close,Fermer
+cloth,Tissu
+clothes,Vêtements
+come_here,Venir ici
+command_line,ligne de commande
+connected,Connecté
+consumption,Consommation
+containers,Contenants
+cooked_fish,Poisson cuit
+cooked_meat,Viande cuite
+cooking,Cuisine
+copper,Cuivre
+copper_axe,Hache en cuivre
+copper_deposit,Gisement de cuivre
+copper_harpoon,Harpon en cuivre
+copper_hoe,Houe en cuivre
+copper_ore,Minerai de cuivre
+copper_pick,Pioche en cuivre
+copper_reaper,Faucheuse en cuivre
+copper_sickle,Faucille en cuivre
+copper_smelting,Fonderie de cuivre
+copper_smithy,Forge de cuivre
+copper_spear,Lance en cuivre
+copy,Copier
+copy_settings,Copier paramètres
+cozy_hut,Hutte confortable
+cozy_tent,Tente confortable
+crafter,Établi
+crafting,Artisanat
+create,Créer
+credits,Crédits
+crossbow,Arbalète
+crushed_copper_ore,Minerai de cuivre broyé
+crushed_iron_ore,Minerai de fer broyé
+crushed_tin_ore,Minerai d'étain broyé
+culinary_ingredients,Ingrédients culinaires
+cures,Remèdes
+cut,Tailler
+cut_automatically,Tailler automatiquement
+cut_completely,Tailler complètement
+cut_now,Tailler maintenant
+dandelion,Pissenlit
+day,Jour
+days,Jours
+days_until_aging_x,Days until aging: {0}
+days_until_death_x,Days until death: {0}
+decline,Refuser
+defense,Défense
+depends_on_wind_speed,Dépend de la vitesse du vent
+deposit,Dépôt
+destruct,Détruire
+destruct_irrigation_canal,Détruire canal d'irrigation
+destruct_surface,Destruct surface
+dirt_path,Chemin de terre
+dirty_animal_pen,Enclos pour animal sale
+disable_all,Désactiver tout
+disband,Démanteler
+disconnected,Déconnecté
+dog,Chien
+dolmen,Dolmen
+domesticate,Domestiquer
+drop_spindle,Fuseau
+dry_fish,Poisson séché
+dry_manure_fuel,Bouse séchée
+dry_meat,Viande séchée
+dry_skin,Peau séchée
+durability,Durabilité
+duration_x_hours,Durée: {0:0.0} heures
+duration_x_minutes,Durée: {0} minutes
+edge_scrolling_camera,Défilement sur les bords Caméra
+effects,Effets
+efficiency,Efficacité
+enable_all,Activer tout
+energy,Energie
+energy_available,Énergie disponible
+energy_consumer,Consommateur d'énergie
+energy_consumption,Consommation d'énergie
+energy_output,Production d'énergie
+energy_production,Energy production
+energy_source,Source d'énergie
+energy_type,Type d'énergie
+equip,Équiper
+equipment,Equipment
+exit_to_desktop,Retourner au Bureau
+exit_to_main_menu,Retourner au Menu Principal
+experience_points,Points d'expérience
+farm_plot,Parcelle agricole
+farming,Agriculture
+felling,Abattage
+fermenting_pot,Jarre de fermentation
+fertilize,Fertiliser
+fertilizer,Engrais
+fertilizers,Engrais
+fertilizing,Fertilisation
+fiber,Fibre
+fish_trap,Piège à poissons
+fishing,Pêche
+fishing_place,Zone de pêche
+fishing_rod,Canne à pêche
+flatbread,Pain plat
+flax,Lin
+floor,Sol
+flour,Farine
+flowers,Fleurs
+food,Aliments
+food_dryer,Séchoir à aliments
+food_drying,Séchage des aliments
+food_poisoning,Intox alimentaire
+food_poisoning_cure,Remède intox alimentaire
+food_storage_hut,Hutte de stockage des aliments
+food_storage_hut_description,Utilisée pour conserver les aliments. Conserve les aliments frais pendant longtemps
+free_up,Free up
+freshness,Fraîcheur
+fuel,Combustible
+fullscreen,Plein écran
+future,Futur
+game_finished,Partie terminée
+game_menu,Menu
+gas,Gaz
+gather,Ramasser
+gathering,Collecte
+grain_processing,Travail du grain
+grape,Raisin
+grape_bush,Vigne
+grave,Tombe
+growth_progress,Progression croissance
+growth_speed,Vitesse croissance
+happiness,Bonheur
+harvesting,Récolte
+has_joined_your_settlement,{0} a rejoint votre colonie
+hauling,Transporte
+hay,Foin
+haystack,Meule de foin
+haystack_description,Utilisée pour stocker le foin
+health,Santé
+hearth,Foyer
+herbalist_table,Table d'herboriste
+herbalist_table_description,Utilisée pour créer des médicaments primitifs
+honey,Miel
+honeycomb,Rayon de miel
+horse,Cheval
+hours,Heures
+hunger,Faim
+hunt,Chasser
+hunting,Chasse
+hut,Hutte
+information,Information
+ingredients,Ingrédients
+inventory,Inventory
+iron,Fer
+iron_age,Âge du Fer
+iron_axe,Hache en fer
+iron_bloom,Fleur de fer
+iron_deposit,Gisement de fer
+iron_harpoon,Harpon en fer
+iron_hoe,Houe en fer
+iron_ore,Minerai de fer
+iron_pick,Pioche en fer
+iron_sickle,Faucille en fer
+iron_smelting,Fonderie de fer
+iron_smithy,Forge de fer
+iron_spear,Lance en fer
+irrigate,Arroser
+irrigation,Irrigation
+irrigation_canals,Canaux d'irrigation
+items,Objets
+kiln,Four
+kinetic,Cinétique
+knowledge,Connaissances
+knowledge_points,Points de Connaissance
+knowledge_table,Table de connaissances
+language,Langue
+language_change_warning,Veuillez redémarrer le jeu pour que les modifications soient prises en compte.
+language_name,Français
+learning,Apprentissage
+leather,Cuir
+leather_outfit,Tenue en cuir
+left_click,Clic gauche
+level,Niveau
+light,Léger
+load_game,Charger Partie
+low_light,Faible éclairage
+mammoth,Mammouth
+manure,Fumier
+manure_drying_area,Manure drying area
+manure_drying_area_description,Used for drying manure
+mealing_stone,Meule à grains
+mealing_stone_description,Used for processing grain and seeds
+mechanical_crusher,Broyeur mécanique
+mechanical_millstone,Meule mécanique
+mechanisms,Mécanismes
+medicine,Médecine
+melee_damage,Dégâts de mêlée
+mesolithic,Mésolithique
+metallurgy,Métallurgie
+millstone,Meule
+mine,Miner
+mine_description,Utilisé pour extraire les ressources des mines. Génère des gisements tout autour
+mine_mine,Mine
+mining,Extraction minière
+moderate,Modéré
+moisture,Humidité
+mortar_and_pestle,Mortier et pilon
+mouflon,Mouflon
+movement_speed,Vitesse de déplacement
+mudbrick,Brique en argile
+mudbrick_dryer,Séchoir à briques
+mudbrick_floor,Sol en argile
+mudbrick_hut,Hutte de brique en argile
+mudbrick_wall,Mur en argile
+music_volume,Volume de la musique
+name,Nom
+neolithic,Néolithique
+new_game,Nouvelle Partie
+new_settlers,Nouveaux colons
+new_settlers_arrived,Nouveau colon arrivé
+new_technologies_available,Nouvelle technologie disponible
+noria,Noria
+noria_description,Utilisé pour extraire l'eau d'un puits et la diriger vers les canaux d'irrigation.
+number_of_fish,Nombre de poissons
+number_of_uses,Nombre d'utilisations
+nutrition,Alimentation
+oak,Chêne
+oil_lamp,Lampe à huile
+oil_lamp_description,"Utilisée pour l'éclairage, utilise des huiles et des graisses animales comme combustible"
+old,Vieux
+open,Ouvrir
+open_game_data_folder,Ouvrir dossier données du jeu
+oven,Four
+paleolithic,Paléolithique
+palisade,Palissade
+paste,Coller
+pause,Pause
+pea,Pois
+pea_seeds,Graines de pois
+pea_soup,Soupe de pois
+peaceful_mode,Mode pacifique
+peas,Pois
+pemmican,Pemmican
+per_day,par jour
+pets,Compagnons
+pig,Cochon
+plant,Plante
+planting,Plante
+plowing,Labour
+point_of_entry_to_a_space_which_is_enclosed_by_walls,Point d'entrée d’une zone entouré de murs
+pot_of_beer,Jarre de bière
+pot_of_honey,Pot de miel
+pot_of_mead,Jarre d'hydromel
+pot_of_milk,Jarre de lait
+pot_of_water,Jarre d'eau
+pot_of_wine,Jarre de vin
+pottery,Poterie
+pregnancy,Grossesse
+primitive_animal_dwelling,Étable primitive
+primitive_dwelling,Habitation primitive
+primitive_medicine,Médecine primitive
+primitive_school_description,Utilisée pour gagner des points de connaissance
+priority,Priorité
+production,Production
+production_limit,Limite de production
+productivity,Productivité
+progress,Progrès
+projectile_speed,Vitesse des projectiles
+protects_against_low_temperatures,Protège contre les basses températures
+rain,Pluie
+raisin,Raisin sec
+raisin_buns,Brioche aux raisins
+ranching,Élevage
+range_damage,Dégâts à distance
+ration,Ration
+raw_fish,Poisson cru
+raw_meat,Viande crue
+raw_skin,Peau brute
+recharge_time,Temps de recharge
+recipe,Recette
+recipes,Recettes
+remove_equipment,Remove equipment
+rename,Renommer
+repeat,Répéter
+repeat_until_production_limits_are_reached,Répéter jusqu'à ce que les limites de production soient atteintes
+required,Requis
+required_technology,Technologie requise
+resource,Ressource
+resources,Ressources
+rest,Se reposer
+result,Résultat
+resume,Continuer
+return_to_the_future,Retour vers le futur
+right_click,Clic droit
+satiety,Satiété
+save,Sauvegarder
+season,Saison
+seeds,Graines
+selling,Selling
+settlement,Colonie
+settler_corpse,Cadavre de colon
+settlers,Colons
+sheaf_of_barley,Gerbe d'orge
+sheep,Mouton
+shelf_life,Durée de vie
+shelf_life_of_products,Durée de vie produits
+show_resource_in_the_general_list,Afficher ressource dans liste générale
+side_item,Side item
+skin_drying_rack,Séchoir à peaux
+skin_tent,Tente en peau
+skins_outfit,Tenue en peau
+slaughter,Abattage
+sleep,Dormir
+sleeping,Dort
+sleeping_on_the_ground,Dort par terre
+sling,Fronde
+soil,Sol
+sound_volume,Volume sonore
+sowing,Planter
+spawn_time,Durée apparition
+speed,Vitesse
+spinning,Filage
+spinning_wheel,Rouet
+spoilage_rate,Taux de détérioration
+spoiled,Pourri
+spring,Printemps
+stick_hut,Hutte en bois
+stockpile,Réserve
+stone,Pierre
+stone_axe,Hache en pierre
+stone_deposit,Gisement de pierres
+stone_floor,Sol en pierre
+stone_harpoon,Harpon en pierre
+stone_hoe,Houe en pierre
+stone_pick,Pioche en pierre
+stone_pieces,Morceaux de pierre
+stone_sickle,Faucille en pierre
+stone_spear,Lance en pierre
+stone_tools,Outils en pierre
+stone_wall,Mur en pierre
+stopped_due_to,Arrêtée à cause de: {0}
+storage,Stockage
+stored,Stocké
+strong,Fort
+summer,Eté
+supplying,Approvisionnement
+tailors_workshop,Atelier du tailleur
+tannery,Tannerie
+tanning,Tannage
+tarpan,Tarpan
+technologies,Technologies
+temperature,Température
+the_settlers_are_freezing,Les colons sont gelés
+the_settlers_are_starving,Les colons meurent de faim
+the_settlers_are_unhappy,Les colons sont mécontents
+thresher,Batteur
+thresher_description,Utilisé pour battre les plantes afin de séparer les graines du foin
+threshing_floor,Aire de battage
+threshing_floor_description,"Utilisé pour le battage de masse des 
+plantes pour séparer les graines du foin"
+time,Temps
+time_machine,Machine temporelle
+time_machine_description,Machine pour voyager dans le temps
+tin_deposit,Gisement d'étain
+tin_ore,Minerai d'étain
+to_do_the_job_of_x_you_need_tools,Pour faire le travail de {0} vous avez besoin d'outils
+tool_type,Type d'outil
+tools,Outils
+torch,Torche
+torch_description,Utilisée pour éclairer un espace
+total_speed,Vitesse totale
+trade,Commercer
+trading,Commerce
+trading_post,Poste de traite
+trading_post_assortment_update,The assortment of trading posts has been updated!
+trading_post_description,Allows you to buy and sell goods. Updates its assortment once a day
+travel_speed,Vitesse de déplacement
+treadmill,Treadmill
+treadmill_description,Converts the energy of animals and settlers into mechanical energy
+turn_off_music,Désactiver musique
+turn_on_music,Activer musique
+unassign_from,Retirer de {0}
+unfired_pot,Jarre non cuite
+used_for_automated_grinding_of_grain,Utilisé pour le broyage automatisé des céréales
+used_for_coal_production,Utilisé pour produire du charbon
+used_for_cooking,Utilisé pour la cuisine
+used_for_drying_adobe,Utilisé pour sécher l'adobe
+used_for_drying_food,Utilisé pour sécher les aliments
+used_for_drying_skins,Utilisé pour sécher les peaux
+used_for_firing_ceramic_products,Utilisé pour la cuisson de produits céramiques
+used_for_fishing,Utilisée pour la pêche
+used_for_forging_copper_and_bronze_tools,Utilisée pour forger des outils en cuivre et en bronze
+used_for_forging_iron_tools,Utilisée pour forger des outils en fer
+used_for_growing_plants,Utilisée pour cultiver des plantes
+used_for_mining,Utilisé pour l'extraction minière
+used_for_quick_cooking,Utilisé pour cuire rapidement
+used_for_quick_grinding_of_grain,Utilisée pour moudre rapidement des céréales
+used_for_spinning_yarn,Utilisé pour filer le fil
+used_for_storing_resources,Utilisée pour stocker des ressources
+used_for_tanning_skins,Utilisée pour tanner les peaux
+used_to_bury_the_dead,Utilisée pour enterrer les morts
+used_to_collect_water,Utilisée pour collecter de l'eau
+used_to_create_advanced_tools,Utilisé pour créer des outils avancés
+used_to_create_primitive_tools,Utilisé pour créer des outils primitifs
+used_to_cross_water,Utilisé pour traverser l'eau
+used_to_crushing_resources,Utilisé pour broyer les ressources
+used_to_ferment_foods,Utilisée pour fermenter les aliments
+used_to_grinding_and_crushing_resources,Utilisés pour moudre et broyer les ressources
+used_to_make_clothes,Utilisé pour confectionner des vêtements
+used_to_smelting_metals_from_its_ores,Utilisé pour fondre les métaux à partir de leur minerai
+used_to_weave_cloth,Utilisé pour confectionner du tissu
+value,Valeur
+view_settler,View settler
+vomiting,Vomi
+wall,Mur
+wall_description,Une structure utilisée pour créer une barrière infranchissable
+walls,Murs
+warm_clothing,Vêtement chaud
+warm_fur_clothes,Vêtement en fourrure
+warm_knitted_clothes,Vêtement chaud tricoté
+warm_place,Endroit chaud
+warp_weighted_loom,Métier à tisser à poids de chaîne
+was_killed_by,{0} a été tué par {1}
+water_gathering_place,Zone de collecte de l’eau
+weapon,Arme
+weaving,Tissage
+well,Puits
+wild_bee_hive,Ruche d'abeilles sauvages
+wind,Vent
+windmill,Moulin
+windmill_description,Converts wind energy into mechanical energy
+windowed,Fenêtré
+winter,Hiver
+winter_cold,Froid hivernal
+wolf,Loup
+wolf_domestication,Domestication du loup
+wood,Bois
+wood_pieces,Morceaux de bois
+woodcutting,Coupe du bois
+wooden_cart,Chariot en bois
+wooden_gate,Porte en bois
+wooden_harpoon,Harpon en bois
+wooden_plow,Charrue en bois
+wooden_spear,Lance en bois
+wool,Laine
+wool_cloth,Tissu de laine
+wool_clothing,Vêtements en laine
+wool_yarn,Fil de laine
+work,Travailler
+workers,Ouvriers
+workshop,Atelier
+world_name,Nom du monde
+world_settings,Paramètres du monde
+world_size,Taille du monde
+world_with_that_name_already_exists,Un monde avec ce nom existe déjà
+woven_clothing,Vêtement tissé
+x_died_from_the_cold,{0} est mort de froid
+x_died_of_old_age,{0} est mort de vieillesse
+x_died_of_starvation,{0} est mort de faim
+x_got_the_y_effect,{0} a reçu l'effet {1}
+x_is_already_assigned_to_another_hut,{0} is already assigned to another hut
+x_is_already_assigned_to_this_hut,{0} is already assigned to this hut
+yarn,Fil
+сhop_automatically,Couper automatiquement
+сhop_automatically_description,Couper automatiquement la plante après sa pleine croissance
+сut_automatically_description,Tailler automatiquement la plante après sa pleine croissance

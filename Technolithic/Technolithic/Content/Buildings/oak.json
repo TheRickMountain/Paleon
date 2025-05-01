@@ -1,0 +1,72 @@
+{
+  "name_key": "oak",
+  "description_key": "oak",
+  "width": 1,
+  "height": 1,
+  "type": "FarmPlot",
+  "category": "Agriculture",
+  "buildingLaborType": "Plant",
+  "buildingToolType": "Plowing",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": false,
+  "constructionTime": 30,
+  "movementSpeed": 75,
+  "plant": {
+    "key": "oak",
+    "growthSpeed": 5.5555555,
+    "toolType": "Woodcutting",
+    "toolRequired": true,
+    "maxStrength": 90,
+    "isFlower": false,
+    "harvestable": 
+    {
+      "harvest":
+      [
+        {
+          "item": "wood",
+          "weight": 6,
+        }
+      ],
+      "removeAfterHarvest":true
+    },
+    "stages": 4,
+    "variations": 5,
+    "texture": 
+    {
+      "name": "oak",
+      "width": 24,
+      "height": 24
+    },
+    "seasonsVariations":
+    {
+      "3": [0,1],
+      "0": [0,1],
+      "1": [2, 3],
+      "2": [4]
+    }
+  },
+  "texture": {
+    "name": "oak",
+    "width": 24,
+    "height": 24
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A"
+    ]
+  ],
+  "ingredients": []
+}

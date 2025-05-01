@@ -1,0 +1,61 @@
+{
+    "key":  "sheep",
+    "kind":  "sheep",
+    "texture":  {
+                    "name":  "sheep_male_adult",
+                    "width":  24,
+                    "height":  24
+                },
+    "attributes":  [
+                       {
+                           "name":  "Satiety"
+                       },
+                       {
+                           "name":  "Energy"
+                       },
+                       {
+                           "name":  "Health"
+                       },
+                       {
+                           "name":  "Productivity"
+                       }
+                   ],
+    "movementSpeed":  3.7,
+    "canProtect":  false,
+    "isWild":  false,
+    "gender":  "M",
+    "health":  40,
+    "hunger":  100,
+    "energy":  100,
+    "DaysUntilAging":  30,
+    "damage":  6,
+    "defense":  0,
+    "product":  {
+                    "percentPerDay":  33.33,
+                    "item":  18,
+                    "requiredItem":  -1
+                },
+    "drop":  [
+                 {
+                     "item":  "raw_meat",
+                     "count":  2
+                 },
+                 {
+                     "item":  "raw_skin",
+                     "count":  2
+                 },
+                 {
+                     "item":  "bone",
+                     "count":  1
+                 }
+             ],
+    "allowedLabors":  [
+
+                      ],
+    "ration":  [
+                   "hay"
+               ],
+    "attackChance":  "50",
+    "Price":  83,
+    "AgeState":  "Adult"
+}

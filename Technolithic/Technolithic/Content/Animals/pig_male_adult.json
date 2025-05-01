@@ -1,0 +1,58 @@
+{
+    "key":  "pig",
+    "kind":  "pig",
+    "texture":  {
+                    "name":  "pig_male_adult",
+                    "width":  24,
+                    "height":  24
+                },
+    "attributes":  [
+                       {
+                           "name":  "Satiety"
+                       },
+                       {
+                           "name":  "Energy"
+                       },
+                       {
+                           "name":  "Health"
+                       }
+                   ],
+    "movementSpeed":  3.7,
+    "canProtect":  false,
+    "isWild":  false,
+    "gender":  "M",
+    "health":  50,
+    "hunger":  100,
+    "energy":  100,
+    "DaysUntilAging":  24,
+    "damage":  8,
+    "defense":  0,
+    "product":  null,
+    "ration":  [
+                   "hay"
+               ],
+    "drop":  [
+                 {
+                     "item":  "raw_meat",
+                     "count":  2
+                 },
+                 {
+                     "item":  "animal_fat",
+                     "count":  2
+                 },
+                 {
+                     "item":  "raw_skin",
+                     "count":  2
+                 },
+                 {
+                     "item":  "bone",
+                     "count":  1
+                 }
+             ],
+    "allowedLabors":  [
+
+                      ],
+    "attackChance":  "100",
+    "Price":  68,
+    "AgeState":  "Adult"
+}

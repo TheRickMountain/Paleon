@@ -1,0 +1,84 @@
+{
+  "name_key": "mudbrick_dryer",
+  "description_key": "used_for_drying_adobe",
+  "width": 2,
+  "height": 2,
+  "type": "Crafter",
+  "category": "Production",
+  "animated": true,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 15,
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": true,
+    "recipes": [
+      {
+        "main_item": "mudbrick",
+        "time": 900,
+        "result": [
+          {
+            "item": "mudbrick",
+            "weight": 4
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "clay",
+            "weight": 4,
+            "show": false
+          },
+          {
+            "item": "hay",
+            "weight": 4,
+            "show": false
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "mudbrick_dryer",
+    "width": 32,
+    "height": 32
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false
+    ],
+    [
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "wood",
+      "weight": 2
+    }
+  ]
+}

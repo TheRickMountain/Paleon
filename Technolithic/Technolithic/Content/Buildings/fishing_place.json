@@ -1,0 +1,45 @@
+{
+  "name_key": "fishing_place",
+  "description_key": "used_for_fishing",
+  "width": 1,
+  "height": 2,
+  "type": "FishingPlace",
+  "category": "Food",
+  "animated": false,
+  "rotatable": true,
+  "cloneable": true,
+  "requireBuilding": false,
+  "show_item_on_top": false,
+  "destructible": true,
+  "movementSpeed": -1,
+  "constructionTime": 1,
+  "texture": {
+    "name": "fishing_place",
+    "width": 16,
+    "height": 32
+  },
+  "walkable_pattern": [
+    [
+      true
+    ],
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      true
+    ],
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "G"
+    ],
+    [
+      "H"
+    ]
+  ]
+}

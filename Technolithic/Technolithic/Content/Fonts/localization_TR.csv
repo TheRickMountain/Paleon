@@ -1,0 +1,587 @@
+key,translation
+None,None
+Pick,Topla
+a_wild_animal_is_about_to_attack_your_settlement,Vahsi bir hayvan koyüne saldirmak üzere
+a_wild_bee_hive_has_appeared_near_you,Yakininizda bir ari kovani belirlendi
+accept,Kabul et
+achievement_unlocked,New achievement '{0}'!
+achievements,Achievements
+achievements_unlocked_x_slash_y,Achievements unlocked {0}/{1}
+achv_desc_ARE_YOU_SURE_IT_DOESNT_STINK,Cook food using dried manure as fuel
+achv_desc_BACK_TO_THE_FUTURE,Start the time machine and go back to the future
+achv_desc_BEST_FRIENDS_FOREVER,Send a settler with a dog to hunt
+achv_desc_CITY,Have 60 people or more in the settlement
+achv_desc_DENIED,Refuse to accept a nomad into the settlement
+achv_desc_ENGINE_OF_PROGRESS,Research all technologies
+achv_desc_FIRST_BREAD,Bake your first flatbread
+achv_desc_FIRST_BRONZE,Smelt your first bronze
+achv_desc_FIRST_CERAMIC,Fire your first ceramic pot
+achv_desc_FIRST_COPPER,Smelt your first copper
+achv_desc_FIRST_IRON,Forge your first iron
+achv_desc_HOMEMADE_PRODUCTION,Sell 10 units of bread
+achv_desc_I_SURVIVED_100_DAYS,Survive 100 days with at least one settler
+achv_desc_MULTITOOL,One of the settlers must equip at least 3 tools
+achv_desc_TRIBE,Have 15 people or more in the settlement
+achv_desc_VILLAGE,Have 30 people or more in the settlement
+achv_name_ARE_YOU_SURE_IT_DOESNT_STINK,Are you sure it doesn't stink?
+achv_name_BACK_TO_THE_FUTURE,Back to the future
+achv_name_BEST_FRIENDS_FOREVER,Best Friends Forever
+achv_name_CITY,City
+achv_name_DENIED,Denied
+achv_name_ENGINE_OF_PROGRESS,Engine of progress
+achv_name_FIRST_BREAD,First bread
+achv_name_FIRST_BRONZE,First bronze
+achv_name_FIRST_CERAMIC,First ceramic
+achv_name_FIRST_COPPER,First copper
+achv_name_FIRST_IRON,First iron
+achv_name_HOMEMADE_PRODUCTION,Homemade production
+achv_name_I_SURVIVED_100_DAYS,I survived 100 days
+achv_name_MULTITOOL,Multitool
+achv_name_TRIBE,Tribe
+achv_name_VILLAGE,Village
+adult,Yetiskin
+age,Yas
+agriculture,Tarim
+alcoholic_drinks,Alkollü icecekler
+all,Hepsi
+allows_creatures_to_move_faster,Yerliler daha hizli hareket eder
+animal_fat,Animal fat
+animal_female,Kadin
+animal_filter,Hayvan filtresi
+animal_male,Erkek
+animal_pen,Hayvan agili
+animal_pen_description,Hayvanlarin beslenmesi ve dinlenmesi icin kullanilir
+animals,Hayvanlar
+animals_domestication,Hayvan evcillestirme
+assign_a_pet,Assign a pet
+assign_a_settler,Assign a settler
+assign_to,Assign to {0}
+assign_x_to_this_hut,Assign {0} to this hut
+assigned_to,Assigned to {0}
+attack,Saldir
+aurochs,Yaban oküzü
+automatically_mine_spawned_deposits,Kaynaklar otomatik olarak olusturulacak
+autumn,Sonbahar
+back,Geri
+barley,Arpa
+barley_seeds,Arpa tohumu
+barn,Ahir
+base_speed,Temel hiz
+basket,Sepet
+bee_hive,Ari kovani
+bee_hive_description,Yabani ari kovanindan iki kat verimli bal üretir
+beekeeping,Aricilik
+beeswax,Balmumu
+bloomery,Eritme firini
+boar,Yaban domuzu
+bone,Kemik
+bone_harpoon,Kemik zipkin
+bone_sickle,Kemik orak
+bone_spear,Kemik mizrak
+bone_tools,Kemikten aletler
+bow,Yay
+brewing,Alkol yapimi
+brick,Tugla
+brick_floor,Tugla zemin
+brick_wall,Tugla duvar
+bridge,Koprü
+bronze,Bronz
+bronze_age,Bronz cagi
+bronze_axe,Bronz balta
+bronze_harpoon,Bronz zipkin
+bronze_hoe,Bronz capa
+bronze_pick,Bronz kazma
+bronze_sickle,Bronz orak
+bronze_smelting,Bronz eritme
+bronze_spear,Bronz mizrak
+build_irrigation_canal,Sulama kanali insa et
+building,Insa etmek
+bunch_of_peas,Bir avuc bezelye
+burial,Cenaze
+buying,Satin al
+calm,Sakin
+cancel,Iptal et
+capacity,Kapasite
+cattle,Sigirlar
+causes,Nedenler
+ceramic_pot,Seramik comlek
+chainmail,Zincir zirh
+chalcolithic,Kaltolitik
+chance,sans
+charcoal,Odun komürü
+charcoal_kiln,Odun firini
+cheese,Peynir
+cheesemaking,Peynir yapimi
+child,cocuk
+chop,Bic
+chop_completely,Tamamen bic
+chop_now,Temelli kes
+clay,Kil
+clay_barn,Kil depo
+clay_deposit,Kil yatagi
+clay_hut,Kil kulübe
+clay_oven,Kil firini
+clean_up_manure,Gübreyi temizle
+clone,Kopyala
+close,Kapat
+cloth,Kumas
+clothes,Giysiler
+come_here,Buraya gel
+command_line,komut satiri
+connected,Baglandi
+consumption,Tüketim
+containers,Containers
+cooked_fish,Pismis balik
+cooked_meat,Pismis et
+cooking,Yemek pisirme
+copper,Bakir
+copper_axe,Bakir balta
+copper_deposit,Bakir yatagi
+copper_harpoon,Bakir zipkin
+copper_hoe,Bakir capa
+copper_ore,Bakir cevheri
+copper_pick,Bakir kazma
+copper_reaper,Copper reaper
+copper_sickle,Bakir orak
+copper_smelting,Bakir eritme
+copper_smithy,Bakir isleme
+copper_spear,Bakir mizrak
+copy,Kopyala
+copy_settings,Ayarlari kopyala
+cozy_hut,Rahat kulübe
+cozy_tent,Rahat cadir
+crafter,Zanaatkar
+crafting,Üretim
+create,Olustur
+credits,Credits
+crossbow,Tatar yayi
+crushed_copper_ore,Bakir tozu
+crushed_iron_ore,Demir tozu
+crushed_tin_ore,Kalay tozu
+culinary_ingredients,Mutfak malzemeleri
+cures,Tedaviler
+cut,Kes
+cut_automatically,Otomatik kes
+cut_completely,Tamamen kes
+cut_now,Temelli biç
+dandelion,Karahindiba
+day,Gün
+days,Günler
+days_until_aging_x,Days until aging: {0}
+days_until_death_x,Days until death: {0}
+decline,Reddet
+defense,Savunma
+depends_on_wind_speed,Rüzgar hizina baglidir
+deposit,Depozito
+destruct,Yik
+destruct_irrigation_canal,Sulama kanali yik
+destruct_surface,Yüzeyi yik
+dirt_path,Toprak yol
+dirty_animal_pen,Kirli hayvan agili
+disable_all,Hepsini etkisiz hale getir
+disband,Dagit
+disconnected,Baglanti kesildi
+dog,Kopek
+dolmen,Mezar
+domesticate,Evcillestirmek
+drop_spindle,Egirmen
+dry_fish,Kurutulmus balik
+dry_manure_fuel,Tezek
+dry_meat,Kurutulmus et
+dry_skin,Kurutulmus deri
+durability,Dayaniklilik
+duration_x_hours,Duration: {0:0.0} saat
+duration_x_minutes,Duration: {0} dakika
+edge_scrolling_camera,Edge scrolling camera
+effects,Etkiler
+efficiency,Verimlilik
+enable_all,Hepsini etkinlestir
+energy,Enerji
+energy_available,Mevcut enerji
+energy_consumer,Enerji tüketimi
+energy_consumption,Enerji tüketimi
+energy_output,Enerji cikisi
+energy_production,Energy production
+energy_source,Enerji kaynagi
+energy_type,Enerji tipi
+equip,Kusan
+equipment,Equipment
+exit_to_desktop,Masaüstüne cik
+exit_to_main_menu,Ana menüye cik
+experience_points,Tecrübe puanlari
+farm_plot,Tarla bolgesi
+farming,Tarim
+felling,Odunculuk
+fermenting_pot,Fermantasyon kabi
+fertilize,Gübreleme
+fertilizer,Gübre
+fertilizers,Gübreler
+fertilizing,Gübreleme
+fiber,Lif
+fish_trap,Balik tuzagi
+fishing,Balikcilik
+fishing_place,Balikcilik bolgesi
+fishing_rod,Olta
+flatbread,Gozleme
+flax,Keten
+floor,Zemin
+flour,Un
+flowers,cicekler
+food,Yiyecek
+food_dryer,Yiyecek kurutucusu
+food_drying,Yemek kurutmaligi
+food_poisoning,Gida zehirlenmesi
+food_poisoning_cure,Gida zehirlenmesine care
+food_storage_hut,Yiyecek deposu
+food_storage_hut_description,Yiyecek depolamak icin kullanilir yiyecekleri uzun süre taze tutar
+free_up,Free up
+freshness,Tazelik
+fuel,Yakit
+fullscreen,Tam ekran
+future,Gelecek
+game_finished,Oyun bitti
+game_menu,Oyun menüsü
+gas,Gaz
+gather,Topla
+gathering,Toplamak
+grain_processing,Tahil isleme
+grape,üzüm
+grape_bush,Üzüm calisi
+grave,Mezar
+growth_progress,Büyüme ilerlemesi
+growth_speed,Büyüme hizi
+happiness,Mutluluk
+harvesting,Hasat
+has_joined_your_settlement,{0} senin koyüne katildi
+hauling,Tasima
+hay,saman
+haystack,Saman yigini
+haystack_description,Saman depolamak icin kullanilir.
+health,Can
+hearth,Ocak
+herbalist_table,Bitki uzmani masasi
+herbalist_table_description,Ilkel ilac yapimi icin kullanilir.
+honey,Bal
+honeycomb,Bal petegi
+horse,At
+hours,Saatler
+hunger,Aclik
+hunt,Avla
+hunting,Avcilik
+hut,Kulübe
+information,Information
+ingredients,Icindekiler
+inventory,Inventory
+iron,Demir
+iron_age,Demir cagi
+iron_axe,Demir balta
+iron_bloom,Ham demir
+iron_deposit,Demir yatagi
+iron_harpoon,Demir zipkin
+iron_hoe,Demir capa
+iron_ore,Demir cevheri
+iron_pick,Demir kazma
+iron_sickle,Demir orak
+iron_smelting,Demir eritme
+iron_smithy,Demirci
+iron_spear,Demir mizrak
+irrigate,Sulama
+irrigation,Sulama yapmak
+irrigation_canals,Sulama kanali
+items,Esyalar
+kiln,Seramik firini
+kinetic,Kinetik
+knowledge,Bilgi
+knowledge_points,Bilgi puani
+knowledge_table,Bilgi tablasi
+language,Dil
+language_change_warning,Değişikliklerin etkili olması için lütfen oyunu yeniden başlatın
+language_name,Türkçe
+learning,ogrenme
+leather,Deri
+leather_outfit,Deri kiyafet
+left_click,Sol tik
+level,Seviye
+light,Hafif
+load_game,Oyunu yükle
+low_light,Düsük isik
+mammoth,Mamut
+manure,Gübre
+manure_drying_area,Manure drying area
+manure_drying_area_description,Used for drying manure
+mealing_stone,ogütme tasi
+mealing_stone_description,Tahil ve tohumlarin islenmesinde kullanilir
+mechanical_crusher,Mekanik kirici
+mechanical_millstone,Mekanik degirmentasi
+mechanisms,Mekanizmalar
+medicine,Ilac
+melee_damage,Yakin dovüs hasari
+mesolithic,Mesolitik
+metallurgy,Metalurji
+millstone,Degirmen tasi
+mine,Kaz
+mine_description,Maden cevresinde otomatik olarak olusturulacak.
+mine_mine,Madencilik
+mining,Madencilik
+moderate,Iliman
+moisture,Nem
+mortar_and_pestle,Havan tokmagi
+mouflon,Yabani koyun
+movement_speed,Hareket hizi
+mudbrick,Kerpic
+mudbrick_dryer,Kerpic kurutucusu
+mudbrick_floor,Kerpic zemin
+mudbrick_hut,Kerpic ev
+mudbrick_wall,Kerpic duvar
+music_volume,Müzik seviyesi
+name,Isim
+neolithic,Neolitik
+new_game,Yeni oyun
+new_settlers,Yeni yerliler
+new_settlers_arrived,Yeni yerliler geldi
+new_technologies_available,Yeni teknolojiler mevcut
+noria,Su degirmeni
+noria_description,Kuyudan su alip sulama kanalina aktarmak icin kullanilir
+number_of_fish,Balik sayisi
+number_of_uses,Kullanim sayisi
+nutrition,Beslenme
+oak,Mese
+oil_lamp,Kandil
+oil_lamp_description,"Aydınlatma için kullanılır, yakıt olarak yağlar ve hayvansal yağlar kullanılır"
+old,Yasli
+open,Ac
+open_game_data_folder,Oyunun dosyalarini ac
+oven,Firin
+paleolithic,Paleolitik
+palisade,cit
+paste,Yapistir
+pause,Durdur
+pea,Bezelye
+pea_seeds,Bezelye tohumu
+pea_soup,Bezelye corbasi
+peaceful_mode,Bariscil mod
+peas,Bezelye
+pemmican,Pemikan
+per_day,Günlük
+pets,Hayvanlar
+pig,Domuz
+plant,Bitki
+planting,Ekim
+plowing,ciftcilik
+point_of_entry_to_a_space_which_is_enclosed_by_walls,Duvarlarla cevrili bir yere giris noktasi
+pot_of_beer,bira comlegi
+pot_of_honey,Bal comlegi
+pot_of_mead,likor comlegi
+pot_of_milk,süt comlegi
+pot_of_water,su comlegi
+pot_of_wine,sarap comlegi
+pottery,comlekcilik
+pregnancy,Gebelik
+primitive_animal_dwelling,Ilkel hayvan barinagi
+primitive_dwelling,Ilkel konut
+primitive_medicine,Ilkel tip
+primitive_school_description,Bilgi puani kazanmak icin kullanilir
+priority,oncelik
+production,Üretim
+production_limit,Üretim limiti
+productivity,Verimlilik
+progress,Ilerleme
+projectile_speed,Hiz
+protects_against_low_temperatures,Düsük sicakliklara karsi direnc
+rain,Yagmur
+raisin,kuru üzüm
+raisin_buns,Üzümlü corek
+ranching,Ciftcilik
+range_damage,Uzak mesafe hasari
+ration,Ration
+raw_fish,Cig balik
+raw_meat,Cig et
+raw_skin,Ham deri
+recharge_time,Bekleme süresi
+recipe,Tarif
+recipes,Tarifler
+remove_equipment,Remove equipment
+rename,Isimlendir
+repeat,Tekrarla
+repeat_until_production_limits_are_reached,Üretim limitine ulasana kadar üretim devam eder
+required,Gerekli
+required_technology,Gerekli teknoloji
+resource,Kaynak
+resources,Kaynaklar
+rest,Dinlenmek
+result,Result
+resume,Devam et
+return_to_the_future,Gelecege don
+right_click,Sag tik
+satiety,Tokluk
+save,Kaydet
+season,Mevsim
+seeds,Tohumlar
+selling,Sat
+settlement,Yerleşim
+settler_corpse,Yerli cesedi
+settlers,Yerliler
+sheaf_of_barley,Bir demet arpa
+sheep,Koyun
+shelf_life,Raf omrü
+shelf_life_of_products,Ürünlerin raf omrü
+show_resource_in_the_general_list,Kaynagi genel listede goster
+side_item,Yan öğe
+skin_drying_rack,Deri kurutma rafi
+skin_tent,Deri cadir
+skins_outfit,Deri kiyafetler
+slaughter,Katliam
+sleep,Uyumak
+sleeping,Uyuyor
+sleeping_on_the_ground,Zeminde uyuyor
+sling,Sapan
+soil,Toprak
+sound_volume,Ses düzeyi
+sowing,Ekme
+spawn_time,Spawn time
+speed,Hiz
+spinning,Spinning
+spinning_wheel,Cikrik
+spoilage_rate,Bozulma orani
+spoiled,Cürüdü
+spring,Ilkbahar
+stick_hut,cubuktan kulübe
+stockpile,Depolama
+stone,Tas
+stone_axe,Tas balta
+stone_deposit,Tas yatagi
+stone_floor,Tas zemin
+stone_harpoon,Tas zipkin
+stone_hoe,Tas capa
+stone_pick,Tas kazma
+stone_pieces,Tas parcalari
+stone_sickle,Tas orak
+stone_spear,Tas mizrak
+stone_tools,Tas aletler
+stone_wall,Tas duvar
+stopped_due_to,su nedenle durduruldu: {0}
+storage,Depolama
+stored,Depolandi
+strong,Güclü
+summer,Yaz
+supplying,Tasimak
+tailors_workshop,Terzi atolyesi
+tannery,Deri isleme
+tanning,Deri isleme
+tarpan,Tarpan
+technologies,Teknolojiler
+temperature,Sicaklik
+the_settlers_are_freezing,Yerliler soguktan donuyor
+the_settlers_are_starving,Yerliler cok ac
+the_settlers_are_unhappy,Yerliler mutsuz
+thresher,Thresher
+thresher_description,Tohumlari samandan ayirmak icin kullanilir
+threshing_floor,Threshing floor
+threshing_floor_description,"Used for mass animal threshing of 
+plants to separate seeds from hay"
+time,Zaman
+time_machine,Zaman makinesi
+time_machine_description,Zaman makinesi cihazi
+tin_deposit,Kalay yatagi
+tin_ore,Kalay cevheri
+to_do_the_job_of_x_you_need_tools,{0} isini yapmak icin bir alete ihtiyaciniz var.
+tool_type,Alet türü
+tools,Aletler
+torch,Mesale
+torch_description,Alani aydinlatmak icin kullanilir
+total_speed,Toplam hiz
+trade,Ticaret
+trading,Takas
+trading_post,Takas dükkani
+trading_post_assortment_update,Takas dükkanindaki esyalar yenilendi!
+trading_post_description,Mal alip satmanizi saglar
+travel_speed,Seyahat hizi
+treadmill,Treadmill
+treadmill_description,Converts the energy of animals and settlers into mechanical energy
+turn_off_music,Müzigi kapat
+turn_on_music,Müzigi ac
+unassign_from,Unassign from {0}
+unfired_pot,Pismemis comlek
+used_for_automated_grinding_of_grain,Tahil ogütmede kullanilir
+used_for_coal_production,Komür üretimi icin kullanilir
+used_for_cooking,Yemek pisirmek icin kullanilir
+used_for_drying_adobe,Kerpic kurutmak icin kullanilir
+used_for_drying_food,Yiyecekleri kurutmak icin kullanilir
+used_for_drying_skins,Derileri kurutmak icin kullanilir
+used_for_firing_ceramic_products,seramigi firinlamak icin kullanilir
+used_for_fishing,Balikcilik yapmak icin kullanilir
+used_for_forging_copper_and_bronze_tools,Bakir ve bronz alet yapiminda kullanilir
+used_for_forging_iron_tools,Demir alet yapimi icin kullanilir
+used_for_growing_plants,Bitki ekmek icin kullanilir
+used_for_mining,Madencilik icin kullanilir
+used_for_quick_cooking,Hizli yemek pisirme icin kullanilir
+used_for_quick_grinding_of_grain,Tahilin hizli ogütülmesi icin kullanilir
+used_for_spinning_yarn,Iplik egirmek icin kullanilir
+used_for_storing_resources,Kaynaklari depolamak icin kullanilir
+used_for_tanning_skins,Derileri islemek icin kullanilir
+used_to_bury_the_dead,Olüleri gommek icin kullanilir
+used_to_collect_water,Su toplamaya yarar
+used_to_create_advanced_tools,Gelismis alet yapiminda kullanilir
+used_to_create_primitive_tools,Ilkel araclar olusturmak icin kullanilir
+used_to_cross_water,Suyu gecmek icin kullanilir
+used_to_crushing_resources,cevherleri toza cevirmek icin kullanilir
+used_to_ferment_foods,Gidalari fermente etmek icin kullanilir
+used_to_grinding_and_crushing_resources,Kaynaklari ogütüp kirmak icin kullanilir
+used_to_make_clothes,Kiyafet yapiminda kullanilir
+used_to_smelting_metals_from_its_ores,Cevherleri eritmek icin kullanilir.
+used_to_weave_cloth,Kumasi dokumak icin kullanilir
+value,Deger
+view_settler,View settler
+vomiting,Kusma
+wall,Duvar
+wall_description,Gecilmez bir sur olusturmak icin kullanilir.
+walls,Duvarlar
+warm_clothing,Sicak tutan kiyafetler
+warm_fur_clothes,Kürk kiyafet
+warm_knitted_clothes,Warm knitted clothes
+warm_place,Sicak mekan
+warp_weighted_loom,Warp-Dokuma tezhagi
+was_killed_by,{0}
+water_gathering_place,Su toplama noktasi
+weapon,Silah
+weaving,Dokumacilik
+well,Kuyu
+wild_bee_hive,Yabani ari kovani
+wind,Rüzgar
+windmill,Rüzgargülü
+windmill_description,Converts wind energy into mechanical energy
+windowed,Pencereli
+winter,Kis
+winter_cold,Kis sogugu
+wolf,Kurt
+wolf_domestication,Kurt evcillestirme
+wood,Odun
+wood_pieces,Ahsap parcalari
+woodcutting,Odunculuk
+wooden_cart,Ahsap araba
+wooden_gate,Ahsap kapi
+wooden_harpoon,Ahsap zipkin
+wooden_plow,Ahsap saban
+wooden_spear,Ahsap mizrak
+wool,Yün
+wool_cloth,Yün kumas
+wool_clothing,Yün kiyafet
+wool_yarn,Yün iplik
+work,calismak
+workers,Isciler
+workshop,Atolye
+world_name,Dünya adi
+world_settings,Dünya ayarlari
+world_size,Dünya boyutu
+world_with_that_name_already_exists,Ayni isimli dünya var
+woven_clothing,Woven clothing
+x_died_from_the_cold,{0} soguktan oldü
+x_died_of_old_age,{0} yasliliktan oldü
+x_died_of_starvation,{0} acliktan oldü
+x_got_the_y_effect,{0} got the {1} effect
+x_is_already_assigned_to_another_hut,{0} is already assigned to another hut
+x_is_already_assigned_to_this_hut,{0} is already assigned to this hut
+yarn,Iplik
+сhop_automatically,Otomatik bic
+сhop_automatically_description,Yetistikten sonra otomatik bic
+сut_automatically_description,Yetistikten sonra otomatik kes

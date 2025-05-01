@@ -1,0 +1,65 @@
+{
+  "name_key": "mine_mine",
+  "description_key": "mine_description",
+  "width": 2,
+  "height": 2,
+  "type": "Mine",
+  "category": "Mining",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 30,
+  "range": 6,
+  "texture": {
+    "name": "mine",
+    "width": 32,
+    "height": 32
+  },
+  "MineData": {
+    "SpawnTime": 600,
+    "SpawnChance": 40
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false
+    ],
+    [
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "C",
+      "C"
+    ],
+    [
+      "C",
+      "C"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "wood",
+      "weight": 4
+    },
+    {
+      "item": "stone",
+      "weight": 4
+    }
+  ]
+}

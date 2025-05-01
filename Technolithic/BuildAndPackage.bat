@@ -1,0 +1,2 @@
+dotnet publish -c Release -r win-x64 -o PaleonWindows /p:PublishReadyToRun=false /p:TieredCompilation=false --self-contained
+dotnet publish -c Release -r linux-x64 -o PaleonLinux /p:PublishReadyToRun=false /p:TieredCompilation=false --self-contained

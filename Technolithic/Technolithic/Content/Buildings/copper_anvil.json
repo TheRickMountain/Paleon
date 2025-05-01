@@ -1,0 +1,261 @@
+{
+  "name_key": "iron_smithy",
+  "description_key": "used_for_forging_iron_tools",
+  "width": 2,
+  "height": 2,
+  "type": "Crafter",
+  "category": "Metallurgy",
+  "animated": true,
+  "cloneable": true,
+  "rotatable": false,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 30,
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": false,
+    "recipes": [
+      {
+        "main_item": "iron",
+        "time": 30,
+        "result": [
+          {
+            "item": "iron",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "iron_bloom",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "iron_spear",
+        "time": 30,
+        "result": [
+          {
+            "item": "iron_spear",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "iron",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "iron_harpoon",
+        "time": 30,
+        "result": [
+          {
+            "item": "iron_harpoon",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "iron",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "iron_axe",
+        "time": 30,
+        "result": [
+          {
+            "item": "iron_axe",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "iron",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "iron_sickle",
+        "time": 30,
+        "result": [
+          {
+            "item": "iron_sickle",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "iron",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "iron_hoe",
+        "time": 30,
+        "result": [
+          {
+            "item": "iron_hoe",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "iron",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "iron_pick",
+        "time": 30,
+        "result": [
+          {
+            "item": "iron_pick",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "iron",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "chainmail",
+        "time": 50,
+        "result": [
+          {
+            "item": "chainmail",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "iron",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "copper_anvil",
+    "width": 32,
+    "height": 32
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      true,
+      false
+    ],
+    [
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "iron",
+      "weight": 4
+    },
+    {
+      "item": "stone",
+      "weight": 4
+    }
+  ],
+  "lightEmitter": {
+    "radius": 100
+  }
+}

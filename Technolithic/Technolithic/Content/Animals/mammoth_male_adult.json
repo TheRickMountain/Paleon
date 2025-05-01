@@ -1,0 +1,50 @@
+{
+    "key":  "mammoth",
+    "kind":  "mammoth",
+    "texture":  {
+                    "name":  "mammoth_male_adult",
+                    "width":  40,
+                    "height":  40
+                },
+    "attributes":  [
+                       {
+                           "name":  "Energy"
+                       },
+                       {
+                           "name":  "Health"
+                       }
+                   ],
+    "movementSpeed":  3.5,
+    "canProtect":  false,
+    "isWild":  true,
+    "gender":  "M",
+    "health":  200,
+    "hunger":  100,
+    "energy":  100,
+    "DaysUntilAging":  84,
+    "damage":  10,
+    "defense":  0,
+    "product":  null,
+    "drop":  [
+                 {
+                     "item":  "raw_meat",
+                     "count":  15
+                 },
+                 {
+                     "item":  "raw_skin",
+                     "count":  10
+                 },
+                 {
+                     "item":  "bone",
+                     "count":  4
+                 }
+             ],
+    "ration":  [
+                   "hay"
+               ],
+    "allowedLabors":  [
+
+                      ],
+    "attackChance":  "75",
+    "AgeState":  "Adult"
+}

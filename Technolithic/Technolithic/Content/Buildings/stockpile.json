@@ -1,0 +1,73 @@
+{
+  "name_key": "stockpile",
+  "description_key": "used_for_storing_resources",
+  "width": 2,
+  "height": 2,
+  "type": "Stockpile",
+  "category": "Storage",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": false,
+  "show_item_on_top": true,
+  "destructible": true,
+  "movementSpeed": -1,
+  "constructionTime": 1,
+  "storage": {
+    "canCopySettings": true,
+    "capacity": 200,
+    "shelfLifeOfProducts": 1,
+    "filters": [
+      0,
+      1,
+      2,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      13,
+      14,
+      3,
+      15
+    ],
+    "stages": 1,
+    "isEditable": true
+  },
+  "texture": {
+    "name": "stockpile",
+    "width": 32,
+    "height": 32
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A"
+    ]
+  ]
+}

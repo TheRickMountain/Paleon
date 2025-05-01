@@ -1,0 +1,50 @@
+{
+  "name_key": "oil_lamp",
+  "description_key": "oil_lamp_description",
+  "width": 1,
+  "height": 1,
+  "type": "Lighter",
+  "category": "Settlement",
+  "animated": true,
+  "cloneable": true,
+  "rotatable": false,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": -1,
+  "constructionTime": 10,
+  "lightEmitter": {
+    "radius": 200
+  },
+  "texture": {
+    "name": "oil_lamp",
+    "width": 16,
+    "height": 20
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "stone",
+      "weight": 1
+    }
+  ],
+  "fuelConsumer": {
+    "fuel": [
+      "animal_fat"
+    ],
+    "energy_consumption": 0.02
+  }
+}

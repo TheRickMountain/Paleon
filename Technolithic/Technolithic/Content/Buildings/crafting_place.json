@@ -1,0 +1,369 @@
+{
+  "name_key": "crafter",
+  "description_key": "used_to_create_primitive_tools",
+  "width": 1,
+  "height": 1,
+  "type": "Crafter",
+  "category": "Production",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 10,
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": false,
+    "recipes": [
+      {
+        "main_item": "unfired_pot",
+        "time": 50,
+        "result": [
+          {
+            "item": "unfired_pot",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "clay",
+            "weight": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "main_item": "basket",
+        "time": 50,
+        "result": [
+          {
+            "item": "basket",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wood",
+            "weight": 2,
+            "show": true
+          }
+        ]
+      },
+      {
+        "main_item": "bone_sickle",
+        "time": 30,
+        "result": [
+          {
+            "item": "bone_sickle",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "bone",
+            "weight": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "main_item": "bone_spear",
+        "time": 30,
+        "result": [
+          {
+            "item": "bone_spear",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wood",
+            "weight": 1,
+            "show": false
+          },
+          {
+            "item": "bone",
+            "weight": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "main_item": "bone_harpoon",
+        "time": 30,
+        "result": [
+          {
+            "item": "bone_harpoon",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wood",
+            "weight": 1,
+            "show": false
+          },
+          {
+            "item": "bone",
+            "weight": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "main_item": "stone_spear",
+        "time": 30,
+        "result": [
+          {
+            "item": "stone_spear",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wood",
+            "weight": 1,
+            "show": false
+          },
+          {
+            "item": "stone",
+            "weight": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "main_item": "fishing_rod",
+        "time": 30,
+        "result": [
+          {
+            "item": "fishing_rod",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wood",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "yarn",
+            "weight": 1,
+            "show": false
+          }
+        ]
+      },
+      {
+        "main_item": "stone_harpoon",
+        "time": 30,
+        "result": [
+          {
+            "item": "stone_harpoon",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wood",
+            "weight": 1,
+            "show": false
+          },
+          {
+            "item": "stone",
+            "weight": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "main_item": "bow",
+        "time": 30,
+        "result": [
+          {
+            "item": "bow",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wood",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "dry_skin",
+            "weight": 1,
+            "show": false
+          }
+        ]
+      },
+      {
+        "main_item": "sling",
+        "time": 30,
+        "result": [
+          {
+            "item": "sling",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "dry_skin",
+            "weight": 1,
+            "show": false
+          }
+        ]
+      },
+      {
+        "main_item": "stone_sickle",
+        "time": 30,
+        "result": [
+          {
+            "item": "stone_sickle",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "stone",
+            "weight": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "main_item": "stone_axe",
+        "time": 30,
+        "result": [
+          {
+            "item": "stone_axe",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "stone",
+            "weight": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "main_item": "stone_hoe",
+        "time": 30,
+        "result": [
+          {
+            "item": "stone_hoe",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "stone",
+            "weight": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "main_item": "stone_pick",
+        "time": 30,
+        "result": [
+          {
+            "item": "stone_pick",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "stone",
+            "weight": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "main_item": "wooden_spear",
+        "time": 30,
+        "result": [
+          {
+            "item": "wooden_spear",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wood",
+            "weight": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "main_item": "wooden_harpoon",
+        "time": 30,
+        "result": [
+          {
+            "item": "wooden_harpoon",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wood",
+            "weight": 1,
+            "show": true
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "crafting_place",
+    "width": 16,
+    "height": 16
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "stone",
+      "weight": 1
+    }
+  ]
+}

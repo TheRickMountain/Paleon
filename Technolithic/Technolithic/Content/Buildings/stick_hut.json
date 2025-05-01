@@ -1,0 +1,68 @@
+{
+  "name_key": "stick_hut",
+  "description_key": "primitive_dwelling",
+  "width": 2,
+  "height": 2,
+  "type": "Hut",
+  "category": "Settlement",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "movementSpeed": 50,
+  "destructible": true,
+  "constructionTime": 25,
+  "assignable": {
+    "slots": 1,
+    "ApplyStatusEffect": "None"
+  },
+  "texture": {
+    "name": "stick_hut",
+    "width": 32,
+    "height": 32
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false
+    ],
+    [
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "wood",
+      "weight": 4
+    }
+  ],
+  "fuelConsumer": {
+    "fuel": [
+      "wood",
+      "charcoal",
+      "dry_manure_fuel"
+    ],
+    "energy_consumption": 0.06
+  }
+}

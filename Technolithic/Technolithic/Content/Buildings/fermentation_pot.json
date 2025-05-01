@@ -1,0 +1,107 @@
+{
+  "name_key": "fermenting_pot",
+  "description_key": "used_to_ferment_foods",
+  "width": 1,
+  "height": 1,
+  "type": "Crafter",
+  "category": "Food",
+  "animated": true,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 10,
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": true,
+    "recipes": [
+      {
+        "main_item": "pot_of_beer",
+        "time": 900,
+        "result": [
+          {
+            "item": "pot_of_beer",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "pot_of_water",
+            "weight": 1
+          },
+          {
+            "item": "barley_seeds",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "pot_of_wine",
+        "time": 1200,
+        "result": [
+          {
+            "item": "pot_of_wine",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "pot_of_water",
+            "weight": 1
+          },
+          {
+            "item": "grape",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "pot_of_mead",
+        "time": 1200,
+        "result": [
+          {
+            "item": "pot_of_mead",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "pot_of_water",
+            "weight": 1
+          },
+          {
+            "item": "honeycomb",
+            "weight": 1
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "fermentation_pot",
+    "width": 16,
+    "height": 19
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "ceramic_pot",
+      "weight": 1
+    }
+  ]
+}

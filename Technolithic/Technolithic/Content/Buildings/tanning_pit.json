@@ -1,0 +1,82 @@
+{
+  "name_key": "tannery",
+  "description_key": "used_for_tanning_skins",
+  "width": 2,
+  "height": 2,
+  "type": "Crafter",
+  "category": "Production",
+  "animated": true,
+  "cloneable": true,
+  "rotatable": false,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 20,
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": true,
+    "recipes": [
+      {
+        "main_item": "leather",
+        "time": 300,
+        "result": [
+          {
+            "item": "leather",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "dry_skin",
+            "weight": 1
+          },
+          {
+            "item": "wood",
+            "weight": 1
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "tannery",
+    "width": 32,
+    "height": 32
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false
+    ],
+    [
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "clay",
+      "weight": 2
+    }
+  ]
+}

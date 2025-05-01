@@ -1,0 +1,57 @@
+{
+    "key":  "boar",
+    "kind":  "boar",
+    "texture":  {
+                    "name":  "boar_female_old",
+                    "width":  24,
+                    "height":  24
+                },
+    "attributes":  [
+                       {
+                           "name":  "Energy"
+                       },
+                       {
+                           "name":  "Health"
+                       }
+                   ],
+    "movementSpeed":  3.7,
+    "DomesticationData":  {
+                              "TamedForm":  "pig_female_old",
+                              "Chance":  10
+                          },
+    "canProtect":  false,
+    "isWild":  true,
+    "gender":  "F",
+    "health":  35,
+    "hunger":  100,
+    "energy":  100,
+    "DaysUntilAging":  4,
+    "damage":  8,
+    "defense":  0,
+    "ration":  [
+                   "hay"
+               ],
+    "drop":  [
+                 {
+                     "item":  "raw_meat",
+                     "count":  3
+                 },
+                 {
+                     "item":  "raw_skin",
+                     "count":  2
+                 },
+                 {
+                     "item":  "bone",
+                     "count":  1
+                 },
+                 {
+                    "item": "animal_fat",
+                    "count": 1
+                 }
+             ],
+    "allowedLabors":  [
+
+                      ],
+    "attackChance":  "100",
+    "AgeState":  "Old"
+}

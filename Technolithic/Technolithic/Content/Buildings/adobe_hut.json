@@ -1,0 +1,102 @@
+{
+  "name_key": "mudbrick_hut",
+  "description_key": "primitive_dwelling",
+  "width": 4,
+  "height": 3,
+  "type": "Hut",
+  "category": "Settlement",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 50,
+  "assignable": {
+    "slots": 4,
+    "ApplyStatusEffect": "CozyHut"
+  },
+  "texture": {
+    "name": "adobe_hut",
+    "width": 64,
+    "height": 48
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A",
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A",
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A",
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "wood",
+      "weight": 4
+    },
+    {
+      "item": "mudbrick",
+      "weight": 12
+    }
+  ],
+  "fuelConsumer": {
+    "fuel": [
+      "wood",
+      "charcoal",
+      "dry_manure_fuel"
+    ],
+    "energy_consumption": 0.06
+  }
+}

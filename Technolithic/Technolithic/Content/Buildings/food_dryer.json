@@ -1,0 +1,81 @@
+{
+  "name_key": "food_dryer",
+  "description_key": "used_for_drying_food",
+  "width": 1,
+  "height": 1,
+  "type": "Crafter",
+  "category": "Food",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 10,
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": true,
+    "recipes": [
+      {
+        "main_item": "dry_meat",
+        "time": 600,
+        "result": [
+          {
+            "item": "dry_meat",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "raw_meat",
+            "weight": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "main_item": "dry_fish",
+        "time": 600,
+        "result": [
+          {
+            "item": "dry_fish",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "raw_fish",
+            "weight": 1,
+            "show": true
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "food_dryer",
+    "width": 20,
+    "height": 20
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "wood",
+      "weight": 1
+    }
+  ]
+}

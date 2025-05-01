@@ -1,0 +1,87 @@
+{
+  "name_key": "clay_hut",
+  "description_key": "primitive_dwelling",
+  "width": 3,
+  "height": 3,
+  "type": "Hut",
+  "category": "Settlement",
+  "animated": false,
+  "cloneable": true,
+  "rotatable": false,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 30,
+  "assignable": {
+    "slots": 3,
+    "ApplyStatusEffect": "CozyHut"
+  },
+  "texture": {
+    "name": "clay_hut",
+    "width": 48,
+    "height": 48
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A","A","A"
+    ],
+    [
+      "A","A","A"
+    ],
+    [
+      "A","A","A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "wood",
+      "weight": 8
+    },
+    {
+      "item": "clay",
+      "weight": 8
+    }
+  ],
+  "fuelConsumer": {
+    "fuel": [
+      "wood",
+      "charcoal",
+      "dry_manure_fuel"
+    ],
+    "energy_consumption": 0.06
+  }
+}

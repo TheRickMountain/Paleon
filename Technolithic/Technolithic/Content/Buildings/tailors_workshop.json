@@ -1,0 +1,132 @@
+{
+  "name_key": "tailors_workshop",
+  "description_key": "used_to_make_clothes",
+  "width": 1,
+  "height": 1,
+  "type": "Crafter",
+  "category": "Production",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 10,
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": false,
+    "recipes": [
+      {
+        "main_item": "skins_outfit",
+        "time": 50,
+        "result": [
+          {
+            "item": "skins_outfit",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "dry_skin",
+            "weight": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "main_item": "fur_cape",
+        "time": 50,
+        "result": [
+          {
+            "item": "fur_cape",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "dry_skin",
+            "weight": 2,
+            "show": true
+          }
+        ]
+      },
+      {
+        "main_item": "leather_outfit",
+        "time": 50,
+        "result": [
+          {
+            "item": "leather_outfit",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "leather",
+            "weight": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "main_item": "woven_clothing",
+        "time": 50,
+        "result": [
+          {
+            "item": "woven_clothing",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "cloth",
+            "weight": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "main_item": "woven_cape",
+        "time": 50,
+        "result": [
+          {
+            "item": "woven_cape",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wool_cloth",
+            "weight": 1,
+            "show": true
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "tailors_workshop",
+    "width": 16,
+    "height": 16
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "stone",
+      "weight": 1
+    }
+  ]
+}

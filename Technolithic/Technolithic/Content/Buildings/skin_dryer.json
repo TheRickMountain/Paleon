@@ -1,0 +1,63 @@
+{
+  "name_key": "skin_drying_rack",
+  "description_key": "used_for_drying_skins",
+  "width": 1,
+  "height": 1,
+  "type": "Crafter",
+  "category": "Production",
+  "animated": true,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 10,
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": true,
+    "recipes": [
+      {
+        "main_item": "dry_skin",
+        "time": 200,
+        "result": [
+          {
+            "item": "dry_skin",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "raw_skin",
+            "weight": 1
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "skin_dryer",
+    "width": 16,
+    "height": 17
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "wood",
+      "weight": 1
+    }
+  ]
+}

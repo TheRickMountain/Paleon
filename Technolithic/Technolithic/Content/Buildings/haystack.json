@@ -1,0 +1,66 @@
+{
+  "name_key": "haystack",
+  "description_key": "haystack_description",
+  "width": 2,
+  "height": 2,
+  "type": "Stockpile",
+  "category": "Storage",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 75,
+  "constructionTime": 20,
+  "storage": {
+    "canCopySettings": true,
+    "capacity": 300,
+    "shelfLifeOfProducts": 2,
+    "filters": [
+      13
+    ],
+    "stages": 3,
+    "isEditable": true
+  },
+  "texture": {
+    "name": "haystack",
+    "width": 32,
+    "height": 36
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "wood",
+      "weight": 3
+    }
+  ]
+}

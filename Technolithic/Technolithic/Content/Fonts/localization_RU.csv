@@ -1,0 +1,587 @@
+key,translation
+None,None
+Pick,Кирка
+a_wild_animal_is_about_to_attack_your_settlement,Дикое животное собирается напасть на ваше поселение!
+a_wild_bee_hive_has_appeared_near_you,Рядом с вами появился дикий пчелиный улей
+accept,Принять
+achievement_unlocked,Новое достижение '{0}'!
+achievements,Достижения
+achievements_unlocked_x_slash_y,Получено достижений {0}/{1}
+achv_desc_ARE_YOU_SURE_IT_DOESNT_STINK,"Приготовьте еду, используя высушенный навоз как топливо"
+achv_desc_BACK_TO_THE_FUTURE,Запустите машину времени и вернитесь в будущее
+achv_desc_BEST_FRIENDS_FOREVER,Отправьте поселенца с собакой на охоту
+achv_desc_CITY,Имейте 60 или более человек в поселении
+achv_desc_DENIED,Откажитесь принять кочевника в поселение
+achv_desc_ENGINE_OF_PROGRESS,Исследуйте все технологии
+achv_desc_FIRST_BREAD,Испеките свой первый хлеб
+achv_desc_FIRST_BRONZE,Выплавьте свою первую бронзу
+achv_desc_FIRST_CERAMIC,Обожгите свой первый керамический горшок
+achv_desc_FIRST_COPPER,Выплавьте свою первую медь
+achv_desc_FIRST_IRON,Выкуйте свое первое железо
+achv_desc_HOMEMADE_PRODUCTION,"Продайте 10 единиц хлеба, сыра, шерстяной ткани, кувшин вина и соты на торговом посту одновременно"
+achv_desc_I_SURVIVED_100_DAYS,Проживите 100 дней хотя бы с одним поселенцем
+achv_desc_MULTITOOL,Один из поселенцев должен экипировать как минимум 3 инструмента
+achv_desc_TRIBE,Имейте 15 или более человек в поселении
+achv_desc_VILLAGE,Имейте 30 или более человек в поселении
+achv_name_ARE_YOU_SURE_IT_DOESNT_STINK,"Вы уверены, что это не воняет?"
+achv_name_BACK_TO_THE_FUTURE,В гостях хорошо
+achv_name_BEST_FRIENDS_FOREVER,Человек собаке друг
+achv_name_CITY,Город
+achv_name_DENIED,Отказано
+achv_name_ENGINE_OF_PROGRESS,Двигатель прогресса
+achv_name_FIRST_BREAD,Первый хлеб
+achv_name_FIRST_BRONZE,Первая бронза
+achv_name_FIRST_CERAMIC,Первая керамика
+achv_name_FIRST_COPPER,Первая медь
+achv_name_FIRST_IRON,Первое железо
+achv_name_HOMEMADE_PRODUCTION,Домашнее производство
+achv_name_I_SURVIVED_100_DAYS,Я выжил 100 дней!
+achv_name_MULTITOOL,Мультитул
+achv_name_TRIBE,Племя
+achv_name_VILLAGE,Деревня
+adult,Взрослый
+age,Возраст
+agriculture,Земледелие
+alcoholic_drinks,Алкогольные напитки
+all,Все
+allows_creatures_to_move_faster,Позволяет поселенцам перемещаться быстрее
+animal_fat,Животный жир
+animal_female,Самка
+animal_filter,Фильтр животных
+animal_male,Самец
+animal_pen,Загон для животных
+animal_pen_description,Используется для отдыха и подкормки животных
+animals,Животные
+animals_domestication,Одомашнивание животных
+assign_a_pet,Назначить питомца
+assign_a_settler,Назначить поселенца
+assign_to,Закрепить за {0}
+assign_x_to_this_hut,Назначить {0} к этой хижине
+assigned_to,Закреплен за {0}
+attack,Атаковать
+aurochs,Тур
+automatically_mine_spawned_deposits,Automatically mine spawned deposits
+autumn,Осень
+back,Назад
+barley,Ячмень
+barley_seeds,Семена ячменя
+barn,Хлев
+base_speed,Базовая скорость
+basket,Корзина
+bee_hive,Пчелиный улей
+bee_hive_description,Производит мед в 2 раза эффективнее дикого улья
+beekeeping,Пчеловодство
+beeswax,Пчелиный воск
+bloomery,Сыродутная печь
+boar,Кабан
+bone,Кость
+bone_harpoon,Костяной гарпун
+bone_sickle,Костяной серп
+bone_spear,Костяное копье
+bone_tools,Костяные инструменты
+bow,Лук
+brewing,Пивоварение
+brick,Кирпич
+brick_floor,Кирпичный пол
+brick_wall,Кирпичная стена
+bridge,Мост
+bronze,Бронза
+bronze_age,Бронзовый век
+bronze_axe,Бронзовый топор
+bronze_harpoon,Бронзовый гарпун
+bronze_hoe,Бронзовая мотыга
+bronze_pick,Бронзовая кирка
+bronze_sickle,Бронзовый серп
+bronze_smelting,Выплавка бронзы
+bronze_spear,Бронзовое копье
+build_irrigation_canal,Построить оросительный канал
+building,Строительство
+bunch_of_peas,Связка гороха
+burial,Захоронение
+buying,Покупка
+calm,Безветренно
+cancel,Отменить
+capacity,Вместимость
+cattle,Корова
+causes,Вызывает
+ceramic_pot,Керамический горшок
+chainmail,Кольчуга
+chalcolithic,Халколит
+chance,Шанс
+charcoal,Уголь
+charcoal_kiln,Углевыжигательная печь
+cheese,Сыр
+cheesemaking,Сыроделие
+child,Ребенок
+chop,Срубить
+chop_completely,Срубить полностью
+chop_now,Срубить сейчас
+clay,Глина
+clay_barn,Глиняный амбар
+clay_deposit,Залежь глины
+clay_hut,Глиняная хижина
+clay_oven,Глиняная печь
+clean_up_manure,Убирать навоз
+clone,Клонировать
+close,Закрыть
+cloth,Ткань
+clothes,Одежда
+come_here,Отправиться сюда
+command_line,командная строка
+connected,Подключен
+consumption,Потребление
+containers,Контейнеры
+cooked_fish,Жареная рыба
+cooked_meat,Жареное мясо
+cooking,Готовка
+copper,Медь
+copper_axe,Медный топор
+copper_deposit,Залежь меди
+copper_harpoon,Медный гарпун
+copper_hoe,Медная мотыга
+copper_ore,Медная руда
+copper_pick,Медная кирка
+copper_reaper,Медная жатвенная машина
+copper_sickle,Медный серп
+copper_smelting,Выплавка меди
+copper_smithy,Медная кузница
+copper_spear,Медное копье
+copy,Копировать
+copy_settings,Копировать настройки
+cozy_hut,Уютная хижина
+cozy_tent,Уютное укрытие
+crafter,Крафтер
+crafting,Производство
+create,Создать
+credits,Создатели
+crossbow,Арбалет
+crushed_copper_ore,Дробл. медная руда
+crushed_iron_ore,Дробл. железная руда
+crushed_tin_ore,Дробл. оловянная руда
+culinary_ingredients,Кулинарные ингредиенты
+cures,Лечит
+cut,Срезать
+cut_automatically,Срезать автоматически
+cut_completely,Срезать полностью
+cut_now,Срезать сейчас
+dandelion,Одуванчик
+day,День
+days,дней
+days_until_aging_x,Дней до взросления: {0}
+days_until_death_x,Дней до смерти: {0}
+decline,Отклонить
+defense,Защита
+depends_on_wind_speed,Зависит от скорости ветра
+deposit,Залежь
+destruct,Разрушить
+destruct_irrigation_canal,Разрушить оросительный канал
+destruct_surface,Разрушить покрытие
+dirt_path,Грунтовая тропинка
+dirty_animal_pen,Грязный загон
+disable_all,Запретить все
+disband,Распустить
+disconnected,Отключен
+dog,Собака
+dolmen,Дольмен
+domesticate,Приручить
+drop_spindle,Веретено
+dry_fish,Сушеная рыба
+dry_manure_fuel,Кизяк
+dry_meat,Сушеное мясо
+dry_skin,Сушеная шкура
+durability,Прочность
+duration_x_hours,Продолжительность: {0:0.0} часов
+duration_x_minutes,Продолжительность: {0} минут
+edge_scrolling_camera,Прокрутка камеры по краю экрана
+effects,Эффекты
+efficiency,Эффективность
+enable_all,Разрешить все
+energy,Энергия
+energy_available,Доступная энергия
+energy_consumer,Потребитель энергии
+energy_consumption,Потребление энергии
+energy_output,Выработка энергии
+energy_production,Производство энергии
+energy_source,Источник энергии
+energy_type,Тип энергии
+equip,Экипировать
+equipment,Экипировка
+exit_to_desktop,Выйти на рабочий стол
+exit_to_main_menu,Выйти в главное меню
+experience_points,Очки опыта
+farm_plot,Фермерский участок
+farming,Земледелие
+felling,Рубка
+fermenting_pot,Бродильный котел
+fertilize,Удобрять
+fertilizer,Удобрение
+fertilizers,Удобрения
+fertilizing,Удобрение
+fiber,Волокно
+fish_trap,Ловушка для рыб
+fishing,Рыболовля
+fishing_place,Место для рыбалки
+fishing_rod,Удочка
+flatbread,Лепешка
+flax,Лён
+floor,Пол
+flour,Мука
+flowers,Цветы
+food,Еда
+food_dryer,Сушилка для еды
+food_drying,Сушка еды
+food_poisoning,Пищевое отравление
+food_poisoning_cure,Лекарство от пищевого отравления
+food_storage_hut,Хижина для хранения продуктов
+food_storage_hut_description,Используется для хранения пищи. Сохраняет пищу свежей в течении длительного времени
+free_up,Освободить
+freshness,Свежесть
+fuel,Топливо
+fullscreen,Полноэкранный режим
+future,Будущее
+game_finished,Игра завершена
+game_menu,Меню
+gas,Газ
+gather,Собирать
+gathering,Сбор
+grain_processing,Обработка зерна
+grape,Виноград
+grape_bush,Куст винограда
+grave,Могила
+growth_progress,Прогресс роста
+growth_speed,Скорость роста
+happiness,Счастье
+harvesting,Жатва
+has_joined_your_settlement,{0} присоединился к вашему поселению
+hauling,Переноска
+hay,Сено
+haystack,Стог сена
+haystack_description,Используется для хранения сена
+health,Здоровье
+hearth,Очаг
+herbalist_table,Стол травника
+herbalist_table_description,Используется для создания примитивных лекарств
+honey,Мёд
+honeycomb,Медовые соты
+horse,Лошадь
+hours,Часов
+hunger,Голод
+hunt,Охотиться
+hunting,Охота
+hut,Хижина
+information,Информация
+ingredients,Ингредиенты
+inventory,Инвентарь
+iron,Железо
+iron_age,Железный век
+iron_axe,Железный топор
+iron_bloom,Крица
+iron_deposit,Залежь железа
+iron_harpoon,Железный гарпун
+iron_hoe,Железная мотыга
+iron_ore,Железная руда
+iron_pick,Железная кирка
+iron_sickle,Железный серп
+iron_smelting,Выплавка железа
+iron_smithy,Железная кузница
+iron_spear,Железное копье
+irrigate,Орошать
+irrigation,Орошение
+irrigation_canals,Оросительные каналы
+items,Предметы
+kiln,Печь для обжига
+kinetic,Кинетический
+knowledge,Знания
+knowledge_points,Очки Знаний
+knowledge_table,Стол знаний
+language,Язык
+language_change_warning,"Пожалуйста, перезапустите игру, чтобы изменения вступили в силу"
+language_name,Русский
+learning,Обучение
+leather,Кожа
+leather_outfit,Одежда из кожи
+left_click,Левый клик
+level,Уровень
+light,Легкий
+load_game,Загрузить игру
+low_light,Плохая освещенность
+mammoth,Мамонт
+manure,Навоз
+manure_drying_area,Место для сушки навоза
+manure_drying_area_description,Используется для сушки навоза
+mealing_stone,Зернотерка
+mealing_stone_description,Древнейшее приспособление для помола зерна
+mechanical_crusher,Механическая дробилка
+mechanical_millstone,Механический жернов
+mechanisms,Механизмы
+medicine,Медицина
+melee_damage,Ближний урон
+mesolithic,Мезолит
+metallurgy,Металлургия
+millstone,Жёрнов
+mine,Добывать
+mine_description,Используется для извлечения залежей из шахт. Спавнит залежи вокруг себя
+mine_mine,Шахта
+mining,Горное дело
+moderate,Умеренный
+moisture,Влажность
+mortar_and_pestle,Ступа
+mouflon,Муфлон
+movement_speed,Скорость перемещения
+mudbrick,Саман
+mudbrick_dryer,Сушилка для самана
+mudbrick_floor,Саманный пол
+mudbrick_hut,Саманная хижина
+mudbrick_wall,Саманная стена
+music_volume,Громкость музыки
+name,Наименование
+neolithic,Неолит
+new_game,Новая игра
+new_settlers,Новые поселенцы
+new_settlers_arrived,Прибыли новые поселенцы
+new_technologies_available,Доступны новые технологии
+noria,Нория
+noria_description,Используется для подъема воды с колодца и направления её по оросительным каналам
+number_of_fish,Количество рыб
+number_of_uses,Кол-во использований
+nutrition,Питательность
+oak,Дуб
+oil_lamp,Масляная лампа
+oil_lamp_description,"Используется для освещения, использует масла и животные жиры как топливо"
+old,Старый
+open,Открыть
+open_game_data_folder,Открыть папку с данными игры
+oven,Печь
+paleolithic,Палеолит
+palisade,Частокол
+paste,Вставить
+pause,Пауза
+pea,Горох
+pea_seeds,Семена гороха
+pea_soup,Гороховый суп
+peaceful_mode,Мирный режим
+peas,Горох
+pemmican,Пеммикан
+per_day,в день
+pets,Питомцы
+pig,Свинья
+plant,Растение
+planting,Посадка
+plowing,Пашка
+point_of_entry_to_a_space_which_is_enclosed_by_walls,"Проход в стене, запираемый створами"
+pot_of_beer,Кувшин с пивом
+pot_of_honey,Кувшин с медом
+pot_of_mead,Кувшин с медовухой
+pot_of_milk,Кувшин с молоком
+pot_of_water,Кувшин с водой
+pot_of_wine,Кувшин с вином
+pottery,Гончарное дело
+pregnancy,Беременность
+primitive_animal_dwelling,Примитивное жилище животных
+primitive_dwelling,Примитивное жилище
+primitive_medicine,Примитивная медицина
+primitive_school_description,Используется для зарабатывания очков знаний
+priority,Приоритет
+production,Производство
+production_limit,Лимит производства
+productivity,Продуктивность
+progress,Прогресс
+projectile_speed,Скорость снаряда
+protects_against_low_temperatures,Защищает от низких температур
+rain,Дождь
+raisin,Изюм
+raisin_buns,Булочка с изюмом
+ranching,Животноводство
+range_damage,Дальний урон
+ration,Рацион
+raw_fish,Сырая рыба
+raw_meat,Сырое мясо
+raw_skin,Сырая шкура
+recharge_time,Время перезарядки
+recipe,Рецепт
+recipes,Рецепты
+remove_equipment,Снять экипировку
+rename,Переименовать
+repeat,Повтор
+repeat_until_production_limits_are_reached,Повторять до установленных лимитов производства
+required,Требуется
+required_technology,Требуемая технология
+resource,Ресурс
+resources,Ресурсы
+rest,Отдых
+result,Результат
+resume,Продолжить
+return_to_the_future,Вернуться в будущее
+right_click,Правый клик
+satiety,Сытость
+save,Сохранить
+season,Сезон
+seeds,Семена
+selling,Продажа
+settlement,Поселение
+settler_corpse,Труп поселенца
+settlers,Поселенцы
+sheaf_of_barley,Сноп ячменя
+sheep,Овца
+shelf_life,Срок хранения
+shelf_life_of_products,Срок хранения продуктов
+show_resource_in_the_general_list,Показывать ресурс в общем списке
+side_item,Побочный предмет
+skin_drying_rack,Сушилка для шкур
+skin_tent,Хижина из шкур
+skins_outfit,Одежда из шкур
+slaughter,Забить
+sleep,Сон
+sleeping,Сон
+sleeping_on_the_ground,Сон на земле
+sling,Праща
+soil,Почва
+sound_volume,Громкость звука
+sowing,Посев
+spawn_time,Время спавна
+speed,Скорость
+spinning,Прядение
+spinning_wheel,Прялка
+spoilage_rate,Скорость порчи
+spoiled,Испорчен
+spring,Весна
+stick_hut,Хижина из палок
+stockpile,Хранилище
+stone,Камень
+stone_axe,Каменные топор
+stone_deposit,Залежь камня
+stone_floor,Каменный пол
+stone_harpoon,Каменный гарпун
+stone_hoe,Каменная мотыга
+stone_pick,Каменная кирка
+stone_pieces,Кусочки камня
+stone_sickle,Каменный серп
+stone_spear,Каменное копье
+stone_tools,Каменные инструменты
+stone_wall,Каменная стена
+stopped_due_to,Остановлен из-за: {0}
+storage,Хранилище
+stored,Хранится
+strong,Сильный
+summer,Лето
+supplying,Доставка
+tailors_workshop,Мастерская портного
+tannery,Дубильня
+tanning,Дубление
+tarpan,Тарпан
+technologies,Технологии
+temperature,Температура
+the_settlers_are_freezing,Поселенцы замерзают
+the_settlers_are_starving,Поселенцы голодают
+the_settlers_are_unhappy,Поселенцы несчастливы
+thresher,Молотилка
+thresher_description,"Используется для обмолота растений, чтобы отделить семена от сена"
+threshing_floor,Гумно
+threshing_floor_description,"Используется для массового обмолота растений 
+животными, чтобы отделить семена от сена"
+time,Время
+time_machine,Машина времени
+time_machine_description,Устройство для путешествий во времени
+tin_deposit,Залежь олова
+tin_ore,Оловянная руда
+to_do_the_job_of_x_you_need_tools,Для выполнения работы {0} нужны инструменты
+tool_type,Тип инструмента
+tools,Инструменты
+torch,Факел
+torch_description,Используется для освещения пространства
+total_speed,Общая скорость
+trade,Торговать
+trading,Торговля
+trading_post,Торговая лавка
+trading_post_assortment_update,Обновился ассортимент торговых лавок!
+trading_post_description,Позволяет покупать и продавать товары. Обновляет свой ассортимент раз в сутки
+travel_speed,Скорость перемещения
+treadmill,Мускульный привод
+treadmill_description,Преобразует энергию животных и поселенцев в механическую энергию
+turn_off_music,Выключить музыку
+turn_on_music,Включить музыку
+unassign_from,Открепить от {0}
+unfired_pot,Необожженный горшок
+used_for_automated_grinding_of_grain,Используется для автоматического помола зерна
+used_for_coal_production,Используется для производства угля
+used_for_cooking,Используется для приготовления пищи
+used_for_drying_adobe,Используется для сушки самана
+used_for_drying_food,Используется для сушки еды
+used_for_drying_skins,Используется для сушки шкур
+used_for_firing_ceramic_products,Используется для обжига керамических изделий
+used_for_fishing,Используется для ловли рыбы
+used_for_forging_copper_and_bronze_tools,Используется для ковки медных и бронзовых инструментов
+used_for_forging_iron_tools,Используется для ковки железных инструментов
+used_for_growing_plants,Используется для выращивания растений
+used_for_mining,Используется для добычи полезных ископаемых
+used_for_quick_cooking,Используется для быстрого приготовления пищи
+used_for_quick_grinding_of_grain,Используется для быстрого помола зерна
+used_for_spinning_yarn,Используется для прядения пряжи
+used_for_storing_resources,Используется для хранения ресурсов
+used_for_tanning_skins,Используется для дубления шкур
+used_to_bury_the_dead,Используется для захоронения умерших
+used_to_collect_water,Используется для сбора воды
+used_to_create_advanced_tools,Используется для создания продвинутых инструментов
+used_to_create_primitive_tools,Используется для создания примитивных инструментов
+used_to_cross_water,Используется для пересечения воды
+used_to_crushing_resources,Используется для дробления ресурсов
+used_to_ferment_foods,Используется для ферментирования продуктов
+used_to_grinding_and_crushing_resources,Используется для измельчения и дробления ресурсов
+used_to_make_clothes,Используется для создания одежды
+used_to_smelting_metals_from_its_ores,Используется для выплавки металлов из руд
+used_to_weave_cloth,Используется для изготовления тканей
+value,Цена
+view_settler,Посмотреть поселенца
+vomiting,Рвота
+wall,Стена
+wall_description,"Строение, служащее для создания непроходимого заграждения"
+walls,Стены
+warm_clothing,Тёплая одежда
+warm_fur_clothes,Теплая меховая одежда
+warm_knitted_clothes,Теплая вязаная одежда
+warm_place,Теплое место
+warp_weighted_loom,Warp-weighted loom
+was_killed_by,{0} был убит {1}
+water_gathering_place,Место сбора воды
+weapon,Оружие
+weaving,Ткачество
+well,Колодец
+wild_bee_hive,Дикий пчелиный улей
+wind,Ветер
+windmill,Ветряная мельница
+windmill_description,Преобразует энергию ветра в механическую энергию
+windowed,Оконный режим
+winter,Зима
+winter_cold,Зимний холод
+wolf,Волк
+wolf_domestication,Одомашнивание волка
+wood,Древесина
+wood_pieces,Кусочки дерева
+woodcutting,Рубка
+wooden_cart,Деревянная тележка
+wooden_gate,Деревянные ворота
+wooden_harpoon,Деревянный гарпун
+wooden_plow,Деревянная соха
+wooden_spear,Деревянное копье
+wool,Шерсть
+wool_cloth,Шерстяная ткань
+wool_clothing,Шерстяная одежда
+wool_yarn,Шерстяная пряжа
+work,Работа
+workers,Рабочие
+workshop,Мастерская
+world_name,Наименование мира
+world_settings,Настройки мира
+world_size,Размер мира
+world_with_that_name_already_exists,Мир с таким именем уже существует
+woven_clothing,Тканая одежда
+x_died_from_the_cold,{0} умер от холода
+x_died_of_old_age,{0} умер от старости
+x_died_of_starvation,{0} умер от голода
+x_got_the_y_effect,{0} получил эффект {1}
+x_is_already_assigned_to_another_hut,{0} уже назначен к другой хижине
+x_is_already_assigned_to_this_hut,{0} уже назначен к этой хижине
+yarn,Пряжа
+сhop_automatically,Срубить автоматически
+сhop_automatically_description,Автоматически срубить растение после полного произрастания
+сut_automatically_description,Автоматически срезать растение после полного произрастания

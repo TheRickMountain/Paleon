@@ -1,0 +1,42 @@
+{
+  "Items": [
+    "cooked_meat",
+    "cooked_fish",
+    "raw_fish",
+    "raw_meat",
+    "grape",
+    "fiber",
+    "clay",
+    "stone",
+    "wood",
+    "iron_ore",
+    "copper_ore",
+    "tin_ore",
+    "barley_seeds",
+    "pea_seeds",
+    "hay",
+    "wooden_spear",
+    "wooden_harpoon",
+    "skins_outfit",
+    "fur_cape",
+    "dry_skin",
+    "raw_skin",
+    "honeycomb",
+    "knowledge_points"
+  ],
+  "Buildings": [
+    "stockpile",
+    "crafting_place",
+    "tailors_workshop",
+    "hearth",
+    "stone_path_surface",
+    "dirt_path_surface",
+    "skin_dryer",
+    "grave",
+    "fishing_place",
+    "skin_tent",
+    "stick_hut",
+    "knowledge_table",
+    "torch"
+  ]
+}

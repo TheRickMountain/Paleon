@@ -1,0 +1,636 @@
+{
+  "name_key": "clay_oven",
+  "description_key": "used_for_quick_cooking",
+  "width": 2,
+  "height": 2,
+  "type": "Crafter",
+  "category": "Food",
+  "animated": true,
+  "cloneable": true,
+  "rotatable": false,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 25,
+  "smokeGenerator": {
+    "x": 16,
+    "y": 11
+  },
+  "crafter": {
+    "laborType": "Cook",
+    "autocrafter": false,
+    "recipes": [
+      {
+        "id": 1000,
+        "main_item": "pemmican",
+        "time": 50,
+        "result": [
+          {
+            "item": "pemmican",
+            "weight": 1
+          }
+        ],
+        "ingredients":
+        [
+          {
+            "item": "dry_meat",
+            "weight": 1
+          },
+          {
+            "item": "animal_fat",
+            "weight": 1
+          },
+          {
+            "item": "grape",
+            "weight": 1
+          },
+          {
+            "item": "wood",
+            "weight": 2
+          }
+        ]
+      },
+      {
+        "id": 1001,
+        "main_item": "pemmican",
+        "time": 50,
+        "result": [
+          {
+            "item": "pemmican",
+            "weight": 1
+          }
+        ],
+        "ingredients":
+        [
+          {
+            "item": "dry_meat",
+            "weight": 1
+          },
+          {
+            "item": "animal_fat",
+            "weight": 1
+          },
+          {
+            "item": "grape",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "id": 1020,
+        "main_item": "pemmican",
+        "time": 50,
+        "result": [
+          {
+            "item": "pemmican",
+            "weight": 1
+          }
+        ],
+        "ingredients":
+        [
+          {
+            "item": "dry_meat",
+            "weight": 1
+          },
+          {
+            "item": "animal_fat",
+            "weight": 1
+          },
+          {
+            "item": "grape",
+            "weight": 1
+          },
+          {
+            "item": "dry_manure_fuel",
+            "weight": 3
+          }
+        ]
+      },
+      {
+        "id": 1002,
+        "main_item": "pea_soup",
+        "time": 50,
+        "result": [
+          {
+            "item": "pea_soup",
+            "weight": 1
+          },
+          {
+            "item": "ceramic_pot",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "pot_of_water",
+            "weight": 1
+          },
+          {
+            "item": "pea_seeds",
+            "weight": 1
+          },
+          {
+            "item": "wood",
+            "weight": 2
+          }
+        ]
+      },
+      {
+        "id": 1003,
+        "main_item": "pea_soup",
+        "time": 50,
+        "result": [
+          {
+            "item": "pea_soup",
+            "weight": 1
+          },
+          {
+            "item": "ceramic_pot",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "pot_of_water",
+            "weight": 1
+          },
+          {
+            "item": "pea_seeds",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "id": 1019,
+        "main_item": "pea_soup",
+        "time": 50,
+        "result": [
+          {
+            "item": "pea_soup",
+            "weight": 1
+          },
+          {
+            "item": "ceramic_pot",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "pot_of_water",
+            "weight": 1
+          },
+          {
+            "item": "pea_seeds",
+            "weight": 1
+          },
+          {
+            "item": "dry_manure_fuel",
+            "weight": 3
+          }
+        ]
+      },
+      {
+        "id": 1004,
+        "main_item": "raisin_buns",
+        "time": 50,
+        "result": [
+          {
+            "item": "raisin_buns",
+            "weight": 1
+          },
+          {
+            "item": "ceramic_pot",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "pot_of_water",
+            "weight": 1
+          },
+          {
+            "item": "flour",
+            "weight": 1
+          },
+          {
+            "item": "grape",
+            "weight": 1
+          },
+          {
+            "item": "wood",
+            "weight": 2
+          }
+        ]
+      },
+      {
+        "id": 1005,
+        "main_item": "raisin_buns",
+        "time": 50,
+        "result": [
+          {
+            "item": "raisin_buns",
+            "weight": 1
+          },
+          {
+            "item": "ceramic_pot",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "pot_of_water",
+            "weight": 1
+          },
+          {
+            "item": "flour",
+            "weight": 1
+          },
+          {
+            "item": "grape",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "id": 1018,
+        "main_item": "raisin_buns",
+        "time": 50,
+        "result": [
+          {
+            "item": "raisin_buns",
+            "weight": 1
+          },
+          {
+            "item": "ceramic_pot",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "pot_of_water",
+            "weight": 1
+          },
+          {
+            "item": "flour",
+            "weight": 1
+          },
+          {
+            "item": "grape",
+            "weight": 1
+          },
+          {
+            "item": "dry_manure_fuel",
+            "weight": 3
+          }
+        ]
+      },
+      {
+        "id": 1006,
+        "main_item": "flatbread",
+        "time": 50,
+        "result": [
+          {
+            "item": "flatbread",
+            "weight": 1
+          },
+          {
+            "item": "ceramic_pot",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "pot_of_water",
+            "weight": 1
+          },
+          {
+            "item": "flour",
+            "weight": 1
+          },
+          {
+            "item": "wood",
+            "weight": 2
+          }
+        ]
+      },
+      {
+        "id": 1007,
+        "main_item": "flatbread",
+        "time": 50,
+        "result": [
+          {
+            "item": "flatbread",
+            "weight": 1
+          },
+          {
+            "item": "ceramic_pot",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "pot_of_water",
+            "weight": 1
+          },
+          {
+            "item": "flour",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "id": 1017,
+        "main_item": "flatbread",
+        "time": 50,
+        "result": [
+          {
+            "item": "flatbread",
+            "weight": 1
+          },
+          {
+            "item": "ceramic_pot",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "pot_of_water",
+            "weight": 1
+          },
+          {
+            "item": "flour",
+            "weight": 1
+          },
+          {
+            "item": "dry_manure_fuel",
+            "weight": 3
+          }
+        ]
+      },
+      {
+        "id": 1008,
+        "main_item": "cheese",
+        "time": 50,
+        "result": [
+          {
+            "item": "cheese",
+            "weight": 1
+          },
+          {
+            "item": "ceramic_pot",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "pot_of_milk",
+            "weight": 1,
+            "show": false
+          },
+          {
+            "item": "wood",
+            "weight": 2
+          }
+        ]
+      },
+      {
+        "id": 1009,
+        "main_item": "cheese",
+        "time": 50,
+        "result": [
+          {
+            "item": "cheese",
+            "weight": 1
+          },
+          {
+            "item": "ceramic_pot",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "pot_of_milk",
+            "weight": 1,
+            "show": false
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "id": 1016,
+        "main_item": "cheese",
+        "time": 50,
+        "result": [
+          {
+            "item": "cheese",
+            "weight": 1
+          },
+          {
+            "item": "ceramic_pot",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "pot_of_milk",
+            "weight": 1,
+            "show": false
+          },
+          {
+            "item": "dry_manure_fuel",
+            "weight": 3
+          }
+        ]
+      },
+      {
+        "id": 1010,
+        "main_item": "cooked_meat",
+        "time": 30,
+        "result": [
+          {
+            "item": "cooked_meat",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "raw_meat",
+            "weight": 1,
+            "show": false
+          },
+          {
+            "item": "wood",
+            "weight": 2
+          }
+        ]
+      },
+      {
+        "id": 1011,
+        "main_item": "cooked_meat",
+        "time": 30,
+        "result": [
+          {
+            "item": "cooked_meat",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "raw_meat",
+            "weight": 1,
+            "show": false
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "id": 1015,
+        "main_item": "cooked_meat",
+        "time": 30,
+        "result": [
+          {
+            "item": "cooked_meat",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "raw_meat",
+            "weight": 1,
+            "show": false
+          },
+          {
+            "item": "dry_manure_fuel",
+            "weight": 3
+          }
+        ]
+      },
+      {
+        "id": 1012,
+        "main_item": "cooked_fish",
+        "time": 30,
+        "result": [
+          {
+            "item": "cooked_fish",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "raw_fish",
+            "weight": 1,
+            "show": false
+          },
+          {
+            "item": "wood",
+            "weight": 2
+          }
+        ]
+      },
+      {
+        "id": 1013,
+        "main_item": "cooked_fish",
+        "time": 30,
+        "result": [
+          {
+            "item": "cooked_fish",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "raw_fish",
+            "weight": 1,
+            "show": false
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "id": 1014,
+        "main_item": "cooked_fish",
+        "time": 30,
+        "result": [
+          {
+            "item": "cooked_fish",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "raw_fish",
+            "weight": 1,
+            "show": false
+          },
+          {
+            "item": "dry_manure_fuel",
+            "weight": 3
+          }
+        ]
+      }
+    ]
+  },
+  "lightEmitter": {
+    "radius": 150
+  },
+  "texture": {
+    "name": "oven",
+    "width": 32,
+    "height": 35
+  },
+  "walkable_pattern": [
+    [
+      true,true
+    ],
+    [
+      true,true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,false
+    ],
+    [
+      true,true
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A","A"
+    ],
+    [
+      "A","A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "clay",
+      "weight": 4
+    }
+  ]
+}

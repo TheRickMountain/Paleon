@@ -1,0 +1,137 @@
+{
+  "name_key": "bloomery",
+  "description_key": "used_to_smelting_metals_from_its_ores",
+  "width": 2,
+  "height": 2,
+  "type": "Crafter",
+  "category": "Metallurgy",
+  "animated": true,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 35,
+  "smokeGenerator": {
+    "x": 19,
+    "y": -12
+  },
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": false,
+    "recipes": [
+      {
+        "main_item": "copper",
+        "time": 125,
+        "result": [
+          {
+            "item": "copper",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "crushed_copper_ore",
+            "weight": 2
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "bronze",
+        "time": 150,
+        "result": [
+          {
+            "item": "bronze",
+            "weight": 2
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "crushed_copper_ore",
+            "weight": 3
+          },
+          {
+            "item": "crushed_tin_ore",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 2
+          }
+        ]
+      },
+      {
+        "main_item": "iron_bloom",
+        "time": 175,
+        "result": [
+          {
+            "item": "iron_bloom",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "crushed_iron_ore",
+            "weight": 2
+          },
+          {
+            "item": "charcoal",
+            "weight": 4
+          }
+        ]
+      }
+    ]
+  },
+  "lightEmitter": {
+    "radius": 100
+  },
+  "texture": {
+    "name": "bloomery",
+    "width": 32,
+    "height": 48
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false
+    ],
+    [
+      false,
+      true
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "clay",
+      "weight": 4
+    },
+    {
+      "item": "leather",
+      "weight": 1
+    }
+  ]
+}

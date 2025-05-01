@@ -1,0 +1,42 @@
+{
+  "name_key": "dirt_path",
+  "description_key": "allows_creatures_to_move_faster",
+  "width": 1,
+  "height": 1,
+  "type": "Surface",
+  "category": "Floor",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 95,
+  "constructionTime": 5,
+  "toolRequired": false,
+  "connectWithOtherBlocks": false,
+  "texture": {
+    "name": "dirt_path",
+    "width": 16,
+    "height": 16
+  },
+  "ingredients": [],
+  "ground_pattern": [
+    [
+      "J"
+    ]
+  ],
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "SurfaceData":
+  {
+    "Id": 0
+  }
+}

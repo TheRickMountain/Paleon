@@ -1,0 +1,76 @@
+{
+  "name_key": "charcoal_kiln",
+  "description_key": "used_for_coal_production",
+  "width": 2,
+  "height": 2,
+  "type": "Crafter",
+  "category": "Metallurgy",
+  "animated": true,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 25,
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": true,
+    "recipes": [
+      {
+        "main_item": "charcoal",
+        "time": 75,
+        "result": [
+          {
+            "item": "charcoal",
+            "weight": 2
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wood",
+            "weight": 3
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "clay_charcoal_kiln",
+    "width": 32,
+    "height": 32
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false
+    ],
+    [
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A","A"
+    ],
+    [
+      "A","A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "clay",
+      "weight": 4
+    }
+  ]
+}

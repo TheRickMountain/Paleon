@@ -1,0 +1,74 @@
+{
+  "name_key": "manure_drying_area",
+  "description_key": "manure_drying_area_description",
+  "width": 2,
+  "height": 2,
+  "type": "Crafter",
+  "category": "Production",
+  "animated": true,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 15,
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": true,
+    "recipes": [
+      {
+        "main_item": "dry_manure_fuel",
+        "time": 900,
+        "result": [
+          {
+            "item": "dry_manure_fuel",
+            "weight": 4
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "manure",
+            "weight": 4,
+            "show": false
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "manure_drying_area",
+    "width": 32,
+    "height": 32
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false
+    ],
+    [
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": []
+}

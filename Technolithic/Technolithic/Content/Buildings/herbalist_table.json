@@ -1,0 +1,63 @@
+{
+  "name_key": "herbalist_table",
+  "description_key": "herbalist_table_description",
+  "width": 1,
+  "height": 1,
+  "type": "Crafter",
+  "category": "Medicine",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 10,
+  "crafter": {
+    "laborType": "Medicine",
+    "autocrafter": false,
+    "recipes": [
+      {
+        "main_item": "food_poisoning_cure",
+        "time": 35,
+        "result": [
+          {
+            "item": "food_poisoning_cure",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "honeycomb",
+            "weight": 1
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "herbalist_table",
+    "width": 16,
+    "height": 18
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "stone",
+      "weight": 1
+    }
+  ]
+}

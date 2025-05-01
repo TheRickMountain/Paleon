@@ -1,0 +1,47 @@
+{
+  "name_key": "bridge",
+  "description_key": "used_to_cross_water",
+  "width": 1,
+  "height": 1,
+  "type": "Surface",
+  "category": "Floor",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 100,
+  "constructionTime": 10,
+  "toolRequired": false,
+  "connectWithOtherBlocks": false,
+  "texture": {
+    "name": "wooden_bridge",
+    "width": 16,
+    "height": 16
+  },
+  "ingredients": [
+    {
+      "item": "wood",
+      "weight": 2
+    }
+  ],
+  "ground_pattern": [
+    [
+      "I"
+    ]
+  ],
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "SurfaceData":
+  {
+    "Id": 2
+  }
+}

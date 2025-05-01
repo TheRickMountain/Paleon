@@ -1,0 +1,38 @@
+{
+  "name_key": "destruct_surface",
+  "description_key": "destruct_surface",
+  "width": 1,
+  "height": 1,
+  "type": "DestructSurface",
+  "category": "Floor",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 100,
+  "constructionTime": 5,
+  "toolRequired": false,
+  "connectWithOtherBlocks": false,
+  "texture": {
+    "name": "destruct_surface",
+    "width": 16,
+    "height": 16
+  },
+  "ingredients": [],
+  "ground_pattern": [
+    [
+      "M"
+    ]
+  ],
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ]
+}

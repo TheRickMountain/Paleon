@@ -1,0 +1,50 @@
+{
+  "name_key": "torch",
+  "description_key": "torch_description",
+  "width": 1,
+  "height": 1,
+  "type": "Lighter",
+  "category": "Settlement",
+  "animated": true,
+  "cloneable": true,
+  "rotatable": false,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": -1,
+  "constructionTime": 10,
+  "lightEmitter": {
+    "radius": 200
+  },
+  "texture": {
+    "name": "torch",
+    "width": 16,
+    "height": 16
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "wood",
+      "weight": 1
+    }
+  ],
+  "fuelConsumer": {
+    "fuel": [
+      "wood"
+    ],
+    "energy_consumption": 0.02
+  }
+}

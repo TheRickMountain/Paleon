@@ -1,0 +1,587 @@
+key,translation
+None,None
+Pick,Кайло
+a_wild_animal_is_about_to_attack_your_settlement,Дикa тварина збирається напасти на ваше поселення!
+a_wild_bee_hive_has_appeared_near_you,Поряд з вами з'явився дикий бджолиний вулик
+accept,Погодитись
+achievement_unlocked,Нове досягнення '{0}'!
+achievements,Досягнення
+achievements_unlocked_x_slash_y,Отримано досягнень {0}/{1}
+achv_desc_ARE_YOU_SURE_IT_DOESNT_STINK,Cook food using dried manure as fuel
+achv_desc_BACK_TO_THE_FUTURE,Start the time machine and go back to the future
+achv_desc_BEST_FRIENDS_FOREVER,Send a settler with a dog to hunt
+achv_desc_CITY,Have 60 people or more in the settlement
+achv_desc_DENIED,Refuse to accept a nomad into the settlement
+achv_desc_ENGINE_OF_PROGRESS,Research all technologies
+achv_desc_FIRST_BREAD,Bake your first flatbread
+achv_desc_FIRST_BRONZE,Smelt your first bronze
+achv_desc_FIRST_CERAMIC,Fire your first ceramic pot
+achv_desc_FIRST_COPPER,Smelt your first copper
+achv_desc_FIRST_IRON,Forge your first iron
+achv_desc_HOMEMADE_PRODUCTION,Sell 10 units of bread
+achv_desc_I_SURVIVED_100_DAYS,Survive 100 days with at least one settler
+achv_desc_MULTITOOL,One of the settlers must equip at least 3 tools
+achv_desc_TRIBE,Have 15 people or more in the settlement
+achv_desc_VILLAGE,Have 30 people or more in the settlement
+achv_name_ARE_YOU_SURE_IT_DOESNT_STINK,Are you sure it doesn't stink?
+achv_name_BACK_TO_THE_FUTURE,Back to the future
+achv_name_BEST_FRIENDS_FOREVER,Best Friends Forever
+achv_name_CITY,City
+achv_name_DENIED,Denied
+achv_name_ENGINE_OF_PROGRESS,Engine of progress
+achv_name_FIRST_BREAD,First bread
+achv_name_FIRST_BRONZE,First bronze
+achv_name_FIRST_CERAMIC,First ceramic
+achv_name_FIRST_COPPER,First copper
+achv_name_FIRST_IRON,First iron
+achv_name_HOMEMADE_PRODUCTION,Homemade production
+achv_name_I_SURVIVED_100_DAYS,I survived 100 days
+achv_name_MULTITOOL,Multitool
+achv_name_TRIBE,Tribe
+achv_name_VILLAGE,Village
+adult,Дорослий
+age,Вік
+agriculture,Землеробство
+alcoholic_drinks,Алкогольні напої
+all,Усі
+allows_creatures_to_move_faster,Дозволяє швидше пересуватись жителям
+animal_fat,Тваринний жир
+animal_female,Самка
+animal_filter,Фільтр тваринок
+animal_male,Самець
+animal_pen,Загін для тваринок
+animal_pen_description,Використовується для відпочинку та годування тваринок
+animals,Тваринки
+animals_domestication,Одомашнення тварин
+assign_a_pet,Призначити вихованця
+assign_a_settler,Призначити поселенця
+assign_to,Закріпити за {0}
+assign_x_to_this_hut,Призначить {0} до цього будинку
+assigned_to,Закріплений за {0}
+attack,Атакувати
+aurochs,Тур
+automatically_mine_spawned_deposits,Автоматично добувати поклади
+autumn,Осінь
+back,Повернутись
+barley,Ячмінь
+barley_seeds,Зерно ячменю
+barn,Загін
+base_speed,Базова швидкість
+basket,Кошик
+bee_hive,Бджолиний вулик
+bee_hive_description,Виробляє мід в 2 рази ефективніше ніж дикий вулик
+beekeeping,Бджолярство
+beeswax,Бджолиний віск
+bloomery,Доменна піч
+boar,Кабан
+bone,Кістка
+bone_harpoon,Костяний гарпун
+bone_sickle,Костяний серп
+bone_spear,Кістяний спис
+bone_tools,Кісткові інструменти
+bow,Лук
+brewing,Пивоваріння
+brick,Цегла
+brick_floor,Цегляна підлога
+brick_wall,Цегляна стіна
+bridge,Міст
+bronze,Бронза
+bronze_age,Бронзовий вік
+bronze_axe,Бронзова сокира
+bronze_harpoon,Бронзовий гарпун
+bronze_hoe, Бронзова мотика
+bronze_pick,Бронзове кайло
+bronze_sickle,Бронзовий серп
+bronze_smelting,Виплавлення бронзи
+bronze_spear,Бронзовий спис
+build_irrigation_canal,Побудувати орошувальний канал
+building,Будівництво
+bunch_of_peas,Зв'язування гороху
+burial,Поховання
+buying,Покупка
+calm,Безвітряно
+cancel,Відмінити
+capacity,Місткість
+cattle,Корова
+causes,Викликає
+ceramic_pot,Керамічний горщик
+chainmail,Кільчуга
+chalcolithic,Халколіт
+chance,Шанс
+charcoal,Вугілля
+charcoal_kiln,Вуглевипалювальна піч
+cheese,Сир
+cheesemaking,Сироваріння
+child,Дитина
+chop,Зрубати
+chop_completely,Зрубати повністю
+chop_now,Зрубати вже
+clay,Глина
+clay_barn,Глиняна комора
+clay_deposit,Родовище глини
+clay_hut,Глиняна хатинка
+clay_oven,Глиняна піч
+clean_up_manure,Прибрати гній
+clone,Клонувати
+close,Зачинити
+cloth,Тканина
+clothes,Одяг
+come_here,Піти сюди
+command_line,командна лінія
+connected,Під'єднаний
+consumption,Споживання
+containers,Контейнери
+cooked_fish,Смажена риба
+cooked_meat,Смажене мясо
+cooking,Куховарство
+copper,Мідь
+copper_axe,Мідна сокира
+copper_deposit,Родовище міді
+copper_harpoon,Мідний гарпун
+copper_hoe,Мідна мотика
+copper_ore,Мідна руда
+copper_pick,Мідне кайло
+copper_reaper,Мідна жатка
+copper_sickle,Мідний серп
+copper_smelting,Виплавлення міді
+copper_smithy,Мідна кузня
+copper_spear,Мідний спис
+copy,Копіювати
+copy_settings,Копіювати налаштування
+cozy_hut,Затишна хатина
+cozy_tent,Затишне укриття
+crafter,Крафтер
+crafting,Виробництво
+create,Створити
+credits,Розробники
+crossbow,Арбалет
+crushed_copper_ore,Подрібн.мідна руда
+crushed_iron_ore,Подрібн.залізна руда
+crushed_tin_ore,Подрібн.оловяна руда
+culinary_ingredients,Кулінарні інгредієнти
+cures,Лікує
+cut,Зрізати
+cut_automatically,Зрізати автоматично
+cut_completely,Зрізати повністю
+cut_now,Зрізати вже
+dandelion,Кульбабка
+day,День
+days,днів
+days_until_aging_x,Днів до дорослішання: {0}
+days_until_death_x,Днів до смерті: {0}
+decline,Відмінити
+defense,Захист
+depends_on_wind_speed,Залежить від швидкості вітру
+deposit,Родовище
+destruct,Зруйнувати
+destruct_irrigation_canal,Зруйнувати орошувальний канал
+destruct_surface,Зруйнувати покриття
+dirt_path,Грунтова стежина
+dirty_animal_pen,Брудний загін
+disable_all,Заборонити все
+disband,Розпустити
+disconnected,Від'єднаний
+dog,Собака
+dolmen,Дольмен
+domesticate,Приручити
+drop_spindle,Веретено
+dry_fish,Сушена риба
+dry_manure_fuel,Кізяк
+dry_meat,Сушене мясо
+dry_skin,Сушена шкіра
+durability,Міцність
+duration_x_hours,Тривалість: {0:0.0} годин
+duration_x_minutes,Тривалість: {0} хвилин
+edge_scrolling_camera,Прокрутка камери по краю екрану
+effects,Ефекти
+efficiency,Ефективність
+enable_all,Дозволити все
+energy,Енергія
+energy_available,Доступна енергія
+energy_consumer,Споживач живлення
+energy_consumption,Споживання енергії
+energy_output,Вироблення енергії
+energy_production,Виробництво енергії
+energy_source,Джерело живлення
+energy_type,Тип енергії
+equip,Екіпірувати
+equipment,Екіпірування
+exit_to_desktop,Вийти на робочий стіл
+exit_to_main_menu,Вийти в головне меню
+experience_points,Досвід
+farm_plot,Фермерська ділянка
+farming,Землеробство
+felling,Вирубка
+fermenting_pot,Казан для бродіння
+fertilize,Удобрювати
+fertilizer,Добриво
+fertilizers,Добриво
+fertilizing,Добриво
+fiber,Волокно
+fish_trap,Пастка для риб
+fishing,Риболовля
+fishing_place,Місце для рибальства
+fishing_rod,Вудочка
+flatbread,Паляниця
+flax,Льон
+floor,Підлога
+flour,Мука
+flowers,Квіти
+food,Їжа
+food_dryer,Сушарка для їжі
+food_drying,Сушіння їжі
+food_poisoning,Харчове отруєння
+food_poisoning_cure,Ліки від харчового отруєння
+food_storage_hut,Комора для зберігання їжі
+food_storage_hut_description,Використовується для зберігання їжі. Зберігає їжу свіжою на протязі довшого часу
+free_up,Звільнить
+freshness,Свіжість
+fuel,Паливо
+fullscreen,Повноекранний режим
+future,Майбутнє
+game_finished,Гра завершена
+game_menu,Меню
+gas,Gas
+gather,Збирати
+gathering,Збираня
+grain_processing,Обробка зерна
+grape,Виноград
+grape_bush,Кущ винограду
+grave,Могилка
+growth_progress,Прогрес росту
+growth_speed,Швидкість росту
+happiness,Щастя
+harvesting,Збирання врожаю
+has_joined_your_settlement,{0} приєднався до вашого поселення
+hauling,Транспортування
+hay,Сіно
+haystack,Стіг сіна
+haystack_description,Використовується для зберігання сіна
+health,Здоров'я
+hearth,Ватра
+herbalist_table,Стіл травника
+herbalist_table_description,Використовується для створення примітивних ліків
+honey,Мід
+honeycomb,Медовий стільник
+horse,Кінь
+hours,Годин
+hunger,Голод
+hunt,Полювати
+hunting,Мисливство
+hut,Хатина
+information,Інформація
+ingredients,Інгредієнти
+inventory,інвентар
+iron,Залізо
+iron_age,Залізний вік
+iron_axe,Залізна сокира
+iron_bloom,Криця
+iron_deposit,Родовище заліза
+iron_harpoon,Залізний гарпун
+iron_hoe,Залізна мотика
+iron_ore,Залізна руда
+iron_pick,Залізне кайло
+iron_sickle,Залізний серп
+iron_smelting,Виплавлення заліза
+iron_smithy,Залізна кузня
+iron_spear,Залізний спис
+irrigate,Зрошувати
+irrigation,Зрошення
+irrigation_canals,Орошувальні канали
+items,Предмети
+kiln,Піч для випалювання
+kinetic,Kinetic
+knowledge,Знання
+knowledge_points,Знання
+knowledge_table,Стіл знань
+language,Мова
+language_change_warning,Будь ласка перезавантажте гру щоб зміни набрали чинності
+language_name,Українська
+learning,Навчання
+leather,Шкіра
+leather_outfit,Шкіряний одяг
+left_click,Лівий клік
+level,Рівень
+light,Легкий
+load_game,Завантажити гру
+low_light,Погана освітленість
+mammoth,Мамонт
+manure,Гній
+manure_drying_area,Місце для сушіння гною
+manure_drying_area_description,Використовується для сушіння гною
+mealing_stone,Зернотертка
+mealing_stone_description,Найдавніший пристрій для помелу зерна
+mechanical_crusher,Механічний подрібнювач
+mechanical_millstone,Механічний жорнов
+mechanisms,Механізми
+medicine,Ліки
+melee_damage,Пошкодження в ближньому бою
+mesolithic,Мезоліт
+metallurgy,Металургія
+millstone,Жорна
+mine,Видобувати
+mine_description,Використовується для видобутку ресурсів із шахт. Генерує поклади навколо себе
+mine_mine,Шахта
+mining,Гірнича справа
+moderate,Помірний
+moisture,Вологість
+mortar_and_pestle,Ступка з товкачиком
+mouflon,Муфлон
+movement_speed,Швидкість переміщення
+mudbrick,Глиняна цегла
+mudbrick_dryer,Сушарка для саману
+mudbrick_floor,Саманна підлога
+mudbrick_hut,Саманна хатина
+mudbrick_wall,Соманна стіна
+music_volume,Гучність музики
+name,Назва
+neolithic,Неоліт
+new_game,Нова гра
+new_settlers,Нові поселенці
+new_settlers_arrived,Прибули нові жителі
+new_technologies_available,Доступні нові технології
+noria,Норія
+noria_description,Використовується для підйому води з колодязя та направлення її по зрошувальних каналах
+number_of_fish,Кількість риби
+number_of_uses,Кількість використань
+nutrition,Поживність
+oak,Дуб
+oil_lamp,Каганець
+oil_lamp_description,"Використовується для освітлення, використовує олії та тваринні жири як паливо"
+old,Старий
+open,Відчинити
+open_game_data_folder,Відкрити папку з даними гри
+oven,Піч
+paleolithic,Палеоліт
+palisade,Частокіл
+paste,Вставити
+pause,Пауза
+pea,Горох
+pea_seeds,Горохові насіння
+pea_soup,Гороховий суп
+peaceful_mode,Мирний режим
+peas,Горох
+pemmican,Пемікан
+per_day,за день
+pets,Вихованці
+pig,Свиня
+plant,Рослинка
+planting,Planting
+plowing,Оранка
+point_of_entry_to_a_space_which_is_enclosed_by_walls,Прохід в стіні що зачиняється
+pot_of_beer,Глечик з пивом
+pot_of_honey,Глечик з медом
+pot_of_mead,Глечик з медовухою
+pot_of_milk,Глечик з молоком
+pot_of_water,Глечик з водою
+pot_of_wine,Глечик з вином
+pottery,Гончарство
+pregnancy,Вагітність
+primitive_animal_dwelling,Примітивне житло для тваринок
+primitive_dwelling,Примітивне житло
+primitive_medicine,Примітивна медицина
+primitive_school_description,Використовується для здобування знань
+priority,Пріорітет
+production,Виробництво
+production_limit,Ліміт виробництва
+productivity,Продуктивність
+progress,Прогрес
+projectile_speed,Швидкість снаряду
+protects_against_low_temperatures,Захищає від низьких температур
+rain,Дощ
+raisin,Родзинки
+raisin_buns,Булочка з родзинками
+ranching,Скотарство
+range_damage,Пошкодження в бою на відстані
+ration,Раціон
+raw_fish,Сира риба
+raw_meat,Сире мясо
+raw_skin,Сира шкіра
+recharge_time,Час перезаряджання
+recipe,Рецепт
+recipes,Рецепти
+remove_equipment,Зняти екіпірування
+rename,Перейменувати
+repeat,Повторити
+repeat_until_production_limits_are_reached,Повторювати до досягнення встановлених лімітів виробництва
+required,Необхідно
+required_technology,Необхідна технологія
+resource,Ресурс
+resources,Ресурси
+rest,Відпочинок
+result,Результат
+resume,Продовжити
+return_to_the_future,Повернутись в майбутнє
+right_click,Правий клік
+satiety,Ситість
+save,Зберегти
+season,Пора року
+seeds,Сім'я
+selling,Продаж
+settlement,Поселення
+settler_corpse,Мрець
+settlers,Поселенці
+sheaf_of_barley,Сноп ячменю
+sheep,Вівця
+shelf_life,Термін придатності
+shelf_life_of_products,Строк зберігання продуктів
+show_resource_in_the_general_list,Показувати ресурс у загальному списку
+side_item,Побічний предмет
+skin_drying_rack,Сушарка для шкіри
+skin_tent,Хатинка з шкур
+skins_outfit,Шкіряний одяг
+slaughter,Забити
+sleep,Сон
+sleeping,Сон
+sleeping_on_the_ground,Сон на землі
+sling,Праща
+soil,Грунт
+sound_volume,Гучність звуку
+sowing,Посів
+spawn_time,Час спавна
+speed,Швидкість
+spinning,Прядіння
+spinning_wheel,Прядка
+spoilage_rate,Швидкість псування
+spoiled,Зіпсований
+spring,Весна
+stick_hut,Хатина з палиць
+stockpile,Склад
+stone,Камінь
+stone_axe,Камяна сокира
+stone_deposit,Родовище каміння
+stone_floor,Камяна підлога
+stone_harpoon,Камяний гарпун
+stone_hoe,Камяна мотика
+stone_pick,Камяне кайло
+stone_pieces,Шматочки каміння
+stone_sickle,Камяний серп
+stone_spear,Камяний спис
+stone_tools,Кам'яні інструменти
+stone_wall,Камяна стіна
+stopped_due_to,Зупинено через: {0}
+storage,Сховище
+stored,Зберігається
+strong,Сильний
+summer,Літо
+supplying,Постачання
+tailors_workshop,Кравецька майстерня
+tannery,Дубильня
+tanning,Вичинка
+tarpan,Тарпан
+technologies,Технології
+temperature,Температура
+the_settlers_are_freezing,Ваші жителі мерзнуть
+the_settlers_are_starving,Ваші жителі голодають
+the_settlers_are_unhappy,Ваші жителі нещасні
+thresher,Молотілка
+thresher_description,"Використовується для обмолоту рослин, щоб відокремити насіння від сіна"
+threshing_floor,Тік
+threshing_floor_description,"Використовується для масового обмолоту рослин 
+тваринами, щоб відокремити насіння від сіна"
+time,Час
+time_machine,Машина часу
+time_machine_description,Прилад для подорожей в часі
+tin_deposit,Родовище олова
+tin_ore,Оловяна руда
+to_do_the_job_of_x_you_need_tools,Для роботи {0} потрібні інструменти
+tool_type,Тип інструменту
+tools,Приладдя
+torch,Смолоскип
+torch_description,Використовується для освітлення простору
+total_speed,Загальна швидкість
+trade,Торгувати
+trading,Торгівля
+trading_post,Торгова лавка
+trading_post_assortment_update,Оновився асортимент торгових крамниць!
+trading_post_description,Дозволяє купувати та продавати товари. Оновлює свій асортимент разів на добу
+travel_speed,Швидкість переміщення
+treadmill,Мускульний привід
+treadmill_description,Перетворює енергію тварин і поселенців на механічну енергію
+turn_off_music,Вимкнути музику
+turn_on_music,Увімкнути музику
+unassign_from,Відкріпити від {0}
+unfired_pot,Unfired pot
+used_for_automated_grinding_of_grain,Використовується для автоматичного помолу зерна
+used_for_coal_production,Використовується для виготовлення вугілля
+used_for_cooking,Використовується для приготування їжі
+used_for_drying_adobe,Використовується для сушіння саману
+used_for_drying_food,Використовується для сушіння їжі
+used_for_drying_skins,Використовується для сушіння шкіри
+used_for_firing_ceramic_products,Використовується для випалювання керамічних виробів
+used_for_fishing,Використовується для рибальства
+used_for_forging_copper_and_bronze_tools,Використовується для виковування мідних та бронзових виробів
+used_for_forging_iron_tools,Використовується для кування залізних інструментів
+used_for_growing_plants,Використовується для вирощування рослинок
+used_for_mining,Використовується для добування корисних копалин
+used_for_quick_cooking,Використовується для швидкого приготування їжі
+used_for_quick_grinding_of_grain,Використовується для швидкого помолу зерна
+used_for_spinning_yarn,Використовується для прядіння пряжі
+used_for_storing_resources,Використовується для зберігання ресурсів
+used_for_tanning_skins,Використовується для дублення шкіри
+used_to_bury_the_dead,Використовується для поховання померлих
+used_to_collect_water,Використовується для збирання води
+used_to_create_advanced_tools,Використовується для створення продвинутых інструментів
+used_to_create_primitive_tools,Використовується для виготовлення примітивних інструментів
+used_to_cross_water,Використовується щоб перетнути водну перешкоду
+used_to_crushing_resources,Використовується для подрібнення ресурсів
+used_to_ferment_foods,Використовується для виготовлення методом бродіння
+used_to_grinding_and_crushing_resources,Використовується для подрібнення та розкришення ресурсів
+used_to_make_clothes,Використовується для створення одягу
+used_to_smelting_metals_from_its_ores,Використовується для виплавлення металів з руд
+used_to_weave_cloth,Використовується для виготовлення тканин
+value,Ціна
+view_settler,Оглянути поселенця
+vomiting,Блювота
+wall,Стіна
+wall_description,"Будова будівля, що служить для створення непрохідного загородження"
+walls,Стіни
+warm_clothing,Теплий одяг
+warm_fur_clothes,Теплий одяг з хутра
+warm_knitted_clothes,Теплий вязаний одяг
+warm_place,Тепле місце
+warp_weighted_loom,Warp-weighted loom
+was_killed_by,{0} був убитий {1}
+water_gathering_place,Місця для збирання води
+weapon,Зброя
+weaving,Ткацтво
+well,Колодязь
+wild_bee_hive,Дикий вулик бджіл
+wind,Вітер
+windmill,Вітряний млин
+windmill_description,Converts wind energy into mechanical energy
+windowed,Віконний режим
+winter,Зима
+winter_cold,Зимовий холод
+wolf,Вовк
+wolf_domestication,Приручення вовка
+wood,Деревина
+wood_pieces,Шматочки дерева
+woodcutting,Рубання
+wooden_cart,Деревяний візок
+wooden_gate,Дерев'яні ворота
+wooden_harpoon,Деревяний гарпун
+wooden_plow,Деревяний плуг
+wooden_spear,Деревяний спис
+wool,Вовна
+wool_cloth,Вовняна тканина
+wool_clothing,Вовняний одяг
+wool_yarn,Вовняна пряжа
+work,Робота
+workers,Робітники
+workshop,Майстерня
+world_name,Назва світу
+world_settings,Налаштування світу
+world_size,Розмір світу
+world_with_that_name_already_exists,Світ з таким ім'ям уже існує
+woven_clothing,Тканий одяг
+x_died_from_the_cold,{0} помер від холоду
+x_died_of_old_age,{0} помер від старості
+x_died_of_starvation,{0} помер з голоду
+x_got_the_y_effect,{0} отримав ефект {1}
+x_is_already_assigned_to_another_hut,{0} вже призначений до іншої хатини
+x_is_already_assigned_to_this_hut,{0} вже призначений до цієї хатини
+yarn,Пряжа
+сhop_automatically,Зрубати автоматично
+сhop_automatically_description,Автоматично зрубати рослинку після повного дозрівання
+сut_automatically_description,Автоматично зрізати рослинку після повного дозрівання

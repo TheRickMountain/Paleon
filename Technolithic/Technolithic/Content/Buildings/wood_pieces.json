@@ -1,0 +1,59 @@
+{
+  "name_key": "wood_pieces",
+  "description_key": "wood_pieces",
+  "width": 2,
+  "height": 2,
+  "type": "Deposit",
+  "category": "None",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": false,
+  "requireBuilding": false,
+  "destructible": false,
+  "movementSpeed": 50,
+  "constructionTime": 1,
+  "deposit": {
+    "stages": 1,
+    "depositMax": 4,
+    "dropPerCollect": 4,
+    "requiredToolType": "None",
+    "depositResource": "wood",
+    "miningTime": 20
+  },
+  "texture": {
+    "name": "wood_pieces",
+    "width": 32,
+    "height": 32
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false
+    ],
+    [
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": []
+}

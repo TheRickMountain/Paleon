@@ -1,0 +1,587 @@
+key,translation
+None,None
+Pick,Spitzhacke
+a_wild_animal_is_about_to_attack_your_settlement,Ein wildes Tier steht im Begriff
+a_wild_bee_hive_has_appeared_near_you,Ein wilder Bienenstock ist in der Nähe erschienen
+accept,Annehmen
+achievement_unlocked,New achievement '{0}'!
+achievements,Achievements
+achievements_unlocked_x_slash_y,Achievements unlocked {0}/{1}
+achv_desc_ARE_YOU_SURE_IT_DOESNT_STINK,Cook food using dried manure as fuel
+achv_desc_BACK_TO_THE_FUTURE,Start the time machine and go back to the future
+achv_desc_BEST_FRIENDS_FOREVER,Send a settler with a dog to hunt
+achv_desc_CITY,Have 60 people or more in the settlement
+achv_desc_DENIED,Refuse to accept a nomad into the settlement
+achv_desc_ENGINE_OF_PROGRESS,Research all technologies
+achv_desc_FIRST_BREAD,Bake your first flatbread
+achv_desc_FIRST_BRONZE,Smelt your first bronze
+achv_desc_FIRST_CERAMIC,Fire your first ceramic pot
+achv_desc_FIRST_COPPER,Smelt your first copper
+achv_desc_FIRST_IRON,Forge your first iron
+achv_desc_HOMEMADE_PRODUCTION,Sell 10 units of bread
+achv_desc_I_SURVIVED_100_DAYS,Survive 100 days with at least one settler
+achv_desc_MULTITOOL,One of the settlers must equip at least 3 tools
+achv_desc_TRIBE,Have 15 people or more in the settlement
+achv_desc_VILLAGE,Have 30 people or more in the settlement
+achv_name_ARE_YOU_SURE_IT_DOESNT_STINK,Are you sure it doesn't stink?
+achv_name_BACK_TO_THE_FUTURE,Back to the future
+achv_name_BEST_FRIENDS_FOREVER,Best Friends Forever
+achv_name_CITY,City
+achv_name_DENIED,Denied
+achv_name_ENGINE_OF_PROGRESS,Engine of progress
+achv_name_FIRST_BREAD,First bread
+achv_name_FIRST_BRONZE,First bronze
+achv_name_FIRST_CERAMIC,First ceramic
+achv_name_FIRST_COPPER,First copper
+achv_name_FIRST_IRON,First iron
+achv_name_HOMEMADE_PRODUCTION,Homemade production
+achv_name_I_SURVIVED_100_DAYS,I survived 100 days
+achv_name_MULTITOOL,Multitool
+achv_name_TRIBE,Tribe
+achv_name_VILLAGE,Village
+adult,Erwachsen
+age,Alter
+agriculture,Landwirtschaft
+alcoholic_drinks,Alkoholische Getränke
+all,Alle
+allows_creatures_to_move_faster,Erlaubt sich schneller fortzubewegen
+animal_fat,Tierfett
+animal_female,Weiblich
+animal_filter,Tierfilter
+animal_male,Männlich
+animal_pen,Tierpferch
+animal_pen_description,Zum Ausruhen und Füttern der Tiere
+animals,Tiere
+animals_domestication,Domestizierung von Tieren
+assign_a_pet,Assign a pet
+assign_a_settler,Assign a settler
+assign_to,Assign to {0}
+assign_x_to_this_hut,Assign {0} to this hut
+assigned_to,Assigned to {0}
+attack,Anrgiff
+aurochs,Auerochse
+automatically_mine_spawned_deposits,Automatischer Abbau von gespawnten Vorkommen
+autumn,Herbst
+back,Zurück
+barley,Gerste
+barley_seeds,Gerstensamen
+barn,Scheune
+base_speed,Basisgeschwindigkeit
+basket,Korb
+bee_hive,Bienenstock
+bee_hive_description,Produziert doppelt so viel Honig wie ein wilder Bienenstock
+beekeeping,Imkerei
+beeswax,Bienenwachs
+bloomery,Rennofen
+boar,Wildschwein
+bone,Knochen
+bone_harpoon,Knochenharpune
+bone_sickle,Knochensichel
+bone_spear,Knochenspeer
+bone_tools,Knochenwerkzege
+bow,Bogen
+brewing,Brauen
+brick,Ziegel
+brick_floor,Ziegelboden
+brick_wall,Ziegelmauer
+bridge,Brücke
+bronze,Bronze
+bronze_age,Bronzezeit
+bronze_axe,Bronzeaxt
+bronze_harpoon,Bronzeharpune
+bronze_hoe,Bronzehacke
+bronze_pick,Bronzespitzhacke
+bronze_sickle,Bronzesichel
+bronze_smelting,Bronze schmelzen
+bronze_spear,Bronzespeer
+build_irrigation_canal,Bewässerungskanal bauen
+building,Bauen
+bunch_of_peas,Bunch of peas
+burial,Beerdigung
+buying,Buying
+calm,Calm
+cancel,Abbrechen
+capacity,Kapazität
+cattle,Rind
+causes,Ursachen
+ceramic_pot,Keramikkrug
+chainmail,Kettenhemd
+chalcolithic,Chalkolithikum
+chance,Chance
+charcoal,Holzkohle
+charcoal_kiln,Holzkohleofen
+cheese,Käse
+cheesemaking,Käseherstellung
+child,Kind
+chop, Hacke
+chop_completely,Vollständig hacken
+chop_now,Jetzt hacken
+clay,Lehm
+clay_barn,Scheune aus Lehm
+clay_deposit,Lehmvorkommen
+clay_hut,Hütte aus Lehm
+clay_oven,Lehmofen
+clean_up_manure,Gülle beseitigen
+clone,Klonen
+close,Schließen
+cloth,Stoff
+clothes,Kleidung
+come_here,Komm her
+command_line,Befehlslinie
+connected,Verbunden
+consumption,Verbrauch
+containers,Behälter
+cooked_fish,Gekochter Fisch
+cooked_meat,Gekochtes Fleisch
+cooking,Kochen
+copper,Kupfer
+copper_axe,Kupferaxt
+copper_deposit,Kupfervorkommen
+copper_harpoon,Kupferharpune
+copper_hoe,Kupferhacke
+copper_ore,Kupfererz
+copper_pick,Kupferspitzhacke
+copper_reaper,Drescher aus Kupfer
+copper_sickle,Kupfersichel
+copper_smelting,Kuper schmelzen
+copper_smithy,Kupferschmiede
+copper_spear,Kupferspeer
+copy,Kopieren 
+copy_settings,Einstellungen kopieren
+cozy_hut,Cozy hut
+cozy_tent,Cozy tent
+crafter,Werkbank
+crafting,Fertigung
+create,Erstellen
+credits,Credits
+crossbow,Armbrust
+crushed_copper_ore,Zerkleinertes Kupfererz
+crushed_iron_ore,Zerkleinertes Eisenerz
+crushed_tin_ore,Zerkleinertes Zinnerz
+culinary_ingredients,Kulinarische Zutaten
+cures,Heilmittel
+cut, Schneide
+cut_automatically,Automatisch schneiden
+cut_completely,Vollständig schneiden
+cut_now,Jetzt schneiden
+dandelion,Löwenzahn
+day,Tag
+days,Tage
+days_until_aging_x,Days until aging: {0}
+days_until_death_x,Days until death: {0}
+decline,Ablehnen
+defense,Verteidigung
+depends_on_wind_speed,Depends on wind speed
+deposit,Vorkommen
+destruct,Zerstören
+destruct_irrigation_canal,Bewässerungskanal zerstören
+destruct_surface,Destruct surface
+dirt_path,Trampelpfad
+dirty_animal_pen,Dirty animal pen
+disable_all,Alles deaktivieren
+disband,Auflösen
+disconnected,Getrennt
+dog,Hund
+dolmen,Dolmen
+domesticate,Domestizieren
+drop_spindle,Handspindel
+dry_fish,Trockenfisch
+dry_manure_fuel,Getrockneten Dung
+dry_meat,Trockenfleisch
+dry_skin,Trockene Haut
+durability,Haltbarkeit
+duration_x_hours,Duration: {0:0.0} Stunden
+duration_x_minutes,Dauer: {0} Minuten
+edge_scrolling_camera,Kamera-Bildlauf am Rand
+effects,Effekte
+efficiency,Effizienz
+enable_all,Alles aktivieren
+energy,Energie
+energy_available,Verfügbare Energie
+energy_consumer,Energieverbraucher
+energy_consumption,Energieverbrauch
+energy_output,Energieerzeugung
+energy_production,Energy production
+energy_source,Energiequelle
+energy_type,Energy type
+equip,Ausrüsten
+equipment,Equipment
+exit_to_desktop,Zurück zum Desktop
+exit_to_main_menu,Zurück ins Hauptmenü
+experience_points,Erfahrungspunkte
+farm_plot,Ackerland
+farming,Landwirtschaft
+felling,Fällen
+fermenting_pot,Gärbottich
+fertilize,Düngen
+fertilizer,Dünger
+fertilizers,Dünger
+fertilizing,Düngen
+fiber,Faser
+fish_trap,Fischfalle
+fishing,Fischen
+fishing_place,Angelplatz
+fishing_rod,Angel
+flatbread,Fladenbrot
+flax,Flachs
+floor,Boden
+flour,Mehl
+flowers,Blumen
+food,Nahrung
+food_dryer,Trockengestell
+food_drying,Trocknen von Lebensmitteln
+food_poisoning,Food poisoning
+food_poisoning_cure,Heilmittel für Lebensmittelvergiftung
+food_storage_hut,Vorratshütte
+food_storage_hut_description,Zum Lagern von Nahrung
+free_up,Free up
+freshness,Frische
+fuel,Treibstoff
+fullscreen,Vollbild
+future,Zukunft
+game_finished,Spiel beendet
+game_menu,Menü
+gas,Gas
+gather,Sammeln
+gathering,Sammeln
+grain_processing,Getreideverarbeitung
+grape,Traube
+grape_bush,Weinrebe
+grave,Grab
+growth_progress,Wachstumsfortschritt
+growth_speed,Wachstumsrate
+happiness,Freude
+harvesting,Ernten
+has_joined_your_settlement,{0} has joined your settlement
+hauling,Transportieren
+hay,Heu
+haystack,Heuhaufen
+haystack_description,Zum Lagern von Heu
+health,Gesundheit
+hearth,Lagerfeuer
+herbalist_table,Tisch des Kräuterkundlers
+herbalist_table_description,Zur Herstellung primitiver Arzneimittel
+honey,Honig
+honeycomb,Honigwabe
+horse,Pferd
+hours,Stunden
+hunger,Hunger
+hunt,Jagen
+hunting,Jagen
+hut,Hütte
+information,Information
+ingredients,Zutaten
+inventory,Inventory
+iron,Eisen
+iron_age,Eisenzeit
+iron_axe,Eisenaxt
+iron_bloom,Luppe
+iron_deposit,Eisenvorkommen
+iron_harpoon,Eisenharpune
+iron_hoe,Eisenhacke
+iron_ore,Eisenerz
+iron_pick,Eisenspitzhacke
+iron_sickle,Eisensichel
+iron_smelting,Eisen schmelzen
+iron_smithy,Eisenschmiede
+iron_spear,Eisenspeer
+irrigate,Bewässern
+irrigation,Bewässerung
+irrigation_canals,Bewässerungskanäle
+items,Items
+kiln,Brennofen
+kinetic,Kinetic
+knowledge,Wissen
+knowledge_points,Wissenspunkte
+knowledge_table,Knowledge table
+language,Sprache
+language_change_warning,"Bitte starten Sie das Spiel neu, damit die Änderungen wriksam werden. "
+language_name,Deutsch
+learning,Lernen
+leather,Leder
+leather_outfit,Lederkleidung
+left_click,Linksklick
+level,Level
+light,Light
+load_game, Spiel laden
+low_light,Low light
+mammoth,Mammut
+manure,Gülle
+manure_drying_area,Manure drying area
+manure_drying_area_description,Used for drying manure
+mealing_stone,Mahlstein
+mealing_stone_description,Used for processing grain and seeds
+mechanical_crusher,Mechanischer Zerkleinerer
+mechanical_millstone,Quelle mechanischer Energie
+mechanisms,Mechanismen
+medicine,Medizin
+melee_damage,Nahkampfschaden
+mesolithic,Mesolithikum
+metallurgy,Metallurgie
+millstone,Mühlstein
+mine,Abbauen
+mine_description,Wird zum Abbau von Ressourcen aus Minen verwendet. Erzeugt Vorkommen um sich herum
+mine_mine,Bergwerk
+mining,Minenarbeit
+moderate,Moderate
+moisture,Feuchtigkeit
+mortar_and_pestle,Mörser und Stößel
+mouflon,Mufflon
+movement_speed,Bewegungsgeschwindigkeit
+mudbrick,Lehmziegel
+mudbrick_dryer,Lehmziegeltrockner
+mudbrick_floor,Mudbrick floor
+mudbrick_hut,Hütte aus Lehmziegeln
+mudbrick_wall,Mudbrick wall
+music_volume,Music volume
+name,Name
+neolithic,Neolithikum
+new_game,Neues Spiel
+new_settlers,Neue Siedler
+new_settlers_arrived,Ankuft neuer Siedler
+new_technologies_available,Neue Technologien
+noria,Schöpfrad
+noria_description,"Wird verwendet, um Wasser aus einem Brunnen zu heben und es durch Bewässerungskanäle zu leiten"
+number_of_fish,Anzahl Fische
+number_of_uses,Number of uses
+nutrition,Nähwert
+oak,Eiche
+oil_lamp,Öllampe
+oil_lamp_description,"Wird zur Beleuchtung verwendet, nutzt Öle und tierische Fette als Brennstoff"
+old,Alt
+open,Öffnen
+open_game_data_folder,Ordner mit Spieldaten öffnen
+oven,Ofen
+paleolithic,Paläolithikum
+palisade,Palisade
+paste,Einfügen
+pause,Pause
+pea,Erbsen
+pea_seeds,Erbsensamen
+pea_soup,Erbsensuppe
+peaceful_mode,Friedlicher Modus
+peas,Erbsen
+pemmican,Pemmikan
+per_day,pro Tag
+pets,Pets
+pig,Schwein
+plant,Pflanze
+planting,Planting
+plowing,Pflügen
+point_of_entry_to_a_space_which_is_enclosed_by_walls,Eingang zu einem Bereich
+pot_of_beer,Bierkrug
+pot_of_honey,Honigtopf
+pot_of_mead,Metkrug
+pot_of_milk,Milchkrug
+pot_of_water,Wasserkrug
+pot_of_wine,Weinkrug
+pottery,Keramik
+pregnancy,Schwangerschaft
+primitive_animal_dwelling,Primitive Tierbehausung
+primitive_dwelling,Primitive Behausung
+primitive_medicine,Primitive Medizin
+primitive_school_description,Zum Verdienen von Wissenspunkten
+priority,Priorität
+production,Herstellung
+production_limit,Produktionslimit
+productivity,Produktivität
+progress,Fortschritt
+projectile_speed,Projektilgeschwindigkeit
+protects_against_low_temperatures,Schützt vor niedrigen Temperaturen
+rain,Regen
+raisin,Rosine
+raisin_buns,Rosinenbrötchen
+ranching,Viehzucht
+range_damage,Fernkampfschaden
+ration,Ration
+raw_fish,Roher Fisch
+raw_meat,Rohes Fleisch
+raw_skin,Rohe Haut
+recharge_time,Wiederaufladezeit
+recipe,Rezept
+recipes,Rezepte
+remove_equipment,Remove equipment
+rename,Umbenennen
+repeat,Wiederholen
+repeat_until_production_limits_are_reached,Wiederholen des Vorgangs
+required,Erforderlich
+required_technology,Notwendige Technologie
+resource,Ressource
+resources,Ressourcen
+rest,Ausruhen
+result,Ergebnis
+resume,Fortsetzen
+return_to_the_future,Zurück in die Zukunft
+right_click,Rechtsklick
+satiety,Sätigung
+save,Speichern
+season,Jahreszeit
+seeds,Saatgut
+selling,Selling
+settlement,Siedlung
+settler_corpse,Leichnam eines Siedlers
+settlers,Siedler
+sheaf_of_barley,Gerste Garbe
+sheep,Schaf
+shelf_life,Haltbarkeit
+shelf_life_of_products,Haltbarkeit von Produkten
+show_resource_in_the_general_list,Show resource in the general list
+side_item,Side item
+skin_drying_rack,Trockengestell für Häute
+skin_tent,Zelt aus Tierhäuten
+skins_outfit,Kleidung aus Tierhaut
+slaughter,Schlachten
+sleep,Schlafen
+sleeping,Sleeping
+sleeping_on_the_ground,Sleeping on the ground
+sling,Schleuder
+soil,Erde
+sound_volume,Lautstärke
+sowing,Sähen
+spawn_time,Spawn time
+speed,Geschwindigkeit
+spinning,Spinnen
+spinning_wheel,Spinnrad
+spoilage_rate,Verderblichkeitsrate
+spoiled,Verdorben
+spring,Frühling
+stick_hut,Hütte aus Stöckern
+stockpile,Vorratslager
+stone,Stein
+stone_axe,Steinaxt
+stone_deposit,Steinvorkommen
+stone_floor,Steinboden
+stone_harpoon,Steinharpune
+stone_hoe,Steinhacke
+stone_pick,Steinspitzhacke
+stone_pieces,Kiesel
+stone_sickle,Steinsichel
+stone_spear,Steinspeer
+stone_tools,Steinwerkzeuge
+stone_wall,Steinmauer
+stopped_due_to,Gestoppt wegen: {0}
+storage,Lager
+stored,Gelagert
+strong,Strong
+summer,Sommer
+supplying,Versorgung
+tailors_workshop,Schneiderwerkbank
+tannery,Gerberei
+tanning,Gerben
+tarpan,Tarpan
+technologies,Technologien
+temperature,Temperatur
+the_settlers_are_freezing,Die Siedler frieren
+the_settlers_are_starving,Die Siedler hungern
+the_settlers_are_unhappy,Die Siedler sind unglücklich
+thresher,Thresher
+thresher_description,Used to thresh plants to separate seeds from hay
+threshing_floor,Tenne
+threshing_floor_description,"Used for mass animal threshing of 
+plants to separate seeds from hay"
+time,Zeit
+time_machine,Zeitmaschine
+time_machine_description,Gerät für Zeitreisen
+tin_deposit,Zinnvorkommen
+tin_ore,Zinnerz
+to_do_the_job_of_x_you_need_tools,To do the job of {0} you need tools
+tool_type,Art von Werkzeug
+tools,Werkzeug
+torch,Fackel
+torch_description,Used to illuminate a space
+total_speed,Höchstgeschwindigkeit
+trade,Tauschen
+trading,Handel
+trading_post,Handelsposten
+trading_post_assortment_update,The assortment of trading posts has been updated!
+trading_post_description,Allows you to buy and sell goods. Updates its assortment once a day
+travel_speed,Bewegungsgeschwindigkeit
+treadmill,Treadmill
+treadmill_description,Converts the energy of animals and settlers into mechanical energy
+turn_off_music, Musik aus
+turn_on_music,Musik ein
+unassign_from,Unassign from {0}
+unfired_pot,Unfired pot
+used_for_automated_grinding_of_grain,Zum automatischen Mahlen von Getreide
+used_for_coal_production,Für die Herstellung von Holzkohle
+used_for_cooking,Zum Kochen
+used_for_drying_adobe,Zum Trocknen von Lehm
+used_for_drying_food,Zum Konservieren von Lebensmitteln
+used_for_drying_skins,Zum Trocknen von Häuten
+used_for_firing_ceramic_products,Zum Brennen von Keramik
+used_for_fishing,Zum Fangen von Fischen
+used_for_forging_copper_and_bronze_tools,Zum Schmieden von Werkzeugen aus Kupfer und Bronze
+used_for_forging_iron_tools,Zum Schmieden von Eisenwerkzeugen
+used_for_growing_plants,Für den Anbau von Pflanzen
+used_for_mining,Zum Einsatz im Bergbau
+used_for_quick_cooking,Zum schnellen Kochen
+used_for_quick_grinding_of_grain,Zum schnellen Mahlen von Getreide
+used_for_spinning_yarn,Für das Spinnen von Garn
+used_for_storing_resources,Zum Lagern von Ressourcen
+used_for_tanning_skins,Zum Gerben von Häuten
+used_to_bury_the_dead,Zum Beerdigen der Toten
+used_to_collect_water,Zum Sammeln von Wasser
+used_to_create_advanced_tools,Zur Herstellung fortgeschrittener Werkzeuge
+used_to_create_primitive_tools,Zur Herstellung von primitiven Werkzeugen
+used_to_cross_water,Zum Überqueren von Wasser
+used_to_crushing_resources,Zum Zerkleinern von Ressourcen
+used_to_ferment_foods,Zur Fermentierung von Lebensmitteln
+used_to_grinding_and_crushing_resources,Zum Mahlen und Zerkleinern von Rohstoffen
+used_to_make_clothes,Zum Herstellen von Kleidung
+used_to_smelting_metals_from_its_ores,Zum Schmelzen von Metallen aus Erzen
+used_to_weave_cloth,Zum Weben von Kleidung
+value,Wert
+view_settler,View settler
+vomiting,Vomiting
+wall,Mauer
+wall_description,A structure used to create an impassable barrier
+walls,Walls
+warm_clothing,Warm clothing
+warm_fur_clothes,Warme Fellkleidung
+warm_knitted_clothes,Warme Strickkleidung
+warm_place,Warm place
+warp_weighted_loom,Gewichtswebstuhl
+was_killed_by,{0} verstarb durch {1}
+water_gathering_place,Wassersammelstelle
+weapon,Waffe
+weaving,Weben
+well,Brunnen
+wild_bee_hive,Wilder Bienenstock
+wind,Wind
+windmill,Windmühle
+windmill_description,Converts wind energy into mechanical energy
+windowed,Fenstermodus
+winter,Winter
+winter_cold,Winter cold
+wolf,Wolf
+wolf_domestication,Domestizierung von Wölfen
+wood,Holz
+wood_pieces,Stöcker
+woodcutting,Holzfällerarbeit
+wooden_cart,Holzkarren
+wooden_gate,Holztor
+wooden_harpoon,Holzharpune
+wooden_plow,Hölzerner Pflug
+wooden_spear,Holzspeer
+wool,Wolle
+wool_cloth,Wollstoff
+wool_clothing,Wollkleidung
+wool_yarn,Wollgarn
+work,Arbeiten
+workers,Arbeiter
+workshop,Werkstatt
+world_name,Name der Welt
+world_settings,Welteinstellungen
+world_size,Größe der Welt
+world_with_that_name_already_exists,Eine Welt mit diesem Namen existiert bereits
+woven_clothing,Gewebte Kleidung
+x_died_from_the_cold,{0} erfror
+x_died_of_old_age,{0} starb am hohen Alter
+x_died_of_starvation,{0} verhungerte
+x_got_the_y_effect,{0} bekam den Effekt {1}
+x_is_already_assigned_to_another_hut,{0} is already assigned to another hut
+x_is_already_assigned_to_this_hut,{0} is already assigned to this hut
+yarn,Garn
+сhop_automatically,Automatisch hacken
+сhop_automatically_description,Automatisches Hacken der Pflanze nach vollem Wachstum
+сut_automatically_description,Automatisches Schneiden der Pflanze nach vollem Wachstum

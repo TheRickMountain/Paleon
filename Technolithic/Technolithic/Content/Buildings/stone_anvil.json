@@ -1,0 +1,411 @@
+{
+  "name_key": "copper_smithy",
+  "description_key": "used_for_forging_copper_and_bronze_tools",
+  "width": 2,
+  "height": 2,
+  "type": "Crafter",
+  "category": "Metallurgy",
+  "animated": true,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 25,
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": false,
+    "recipes": [
+      {
+        "main_item": "iron",
+        "time": 50,
+        "result": [
+          {
+            "item": "iron",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "iron_bloom",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "copper_reaper",
+        "time": 50,
+        "result": [
+          {
+            "item": "copper_reaper",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "copper",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "wooden_cart",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "copper_spear",
+        "time": 50,
+        "result": [
+          {
+            "item": "copper_spear",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "copper",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "bronze_spear",
+        "time": 50,
+        "result": [
+          {
+            "item": "bronze_spear",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "bronze",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "copper_harpoon",
+        "time": 50,
+        "result": [
+          {
+            "item": "copper_harpoon",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "copper",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "bronze_harpoon",
+        "time": 50,
+        "result": [
+          {
+            "item": "bronze_harpoon",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "bronze",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "copper_axe",
+        "time": 50,
+        "result": [
+          {
+            "item": "copper_axe",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "copper",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "bronze_axe",
+        "time": 50,
+        "result": [
+          {
+            "item": "bronze_axe",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "bronze",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "copper_sickle",
+        "time": 50,
+        "result": [
+          {
+            "item": "copper_sickle",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "copper",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "bronze_sickle",
+        "time": 50,
+        "result": [
+          {
+            "item": "bronze_sickle",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "bronze",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "copper_hoe",
+        "time": 50,
+        "result": [
+          {
+            "item": "copper_hoe",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "copper",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "bronze_hoe",
+        "time": 50,
+        "result": [
+          {
+            "item": "bronze_hoe",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "bronze",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "copper_pick",
+        "time": 50,
+        "result": [
+          {
+            "item": "copper_pick",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "copper",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "main_item": "bronze_pick",
+        "time": 50,
+        "result": [
+          {
+            "item": "bronze_pick",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "bronze",
+            "weight": 1,
+            "show": true
+          },
+          {
+            "item": "wood",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "stone_anvil",
+    "width": 32,
+    "height": 32
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      true,
+      false
+    ],
+    [
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "stone",
+      "weight": 4
+    }
+  ],
+  "lightEmitter": {
+    "radius": 100
+  }
+}

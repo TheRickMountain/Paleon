@@ -1,0 +1,66 @@
+{
+  "name_key": "water_gathering_place",
+  "description_key": "used_to_collect_water",
+  "width": 1,
+  "height": 2,
+  "type": "Crafter",
+  "category": "Production",
+  "animated": false,
+  "rotatable": true,
+  "cloneable": true,
+  "requireBuilding": false,
+  "destructible": true,
+  "movementSpeed": -1,
+  "constructionTime": 1,
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": false,
+    "recipes": [
+      {
+        "main_item": "pot_of_water",
+        "time": 10,
+        "result": [
+          {
+            "item": "pot_of_water",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "ceramic_pot",
+            "weight": 1
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "water_gathering_place",
+    "width": 16,
+    "height": 32
+  },
+  "walkable_pattern": [
+    [
+      true
+    ],
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      true
+    ],
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "G"
+    ],
+    [
+      "H"
+    ]
+  ]
+}

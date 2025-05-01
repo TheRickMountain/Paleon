@@ -1,0 +1,12 @@
+{
+  "plants": [
+    "grape_bush",
+    "barley",
+    "pea",
+    "flax",
+    "dandelion"
+  ],
+  "trees": [
+    "oak"
+  ]
+}

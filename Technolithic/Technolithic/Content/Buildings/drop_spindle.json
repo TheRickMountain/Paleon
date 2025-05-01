@@ -1,0 +1,81 @@
+{
+  "name_key": "drop_spindle",
+  "description_key": "used_for_spinning_yarn",
+  "width": 1,
+  "height": 1,
+  "type": "Crafter",
+  "category": "Production",
+  "animated": true,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 10,
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": false,
+    "recipes": [
+      {
+        "main_item": "wool_yarn",
+        "time": 75,
+        "result": [
+          {
+            "item": "wool_yarn",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wool",
+            "weight": 1,
+            "show": false
+          }
+        ]
+      },
+      {
+        "main_item": "yarn",
+        "time": 75,
+        "result": [
+          {
+            "item": "yarn",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "fiber",
+            "weight": 1,
+            "show": false
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "drop_spindle",
+    "width": 16,
+    "height": 19
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "wood",
+      "weight": 1
+    }
+  ]
+}

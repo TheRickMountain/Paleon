@@ -1,0 +1,58 @@
+{
+  "name_key": "tin_deposit",
+  "description_key": "tin_deposit",
+  "width": 2,
+  "height": 2,
+  "type": "Deposit",
+  "category": "None",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": false,
+  "requireBuilding": false,
+  "destructible": false,
+  "movementSpeed": 50,
+  "constructionTime": 1,
+  "deposit": {
+    "stages": 3,
+    "dropPerCollect": 3,
+    "requiredToolType": "Pick",
+    "depositResource": "tin_ore",
+    "miningTime": 75
+  },
+  "texture": {
+    "name": "tin_deposit",
+    "width": 32,
+    "height": 32
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false
+    ],
+    [
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": []
+}

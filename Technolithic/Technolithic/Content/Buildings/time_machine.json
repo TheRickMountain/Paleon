@@ -1,0 +1,77 @@
+{
+  "name_key": "time_machine",
+  "description_key": "time_machine_description",
+  "width": 3,
+  "height": 3,
+  "type": "TimeMachine",
+  "category": "Mechanisms",
+  "animated": false,
+  "cloneable": true,
+  "rotatable": false,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 75,
+  "texture": {
+    "name": "time_machine",
+    "width": 48,
+    "height": 48
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "iron",
+      "weight": 100
+    }
+  ]
+}

@@ -1,0 +1,586 @@
+key,translation
+None,None
+Pick,掘
+a_wild_animal_is_about_to_attack_your_settlement,野生动物即将攻击您的聚落！
+a_wild_bee_hive_has_appeared_near_you,你附近有一个野生蜂巢。
+accept,同意
+achievement_unlocked,New achievement '{0}'!
+achievements,Achievements
+achievements_unlocked_x_slash_y,Achievements unlocked {0}/{1}
+achv_desc_ARE_YOU_SURE_IT_DOESNT_STINK,Cook food using dried manure as fuel
+achv_desc_BACK_TO_THE_FUTURE,Start the time machine and go back to the future
+achv_desc_BEST_FRIENDS_FOREVER,Send a settler with a dog to hunt
+achv_desc_CITY,Have 60 people or more in the settlement
+achv_desc_DENIED,Refuse to accept a nomad into the settlement
+achv_desc_ENGINE_OF_PROGRESS,Research all technologies
+achv_desc_FIRST_BREAD,Bake your first flatbread
+achv_desc_FIRST_BRONZE,Smelt your first bronze
+achv_desc_FIRST_CERAMIC,Fire your first ceramic pot
+achv_desc_FIRST_COPPER,Smelt your first copper
+achv_desc_FIRST_IRON,Forge your first iron
+achv_desc_HOMEMADE_PRODUCTION,Sell 10 units of bread
+achv_desc_I_SURVIVED_100_DAYS,Survive 100 days with at least one settler
+achv_desc_MULTITOOL,One of the settlers must equip at least 3 tools
+achv_desc_TRIBE,Have 15 people or more in the settlement
+achv_desc_VILLAGE,Have 30 people or more in the settlement
+achv_name_ARE_YOU_SURE_IT_DOESNT_STINK,Are you sure it doesn't stink?
+achv_name_BACK_TO_THE_FUTURE,Back to the future
+achv_name_BEST_FRIENDS_FOREVER,Best Friends Forever
+achv_name_CITY,City
+achv_name_DENIED,Denied
+achv_name_ENGINE_OF_PROGRESS,Engine of progress
+achv_name_FIRST_BREAD,First bread
+achv_name_FIRST_BRONZE,First bronze
+achv_name_FIRST_CERAMIC,First ceramic
+achv_name_FIRST_COPPER,First copper
+achv_name_FIRST_IRON,First iron
+achv_name_HOMEMADE_PRODUCTION,Homemade production
+achv_name_I_SURVIVED_100_DAYS,I survived 100 days
+achv_name_MULTITOOL,Multitool
+achv_name_TRIBE,Tribe
+achv_name_VILLAGE,Village
+adult,成年
+age,年龄
+agriculture,农业
+alcoholic_drinks,酒精饮料
+all,全部
+allows_creatures_to_move_faster,加快移動速度。
+animal_fat,动物脂肪
+animal_female,母
+animal_filter,筛选动物
+animal_male,公
+animal_pen,畜栏
+animal_pen_description,让动物吃饭及休息。
+animals,动物
+animals_domestication,驯化动物
+assign_a_pet,指派宠物
+assign_a_settler,Assign a settler
+assign_to,指派给 {0}
+assign_x_to_this_hut,Assign {0} to this hut
+assigned_to,已指派给 {0}
+attack,攻击
+aurochs,原牛
+automatically_mine_spawned_deposits,自动开采生成的矿物。
+autumn,秋
+back,返回
+barley,大麦
+barley_seeds,大麦种子
+barn,谷仓
+base_speed,基础速度
+basket,篮子
+bee_hive,蜂巢
+bee_hive_description,生产蜂蜜的效率是野生蜂巢的两倍。
+beekeeping,养蜂
+beeswax,蜂蜡
+bloomery,锻造炉
+boar,野猪
+bone,骨头
+bone_harpoon,骨鱼叉
+bone_sickle,骨镰刀
+bone_spear,骨矛
+bone_tools,骨制工具
+bow,弓
+brewing,酿造
+brick,砖块
+brick_floor,砖地板
+brick_wall,砖墙
+bridge,桥梁
+bronze,青铜錠
+bronze_age,青铜时代
+bronze_axe,青铜斧
+bronze_harpoon,青铜鱼叉
+bronze_hoe,青铜锄头
+bronze_pick,青铜镐
+bronze_sickle,青铜镰刀
+bronze_smelting,冶炼青铜矿
+bronze_spear,青铜矛
+build_irrigation_canal,修建水渠
+building,建造
+bunch_of_peas,一把豌豆
+burial,葬礼
+buying,购买
+calm,平靜
+cancel,取消
+capacity,容量
+cattle,牛
+causes,原因
+ceramic_pot,陶罐
+chainmail,链甲
+chalcolithic,红铜时代
+chance,机会
+charcoal,木炭
+charcoal_kiln,炭窯
+cheese,奶酪
+cheesemaking,制作奶酪
+child,幼年
+chop,砍伐
+chop_completely,完全砍伐
+chop_now,现在砍伐
+clay,黏土
+clay_barn,黏土仓库
+clay_deposit,黏土矿床
+clay_hut,黏土屋
+clay_oven,黏土窯炉
+clean_up_manure,清理粪便
+clone,复制
+close,关
+cloth,布料
+clothes,服装
+come_here,来这里
+command_line,指令列
+connected,已连接
+consumption,消耗
+containers,容器
+cooked_fish,熟鱼
+cooked_meat,熟肉
+cooking,料理
+copper,铜錠
+copper_axe,铜斧
+copper_deposit,铜矿床
+copper_harpoon,铜鱼叉
+copper_hoe,铜锄头
+copper_ore,铜矿
+copper_pick,铜镐
+copper_reaper,铜收割机
+copper_sickle,铜镰刀
+copper_smelting,冶炼铜矿
+copper_smithy,铜锻造场
+copper_spear,铜矛
+copy,复制
+copy_settings,复制设定
+cozy_hut,舒适的小屋
+cozy_tent,舒适的帐篷
+crafter,制作台
+crafting,制造
+create,创造
+credits,制作人员
+crossbow,弩
+crushed_copper_ore,碎铜矿
+crushed_iron_ore,碎铁矿
+crushed_tin_ore,碎錫矿
+culinary_ingredients,料理食材
+cures,治疗
+cut,收割
+cut_automatically,自动收割
+cut_completely,完全收割
+cut_now,现在收割
+dandelion,蒲公英
+day,天
+days,天
+days_until_aging_x,离增龄还有: {0} 天
+days_until_death_x,离死亡还有: {0} 天
+decline,衰退
+defense,防御
+depends_on_wind_speed,取决于风速。
+deposit,矿床
+destruct,拆除
+destruct_irrigation_canal,拆除水渠
+destruct_surface,拆除地板
+dirt_path,土路
+dirty_animal_pen,肮脏的畜栏
+disable_all,全部停用
+disband,解散
+disconnected,未连接
+dog,狗
+dolmen,巨石墓
+domesticate,驯化
+drop_spindle,紡线锤
+dry_fish,鱼干
+dry_manure_fuel,干粪燃料
+dry_meat,肉干
+dry_skin,干皮革
+durability,耐久
+duration_x_hours,持续时间: {0:0.0} 小时
+duration_x_minutes,持续时间: {0} 分钟
+edge_scrolling_camera,边缘滚动相机
+effects,影响
+efficiency,效率
+enable_all,全部啟用
+energy,体力
+energy_available,可用能量
+energy_consumer,能量消耗
+energy_consumption,能量消耗
+energy_output,能量输出
+energy_production,Energy production
+energy_source,能量来源
+energy_type,能源类型
+equip,装备
+equipment,Equipment
+exit_to_desktop,回到桌面
+exit_to_main_menu,回到主菜单
+experience_points,经验值
+farm_plot,农地
+farming,农耕
+felling,砍伐
+fermenting_pot,酿造罐
+fertilize,施肥
+fertilizer,肥料
+fertilizers,肥料
+fertilizing,施肥
+fiber,纖维
+fish_trap,鱼簍
+fishing,捕鱼
+fishing_place,捕鱼点
+fishing_rod,钓竿
+flatbread,面饼
+flax,亚麻
+floor,地板
+flour,面粉
+flowers,花朵
+food,食物
+food_dryer,干燥架
+food_drying,食品干燥
+food_poisoning,食物中毒
+food_poisoning_cure,食物中毒治疗药
+food_storage_hut,食物仓库
+food_storage_hut_description,"用来储存食物,延长食物的保质期。"
+free_up,Free up
+freshness,新鲜
+fuel,燃料
+fullscreen,全屏幕
+future,未来
+game_finished,游戏结束
+game_menu,游戏菜单
+gas,煤气
+gather,收集
+gathering,收集
+grain_processing,谷物加工
+grape,葡萄
+grape_bush,葡萄藤
+grave,坟墓
+growth_progress,成长进度
+growth_speed,成长速度
+happiness,幸福
+harvesting,采收
+has_joined_your_settlement,{0} 已加入你的聚落。
+hauling,搬运
+hay,干草
+haystack,干草垛
+haystack_description,存放干草。
+health,健康
+hearth,石炉
+herbalist_table,制药桌
+herbalist_table_description,制造原始的药物。
+honey,蜂蜜
+honeycomb,蜂巢板
+horse,马
+hours,小时
+hunger,饥饿
+hunt,狩猎
+hunting,狩猎
+hut,房屋
+information,Information
+ingredients,原料
+inventory,Inventory
+iron,铁錠
+iron_age,铁器时代
+iron_axe,铁斧
+iron_bloom,铁坯
+iron_deposit,铁矿床
+iron_harpoon,铁鱼叉
+iron_hoe,铁锄头
+iron_ore,铁矿
+iron_pick,铁镐
+iron_sickle,铁镰刀
+iron_smelting,冶炼铁矿
+iron_smithy,铁锻造场
+iron_spear,铁矛
+irrigate,浇水
+irrigation,浇水
+irrigation_canals,水渠
+items,物品
+kiln,陶窯
+kinetic,动力学
+knowledge,知识
+knowledge_points,知识点数
+knowledge_table,研究桌
+language,语言
+language_change_warning,请重新激活游戏使变更生效。
+language_name,Simplified Chinese
+learning,研究
+leather,熟皮革
+leather_outfit,皮革衣服
+left_click,左键
+level,等级
+light,照明
+load_game,载入游戏
+low_light,照明不足
+mammoth,猛玛象
+manure,粪便
+manure_drying_area,Manure drying area
+manure_drying_area_description,Used for drying manure
+mealing_stone,石磨盘
+mealing_stone_description,用于加工谷物和种子。
+mechanical_crusher,破碎机
+mechanical_millstone,机械石磨
+mechanisms,机械
+medicine,医药
+melee_damage,近战伤害
+mesolithic,中石器时代
+metallurgy,冶炼
+millstone,石磨
+mine,开采
+mine_description,在周围产出可开采的资源。
+mine_mine,矿井
+mining,开采
+moderate,温和
+moisture,水分
+mortar_and_pestle,石臼和杵
+mouflon,摩弗伦羊
+movement_speed,移动速度
+mudbrick,泥砖
+mudbrick_dryer,泥砖干燥处
+mudbrick_floor,泥砖地板
+mudbrick_hut,泥磚屋
+mudbrick_wall,泥砖墙
+music_volume,音乐音量
+name,名字
+neolithic,新石器时代
+new_game,新游戏
+new_settlers,新的居民
+new_settlers_arrived,新的居民已抵达。
+new_technologies_available,可解锁新技术。
+noria,铲轮水车
+noria_description,从井中取水并引导其通过水渠。
+number_of_fish,鱼的数量
+number_of_uses,使用次数
+nutrition,营养
+oak,橡树
+oil_lamp,油灯
+oil_lamp_description,使用油或动物脂肪照明。
+old,老年
+open,开
+open_game_data_folder,开启游戏资料夹
+oven,窯炉
+paleolithic,旧石器时代
+palisade,栅栏
+paste,貼上
+pause,暂停
+pea,豌豆
+pea_seeds,豌豆种子
+pea_soup,豌豆汤
+peaceful_mode,和平模式
+peas,豆子
+pemmican,干肉饼
+per_day,每天
+pets,宠物
+pig,猪
+plant,植物
+planting,种植
+plowing,耕作
+point_of_entry_to_a_space_which_is_enclosed_by_walls,被墙壁包围的空间出入口。
+pot_of_beer,一罐啤酒
+pot_of_honey,一罐蜂蜜
+pot_of_mead,一罐蜂蜜酒
+pot_of_milk,一罐奶
+pot_of_water,一罐水
+pot_of_wine,一罐葡萄酒
+pottery,陶器
+pregnancy,怀孕
+primitive_animal_dwelling,原始的畜栏。
+primitive_dwelling,原始的住所。
+primitive_medicine,原始医学
+primitive_school_description,用来获得知识点数。
+priority,优先度
+production,生产
+production_limit,产量限制
+productivity,产量
+progress,进展
+projectile_speed,射击速度
+protects_against_low_temperatures,防止低温。
+rain,下雨
+raisin,葡萄干
+raisin_buns,葡萄干面包
+ranching,畜牧
+range_damage,远攻伤害
+ration,食物配给
+raw_fish,生鱼
+raw_meat,生肉
+raw_skin,生皮革
+recharge_time,再生时间
+recipe,配方
+recipes,配方
+remove_equipment,Remove equipment
+rename,改名
+repeat,重复
+repeat_until_production_limits_are_reached,生产至数量上限。
+required,需要
+required_technology,需要科技研究
+resource,资源
+resources,资源
+rest,休息
+result,结果
+resume,回到游戏
+return_to_the_future,回到未来
+right_click,右键
+satiety,饱腹
+save,储存
+season,季节
+seeds,种子
+selling,贩卖
+settlement,Settlement
+settler_corpse,居民屍體
+settlers,居民
+sheaf_of_barley,一捆大麦
+sheep,绵羊
+shelf_life,保质期
+shelf_life_of_products,保存期限
+show_resource_in_the_general_list,显示清单上的所有资源。
+side_item,Side item
+skin_drying_rack,晾皮架
+skin_tent,皮制帐篷
+skins_outfit,皮制衣服
+slaughter,屠宰
+sleep,睡眠
+sleeping,睡眠
+sleeping_on_the_ground,睡在地上
+sling,投石索
+soil,土壤
+sound_volume,音量
+sowing,播种
+spawn_time,产出时间
+speed,速度
+spinning,紡纱
+spinning_wheel,紡车
+spoilage_rate,腐败度
+spoiled,变质
+spring,春
+stick_hut,简陋小屋
+stockpile,储存
+stone,石材
+stone_axe,石斧
+stone_deposit,石矿
+stone_floor,石路
+stone_harpoon,石鱼叉
+stone_hoe,石锄头
+stone_pick,石镐
+stone_pieces,石块
+stone_sickle,石镰刀
+stone_spear,石矛
+stone_tools,石制工具
+stone_wall,石墙
+stopped_due_to,因此停止: {0}
+storage,貯存
+stored,已储存
+strong,強烈
+summer,夏
+supplying,供应
+tailors_workshop,裁缝工作坊
+tannery,制革场
+tanning,鞣制皮革
+tarpan,泰班野马
+technologies,科技研究
+temperature,温度
+the_settlers_are_freezing,冻僵的居民
+the_settlers_are_starving,饥饿的居民
+the_settlers_are_unhappy,不开心的居民
+thresher,脫粒器
+thresher_description,将种子与干草分离。
+threshing_floor,脱粒场
+threshing_floor_description,"利用动物脱粒,分离种子与干草。"
+time,时间
+time_machine,时间机器
+time_machine_description,时间旅行装置
+tin_deposit,錫矿床
+tin_ore,錫矿
+to_do_the_job_of_x_you_need_tools,你需要 {0} 工具才能工作。
+tool_type,工具种类
+tools,工具
+torch,火炬
+torch_description,用木材照明。
+total_speed,整体速度
+trade,交易
+trading,交易
+trading_post,交易站
+trading_post_assortment_update,交易站的貨物已更新！
+trading_post_description,"允许购买和出售商品,每天更新一次货物内容。"
+travel_speed,移动速度
+treadmill,Treadmill
+treadmill_description,Converts the energy of animals and settlers into mechanical energy
+turn_off_music,关闭音乐
+turn_on_music,开启音乐
+unassign_from,取消指派给 {0}  
+unfired_pot,未烧制的罐
+used_for_automated_grinding_of_grain,利用风力研磨谷物。
+used_for_coal_production,生产煤炭。
+used_for_cooking,用來料理。
+used_for_drying_adobe,在这里烘干土坯。
+used_for_drying_food,"将食物晒干,可延长保质期。"
+used_for_drying_skins,简单的晾干生皮。
+used_for_firing_ceramic_products,"温度更高,可烧制陶器。"
+used_for_fishing,在这里捕鱼。
+used_for_forging_copper_and_bronze_tools,锻造铜及青铜工具。
+used_for_forging_iron_tools,锻造铁制工具。
+used_for_growing_plants,种植农作物。
+used_for_mining,用于开采。
+used_for_quick_cooking,更快的烹煮食材。
+used_for_quick_grinding_of_grain,提高研磨谷物的效率。
+used_for_spinning_yarn,用于紡制纱线。
+used_for_storing_resources,储存资源。
+used_for_tanning_skins,将晾干的皮革鞣制成熟皮革。
+used_to_bury_the_dead,埋葬死者。
+used_to_collect_water,用來取水。
+used_to_create_advanced_tools,制作进阶工具。
+used_to_create_primitive_tools,制作原始工具。
+used_to_cross_water,用来穿越水面。
+used_to_crushing_resources,用來粉碎材料。
+used_to_ferment_foods,用于酿造及发酵。
+used_to_grinding_and_crushing_resources,碾碎及研磨矿石。
+used_to_make_clothes,制作服装。
+used_to_smelting_metals_from_its_ores,将矿石冶炼成金属錠。
+used_to_weave_cloth,将纱线紡成布料。
+value,价值
+view_settler,View settler
+vomiting,呕吐
+wall,墙壁
+wall_description,用来建造不可通过的结构。
+walls,墙壁
+warm_clothing,温暖的衣服
+warm_fur_clothes,保暖的毛皮衣
+warm_knitted_clothes,保暖的针织衣
+warm_place,温暖的地方
+warp_weighted_loom,织布机
+was_killed_by,{0} 被 {1} 杀死
+water_gathering_place,汲水处
+weapon,武器
+weaving,编织
+well,水井
+wild_bee_hive,野生蜂巢
+wind,風速
+windmill,风车
+windmill_description,Converts wind energy into mechanical energy
+windowed,窗口化
+winter,冬
+winter_cold,寒流
+wolf,狼
+wolf_domestication,驯化野狼
+wood,木材
+wood_pieces,木片
+woodcutting,伐木
+wooden_cart,木车
+wooden_gate,木门
+wooden_harpoon,木鱼叉
+wooden_plow,木犁
+wooden_spear,木矛
+wool,羊毛
+wool_cloth,羊毛布料
+wool_clothing,羊毛衣服
+wool_yarn,羊毛线
+work,工作
+workers,工作者
+workshop,工作坊
+world_name,世界名称
+world_settings,世界设定
+world_size,世界规模
+world_with_that_name_already_exists,已存在同名世界。
+woven_clothing,编织服装
+x_died_from_the_cold,{0} 冷死
+x_died_of_old_age,{0} 老死
+x_died_of_starvation,{0} 饿死
+x_got_the_y_effect,{0} 得到 {1} 效果
+x_is_already_assigned_to_another_hut,{0} is already assigned to another hut
+x_is_already_assigned_to_this_hut,{0} is already assigned to this hut
+yarn,紗線
+сhop_automatically,自动砍伐
+сhop_automatically_description,自动砍伐成熟植物。
+сut_automatically_description,自动收割成熟植物。

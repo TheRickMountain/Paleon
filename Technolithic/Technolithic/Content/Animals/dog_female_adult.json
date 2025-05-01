@@ -1,0 +1,57 @@
+{
+    "key":  "dog",
+    "kind":  "dog",
+    "texture":  {
+                    "name":  "dog_female_adult",
+                    "width":  24,
+                    "height":  24
+                },
+    "attributes":  [
+                       {
+                           "name":  "Health"
+                       }
+                   ],
+    "movementSpeed":  4.6,
+    "canProtect":  true,
+    "isWild":  false,
+    "isPet":  true,
+    "gender":  "F",
+    "health":  60,
+    "hunger":  100,
+    "energy":  100,
+    "DaysUntilAging":  32,
+    "damage":  3,
+    "defense":  0,
+    "product":  null,
+    "ration":  [
+                   "raw_meat",
+                   "raw_fish"
+               ],
+    "drop":  [
+                 {
+                     "item":  "raw_meat",
+                     "count":  1
+                 },
+                 {
+                     "item":  "raw_skin",
+                     "count":  1
+                 },
+                 {
+                     "item":  "bone",
+                     "count":  1
+                 }
+             ],
+    "allowedLabors":  [
+
+                      ],
+    "attackChance":  "100",
+    "PregnancyData":  {
+                          "DurationInDays":  6,
+                          "Offspring":  [
+                                            "dog_female_baby",
+                                            "dog_male_baby"
+                                        ]
+                      },
+    "Price":  68,
+    "AgeState":  "Adult"
+}

@@ -1,0 +1,35 @@
+{
+  "name_key": "destruct_irrigation_canal",
+  "description_key": "destruct_irrigation_canal",
+  "width": 1,
+  "height": 1,
+  "type": "DestructIrrigationCanal",
+  "category": "Production",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": false,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": -1,
+  "constructionTime": 25,
+  "texture": {
+    "name": "destruct_irrigation_canal",
+    "width": 16,
+    "height": 16
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "D"
+    ]
+  ]
+}

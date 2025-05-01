@@ -1,0 +1,53 @@
+{
+    "key":  "aurochs",
+    "kind":  "aurochs",
+    "texture":  {
+                    "name":  "aurochs_female_old",
+                    "width":  24,
+                    "height":  24
+                },
+    "attributes":  [
+                       {
+                           "name":  "Energy"
+                       },
+                       {
+                           "name":  "Health"
+                       }
+                   ],
+    "movementSpeed":  3.5,
+    "DomesticationData":  {
+                              "TamedForm":  "cattle_female_old",
+                              "Chance":  10
+                          },
+    "canProtect":  false,
+    "isWild":  true,
+    "gender":  "F",
+    "health":  35,
+    "hunger":  100,
+    "energy":  100,
+    "DaysUntilAging":  6,
+    "damage":  6,
+    "defense":  0,
+    "drop":  [
+                 {
+                     "item":  "raw_meat",
+                     "count":  3
+                 },
+                 {
+                     "item":  "raw_skin",
+                     "count":  3
+                 },
+                 {
+                     "item":  "bone",
+                     "count":  2
+                 }
+             ],
+    "ration":  [
+                   "hay"
+               ],
+    "allowedLabors":  [
+
+                      ],
+    "attackChance":  "75",
+    "AgeState":  "Old"
+}

@@ -1,0 +1,85 @@
+{
+  "name_key": "warp_weighted_loom",
+  "description_key": "used_to_weave_cloth",
+  "width": 1,
+  "height": 1,
+  "type": "Crafter",
+  "category": "Production",
+  "animated": true,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 15,
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": false,
+    "recipes": [
+      {
+        "main_item": "wool_cloth",
+        "time": 75,
+        "result": [
+          {
+            "item": "wool_cloth",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wool_yarn",
+            "weight": 2,
+            "show": false
+          }
+        ]
+      },
+      {
+        "main_item": "cloth",
+        "time": 75,
+        "result": [
+          {
+            "item": "cloth",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "yarn",
+            "weight": 2,
+            "show": false
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "warp_weighted_loom",
+    "width": 16,
+    "height": 16
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "wood",
+      "weight": 1
+    },
+    {
+      "item": "yarn",
+      "weight": 1
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "name_key": "workshop",
+  "description_key": "used_to_create_advanced_tools",
+  "width": 2,
+  "height": 3,
+  "type": "Crafter",
+  "category": "Production",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 30,
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": false,
+    "recipes": [
+      {
+        "main_item": "wooden_plow",
+        "time": 50,
+        "result": [
+          {
+            "item": "wooden_plow",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wood",
+            "weight": 1,
+            "show": false
+          }
+        ]
+      },
+      {
+        "main_item": "wooden_cart",
+        "time": 50,
+        "result": [
+          {
+            "item": "wooden_cart",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wood",
+            "weight": 1,
+            "show": false
+          }
+        ]
+      },
+      {
+        "main_item": "crossbow",
+        "time": 50,
+        "result": [
+          {
+            "item": "crossbow",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "wood",
+            "weight": 1,
+            "show": false
+          },
+          {
+            "item": "yarn",
+            "weight": 1,
+            "show": false
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "workshop",
+    "width": 32,
+    "height": 48
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false
+    ],
+    [
+      false,
+      false
+    ],
+    [
+      false,
+      true
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "wood",
+      "weight": 12
+    },
+    {
+      "item": "clay",
+      "weight": 12
+    }
+  ]
+}

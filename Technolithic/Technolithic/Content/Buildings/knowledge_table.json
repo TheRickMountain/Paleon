@@ -1,0 +1,155 @@
+{
+  "name_key": "knowledge_table",
+  "description_key": "primitive_school_description",
+  "width": 1,
+  "height": 1,
+  "type": "Crafter",
+  "category": "Knowledge",
+  "animated": true,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 10,
+  "crafter": {
+    "laborType": "Learning",
+    "autocrafter": false,
+    "recipes": [
+      {
+        "id": 800,
+        "main_item": "knowledge_points",
+        "time": 75,
+        "result": [
+          {
+            "item": "knowledge_points",
+            "weight": 10
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "stone",
+            "weight": 1,
+            "show": false
+          }
+        ]
+      },
+      {
+        "id": 801,
+        "main_item": "knowledge_points",
+        "time": 75,
+        "result": [
+          {
+            "item": "knowledge_points",
+            "weight": 25
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "ceramic_pot",
+            "weight": 1,
+            "show": false
+          }
+        ]
+      },
+      {
+        "id": 802,
+        "main_item": "knowledge_points",
+        "time": 75,
+        "result": [
+          {
+            "item": "knowledge_points",
+            "weight": 50
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "cloth",
+            "weight": 1,
+            "show": false
+          }
+        ]
+      },
+      {
+        "id": 803,
+        "main_item": "knowledge_points",
+        "time": 75,
+        "result": [
+          {
+            "item": "knowledge_points",
+            "weight": 100
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "copper",
+            "weight": 1,
+            "show": false
+          }
+        ]
+      },
+      {
+        "id": 804,
+        "main_item": "knowledge_points",
+        "time": 75,
+        "result": [
+          {
+            "item": "knowledge_points",
+            "weight": 200
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "bronze",
+            "weight": 1,
+            "show": false
+          }
+        ]
+      },
+      {
+        "id": 805,
+        "main_item": "knowledge_points",
+        "time": 75,
+        "result": [
+          {
+            "item": "knowledge_points",
+            "weight": 400
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "iron",
+            "weight": 1,
+            "show": false
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "knowledge_table",
+    "width": 16,
+    "height": 16
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "stone",
+      "weight": 1
+    }
+  ]
+}

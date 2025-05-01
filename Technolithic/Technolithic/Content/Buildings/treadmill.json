@@ -1,0 +1,71 @@
+{
+  "name_key": "treadmill",
+  "description_key": "treadmill_description",
+  "width": 3,
+  "height": 2,
+  "type": "CreaturePoweredEnergySource",
+  "category": "Mechanisms",
+  "animated": true,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 50,
+  "range": 4,
+  "EnergySourceData":{
+    "GeneratedPower": 20,
+    "EnergyType": "Kinetic"
+  },
+  "texture": {
+    "name": "treadmill",
+    "width": 48,
+    "height": 34
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      true,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "mudbrick",
+      "weight": 4
+    },
+    {
+      "item": "wood",
+      "weight": 8
+    }
+  ]
+}

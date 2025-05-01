@@ -1,0 +1,86 @@
+{
+  "name_key": "windmill",
+  "description_key": "windmill_description",
+  "width": 3,
+  "height": 3,
+  "type": "WindPoweredEnergySource",
+  "category": "Mechanisms",
+  "animated": true,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 50,
+  "range": 4,
+  "EnergySourceData":{
+    "GeneratedPower": 30,
+    "EnergyType": "Kinetic"
+  },
+  "texture": {
+    "name": "windmill",
+    "width": 48,
+    "height": 48
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "mudbrick",
+      "weight": 9
+    },
+    {
+      "item": "wood",
+      "weight": 8
+    }
+  ]
+}

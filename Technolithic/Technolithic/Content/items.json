@@ -1,0 +1,1622 @@
+{
+  "wooden_cart": {
+    "Id": 38,
+    "key": "wooden_cart",
+    "Durability": 300,
+    "ItemCategory": 7,
+    "Value": 2,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": 6,
+      "PositionY": 16,
+      "Rotation": 0
+    },
+    "Tool": {
+      "MeleeDamage": 0,
+      "RangeDamage": 0,
+      "Level": 1,
+      "Efficiency": 1.0,
+      "ToolType": 6,
+      "CreatureType": 1,
+      "RechargeTime": 0,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Haul", "Supply"]
+    }
+  },
+  "wooden_plow": {
+    "Id": 39,
+    "key": "wooden_plow",
+    "Durability": 50,
+    "ItemCategory": 7,
+    "Value": 2,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": 6,
+      "PositionY": 16,
+      "Rotation": 0
+    },
+    "Tool": {
+      "MeleeDamage": 0,
+      "RangeDamage": 0,
+      "Level": 1,
+      "Efficiency": 1.0,
+      "ToolType": 4,
+      "CreatureType": 1,
+      "RechargeTime": 0,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Plant"]
+    }
+  },
+  "copper_reaper": {
+    "Id": 37,
+    "key": "copper_reaper",
+    "Durability": 70,
+    "ItemCategory": 7,
+    "Value": 2,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -32,
+      "PositionY": 16,
+      "Rotation": 0
+    },
+    "Tool": {
+      "MeleeDamage": 0,
+      "RangeDamage": 0,
+      "Level": 1,
+      "Efficiency": 1.0,
+      "ToolType": 3,
+      "CreatureType": 1,
+      "RechargeTime": 0,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Harvest"]
+    }
+  },
+  "copper": {
+    "Id": 113,
+    "key": "copper",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 4
+  },
+  "bronze": {
+    "Id": 114,
+    "key": "bronze",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 5
+  },
+  "iron": {
+    "Id": 115,
+    "key": "iron",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 4
+  },
+  "iron_bloom": {
+    "Id": 48,
+    "key": "iron_bloom",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 3
+  },
+  "manure": {
+    "Id": 2,
+    "key": "manure",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 1
+  },
+  "wood": {
+    "Id": 15,
+    "key": "wood",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 1,
+    "Consumable": {
+      "Statistics": {
+        "Fuel": 15
+      }
+    }
+  },
+  "charcoal": {
+    "Id": 23,
+    "key": "charcoal",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 2,
+    "Consumable": {
+      "Statistics": {
+        "Fuel": 30
+      }
+    }
+  },
+  "dry_manure_fuel": {
+    "Id": 58,
+    "key": "dry_manure_fuel",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 2,
+    "Consumable": {
+      "Statistics": {
+        "Fuel": 10
+      }
+    }
+  },
+  "stone": {
+    "Id": 20,
+    "key": "stone",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 1
+  },
+  "bone": {
+    "Id": 22,
+    "key": "bone",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 1
+  },
+  "clay": {
+    "Id": 19,
+    "key": "clay",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 2
+  },
+  "leather": {
+    "Id": 71,
+    "key": "leather",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 4
+  },
+  "copper_ore": {
+    "Id": 17,
+    "key": "copper_ore",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 2
+  },
+  "tin_ore": {
+    "Id": 85,
+    "key": "tin_ore",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 2
+  },
+  "iron_ore": {
+    "Id": 84,
+    "key": "iron_ore",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 2
+  },
+  "crushed_copper_ore": {
+    "Id": 54,
+    "key": "crushed_copper_ore",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 2
+  },
+  "crushed_tin_ore": {
+    "Id": 55,
+    "key": "crushed_tin_ore",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 2
+  },
+  "crushed_iron_ore": {
+    "Id": 56,
+    "key": "crushed_iron_ore",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 2
+  },
+  "fiber": {
+    "Id": 11,
+    "key": "fiber",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 2
+  },
+  "wool": {
+    "Id": 18,
+    "key": "wool",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 2
+  },
+  "wool_yarn": {
+    "Id": 32,
+    "key": "wool_yarn",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 3
+  },
+  "wool_cloth": {
+    "Id": 33,
+    "key": "wool_cloth",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 4
+  },
+  "cloth": {
+    "Id": 12,
+    "key": "cloth",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 4
+  },
+  "yarn": {
+    "Id": 13,
+    "key": "yarn",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 3
+  },
+  "dry_skin": {
+    "Id": 46,
+    "key": "dry_skin",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 3
+  },
+  "raw_skin": {
+    "Id": 42,
+    "key": "raw_skin",
+    "IsDecayable": true,
+    "SpoilageRate": 25,
+    "Durability": 100,
+    "ItemCategory": 2,
+    "Value": 2
+  },
+  "mudbrick": {
+    "Id": 100,
+    "key": "mudbrick",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 2
+  },
+  "brick": {
+    "Id": 117,
+    "key": "brick",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 3
+  },
+  "settler_corpse": {
+    "Id": 126,
+    "key": "settler_corpse",
+    "Durability": 0,
+    "ItemCategory": 4,
+    "Value": 0
+  },
+  "stone_sickle": {
+    "Id": 139,
+    "key": "stone_sickle",
+    "Durability": 30,
+    "ItemCategory": 7,
+    "Value": 3,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 4,
+      "RangeDamage": 0,
+      "Level": 1,
+      "Efficiency": 1.0,
+      "ToolType": 3,
+      "CreatureType": 0,
+      "RechargeTime": 1.25,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Harvest"]
+    }
+  },
+  "bone_sickle": {
+    "Id": 138,
+    "key": "bone_sickle",
+    "Durability": 35,
+    "ItemCategory": 7,
+    "Value": 3,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 4,
+      "RangeDamage": 0,
+      "Level": 1,
+      "Efficiency": 1.5,
+      "ToolType": 3,
+      "CreatureType": 0,
+      "RechargeTime": 1.25,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Harvest"]
+    }
+  },
+  "copper_sickle": {
+    "Id": 140,
+    "key": "copper_sickle",
+    "Durability": 40,
+    "ItemCategory": 7,
+    "Value": 4,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 6,
+      "RangeDamage": 0,
+      "Level": 3,
+      "Efficiency": 2.0,
+      "ToolType": 3,
+      "CreatureType": 0,
+      "RechargeTime": 1.25,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Harvest"]
+    }
+  },
+  "bronze_sickle": {
+    "Id": 141,
+    "key": "bronze_sickle",
+    "Durability": 50,
+    "ItemCategory": 7,
+    "Value": 5,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 8,
+      "RangeDamage": 0,
+      "Level": 4,
+      "Efficiency": 3.0,
+      "ToolType": 3,
+      "CreatureType": 0,
+      "RechargeTime": 1.25,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Harvest"]
+    }
+  },
+  "iron_sickle": {
+    "Id": 142,
+    "key": "iron_sickle",
+    "Durability": 70,
+    "ItemCategory": 7,
+    "Value": 7,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 12,
+      "RangeDamage": 0,
+      "Level": 5,
+      "Efficiency": 5.0,
+      "ToolType": 3,
+      "CreatureType": 0,
+      "RechargeTime": 1.25,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Harvest"]
+    }
+  },
+  "stone_axe": {
+    "Id": 134,
+    "key": "stone_axe",
+    "Durability": 30,
+    "ItemCategory": 7,
+    "Value": 3,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 4,
+      "RangeDamage": 0,
+      "Level": 1,
+      "Efficiency": 1.0,
+      "ToolType": 0,
+      "CreatureType": 0,
+      "RechargeTime": 1.25,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Chop"]
+    }
+  },
+  "copper_axe": {
+    "Id": 135,
+    "key": "copper_axe",
+    "Durability": 40,
+    "ItemCategory": 7,
+    "Value": 4,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 6,
+      "RangeDamage": 0,
+      "Level": 2,
+      "Efficiency": 2.0,
+      "ToolType": 0,
+      "CreatureType": 0,
+      "RechargeTime": 1.25,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Chop"]
+    }
+  },
+  "bronze_axe": {
+    "Id": 136,
+    "key": "bronze_axe",
+    "Durability": 50,
+    "ItemCategory": 7,
+    "Value": 5,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 8,
+      "RangeDamage": 0,
+      "Level": 3,
+      "Efficiency": 3.0,
+      "ToolType": 0,
+      "CreatureType": 0,
+      "RechargeTime": 1.25,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Chop"]
+    }
+  },
+  "iron_axe": {
+    "Id": 137,
+    "key": "iron_axe",
+    "Durability": 70,
+    "ItemCategory": 7,
+    "Value": 7,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 12,
+      "RangeDamage": 0,
+      "Level": 5,
+      "Efficiency": 5.0,
+      "ToolType": 0,
+      "CreatureType": 0,
+      "RechargeTime": 1.25,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Chop"]
+    }
+  },
+  "stone_hoe": {
+    "Id": 129,
+    "key": "stone_hoe",
+    "Durability": 30,
+    "ItemCategory": 7,
+    "Value": 3,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 4,
+      "RangeDamage": 0,
+      "Level": 1,
+      "Efficiency": 1.0,
+      "ToolType": 4,
+      "CreatureType": 0,
+      "RechargeTime": 1.5,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Plant"]
+    }
+  },
+  "copper_hoe": {
+    "Id": 130,
+    "key": "copper_hoe",
+    "Durability": 40,
+    "ItemCategory": 7,
+    "Value": 4,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 6,
+      "RangeDamage": 0,
+      "Level": 2,
+      "Efficiency": 2.0,
+      "ToolType": 4,
+      "CreatureType": 0,
+      "RechargeTime": 1.5,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Plant"]
+    }
+  },
+  "bronze_hoe": {
+    "Id": 131,
+    "key": "bronze_hoe",
+    "Durability": 50,
+    "ItemCategory": 7,
+    "Value": 5,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 8,
+      "RangeDamage": 0,
+      "Level": 3,
+      "Efficiency": 3.0,
+      "ToolType": 4,
+      "CreatureType": 0,
+      "RechargeTime": 1.5,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Plant"]
+    }
+  },
+  "iron_hoe": {
+    "Id": 132,
+    "key": "iron_hoe",
+    "Durability": 70,
+    "ItemCategory": 7,
+    "Value": 7,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 12,
+      "RangeDamage": 0,
+      "Level": 5,
+      "Efficiency": 5.0,
+      "ToolType": 4,
+      "CreatureType": 0,
+      "RechargeTime": 1.5,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Plant"]
+    }
+  },
+  "stone_pick": {
+    "Id": 145,
+    "key": "stone_pick",
+    "Durability": 30,
+    "ItemCategory": 7,
+    "Value": 3,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 4,
+      "RangeDamage": 0,
+      "Level": 1,
+      "Efficiency": 1.0,
+      "ToolType": 1,
+      "CreatureType": 0,
+      "RechargeTime": 1.5,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Mine"]
+    }
+  },
+  "copper_pick": {
+    "Id": 146,
+    "key": "copper_pick",
+    "Durability": 40,
+    "ItemCategory": 7,
+    "Value": 4,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 6,
+      "RangeDamage": 0,
+      "Level": 2,
+      "Efficiency": 2.0,
+      "ToolType": 1,
+      "CreatureType": 0,
+      "RechargeTime": 1.5,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Mine"]
+    }
+  },
+  "bronze_pick": {
+    "Id": 147,
+    "key": "bronze_pick",
+    "Durability": 50,
+    "ItemCategory": 7,
+    "Value": 5,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 8,
+      "RangeDamage": 0,
+      "Level": 3,
+      "Efficiency": 3.0,
+      "ToolType": 1,
+      "CreatureType": 0,
+      "RechargeTime": 1.5,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Mine"]
+    }
+  },
+  "iron_pick": {
+    "Id": 148,
+    "key": "iron_pick",
+    "Durability": 70,
+    "ItemCategory": 7,
+    "Value": 7,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 12,
+      "RangeDamage": 0,
+      "Level": 5,
+      "Efficiency": 5.0,
+      "ToolType": 1,
+      "CreatureType": 0,
+      "RechargeTime": 1.5,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Mine"]
+    }
+  },
+  "wooden_spear": {
+    "Id": 152,
+    "key": "wooden_spear",
+    "Durability": 30,
+    "ItemCategory": 14,
+    "Value": 2,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 4,
+      "RangeDamage": 0,
+      "Level": 1,
+      "Efficiency": 0.0,
+      "ToolType": 2,
+      "CreatureType": 0,
+      "RechargeTime": 1.0,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Hunt"]
+    }
+  },
+  "stone_spear": {
+    "Id": 153,
+    "key": "stone_spear",
+    "Durability": 40,
+    "ItemCategory": 14,
+    "Value": 3,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 6,
+      "RangeDamage": 0,
+      "Level": 2,
+      "Efficiency": 0.0,
+      "ToolType": 2,
+      "CreatureType": 0,
+      "RechargeTime": 1.0,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Hunt"]
+    }
+  },
+  "bone_spear": {
+    "Id": 151,
+    "key": "bone_spear",
+    "Durability": 45,
+    "ItemCategory": 14,
+    "Value": 3,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 7,
+      "RangeDamage": 0,
+      "Level": 3,
+      "Efficiency": 0.0,
+      "ToolType": 2,
+      "CreatureType": 0,
+      "RechargeTime": 1.0,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Hunt"]
+    }
+  },
+  "copper_spear": {
+    "Id": 154,
+    "key": "copper_spear",
+    "Durability": 60,
+    "ItemCategory": 14,
+    "Value": 4,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 8,
+      "RangeDamage": 0,
+      "Level": 4,
+      "Efficiency": 0.0,
+      "ToolType": 2,
+      "CreatureType": 0,
+      "RechargeTime": 1.0,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Hunt"]
+    }
+  },
+  "bronze_spear": {
+    "Id": 155,
+    "key": "bronze_spear",
+    "Durability": 70,
+    "ItemCategory": 14,
+    "Value": 5,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 10,
+      "RangeDamage": 0,
+      "Level": 5,
+      "Efficiency": 0.0,
+      "ToolType": 2,
+      "CreatureType": 0,
+      "RechargeTime": 1.0,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Hunt"]
+    }
+  },
+  "iron_spear": {
+    "Id": 156,
+    "key": "iron_spear",
+    "Durability": 80,
+    "ItemCategory": 14,
+    "Value": 7,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 14,
+      "RangeDamage": 0,
+      "Level": 6,
+      "Efficiency": 0.0,
+      "ToolType": 2,
+      "CreatureType": 0,
+      "RechargeTime": 1.0,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Hunt"]
+    }
+  },
+  "wooden_harpoon": {
+    "Id": 158,
+    "key": "wooden_harpoon",
+    "Durability": 20,
+    "ItemCategory": 7,
+    "Value": 2,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 2,
+      "RangeDamage": 0,
+      "Level": 1,
+      "Efficiency": 0.25,
+      "ToolType": 5,
+      "CreatureType": 0,
+      "RechargeTime": 1.0,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Fish"]
+    }
+  },
+  "stone_harpoon": {
+    "Id": 159,
+    "key": "stone_harpoon",
+    "Durability": 30,
+    "ItemCategory": 7,
+    "Value": 3,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 4,
+      "RangeDamage": 0,
+      "Level": 2,
+      "Efficiency": 0.3,
+      "ToolType": 5,
+      "CreatureType": 0,
+      "RechargeTime": 1.0,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Fish"]
+    }
+  },
+  "bone_harpoon": {
+    "Id": 157,
+    "key": "bone_harpoon",
+    "Durability": 35,
+    "ItemCategory": 7,
+    "Value": 3,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 4,
+      "RangeDamage": 0,
+      "Level": 3,
+      "Efficiency": 0.35,
+      "ToolType": 5,
+      "CreatureType": 0,
+      "RechargeTime": 1.0,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Fish"]
+    }
+  },
+  "copper_harpoon": {
+    "Id": 160,
+    "key": "copper_harpoon",
+    "Durability": 40,
+    "ItemCategory": 7,
+    "Value": 4,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 6,
+      "RangeDamage": 0,
+      "Level": 4,
+      "Efficiency": 0.4,
+      "ToolType": 5,
+      "CreatureType": 0,
+      "RechargeTime": 1.0,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Fish"]
+    }
+  },
+  "bronze_harpoon": {
+    "Id": 161,
+    "key": "bronze_harpoon",
+    "Durability": 50,
+    "ItemCategory": 7,
+    "Value": 5,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 8,
+      "RangeDamage": 0,
+      "Level": 5,
+      "Efficiency": 0.5,
+      "ToolType": 5,
+      "CreatureType": 0,
+      "RechargeTime": 1.0,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Fish"]
+    }
+  },
+  "iron_harpoon": {
+    "Id": 162,
+    "key": "iron_harpoon",
+    "Durability": 70,
+    "ItemCategory": 7,
+    "Value": 7,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 12,
+      "RangeDamage": 0,
+      "Level": 6,
+      "Efficiency": 0.6,
+      "ToolType": 5,
+      "CreatureType": 0,
+      "RechargeTime": 1.0,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Fish"]
+    }
+  },
+  "fishing_rod": {
+    "Id": 164,
+    "key": "fishing_rod",
+    "Durability": 40,
+    "ItemCategory": 7,
+    "Value": 5,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 2,
+      "RangeDamage": 0,
+      "Level": 7,
+      "Efficiency": 1.0,
+      "ToolType": 5,
+      "CreatureType": 0,
+      "RechargeTime": 1.0,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "LaborTypes": ["Fish"]
+    }
+  },
+  "sling": {
+    "Id": 79,
+    "key": "sling",
+    "Durability": 30,
+    "ItemCategory": 14,
+    "Value": 3,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 3,
+      "RangeDamage": 4,
+      "Level": 1,
+      "Efficiency": 0.0,
+      "ToolType": 7,
+      "CreatureType": 0,
+      "RechargeTime": 1.5,
+      "AmmoTextureId": 255,
+      "ProjectileSpeed": 1,
+      "LaborTypes": ["Hunt"]
+    }
+  },
+  "bow": {
+    "Id": 51,
+    "key": "bow",
+    "Durability": 50,
+    "ItemCategory": 14,
+    "Value": 4,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 4,
+      "RangeDamage": 6,
+      "Level": 2,
+      "Efficiency": 0.0,
+      "ToolType": 7,
+      "CreatureType": 0,
+      "RechargeTime": 1.25,
+      "AmmoTextureId": 254,
+      "ProjectileSpeed": 1,
+      "LaborTypes": ["Hunt"]
+    }
+  },
+  "crossbow": {
+    "Id": 52,
+    "key": "crossbow",
+    "Durability": 50,
+    "ItemCategory": 14,
+    "Value": 6,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 6,
+      "RangeDamage": 10,
+      "Level": 3,
+      "Efficiency": 0.0,
+      "ToolType": 7,
+      "CreatureType": 0,
+      "RechargeTime": 1.5,
+      "AmmoTextureId": 254,
+      "ProjectileSpeed": 1,
+      "LaborTypes": ["Hunt"]
+    }
+  },
+  "barley_seeds": {
+    "Id": 81,
+    "key": "barley_seeds",
+    "Durability": 0,
+    "ItemCategory": 5,
+    "Value": 1
+  },
+  "pea_seeds": {
+    "Id": 83,
+    "key": "pea_seeds",
+    "Durability": 0,
+    "ItemCategory": 5,
+    "Value": 1
+  },
+  "sheaf_of_barley": {
+    "Id": 31,
+    "key": "sheaf_of_barley",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 1
+  },
+  "bunch_of_peas": {
+    "Id": 47,
+    "key": "bunch_of_peas",
+    "Durability": 0,
+    "ItemCategory": 2,
+    "Value": 1
+  },
+  "skins_outfit": {
+    "Id": 25,
+    "key": "skins_outfit",
+    "Durability": 80,
+    "IsDecayable": true,
+    "ItemCategory": 8,
+    "Value": 4,
+    "Equipment": {
+      "TextureData": {
+        "Source": "clothes",
+        "X": 24,
+        "Y": 0,
+        "Width": 24,
+        "Height": 24
+      },
+      "PositionX": -12,
+      "PositionY": 12,
+      "Rotation": 0
+    },
+    "Outfit": {
+      "Defense": 2,
+      "IsTop": false
+    }
+  },
+  "fur_cape": {
+    "Id": 41,
+    "key": "warm_fur_clothes",
+    "Durability": 80,
+    "IsDecayable": true,
+    "ItemCategory": 8,
+    "Value": 6,
+    "Equipment": {
+      "TextureData": {
+        "Source": "clothes",
+        "X": 48,
+        "Y": 24,
+        "Width": 24,
+        "Height": 24
+      },
+      "PositionX": -12,
+      "PositionY": 12,
+      "Rotation": 0
+    },
+    "Outfit": {
+      "Defense": 2,
+      "IsTop": true
+    }
+  },
+  "woven_cape": {
+    "Id": 3,
+    "key": "warm_knitted_clothes",
+    "Durability": 120,
+    "IsDecayable": true,
+    "ItemCategory": 8,
+    "Value": 8,
+    "Equipment": {
+      "TextureData": {
+        "Source": "clothes",
+        "X": 72,
+        "Y": 0,
+        "Width": 24,
+        "Height": 24
+      },
+      "PositionX": -12,
+      "PositionY": 12,
+      "Rotation": 0
+    },
+    "Outfit": {
+      "Defense": 2,
+      "IsTop": true
+    }
+  },
+  "woven_clothing": {
+    "Id": 14,
+    "key": "woven_clothing",
+    "Durability": 120,
+    "IsDecayable": true,
+    "ItemCategory": 8,
+    "Value": 5,
+    "Equipment": {
+      "TextureData": {
+        "Source": "clothes",
+        "X": 24,
+        "Y": 24,
+        "Width": 24,
+        "Height": 24
+      },
+      "PositionX": -12,
+      "PositionY": 12,
+      "Rotation": 0
+    },
+    "Outfit": {
+      "Defense": 4,
+      "IsTop": false
+    }
+  },
+  "chainmail": {
+    "Id": 30,
+    "key": "chainmail",
+    "Durability": 150,
+    "IsDecayable": true,
+    "ItemCategory": 8,
+    "Value": 9,
+    "Equipment": {
+      "TextureData": {
+        "Source": "clothes",
+        "X": 0,
+        "Y": 24,
+        "Width": 24,
+        "Height": 24
+      },
+      "PositionX": -12,
+      "PositionY": 12,
+      "Rotation": 0
+    },
+    "Outfit": {
+      "Defense": 8,
+      "IsTop": false
+    }
+  },
+  "leather_outfit": {
+    "Id": 24,
+    "key": "leather_outfit",
+    "Durability": 100,
+    "IsDecayable": true,
+    "ItemCategory": 8,
+    "Value": 5,
+    "Equipment": {
+      "TextureData": {
+        "Source": "clothes",
+        "X": 0,
+        "Y": 0,
+        "Width": 24,
+        "Height": 24
+      },
+      "PositionX": -12,
+      "PositionY": 12,
+      "Rotation": 0
+    },
+    "Outfit": {
+      "Defense": 4,
+      "IsTop": false
+    }
+  },
+  "ceramic_pot": {
+    "Id": 1,
+    "key": "ceramic_pot",
+    "Durability": 0,
+    "ItemCategory": 9,
+    "Value": 4
+  },
+  "unfired_pot": {
+    "Id": 36,
+    "key": "unfired_pot",
+    "Durability": 0,
+    "ItemCategory": 9,
+    "Value": 3
+  },
+  "basket": {
+    "Id": 50,
+    "key": "basket",
+    "Durability": 0,
+    "ItemCategory": 9,
+    "Value": 2
+  },
+  "pot_of_beer": {
+    "Id": 5,
+    "key": "pot_of_beer",
+    "Durability": 0,
+    "ItemCategory": 6,
+    "Value": 6,
+    "Consumable": {
+      "Statistics": {
+        "Happiness": 100
+      },
+      "Container": "ceramic_pot"
+    }
+  },
+  "pot_of_mead": {
+    "Id": 4,
+    "key": "pot_of_mead",
+    "Durability": 0,
+    "ItemCategory": 6,
+    "Value": 6,
+    "Consumable": {
+      "Statistics": {
+        "Happiness": 100
+      },
+      "Container": "ceramic_pot"
+    }
+  },
+  "pot_of_wine": {
+    "Id": 6,
+    "key": "pot_of_wine",
+    "Durability": 0,
+    "ItemCategory": 6,
+    "Value": 6,
+    "Consumable": {
+      "Statistics": {
+        "Happiness": 70
+      },
+      "Container": "ceramic_pot"
+    }
+  },
+  "pot_of_water": {
+    "Id": 7,
+    "key": "pot_of_water",
+    "Durability": 0,
+    "ItemCategory": 0,
+    "Value": 4
+  },
+  "pot_of_milk": {
+    "Id": 8,
+    "key": "pot_of_milk",
+    "IsDecayable": true,
+    "Durability": 100,
+    "SpoilageRate": 25,
+    "ItemCategory": 0,
+    "Value": 6
+  },
+  "flour": {
+    "Id": 40,
+    "key": "flour",
+    "Durability": 0,
+    "ItemCategory": 0,
+    "Value": 3
+  },
+  "grape": {
+    "Id": 69,
+    "key": "grape",
+    "IsDecayable": true,
+    "Durability": 100,
+    "SpoilageRate": 25,
+    "ItemCategory": 6,
+    "Value": 2,
+    "Consumable": {
+      "Statistics": {
+        "Satiety": 15,
+        "Happiness": 1
+      }
+    }
+  },
+  "raw_meat": {
+    "Id": 43,
+    "key": "raw_meat",
+    "IsDecayable": true,
+    "Durability": 100,
+    "SpoilageRate": 25,
+    "ItemCategory": 6,
+    "Value": 2,
+    "Consumable": {
+      "Statistics": {
+        "Satiety": 35,
+        "Happiness": -2
+      },
+      "ApplyStatusEffect": "FoodPoisoning",
+      "StatusEffectChance": 10
+    }
+  },
+  "animal_fat": {
+    "Id": 49,
+    "key": "animal_fat",
+    "IsDecayable": true,
+    "Durability": 100,
+    "SpoilageRate": 14.285,
+    "ItemCategory": 0,
+    "Value": 3,
+    "Consumable": {
+      "Statistics": {
+        "Fuel": 20
+      }
+    }
+  },
+  "dry_fish": {
+    "Id": 44,
+    "key": "dry_fish",
+    "IsDecayable": true,
+    "Durability": 100,
+    "SpoilageRate": 6.25,
+    "ItemCategory": 6,
+    "Value": 2,
+    "Consumable": {
+      "Statistics": {
+        "Satiety": 30,
+        "Happiness": -2
+      }
+    }
+  },
+  "dry_meat": {
+    "Id": 45,
+    "key": "dry_meat",
+    "IsDecayable": true,
+    "Durability": 100,
+    "SpoilageRate": 6.25,
+    "ItemCategory": 6,
+    "Value": 2,
+    "Consumable": {
+      "Statistics": {
+        "Satiety": 35,
+        "Happiness": -3
+      }
+    }
+  },
+  "pemmican": {
+    "Id": 57,
+    "key": "pemmican",
+    "IsDecayable": true,
+    "Durability": 100,
+    "SpoilageRate": 4,
+    "ItemCategory": 6,
+    "Value": 4,
+    "Consumable": {
+      "Statistics": {
+        "Satiety": 50,
+        "Happiness": 1
+      }
+    }
+  },
+  "raw_fish": {
+    "Id": 28,
+    "key": "raw_fish",
+    "IsDecayable": true,
+    "Durability": 100,
+    "SpoilageRate": 25,
+    "ItemCategory": 6,
+    "Value": 2,
+    "Consumable": {
+      "Statistics": {
+        "Satiety": 30,
+        "Happiness": -1
+      },
+      "ApplyStatusEffect": "FoodPoisoning",
+      "StatusEffectChance": 10
+    }
+  },
+  "cooked_meat": {
+    "Id": 26,
+    "key": "cooked_meat",
+    "IsDecayable": true,
+    "Durability": 100,
+    "SpoilageRate": 12.5,
+    "ItemCategory": 6,
+    "Value": 2,
+    "Consumable": {
+      "Statistics": {
+        "Satiety": 45,
+        "Happiness": 0
+      }
+    }
+  },
+  "cooked_fish": {
+    "Id": 27,
+    "key": "cooked_fish",
+    "IsDecayable": true,
+    "Durability": 100,
+    "SpoilageRate": 12.5,
+    "ItemCategory": 6,
+    "Value": 2,
+    "Consumable": {
+      "Statistics": {
+        "Satiety": 40,
+        "Happiness": 1
+      }
+    }
+  },
+  "flatbread": {
+    "Id": 21,
+    "key": "flatbread",
+    "IsDecayable": true,
+    "Durability": 100,
+    "SpoilageRate": 12.5,
+    "ItemCategory": 6,
+    "Value": 4,
+    "Consumable": {
+      "Statistics": {
+        "Satiety": 50,
+        "Happiness": 4
+      }
+    }
+  },
+  "pea_soup": {
+    "Id": 29,
+    "key": "pea_soup",
+    "IsDecayable": true,
+    "Durability": 100,
+    "SpoilageRate": 20,
+    "ItemCategory": 6,
+    "Value": 3,
+    "Consumable": {
+      "Statistics": {
+        "Satiety": 50,
+        "Happiness": 4
+      }
+    }
+  },
+  "raisin_buns": {
+    "Id": 16,
+    "key": "raisin_buns",
+    "IsDecayable": true,
+    "Durability": 100,
+    "SpoilageRate": 12.5,
+    "ItemCategory": 6,
+    "Value": 3,
+    "Consumable": {
+      "Statistics": {
+        "Satiety": 70,
+        "Happiness": 5
+      }
+    }
+  },
+  "cheese": {
+    "Id": 34,
+    "key": "cheese",
+    "IsDecayable": true,
+    "Durability": 100,
+    "SpoilageRate": 12.5,
+    "ItemCategory": 6,
+    "Value": 3,
+    "Consumable": {
+      "Statistics": {
+        "Satiety": 60,
+        "Happiness": 4
+      }
+    }
+  },
+  "food_poisoning_cure": {
+    "Id": 35,
+    "key": "food_poisoning_cure",
+    "IsDecayable": true,
+    "Durability": 100,
+    "SpoilageRate": 10.0,
+    "ItemCategory": 15,
+    "Value": 3,
+    "Consumable": {
+      "Statistics": {
+        
+      },
+      "RemoveStatusEffect": "FoodPoisoning",
+      "StatusEffectChance": 100
+    }
+  },
+  "honeycomb": {
+    "Id": 102,
+    "key": "honeycomb",
+    "IsDecayable": false,
+    "Durability": 0,
+    "ItemCategory": 0,
+    "Value": 3,
+    "Consumable": null
+  },
+  "hay": {
+    "Id": 10,
+    "key": "hay",
+    "Durability": 100,
+    "IsDecayable": true,
+    "SpoilageRate": 10,
+    "ItemCategory": 13,
+    "Value": 1,
+    "Consumable": {
+      "Statistics": {
+        "Satiety": 100
+      }
+    }
+  },
+  "knowledge_points": {
+    "Id": 9,
+    "key": "knowledge_points",
+    "Durability": 0,
+    "ItemCategory": -1,
+    "Value": 0,
+    "IsVirtual": true
+  }
+}

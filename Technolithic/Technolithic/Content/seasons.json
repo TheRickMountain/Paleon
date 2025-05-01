@@ -1,0 +1,14 @@
+{
+  "0": {
+    "key": "summer"
+  },
+  "1":{
+    "key": "autumn"
+  },
+  "2":{
+    "key": "winter"
+  },
+  "3":{
+    "key": "spring"
+  }
+}

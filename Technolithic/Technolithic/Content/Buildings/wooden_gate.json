@@ -1,0 +1,41 @@
+{
+  "name_key": "wooden_gate",
+  "description_key": "point_of_entry_to_a_space_which_is_enclosed_by_walls",
+  "width": 1,
+  "height": 1,
+  "type": "Gate",
+  "category": "Wall",
+  "animated": true,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": -1,
+  "constructionTime": 10,
+  "texture": {
+    "name": "wooden_gate",
+    "width": 16,
+    "height": 16
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "wood",
+      "weight": 2
+    }
+  ]
+}

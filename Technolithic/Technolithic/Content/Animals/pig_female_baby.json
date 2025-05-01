@@ -1,0 +1,53 @@
+{
+    "key":  "pig",
+    "kind":  "pig",
+    "texture":  {
+                    "name":  "pig_female_baby",
+                    "width":  24,
+                    "height":  24
+                },
+    "attributes":  [
+                       {
+                           "name":  "Satiety"
+                       },
+                       {
+                           "name":  "Energy"
+                       },
+                       {
+                           "name":  "Health"
+                       }
+                   ],
+    "movementSpeed":  3.7,
+    "canProtect":  false,
+    "isWild":  false,
+    "gender":  "F",
+    "health":  25,
+    "hunger":  100,
+    "energy":  100,
+    "DaysUntilAging":  4,
+    "damage":  8,
+    "defense":  0,
+    "ration":  [
+                   "hay"
+               ],
+    "drop":  [
+                 {
+                     "item":  "raw_meat",
+                     "count":  1
+                 },
+                 {
+                     "item":  "raw_skin",
+                     "count":  1
+                 },
+                 {
+                     "item":  "bone",
+                     "count":  1
+                 }
+             ],
+    "allowedLabors":  [
+
+                      ],
+    "attackChance":  0,
+    "Price":  48,
+    "AgeState":  "Baby"
+}

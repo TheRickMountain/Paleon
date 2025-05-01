@@ -1,0 +1,506 @@
+[
+  {
+    "Id": 0,
+    "Name": "stone_tools",
+    "HasIcon": false,
+    "Age": "Paleolithic",
+    "RequiredXP": 50,
+    "UnlockedItems": ["stone_spear", "stone_harpoon", "stone_axe", "stone_pick", "stone_sickle", "stone_hoe"],
+    "UnlockedActions": ["Chop", "ChopCompletely", "Mine"],
+    "Parents": []
+  },
+  {
+    "Id": 74,
+    "Name": "primitive_medicine",
+    "HasIcon": false,
+    "Age": "Paleolithic",
+    "RequiredXP": 50,
+    "UnlockedItems": ["food_poisoning_cure"],
+    "UnlockedBuildings": ["herbalist_table"],
+    "Parents": []
+  },
+  {
+    "Id": 75,
+    "Name": "trading",
+    "HasIcon": false,
+    "Age": "Paleolithic",
+    "RequiredXP": 50,
+    "UnlockedBuildings": ["trading_post"],
+    "Parents": []
+  },
+  {
+    "Id": 42,
+    "Name": "food_drying",
+    "HasIcon": false,
+    "Age": "Paleolithic",
+    "RequiredXP": 50,
+    "UnlockedItems": ["dry_fish", "dry_meat"],
+    "UnlockedBuildings": ["food_dryer"],
+    "Parents": []
+  },
+  {
+    "Id": 2,
+    "Name": "sling",
+    "HasIcon": false,
+    "Age": "Paleolithic",
+    "RequiredXP": 50,
+    "UnlockedItems": ["sling"],
+    "Parents": []
+  },
+  {
+    "Id": 35,
+    "Name": "fish_trap",
+    "HasIcon": false,
+    "Age": "Paleolithic",
+    "RequiredXP": 50,
+    "UnlockedBuildings": ["fish_trap"],
+    "UnlockedItems": ["basket"],
+    "Parents": []
+  },
+  {
+    "Id": 6,
+    "Name": "tanning",
+    "HasIcon": false,
+    "Age": "Paleolithic",
+    "RequiredXP": 50,
+    "UnlockedBuildings": ["tanning_pit"],
+    "UnlockedItems": ["leather", "leather_outfit"],
+    "Parents": []
+  },
+  {
+    "Id": 11,
+    "Name": "oven",
+    "HasIcon": false,
+    "Age": "Mesolithic",
+    "RequiredXP": 175,
+    "UnlockedBuildings": ["oven"],
+    "Parents": []
+  },
+  {
+    "Id": 81,
+    "Name": "oil_lamp",
+    "HasIcon": false,
+    "Age": "Mesolithic",
+    "RequiredXP": 175,
+    "UnlockedBuildings": ["oil_lamp"],
+    "Parents": []
+  },
+  {
+    "Id": 82,
+    "Name": "pemmican",
+    "HasIcon": false,
+    "Age": "Mesolithic",
+    "RequiredXP": 175,
+    "UnlockedItems": [ "pemmican" ],
+    "Parents": [11, 42]
+  },
+  {
+    "Id": 66,
+    "Name": "bone_tools",
+    "HasIcon": false,
+    "Age": "Mesolithic",
+    "RequiredXP": 175,
+    "UnlockedItems": ["bone_sickle", "bone_spear", "bone_harpoon"],
+    "Parents": [0]
+  },
+  {
+    "Id": 43,
+    "Name": "mine_mine",
+    "HasIcon": false,
+    "Age": "Mesolithic",
+    "RequiredXP": 175,
+    "UnlockedBuildings": ["mine"],
+    "Parents": [0]
+  },
+  {
+    "Id": 5,
+    "Name": "pottery",
+    "HasIcon": false,
+    "Age": "Mesolithic",
+    "RequiredXP": 175,
+    "UnlockedItems": ["ceramic_pot", "unfired_pot", "pot_of_water"],
+    "UnlockedBuildings": ["kiln", "water_gathering_place"],
+    "Parents": []
+  },
+  {
+    "Id": 3,
+    "Name": "grain_processing",
+    "HasIcon": false,
+    "Age": "Mesolithic",
+    "RequiredXP": 175,
+    "UnlockedBuildings": ["thresher", "mealing_stone"],
+    "UnlockedItems": ["flour", "flatbread", "pea_soup", "raisin_buns"],
+    "Parents": [11, 5]
+  },
+  {
+    "Id": 54,
+    "Name": "wolf_domestication",
+    "HasIcon": true,
+    "Age": "Mesolithic",
+    "RequiredXP": 175,
+    "UnlockedAnimals": ["dog_male_baby", "dog_female_baby", "dog_male_adult", "dog_female_adult", "dog_male_old", "dog_female_old"],
+    "Parents": []
+  },
+  {
+    "Id": 12,
+    "Name": "clay_hut",
+    "HasIcon": false,
+    "Age": "Mesolithic",
+    "RequiredXP": 175,
+    "UnlockedBuildings": ["clay_hut"],
+    "Parents": []
+  },
+  {
+    "Id": 48,
+    "Name": "storage",
+    "HasIcon": false,
+    "Age": "Mesolithic",
+    "RequiredXP": 175,
+    "UnlockedBuildings": ["clay_barn", "food_storage_hut"],
+    "Parents": [12]
+  },
+  {
+    "Id": 19,
+    "Name": "bow",
+    "HasIcon": false,
+    "Age": "Mesolithic",
+    "RequiredXP": 175,
+    "UnlockedItems": ["bow"],
+    "Parents": [2]
+  },
+  {
+    "Id": 23,
+    "Name": "alcoholic_drinks",
+    "HasIcon": false,
+    "Age": "Mesolithic",
+    "RequiredXP": 175,
+    "UnlockedBuildings": ["fermentation_pot"],
+    "UnlockedItems": ["pot_of_beer", "pot_of_wine", "pot_of_mead"],
+    "Parents": [5]
+  },
+  {
+    "Id": 7,
+    "Name": "bridge",
+    "HasIcon": false,
+    "Age": "Neolithic",
+    "RequiredXP": 500,
+    "UnlockedBuildings": ["wooden_bridge_surface"],
+    "Parents": []
+  },
+  {
+    "Id": 8,
+    "Name": "agriculture",
+    "HasIcon": true,
+    "Age": "Neolithic",
+    "RequiredXP": 500,
+    "UnlockedBuildings": ["pea", "oak", "barley", "dandelion", "grape_bush", "flax", "haystack"],
+    "Parents": []
+  },
+  {
+    "Id": 34,
+    "Name": "irrigation",
+    "HasIcon": true,
+    "Age": "Neolithic",
+    "RequiredXP": 500,
+    "Parents": [8, 5]
+  },
+  {
+    "Id": 46,
+    "Name": "irrigation_canals",
+    "HasIcon": true,
+    "Age": "Neolithic",
+    "RequiredXP": 500,
+    "UnlockedActions": ["BuildIrrigationCanal", "DestructIrrigationCanal"],
+    "Parents": [34]
+  },
+  {
+    "Id": 9,
+    "Name": "animals_domestication",
+    "HasIcon": true,
+    "Age": "Neolithic",
+    "RequiredXP": 500,
+    "UnlockedBuildings": ["animal_pen"],
+    "UnlockedAnimals": ["cattle_male_baby", "cattle_female_baby", "sheep_male_baby", "sheep_female_baby", "horse_male_baby", "horse_female_baby", "pig_male_baby", "pig_female_baby", "cattle_male_adult", "cattle_female_adult", "sheep_male_adult", "sheep_female_adult", "horse_male_adult", "horse_female_adult", "pig_male_adult", "pig_female_adult", "cattle_male_old", "cattle_female_old", "sheep_male_old", "sheep_female_old", "horse_male_old", "horse_female_old", "pig_male_old", "pig_female_old"],
+    "UnlockedActions": ["Slaughter"],
+    "Parents": [54]
+  },
+  {
+    "Id": 91,
+    "Name": "threshing_floor",
+    "HasIcon": false,
+    "Age": "Neolithic",
+    "RequiredXP": 500,
+    "UnlockedBuildings": ["threshing_floor"],
+    "Parents": [3, 9]
+  },
+  {
+    "Id": 51,
+    "Name": "beekeeping",
+    "HasIcon": false,
+    "Age": "Neolithic",
+    "RequiredXP": 500,
+    "UnlockedBuildings": ["bee_hive"],
+    "Parents": []
+  },
+  {
+    "Id": 10,
+    "Name": "weaving",
+    "HasIcon": false,
+    "Age": "Neolithic",
+    "RequiredXP": 500,
+    "UnlockedBuildings": ["warp_weighted_loom", "drop_spindle"],
+    "UnlockedItems": ["yarn", "cloth", "woven_clothing"],
+    "Parents": []
+  },
+  {
+    "Id": 71,
+    "Name": "wool_clothing",
+    "HasIcon": false,
+    "Age": "Neolithic",
+    "RequiredXP": 500,
+    "UnlockedItems": ["wool_yarn", "wool_cloth", "woven_cape"],
+    "Parents": [10, 9]
+  },
+  {
+    "Id": 50,
+    "Name": "fishing_rod",
+    "HasIcon": false,
+    "Age": "Neolithic",
+    "RequiredXP": 500,
+    "UnlockedItems": ["fishing_rod"],
+    "Parents": [10]
+  },
+  {
+    "Id": 13,
+    "Name": "walls",
+    "HasIcon": false,
+    "Age": "Neolithic",
+    "RequiredXP": 500,
+    "UnlockedBuildings": ["stone_wall", "palisade", "wooden_gate"],
+    "Parents": []
+  },
+  {
+    "Id": 14,
+    "Name": "dolmen",
+    "HasIcon": false,
+    "Age": "Neolithic",
+    "RequiredXP": 500,
+    "UnlockedBuildings": ["dolmen"],
+    "Parents": []
+  },
+  {
+    "Id": 53,
+    "Name": "dry_manure_fuel",
+    "HasIcon": false,
+    "Age": "Neolithic",
+    "RequiredXP": 500,
+    "UnlockedBuildings": ["manure_drying_area"],
+    "UnlockedItems": ["dry_manure_fuel"],
+    "Parents": [9]
+  },
+  {
+    "Id": 15,
+    "Name": "copper_smelting",
+    "HasIcon": false,
+    "Age": "Chalcolithic",
+    "RequiredXP": 1000,
+    "UnlockedBuildings": ["bloomery", "stone_anvil", "mortar", "clay_charcoal_kiln"],
+    "UnlockedItems": ["copper_ore", "crushed_copper_ore", "copper", "copper_spear", "copper_harpoon", "copper_axe", "copper_pick", "copper_sickle", "copper_hoe", "charcoal"],
+    "Parents": [0, 6, 5]
+  },
+  {
+    "Id": 16,
+    "Name": "bronze_smelting",
+    "HasIcon": false,
+    "Age": "BronzeAge",
+    "RequiredXP": 2000,
+    "UnlockedItems": ["tin_ore", "crushed_tin_ore", "bronze", "bronze_spear", "bronze_harpoon", "bronze_axe", "bronze_pick", "bronze_sickle", "bronze_hoe"],
+    "Parents": [15]
+  },
+  {
+    "Id": 44,
+    "Name": "spinning_wheel",
+    "HasIcon": false,
+    "Age": "BronzeAge",
+    "RequiredXP": 2000,
+    "UnlockedBuildings": ["spinning_wheel"],
+    "Parents": [10]
+  },
+  {
+    "Id": 17,
+    "Name": "iron_smelting",
+    "HasIcon": false,
+    "Age": "IronAge",
+    "RequiredXP": 4000,
+    "UnlockedBuildings": ["copper_anvil"],
+    "UnlockedItems": ["iron_ore", "crushed_iron_ore", "iron_bloom", "iron", "iron_spear", "iron_harpoon", "iron_axe", "iron_pick", "iron_sickle", "iron_hoe"],
+    "Parents": [16]
+  },
+  {
+    "Id": 20,
+    "Name": "millstone",
+    "HasIcon": false,
+    "Age": "Neolithic",
+    "RequiredXP": 500,
+    "UnlockedBuildings": ["millstone"],
+    "Parents": [3]
+  },
+  {
+    "Id": 24,
+    "Name": "well",
+    "HasIcon": false,
+    "Age": "Neolithic",
+    "RequiredXP": 500,
+    "UnlockedBuildings": ["well"],
+    "Parents": [5]
+  },
+  {
+    "Id": 26,
+    "Name": "wooden_plow",
+    "HasIcon": false,
+    "Age": "Chalcolithic",
+    "RequiredXP": 1000,
+    "UnlockedItems": ["wooden_plow"],
+    "UnlockedBuildings": ["workshop"],
+    "Parents": [9, 8]
+  },
+  {
+    "Id": 27,
+    "Name": "wooden_cart",
+    "HasIcon": false,
+    "Age": "Chalcolithic",
+    "RequiredXP": 1000,
+    "UnlockedItems": ["wooden_cart"],
+    "UnlockedBuildings": ["workshop"],
+    "Parents": [9]
+  },
+  {
+    "Id": 41,
+    "Name": "copper_reaper",
+    "HasIcon": false,
+    "Age": "Chalcolithic",
+    "RequiredXP": 1000,
+    "UnlockedItems": ["copper_reaper"],
+    "Parents": [15, 27]
+  },
+  {
+    "Id": 28,
+    "Name": "cheesemaking",
+    "HasIcon": false,
+    "Age": "Neolithic",
+    "RequiredXP": 500,
+    "UnlockedItems": ["cheese", "pot_of_milk"],
+    "Parents": [9, 5, 11]
+  },
+  {
+    "Id": 29,
+    "Name": "fertilizing",
+    "HasIcon": false,
+    "Age": "Neolithic",
+    "RequiredXP": 500,
+    "UnlockedItems": ["manure"],
+    "Parents": [8, 9]
+  },
+  {
+    "Id": 67,
+    "Name": "mudbrick",
+    "HasIcon": false,
+    "Age": "Neolithic",
+    "RequiredXP": 250,
+    "UnlockedBuildings": ["mudbrick_dryer", "mudbrick_wall", "mudbrick_path_surface"],
+    "UnlockedItems": ["mudbrick"],
+    "Parents": []
+  },
+  {
+    "Id": 30,
+    "Name": "mudbrick_hut",
+    "HasIcon": false,
+    "Age": "Neolithic",
+    "RequiredXP": 500,
+    "UnlockedBuildings": ["adobe_hut"],
+    "Parents": [12, 67]
+  },
+  {
+    "Id": 69,
+    "Name": "treadmill",
+    "HasIcon": false,
+    "Age": "BronzeAge",
+    "RequiredXP": 2000,
+    "UnlockedBuildings": ["treadmill"],
+    "Parents": [30]
+  },
+  {
+    "Id": 31,
+    "Name": "windmill",
+    "HasIcon": false,
+    "Age": "BronzeAge",
+    "RequiredXP": 2000,
+    "UnlockedBuildings": ["windmill"],
+    "Parents": [69]
+  },
+  {
+    "Id": 80,
+    "Name": "noria",
+    "HasIcon": false,
+    "Age": "BronzeAge",
+    "RequiredXP": 2000,
+    "UnlockedBuildings": ["mechanical_noria"],
+    "Parents": [69, 46]
+  },
+  {
+    "Id": 68,
+    "Name": "brick",
+    "HasIcon": false,
+    "Age": "BronzeAge",
+    "RequiredXP": 1000,
+    "UnlockedItems": ["brick"],
+    "UnlockedBuildings": ["brick_wall", "brick_path_surface"],
+    "Parents": [67, 5]
+  },
+  {
+    "Id": 40,
+    "Name": "mechanical_crusher",
+    "HasIcon": false,
+    "Age": "BronzeAge",
+    "RequiredXP": 2000,
+    "UnlockedBuildings": ["mechanical_crusher"],
+    "Parents": [15, 69]
+  },
+  {
+    "Id": 47,
+    "Name": "mechanical_millstone",
+    "HasIcon": false,
+    "Age": "BronzeAge",
+    "RequiredXP": 2000,
+    "UnlockedBuildings": ["mechanical_millstone"],
+    "Parents": [20, 69]
+  },
+  {
+    "Id": 32,
+    "Name": "chainmail",
+    "HasIcon": false,
+    "Age": "IronAge",
+    "RequiredXP": 4000,
+    "UnlockedItems": ["chainmail"],
+    "Parents": [17]
+  },
+  {
+    "Id": 33,
+    "Name": "crossbow",
+    "HasIcon": false,
+    "Age": "IronAge",
+    "RequiredXP": 4000,
+    "UnlockedItems": ["crossbow"],
+    "UnlockedBuildings": ["workshop"],
+    "Parents": [19]
+  },
+  {
+    "Id": 52,
+    "Name": "time_machine",
+    "HasIcon": false,
+    "Age": "Future",
+    "RequiredXP": 16000,
+    "UnlockedBuildings": ["time_machine"],
+    "Parents": [17]
+  }
+]

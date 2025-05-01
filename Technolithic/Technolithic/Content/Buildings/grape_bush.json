@@ -1,0 +1,72 @@
+{
+  "name_key": "grape_bush",
+  "description_key": "grape_bush",
+  "width": 1,
+  "height": 1,
+  "type": "FarmPlot",
+  "category": "Agriculture",
+  "buildingLaborType": "Plant",
+  "buildingToolType": "Plowing",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": false,
+  "constructionTime": 30,
+  "movementSpeed": 75,
+  "plant": {
+    "key": "grape_bush",
+    "growthSpeed": 7.14,
+    "toolType": "Harvesting",
+    "toolRequired": false,
+    "maxStrength": 30,
+    "isFlower": false,
+    "harvestable":
+    {
+      "harvest":
+      [
+        {
+          "item": "grape",
+          "weight": 1,
+        }
+      ],
+      "removeAfterHarvest": false
+    },
+    "stages": 5,
+    "variations": 4,
+    "texture": 
+    {
+      "name": "grape_bush",
+      "width": 16,
+      "height": 19
+    },
+    "seasonsVariations":
+    {
+      "3": [0],
+      "0": [0],
+      "1": [1, 2],
+      "2": [3]
+    }
+  },
+  "texture": {
+    "name": "grape_bush",
+    "width": 16,
+    "height": 19
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A"
+    ]
+  ],
+  "ingredients": []
+}

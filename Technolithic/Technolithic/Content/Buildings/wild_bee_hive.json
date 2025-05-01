@@ -1,0 +1,39 @@
+{
+  "name_key": "wild_bee_hive",
+  "description_key": "wild_bee_hive_description",
+  "width": 1,
+  "height": 1,
+  "type": "BeeHive",
+  "category": "None",
+  "animated": true,
+  "rotatable": false,
+  "requireBuilding": true,
+  "destructible": true,
+  "cloneable": false,
+  "movementSpeed": 50,
+  "constructionTime": 1,
+  "range": 3,
+  "beeHive": {
+    "honeyGenerationSpeed": 25
+  },
+  "texture": {
+    "name": "wild_bee_hive",
+    "width": 16,
+    "height": 22
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A"
+    ]
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "name_key": "bee_hive",
+  "description_key": "bee_hive_description",
+  "width": 1,
+  "height": 1,
+  "type": "BeeHive",
+  "category": "Food",
+  "animated": true,
+  "rotatable": false,
+  "requireBuilding": true,
+  "destructible": true,
+  "cloneable": true,
+  "movementSpeed": 50,
+  "constructionTime": 25,
+  "range": 3,
+  "beeHive": {
+    "honeyGenerationSpeed": 50
+  },
+  "texture": {
+    "name": "bee_hive",
+    "width": 16,
+    "height": 27
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "wood",
+      "weight": 1
+    },
+    {
+      "item": "honeycomb",
+      "weight": 1
+    }
+  ]
+}

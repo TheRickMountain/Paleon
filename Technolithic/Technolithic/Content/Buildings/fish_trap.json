@@ -1,0 +1,57 @@
+{
+  "name_key": "fish_trap",
+  "description_key": "used_for_fishing",
+  "width": 2,
+  "height": 2,
+  "type": "FishTrap",
+  "category": "Food",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "show_item_on_top": false,
+  "destructible": true,
+  "movementSpeed": -1,
+  "constructionTime": 10,
+  "texture": {
+    "name": "fish_trap",
+    "width": 32,
+    "height": 32
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false
+    ],
+    [
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "B",
+      "B"
+    ],
+    [
+      "B",
+      "B"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "basket",
+      "weight": 1
+    }
+  ]
+}

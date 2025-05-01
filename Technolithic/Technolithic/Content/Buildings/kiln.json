@@ -1,0 +1,153 @@
+{
+  "name_key": "kiln",
+  "description_key": "used_for_firing_ceramic_products",
+  "width": 2,
+  "height": 2,
+  "type": "Crafter",
+  "category": "Production",
+  "animated": true,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 30,
+  "smokeGenerator": {
+    "x": 16,
+    "y": 2
+  },
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": true,
+    "recipes": [
+      {
+        "id": 1000,
+        "main_item": "ceramic_pot",
+        "time": 75,
+        "result": [
+          {
+            "item": "ceramic_pot",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "unfired_pot",
+            "weight": 1
+          },
+          {
+            "item": "wood",
+            "weight": 2
+          }
+        ]
+      },
+      {
+        "id": 1001,
+        "main_item": "ceramic_pot",
+        "time": 75,
+        "result": [
+          {
+            "item": "ceramic_pot",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "unfired_pot",
+            "weight": 1
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "id": 1002,
+        "main_item": "brick",
+        "time": 75,
+        "result": [
+          {
+            "item": "brick",
+            "weight": 4
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "clay",
+            "weight": 4
+          },
+          {
+            "item": "wood",
+            "weight": 2
+          }
+        ]
+      },
+      {
+        "id": 1003,
+        "main_item": "brick",
+        "time": 75,
+        "result": [
+          {
+            "item": "brick",
+            "weight": 4
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "clay",
+            "weight": 4
+          },
+          {
+            "item": "charcoal",
+            "weight": 1
+          }
+        ]
+      }
+    ]
+  },
+  "lightEmitter": {
+    "radius": 100
+  },
+  "texture": {
+    "name": "kiln",
+    "width": 32,
+    "height": 32
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false
+    ],
+    [
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "clay",
+      "weight": 4
+    }
+  ]
+}

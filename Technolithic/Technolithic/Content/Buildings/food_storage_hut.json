@@ -1,0 +1,98 @@
+{
+  "name_key": "food_storage_hut",
+  "description_key": "food_storage_hut_description",
+  "width": 3,
+  "height": 3,
+  "type": "Stockpile",
+  "category": "Storage",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "show_item_on_top": false,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 30,
+  "storage": {
+    "canCopySettings": true,
+    "capacity": 400,
+    "shelfLifeOfProducts": 2,
+    "filters": [
+      0,
+      6,
+      15
+    ],
+    "stages": 1,
+    "isEditable": true
+  },
+  "texture": {
+    "name": "food_storage_hut",
+    "width": 40,
+    "height": 43
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "wood",
+      "weight": 4
+    },
+    {
+      "item": "clay",
+      "weight": 6
+    },
+    {
+      "item": "stone",
+      "weight": 3
+    }
+  ],
+}

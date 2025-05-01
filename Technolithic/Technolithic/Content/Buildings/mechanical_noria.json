@@ -1,0 +1,89 @@
+{
+  "name_key": "noria",
+  "description_key": "noria_description",
+  "width": 3,
+  "height": 3,
+  "type": "Noria",
+  "category": "Agriculture",
+  "animated": true,
+  "rotatable": true,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 50,
+  "constructionTime": 50,
+  "EnergyConsumer": {
+    "RequiredPower": 15,
+    "EnergyType": "Kinetic"
+  },
+  "texture": {
+    "name": "mechanical_noria",
+    "width": 48,
+    "height": 48
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "K",
+      "A"
+    ],
+    [
+      "A",
+      "L",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "mudbrick",
+      "weight": 9
+    },
+    {
+      "item": "ceramic_pot",
+      "weight": 8
+    },
+    {
+      "item": "wood",
+      "weight": 6
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "name_key": "well",
+  "description_key": "used_to_collect_water",
+  "width": 2,
+  "height": 2,
+  "type": "Crafter",
+  "category": "Production",
+  "animated": false,
+  "rotatable": false,
+  "requireBuilding": true,
+  "destructible": true,
+  "cloneable": true,
+  "movementSpeed": 50,
+  "constructionTime": 30,
+  "crafter": {
+    "laborType": "Craft",
+    "autocrafter": false,
+    "recipes": [
+      {
+        "main_item": "pot_of_water",
+        "time": 15,
+        "result": [
+          {
+            "item": "pot_of_water",
+            "weight": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "ceramic_pot",
+            "weight": 1
+          }
+        ]
+      }
+    ]
+  },
+  "texture": {
+    "name": "well",
+    "width": 32,
+    "height": 32
+  },
+  "walkable_pattern": [
+    [
+      true,
+      true
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false,
+      false
+    ],
+    [
+      false,
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "A"
+    ]
+  ],
+  "ingredients": [
+    {
+      "item": "clay",
+      "weight": "4"
+    }
+  ]
+}

@@ -24,7 +24,7 @@ namespace Technolithic
             if (animal.TargetAnimalPen.Inventory.GetAvailableItemCount(ItemDatabase.GetItemByName("hay")) <= 0)
                 return false;
 
-            if (animal.TargetAnimalPen.GetReachableTile(creature) == null)
+            if (animal.TargetAnimalPen.GetApproachableTile(creature) == null)
                 return false;
 
             AddTask(creature, new AnimalEatTask(creature, animal.TargetAnimalPen));

@@ -304,7 +304,7 @@ namespace Technolithic
 
         private void HarvestPlant()
         {
-            Tile tile = GetReachableTile();
+            Tile tile = GetApproachableTile();
 
             if (PlantData.Fruits != null && growthPercent == 100)
             {
@@ -470,7 +470,7 @@ namespace Technolithic
                     centerTile.MoistureLevel = 100;
                     Inventory.PopItem(potOfWater, 1);
                     Item ceramicPot = ItemDatabase.GetItemByName("ceramic_pot");
-                    GetReachableTile().Inventory.AddCargo(new ItemContainer(ceramicPot, 1, ceramicPot.Durability));
+                    GetApproachableTile().Inventory.AddCargo(new ItemContainer(ceramicPot, 1, ceramicPot.Durability));
 
                     UpdateFarmPlotView();
                 }

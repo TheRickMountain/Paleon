@@ -21,7 +21,7 @@ namespace Technolithic
             if (CreatureTasks.Count > 0)
                 return false;
 
-            Tile targetTile = building.GetReachableTile(creature);
+            Tile targetTile = building.GetApproachableTile(creature);
             if (targetTile == null)
                 return false;
 

@@ -26,7 +26,7 @@ namespace Technolithic
                     continue;
                 }
                 
-                if (crafter.GetReachableTile(creature) != null && crafter.IsReserved == false && crafter.CanCraft)
+                if (crafter.GetApproachableTile(creature) != null && crafter.IsReserved == false && crafter.CanCraft)
                 {
                     targetCrafter = crafter;
                     break;

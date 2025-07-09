@@ -101,6 +101,7 @@ burial,Enterrement
 buying,Buying
 calm,Calme
 cancel,Annuler
+cancel_x,Cancel: {0}
 capacity,Capacité
 cattle,Vache
 causes,Raisons
@@ -114,8 +115,6 @@ cheese,Fromage
 cheesemaking,Fabrication du fromage
 child,Enfant
 chop,Couper
-chop_completely,Couper complètement
-chop_now,Couper maintenant
 clay,Argile
 clay_barn,Grange en argile
 clay_deposit,Gisement d'argile
@@ -445,6 +444,7 @@ spinning_wheel,Rouet
 spoilage_rate,Taux de détérioration
 spoiled,Pourri
 spring,Printemps
+spruce,Spruce
 stick_hut,Hutte en bois
 stockpile,Réserve
 stone,Pierre
@@ -582,6 +582,4 @@ x_got_the_y_effect,{0} a reçu l'effet {1}
 x_is_already_assigned_to_another_hut,{0} is already assigned to another hut
 x_is_already_assigned_to_this_hut,{0} is already assigned to this hut
 yarn,Fil
-сhop_automatically,Couper automatiquement
-сhop_automatically_description,Couper automatiquement la plante après sa pleine croissance
 сut_automatically_description,Tailler automatiquement la plante après sa pleine croissance

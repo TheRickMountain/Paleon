@@ -32,7 +32,7 @@ namespace Technolithic
                 if (building.IsBuilt == false)
                     continue;
 
-                if (building.GetReachableTile(creature) == null)
+                if (building.GetApproachableTile(creature) == null)
                     continue;
 
                 if (building.CurrentFuelCondition > 0)

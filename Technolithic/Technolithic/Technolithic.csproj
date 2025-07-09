@@ -592,6 +592,9 @@
     <None Update="Content\Buildings\sprinkler.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Content\Buildings\spruce.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Content\Buildings\steam_engine.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

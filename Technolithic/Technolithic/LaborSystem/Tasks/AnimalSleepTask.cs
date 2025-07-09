@@ -22,12 +22,12 @@ namespace Technolithic
             if (animal.IsDomesticated)
             {
                 // Trying to find new animal pen
-                if (animal.TargetAnimalPen == null || animal.TargetAnimalPen.GetReachableTile(animal) == null)
+                if (animal.TargetAnimalPen == null || animal.TargetAnimalPen.GetApproachableTile(animal) == null)
                 {
                     foreach (var animalPen in GameplayScene.WorldManager.AnimalPenBuildings)
                     {
                         if (animalPen.FreeSlots > 0 && animalPen.GetAnimalTemplateFilter(animal.AnimalTemplate)
-                            && animalPen.GetReachableTile(animal) != null)
+                            && animalPen.GetApproachableTile(animal) != null)
                         {
                             if (animal.TargetAnimalPen != null)
                             {

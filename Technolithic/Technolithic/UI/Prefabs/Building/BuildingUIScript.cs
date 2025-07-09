@@ -13,6 +13,7 @@ namespace Technolithic
         private Dictionary<MNode, Item> nodesFuels;
 
         private BuildingCmp selectedBuilding;
+        private Interactable selectedInteractable;
         private MyPanelUI panel;
 
         private BigButton cancelButton;
@@ -34,6 +35,8 @@ namespace Technolithic
         private Dictionary<Tab, MNode> tabNodes = new Dictionary<Tab, MNode>();
 
         private RichTextUI infoText;
+
+        private Dictionary<InteractionType, BigButton> interactionButtonDict = new();
 
         public BuildingUIScript() : base(true)
         {
@@ -139,9 +142,11 @@ namespace Technolithic
             }
         }
 
-        public void SetBuilding(BuildingCmp building)
+        public void SetBuilding(BuildingCmp building, InteractionsDatabase interactionsDatabase)
         {
             selectedBuilding = building;
+
+            selectedInteractable = building;
 
             selectedBuilding.OnBuildingCanceledCallback += CloseUI;
             selectedBuilding.OnBuildingCompletedCallback += CloseUI;
@@ -167,6 +172,39 @@ namespace Technolithic
             SetTab(true, ParentNode.GetChildByName("StatsTab").GetComponent<ButtonScript>());
 
             UpdateButtons();
+
+            // TODO: refactoring required
+            foreach(InteractionType interactionType in selectedInteractable.AvailableInteractions)
+            {
+                BigButton interactionButton;
+
+                InteractionData interactionData = interactionsDatabase.GetInteractionData(interactionType);
+
+                if (interactionButtonDict.ContainsKey(interactionType) == false)
+                {
+                    interactionButton = new BigButton(ParentNode.Scene, interactionData.Icon, true);
+                    interactionButtonDict[interactionType] = interactionButton;
+                    interactionButton.Tooltips = interactionData.DisplayName;
+                    interactionButton.ButtonScript.Pressed += Interactable_InteractionButton_Pressed;
+                    interactionButton.SetMetadata("interaction_data", interactionData);
+                }
+
+                interactionButton = interactionButtonDict[interactionType];
+
+                interactionButton.ButtonScript.IsSelected = selectedInteractable.IsInteractionMarked(interactionType);
+
+                if(interactionButton.ButtonScript.IsSelected)
+                {
+                    interactionButton.Tooltips = Localization.GetLocalizedText("cancel_x", interactionData.DisplayName);
+                }
+                else
+                {
+                    interactionButton.Tooltips = interactionData.DisplayName;
+                }
+
+                ListViewUIScript buttonsListView = ParentNode.GetChildByName("ButtonsListView").GetComponent<ListViewUIScript>();
+                buttonsListView.AddItem(interactionButton);
+            }
         }
 
         public void CloseUI(BuildingCmp buildingCmp)
@@ -414,22 +452,6 @@ namespace Technolithic
 
                         cutChopCompletelyButton.Tooltips = Localization.GetLocalizedText("cut_now");
                     }
-                    else if (farmPlot.PlantData.ToolType == ToolType.Woodcutting)
-                    {
-                        cutChopCompletelyButton.GetChildByName("Icon").GetComponent<MImageCmp>().Texture = ResourceManager.ChopCompletelyIcon;
-
-                        if (!GameplayScene.Instance.ProgressTree.IsTechnologyUnlocked(TechnologyDatabase.StoneTools))
-                        {
-                            cutChopCompletelyButton.GetComponent<ButtonScript>().IsDisabled = true;
-                            cutChopCompletelyButton.Tooltips = Localization.GetLocalizedText("chop_now") + $"\n/c[#FFA500]{Localization.GetLocalizedText("required_technology")}:\n" +
-                                $"{TechnologyDatabase.StoneTools.Name}/cd";
-                        }
-                        else
-                        {
-                            cutChopCompletelyButton.GetComponent<ButtonScript>().IsSelected = farmPlot.Chop;
-                            cutChopCompletelyButton.Tooltips = Localization.GetLocalizedText("chop_now");
-                        }
-                    }
 
                     buttonsListView.AddItem(cutChopCompletelyButton);
                 }
@@ -594,6 +616,22 @@ namespace Technolithic
                     tab.Y = -tab.Height + 6;
                     node.Active = true;
                 }
+            }
+        }
+
+        private void Interactable_InteractionButton_Pressed(ButtonScript buttonScript)
+        {
+            InteractionData interactionData = buttonScript.ParentNode.GetMetadata<InteractionData>("interaction_data");
+
+            if (buttonScript.IsSelected)
+            {
+                selectedInteractable.MarkInteraction(interactionData.InteractionType);
+                buttonScript.ParentNode.Tooltips = Localization.GetLocalizedText("cancel_x", interactionData.DisplayName);
+            }
+            else
+            {
+                selectedInteractable.UnmarkInteraction(interactionData.InteractionType);
+                buttonScript.ParentNode.Tooltips = interactionData.DisplayName;
             }
         }
     }

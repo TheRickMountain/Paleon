@@ -26,7 +26,7 @@ namespace Technolithic
         {
             base.BeforeUpdate();
 
-            Tile tile = building.GetReachableTile(Owner);
+            Tile tile = building.GetApproachableTile(Owner);
             Owner.Movement.SetPath(tile, false);
 
             Owner.Slider.SetValue(0, building.BuildingTemplate.ConstructionTime, building.ConstructionProgress, Color.Orange);
@@ -66,7 +66,7 @@ namespace Technolithic
                     break;
                 case MovementState.Failed:
                     {
-                        Tile tile = building.GetReachableTile(Owner);
+                        Tile tile = building.GetApproachableTile(Owner);
                         if (tile != null)
                         {
                             Owner.Movement.SetPath(tile, false);

@@ -22,7 +22,7 @@ namespace Technolithic
         {
             base.BeforeUpdate();
 
-            Owner.Movement.SetPath(farmPlot.GetReachableTile(), false);
+            Owner.Movement.SetPath(farmPlot.GetApproachableTile(), false);
 
             Owner.Slider.SetValue(0, farmPlot.DestructingMaxProgress, farmPlot.DestructingCurrentProgress, Color.Orange);
         }
@@ -56,7 +56,7 @@ namespace Technolithic
                     break;
                 case MovementState.Failed:
                     {
-                        Tile tile = farmPlot.GetReachableTile(Owner);
+                        Tile tile = farmPlot.GetApproachableTile(Owner);
                         if (tile != null)
                         {
                             Owner.Movement.SetPath(tile, false);

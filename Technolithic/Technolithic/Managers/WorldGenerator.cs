@@ -83,9 +83,8 @@ namespace Technolithic
                         Entity entity = worldManager.TryToBuild(buildingTemplate, x, y, Direction.DOWN, true);
                         if (entity != null)
                         {
-                            FarmPlot wildFarmPlot = entity.Get<FarmPlot>();
-                            wildFarmPlot.SetPlantParameters(MyRandom.Range(3) == 2 ? 100 : MyRandom.Range(75, 100), 0);
-                            wildFarmPlot.MakeWild();
+                            TreeBuilding treeBuilding = entity.Get<TreeBuilding>();
+                            treeBuilding.SetGrowthProgress(MyRandom.FromSet(0.1f, 0.2f, 0.5f, 0.8f, 0.8f, 1.0f, 1.0f, 1.0f));
                             continue;
                         }
                     }

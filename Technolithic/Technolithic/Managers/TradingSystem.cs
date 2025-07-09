@@ -207,7 +207,7 @@ namespace Technolithic
 
             ToSellItems.Clear();
 
-            Tile traderCurrentTile = activeTradingPost.GetReachableTile();
+            Tile traderCurrentTile = activeTradingPost.GetApproachableTile();
 
             foreach (var kvp in ToBuyItems)
             {

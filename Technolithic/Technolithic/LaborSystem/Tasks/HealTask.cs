@@ -22,7 +22,7 @@ namespace Technolithic
 
         public override void BeforeUpdate()
         {
-            Tile targetTile = hutBuildingCmp.GetReachableTile(Owner);
+            Tile targetTile = hutBuildingCmp.GetApproachableTile(Owner);
             if (targetTile == null)
             {
                 State = TaskState.Failed;
@@ -66,7 +66,7 @@ namespace Technolithic
                     break;
                 case MovementState.Failed:
                     {
-                        Tile tile = hutBuildingCmp.GetReachableTile(Owner);
+                        Tile tile = hutBuildingCmp.GetApproachableTile(Owner);
                         if (tile != null)
                         {
                             Owner.Movement.SetPath(tile, false);

@@ -30,7 +30,7 @@ namespace Technolithic
         {
             if (creature.AssignedHut != null)
             {
-                if (creature.AssignedHut.GetReachableTile(creature) == null)
+                if (creature.AssignedHut.GetApproachableTile(creature) == null)
                     return null;
 
                 if (creature.AssignedHut.CurrentFuelCondition <= 0)
@@ -46,7 +46,7 @@ namespace Technolithic
                     continue;
                 }
 
-                if (hut.GetReachableTile(creature) == null)
+                if (hut.GetApproachableTile(creature) == null)
                 {
                     continue;
                 }

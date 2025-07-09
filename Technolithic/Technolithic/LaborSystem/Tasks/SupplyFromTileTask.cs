@@ -72,7 +72,7 @@ namespace Technolithic
 
                             itemWasTaken = true;
 
-                            Owner.Movement.SetPath(putToBuilding.GetReachableTile(Owner), false);
+                            Owner.Movement.SetPath(putToBuilding.GetApproachableTile(Owner), false);
                         }
                         else
                         {
@@ -95,7 +95,7 @@ namespace Technolithic
                     {
                         if (itemWasTaken)
                         {
-                            Tile tile = putToBuilding.GetReachableTile(Owner);
+                            Tile tile = putToBuilding.GetApproachableTile(Owner);
                             if (tile != null)
                             {
                                 Owner.Movement.SetPath(tile, false);

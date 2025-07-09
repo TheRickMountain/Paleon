@@ -113,6 +113,8 @@ namespace Technolithic
         public Action<ButtonScript> ButtonChecked;
         private Action<ButtonScript> onHovered;
 
+        public event Action<ButtonScript> Pressed;
+
         public bool AllowLeftClick = true;
         public bool AllowRightClick = false;
 
@@ -187,7 +189,8 @@ namespace Technolithic
                             SoundEffect.Play();
 
                             onClicked?.Invoke(isSelected, this);
-                            
+                            Pressed?.Invoke(this);
+
                             LeftButtonDetected = false;
                         }
                     }

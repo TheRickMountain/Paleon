@@ -26,7 +26,7 @@ namespace Technolithic
 
         public override void BeforeUpdate()
         {
-            Tile targetTile = animalPen.GetReachableTile(Owner);
+            Tile targetTile = animalPen.GetApproachableTile(Owner);
             Owner.Movement.SetPath(targetTile, true);
         }
 

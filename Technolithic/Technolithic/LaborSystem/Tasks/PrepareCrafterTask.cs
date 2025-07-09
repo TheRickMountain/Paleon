@@ -26,7 +26,7 @@ namespace Technolithic
 
         public override void BeforeUpdate()
         {
-            Tile targetTile = targetCrafter.GetReachableTile(Owner);
+            Tile targetTile = targetCrafter.GetApproachableTile(Owner);
             Owner.Movement.SetPath(targetTile, false);
 
             Owner.Slider.SetValue(0, prepTime, 0, Color.Orange);

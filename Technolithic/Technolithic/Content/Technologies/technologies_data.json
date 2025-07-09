@@ -6,7 +6,7 @@
     "Age": "Paleolithic",
     "RequiredXP": 50,
     "UnlockedItems": ["stone_spear", "stone_harpoon", "stone_axe", "stone_pick", "stone_sickle", "stone_hoe"],
-    "UnlockedActions": ["Chop", "ChopCompletely", "Mine"],
+    "UnlockedActions": ["Chop", "Mine"],
     "Parents": []
   },
   {
@@ -193,7 +193,7 @@
     "HasIcon": true,
     "Age": "Neolithic",
     "RequiredXP": 500,
-    "UnlockedBuildings": ["pea", "oak", "barley", "dandelion", "grape_bush", "flax", "haystack"],
+    "UnlockedBuildings": ["pea", "oak", "barley", "dandelion", "grape_bush", "flax", "haystack", "spruce"],
     "Parents": []
   },
   {

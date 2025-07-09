@@ -23,7 +23,7 @@ namespace Technolithic
 
         public override void BeforeUpdate()
         {
-            Tile tile = energySource.GetReachableTile(Owner);
+            Tile tile = energySource.GetApproachableTile(Owner);
             Owner.Movement.SetPath(tile, false);
         }
 
@@ -44,7 +44,7 @@ namespace Technolithic
                     break;
                 case MovementState.Failed:
                     {
-                        Tile tile = energySource.GetReachableTile(Owner);
+                        Tile tile = energySource.GetApproachableTile(Owner);
                         if (tile != null)
                         {
                             Owner.Movement.SetPath(tile, false);

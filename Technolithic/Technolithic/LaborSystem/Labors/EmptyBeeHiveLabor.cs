@@ -24,7 +24,7 @@ namespace Technolithic
             foreach(var beeHive in GameplayScene.WorldManager.BeeHiveBuildings)
             {
                 if(beeHive.GatherResources && beeHive.IsReserved == false && 
-                    beeHive.IsEmpty == false && beeHive.GetReachableTile(creature) != null)
+                    beeHive.IsEmpty == false && beeHive.GetApproachableTile(creature) != null)
                 {
                     targetBeeHive = beeHive;
                     break;

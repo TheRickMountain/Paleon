@@ -32,7 +32,7 @@ namespace Technolithic
                 if (animalPen.IsFullOfManure() == false)
                     continue;
 
-                if (animalPen.GetReachableTile(creature) == null)
+                if (animalPen.GetApproachableTile(creature) == null)
                     continue;
 
                 targetAnimalPen = animalPen;

@@ -39,7 +39,7 @@ namespace Technolithic
                 if (targetTile == null)
                 {
                     // Trying to find new animal pen
-                    if (animal.TargetAnimalPen == null || animal.TargetAnimalPen.GetReachableTile(animal) == null)
+                    if (animal.TargetAnimalPen == null || animal.TargetAnimalPen.GetApproachableTile(animal) == null)
                     {
                         foreach (var animalPen in GameplayScene.WorldManager.AnimalPenBuildings)
                         {
@@ -49,7 +49,7 @@ namespace Technolithic
                             if (animalPen.FreeSlots <= 0)
                                 continue;
 
-                            if (animalPen.GetAnimalTemplateFilter(animal.AnimalTemplate) && animalPen.GetReachableTile(animal) != null)
+                            if (animalPen.GetAnimalTemplateFilter(animal.AnimalTemplate) && animalPen.GetApproachableTile(animal) != null)
                             {
                                 if (animal.TargetAnimalPen != null)
                                 {

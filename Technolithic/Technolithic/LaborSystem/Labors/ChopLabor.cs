@@ -26,7 +26,7 @@ namespace Technolithic
             if (CreatureTasks.Count > 0)
                 return false;
 
-            if (farmPlot.GetReachableTile(creature) == null)
+            if (farmPlot.GetApproachableTile(creature) == null)
                 return false;
 
             if (farmPlot.PlantData.ToolType != ToolType.None)

@@ -26,7 +26,7 @@ namespace Technolithic
                 if (energySource.IsReserved)
                     continue;
 
-                if (energySource.GetReachableTile(creature) == null)
+                if (energySource.GetApproachableTile(creature) == null)
                     continue;
 
                 targetEnergySource = energySource;

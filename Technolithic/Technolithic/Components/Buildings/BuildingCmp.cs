@@ -10,7 +10,7 @@ namespace Technolithic
 {
 
 
-    public class BuildingCmp : Component
+    public class BuildingCmp : Interactable
     {
         public AnimatedSprite Sprite { get; private set; }
 
@@ -703,6 +703,8 @@ namespace Technolithic
 
         public virtual void DestructBuilding()
         {
+            Destroy();
+
             if (smokeTimer != null)
             {
                 smokeTimer.OnTimeout -= OnSmokeTimerTimeout;
@@ -823,7 +825,7 @@ namespace Technolithic
             }
         }
 
-        public Tile GetReachableTile(CreatureCmp creature)
+        public override Tile GetApproachableTile(CreatureCmp creature)
         {
             for (int i = 0; i < TargetTiles.Count; ++i)
             {
@@ -857,7 +859,7 @@ namespace Technolithic
             return null;
         }
 
-        public Tile GetReachableTile()
+        public override Tile GetApproachableTile()
         {
             for (int i = 0; i < TargetTiles.Count; ++i)
             {

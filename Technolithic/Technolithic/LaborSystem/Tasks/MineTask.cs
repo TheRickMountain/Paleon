@@ -27,7 +27,7 @@ namespace Technolithic
         {
             base.BeforeUpdate();
 
-            Owner.Movement.SetPath(depositCmp.GetReachableTile(), false);
+            Owner.Movement.SetPath(depositCmp.GetApproachableTile(), false);
 
             Owner.Slider.SetValue(0, depositCmp.BuildingTemplate.Deposit.MiningTime, depositCmp.MiningCurrentTime, Color.Orange);
         }
@@ -67,7 +67,7 @@ namespace Technolithic
                     break;
                 case MovementState.Failed:
                     {
-                        Tile tile = depositCmp.GetReachableTile(Owner);
+                        Tile tile = depositCmp.GetApproachableTile(Owner);
                         if (tile != null)
                         {
                             Owner.Movement.SetPath(tile, false);

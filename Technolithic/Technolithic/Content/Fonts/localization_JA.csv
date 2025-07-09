@@ -101,6 +101,7 @@ burial,埋葬
 buying,購入
 calm,穏やか
 cancel,キャンセル
+cancel_x,Cancel: {0}
 capacity,収容可能
 cattle,牛
 causes,誘発
@@ -114,8 +115,6 @@ cheese,チーズ
 cheesemaking,チーズ製造
 child,子ども
 chop,伐採
-chop_completely,完全に伐採
-chop_now,すぐに伐採
 clay,粘土
 clay_barn,粘土製の倉庫
 clay_deposit,粘土鉱床
@@ -447,6 +446,7 @@ spinning_wheel,糸車
 spoilage_rate,腐敗率
 spoiled,が腐敗
 spring,春
+spruce,Spruce
 stick_hut,小枝の小屋
 stockpile,備蓄所
 stone,石
@@ -584,6 +584,4 @@ x_got_the_y_effect,{0}は{1}の影響を受けています
 x_is_already_assigned_to_another_hut,{0}はすでに別の小屋に割り当てられています
 x_is_already_assigned_to_this_hut,{0}はすでにこの小屋に割り当てられています
 yarn,糸
-сhop_automatically,自動伐採
-сhop_automatically_description,完全に成長した植物を自動的に伐採
 сut_automatically_description,完全に成長した植物を自動的に収穫

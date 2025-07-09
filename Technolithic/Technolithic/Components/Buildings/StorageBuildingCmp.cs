@@ -244,7 +244,7 @@ namespace Technolithic
                 if (factWeight == 0)
                     return;
 
-                Tile tile = GetReachableTile();
+                Tile tile = GetApproachableTile();
                 foreach (var itemContainer in Inventory.PopItem(item, factWeight))
                 {
                     tile.Inventory.AddCargo(itemContainer);

@@ -1,6 +1,6 @@
 {
-  "name_key": "oak",
-  "description_key": "oak",
+  "name_key": "spruce",
+  "description_key": "spruce",
   "width": 1,
   "height": 1,
   "type": "Tree",
@@ -36,7 +36,7 @@
     ]
   },
   "texture": {
-    "name": "oak",
+    "name": "spruce",
     "width": 24,
     "height": 24
   },

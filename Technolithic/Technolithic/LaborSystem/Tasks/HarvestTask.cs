@@ -27,7 +27,7 @@ namespace Technolithic
         {
             base.BeforeUpdate();
 
-            Tile targetTile = farmPlot.GetReachableTile(Owner);
+            Tile targetTile = farmPlot.GetApproachableTile(Owner);
 
             if (targetTile == null)
             {
@@ -70,7 +70,7 @@ namespace Technolithic
                     break;
                 case MovementState.Failed:
                     {
-                        Tile tile = farmPlot.GetReachableTile(Owner);
+                        Tile tile = farmPlot.GetApproachableTile(Owner);
                         if (tile != null)
                         {
                             Owner.Movement.SetPath(tile, false);

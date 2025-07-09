@@ -35,16 +35,12 @@ namespace Technolithic
             CreateActionButton(MyAction.Mine, ResourceManager.MineIcon, Localization.GetLocalizedText("mine"), 
                 false, Keys.M);
             
-            CreateActionButton(MyAction.Chop, ResourceManager.ChopIcon, Localization.GetLocalizedText("сhop_automatically") + "\n" +
-                "/c[#919090]" + Localization.GetLocalizedText("сhop_automatically_description") + "/cd", 
+            CreateActionButton(MyAction.Chop, ResourceManager.ChopIcon, Localization.GetLocalizedText("chop"),
                 false, Keys.N);
             
             CreateActionButton(MyAction.Cut, ResourceManager.CutIcon, Localization.GetLocalizedText("cut_automatically") + "\n" +
                 "/c[#919090]" + Localization.GetLocalizedText("сut_automatically_description") + "/cd", 
                 true, Keys.B);
-            
-            CreateActionButton(MyAction.ChopCompletely, ResourceManager.ChopCompletelyIcon, Localization.GetLocalizedText("chop_now"), 
-                false, Keys.Y);
             
             CreateActionButton(MyAction.CutCompletely, ResourceManager.CutCompletelyIcon, Localization.GetLocalizedText("cut_now"), 
                 true, Keys.F);

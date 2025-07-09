@@ -30,7 +30,7 @@ namespace Technolithic
         {
             base.BeforeUpdate();
 
-            Tile tile = buildingToSupply.GetReachableTile(Owner);
+            Tile tile = buildingToSupply.GetApproachableTile(Owner);
 
             if (tile == null)
             {
@@ -65,7 +65,7 @@ namespace Technolithic
                     break;
                 case MovementState.Failed:
                     {
-                        Tile tile = buildingToSupply.GetReachableTile(Owner);
+                        Tile tile = buildingToSupply.GetApproachableTile(Owner);
                         if (tile != null)
                         {
                             Owner.Movement.SetPath(tile, false);

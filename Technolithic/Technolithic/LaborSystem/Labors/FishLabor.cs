@@ -23,7 +23,7 @@ namespace Technolithic
 
             foreach(var fishingPlace in GameplayScene.WorldManager.FishingPlaceBuildings)
             {
-                if(fishingPlace.IsReserved == false && fishingPlace.GetReachableTile(creature) != null
+                if(fishingPlace.IsReserved == false && fishingPlace.GetApproachableTile(creature) != null
                     && fishingPlace.IsWaterChunkHasFish())
                 {
                     targetFishingPlaceCmp = fishingPlace;

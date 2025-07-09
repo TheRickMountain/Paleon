@@ -429,7 +429,7 @@ namespace Technolithic
 
             if(BuildingCmp != null)
             {
-                return BuildingCmp.GetReachableTile(creatureCmp);
+                return BuildingCmp.GetApproachableTile(creatureCmp);
             }
 
             return null;

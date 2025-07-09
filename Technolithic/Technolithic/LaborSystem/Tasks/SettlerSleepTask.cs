@@ -24,7 +24,7 @@ namespace Technolithic
             if(hutBuildingCmp != null)
             {
                 hutBuildingCmp.AssignCreature(Owner);
-                targetTile = hutBuildingCmp.GetReachableTile(Owner);
+                targetTile = hutBuildingCmp.GetApproachableTile(Owner);
             }
             else
             {
@@ -36,7 +36,7 @@ namespace Technolithic
         {
             if (Owner.AssignedHut != null)
             {
-                if (Owner.AssignedHut.GetReachableTile(Owner) == null)
+                if (Owner.AssignedHut.GetApproachableTile(Owner) == null)
                 {
                     return null;
                 }
@@ -53,7 +53,7 @@ namespace Technolithic
                     continue;
                 }
 
-                if(hut.GetReachableTile(Owner) == null)
+                if(hut.GetApproachableTile(Owner) == null)
                 {
                     continue;
                 }

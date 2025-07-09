@@ -23,7 +23,7 @@ namespace Technolithic
 
             foreach (var fishTrap in GameplayScene.WorldManager.FishTrapBuildings)
             {
-                if (fishTrap.IsReserved == false && fishTrap.CatchedItem != null && fishTrap.GetReachableTile(creature) != null)
+                if (fishTrap.IsReserved == false && fishTrap.CatchedItem != null && fishTrap.GetApproachableTile(creature) != null)
                 {
                     targetFishTrap = fishTrap;
                     break;

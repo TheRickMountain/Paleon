@@ -45,7 +45,7 @@ namespace Technolithic
         {
             base.BeforeUpdate();
 
-            Tile tile = takeFromStorage.GetReachableTile(Owner);
+            Tile tile = takeFromStorage.GetApproachableTile(Owner);
 
             if (tile == null)
             {
@@ -64,7 +64,7 @@ namespace Technolithic
             {
                 case MovementState.Success:
                     {
-                        if (putToBuilding.GetReachableTile(Owner) == null)
+                        if (putToBuilding.GetApproachableTile(Owner) == null)
                         {
                             State = TaskState.Failed;
                             CustomCancel();
@@ -84,7 +84,7 @@ namespace Technolithic
 
                             itemWasTaken = true;
 
-                            Owner.Movement.SetPath(putToBuilding.GetReachableTile(Owner), false);
+                            Owner.Movement.SetPath(putToBuilding.GetApproachableTile(Owner), false);
 
                             takeFromStorage.OnBuildingDestructedCallback -= OnTakeFromStorageDeletedCallback;
                         }
@@ -109,7 +109,7 @@ namespace Technolithic
                     {
                         if(itemWasTaken)
                         {
-                            Tile tile = putToBuilding.GetReachableTile(Owner);
+                            Tile tile = putToBuilding.GetApproachableTile(Owner);
                             if (tile != null)
                             {
                                 Owner.Movement.SetPath(tile, false);
@@ -122,7 +122,7 @@ namespace Technolithic
                         }
                         else
                         {
-                            Tile tile = takeFromStorage.GetReachableTile(Owner);
+                            Tile tile = takeFromStorage.GetApproachableTile(Owner);
                             if (tile != null)
                             {
                                 Owner.Movement.SetPath(tile, false);
@@ -137,7 +137,7 @@ namespace Technolithic
                     break;
                 case MovementState.Running:
                     {
-                        if (putToBuilding.GetReachableTile(Owner) == null)
+                        if (putToBuilding.GetApproachableTile(Owner) == null)
                         {
                             State = TaskState.Failed;
                             CustomCancel();

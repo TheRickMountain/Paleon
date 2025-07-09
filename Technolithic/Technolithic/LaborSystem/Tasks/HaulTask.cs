@@ -73,7 +73,7 @@ namespace Technolithic
 
                             itemWasTaken = true;
 
-                            Owner.Movement.SetPath(putToStorage.GetReachableTile(), true);
+                            Owner.Movement.SetPath(putToStorage.GetApproachableTile(), true);
                         }
                         else
                         {

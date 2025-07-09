@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,15 @@ namespace Technolithic
         public static float NextFloat()
         {
             return (float)random.NextDouble();
+        }
+
+        public static T FromSet<T>(params T[] values)
+        {
+            if (values.Length == 0)
+                throw new ArgumentException("Values array cannot be empty", nameof(values));
+
+            int index = Range(values.Length);
+            return values[index];
         }
 
         public static int FromSet(params int[] values)

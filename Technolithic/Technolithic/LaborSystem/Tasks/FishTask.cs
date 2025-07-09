@@ -28,7 +28,7 @@ namespace Technolithic
         {
             base.BeforeUpdate();
 
-            Tile targetTile = targetFishingPlace.GetReachableTile(Owner);
+            Tile targetTile = targetFishingPlace.GetApproachableTile(Owner);
 
             if (targetTile == null)
             {
@@ -79,7 +79,7 @@ namespace Technolithic
                     break;
                 case MovementState.Failed:
                     {
-                        Tile tile = targetFishingPlace.GetReachableTile(Owner);
+                        Tile tile = targetFishingPlace.GetApproachableTile(Owner);
                         if (tile != null)
                         {
                             Owner.Movement.SetPath(tile, false);

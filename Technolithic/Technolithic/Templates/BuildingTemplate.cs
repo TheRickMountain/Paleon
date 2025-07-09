@@ -33,6 +33,7 @@ namespace Technolithic
         Surface,
         DestructSurface,
         TradingPost,
+        Tree,
         None
     }
 
@@ -115,6 +116,7 @@ namespace Technolithic
         public PlantData PlantData { get; private set; }
         public SmokeGeneratorData SmokeGeneratorData { get; private set; }
         public SurfaceData SurfaceData { get; private set; }
+        public TreeData TreeData { get; private set; }
 
         public bool IsDestructible { get; private set; }
         
@@ -375,6 +377,12 @@ namespace Technolithic
                 SurfaceData = JsonSerializer.CreateDefault().Deserialize<SurfaceData>(JObject["SurfaceData"].CreateReader());
             }
 
+            if (!JObject["TreeData"].IsNullOrEmpty())
+            {
+                TreeData = JsonSerializer.CreateDefault().Deserialize<TreeData>(JObject["TreeData"].CreateReader());
+                TreeData.Initialize(Textures);
+            }
+
             if(PlantData != null)
             {
                 Icons[Direction.DOWN] = PlantData.Icon;
@@ -393,7 +401,8 @@ namespace Technolithic
             }
         }
 
-        public Entity CreateEntity(Tile[,] tiles, Direction direction, bool completeImmediately, float currentFuelCondition)
+        public Entity CreateEntity(Tile[,] tiles, Direction direction, bool completeImmediately, float currentFuelCondition,
+            InteractablesManager interactablesManager)
         {
             Entity entity = new Entity();
 
@@ -467,11 +476,15 @@ namespace Technolithic
                 case BuildingType.TradingPost:
                     buildingCmp = new TradingPostBuildingCmp(this, direction);
                     break;
+                case BuildingType.Tree:
+                    buildingCmp = new TreeBuilding(this, direction);
+                    break;
                 case BuildingType.None:
                     buildingCmp = new BuildingCmp(this, direction);
                     break;
             }
-            
+
+            buildingCmp.SetInteractablesManager(interactablesManager);
             entity.Add(buildingCmp);
 
             switch(direction)

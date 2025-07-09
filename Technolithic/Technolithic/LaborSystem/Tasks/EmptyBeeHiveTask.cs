@@ -26,7 +26,7 @@ namespace Technolithic
 
         public override void BeforeUpdate()
         {
-            Tile targetTile = targetBeeHive.GetReachableTile(Owner);
+            Tile targetTile = targetBeeHive.GetApproachableTile(Owner);
 
             Owner.Movement.SetPath(targetTile, false);
         }
@@ -65,7 +65,7 @@ namespace Technolithic
                     break;
                 case MovementState.Failed:
                     {
-                        Tile tile = targetBeeHive.GetReachableTile(Owner);
+                        Tile tile = targetBeeHive.GetApproachableTile(Owner);
                         if (tile != null)
                         {
                             Owner.Movement.SetPath(tile, false);

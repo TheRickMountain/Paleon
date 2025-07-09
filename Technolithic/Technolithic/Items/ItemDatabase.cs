@@ -185,5 +185,22 @@ namespace Technolithic
             return idItemPair[id];
         }
 
+        public static Dictionary<Item, int> ConvertRawLootToReal(IReadOnlyDictionary<string, int> rawLoot)
+        {
+            if (rawLoot == null || rawLoot.Count == 0) return new Dictionary<Item, int>();
+
+            Dictionary<Item, int> realLoot = new Dictionary<Item, int>();
+
+            foreach(var kvp in rawLoot)
+            {
+                Item item = GetItemByName(kvp.Key);
+                int amount = kvp.Value;
+
+                realLoot.Add(item, amount);
+            }
+
+            return realLoot;
+        }
+
     }
 }

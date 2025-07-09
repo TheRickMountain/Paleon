@@ -101,6 +101,7 @@ burial,葬禮
 buying,購買
 calm,平靜
 cancel,取消
+cancel_x,Cancel: {0}
 capacity,容量
 cattle,牛
 causes,原因
@@ -114,8 +115,6 @@ cheese,奶酪
 cheesemaking,製作起士
 child,幼年
 chop,砍伐
-chop_completely,完全砍伐
-chop_now,現在砍伐
 clay,黏土
 clay_barn,黏土倉庫
 clay_deposit,黏土礦床
@@ -445,6 +444,7 @@ spinning_wheel,紡車
 spoilage_rate,腐敗度
 spoiled,變質
 spring,春
+spruce,Spruce
 stick_hut,簡陋小屋
 stockpile,儲存
 stone,石材
@@ -581,6 +581,4 @@ x_got_the_y_effect,{0} 得到 {1} 效果
 x_is_already_assigned_to_another_hut,{0} is already assigned to another hut
 x_is_already_assigned_to_this_hut,{0} is already assigned to this hut
 yarn,紗線
-сhop_automatically,自動砍伐
-сhop_automatically_description,自動砍伐成熟植物。
 сut_automatically_description,自動收割成熟植物。

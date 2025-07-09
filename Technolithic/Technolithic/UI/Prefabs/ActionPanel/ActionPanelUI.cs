@@ -11,7 +11,6 @@ namespace Technolithic
     public enum MyAction
     {
         Build,
-        ChopCompletely,
         CutCompletely,
         Chop,
         Cut,

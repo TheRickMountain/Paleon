@@ -25,7 +25,7 @@ namespace Technolithic
 
         public override void BeforeUpdate()
         {
-            Tile tile = crafter.GetReachableTile(Owner);
+            Tile tile = crafter.GetApproachableTile(Owner);
             if (tile != null)
             {
                 Owner.Movement.SetPath(tile, false);
@@ -80,7 +80,7 @@ namespace Technolithic
                     break;
                 case MovementState.Failed:
                     {
-                        Tile tile = crafter.GetReachableTile(Owner);
+                        Tile tile = crafter.GetApproachableTile(Owner);
                         if (tile != null)
                         {
                             Owner.Movement.SetPath(tile, false);

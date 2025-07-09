@@ -1489,6 +1489,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/spinning_wheel.png
 
+#begin Buildings/spruce.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/spruce.png
+
 #begin Buildings/stick_hut.png
 /importer:TextureImporter
 /processor:TextureProcessor

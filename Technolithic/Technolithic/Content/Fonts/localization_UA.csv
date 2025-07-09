@@ -101,6 +101,7 @@ burial,Поховання
 buying,Покупка
 calm,Безвітряно
 cancel,Відмінити
+cancel_x,Cancel: {0}
 capacity,Місткість
 cattle,Корова
 causes,Викликає
@@ -114,8 +115,6 @@ cheese,Сир
 cheesemaking,Сироваріння
 child,Дитина
 chop,Зрубати
-chop_completely,Зрубати повністю
-chop_now,Зрубати вже
 clay,Глина
 clay_barn,Глиняна комора
 clay_deposit,Родовище глини
@@ -445,6 +444,7 @@ spinning_wheel,Прядка
 spoilage_rate,Швидкість псування
 spoiled,Зіпсований
 spring,Весна
+spruce,Spruce
 stick_hut,Хатина з палиць
 stockpile,Склад
 stone,Камінь
@@ -582,6 +582,4 @@ x_got_the_y_effect,{0} отримав ефект {1}
 x_is_already_assigned_to_another_hut,{0} вже призначений до іншої хатини
 x_is_already_assigned_to_this_hut,{0} вже призначений до цієї хатини
 yarn,Пряжа
-сhop_automatically,Зрубати автоматично
-сhop_automatically_description,Автоматично зрубати рослинку після повного дозрівання
 сut_automatically_description,Автоматично зрізати рослинку після повного дозрівання

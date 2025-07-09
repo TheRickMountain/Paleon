@@ -111,12 +111,26 @@ namespace Technolithic
 
         private Queue<SelectableCmp> selectablesQueue = new Queue<SelectableCmp>();
 
+        private InteractionsDatabase interactionsDatabase;
+        private InteractablesManager interactablesManager;
+        
         public WorldManager(WorldManagerSaveData saveData)
         {
             ItemsDecayer = new ItemsDecayer();
             StorageManager = new StorageManager();
             LaborManager = new LaborManager();
             buildingManager = new BuildingManager();
+            interactionsDatabase = new InteractionsDatabase();
+            interactablesManager = new InteractablesManager(interactionsDatabase);
+            
+            foreach(LaborType laborType in interactionsDatabase.GetInvolvedTypesOfLabor())
+            {
+                InteractLabor interactLabor = new InteractLabor(laborType,
+                    interactionsDatabase, interactablesManager);
+                interactLabor.Repeat = true;
+                interactLabor.IsMultiCreatureLabor = true;
+                LaborManager.Add(interactLabor);
+            }
 
             haulLabor.Repeat = true;
             haulLabor.IsMultiCreatureLabor = true;
@@ -887,7 +901,8 @@ namespace Technolithic
                     GameplayScene.UIRootNodeScript.OpenCreatureUI(selectable.Entity.Get<CreatureCmp>());
                     break;
                 case SelectableType.Building:
-                    GameplayScene.UIRootNodeScript.OpenBuildingUI(selectable.Entity.Get<BuildingCmp>());
+                    GameplayScene.UIRootNodeScript.OpenBuildingUI(selectable.Entity.Get<BuildingCmp>(),
+                        interactionsDatabase);
                     break;
                 case SelectableType.ItemContainers:
                     GameplayScene.UIRootNodeScript.OpenItemStackUI(GameplayScene.MouseTile);
@@ -1269,24 +1284,6 @@ namespace Technolithic
                             }
                         }
                         break;
-                    case MyAction.ChopCompletely:
-                        for (int x = 0; x < tiles.GetLength(0); x++)
-                        {
-                            for (int y = 0; y < tiles.GetLength(1); y++)
-                            {
-                                Tile tile = tiles[x, y];
-
-                                if(tile.Entity != null)
-                                {
-                                    FarmPlot wildFarmPlot = tile.Entity.Get<FarmPlot>();
-                                    if(wildFarmPlot != null && wildFarmPlot.IsBuilt && wildFarmPlot.PlantData.ToolType == ToolType.Woodcutting)
-                                    {
-                                        wildFarmPlot.Chop = true;
-                                    }
-                                }
-                            }
-                        }
-                        break;
                     case MyAction.CutCompletely:
                         for (int x = 0; x < tiles.GetLength(0); x++)
                         {
@@ -1332,10 +1329,11 @@ namespace Technolithic
 
                                 if (tile.Entity != null)
                                 {
-                                    FarmPlot wildFarmPlot = tile.Entity.Get<FarmPlot>();
-                                    if (wildFarmPlot != null && wildFarmPlot.IsBuilt && wildFarmPlot.PlantData.ToolType == ToolType.Woodcutting)
+                                    Interactable interactable = tile.Entity.Get<Interactable>();
+                                    if (interactable != null)
                                     {
-                                        wildFarmPlot.Harvest = true;
+                                        // TODO: temp (Need to implement a GameAction system like in Paleon Reinvented)
+                                        interactable.MarkInteraction(InteractionType.Chop);
                                     }
                                 }
                             }
@@ -1458,6 +1456,13 @@ namespace Technolithic
 
                                 if (tile.Entity != null)
                                 {
+                                    if(tile.Entity.Has<Interactable>())
+                                    {
+                                        // TODO: temp
+                                        Interactable interactable = tile.Entity.Get<Interactable>();
+                                        interactable.UnmarkInteraction(InteractionType.Chop);
+                                    }
+
                                     if (tile.Entity.Has<BuildingCmp>())
                                     {
                                         BuildingCmp building = tile.Entity.Get<BuildingCmp>();
@@ -1575,7 +1580,7 @@ namespace Technolithic
             }
 
             Entity entity = buildingTemplate.CreateEntity(tiles, buildingDirection,
-                     GameplayScene.BuildingsRequiredBuilding ? completeImmediately : true, 0);
+                     GameplayScene.BuildingsRequiredBuilding ? completeImmediately : true, 0, interactablesManager);
                 
             BuildingCmp newBuilding = entity.Get<BuildingCmp>();
 

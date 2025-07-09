@@ -21,7 +21,7 @@ namespace Technolithic
             for (int i = 0; i < GameplayScene.WorldManager.AutoCrafterBuildings[LaborType].Count; i++)
             {
                 CrafterBuildingCmp crafter = GameplayScene.WorldManager.AutoCrafterBuildings[LaborType][i];
-                if (crafter.GetReachableTile(creature) != null &&
+                if (crafter.GetApproachableTile(creature) != null &&
                     crafter.CanCraft &&
                     crafter.IsPrepared == false && 
                     crafter.IsReserved == false)

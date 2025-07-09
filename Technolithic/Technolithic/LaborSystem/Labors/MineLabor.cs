@@ -21,7 +21,7 @@ namespace Technolithic
             for (int i = 0; i < GameplayScene.WorldManager.MineableDeposits.Count; i++)
             {
                 DepositCmp depositCmp = GameplayScene.WorldManager.MineableDeposits[i];
-                if(depositCmp.GetReachableTile(creature) != null && depositCmp.IsReserved == false &&
+                if(depositCmp.GetApproachableTile(creature) != null && depositCmp.IsReserved == false &&
                     depositCmp.IsMarkedToObtain == true && depositCmp.CanBeObtained())
                 {
                     targetDeposit = depositCmp;

@@ -80,8 +80,12 @@ namespace Technolithic
         private float backgroundSongPauseTimer = 0;
         private int pauseBetweenBackgroundSongs = 600;
 
+        private InteractionsDatabase interactionsDatabase;
+
         public GameplayScene(string saveFileName, int worldSize, string worldName)
         {
+            interactionsDatabase = new InteractionsDatabase();
+
             MediaPlayer.Stop();
             MediaPlayer.IsMuted = false;
 
@@ -130,7 +134,7 @@ namespace Technolithic
 
             if (string.IsNullOrEmpty(saveFileName))
             {
-                WorldManager = new WorldManager(null);
+                WorldManager = new WorldManager(null, interactionsDatabase);
                 WorldManager.Begin();
 
                 AchievementManager = new AchievementManager(null);
@@ -210,7 +214,7 @@ namespace Technolithic
 
                 OldSaveConverter.Convert(saveManager);
 
-                WorldManager = new WorldManager(saveManager.Data.WorldManagerSaveData);
+                WorldManager = new WorldManager(saveManager.Data.WorldManagerSaveData, interactionsDatabase);
                 WorldManager.Begin();
 
                 AchievementManager = new AchievementManager(saveManager.Data.UnlockedAchievements);
@@ -1191,6 +1195,24 @@ namespace Technolithic
             }
 
             World.RenderMarkTileMap();
+
+            // TODO: Before refactoring, I will place the rendering of the marked interactables here
+            foreach(Entity entity in entityLayer.Entities)
+            {
+                Interactable interactable = entity.Get<Interactable>();
+                if(interactable != null)
+                {
+                    foreach(InteractionType interactionType in interactable.AvailableInteractions)
+                    {
+                        if(interactable.IsInteractionMarked(interactionType) && 
+                            interactable.IsInteractionActivated(interactionType))
+                        {
+                            InteractionData interactionData = interactionsDatabase.GetInteractionData(interactionType);
+                            interactionData?.Icon?.Draw(entity.Position);
+                        }
+                    }
+                }
+            }
 
             WorldManager.Render();
 

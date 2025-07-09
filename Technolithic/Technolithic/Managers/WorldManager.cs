@@ -111,16 +111,16 @@ namespace Technolithic
 
         private Queue<SelectableCmp> selectablesQueue = new Queue<SelectableCmp>();
 
-        private InteractionsDatabase interactionsDatabase;
         private InteractablesManager interactablesManager;
-        
-        public WorldManager(WorldManagerSaveData saveData)
+        private InteractionsDatabase interactionsDatabase;
+
+        public WorldManager(WorldManagerSaveData saveData, InteractionsDatabase interactionsDatabase)
         {
             ItemsDecayer = new ItemsDecayer();
             StorageManager = new StorageManager();
             LaborManager = new LaborManager();
             buildingManager = new BuildingManager();
-            interactionsDatabase = new InteractionsDatabase();
+            this.interactionsDatabase = interactionsDatabase;
             interactablesManager = new InteractablesManager(interactionsDatabase);
             
             foreach(LaborType laborType in interactionsDatabase.GetInvolvedTypesOfLabor())

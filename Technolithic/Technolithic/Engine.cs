@@ -65,7 +65,7 @@ namespace Technolithic
         }
 
         public const string GAME_NAME = "Paleon";
-        public static GameVersion GameVersion { get; } = new GameVersion(1, 6, 2);
+        public static GameVersion GameVersion { get; } = new GameVersion(1, 7, 0);
 
 #if DEBUG
         public static string VERSION_STRING { get; private set; } = $"{GameVersion.ToString()} [DEBUG]";

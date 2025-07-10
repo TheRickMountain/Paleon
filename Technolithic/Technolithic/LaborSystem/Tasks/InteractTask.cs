@@ -68,6 +68,8 @@ namespace Technolithic
                         {
                             _interactable.CompleteInteraction(_interactionType);
 
+                            _interactable.ResetProgress(_interactionType);
+
                             Owner.CreatureEquipment.DecreaseToolDurability(_interactionType, 1);
 
                             Owner.Slider.Active = false;

@@ -122,6 +122,11 @@ namespace Technolithic
             _interactionHandler.SetInteractionProgress(interactionType, progress);
         }
 
+        public void ResetProgress(in InteractionType interactionType)
+        {
+            _interactionHandler.SetInteractionProgress(interactionType, 0);
+        }
+
         public virtual void CompleteInteraction(InteractionType interactionType) { }
 
         public void Reserve()

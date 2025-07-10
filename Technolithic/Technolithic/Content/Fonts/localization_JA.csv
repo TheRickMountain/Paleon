@@ -60,6 +60,7 @@ assign_x_to_this_hut,この小屋に{0}を割り当てる
 assigned_to,{0}に割り当て済み
 attack,攻撃
 aurochs,野生牛
+automatically_empty_the_trap,Automatically empty the trap
 automatically_mine_spawned_deposits,生成された鉱床を自動的に採掘
 autumn,秋
 back,戻る

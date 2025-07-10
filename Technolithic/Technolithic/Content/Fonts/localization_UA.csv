@@ -60,6 +60,7 @@ assign_x_to_this_hut,Призначить {0} до цього будинку
 assigned_to,Закріплений за {0}
 attack,Атакувати
 aurochs,Тур
+automatically_empty_the_trap,Automatically empty the trap
 automatically_mine_spawned_deposits,Автоматично добувати поклади
 autumn,Осінь
 back,Повернутись

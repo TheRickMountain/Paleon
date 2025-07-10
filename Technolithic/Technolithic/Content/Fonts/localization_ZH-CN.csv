@@ -60,6 +60,7 @@ assign_x_to_this_hut,Assign {0} to this hut
 assigned_to,已指派给 {0}
 attack,攻击
 aurochs,原牛
+automatically_empty_the_trap,Automatically empty the trap
 automatically_mine_spawned_deposits,自动开采生成的矿物。
 autumn,秋
 back,返回

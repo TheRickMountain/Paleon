@@ -57,7 +57,7 @@ namespace Technolithic
 
         public void DeactivateInteraction(InteractionType interactionType)
         {
-            markedInteractions.Remove(interactionType);
+            activatedInteractions.Remove(interactionType);
         }
 
         public bool IsInteractionMarked(InteractionType interactionType)

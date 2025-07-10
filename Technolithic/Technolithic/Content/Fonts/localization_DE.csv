@@ -60,6 +60,7 @@ assign_x_to_this_hut,Assign {0} to this hut
 assigned_to,Assigned to {0}
 attack,Anrgiff
 aurochs,Auerochse
+automatically_empty_the_trap,Automatically empty the trap
 automatically_mine_spawned_deposits,Automatischer Abbau von gespawnten Vorkommen
 autumn,Herbst
 back,Zurück

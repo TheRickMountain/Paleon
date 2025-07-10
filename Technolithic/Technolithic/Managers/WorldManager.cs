@@ -45,7 +45,6 @@ namespace Technolithic
 
         public List<HutBuildingCmp> HutBuildingsV2 { get; set; } = new List<HutBuildingCmp>();
         public List<FishingPlaceCmp> FishingPlaceBuildings { get; set; } = new List<FishingPlaceCmp>();
-        public List<FishTrap> FishTrapBuildings { get; set; } = new List<FishTrap>();
         public List<BeeHiveBuildingCmp> BeeHiveBuildings { get; set; } = new List<BeeHiveBuildingCmp>();
         public List<BuildingCmp> FuelConsumerBuildings { get; set; } = new List<BuildingCmp>();
         public List<DepositCmp> GatherableDeposits { get; set; } = new List<DepositCmp>();
@@ -84,7 +83,6 @@ namespace Technolithic
         private SupplyFromStorageLabor supplyStorageLabor = new SupplyFromStorageLabor();
         private SupplyFromTileLabor supplyFromTileLabor = new SupplyFromTileLabor();
         private FishLabor fishLabor = new FishLabor();
-        private EmptyFishTrapLabor emptyFishTrapLabor = new EmptyFishTrapLabor();
         private EmptyBeeHiveLabor emptyBeeHiveLabor = new EmptyBeeHiveLabor();
         private SupplyFuelLabor supplyFuelLabor = new SupplyFuelLabor();
         private GatherLabor gatherLabor = new GatherLabor();
@@ -154,10 +152,6 @@ namespace Technolithic
             fishLabor.Repeat = true;
             fishLabor.IsMultiCreatureLabor = true;
             LaborManager.Add(fishLabor);
-
-            emptyFishTrapLabor.Repeat = true;
-            emptyFishTrapLabor.IsMultiCreatureLabor = true;
-            LaborManager.Add(emptyFishTrapLabor);
 
             emptyBeeHiveLabor.Repeat = true;
             emptyBeeHiveLabor.IsMultiCreatureLabor = true;

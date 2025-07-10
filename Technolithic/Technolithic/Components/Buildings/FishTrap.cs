@@ -16,6 +16,7 @@ namespace Technolithic
 
         public float CurrentTime { get; set; } = 0;
 
+        // TODO: load from json
         private const float TRY_TIME = WorldState.HOURS_PER_CYCLE * WorldState.MINUTES_PER_HOUR;
 
         private Vector2 catchedItemDrawPosition;
@@ -30,11 +31,6 @@ namespace Technolithic
 
         }
 
-        public override void Begin()
-        {
-            base.Begin();
-        }
-
         public override void UpdateCompleted()
         {
             base.UpdateCompleted();
@@ -47,6 +43,8 @@ namespace Technolithic
                     CurrentTime = 0;
 
                     CatchedItem = GetRandomCatchedItem();
+
+                    ActivateInteraction(InteractionType.EmptyFishTrap);
                 }
             }
         }
@@ -55,9 +53,12 @@ namespace Technolithic
         {
             base.CompleteBuilding();
 
-            progressSlider = new Slider(BuildingTemplate.Width * Engine.TILE_SIZE, 4, Color.Black, Color.Orange);
+            AddAvailableInteraction(InteractionType.EmptyFishTrap, false);
+            SetInteractionDuration(InteractionType.EmptyFishTrap, 5.0f);
 
-            GameplayScene.WorldManager.FishTrapBuildings.Add(this);
+            MarkInteraction(InteractionType.EmptyFishTrap);
+
+            progressSlider = new Slider(BuildingTemplate.Width * Engine.TILE_SIZE, 4, Color.Black, Color.Orange);
 
             coveredWaterChunks = new List<WaterChunk>();
 
@@ -80,13 +81,40 @@ namespace Technolithic
             catchedItemDrawPosition = CenterPosition - new Vector2(0, 16);
         }
 
-        public override void DestructBuilding()
+        public override void CompleteInteraction(InteractionType interactionType)
         {
-            base.DestructBuilding();
+            base.CompleteInteraction(interactionType);
 
-            GameplayScene.WorldManager.FishTrapBuildings.Remove(this);
+            switch (interactionType)
+            {
+                case InteractionType.EmptyFishTrap:
+                    {
+                        ItemContainer itemContainer = new ItemContainer(CatchedItem, 1, CatchedItem.Durability);
+
+                        GetCenterTile().Inventory.AddCargo(itemContainer);
+                        
+                        CatchedItem = null;
+                        
+                        CurrentNumberOfUses--;
+
+                        if (CurrentNumberOfUses <= 0)
+                        {
+                            ThrowBuildingRecipeItemsAfterDestructing = false;
+
+                            DestructBuilding();
+
+                            GameplayScene.WorldManager.TryToBuild(BuildingTemplate, GetCenterTile().X, GetCenterTile().Y, Direction);
+                        }
+                        else
+                        {
+                            DeactivateInteraction(InteractionType.EmptyFishTrap);
+                        }
+                    }
+                    break;
+            }
         }
 
+        // TODO: load from json
         private Item GetRandomCatchedItem()
         {
             if(MyRandom.ProbabilityChance(70))
@@ -109,23 +137,6 @@ namespace Technolithic
             else
             {
                 return ItemDatabase.GetItemByName("stone");
-            }
-        }
-
-        public void TryToEmpty(CreatureCmp creatureCmp)
-        {
-            ItemContainer itemContainer = new ItemContainer(CatchedItem, 1, CatchedItem.Durability);
-            creatureCmp.Movement.CurrentTile.Inventory.AddCargo(itemContainer);
-            CatchedItem = null;
-            CurrentNumberOfUses--;
-
-            if(CurrentNumberOfUses <= 0)
-            {
-                ThrowBuildingRecipeItemsAfterDestructing = false;
-
-                DestructBuilding();
-
-                GameplayScene.WorldManager.TryToBuild(BuildingTemplate, GetCenterTile().X, GetCenterTile().Y, Direction);
             }
         }
 
@@ -155,8 +166,8 @@ namespace Technolithic
 
             if (IsBuilt)
             {
-                baseInfo += $"- {Localization.GetLocalizedText("progress")}: {(int)CurrentTime}/{TRY_TIME}";
-                baseInfo += $"\n- {Localization.GetLocalizedText("number_of_uses")}: {CurrentNumberOfUses}/{MAX_NUMBER_OF_USES}";
+                baseInfo += $"- {Localization.GetLocalizedText("progress")}: {(int)CurrentTime}/{TRY_TIME}\n";
+                baseInfo += $"- {Localization.GetLocalizedText("number_of_uses")}: {CurrentNumberOfUses}/{MAX_NUMBER_OF_USES}";
             }
 
             return baseInfo;

@@ -206,6 +206,8 @@ namespace Technolithic
         {
             ItemContainer itemContainer = interactionToolDict[interactionType];
 
+            if (itemContainer == null) return;
+
             itemContainer.Durability -= value;
             if(itemContainer.Durability <= 0)
             {

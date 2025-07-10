@@ -120,6 +120,7 @@ namespace Technolithic
         public static MyTexture OwnershipIcon { get; private set; }
         public static MyTexture EnergyProductionIcon { get; private set; }
         public static MyTexture HutIcon { get; private set; }
+        public static MyTexture EmptyFishTrapIcon { get; private set; }
 
         public static SoundEffectInstance BuildingSoundEffect { get; private set; }
         public static SoundEffectInstance ClickSoundEffect { get; private set; }
@@ -238,6 +239,7 @@ namespace Technolithic
             OwnershipIcon = uiSpriteSheet.GetSubtexture(0, 112, 16, 16);
             EnergyProductionIcon = uiSpriteSheet.GetSubtexture(112, 240, 16, 16);
             HutIcon = uiSpriteSheet.GetSubtexture(16, 128, 16, 16);
+            EmptyFishTrapIcon = uiSpriteSheet.GetSubtexture(112, 112, 16, 16);
 
             MyTexture emotest = GetTexture("emotest");
             HungerThought = emotest.GetSubtexture(16, 0, 16, 16);

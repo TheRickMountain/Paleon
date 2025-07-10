@@ -15,7 +15,7 @@
   "constructionTime": 10,
   "movementSpeed": 75,
   "TreeData": {
-    "GrowthRateInDays": 1,
+    "GrowthRateInDays": 8,
     "GrowthStages": [
       {
         "InteractionDurationInHours": 0.1,

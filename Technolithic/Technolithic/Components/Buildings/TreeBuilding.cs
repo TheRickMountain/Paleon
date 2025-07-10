@@ -11,6 +11,8 @@ namespace Technolithic
         private float _growthProgress = 0.0f;
         private int _growthStage = -1;
 
+        private Season lastSeason;
+
         public TreeBuilding(BuildingTemplate buildingTemplate, Direction direction) 
             : base(buildingTemplate, direction)
         {
@@ -23,6 +25,13 @@ namespace Technolithic
 
             float progressPerFrame = treeData.GrowthRateInDays / (WorldState.HOURS_PER_CYCLE * WorldState.MINUTES_PER_HOUR);
             progressPerFrame *= Engine.GameDeltaTime;
+
+            if(GameplayScene.Instance.WorldState.CurrentSeason != lastSeason)
+            {
+                lastSeason = GameplayScene.Instance.WorldState.CurrentSeason;
+
+                UpdateSprite();
+            }
 
             // TODO: refactoring required (There is no point in updating growth progress every frame)
             if (GameplayScene.Instance.WorldState.CurrentSeason == Season.Winter)
@@ -62,6 +71,8 @@ namespace Technolithic
             SetGrowthProgress(0);
 
             UpdateSprite();
+
+            lastSeason = GameplayScene.Instance.WorldState.CurrentSeason;
         }
 
         public override void CompleteInteraction(InteractionType interactionType)
@@ -102,6 +113,7 @@ namespace Technolithic
             if (IsBuilt)
             {
                 parentInformation += $"- {Localization.GetLocalizedText("growth_progress")}: {(int)(_growthProgress * 100)}%\n";
+                parentInformation += $"- {Localization.GetLocalizedText("growth_speed")}: {GetGrowthSpeedPerDay()}% {Localization.GetLocalizedText("per_day")}\n\n";
             }
 
             return parentInformation;
@@ -120,6 +132,14 @@ namespace Technolithic
         {
             Sprite.CurrentAnimation.Frames[0] = treeData.GetGrowthStageTexture(_growthStage,
                     GameplayScene.Instance.WorldState.CurrentSeason);
+        }
+
+        private float GetGrowthSpeedPerDay()
+        {
+            if (GameplayScene.Instance.WorldState.CurrentSeason == Season.Winter)
+                return 0;
+
+            return 100f / treeData.GrowthRateInDays;
         }
     }
 }

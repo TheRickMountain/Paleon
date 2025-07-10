@@ -13,6 +13,8 @@ namespace Technolithic
 
         private Season lastSeason;
 
+        private float timer = 0.0f;
+
         public TreeBuilding(BuildingTemplate buildingTemplate, Direction direction) 
             : base(buildingTemplate, direction)
         {
@@ -23,23 +25,29 @@ namespace Technolithic
         {
             base.UpdateCompleted();
 
-            float progressPerFrame = treeData.GrowthRateInDays / (WorldState.HOURS_PER_CYCLE * WorldState.MINUTES_PER_HOUR);
-            progressPerFrame *= Engine.GameDeltaTime;
+            timer += Engine.GameDeltaTime;
 
-            if(GameplayScene.Instance.WorldState.CurrentSeason != lastSeason)
+            if (timer >= 1.0f)
             {
-                lastSeason = GameplayScene.Instance.WorldState.CurrentSeason;
+                timer = 0;
 
-                UpdateSprite();
+                float progressPerMinute = 1.0f / (treeData.GrowthRateInDays * WorldState.HOURS_PER_CYCLE * WorldState.MINUTES_PER_HOUR);
+
+                if (GameplayScene.Instance.WorldState.CurrentSeason != lastSeason)
+                {
+                    lastSeason = GameplayScene.Instance.WorldState.CurrentSeason;
+
+                    UpdateSprite();
+                }
+
+                // TODO: refactoring required (There is no point in updating growth progress every frame)
+                if (GameplayScene.Instance.WorldState.CurrentSeason == Season.Winter)
+                {
+                    progressPerMinute = 0;
+                }
+
+                SetGrowthProgress(_growthProgress + progressPerMinute);
             }
-
-            // TODO: refactoring required (There is no point in updating growth progress every frame)
-            if (GameplayScene.Instance.WorldState.CurrentSeason == Season.Winter)
-            {
-                progressPerFrame = 0;
-            }
-
-            SetGrowthProgress(_growthProgress + progressPerFrame);
         }
 
         public void SetGrowthProgress(float newGrowthProgress)

@@ -31,6 +31,8 @@ namespace Technolithic
             {
                 State = TaskState.Failed;
             }
+
+            Owner.CreatureEquipment.ToolItemContainer = Owner.CreatureEquipment.TryGetTool(_interactionType);
         }
 
         public override void UpdateTask()
@@ -66,6 +68,8 @@ namespace Technolithic
                         {
                             _interactable.CompleteInteraction(_interactionType);
 
+                            Owner.CreatureEquipment.DecreaseToolDurability(_interactionType, 1);
+
                             Owner.Slider.Active = false;
 
                             State = TaskState.Success;
@@ -94,6 +98,8 @@ namespace Technolithic
             Owner.Slider.Active = false;
 
             _interactable.Unreserve();
+
+            Owner.CreatureEquipment.ToolItemContainer = null;
         }
 
         public override void Cancel()
@@ -105,6 +111,8 @@ namespace Technolithic
             Owner.Slider.Active = false;
 
             _interactable.Unreserve();
+
+            Owner.CreatureEquipment.ToolItemContainer = null;
         }
 
         private bool IsTaskValid()

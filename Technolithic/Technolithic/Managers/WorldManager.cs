@@ -394,13 +394,19 @@ namespace Technolithic
             OnItemOpenedCallback?.Invoke(item);
         }
 
-        public (Inventory, Item) FindTool(int zoneId, CreatureType creatureType, InteractionType interactionType)
+        public (Inventory, Item) FindTool(CreatureCmp creature, InteractionType interactionType)
         {
-            // TODO: Try to find the tool in the storage
+            int zoneId = creature.Movement.CurrentTile.Room.Id;
+            StorageBuildingCmp storage = StorageManager.GetStorageWithTool(creature, interactionType);
+            if (storage != null)
+            {
+                Item item = storage.GetAvailableTool(creature, interactionType);
+                return (storage.Inventory, item);
+            }
 
             if (TilesThatHaveItems[zoneId].Count != 0)
             {
-                foreach (var item in ItemDatabase.GetInteractionTypeTools(creatureType, interactionType))
+                foreach (var item in ItemDatabase.GetInteractionTypeTools(creature.CreatureType, interactionType))
                 {
                     if (TilesThatHaveItems[zoneId].ContainsKey(item) == false) continue;
 

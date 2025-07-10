@@ -370,6 +370,17 @@ namespace Technolithic
             return null;
         }
 
+        public Item GetAvailableTool(CreatureCmp creature, InteractionType interactionType)
+        {
+            foreach(Item item in ItemDatabase.GetInteractionTypeTools(creature.CreatureType, interactionType))
+            {
+                if (Inventory.GetAvailableItemCount(item) > 0)
+                    return item;
+            }
+
+            return null;
+        }
+
         public override void Render()
         {
             base.Render();

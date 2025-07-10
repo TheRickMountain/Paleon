@@ -202,6 +202,25 @@ namespace Technolithic
             }
         }
 
+        public void DecreaseToolDurability(InteractionType interactionType, float value)
+        {
+            ItemContainer itemContainer = interactionToolDict[interactionType];
+
+            itemContainer.Durability -= value;
+            if(itemContainer.Durability <= 0)
+            {
+                interactionToolDict[interactionType] = null;
+
+                if (ToolItemContainer == itemContainer)
+                {
+                    ToolItemContainer = null;
+                }
+
+                // TODO: temp
+                tools[itemContainer.Item.Tool.ToolType] = null;
+            }
+        }
+
         public void EquipTool(ItemContainer itemContainer)
         {
             ToolType toolType = itemContainer.Item.Tool.ToolType;
@@ -234,6 +253,11 @@ namespace Technolithic
         public ItemContainer TryGetTool(ToolType toolType)
         {
             return tools[toolType];
+        }
+
+        public ItemContainer TryGetTool(InteractionType interactionType)
+        {
+            return interactionToolDict[interactionType];
         }
 
         public ItemContainer TryGetTool(LaborType laborType)

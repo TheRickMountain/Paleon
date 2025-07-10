@@ -28,8 +28,7 @@
 
                 if (creature.CreatureEquipment.HasTool(interactionType) == false)
                 {
-                    var tuplePair = GameplayScene.WorldManager.FindTool(creature.Movement.CurrentTile.GetRoomId(),
-                        creature.CreatureType, interactionType);
+                    var tuplePair = GameplayScene.WorldManager.FindTool(creature, interactionType);
 
                     if(tuplePair.Item1 != null)
                     {
@@ -39,10 +38,9 @@
                         EquipItemTask equipTask = new EquipItemTask(creature, inventory, item);
                         AddTask(creature, equipTask);
                     }
-                    else
+                    else if (interactable.DoesInteractionRequireTool(interactionType))
                     {
-                        // TODO: continue if interactable requires tool to perform the interaction
-                        // if interactable.RequiresTool then return false
+                        continue;
                     }
                 }
 

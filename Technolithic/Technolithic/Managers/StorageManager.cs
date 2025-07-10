@@ -56,6 +56,18 @@ namespace Technolithic
             return null;
         }
 
+        public StorageBuildingCmp GetStorageWithTool(CreatureCmp creature, InteractionType interactionType)
+        {
+            foreach(Item item in ItemDatabase.GetInteractionTypeTools(creature.CreatureType, interactionType))
+            {
+                StorageBuildingCmp storageBuildingCmp = GetStorageWith(creature, item);
+                if(storageBuildingCmp != null)
+                    return storageBuildingCmp;
+            }
+
+            return null;
+        }
+
         public void AddStorage(StorageBuildingCmp stockpileBuilding)
         {
             Storages.Add(stockpileBuilding);

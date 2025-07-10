@@ -156,6 +156,8 @@ namespace Technolithic
 
         public abstract Tile GetApproachableTile();
 
+        public abstract Tile GetApproachableTile(int zoneId);
+
         public void Destroy()
         {
             if (_isDestroyed) return;

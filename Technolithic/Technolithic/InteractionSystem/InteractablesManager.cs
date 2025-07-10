@@ -61,6 +61,23 @@ namespace Technolithic
 
         public Interactable GetFirstInteractable(int zoneId, InteractionType interactionType)
         {
+            // TODO: temp
+            var interactablesList = interactionTypeInteractablesDict[interactionType];
+
+            if (interactablesList.Count == 0) return null;
+
+            foreach (Interactable interactable in interactablesList)
+            {
+                Tile tile = interactable.GetApproachableTile(zoneId);
+
+                if(tile != null)
+                {
+                    return interactable;
+                }
+            }
+
+            return null;
+
             // TODO: It is necessary to return the building located in the required zone.
 
             //if (interactionTypeEntitiesByRoom.TryGetValue(roomId, out var byType))
@@ -72,9 +89,9 @@ namespace Technolithic
 
             // TODO: temp
 
-            if (interactionTypeInteractablesDict[interactionType].Count == 0) return null;
+            //if (interactionTypeInteractablesDict[interactionType].Count == 0) return null;
 
-            return interactionTypeInteractablesDict[interactionType][0];
+            //return interactionTypeInteractablesDict[interactionType][0];
         }
 
         //public List<InteractableEntity> TryGetTopPriorityEntities(int roomId, InteractionTypeId interactionTypeId)

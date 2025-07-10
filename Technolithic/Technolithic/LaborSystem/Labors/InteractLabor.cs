@@ -20,11 +20,10 @@
             {
                 InteractionType interactionType = interactionData.InteractionType;
 
+                // TODO: Required to get "interactables" list to find the closest one
                 Interactable interactable = _interactablesManager.GetFirstInteractable(creatureZoneId, interactionType);
 
                 if (interactable == null) continue;
-
-                // TODO: Required to get "interactables" list to find the closest one
 
                 if (creature.CreatureEquipment.HasTool(interactionType) == false)
                 {

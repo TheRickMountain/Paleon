@@ -838,6 +838,35 @@ namespace Technolithic
             return null;
         }
 
+        public override Tile GetApproachableTile(int zoneId)
+        {
+            for (int i = 0; i < TargetTiles.Count; ++i)
+            {
+                Tile tile = TargetTiles[i];
+
+                if (tile.IsWalkable == false) continue;
+
+                if(tile.Room.Id != zoneId) continue;
+
+                return tile;
+            }
+
+            return null;
+        }
+
+        public override Tile GetApproachableTile()
+        {
+            for (int i = 0; i < TargetTiles.Count; ++i)
+            {
+                Tile tile = TargetTiles[i];
+
+                if (tile.IsWalkable)
+                    return tile;
+            }
+
+            return null;
+        }
+
         // TODO: переделать
         public Tile GetCenterTile()
         {
@@ -854,19 +883,6 @@ namespace Technolithic
                 case Direction.UP: 
                 case Direction.DOWN:
                     return TilesInfosArray[(int)(BuildingTemplate.Width / 2), (int)(BuildingTemplate.Height / 2)].Tile;
-            }
-
-            return null;
-        }
-
-        public override Tile GetApproachableTile()
-        {
-            for (int i = 0; i < TargetTiles.Count; ++i)
-            {
-                Tile tile = TargetTiles[i];
-
-                if (tile.IsWalkable)
-                    return tile;
             }
 
             return null;

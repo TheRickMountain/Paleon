@@ -405,6 +405,7 @@ repeat,Wiederholen
 repeat_until_production_limits_are_reached,Wiederholen des Vorgangs
 required,Erforderlich
 required_technology,Notwendige Technologie
+required_technology_x,Required technology: {0}
 resource,Ressource
 resources,Ressourcen
 rest,Ausruhen

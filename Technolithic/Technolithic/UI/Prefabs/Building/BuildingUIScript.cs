@@ -142,7 +142,7 @@ namespace Technolithic
             }
         }
 
-        public void SetBuilding(BuildingCmp building, InteractionsDatabase interactionsDatabase)
+        public void SetBuilding(BuildingCmp building, InteractionsDatabase interactionsDatabase, ProgressTree progressTree)
         {
             selectedBuilding = building;
 
@@ -191,15 +191,26 @@ namespace Technolithic
 
                 interactionButton = interactionButtonDict[interactionType];
 
-                interactionButton.ButtonScript.IsSelected = selectedInteractable.IsInteractionMarked(interactionType);
-
-                if(interactionButton.ButtonScript.IsSelected)
+                Technology requiredTechnology = TechnologyDatabase.GetTechnologyThatUnlocksInteraction(interactionType);
+                if (requiredTechnology != null && progressTree.IsTechnologyUnlocked(requiredTechnology) == false)
                 {
-                    interactionButton.Tooltips = Localization.GetLocalizedText("cancel_x", interactionData.DisplayName);
+                    interactionButton.ButtonScript.IsDisabled = true;
+                    interactionButton.Tooltips = $"{Localization.GetLocalizedText($"required_technology_x", requiredTechnology.Name).Paint(Color.Yellow)}\n" +
+                        $"{interactionData.DisplayName.Paint(Color.DarkGray)}";
                 }
                 else
                 {
-                    interactionButton.Tooltips = interactionData.DisplayName;
+                    interactionButton.ButtonScript.IsDisabled = false;
+                    interactionButton.ButtonScript.IsSelected = selectedInteractable.IsInteractionMarked(interactionType);
+
+                    if (interactionButton.ButtonScript.IsSelected)
+                    {
+                        interactionButton.Tooltips = Localization.GetLocalizedText("cancel_x", interactionData.DisplayName);
+                    }
+                    else
+                    {
+                        interactionButton.Tooltips = interactionData.DisplayName;
+                    }
                 }
 
                 ListViewUIScript buttonsListView = ParentNode.GetChildByName("ButtonsListView").GetComponent<ListViewUIScript>();

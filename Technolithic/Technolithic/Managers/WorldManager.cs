@@ -113,14 +113,17 @@ namespace Technolithic
 
         private InteractablesManager interactablesManager;
         private InteractionsDatabase interactionsDatabase;
+        private ProgressTree progressTree;
 
-        public WorldManager(WorldManagerSaveData saveData, InteractionsDatabase interactionsDatabase)
+        public WorldManager(WorldManagerSaveData saveData, InteractionsDatabase interactionsDatabase, ProgressTree progressTree)
         {
             ItemsDecayer = new ItemsDecayer();
             StorageManager = new StorageManager();
             LaborManager = new LaborManager();
             buildingManager = new BuildingManager();
             this.interactionsDatabase = interactionsDatabase;
+            this.progressTree = progressTree;
+            
             interactablesManager = new InteractablesManager(interactionsDatabase);
             
             foreach(LaborType laborType in interactionsDatabase.GetInvolvedTypesOfLabor())
@@ -391,6 +394,27 @@ namespace Technolithic
             OnItemOpenedCallback?.Invoke(item);
         }
 
+        public (Inventory, Item) FindTool(int zoneId, CreatureType creatureType, InteractionType interactionType)
+        {
+            // TODO: Try to find the tool in the storage
+
+            if (TilesThatHaveItems[zoneId].Count != 0)
+            {
+                foreach (var item in ItemDatabase.GetInteractionTypeTools(creatureType, interactionType))
+                {
+                    if (TilesThatHaveItems[zoneId].ContainsKey(item) == false) continue;
+
+                    if (TilesThatHaveItems[zoneId][item].Count == 0) continue;
+
+                    Inventory inventory = TilesThatHaveItems[zoneId][item][0];
+
+                    return (inventory, item);
+                }
+            }
+
+            return (null, null);
+        }
+
         public Tuple<Inventory, Item> FindTool(CreatureCmp creature, ToolType toolType)
         {
             int creatureRoomId = creature.Movement.CurrentTile.Room.Id;
@@ -432,7 +456,7 @@ namespace Technolithic
                 return true;
             else
             {
-                if (GameplayScene.Instance.ProgressTree.UnlockedItems[craftingRecipe.MainItem] == false)
+                if (progressTree.UnlockedItems[craftingRecipe.MainItem] == false)
                     return false;
 
                 openedCraftingRecipes[craftingRecipe] = true;
@@ -902,7 +926,7 @@ namespace Technolithic
                     break;
                 case SelectableType.Building:
                     GameplayScene.UIRootNodeScript.OpenBuildingUI(selectable.Entity.Get<BuildingCmp>(),
-                        interactionsDatabase);
+                        interactionsDatabase, progressTree);
                     break;
                 case SelectableType.ItemContainers:
                     GameplayScene.UIRootNodeScript.OpenItemStackUI(GameplayScene.MouseTile);

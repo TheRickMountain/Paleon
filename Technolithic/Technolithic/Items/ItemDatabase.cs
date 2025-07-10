@@ -21,6 +21,8 @@ namespace Technolithic
         public static Dictionary<CreatureType, Dictionary<ToolType, List<Item>>> Tools = new Dictionary<CreatureType, Dictionary<ToolType, List<Item>>>();
         public static Dictionary<int, string> ItemCategories = new Dictionary<int, string>();
         public static Dictionary<StatusEffectId, List<Item>> StatusEffectRemovers = new Dictionary<StatusEffectId, List<Item>>();
+        
+        private static Dictionary<CreatureType, Dictionary<InteractionType, List<Item>>> interactionTypeTools = new();
 
         public static void Initialize()
         {
@@ -31,6 +33,16 @@ namespace Technolithic
             {
                 Tools[CreatureType.Animal].Add(toolType, new List<Item>());
                 Tools[CreatureType.Settler].Add(toolType, new List<Item>());
+            }
+
+            foreach(CreatureType creatureType in  Enum.GetValues(typeof(CreatureType)))
+            {
+                interactionTypeTools.Add(creatureType, new Dictionary<InteractionType, List<Item>>());
+
+                foreach (InteractionType interactionType in Enum.GetValues(typeof(InteractionType)))
+                {
+                    interactionTypeTools[creatureType].Add(interactionType, new List<Item>());
+                }
             }
 
             JObject jobject = JObject.Parse(File.ReadAllText(Path.Combine(Engine.ContentDirectory, "itemCategories.json")));
@@ -61,41 +73,26 @@ namespace Technolithic
 
                 Item item = new Item(id, icon, name, itemCategory, value, durability, spoilageRate, isDecayable, isVirtual);
 
+                JsonSerializer serializer = JsonSerializer.CreateDefault();
+
                 if (itemData["Tool"].IsNullOrEmpty() == false)
                 {
-                    JToken toolToken = itemData["Tool"];
-                    int meleeDamage = toolToken["MeleeDamage"].Value<int>();
-                    int rangeDamage = toolToken["RangeDamage"].Value<int>();
-                    int level = toolToken["Level"].Value<int>();
-                    float efficiency = toolToken["Efficiency"].Value<float>();
-                    ToolType toolType = (ToolType)toolToken["ToolType"].Value<int>();
-                    CreatureType creatureType = (CreatureType)toolToken["CreatureType"].Value<int>();
-                    float rechargeTime = toolToken["RechargeTime"].Value<int>();
-                    int ammoTextureId = toolToken["AmmoTextureId"].Value<int>();
-                    float projectileSpeed = toolToken["ProjectileSpeed"].Value<float>();
-                    MyTexture ammoTexture;
+                    Tool tool = serializer.Deserialize<Tool>(itemData["Tool"].CreateReader());
 
-                    if (ammoTextureId != -1)
-                        ammoTexture = ResourceManager.AmmoTileset[ammoTextureId];
-                    else
-                        ammoTexture = RenderManager.Pixel;
+                    tool.Initialize();
+                    item.SetAsTool(tool);
 
-                    LaborType[] laborTypes = new LaborType[toolToken["LaborTypes"].Count()];
-
-                    for (int i = 0; i < toolToken["LaborTypes"].Count(); i++)
+                    Tools[tool.CreatureType][tool.ToolType].Add(item);
+                    
+                    foreach(InteractionType interactionType in tool.InteractionTypes)
                     {
-                        laborTypes[i] = Utils.ParseEnum<LaborType>(toolToken["LaborTypes"][i].Value<string>());
+                        interactionTypeTools[tool.CreatureType][interactionType].Add(item);
                     }
-
-                    item.SetAsTool(new Tool(meleeDamage, rangeDamage, level, efficiency, toolType, creatureType,
-                        rechargeTime, ammoTexture, projectileSpeed, laborTypes));
-
-                    Tools[creatureType][toolType].Add(item);
                 }
 
                 if (itemData["Outfit"].IsNullOrEmpty() == false)
                 {
-                    Outfit outfit = JsonSerializer.CreateDefault().Deserialize<Outfit>(itemData["Outfit"].CreateReader());
+                    Outfit outfit = serializer.Deserialize<Outfit>(itemData["Outfit"].CreateReader());
 
                     item.SetAsOutfit(outfit);
 
@@ -111,14 +108,14 @@ namespace Technolithic
 
                 if (itemData["Consumable"].IsNullOrEmpty() == false)
                 {
-                    Consumable consumable = JsonSerializer.CreateDefault().Deserialize<Consumable>(itemData["Consumable"].CreateReader());
+                    Consumable consumable = serializer.Deserialize<Consumable>(itemData["Consumable"].CreateReader());
 
                     item.SetAsConsumable(consumable);
                 }
 
                 if (itemData["Equipment"].IsNullOrEmpty() == false)
                 {
-                    item.Equipment = JsonSerializer.CreateDefault().Deserialize<Equipment>(itemData["Equipment"].CreateReader());
+                    item.Equipment = serializer.Deserialize<Equipment>(itemData["Equipment"].CreateReader());
                 }
 
                 AddItem(key, item);
@@ -140,6 +137,8 @@ namespace Technolithic
                     Tools[CreatureType.Animal][(ToolType)toolType].Reverse();
                 }
             }
+
+            SortInteractionTypeToolsByEfficiency();
 
             foreach (var kvp in Items)
             {
@@ -202,5 +201,21 @@ namespace Technolithic
             return realLoot;
         }
 
+        public static IReadOnlyList<Item> GetInteractionTypeTools(CreatureType creatureType, InteractionType interactionType)
+        {
+            return interactionTypeTools[creatureType][interactionType];
+        }
+
+        private static void SortInteractionTypeToolsByEfficiency()
+        {
+            foreach (CreatureType creatureType in Enum.GetValues(typeof(CreatureType)))
+            {
+                foreach (InteractionType interactionType in Enum.GetValues(typeof(InteractionType)))
+                {
+                    interactionTypeTools[creatureType][interactionType]
+                        .Sort((a, b) => b.Tool.Efficiency.CompareTo(a.Tool.Efficiency));
+                }
+            }
+        }
     }
 }

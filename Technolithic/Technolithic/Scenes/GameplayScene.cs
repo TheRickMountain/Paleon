@@ -134,7 +134,9 @@ namespace Technolithic
 
             if (string.IsNullOrEmpty(saveFileName))
             {
-                WorldManager = new WorldManager(null, interactionsDatabase);
+                ProgressTree = new ProgressTree(null);
+
+                WorldManager = new WorldManager(null, interactionsDatabase, ProgressTree);
                 WorldManager.Begin();
 
                 AchievementManager = new AchievementManager(null);
@@ -148,8 +150,7 @@ namespace Technolithic
                 NomadsManager = new NomadsManager(null);
                 AnimalSpawnManager = new AnimalSpawnManager();
                 TradingSystem = new TradingSystem();
-                ProgressTree = new ProgressTree(null);
-
+                
                 WorldGenerator worldGenerator = new WorldGenerator(World, WorldManager);
 
                 WorldManager.GenerateWorld();
@@ -214,7 +215,9 @@ namespace Technolithic
 
                 OldSaveConverter.Convert(saveManager);
 
-                WorldManager = new WorldManager(saveManager.Data.WorldManagerSaveData, interactionsDatabase);
+                ProgressTree = new ProgressTree(saveManager.Data.ProgressTreeSaveData);
+
+                WorldManager = new WorldManager(saveManager.Data.WorldManagerSaveData, interactionsDatabase, ProgressTree);
                 WorldManager.Begin();
 
                 AchievementManager = new AchievementManager(saveManager.Data.UnlockedAchievements);
@@ -229,7 +232,7 @@ namespace Technolithic
                 NomadsManager = new NomadsManager(saveManager.Data.NomadsManagerSaveData);
                 AnimalSpawnManager = new AnimalSpawnManager();
                 TradingSystem = new TradingSystem();
-                ProgressTree = new ProgressTree(saveManager.Data.ProgressTreeSaveData);
+                
                 WaterChunkManager = new WaterChunkManager();
                 EnergyManager = new EnergyManager();
                 PrecipitationManager = new PrecipitationManager(WorldState.CurrentSeason);

@@ -405,6 +405,7 @@ repeat,Repeat
 repeat_until_production_limits_are_reached,Repeat until production limits are reached
 required,Required
 required_technology,Required technology
+required_technology_x,Required technology: {0}
 resource,Resource
 resources,Resources
 rest,Rest

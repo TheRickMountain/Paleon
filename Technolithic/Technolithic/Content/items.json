@@ -441,7 +441,8 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Chop"]
+      "LaborTypes": ["Chop"],
+      "InteractionTypes": ["Chop"]
     }
   },
   "copper_axe": {
@@ -466,7 +467,8 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Chop"]
+      "LaborTypes": ["Chop"],
+      "InteractionTypes": ["Chop"]
     }
   },
   "bronze_axe": {
@@ -491,7 +493,8 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Chop"]
+      "LaborTypes": ["Chop"],
+      "InteractionTypes": ["Chop"]
     }
   },
   "iron_axe": {
@@ -516,7 +519,8 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Chop"]
+      "LaborTypes": ["Chop"],
+      "InteractionTypes": ["Chop"]
     }
   },
   "stone_hoe": {

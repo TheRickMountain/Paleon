@@ -19,6 +19,8 @@ namespace Technolithic
        
         public static Technology Irrigation { get; private set; }
 
+        public static Dictionary<InteractionType, Technology> interactionTypeUnlockTechnology;
+
         public static void Initialize(string contentDirectory)
         {
             Tileset tileset = new Tileset(ResourceManager.GetTexture("technologies_icons"), 16, 16);
@@ -61,10 +63,47 @@ namespace Technolithic
                 }
             }
 
+            CreateAndPopulateInteractionTypeUnlockTechnologyDict();
+
             // TODO: придумать как исправить
             StoneTools = Technologies[0];
             Fertilizing = Technologies[29];
             Irrigation = Technologies[34];
+        }
+
+        private static void CreateAndPopulateInteractionTypeUnlockTechnologyDict()
+        {
+            interactionTypeUnlockTechnology = new Dictionary<InteractionType, Technology>();
+
+            foreach (InteractionType interactionType in Enum.GetValues(typeof(InteractionType)))
+            {
+                interactionTypeUnlockTechnology.Add(interactionType, null);
+            }
+
+            foreach (Technology technology in Technologies.Values)
+            {
+                if (technology.UnlockedItems == null || technology.UnlockedItems.Count == 0) continue;
+
+                foreach (Item item in technology.UnlockedItems)
+                {
+                    if (item.Tool == null) continue;
+
+                    if (item.Tool.InteractionTypes.Length == 0) continue;
+
+                    foreach(InteractionType interactionType in item.Tool.InteractionTypes)
+                    {
+                        // INFO: the technology has already been found
+                        if (interactionTypeUnlockTechnology[interactionType] != null) continue;
+
+                        interactionTypeUnlockTechnology[interactionType] = technology;
+                    }
+                }
+            }
+        }
+
+        public static Technology GetTechnologyThatUnlocksInteraction(InteractionType interactionType)
+        {
+            return interactionTypeUnlockTechnology[interactionType];
         }
 
     }

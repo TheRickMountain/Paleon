@@ -13,6 +13,7 @@ namespace Technolithic
 
         private Dictionary<InteractionType, float> interactionDuration;
         private Dictionary<InteractionType, float> interactionProgress;
+        private Dictionary<InteractionType, bool> interactionRequiredTool;
 
         public IReadOnlySet<InteractionType> AvailableInteractions => availableInteractions;
 
@@ -25,14 +26,23 @@ namespace Technolithic
 
             interactionDuration = new();
             interactionProgress = new();
+            interactionRequiredTool = new();
         }
 
-        public void AddAvailableInteraction(InteractionType interactionType)
+        public void AddAvailableInteraction(InteractionType interactionType, bool toolRequired)
         {
             availableInteractions.Add(interactionType);
 
             interactionDuration.Add(interactionType, 1.0f);
             interactionProgress.Add(interactionType, 0.0f);
+            interactionRequiredTool.Add(interactionType, toolRequired);
+        }
+
+        public bool DoesInteractionRequireTool(InteractionType interactionType)
+        {
+            if (interactionRequiredTool.ContainsKey(interactionType) == false) return false;
+
+            return interactionRequiredTool[interactionType];
         }
 
         public bool IsInteractionActivated(InteractionType interactionType)

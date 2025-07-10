@@ -23,11 +23,16 @@ namespace Technolithic
             _interactablesManager = interactablesManager;
         }
 
-        protected void AddAvailableInteraction(InteractionType interactionType)
+        protected void AddAvailableInteraction(InteractionType interactionType, bool toolRequired)
         {
             if (_isDestroyed) return;
 
-            _interactionHandler.AddAvailableInteraction(interactionType);
+            _interactionHandler.AddAvailableInteraction(interactionType, toolRequired);
+        }
+
+        public bool DoesInteractionRequireTool(InteractionType interactionType)
+        {
+            return _interactionHandler.DoesInteractionRequireTool(interactionType);
         }
 
         public bool IsInteractionActivated(InteractionType interactionType)

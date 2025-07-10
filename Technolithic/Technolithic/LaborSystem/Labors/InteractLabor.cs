@@ -20,11 +20,31 @@
             {
                 InteractionType interactionType = interactionData.InteractionType;
 
-                // TODO: It is necessary to check the necessity of the tool to perform the interaction
-                // TODO: Required to get "interactables" list to find the closest one
                 Interactable interactable = _interactablesManager.GetFirstInteractable(creatureZoneId, interactionType);
 
                 if (interactable == null) continue;
+
+                // TODO: Required to get "interactables" list to find the closest one
+
+                if (creature.CreatureEquipment.HasTool(interactionType) == false)
+                {
+                    var tuplePair = GameplayScene.WorldManager.FindTool(creature.Movement.CurrentTile.GetRoomId(),
+                        creature.CreatureType, interactionType);
+
+                    if(tuplePair.Item1 != null)
+                    {
+                        Inventory inventory = tuplePair.Item1;
+                        Item item = tuplePair.Item2;
+
+                        EquipItemTask equipTask = new EquipItemTask(creature, inventory, item);
+                        AddTask(creature, equipTask);
+                    }
+                    else
+                    {
+                        // TODO: continue if interactable requires tool to perform the interaction
+                        // if interactable.RequiresTool then return false
+                    }
+                }
 
                 InteractTask interactTask = new InteractTask(creature, interactable, interactionType);
                 AddTask(creature, interactTask);

@@ -8,6 +8,7 @@ namespace Technolithic
 {
     public class CreatureEquipment
     {
+        private const float DEFAULT_INTERACTION_EFFICIENCY = 1.0f;
 
         private ItemContainer toolItemContainer;
         private ItemContainer clothingItemContainer;
@@ -31,6 +32,10 @@ namespace Technolithic
 
         private Dictionary<ToolType, ItemContainer> tools = new();
 
+        private Dictionary<InteractionType, ItemContainer> interactionToolDict = new();
+
+        private Dictionary<InteractionType, float> interactionEfficiencyDict = new();
+
         public CreatureEquipment(int nativeDefense, int nativeMeleeDamage, float nativeRechargeTime)
         {
             this.nativeDefense = nativeDefense;
@@ -40,6 +45,12 @@ namespace Technolithic
             foreach(ToolType toolType in Enum.GetValues(typeof(ToolType)))
             {
                 tools.Add(toolType, null);
+            }
+
+            foreach (InteractionType interactionType in Enum.GetValues(typeof(InteractionType)))
+            {
+                interactionToolDict.Add(interactionType, null);
+                interactionEfficiencyDict.Add(interactionType, DEFAULT_INTERACTION_EFFICIENCY);
             }
 
             CalculateStats();
@@ -197,6 +208,12 @@ namespace Technolithic
 
             tools[toolType] = itemContainer;
 
+            foreach(InteractionType interactionType in itemContainer.Item.Tool.InteractionTypes)
+            {
+                interactionToolDict[interactionType] = itemContainer;
+                interactionEfficiencyDict[interactionType] = itemContainer.Item.Tool.Efficiency;
+            }
+
             // Achievement
             int toolsAmount = 0;
             foreach(var kvp in tools)
@@ -238,6 +255,11 @@ namespace Technolithic
             }
 
             return null;
+        }
+
+        public bool HasTool(InteractionType interactionType)
+        {
+            return interactionToolDict[interactionType] != null;
         }
 
         public bool HasTool(ToolType toolType)
@@ -465,6 +487,11 @@ namespace Technolithic
                     }
                 }
             }
+        }
+
+        public float GetInteractionEfficiency(InteractionType interactionType)
+        {
+            return interactionEfficiencyDict[interactionType];
         }
 
         public void Render()

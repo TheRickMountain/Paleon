@@ -405,6 +405,7 @@ repeat,Повторити
 repeat_until_production_limits_are_reached,Повторювати до досягнення встановлених лімітів виробництва
 required,Необхідно
 required_technology,Необхідна технологія
+required_technology_x,Required technology: {0}
 resource,Ресурс
 resources,Ресурси
 rest,Відпочинок

@@ -47,8 +47,7 @@ namespace Technolithic
                     {
                         Owner.Slider.Active = true;
 
-                        // TODO: get the effectiveness of the creature's tool
-                        float efficiency = 1.0f;
+                        float efficiency = Owner.CreatureEquipment.GetInteractionEfficiency(_interactionType);
 
                         float progressPerFrame = efficiency * Engine.GameDeltaTime;
 

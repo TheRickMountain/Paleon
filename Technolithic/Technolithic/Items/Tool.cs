@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,31 +22,31 @@ namespace Technolithic
 
     public class Tool 
     {
-        public int MeleeDamage { get; private set; }
-        public int RangeDamage { get; private set; }
-        public int Level { get; private set; }
-        public float Efficiency { get; private set; }
-        public ToolType ToolType { get; private set; }
-        public CreatureType CreatureType { get; private set; }
-        public float RechargeTime { get; private set; }
-        public float ProjectileSpeed { get; private set; }
-        public LaborType[] LaborTypes { get; private set; }
+        public int MeleeDamage { get; init; }
+        public int RangeDamage { get; init; }
+        public int Level { get; init; }
+        public float Efficiency { get; init; }
+        public ToolType ToolType { get; init; }
+        public CreatureType CreatureType { get; init; }
+        public float RechargeTime { get; init; }
+        public int AmmoTextureId { get; init; }
+        public float ProjectileSpeed { get; init; }
+        public LaborType[] LaborTypes { get; init; }
+        public InteractionType[] InteractionTypes { get; init; } = new InteractionType[0];
 
+        [JsonIgnore]
         public MyTexture AmmoTexture { get; set; }
 
-        public Tool(int meleeDamage, int rangeDamage, int level, float efficiency, ToolType toolType, CreatureType creatureType, 
-            float rechargeTime, MyTexture ammoTexture, float projectileSpeed, LaborType[] laborTypes)
+        public void Initialize()
         {
-            MeleeDamage = meleeDamage;
-            RangeDamage = rangeDamage;
-            Level = level;
-            Efficiency = efficiency;
-            ToolType = toolType;
-            CreatureType = creatureType;
-            RechargeTime = rechargeTime;
-            AmmoTexture = ammoTexture;
-            ProjectileSpeed = projectileSpeed;
-            LaborTypes = laborTypes;
+            if (AmmoTextureId != -1)
+            {
+                AmmoTexture = ResourceManager.AmmoTileset[AmmoTextureId];
+            }
+            else
+            {
+                AmmoTexture = RenderManager.Pixel;
+            }
         }
 
         public string GetInformation()

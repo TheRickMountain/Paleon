@@ -405,6 +405,7 @@ repeat,Tekrarla
 repeat_until_production_limits_are_reached,Üretim limitine ulasana kadar üretim devam eder
 required,Gerekli
 required_technology,Gerekli teknoloji
+required_technology_x,Required technology: {0}
 resource,Kaynak
 resources,Kaynaklar
 rest,Dinlenmek

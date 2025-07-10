@@ -405,6 +405,7 @@ repeat,Repetir
 repeat_until_production_limits_are_reached,Repetir até que os limites de produção sejam alcançados
 required,Necessário
 required_technology,Tecnologia necessária
+required_technology_x,Required technology: {0}
 resource,Recurso
 resources,Recursos
 rest,Descanso

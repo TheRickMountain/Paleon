@@ -405,6 +405,7 @@ repeat,重复
 repeat_until_production_limits_are_reached,生产至数量上限。
 required,需要
 required_technology,需要科技研究
+required_technology_x,Required technology: {0}
 resource,资源
 resources,资源
 rest,休息

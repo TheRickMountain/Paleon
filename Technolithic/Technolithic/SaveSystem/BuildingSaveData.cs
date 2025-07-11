@@ -10,6 +10,9 @@ namespace Technolithic
 {
     public class BuildingSaveData
     {
+        public List<InteractionType> MarkedInteractions;
+        public Dictionary<InteractionType, float> InteractionPercentProgressDict;
+
         public string BuildingTemplateName { get; set; }
         public Point[,] Tiles { get; set; }
         public bool IsBuilt { get; set; }

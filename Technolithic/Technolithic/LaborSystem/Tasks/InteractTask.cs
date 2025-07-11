@@ -123,11 +123,8 @@ namespace Technolithic
 
         private bool IsTaskValid()
         {
-            if (_interactable.IsInteractionMarked(_interactionType) == false) return false;
-
-            if (_interactable.IsInteractionActivated(_interactionType) == false) return false;
-
-            return true;
+            return _interactable.IsInteractionMarked(_interactionType) &&
+                _interactable.IsInteractionActivated(_interactionType);
         }
     }
 }

@@ -122,9 +122,15 @@ namespace Technolithic
             _interactionHandler.SetInteractionProgress(interactionType, progress);
         }
 
+        public void SetInteractionProgressPercent(InteractionType interactionType, float progressPercent)
+        {
+            float progress = GetInteractionDuration(interactionType) * progressPercent;
+            SetInteractionProgress(interactionType, progress);
+        }
+
         public void ResetProgress(in InteractionType interactionType)
         {
-            _interactionHandler.SetInteractionProgress(interactionType, 0);
+            SetInteractionProgress(interactionType, 0);
         }
 
         public virtual void CompleteInteraction(InteractionType interactionType) { }

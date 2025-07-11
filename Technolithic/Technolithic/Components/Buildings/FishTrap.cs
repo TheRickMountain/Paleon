@@ -35,6 +35,11 @@ namespace Technolithic
         {
             base.UpdateCompleted();
 
+            if(CatchedItem != null && IsInteractionActivated(InteractionType.EmptyFishTrap) == false)
+            {
+                ActivateInteraction(InteractionType.EmptyFishTrap);
+            }
+
             if (CatchedItem == null)
             {
                 CurrentTime += Engine.GameDeltaTime;
@@ -43,8 +48,6 @@ namespace Technolithic
                     CurrentTime = 0;
 
                     CatchedItem = GetRandomCatchedItem();
-
-                    ActivateInteraction(InteractionType.EmptyFishTrap);
                 }
             }
         }

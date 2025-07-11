@@ -495,6 +495,25 @@ namespace Technolithic
                             }
                         }
                     }
+
+                    if (buildingSaveData.MarkedInteractions != null)
+                    {
+                        foreach (InteractionType interactionType in buildingSaveData.MarkedInteractions)
+                        {
+                            buildingCmp.MarkInteraction(interactionType);
+                        }
+                    }
+
+                    if (buildingSaveData.InteractionPercentProgressDict != null)
+                    {
+                        foreach (var kvp in buildingSaveData.InteractionPercentProgressDict)
+                        {
+                            InteractionType interactionType = kvp.Key;
+                            float percentProgress = kvp.Value;
+
+                            buildingCmp.SetInteractionProgressPercent(interactionType, percentProgress);
+                        }
+                    }
                 }
 
                 Dictionary<Guid, CreatureCmp> creaturesById = new Dictionary<Guid, CreatureCmp>();

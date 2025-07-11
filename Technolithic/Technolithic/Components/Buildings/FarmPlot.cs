@@ -524,7 +524,6 @@ namespace Technolithic
                 buildingSaveData.GrowthPercent = growthPercent;
                 buildingSaveData.AdditionalHarvestScrore = additionalHarvestScore;
                 buildingSaveData.HarvestingCurrentProgress = DestructingCurrentProgress;
-                buildingSaveData.Destruct = false;
             }
 
             return buildingSaveData;

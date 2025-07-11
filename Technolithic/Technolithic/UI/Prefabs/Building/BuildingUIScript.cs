@@ -17,7 +17,6 @@ namespace Technolithic
         private MyPanelUI panel;
 
         private BigButton cancelButton;
-        private BigButton destructButton;
         private BigButton cutChopButton;
         private BigButton cutChopCompletelyButton;
         private BigButton cloneButton;
@@ -55,10 +54,6 @@ namespace Technolithic
             cancelButton = new BigButton(ParentNode.Scene, ResourceManager.CancelIcon, true);
             cancelButton.GetComponent<ButtonScript>().AddOnClickedCallback(CancelBuilding);
             cancelButton.Tooltips = Localization.GetLocalizedText("cancel");
-
-            destructButton = new BigButton(ParentNode.Scene, ResourceManager.DestructIcon, true);
-            destructButton.GetComponent<ButtonScript>().AddOnClickedCallback(DestructBuilding);
-            destructButton.Tooltips = Localization.GetLocalizedText("destruct");
 
             cutChopButton = new BigButton(ParentNode.Scene, RenderManager.Pixel, true);
             cutChopButton.GetComponent<ButtonScript>().AddOnClickedCallback(HarvestBuilding);
@@ -333,13 +328,6 @@ namespace Technolithic
             CloseUI(selectedBuilding);
         }
 
-        public void DestructBuilding(bool value, ButtonScript sender)
-        {
-            selectedBuilding.Destruct = !selectedBuilding.Destruct;
-
-            UpdateButtons();
-        }
-
         private void UpdateStatsListView(BuildingCmp building)
         {
             MNode listView = ParentNode.GetChildByName("StatsListView");
@@ -540,26 +528,6 @@ namespace Technolithic
                 {
                     buttonsListView.AddItem(tradeButton);
                 }
-
-                if(selectedBuilding.BuildingTemplate.IsDestructible)
-                {
-                    destructButton.GetComponent<ButtonScript>().IsSelected = selectedBuilding.Destruct;
-
-                    if (selectedBuilding.BuildingTemplate.BuildingType == BuildingType.FarmPlot)
-                    {
-                        if((selectedBuilding as FarmPlot).IsWild == false)
-                        {
-                            buttonsListView.AddItem(destructButton);
-                        }
-                    }
-                    else
-                    {
-                        buttonsListView.AddItem(destructButton);
-                    }
-
-                    destructButton.GetChildByName("Icon").GetComponent<MImageCmp>().Texture = ResourceManager.DestructIcon;
-                }
-
             }
 
             if (selectedBuilding.BuildingTemplate.Cloneable &&

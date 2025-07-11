@@ -6,7 +6,8 @@ namespace Technolithic
     public enum InteractionType
     {
         Chop,
-        EmptyFishTrap
+        EmptyFishTrap,
+        Destruct
     }
 
     public class InteractionsDatabase
@@ -31,6 +32,11 @@ namespace Technolithic
                 LaborType.Fish,
                 Localization.GetLocalizedText("automatically_empty_the_trap"),
                 ResourceManager.EmptyFishTrapIcon));
+
+            AddInteractionData(new InteractionData(InteractionType.Destruct,
+                LaborType.Build,
+                Localization.GetLocalizedText("destruct"),
+                ResourceManager.DestructIcon));
         }
 
         private void AddInteractionData(InteractionData interactionData)

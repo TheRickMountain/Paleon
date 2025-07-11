@@ -15,8 +15,6 @@ namespace Technolithic
         public bool IsBuilt { get; set; }
         public Direction Direction { get; set; }
         public float BuildingProgress { get; set; }
-        public float DestructingProgress { get; set; }
-        public bool Destruct { get; set; }
 
         public float CurrentFuelCondition { get; set; }
         public Dictionary<int, bool> ConsumableFuel { get; set; }
@@ -29,7 +27,6 @@ namespace Technolithic
         public bool Chop { get; set; }
         public bool Fertilize { get; set; }
         public bool Irrigate { get; set; }
-        public int SeedId { get; set; } //TODO: Удалить?
         public float GrowthPercent { get; set; }
         public int AdditionalHarvestScrore { get; set; }
         public float HarvestingCurrentProgress { get; set; }

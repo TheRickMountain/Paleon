@@ -295,7 +295,6 @@ namespace Technolithic
                     BuildingCmp buildingCmp = buildingEntity.Get<BuildingCmp>();
 
                     buildingCmp.ConstructionProgress = buildingSaveData.BuildingProgress;
-                    buildingCmp.DeconstructionProgress = buildingSaveData.DestructingProgress;
 
                     if (buildingCmp.IsBuilt)
                     {
@@ -496,8 +495,6 @@ namespace Technolithic
                             }
                         }
                     }
-
-                    buildingCmp.Destruct = buildingSaveData.Destruct;
                 }
 
                 Dictionary<Guid, CreatureCmp> creaturesById = new Dictionary<Guid, CreatureCmp>();

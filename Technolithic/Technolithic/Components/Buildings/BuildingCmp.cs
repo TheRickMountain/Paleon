@@ -1,15 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
-using Newtonsoft.Json.Linq;
 using Penumbra;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 namespace Technolithic
 {
-
-
     public class BuildingCmp : Interactable
     {
         public AnimatedSprite Sprite { get; private set; }
@@ -27,50 +22,9 @@ namespace Technolithic
 
         public float ConstructionProgress { get; set; }
 
-        public float DeconstructionProgress { get; set; }
-
         public Inventory Inventory { get; private set; }
 
         private BuildLabor buildLabor;
-
-        private bool destruct;
-        public bool Destruct
-        {
-            get { return destruct; }
-            set
-            {
-                if (destruct == value)
-                    return;
-
-                destruct = value;
-
-                if (destruct)
-                {
-                    if (BuildingTemplate.RequireBuilding)
-                    {
-                        foreach (var tileInfo in TilesInfosList)
-                        {
-                            tileInfo.Tile.MarkType = MarkType.Destruct;
-                        }
-
-                        AddBuildingToBuildingsToDestruct();
-                    }
-                    else
-                    {
-                        DestructBuilding();
-                    }
-                }
-                else
-                {
-                    foreach (var tileInfo in TilesInfosList)
-                    {
-                        tileInfo.Tile.MarkType = MarkType.None;
-                    }
-
-                    RemoveBuildingFromBuildingsToDestruct();
-                }
-            }
-        }
 
         public bool IsTurnedOn { get; set; }
 
@@ -100,7 +54,6 @@ namespace Technolithic
         private string consumptionString;
 
         public bool ReservedToSupplyFuel { get; set; }
-        public bool ReservedToDestruct { get; set; }
 
         public bool IsReserved { get; set; }
 
@@ -509,6 +462,15 @@ namespace Technolithic
         {
             IsBuilt = true;
 
+            if(BuildingTemplate.IsDestructible)
+            {
+                // TODO: some buildings may require a tool for demolition
+                AddAvailableInteraction(InteractionType.Destruct, false);
+
+                SetInteractionDuration(InteractionType.Destruct, BuildingTemplate.ConstructionTime);
+                ActivateInteraction(InteractionType.Destruct);
+            }
+
             if (BuildingTemplate.SmokeGeneratorData != null)
             {
                 smokeTimer = new MyTimer();
@@ -645,6 +607,20 @@ namespace Technolithic
             OnBuildingCompletedCallback?.Invoke(this);
         }
 
+        public override void CompleteInteraction(InteractionType interactionType)
+        {
+            base.CompleteInteraction(interactionType);
+
+            switch (interactionType)
+            {
+                case InteractionType.Destruct:
+                    {
+                        DestructBuilding();
+                    }
+                    break;
+            }
+        }
+
         private HashSet<Tile> TryToGetRangeTiles()
         {
             HashSet<Tile> tiles = new HashSet<Tile>();
@@ -714,8 +690,6 @@ namespace Technolithic
             {
                 tileInfo.Tile.MarkType = MarkType.None;
             }
-
-            RemoveBuildingFromBuildingsToDestruct();
 
             IsBuilt = false;
 
@@ -966,148 +940,11 @@ namespace Technolithic
             CurrentFuelCondition = item.Consumable.Statistics[AttributeType.Fuel];
         }
 
-        public bool IsCanBeAchieved()
-        {
-            Tile centerTile = GetCenterTile();
-
-            Tile leftTile = centerTile.LeftTile;
-            if (leftTile != null && leftTile.Room != null)
-                return true;
-
-            Tile rightTile = centerTile.RightTile;
-            if (rightTile != null && rightTile.Room != null)
-                return true;
-
-            Tile topTile = centerTile.TopTile;
-            if (topTile != null && topTile.Room != null)
-                return true;
-
-            Tile bottomTile = centerTile.BottomTile;
-            if (bottomTile != null && bottomTile.Room != null)
-                return true;
-
-            return false;
-        }
-
-        public void AddBuildingToBuildingsToDestruct()
-        {
-            if (BuildingTemplate.BuildingType == BuildingType.Wall || BuildingTemplate.BuildingType == BuildingType.Gate)
-            {
-                Tile centerTile = GetCenterTile();
-
-                Tile leftTile = centerTile.LeftTile;
-                int leftTileRoomId = -1;
-                if (leftTile != null && leftTile.Room != null)
-                {
-                    leftTileRoomId = leftTile.Room.Id;
-                    if (GameplayScene.WorldManager.BuildingsToDestruct[leftTileRoomId].Contains(this) == false)
-                    {
-                        GameplayScene.WorldManager.BuildingsToDestruct[leftTileRoomId].Add(this);
-                    }
-                }
-
-                Tile rightTile = centerTile.RightTile;
-                int rightTileRoomId = -1;
-                if (rightTile != null && rightTile.Room != null)
-                {
-                    rightTileRoomId = rightTile.Room.Id;
-                    if (GameplayScene.WorldManager.BuildingsToDestruct[rightTileRoomId].Contains(this) == false)
-                    {
-                        GameplayScene.WorldManager.BuildingsToDestruct[rightTileRoomId].Add(this);
-                    }
-                }
-
-                Tile topTile = centerTile.TopTile;
-                int topTileRoomId = -1;
-                if (topTile != null && topTile.Room != null)
-                {
-                    topTileRoomId = topTile.Room.Id;
-                    if (GameplayScene.WorldManager.BuildingsToDestruct[topTileRoomId].Contains(this) == false)
-                    {
-                        GameplayScene.WorldManager.BuildingsToDestruct[topTileRoomId].Add(this);
-                    }
-                }
-
-                Tile bottomTile = centerTile.BottomTile;
-                int bottomTimeRoomId = -1;
-                if (bottomTile != null && bottomTile.Room != null)
-                {
-                    bottomTimeRoomId = bottomTile.Room.Id;
-                    if (GameplayScene.WorldManager.BuildingsToDestruct[bottomTimeRoomId].Contains(this) == false)
-                    {
-                        GameplayScene.WorldManager.BuildingsToDestruct[bottomTimeRoomId].Add(this);
-                    }
-                }
-
-                if (leftTileRoomId == -1 && rightTileRoomId == -1 && topTileRoomId == -1 && bottomTimeRoomId == -1)
-                {
-                    GameplayScene.WorldManager.BuildingsToDestruct[-1].Add(this);
-                }
-            }
-            else
-            {
-                int roomId = GetCenterTile().Room.Id;
-                GameplayScene.WorldManager.BuildingsToDestruct[roomId].Add(this);
-            }
-        }
-
-        public void RemoveBuildingFromBuildingsToDestruct()
-        {
-            if (BuildingTemplate.BuildingType == BuildingType.Wall || BuildingTemplate.BuildingType == BuildingType.Gate)
-            {
-                Tile centerTile = GetCenterTile();
-
-                Tile leftTile = centerTile.LeftTile;
-                int leftTileRoomId = -1;
-                if (leftTile != null && leftTile.Room != null)
-                {
-                    leftTileRoomId = leftTile.Room.Id;
-                    GameplayScene.WorldManager.BuildingsToDestruct[leftTileRoomId].Remove(this);
-                }
-
-                Tile rightTile = centerTile.RightTile;
-                int rightTileRoomId = -1;
-                if (rightTile != null && rightTile.Room != null)
-                {
-                    rightTileRoomId = rightTile.Room.Id;
-                    GameplayScene.WorldManager.BuildingsToDestruct[rightTileRoomId].Remove(this);
-                }
-
-                Tile topTile = centerTile.TopTile;
-                int topTileRoomId = -1;
-                if (topTile != null && topTile.Room != null)
-                {
-                    topTileRoomId = topTile.Room.Id;
-                    GameplayScene.WorldManager.BuildingsToDestruct[topTileRoomId].Remove(this);
-                }
-
-                Tile bottomTile = centerTile.BottomTile;
-                int bottomTileRoomId = -1;
-                if (bottomTile != null && bottomTile.Room != null)
-                {
-                    bottomTileRoomId = bottomTile.Room.Id;
-                    GameplayScene.WorldManager.BuildingsToDestruct[bottomTileRoomId].Remove(this);
-                }
-
-                if (leftTileRoomId == -1 && rightTileRoomId == -1 && topTileRoomId == -1 && bottomTileRoomId == -1)
-                {
-                    GameplayScene.WorldManager.BuildingsToDestruct[-1].Remove(this);
-                }
-            }
-            else
-            {
-                int roomId = GetCenterTile().Room.Id;
-                GameplayScene.WorldManager.BuildingsToDestruct[roomId].Remove(this);
-            }
-        }
-
         public virtual BuildingSaveData GetSaveData()
         {
             BuildingSaveData buildingSaveData = new BuildingSaveData();
             buildingSaveData.BuildingTemplateName = BuildingTemplate.Json;
             buildingSaveData.BuildingProgress = ConstructionProgress;
-            buildingSaveData.DestructingProgress = DeconstructionProgress;
-            buildingSaveData.Destruct = Destruct;
 
             buildingSaveData.CurrentFuelCondition = CurrentFuelCondition;
 

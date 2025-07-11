@@ -11,7 +11,7 @@
   "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 75,
-  "constructionTime": 20,
+  "constructionTime": 10,
   "storage": {
     "canCopySettings": true,
     "capacity": 300,

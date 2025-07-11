@@ -70,16 +70,11 @@ namespace Technolithic
         public Dictionary<Item, bool> NewSettlerFoodRationFilters = new Dictionary<Item, bool>();
 
         
-        // Коллекция тайлов имеющих предметы
         public Dictionary<int, Dictionary<Item, List<Inventory>>> TilesThatHaveItems { get; private set; } = new Dictionary<int, Dictionary<Item, List<Inventory>>>();
-        // Коллекция складов имеющих свободное место для предметов
-        public Dictionary<int, List<BuildingCmp>> BuildingsToDestruct { get; private set; } = new Dictionary<int, List<BuildingCmp>>();
-        // Коллекция складов имеющих предметы
         public Dictionary<Item, List<Inventory>> BuildingsThatRequireItemsV2 { get; private set; } = new Dictionary<Item, List<Inventory>>();
         public Dictionary<Item, List<Inventory>> StoragesThatHaveItemsV2 {get; private set; } = new Dictionary<Item, List<Inventory>>();
         
         private HaulLabor haulLabor = new HaulLabor();
-        private DestructLabor destructLabor = new DestructLabor();
         private SupplyFromStorageLabor supplyStorageLabor = new SupplyFromStorageLabor();
         private SupplyFromTileLabor supplyFromTileLabor = new SupplyFromTileLabor();
         private FishLabor fishLabor = new FishLabor();
@@ -136,10 +131,6 @@ namespace Technolithic
             haulLabor.Repeat = true;
             haulLabor.IsMultiCreatureLabor = true;
             LaborManager.Add(haulLabor);
-
-            destructLabor.Repeat = true;
-            destructLabor.IsMultiCreatureLabor = true;
-            LaborManager.Add(destructLabor);
 
             supplyStorageLabor.Repeat = true;
             supplyStorageLabor.IsMultiCreatureLabor = true;
@@ -280,7 +271,6 @@ namespace Technolithic
             SettlerBeverageRation.Add(ItemDatabase.GetItemByName("pot_of_mead"));
 
             TilesThatHaveItems.Add(0, new Dictionary<Item, List<Inventory>>());
-            BuildingsToDestruct.Add(0, new List<BuildingCmp>());
 
             foreach(var kvp in ItemDatabase.Items)
             {
@@ -611,9 +601,6 @@ namespace Technolithic
 
                 if (StorageManager.StorageThatHaveEmptySpaceForItems.ContainsKey(roomId) == false)
                     StorageManager.StorageThatHaveEmptySpaceForItems.Add(roomId, new Dictionary<Item, List<Inventory>>());
-
-                if (BuildingsToDestruct.ContainsKey(roomId) == false)
-                    BuildingsToDestruct.Add(roomId, new List<BuildingCmp>());
             }
 
             // Попытка распихнуть все строения id которых уже не существуют в новые коллекции
@@ -621,17 +608,6 @@ namespace Technolithic
 
             ReallocateInventories(roomsIds, roomIdsToRemove, TilesThatHaveItems);
             ReallocateInventories(roomsIds, roomIdsToRemove, StorageManager.StorageThatHaveEmptySpaceForItems);
-            ReallocateBuildings(roomsIds, roomIdsToRemove, BuildingsToDestruct);
-
-            // Попытка распихнуть строения находящиеся в roomId == -1 в действующие roomId
-            for (int i = BuildingsToDestruct[-1].Count - 1; i >= 0; i--)
-            {
-                if(BuildingsToDestruct[-1][i].IsCanBeAchieved())
-                {
-                    BuildingsToDestruct[-1][i].AddBuildingToBuildingsToDestruct();
-                    BuildingsToDestruct[-1].RemoveAt(i);
-                }
-            }
             
             // Удаление коллекций id которых не существует
             for (int i = 0; i < roomIdsToRemove.Count; i++)
@@ -641,8 +617,6 @@ namespace Technolithic
                 TilesThatHaveItems.Remove(roomId);
 
                 StorageManager.StorageThatHaveEmptySpaceForItems.Remove(roomId);
-
-                BuildingsToDestruct.Remove(roomId);
             }
 
             if(tile.Inventory.TotalItemsCount > 0)
@@ -654,26 +628,6 @@ namespace Technolithic
                     if(freeTile != null)
                     {
                         tile.Inventory.ThrowCargo(freeTile);
-                    }
-                }
-            }
-        }
-
-        private void ReallocateBuildings(List<int> roomsIds, List<int> roomsToRemove, Dictionary<int, List<BuildingCmp>> collection)
-        {
-            foreach (var kvp in collection)
-            {
-                int roomId = kvp.Key;
-                List<BuildingCmp> buildings = kvp.Value;
-
-                if(roomsIds.Contains(roomId) == false)
-                {
-                    if(roomsToRemove.Contains(roomId) == false)
-                        roomsToRemove.Add(roomId);
-
-                    foreach(var building in buildings)
-                    {
-                        building.AddBuildingToBuildingsToDestruct();
                     }
                 }
             }
@@ -1485,6 +1439,7 @@ namespace Technolithic
                                         // TODO: temp
                                         Interactable interactable = tile.Entity.Get<Interactable>();
                                         interactable.UnmarkInteraction(InteractionType.Chop);
+                                        interactable.UnmarkInteraction(InteractionType.Destruct);
                                     }
 
                                     if (tile.Entity.Has<BuildingCmp>())
@@ -1514,8 +1469,6 @@ namespace Technolithic
                                                 DepositCmp deposit = building as DepositCmp;
                                                 deposit.IsMarkedToObtain = false;
                                             }
-
-                                            building.Destruct = false;
                                         }
                                     }
                                 }
@@ -1531,19 +1484,11 @@ namespace Technolithic
 
                                 if (tile.Entity != null)
                                 {
-                                    if (tile.Entity.Has<BuildingCmp>())
+                                    if (tile.Entity.Has<Interactable>())
                                     {
-                                        BuildingCmp building = tile.Entity.Get<BuildingCmp>();
-                                        if (building.IsBuilt && building.BuildingTemplate.IsDestructible)
-                                        {
-                                            if (building is FarmPlot && (building as FarmPlot).IsWild)
-                                                continue;
-
-                                            if (GameplayScene.BuildingsRequiredDestructing)
-                                                building.Destruct = true;
-                                            else
-                                                building.DestructBuilding();
-                                        }
+                                        // TODO: temp
+                                        Interactable interactable = tile.Entity.Get<Interactable>();
+                                        interactable.MarkInteraction(InteractionType.Destruct);
                                     }
                                 }
                             }

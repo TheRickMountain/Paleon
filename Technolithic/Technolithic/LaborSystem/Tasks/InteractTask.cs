@@ -5,13 +5,15 @@ namespace Technolithic
     public class InteractTask : Task
     {
         private Interactable _interactable;
+        private InteractionData _interactionData;
         private InteractionType _interactionType;
 
-        public InteractTask(CreatureCmp creatureCmp, Interactable interactable, InteractionType interactionType) 
+        public InteractTask(CreatureCmp creatureCmp, Interactable interactable, InteractionData interactionData) 
             : base(creatureCmp)
         {
             _interactable = interactable;
-            _interactionType = interactionType;
+            _interactionData = interactionData;
+            _interactionType = _interactionData.InteractionType;
         }
 
         public override void Begin()
@@ -25,7 +27,8 @@ namespace Technolithic
             if (tile != null)
             {
                 Owner.Movement.SetPath(tile, false);
-                Owner.Slider.SetValue(0, 1.0f, _interactable.GetInteractionProgressPercent(_interactionType), Color.Orange);
+                Owner.Slider.SetValue(0, 1.0f, _interactable.GetInteractionProgressPercent(_interactionType), 
+                    _interactionData.ProgressBarColor);
             }
             else
             {
@@ -62,7 +65,8 @@ namespace Technolithic
                         float interactionDuration = _interactable.GetInteractionDuration(_interactionType);
                         interactionProgress = _interactable.GetInteractionProgress(_interactionType);
 
-                        Owner.Slider.SetValue(0, 1.0f, _interactable.GetInteractionProgressPercent(_interactionType), Color.Orange);
+                        Owner.Slider.SetValue(0, 1.0f, _interactable.GetInteractionProgressPercent(_interactionType),
+                            _interactionData.ProgressBarColor);
 
                         if (interactionProgress >= interactionDuration)
                         {

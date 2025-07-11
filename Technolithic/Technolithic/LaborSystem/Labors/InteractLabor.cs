@@ -43,7 +43,7 @@
                     }
                 }
 
-                InteractTask interactTask = new InteractTask(creature, interactable, interactionType);
+                InteractTask interactTask = new InteractTask(creature, interactable, interactionData);
                 AddTask(creature, interactTask);
                 return true;
             }

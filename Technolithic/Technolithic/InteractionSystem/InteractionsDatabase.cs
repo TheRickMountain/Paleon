@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Technolithic
@@ -26,17 +27,20 @@ namespace Technolithic
                 InteractionType.Chop,
                 LaborType.Chop,
                 Localization.GetLocalizedText("chop"),
-                ResourceManager.ChopIcon));
+                ResourceManager.ChopIcon,
+                Color.Orange));
 
             AddInteractionData(new InteractionData(InteractionType.EmptyFishTrap,
                 LaborType.Fish,
                 Localization.GetLocalizedText("automatically_empty_the_trap"),
-                ResourceManager.EmptyFishTrapIcon));
+                ResourceManager.EmptyFishTrapIcon,
+                Color.Orange));
 
             AddInteractionData(new InteractionData(InteractionType.Destruct,
                 LaborType.Build,
                 Localization.GetLocalizedText("destruct"),
-                ResourceManager.DestructIcon));
+                ResourceManager.DestructIcon,
+                Color.Red));
         }
 
         private void AddInteractionData(InteractionData interactionData)

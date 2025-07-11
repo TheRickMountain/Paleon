@@ -1,4 +1,6 @@
-﻿namespace Technolithic
+﻿using Microsoft.Xna.Framework;
+
+namespace Technolithic
 {
     public class InteractionData
     {
@@ -7,13 +9,15 @@
         public LaborType LaborType { get; private set; }
         public string DisplayName { get; private set; }
         public MyTexture Icon { get; private set; }
+        public Color ProgressBarColor { get; private set; }
 
-        public InteractionData(InteractionType interactionType, LaborType laborType, string displayName, MyTexture icon)
+        public InteractionData(InteractionType interactionType, LaborType laborType, string displayName, MyTexture icon, Color progressBarColor)
         {
             InteractionType = interactionType;
             LaborType = laborType;
             DisplayName = displayName;
             Icon = icon;
+            ProgressBarColor = progressBarColor;
         }
 
     }

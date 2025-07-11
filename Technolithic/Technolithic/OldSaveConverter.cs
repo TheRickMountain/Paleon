@@ -199,6 +199,26 @@ namespace Technolithic
                     }
                 }
             }
+
+            if (saveManager.Info.GameVersion < new GameVersion(1, 7, 0))
+            {
+                foreach (var buildingSaveData in saveManager.Data.BuildingSaveDatas)
+                {
+                    if (Engine.Instance.Buildings.ContainsKey(buildingSaveData.BuildingTemplateName) == false)
+                    {
+                        continue;
+                    }
+
+                    BuildingTemplate buildingTemplate = Engine.Instance.Buildings[buildingSaveData.BuildingTemplateName];
+
+                    if (buildingTemplate.BuildingType != BuildingType.Tree)
+                    {
+                        continue;
+                    }
+
+                    buildingSaveData.TreeBuildingGrowthProgress = buildingSaveData.GrowthPercent / 100f;
+                }
+            }
         }
 
     }

@@ -466,6 +466,12 @@ namespace Technolithic
                                     hutAssignedCreaturesPairs.Add(hut, buildingSaveData.HutAssignedCreatures);
                                 }
                                 break;
+                            case BuildingType.Tree:
+                                {
+                                    TreeBuilding treeBuilding = buildingCmp as TreeBuilding;
+                                    treeBuilding.SetGrowthProgress(buildingSaveData.TreeBuildingGrowthProgress);
+                                }
+                                break;
                         }
                     }
 

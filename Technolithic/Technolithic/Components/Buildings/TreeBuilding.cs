@@ -131,7 +131,10 @@ namespace Technolithic
         {
             var parentSaveData = base.GetSaveData();
 
-            // TODO: set save data
+            if(IsBuilt)
+            {
+                parentSaveData.TreeBuildingGrowthProgress = _growthProgress;
+            }
 
             return parentSaveData;
         }

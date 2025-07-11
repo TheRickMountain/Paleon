@@ -76,5 +76,8 @@ namespace Technolithic
 
         // Hut
         public List<Guid> HutAssignedCreatures { get; set; }
+
+        // Tree
+        public float TreeBuildingGrowthProgress { get; set; }
     }
 }

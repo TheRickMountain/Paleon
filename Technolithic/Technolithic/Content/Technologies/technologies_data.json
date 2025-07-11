@@ -190,11 +190,20 @@
   {
     "Id": 8,
     "Name": "agriculture",
-    "HasIcon": true,
+    "HasIcon": false,
     "Age": "Neolithic",
     "RequiredXP": 500,
-    "UnlockedBuildings": ["pea", "oak", "barley", "dandelion", "grape_bush", "flax", "haystack", "spruce"],
+    "UnlockedBuildings": ["pea", "barley", "dandelion", "grape_bush", "flax", "haystack"],
     "Parents": []
+  },
+  {
+    "Id": 18,
+    "Name": "tree_farming",
+    "HasIcon": false,
+    "Age": "Neolithic",
+    "RequiredXP": 500,
+    "UnlockedBuildings": ["oak", "spruce"],
+    "Parents": [8]
   },
   {
     "Id": 34,

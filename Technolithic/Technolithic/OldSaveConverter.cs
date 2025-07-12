@@ -218,6 +218,16 @@ namespace Technolithic
 
                     buildingSaveData.TreeBuildingGrowthProgress = buildingSaveData.GrowthPercent / 100f;
                 }
+
+                foreach (var creatureSaveData in saveManager.Data.CreatureSaveDatas)
+                {
+                    if (creatureSaveData.LaborTypePriorityPair != null && creatureSaveData.LaborTypePriorityPair.ContainsKey("Gather"))
+                    {
+                        var value = creatureSaveData.LaborTypePriorityPair["Gather"];
+                        creatureSaveData.LaborTypePriorityPair.Remove("Gather");
+                        creatureSaveData.LaborTypePriorityPair.Add(LaborType.Gathering.ToString(), value);
+                    }
+                }
             }
         }
 

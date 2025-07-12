@@ -618,10 +618,10 @@ namespace Technolithic
                 settlerSaveData.TopOutfitDurability = CreatureEquipment.TopClothingItemContainer.Durability;
             }
 
-            settlerSaveData.LaborTypePriorityPair = new Dictionary<LaborType, int>();
+            settlerSaveData.LaborTypePriorityPair = new Dictionary<string, int>();
             foreach(var kvp in LaborTypePriorityPair)
             {
-                settlerSaveData.LaborTypePriorityPair.Add(kvp.Key, kvp.Value);
+                settlerSaveData.LaborTypePriorityPair.Add(kvp.Key.ToString(), kvp.Value);
             }
 
             settlerSaveData.BodyTextureId = settlerInfo.BodyTextureId;

@@ -498,18 +498,29 @@ namespace Technolithic
 
                     if (buildingSaveData.MarkedInteractions != null)
                     {
-                        foreach (InteractionType interactionType in buildingSaveData.MarkedInteractions)
+                        foreach(InteractionType interactionType in buildingCmp.AvailableInteractions)
                         {
-                            buildingCmp.MarkInteraction(interactionType);
+                            if(buildingSaveData.MarkedInteractions.Contains(interactionType))
+                            {
+                                buildingCmp.MarkInteraction(interactionType);
+                            }
+                            else
+                            {
+                                buildingCmp.UnmarkInteraction(interactionType);
+                            }
                         }
                     }
 
                     if (buildingSaveData.InteractionPercentProgressDict != null)
                     {
-                        foreach (var kvp in buildingSaveData.InteractionPercentProgressDict)
+                        foreach(InteractionType interactionType in buildingCmp.AvailableInteractions)
                         {
-                            InteractionType interactionType = kvp.Key;
-                            float percentProgress = kvp.Value;
+                            float percentProgress = 0.0f;
+
+                            if(buildingSaveData.InteractionPercentProgressDict.ContainsKey(interactionType))
+                            {
+                                percentProgress = buildingSaveData.InteractionPercentProgressDict[interactionType];
+                            }
 
                             buildingCmp.SetInteractionProgressPercent(interactionType, percentProgress);
                         }
@@ -590,7 +601,7 @@ namespace Technolithic
 
                                 foreach (var kvp in creatureSaveData.LaborTypePriorityPair.OrEmptyIfNull())
                                 {
-                                    settlerCmp.SetLaborPriority(kvp.Key, kvp.Value);
+                                    settlerCmp.SetLaborPriority(Enum.Parse<LaborType>(kvp.Key), kvp.Value);
                                 }
 
                                 settlerCmp.CreatureStats.Hunger.CurrentValue = creatureSaveData.Hunger;
@@ -676,7 +687,7 @@ namespace Technolithic
 
                                 foreach (var kvp in creatureSaveData.LaborTypePriorityPair.OrEmptyIfNull())
                                 {
-                                    animalCmp.SetLaborPriority(kvp.Key, kvp.Value);
+                                    animalCmp.SetLaborPriority(Enum.Parse<LaborType>(kvp.Key), kvp.Value);
                                 }
 
                                 if (creatureSaveData.Tools != null)

@@ -943,10 +943,10 @@ namespace Technolithic
                 creatureSaveData.TopOutfitDurability = CreatureEquipment.TopClothingItemContainer.Durability;
             }
 
-            creatureSaveData.LaborTypePriorityPair = new Dictionary<LaborType, int>();
+            creatureSaveData.LaborTypePriorityPair = new Dictionary<string, int>();
             foreach (var kvp in LaborTypePriorityPair)
             {
-                creatureSaveData.LaborTypePriorityPair.Add(kvp.Key, kvp.Value);
+                creatureSaveData.LaborTypePriorityPair.Add(kvp.Key.ToString(), kvp.Value);
             }
 
             creatureSaveData.InventoryItems = new List<Tuple<int, int, float>>();

@@ -18,8 +18,7 @@ namespace Technolithic
         public string Name { get; set; }
         public Color HairColor { get; set; }
         public Dictionary<int, bool> Ration { get; set; }
-        public Dictionary<LaborType, bool> LaborsPriorities { get; set; }
-        public Dictionary<LaborType, int> LaborTypePriorityPair { get; set; }
+        public Dictionary<string, int> LaborTypePriorityPair { get; set; }
 
         public List<Tuple<int, int, float>> Tools { get; set; }
 

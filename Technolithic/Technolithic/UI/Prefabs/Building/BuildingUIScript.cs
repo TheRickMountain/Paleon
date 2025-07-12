@@ -208,6 +208,9 @@ namespace Technolithic
                     }
                 }
 
+                interactionButton.Tooltips += $"\n{Localization.GetLocalizedText("labor_type")}: " +
+                    $"{Labor.GetLaborString(interactionData.LaborType)}";
+
                 ListViewUIScript buttonsListView = ParentNode.GetChildByName("ButtonsListView").GetComponent<ListViewUIScript>();
                 buttonsListView.AddItem(interactionButton);
             }

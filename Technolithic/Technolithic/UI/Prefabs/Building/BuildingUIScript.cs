@@ -179,37 +179,27 @@ namespace Technolithic
                 {
                     interactionButton = new BigButton(ParentNode.Scene, interactionData.Icon, true);
                     interactionButtonDict[interactionType] = interactionButton;
-                    interactionButton.Tooltips = interactionData.DisplayName;
                     interactionButton.ButtonScript.Pressed += Interactable_InteractionButton_Pressed;
                     interactionButton.SetMetadata("interaction_data", interactionData);
                 }
 
                 interactionButton = interactionButtonDict[interactionType];
+                interactionButton.SetMetadata("interactable", selectedInteractable);
+                interactionButton.Tooltips = "";
 
                 Technology requiredTechnology = TechnologyDatabase.GetTechnologyThatUnlocksInteraction(interactionType);
                 if (requiredTechnology != null && progressTree.IsTechnologyUnlocked(requiredTechnology) == false)
                 {
                     interactionButton.ButtonScript.IsDisabled = true;
-                    interactionButton.Tooltips = $"{Localization.GetLocalizedText($"required_technology_x", requiredTechnology.Name).Paint(Color.Yellow)}\n" +
-                        $"{interactionData.DisplayName.Paint(Color.DarkGray)}";
+                    interactionButton.Tooltips = $"{Localization.GetLocalizedText($"required_technology_x", requiredTechnology.Name).Paint(Color.Yellow)}\n";
                 }
                 else
                 {
                     interactionButton.ButtonScript.IsDisabled = false;
                     interactionButton.ButtonScript.IsSelected = selectedInteractable.IsInteractionMarked(interactionType);
-
-                    if (interactionButton.ButtonScript.IsSelected)
-                    {
-                        interactionButton.Tooltips = Localization.GetLocalizedText("cancel_x", interactionData.DisplayName);
-                    }
-                    else
-                    {
-                        interactionButton.Tooltips = interactionData.DisplayName;
-                    }
                 }
 
-                interactionButton.Tooltips += $"\n{Localization.GetLocalizedText("labor_type")}: " +
-                    $"{Labor.GetLaborString(interactionData.LaborType)}";
+                interactionButton.Tooltips += GenerateInteractionTooltip(building, interactionData);
 
                 ListViewUIScript buttonsListView = ParentNode.GetChildByName("ButtonsListView").GetComponent<ListViewUIScript>();
                 buttonsListView.AddItem(interactionButton);
@@ -592,17 +582,44 @@ namespace Technolithic
         private void Interactable_InteractionButton_Pressed(ButtonScript buttonScript)
         {
             InteractionData interactionData = buttonScript.ParentNode.GetMetadata<InteractionData>("interaction_data");
+            Interactable interactable = buttonScript.ParentNode.GetMetadata<Interactable>("interactable");
 
             if (buttonScript.IsSelected)
             {
                 selectedInteractable.MarkInteraction(interactionData.InteractionType);
-                buttonScript.ParentNode.Tooltips = Localization.GetLocalizedText("cancel_x", interactionData.DisplayName);
             }
             else
             {
                 selectedInteractable.UnmarkInteraction(interactionData.InteractionType);
-                buttonScript.ParentNode.Tooltips = interactionData.DisplayName;
             }
+
+            buttonScript.ParentNode.Tooltips = GenerateInteractionTooltip(interactable, interactionData);
+        }
+
+        private string GenerateInteractionTooltip(Interactable interactable, InteractionData interactionData)
+        {
+            if (interactable == null) return "";
+
+            if (interactionData == null) return "";
+
+            InteractionType interactionType = interactionData.InteractionType;
+
+            if (interactable.AvailableInteractions.Contains(interactionType) == false) return "";
+
+            string tooltip = "";
+
+            if(interactable.IsInteractionMarked(interactionType))
+            {
+                tooltip += Localization.GetLocalizedText("cancel_x", interactionData.DisplayName);
+            }
+            else
+            {
+                tooltip += interactionData.DisplayName;
+            }
+
+            tooltip += $"\n{Localization.GetLocalizedText("labor_type")}: {Labor.GetLaborString(interactionData.LaborType)}";
+
+            return tooltip;
         }
     }
 }

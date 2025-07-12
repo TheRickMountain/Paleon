@@ -468,6 +468,17 @@ namespace Technolithic
             }
         }
 
+        [Command("fill_beehive")]
+        private static void FillBeehive()
+        {
+            Entity entity = GameplayScene.WorldManager.GetSelectedEntity();
+            BeeHiveBuildingCmp beeHiveBuildingCmp = entity?.Get<BeeHiveBuildingCmp>();
+            if (beeHiveBuildingCmp != null)
+            {
+                beeHiveBuildingCmp.SetProgress(100);
+            }
+        }
+
         [Command("hit_lightning")]
         private static void HitLightning()
         {

@@ -279,11 +279,6 @@ namespace Technolithic
                 DepositCmp depositCmp = selectedBuilding as DepositCmp;
                 depositCmp.IsMarkedToObtain = !depositCmp.IsMarkedToObtain;
             }
-            else if(selectedBuilding is BeeHiveBuildingCmp)
-            {
-                BeeHiveBuildingCmp beeHive = selectedBuilding as BeeHiveBuildingCmp;
-                beeHive.GatherResources = !beeHive.GatherResources;
-            }
         }
 
         public void FertilizeBuilding(bool value, ButtonScript sender)
@@ -508,13 +503,6 @@ namespace Technolithic
                     cleanUpManureButton.ButtonScript.IsSelected = animalPen.IsFlaggedToCleanManure;
 
                     buttonsListView.AddItem(cleanUpManureButton);
-                }
-                else if(selectedBuilding.BuildingTemplate.BuildingType == BuildingType.BeeHive)
-                {
-                    BeeHiveBuildingCmp beeHive = selectedBuilding as BeeHiveBuildingCmp;
-
-                    gatherButton.GetComponent<ButtonScript>().IsSelected = beeHive.GatherResources;
-                    buttonsListView.AddItem(gatherButton);
                 }
                 else if(selectedBuilding.BuildingTemplate.BuildingType == BuildingType.Crafter)
                 {

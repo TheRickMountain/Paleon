@@ -57,7 +57,6 @@ namespace Technolithic
 
         public bool IsBeeHiveEmpty { get; set; }
         public float BeeHiveCurrentPercentProgress { get; set; }
-        public bool GatherBeeHiveResources { get; set; }
 
         // Animal pen
         public Dictionary<string, bool> AnimalsFilters { get; set; }

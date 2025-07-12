@@ -60,6 +60,8 @@ assign_x_to_this_hut,Assign {0} to this hut
 assigned_to,Assigned to {0}
 attack,Saldir
 aurochs,Yaban oküzü
+auto_collect_honey,Automatically collect honey
+auto_collect_wild_honey,Automatically collect wild honey
 automatically_empty_the_trap,Automatically empty the trap
 automatically_mine_spawned_deposits,Kaynaklar otomatik olarak olusturulacak
 autumn,Sonbahar
@@ -244,6 +246,7 @@ game_menu,Oyun menüsü
 gas,Gaz
 gather,Topla
 gathering,Toplamak
+gathering_labor,Gathering
 grain_processing,Tahil isleme
 grape,üzüm
 grape_bush,Üzüm calisi

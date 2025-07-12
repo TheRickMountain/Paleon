@@ -9,15 +9,7 @@ namespace Technolithic
 {
     public class BeeHiveData
     {
-
-        public float HoneyGenerationSpeed { get; private set; }
-
-        public BeeHiveData(JObject jobject)
-        {
-            JToken jToken = jobject["beeHive"];
-
-            HoneyGenerationSpeed = jToken["honeyGenerationSpeed"].Value<float>();
-        }
-
+        public bool IsWild { get; init; }
+        public float HoneyGenerationSpeed { get; init; }
     }
 }

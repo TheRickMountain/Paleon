@@ -8,7 +8,9 @@ namespace Technolithic
     {
         Chop,
         EmptyFishTrap,
-        Destruct
+        Destruct,
+        CollectWildHoney,
+        CollectHoney
     }
 
     public class InteractionsDatabase
@@ -41,6 +43,18 @@ namespace Technolithic
                 Localization.GetLocalizedText("destruct"),
                 ResourceManager.DestructIcon,
                 Color.Red));
+
+            AddInteractionData(new InteractionData(InteractionType.CollectWildHoney,
+                LaborType.Gathering,
+                Localization.GetLocalizedText("auto_collect_wild_honey"),
+                ResourceManager.CollectHoneyIcon,
+                Color.Orange));
+
+            AddInteractionData(new InteractionData(InteractionType.CollectHoney,
+                LaborType.Beekeeping,
+                Localization.GetLocalizedText("auto_collect_honey"),
+                ResourceManager.CollectHoneyIcon,
+                Color.Orange));
         }
 
         private void AddInteractionData(InteractionData interactionData)

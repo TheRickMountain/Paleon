@@ -60,6 +60,8 @@ assign_x_to_this_hut,Назначить {0} к этой хижине
 assigned_to,Закреплен за {0}
 attack,Атаковать
 aurochs,Тур
+auto_collect_honey,Автоматически собирать мед
+auto_collect_wild_honey,Автоматически собирать дикий мед
 automatically_empty_the_trap,Автоматически опустошать ловушку
 automatically_mine_spawned_deposits,Automatically mine spawned deposits
 autumn,Осень
@@ -244,6 +246,7 @@ game_menu,Меню
 gas,Газ
 gather,Собирать
 gathering,Сбор
+gathering_labor,Собирательство
 grain_processing,Обработка зерна
 grape,Виноград
 grape_bush,Куст винограда

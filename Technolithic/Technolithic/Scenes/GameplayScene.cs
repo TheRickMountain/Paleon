@@ -823,7 +823,10 @@ namespace Technolithic
 
         private void SpawnBeeHivesIfThereIsNo(int day, Season season)
         {
-            if(WorldManager.BeeHiveBuildings.Count == 0)
+            // TODO: Bug: улья будут спавниться бесконечно, если при генерации мира не будет диких ульев
+            // Поэтому, раз в день нужно вручную просматривать список всех диких (и возможно домашних, не думаю, что есть смысл спавнить
+            // дикие улья, если на карте полно домашних (как бы конкуренция)
+            if(WorldManager.WildBeehives.Count == 0)
             {
                 // Шанс спавна улья равен 5% в день
                 bool spawnBeeHive = MyRandom.ProbabilityChance(5);

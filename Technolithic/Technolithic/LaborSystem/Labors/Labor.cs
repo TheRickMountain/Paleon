@@ -19,8 +19,8 @@ namespace Technolithic
         Hunt = 9,
         Ranching = 11,
         Chop = 1,
-        Gather = 6,
-        Mine = 8,
+        Gathering = 6,
+        Mine = 8, // TODO: rename to "Mining" (Добыча полезных ископаемых)
         Waner = 12,
         Sleep = 13,
         Eat = 14,
@@ -173,8 +173,8 @@ namespace Technolithic
             {
                 case LaborType.Chop:
                     return Localization.GetLocalizedText("felling");
-                case LaborType.Gather:
-                    return Localization.GetLocalizedText("gathering");
+                case LaborType.Gathering:
+                    return Localization.GetLocalizedText("gathering_labor");
                 case LaborType.Mine:
                     return Localization.GetLocalizedText("mining");
                 case LaborType.Haul:
@@ -217,7 +217,7 @@ namespace Technolithic
             {
                 case LaborType.Chop:
                     return ResourceManager.GetTexture("ui").GetSubtexture(0, 224, 16, 16);
-                case LaborType.Gather:
+                case LaborType.Gathering:
                     return ResourceManager.GetTexture("ui").GetSubtexture(16, 224, 16, 16);
                 case LaborType.Mine:
                     return ResourceManager.GetTexture("ui").GetSubtexture(32, 224, 16, 16);

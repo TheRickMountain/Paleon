@@ -320,9 +320,9 @@ namespace Technolithic
                 EnergySourceData = JsonSerializer.CreateDefault().Deserialize<EnergySourceData>(JObject["EnergySourceData"].CreateReader());
             }
 
-            if(!JObject["beeHive"].IsNullOrEmpty())
+            if(!JObject["BeeHiveData"].IsNullOrEmpty())
             {
-                BeeHiveData = new BeeHiveData(JObject);
+                BeeHiveData = JsonSerializer.CreateDefault().Deserialize<BeeHiveData>(JObject["BeeHiveData"].CreateReader());
             }
 
             if(!JObject["smokeGenerator"].IsNullOrEmpty())

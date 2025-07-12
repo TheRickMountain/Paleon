@@ -21,8 +21,6 @@ namespace Technolithic
             }
         }
 
-        public bool GatherResources { get; set; } = false;
-
         private float currentPercentProgress = 0;
 
         private int flowersNumber = 0;
@@ -32,13 +30,6 @@ namespace Technolithic
 
         public BeeHiveBuildingCmp(BuildingTemplate buildingTemplate, Direction direction) : base(buildingTemplate, direction)
         {
-
-        }
-
-        public override void Begin()
-        {
-            base.Begin();
-
             float progressPerHour = BuildingTemplate.BeeHiveData.HoneyGenerationSpeed / WorldState.HOURS_PER_CYCLE;
             baseSpeedPerMinute = progressPerHour / WorldState.MINUTES_PER_HOUR;
         }
@@ -46,7 +37,6 @@ namespace Technolithic
         public void SetSaveData(BuildingSaveData buildingSaveData)
         {
             IsEmpty = buildingSaveData.IsBeeHiveEmpty;
-            GatherResources = buildingSaveData.GatherBeeHiveResources;
             currentPercentProgress = buildingSaveData.BeeHiveCurrentPercentProgress;
         }
 
@@ -58,6 +48,24 @@ namespace Technolithic
         public override void UpdateCompleted()
         {
             base.UpdateCompleted();
+
+            if (IsEmpty == false)
+            {
+                if (BuildingTemplate.BeeHiveData.IsWild)
+                {
+                    if (IsInteractionActivated(InteractionType.CollectWildHoney) == false)
+                    {
+                        ActivateInteraction(InteractionType.CollectWildHoney);
+                    }
+                }
+                else
+                {
+                    if (IsInteractionActivated(InteractionType.CollectHoney) == false)
+                    {
+                        ActivateInteraction(InteractionType.CollectHoney);
+                    }
+                }
+            }
 
             // Улей генерирует мед только в солнечную погоду и в любой сезон, кроме зимы
             if (IsEmpty && GameplayScene.Instance.WorldState.CurrentWeather == Weather.Sun &&
@@ -77,7 +85,19 @@ namespace Technolithic
         {
             base.CompleteBuilding();
 
-            GameplayScene.WorldManager.BeeHiveBuildings.Add(this);
+            // TODO: время сбора нужно загрузить из json файла
+            if(BuildingTemplate.BeeHiveData.IsWild)
+            {
+                AddAvailableInteraction(InteractionType.CollectWildHoney, false);
+                SetInteractionDuration(InteractionType.CollectWildHoney, 5.0f);
+            }
+            else
+            {
+                AddAvailableInteraction(InteractionType.CollectHoney, false);
+                SetInteractionDuration(InteractionType.CollectHoney, 5.0f);
+
+                MarkInteraction(InteractionType.CollectHoney);
+            }
 
             Tile centerTile = GetCenterTile();
 
@@ -90,6 +110,26 @@ namespace Technolithic
                     flowersNumber++;
                     RecalculateAdditionalSpeedPerMinute();
                 }
+            }
+        }
+
+        public override void CompleteInteraction(InteractionType interactionType)
+        {
+            base.CompleteInteraction(interactionType);
+
+            switch (interactionType)
+            {
+                case InteractionType.CollectHoney:
+                case InteractionType.CollectWildHoney:
+                    {
+                        DeactivateInteraction(interactionType);
+
+                        // TODO: выдаваемый ресурс нужно получать из json файла
+                        Item item = ItemDatabase.GetItemByName("honeycomb");
+                        GetCenterTile().Inventory.AddCargo(new ItemContainer(item, 1, item.Durability));
+                        IsEmpty = true;
+                    }
+                    break;
             }
         }
 
@@ -122,20 +162,6 @@ namespace Technolithic
             additionalSpeedPerMinute = progressPerHour / WorldState.MINUTES_PER_HOUR;
         }
 
-        public override void DestructBuilding()
-        {
-            base.DestructBuilding();
-
-            GameplayScene.WorldManager.BeeHiveBuildings.Remove(this);
-        }
-
-        public void TryToEmpty(CreatureCmp creatureCmp)
-        {
-            Item item = ItemDatabase.GetItemByName("honeycomb");
-            creatureCmp.Movement.CurrentTile.Inventory.AddCargo(new ItemContainer(item, 1, item.Durability));
-            IsEmpty = true;
-        }
-
         public override BuildingSaveData GetSaveData()
         {
             var saveData = base.GetSaveData();
@@ -143,7 +169,6 @@ namespace Technolithic
             if (IsBuilt)
             {
                 saveData.IsBeeHiveEmpty = IsEmpty;
-                saveData.GatherBeeHiveResources = GatherResources;
                 saveData.BeeHiveCurrentPercentProgress = currentPercentProgress;
             }
 
@@ -167,7 +192,15 @@ namespace Technolithic
                     info += $"\n/c[#DB4E4E]{Localization.GetLocalizedText("stopped_due_to", Localization.GetLocalizedText("rain"))}";
                 }
 
-                info += $"\n/c[#1FD655]{Localization.GetLocalizedText("progress")}: {(int)currentPercentProgress}%/cd"; 
+                if (IsEmpty)
+                {
+                    info += $"\n/c[#1FD655]{Localization.GetLocalizedText("progress")}: {(int)currentPercentProgress}%/cd";                    
+                }
+                else
+                {
+                    info += $"\n/c[#1FD655]{Localization.GetLocalizedText("progress")}: 100%/cd";
+                }
+
                 info += $"\n/c[#63E5FF]{Localization.GetLocalizedText("total_speed")}: " +
                 $"+{BuildingTemplate.BeeHiveData.HoneyGenerationSpeed + (flowersNumber * PERCENT_PER_FLOWER)}% " +
                     $"{Localization.GetLocalizedText("per_day")}/cd";

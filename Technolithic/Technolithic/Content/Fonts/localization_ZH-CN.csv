@@ -60,6 +60,8 @@ assign_x_to_this_hut,Assign {0} to this hut
 assigned_to,已指派给 {0}
 attack,攻击
 aurochs,原牛
+auto_collect_honey,Automatically collect honey
+auto_collect_wild_honey,Automatically collect wild honey
 automatically_empty_the_trap,Automatically empty the trap
 automatically_mine_spawned_deposits,自动开采生成的矿物。
 autumn,秋
@@ -244,6 +246,7 @@ game_menu,游戏菜单
 gas,煤气
 gather,收集
 gathering,收集
+gathering_labor,Gathering
 grain_processing,谷物加工
 grape,葡萄
 grape_bush,葡萄藤

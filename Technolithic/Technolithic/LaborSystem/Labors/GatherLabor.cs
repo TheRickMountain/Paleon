@@ -9,7 +9,7 @@ namespace Technolithic
     public class GatherLabor : Labor
     {
 
-        public GatherLabor() : base(LaborType.Gather)
+        public GatherLabor() : base(LaborType.Gathering)
         {
 
         }

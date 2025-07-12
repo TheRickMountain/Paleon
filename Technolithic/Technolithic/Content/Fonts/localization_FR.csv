@@ -60,6 +60,8 @@ assign_x_to_this_hut,Assign {0} to this hut
 assigned_to,Attribué à {0}
 attack,Attaquer
 aurochs,Aurochs
+auto_collect_honey,Automatically collect honey
+auto_collect_wild_honey,Automatically collect wild honey
 automatically_empty_the_trap,Automatically empty the trap
 automatically_mine_spawned_deposits,Miner automatiquement les gisements créés
 autumn,Automne
@@ -244,6 +246,7 @@ game_menu,Menu
 gas,Gaz
 gather,Ramasser
 gathering,Collecte
+gathering_labor,Gathering
 grain_processing,Travail du grain
 grape,Raisin
 grape_bush,Vigne

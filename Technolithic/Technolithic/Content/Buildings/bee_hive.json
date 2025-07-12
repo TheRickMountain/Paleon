@@ -13,8 +13,9 @@
   "movementSpeed": 50,
   "constructionTime": 25,
   "range": 3,
-  "beeHive": {
-    "honeyGenerationSpeed": 50
+  "BeeHiveData": {
+    "IsWild": false,
+    "HoneyGenerationSpeed": 50
   },
   "texture": {
     "name": "bee_hive",

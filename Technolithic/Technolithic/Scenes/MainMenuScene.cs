@@ -28,6 +28,8 @@ namespace Technolithic
         private MButtonUI loadGameButton;
         private MButtonUI exitToDesktopButton;
 
+        private MButtonUI discordButton;
+
         private MButtonUI windowModeButton;
         private MButtonUI openGameDataButton;
         private MButtonUI creditsButton;
@@ -72,6 +74,25 @@ namespace Technolithic
             buttons.Add(languageButton = CreateButton(this, Localization.GetLocalizedText("language"), OpenLanguageUI));
             buttons.Add(loadGameButton = CreateButton(this, Localization.GetLocalizedText("load_game"), OpenLoadGameUI));
             buttons.Add(exitToDesktopButton = CreateButton(this, Localization.GetLocalizedText("exit_to_desktop"), ExitToDesktop));
+
+            discordButton = new BigButton(this, ResourceManager.DiscordIcon, false, false);
+            discordButton.X = 5;
+            discordButton.Y = 5;
+            discordButton.Tooltips = "Discord";
+            discordButton.GetComponent<ButtonScript>().Pressed += (x) => 
+            { 
+                try
+                {
+                    string discordUrl = "https://discord.gg/bnGvx8mXyB";
+
+                    Process.Start(new ProcessStartInfo(discordUrl) { UseShellExecute = true });
+                }
+                catch (Exception ex) 
+                {
+                    Debug.WriteLine("Failed to open discord link: " + ex.Message);
+                }
+            };
+            uiNode.AddChildNode(discordButton);
 
             windowModeButton = new BigButton(this, ResourceManager.WindowedModeIcon, false, false);
             windowModeButton.X = Engine.Width - windowModeButton.Width - 5;
@@ -142,8 +163,8 @@ namespace Technolithic
 
             gameVersionText = new MyText(this);
             gameVersionText.Text = Engine.GAME_NAME + " " + Engine.VERSION_STRING;
-            gameVersionText.X = 4;
-            gameVersionText.Y = 4;
+            gameVersionText.X = 5;
+            gameVersionText.Y = Engine.Height - gameVersionText.TextHeight;
             uiNode.AddChildNode(gameVersionText);
 
             mainThemeSong = ResourceManager.GetSong("main_theme");
@@ -219,8 +240,8 @@ namespace Technolithic
             creditsUI.X = Engine.Width / 2 - creditsUI.Width / 2;
             creditsUI.Y = Engine.Height / 2 - creditsUI.Height / 2;
 
-            gameVersionText.X = 4;
-            gameVersionText.Y = 4;
+            gameVersionText.X = 5;
+            gameVersionText.Y = Engine.Height - gameVersionText.TextHeight;
         }
 
         public override void Initialize()

@@ -106,8 +106,6 @@ namespace Technolithic
         private InteractionsDatabase interactionsDatabase;
         private ProgressTree progressTree;
 
-        public List<BeeHiveBuildingCmp> WildBeehives = new List<BeeHiveBuildingCmp>();
-
         public WorldManager(WorldManagerSaveData saveData, InteractionsDatabase interactionsDatabase, ProgressTree progressTree)
         {
             ItemsDecayer = new ItemsDecayer();
@@ -468,8 +466,10 @@ namespace Technolithic
                     GameplayScene.Instance.SpawnAnimal(randomTile.X, randomTile.Y, animalTemplate, randomDaysUntilAging);
                 }
             }
-            
+
             // Генерация дикого улья (10 попыток заспавнить улей)
+            List<BeeHiveBuildingCmp> wildBeehives = new List<BeeHiveBuildingCmp>();
+
             int maxBeeHivesCount = MyRandom.Range(1, 3);
             for (int j = 0; j < maxBeeHivesCount; j++)
             {
@@ -485,14 +485,14 @@ namespace Technolithic
                         // TODO: Bug: при создании мира дикие улья всегда будут иметь прогресс от 0.0 до 1.0 так как
                         // строение ожидает число от 0 до 100. Пока временно умножим число на 100. Нужно будет исправить в будущем
                         beehive.SetProgress(MyRandom.NextFloat() * 100); // TODO: temp
-                        WildBeehives.Add(beehive);
+                        wildBeehives.Add(beehive);
                         break;
                     }
                 }
             }
 
             // Генерация одуванчиков вокруг ульев
-            foreach(var wildBeeHive in WildBeehives)
+            foreach(var wildBeeHive in wildBeehives)
             {
                 GenerateRandomlyFlowers(wildBeeHive.RangeTiles.ToList());
             }

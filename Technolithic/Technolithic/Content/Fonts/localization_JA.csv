@@ -106,6 +106,7 @@ calm,穏やか
 cancel,キャンセル
 cancel_x,Cancel: {0}
 capacity,収容可能
+catch_fish,Catch fish
 cattle,牛
 causes,誘発
 ceramic_pot,陶磁器の壺
@@ -412,7 +413,6 @@ repeat,リピート
 repeat_until_production_limits_are_reached,生産限界に達するまで繰り返します
 required,必須
 required_technology,必要な技術
-required_technology_x,Required technology: {0}
 resource,資源
 resources,資源
 rest,休憩
@@ -493,6 +493,7 @@ time_machine_description,タイムトラベル装置
 tin_deposit,錫鉱床
 tin_ore,錫鉱石
 to_do_the_job_of_x_you_need_tools,{0}をするには道具が必要
+tool_required,Tool required
 tool_type,道具タイプ
 tools,道具
 torch,松明

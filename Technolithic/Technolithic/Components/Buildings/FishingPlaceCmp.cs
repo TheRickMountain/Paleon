@@ -17,9 +17,55 @@ namespace Technolithic
 
         }
 
+        public override void UpdateCompleted()
+        {
+            base.UpdateCompleted();
+
+            if(IsWaterChunkHasFish())
+            {
+                if(IsInteractionActivated(InteractionType.CatchFish) == false)
+                {
+                    ActivateInteraction(InteractionType.CatchFish);
+                }
+            }
+            else
+            {
+                if(IsInteractionActivated(InteractionType.CatchFish))
+                {
+                    DeactivateInteraction(InteractionType.CatchFish);
+                }
+            }
+        }
+
+        public override void CompleteInteraction(InteractionType interactionType)
+        {
+            base.CompleteInteraction(interactionType);
+
+            switch (interactionType)
+            {
+                case InteractionType.CatchFish:
+                    {
+                        CatchFish();
+
+                        if (IsWaterChunkHasFish() == false)
+                        {
+                            DeactivateInteraction(InteractionType.CatchFish);
+                        }
+                    }
+                    break;
+            }
+        }
+
         public override void CompleteBuilding()
         {
             base.CompleteBuilding();
+
+            AddAvailableInteraction(InteractionType.CatchFish, true);
+
+            // TODO: загружать данные из json файла
+            SetInteractionDuration(InteractionType.CatchFish, 125);
+
+            MarkInteraction(InteractionType.CatchFish);
 
             Tile waterTile = GetWaterTile();
 
@@ -27,8 +73,6 @@ namespace Technolithic
             {
                 coveredWaterChunk = waterTile.WaterChunk;
             }
-
-            GameplayScene.WorldManager.FishingPlaceBuildings.Add(this);
 
             if(wasInformed == false)
             {
@@ -56,6 +100,9 @@ namespace Technolithic
         public void CatchFish()
         {
             coveredWaterChunk.CatchFish();
+            // TODO: загружать данные из json файла
+            Item fishItem = ItemDatabase.GetItemByName("raw_fish");
+            GetCenterTile().Inventory.AddCargo(new ItemContainer(fishItem, 1, fishItem.Durability));
         }
 
         public bool IsWaterChunkHasFish()
@@ -66,13 +113,6 @@ namespace Technolithic
             }
 
             return false;
-        }
-
-        public override void DestructBuilding()
-        {
-            base.DestructBuilding();
-
-            GameplayScene.WorldManager.FishingPlaceBuildings.Remove(this);
         }
 
     }

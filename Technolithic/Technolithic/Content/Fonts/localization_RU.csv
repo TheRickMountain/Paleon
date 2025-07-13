@@ -106,6 +106,7 @@ calm,Безветренно
 cancel,Отменить
 cancel_x,Отменить: {0}
 capacity,Вместимость
+catch_fish,Ловить рыбу
 cattle,Корова
 causes,Вызывает
 ceramic_pot,Керамический горшок
@@ -410,7 +411,6 @@ repeat,Повтор
 repeat_until_production_limits_are_reached,Повторять до установленных лимитов производства
 required,Требуется
 required_technology,Требуемая технология
-required_technology_x,Требуемая технология: {0}
 resource,Ресурс
 resources,Ресурсы
 rest,Отдых
@@ -491,6 +491,7 @@ time_machine_description,Устройство для путешествий во
 tin_deposit,Залежь олова
 tin_ore,Оловянная руда
 to_do_the_job_of_x_you_need_tools,Для выполнения работы {0} нужны инструменты
+tool_required,Требуется инструмент
 tool_type,Тип инструмента
 tools,Инструменты
 torch,Факел

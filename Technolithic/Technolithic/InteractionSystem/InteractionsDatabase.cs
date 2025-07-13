@@ -10,7 +10,8 @@ namespace Technolithic
         EmptyFishTrap,
         Destruct,
         CollectWildHoney,
-        CollectHoney
+        CollectHoney,
+        CatchFish
     }
 
     public class InteractionsDatabase
@@ -54,6 +55,12 @@ namespace Technolithic
                 LaborType.Beekeeping,
                 Localization.GetLocalizedText("auto_collect_honey"),
                 ResourceManager.CollectHoneyIcon,
+                Color.Orange));
+
+            AddInteractionData(new InteractionData(InteractionType.CatchFish,
+                LaborType.Fish,
+                Localization.GetLocalizedText("catch_fish"),
+                ResourceManager.CatchFishIcon,
                 Color.Orange));
         }
 

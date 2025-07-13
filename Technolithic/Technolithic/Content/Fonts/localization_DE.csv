@@ -106,6 +106,7 @@ calm,Calm
 cancel,Abbrechen
 cancel_x,Cancel: {0}
 capacity,Kapazität
+catch_fish,Catch fish
 cattle,Rind
 causes,Ursachen
 ceramic_pot,Keramikkrug
@@ -410,7 +411,6 @@ repeat,Wiederholen
 repeat_until_production_limits_are_reached,Wiederholen des Vorgangs
 required,Erforderlich
 required_technology,Notwendige Technologie
-required_technology_x,Required technology: {0}
 resource,Ressource
 resources,Ressourcen
 rest,Ausruhen
@@ -491,6 +491,7 @@ time_machine_description,Gerät für Zeitreisen
 tin_deposit,Zinnvorkommen
 tin_ore,Zinnerz
 to_do_the_job_of_x_you_need_tools,To do the job of {0} you need tools
+tool_required,Tool required
 tool_type,Art von Werkzeug
 tools,Werkzeug
 torch,Fackel

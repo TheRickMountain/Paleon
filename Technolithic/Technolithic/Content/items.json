@@ -895,7 +895,8 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Fish"]
+      "LaborTypes": ["Fish"],
+      "InteractionTypes": ["CatchFish"]
     }
   },
   "stone_harpoon": {
@@ -920,7 +921,8 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Fish"]
+      "LaborTypes": ["Fish"],
+      "InteractionTypes": ["CatchFish"]
     }
   },
   "bone_harpoon": {
@@ -945,7 +947,8 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Fish"]
+      "LaborTypes": ["Fish"],
+      "InteractionTypes": ["CatchFish"]
     }
   },
   "copper_harpoon": {
@@ -970,7 +973,8 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Fish"]
+      "LaborTypes": ["Fish"],
+      "InteractionTypes": ["CatchFish"]
     }
   },
   "bronze_harpoon": {
@@ -995,7 +999,8 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Fish"]
+      "LaborTypes": ["Fish"],
+      "InteractionTypes": ["CatchFish"]
     }
   },
   "iron_harpoon": {
@@ -1020,7 +1025,8 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Fish"]
+      "LaborTypes": ["Fish"],
+      "InteractionTypes": ["CatchFish"]
     }
   },
   "fishing_rod": {
@@ -1045,7 +1051,8 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Fish"]
+      "LaborTypes": ["Fish"],
+      "InteractionTypes": ["CatchFish"]
     }
   },
   "sling": {

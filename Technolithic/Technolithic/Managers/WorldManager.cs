@@ -44,7 +44,6 @@ namespace Technolithic
         private AnimatedSprite pickSprite;
 
         public List<HutBuildingCmp> HutBuildingsV2 { get; set; } = new List<HutBuildingCmp>();
-        public List<FishingPlaceCmp> FishingPlaceBuildings { get; set; } = new List<FishingPlaceCmp>();
         public List<BuildingCmp> FuelConsumerBuildings { get; set; } = new List<BuildingCmp>();
         public List<DepositCmp> GatherableDeposits { get; set; } = new List<DepositCmp>();
         public List<DepositCmp> MineableDeposits { get; set; } = new List<DepositCmp>();
@@ -76,7 +75,6 @@ namespace Technolithic
         private HaulLabor haulLabor = new HaulLabor();
         private SupplyFromStorageLabor supplyStorageLabor = new SupplyFromStorageLabor();
         private SupplyFromTileLabor supplyFromTileLabor = new SupplyFromTileLabor();
-        private FishLabor fishLabor = new FishLabor();
         private SupplyFuelLabor supplyFuelLabor = new SupplyFuelLabor();
         private GatherLabor gatherLabor = new GatherLabor();
         private MineLabor mineLabor = new MineLabor();
@@ -137,10 +135,6 @@ namespace Technolithic
             supplyFromTileLabor.Repeat = true;
             supplyFromTileLabor.IsMultiCreatureLabor = true;
             LaborManager.Add(supplyFromTileLabor);
-
-            fishLabor.Repeat = true;
-            fishLabor.IsMultiCreatureLabor = true;
-            LaborManager.Add(fishLabor);
 
             supplyFuelLabor.Repeat = true;
             supplyFuelLabor.IsMultiCreatureLabor = true;

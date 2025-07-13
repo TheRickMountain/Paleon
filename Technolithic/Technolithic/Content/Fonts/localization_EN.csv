@@ -106,6 +106,7 @@ calm,Calm
 cancel,Cancel
 cancel_x,Cancel: {0}
 capacity,Capacity
+catch_fish,Catch fish
 cattle,Cattle
 causes,Causes
 ceramic_pot,Ceramic pot
@@ -410,7 +411,6 @@ repeat,Repeat
 repeat_until_production_limits_are_reached,Repeat until production limits are reached
 required,Required
 required_technology,Required technology
-required_technology_x,Required technology: {0}
 resource,Resource
 resources,Resources
 rest,Rest
@@ -491,6 +491,7 @@ time_machine_description,Time travel device
 tin_deposit,Tin deposit
 tin_ore,Tin ore
 to_do_the_job_of_x_you_need_tools,To do the job of {0} you need tools
+tool_required,Tool required
 tool_type,Tool type
 tools,Tools
 torch,Torch

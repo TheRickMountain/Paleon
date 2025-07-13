@@ -106,6 +106,7 @@ calm,Sakin
 cancel,Iptal et
 cancel_x,Cancel: {0}
 capacity,Kapasite
+catch_fish,Catch fish
 cattle,Sigirlar
 causes,Nedenler
 ceramic_pot,Seramik comlek
@@ -410,7 +411,6 @@ repeat,Tekrarla
 repeat_until_production_limits_are_reached,Üretim limitine ulasana kadar üretim devam eder
 required,Gerekli
 required_technology,Gerekli teknoloji
-required_technology_x,Required technology: {0}
 resource,Kaynak
 resources,Kaynaklar
 rest,Dinlenmek
@@ -491,6 +491,7 @@ time_machine_description,Zaman makinesi cihazi
 tin_deposit,Kalay yatagi
 tin_ore,Kalay cevheri
 to_do_the_job_of_x_you_need_tools,{0} isini yapmak icin bir alete ihtiyaciniz var.
+tool_required,Tool required
 tool_type,Alet türü
 tools,Aletler
 torch,Mesale

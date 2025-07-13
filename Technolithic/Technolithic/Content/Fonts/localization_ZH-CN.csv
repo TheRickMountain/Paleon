@@ -106,6 +106,7 @@ calm,平靜
 cancel,取消
 cancel_x,Cancel: {0}
 capacity,容量
+catch_fish,Catch fish
 cattle,牛
 causes,原因
 ceramic_pot,陶罐
@@ -410,7 +411,6 @@ repeat,重复
 repeat_until_production_limits_are_reached,生产至数量上限。
 required,需要
 required_technology,需要科技研究
-required_technology_x,Required technology: {0}
 resource,资源
 resources,资源
 rest,休息
@@ -490,6 +490,7 @@ time_machine_description,时间旅行装置
 tin_deposit,錫矿床
 tin_ore,錫矿
 to_do_the_job_of_x_you_need_tools,你需要 {0} 工具才能工作。
+tool_required,Tool required
 tool_type,工具种类
 tools,工具
 torch,火炬

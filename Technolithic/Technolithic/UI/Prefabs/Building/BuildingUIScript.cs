@@ -185,21 +185,10 @@ namespace Technolithic
 
                 interactionButton = interactionButtonDict[interactionType];
                 interactionButton.SetMetadata("interactable", selectedInteractable);
-                interactionButton.Tooltips = "";
 
-                Technology requiredTechnology = TechnologyDatabase.GetTechnologyThatUnlocksInteraction(interactionType);
-                if (requiredTechnology != null && progressTree.IsTechnologyUnlocked(requiredTechnology) == false)
-                {
-                    interactionButton.ButtonScript.IsDisabled = true;
-                    interactionButton.Tooltips = $"{Localization.GetLocalizedText($"required_technology_x", requiredTechnology.Name).Paint(Color.Yellow)}\n";
-                }
-                else
-                {
-                    interactionButton.ButtonScript.IsDisabled = false;
-                    interactionButton.ButtonScript.IsSelected = selectedInteractable.IsInteractionMarked(interactionType);
-                }
+                interactionButton.ButtonScript.IsSelected = selectedInteractable.IsInteractionMarked(interactionType);
 
-                interactionButton.Tooltips += GenerateInteractionTooltip(building, interactionData);
+                interactionButton.Tooltips = GenerateInteractionTooltip(building, interactionData);
 
                 ListViewUIScript buttonsListView = ParentNode.GetChildByName("ButtonsListView").GetComponent<ListViewUIScript>();
                 buttonsListView.AddItem(interactionButton);
@@ -610,14 +599,28 @@ namespace Technolithic
 
             if(interactable.IsInteractionMarked(interactionType))
             {
-                tooltip += Localization.GetLocalizedText("cancel_x", interactionData.DisplayName);
+                tooltip += Localization.GetLocalizedText("cancel_x", interactionData.DisplayName.Paint(Color.Orange))
+                    .Paint(Color.Red);
             }
             else
             {
-                tooltip += interactionData.DisplayName;
+                tooltip += interactionData.DisplayName.Paint(Color.Orange);
             }
 
             tooltip += $"\n{Localization.GetLocalizedText("labor_type")}: {Labor.GetLaborString(interactionData.LaborType)}";
+
+            if (interactable.DoesInteractionRequireTool(interactionType))
+            {
+                tooltip += $"\n{Localization.GetLocalizedText("tool_required")}:".Paint(Color.Yellow);
+
+                var itemsList = ItemDatabase.GetInteractionTypeTools(CreatureType.Settler, interactionType);
+                for (int i = itemsList.Count - 1; i >= 0; i--)
+                {
+                    Item item = itemsList[i];
+
+                    tooltip += $"\n- {item.Name}";
+                }
+            }
 
             return tooltip;
         }

@@ -60,6 +60,7 @@ assign_x_to_this_hut,Призначить {0} до цього будинку
 assigned_to,Закріплений за {0}
 attack,Атакувати
 aurochs,Тур
+auto_clean_pen,Auto-clean pen
 auto_collect_honey,Automatically collect honey
 auto_collect_wild_honey,Automatically collect wild honey
 automatically_empty_the_trap,Automatically empty the trap
@@ -124,7 +125,6 @@ clay_barn,Глиняна комора
 clay_deposit,Родовище глини
 clay_hut,Глиняна хатинка
 clay_oven,Глиняна піч
-clean_up_manure,Прибрати гній
 clone,Клонувати
 close,Зачинити
 cloth,Тканина

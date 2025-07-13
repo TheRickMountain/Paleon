@@ -24,7 +24,6 @@ namespace Technolithic
         private BigButton fertilizeButton;
         private BigButton copySettingsButton;
         private BigButton priorityButton;
-        private BigButton cleanUpManureButton;
         private BigButton autoMineSpawnedDepositsButton;
         private BigButton tradeButton;
         private MTextButtonUI returnHomeButton;
@@ -74,10 +73,6 @@ namespace Technolithic
             copySettingsButton = new BigButton(ParentNode.Scene, ResourceManager.CopyIcon, false);
             copySettingsButton.GetComponent<ButtonScript>().AddOnClickedCallback(OnCopySettingsButtonPressedCallback);
             copySettingsButton.Tooltips = Localization.GetLocalizedText("copy_settings");
-
-            cleanUpManureButton = new BigButton(ParentNode.Scene, ItemDatabase.GetItemByName("manure").Icon, true);
-            cleanUpManureButton.GetComponent<ButtonScript>().AddOnClickedCallback(OnCleanUpManureButtonPressedCallback);
-            cleanUpManureButton.Tooltips = Localization.GetLocalizedText("clean_up_manure");
 
             autoMineSpawnedDepositsButton = new BigButton(ParentNode.Scene, ResourceManager.GetTexture("ui").GetSubtexture(240, 0, 16, 16), true, false);
             autoMineSpawnedDepositsButton.GetComponent<ButtonScript>().AddOnClickedCallback(OnAutoMineSpawnedDepositsButtonPressedCallback);
@@ -204,12 +199,6 @@ namespace Technolithic
         {
             GameplayScene.WorldManager.BuildingSaveDataForCopy = selectedBuilding.GetSaveData();
             GameplayScene.WorldManager.SetMyAction(MyAction.CopySettings, ResourceManager.CopyIcon);
-        }
-
-        public void OnCleanUpManureButtonPressedCallback(bool value, ButtonScript buttonScript)
-        {
-            AnimalPenBuildingCmp animalPen = selectedBuilding as AnimalPenBuildingCmp;
-            animalPen.IsFlaggedToCleanManure = !animalPen.IsFlaggedToCleanManure;
         }
 
         private void OnTradeButtonPressed(bool value, ButtonScript script)
@@ -424,12 +413,6 @@ namespace Technolithic
                 else if(selectedBuilding.BuildingTemplate.BuildingType == BuildingType.AnimalPen)
                 {
                     buttonsListView.AddItem(copySettingsButton);
-
-                    AnimalPenBuildingCmp animalPen = selectedBuilding as AnimalPenBuildingCmp;
-
-                    cleanUpManureButton.ButtonScript.IsSelected = animalPen.IsFlaggedToCleanManure;
-
-                    buttonsListView.AddItem(cleanUpManureButton);
                 }
                 else if(selectedBuilding.BuildingTemplate.BuildingType == BuildingType.Crafter)
                 {

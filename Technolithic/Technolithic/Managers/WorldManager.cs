@@ -74,7 +74,6 @@ namespace Technolithic
         private SupplyFromStorageLabor supplyStorageLabor = new SupplyFromStorageLabor();
         private SupplyFromTileLabor supplyFromTileLabor = new SupplyFromTileLabor();
         private SupplyFuelLabor supplyFuelLabor = new SupplyFuelLabor();
-        private CleanAnimalPenLabor cleanAnimalPenLabor = new CleanAnimalPenLabor();
         private AnimalDomesticateLabor animalDomesticateLabor = new AnimalDomesticateLabor();
         private SettlerHuntLabor settlerHuntLabor = new SettlerHuntLabor();
         private EnergyProductionLabor energyProductionLabor = new EnergyProductionLabor();
@@ -135,10 +134,6 @@ namespace Technolithic
             supplyFuelLabor.Repeat = true;
             supplyFuelLabor.IsMultiCreatureLabor = true;
             LaborManager.Add(supplyFuelLabor);
-
-            cleanAnimalPenLabor.Repeat = true;
-            cleanAnimalPenLabor.IsMultiCreatureLabor = true;
-            LaborManager.Add(cleanAnimalPenLabor);
 
             animalDomesticateLabor.Repeat = true;
             animalDomesticateLabor.IsMultiCreatureLabor = true;

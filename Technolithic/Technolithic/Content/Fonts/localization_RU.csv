@@ -60,6 +60,7 @@ assign_x_to_this_hut,Назначить {0} к этой хижине
 assigned_to,Закреплен за {0}
 attack,Атаковать
 aurochs,Тур
+auto_clean_pen,Авто-чистка загона
 auto_collect_honey,Автоматически собирать мед
 auto_collect_wild_honey,Автоматически собирать дикий мед
 automatically_empty_the_trap,Автоматически опустошать ловушку
@@ -124,7 +125,6 @@ clay_barn,Глиняный амбар
 clay_deposit,Залежь глины
 clay_hut,Глиняная хижина
 clay_oven,Глиняная печь
-clean_up_manure,Убирать навоз
 clone,Клонировать
 close,Закрыть
 cloth,Ткань

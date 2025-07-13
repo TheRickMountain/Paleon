@@ -60,6 +60,7 @@ assign_x_to_this_hut,Assign {0} to this hut
 assigned_to,Assigned to {0}
 attack,Saldir
 aurochs,Yaban oküzü
+auto_clean_pen,Auto-clean pen
 auto_collect_honey,Automatically collect honey
 auto_collect_wild_honey,Automatically collect wild honey
 automatically_empty_the_trap,Automatically empty the trap
@@ -124,7 +125,6 @@ clay_barn,Kil depo
 clay_deposit,Kil yatagi
 clay_hut,Kil kulübe
 clay_oven,Kil firini
-clean_up_manure,Gübreyi temizle
 clone,Kopyala
 close,Kapat
 cloth,Kumas

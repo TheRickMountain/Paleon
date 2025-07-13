@@ -33,7 +33,15 @@ namespace Technolithic
             timer = new Timer();
 
             Tile tile = inventory.GetReachableTile(Owner);
-            Owner.Movement.SetPath(tile, false);
+            if (tile == null)
+            {
+                State = TaskState.Failed;
+                return;
+            }
+            else
+            {
+                Owner.Movement.SetPath(tile, false);
+            }
         }
 
         public override void UpdateTask()

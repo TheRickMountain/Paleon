@@ -402,8 +402,6 @@ namespace Technolithic
                                 {
                                     AnimalPenBuildingCmp animalPenBuilding = buildingCmp as AnimalPenBuildingCmp;
 
-                                    animalPenBuilding.IsFlaggedToCleanManure = buildingSaveData.IsFlaggedToCleanManure;
-
                                     animalPenBuilding.CurrentManureProgress = buildingSaveData.CurrentManureProgress;
 
                                     if (buildingSaveData.AnimalsFilters != null)
@@ -1250,7 +1248,7 @@ namespace Technolithic
                             interactable.IsInteractionActivated(interactionType))
                         {
                             InteractionData interactionData = interactionsDatabase.GetInteractionData(interactionType);
-                            interactionData?.Icon?.Draw(entity.Position);
+                            interactionData?.Icon?.Draw(entity.Position, Color.White * 0.75f);
                         }
                     }
                 }

@@ -59,7 +59,6 @@ namespace Technolithic
         // Animal pen
         public Dictionary<string, bool> AnimalsFilters { get; set; }
         public float CurrentManureProgress { get; set; }
-        public bool IsFlaggedToCleanManure { get; set; }
 
         // Mine
 

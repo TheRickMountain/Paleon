@@ -11,8 +11,6 @@ namespace Technolithic
 
         public int FreeSlots { get => BuildingTemplate.AnimalPenData.Slots - animals.Count; }
 
-        public bool IsFlaggedToCleanManure { get; set; } = true;
-
         private HashSet<AnimalCmp> animals = new HashSet<AnimalCmp>();
 
         private Dictionary<AnimalTemplate, bool> animalsFilters = new Dictionary<AnimalTemplate, bool>();
@@ -47,7 +45,22 @@ namespace Technolithic
 
             IsTurnedOn = Inventory.GetInventoryFactWeight(hayItem) > 0;
 
-            if(IsFullOfManure() == false)
+            if(IsFullOfManure())
+            {
+                if(IsInteractionActivated(InteractionType.AutoCleanPen) == false)
+                {
+                    ActivateInteraction(InteractionType.AutoCleanPen);
+                }
+            }
+            else
+            {
+                if (IsInteractionActivated(InteractionType.AutoCleanPen))
+                {
+                    DeactivateInteraction(InteractionType.AutoCleanPen);
+                }
+            }
+
+            if (IsFullOfManure() == false)
             {
                 float progressPerDay = GetPercentPerDayValueBasedOnInsideAnimalsAmount();
                 float progressPerMinute = ConvertProgressPerDayToMinute(progressPerDay);
@@ -63,17 +76,6 @@ namespace Technolithic
             {
                 manureTexture.Draw(Entity.Position);
             }
-        }
-
-        public void CleanManure()
-        {
-            CurrentManureProgress = 0;
-
-            Tile manureThrowTile = GetCenterTile();
-
-            ItemContainer itemContainer = new ItemContainer(manureItem, 5, manureItem.Durability);
-
-            manureThrowTile.Inventory.AddCargo(itemContainer);
         }
 
         public bool IsFullOfManure()
@@ -114,6 +116,11 @@ namespace Technolithic
         {
             base.CompleteBuilding();
 
+            AddAvailableInteraction(InteractionType.AutoCleanPen, false);
+            SetInteractionDuration(InteractionType.AutoCleanPen, 1 * WorldState.MINUTES_PER_HOUR);
+
+            MarkInteraction(InteractionType.AutoCleanPen);
+
             foreach (var animalTemplate in BuildingTemplate.AnimalPenData.GetAllowedAnimalTemplates())
             {
                 animalsFilters.Add(animalTemplate, true);
@@ -129,6 +136,29 @@ namespace Technolithic
             {
                 Inventory.AddRequiredWeight(hayItem, hayToDeliver);
             }
+        }
+
+        public override void CompleteInteraction(InteractionType interactionType)
+        {
+            base.CompleteInteraction(interactionType);
+
+            switch (interactionType)
+            {
+                case InteractionType.AutoCleanPen:
+                    {
+                        CleanManure();
+                    }
+                    break;
+            }
+        }
+
+        public void CleanManure()
+        {
+            CurrentManureProgress = 0;
+
+            GetCenterTile().Inventory.AddCargo(manureItem, 5);
+
+            DeactivateInteraction(InteractionType.AutoCleanPen);
         }
 
         public override void DestructBuilding()
@@ -216,8 +246,6 @@ namespace Technolithic
             saveData.AnimalsFilters = new Dictionary<string, bool>();
 
             saveData.CurrentManureProgress = CurrentManureProgress;
-
-            saveData.IsFlaggedToCleanManure = IsFlaggedToCleanManure;
 
             foreach (var kvp in animalsFilters)
             {

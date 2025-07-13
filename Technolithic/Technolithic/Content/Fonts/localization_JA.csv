@@ -60,6 +60,7 @@ assign_x_to_this_hut,この小屋に{0}を割り当てる
 assigned_to,{0}に割り当て済み
 attack,攻撃
 aurochs,野生牛
+auto_clean_pen,Auto-clean pen
 auto_collect_honey,Automatically collect honey
 auto_collect_wild_honey,Automatically collect wild honey
 automatically_empty_the_trap,Automatically empty the trap
@@ -124,7 +125,6 @@ clay_barn,粘土製の倉庫
 clay_deposit,粘土鉱床
 clay_hut,粘土製の小屋
 clay_oven,粘土製のかまど
-clean_up_manure,肥やしの掃除
 clone,複製
 close,閉じる
 cloth,布

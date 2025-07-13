@@ -60,6 +60,7 @@ assign_x_to_this_hut,Assign {0} to this hut
 assigned_to,已指派給 {0}
 attack,攻擊
 aurochs,原牛
+auto_clean_pen,Auto-clean pen
 auto_collect_honey,Automatically collect honey
 auto_collect_wild_honey,Automatically collect wild honey
 automatically_empty_the_trap,Automatically empty the trap
@@ -124,7 +125,6 @@ clay_barn,黏土倉庫
 clay_deposit,黏土礦床
 clay_hut,黏土屋
 clay_oven,黏土窯爐
-clean_up_manure,清理糞便
 clone,複製
 close,關
 cloth,布料

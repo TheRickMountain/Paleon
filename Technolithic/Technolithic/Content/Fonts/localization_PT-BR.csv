@@ -60,6 +60,7 @@ assign_x_to_this_hut,Assign {0} to this hut
 assigned_to,Assigned to {0}
 attack,Atacar
 aurochs,Auroque
+auto_clean_pen,Auto-clean pen
 auto_collect_honey,Automatically collect honey
 auto_collect_wild_honey,Automatically collect wild honey
 automatically_empty_the_trap,Automatically empty the trap
@@ -124,7 +125,6 @@ clay_barn,Celeiro de barro
 clay_deposit,Depósito de barro
 clay_hut,Barraca de barro
 clay_oven,Forno de barro
-clean_up_manure,Limpar estrume
 clone,Clone
 close,Fechar
 cloth,Tecido

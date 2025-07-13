@@ -14,7 +14,8 @@ namespace Technolithic
         CatchFish,
         GatherStone,
         GatherWood,
-        Mine
+        Mine,
+        AutoCleanPen
     }
 
     public class InteractionsDatabase
@@ -66,9 +67,6 @@ namespace Technolithic
                 ResourceManager.CatchFishIcon,
                 Color.Orange));
 
-            // TODO: icon
-            // TDOO: localization
-
             AddInteractionData(new InteractionData(InteractionType.GatherWood,
                 LaborType.Gathering,
                 Localization.GetLocalizedText("gather_wood"),
@@ -85,6 +83,12 @@ namespace Technolithic
                 LaborType.Mining,
                 Localization.GetLocalizedText("mine"),
                 ResourceManager.MineIcon,
+                Color.Orange));
+
+            AddInteractionData(new InteractionData(InteractionType.AutoCleanPen,
+                LaborType.Ranching,
+                Localization.GetLocalizedText("auto_clean_pen"),
+                ResourceManager.CleanUpIcon,
                 Color.Orange));
         }
 

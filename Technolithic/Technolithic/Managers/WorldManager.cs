@@ -45,8 +45,6 @@ namespace Technolithic
 
         public List<HutBuildingCmp> HutBuildingsV2 { get; set; } = new List<HutBuildingCmp>();
         public List<BuildingCmp> FuelConsumerBuildings { get; set; } = new List<BuildingCmp>();
-        public List<DepositCmp> GatherableDeposits { get; set; } = new List<DepositCmp>();
-        public List<DepositCmp> MineableDeposits { get; set; } = new List<DepositCmp>();
         public List<AnimalPenBuildingCmp> AnimalPenBuildings { get; set; } = new List<AnimalPenBuildingCmp>();
 
         public HashSet<AnimalCmp> AnimalsToDomesticate { get; set; } = new HashSet<AnimalCmp>();
@@ -76,8 +74,6 @@ namespace Technolithic
         private SupplyFromStorageLabor supplyStorageLabor = new SupplyFromStorageLabor();
         private SupplyFromTileLabor supplyFromTileLabor = new SupplyFromTileLabor();
         private SupplyFuelLabor supplyFuelLabor = new SupplyFuelLabor();
-        private GatherLabor gatherLabor = new GatherLabor();
-        private MineLabor mineLabor = new MineLabor();
         private CleanAnimalPenLabor cleanAnimalPenLabor = new CleanAnimalPenLabor();
         private AnimalDomesticateLabor animalDomesticateLabor = new AnimalDomesticateLabor();
         private SettlerHuntLabor settlerHuntLabor = new SettlerHuntLabor();
@@ -139,14 +135,6 @@ namespace Technolithic
             supplyFuelLabor.Repeat = true;
             supplyFuelLabor.IsMultiCreatureLabor = true;
             LaborManager.Add(supplyFuelLabor);
-
-            gatherLabor.Repeat = true;
-            gatherLabor.IsMultiCreatureLabor = true;
-            LaborManager.Add(gatherLabor);
-
-            mineLabor.Repeat = true;
-            mineLabor.IsMultiCreatureLabor = true;
-            LaborManager.Add(mineLabor);
 
             cleanAnimalPenLabor.Repeat = true;
             cleanAnimalPenLabor.IsMultiCreatureLabor = true;
@@ -1075,6 +1063,50 @@ namespace Technolithic
 
                 Tile[,] tiles = SelectTiles(firstSelectedTile, GameplayScene.MouseTile);
 
+                // TODO: temp (Need to implement a GameAction system like in Paleon Reinvented)
+                for (int x = 0; x < tiles.GetLength(0); x++)
+                {
+                    for (int y = 0; y < tiles.GetLength(1); y++)
+                    {
+                        Tile tile = tiles[x, y];
+
+                        if (tile.Entity != null)
+                        {
+                            Interactable interactable = tile.Entity.Get<Interactable>();
+                            if (interactable != null)
+                            {
+                                switch(action)
+                                {
+                                    case MyAction.Chop:
+                                        interactable.MarkInteraction(InteractionType.Chop);
+                                        break;
+                                    case MyAction.Mine:
+                                        interactable.MarkInteraction(InteractionType.Mine);
+                                        break;
+                                    case MyAction.GatherStone:
+                                        interactable.MarkInteraction(InteractionType.GatherStone);
+                                        break;
+                                    case MyAction.GatherWood:
+                                        interactable.MarkInteraction(InteractionType.GatherWood);
+                                        break;
+                                    case MyAction.Destruct:
+                                        interactable.MarkInteraction(InteractionType.Destruct);
+                                        break;
+                                    case MyAction.Cancel:
+                                        {
+                                            interactable.UnmarkInteraction(InteractionType.Chop);
+                                            interactable.UnmarkInteraction(InteractionType.Mine);
+                                            interactable.UnmarkInteraction(InteractionType.GatherStone);
+                                            interactable.UnmarkInteraction(InteractionType.GatherWood);
+                                            interactable.UnmarkInteraction(InteractionType.Destruct);
+                                        }
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                }
+
                 switch (action)
                 {
                     case MyAction.None:
@@ -1162,25 +1194,6 @@ namespace Technolithic
                             }
                         }
                         break;
-                    case MyAction.Gather:
-                        for (int x = 0; x < tiles.GetLength(0); x++)
-                        {
-                            for (int y = 0; y < tiles.GetLength(1); y++)
-                            {
-                                Tile tile = tiles[x, y];
-
-                                if (tile.Entity != null)
-                                {
-                                    DepositCmp deposit = tile.Entity.Get<DepositCmp>();
-                                    if (deposit != null && deposit.IsMarkedToObtain == false &&
-                                        deposit.BuildingTemplate.Deposit.RequiredToolType == ToolType.None)
-                                    {
-                                        deposit.IsMarkedToObtain = true;
-                                    }
-                                }
-                            }
-                        }
-                        break;
                     case MyAction.Slaughter:
                         {
                             List<Tile> selectedTiles = new List<Tile>();
@@ -1237,25 +1250,6 @@ namespace Technolithic
                             }
                         }
                         break;
-                    case MyAction.Mine:
-                        for (int x = 0; x < tiles.GetLength(0); x++)
-                        {
-                            for (int y = 0; y < tiles.GetLength(1); y++)
-                            {
-                                Tile tile = tiles[x, y];
-
-                                if (tile.Entity != null)
-                                {
-                                    DepositCmp deposit = tile.Entity.Get<DepositCmp>();
-                                    if (deposit != null && deposit.IsMarkedToObtain == false &&
-                                        deposit.BuildingTemplate.Deposit.RequiredToolType == ToolType.Pick)
-                                    {
-                                        deposit.IsMarkedToObtain = true;
-                                    }
-                                }
-                            }
-                        }
-                        break;
                     case MyAction.CutCompletely:
                         for (int x = 0; x < tiles.GetLength(0); x++)
                         {
@@ -1287,25 +1281,6 @@ namespace Technolithic
                                     if (wildFarmPlot != null && wildFarmPlot.IsBuilt && wildFarmPlot.PlantData.ToolType == ToolType.Harvesting)
                                     {
                                         wildFarmPlot.Harvest = true;
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case MyAction.Chop:
-                        for (int x = 0; x < tiles.GetLength(0); x++)
-                        {
-                            for (int y = 0; y < tiles.GetLength(1); y++)
-                            {
-                                Tile tile = tiles[x, y];
-
-                                if (tile.Entity != null)
-                                {
-                                    Interactable interactable = tile.Entity.Get<Interactable>();
-                                    if (interactable != null)
-                                    {
-                                        // TODO: temp (Need to implement a GameAction system like in Paleon Reinvented)
-                                        interactable.MarkInteraction(InteractionType.Chop);
                                     }
                                 }
                             }
@@ -1428,14 +1403,6 @@ namespace Technolithic
 
                                 if (tile.Entity != null)
                                 {
-                                    if(tile.Entity.Has<Interactable>())
-                                    {
-                                        // TODO: temp
-                                        Interactable interactable = tile.Entity.Get<Interactable>();
-                                        interactable.UnmarkInteraction(InteractionType.Chop);
-                                        interactable.UnmarkInteraction(InteractionType.Destruct);
-                                    }
-
                                     if (tile.Entity.Has<BuildingCmp>())
                                     {
                                         BuildingCmp building = tile.Entity.Get<BuildingCmp>();
@@ -1458,31 +1425,7 @@ namespace Technolithic
                                                     farmPlot.Harvest = false;
                                                 }
                                             }
-                                            else if(building is DepositCmp)
-                                            {
-                                                DepositCmp deposit = building as DepositCmp;
-                                                deposit.IsMarkedToObtain = false;
-                                            }
                                         }
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case MyAction.Destruct:
-                        for (int x = 0; x < tiles.GetLength(0); x++)
-                        {
-                            for (int y = 0; y < tiles.GetLength(1); y++)
-                            {
-                                Tile tile = tiles[x, y];
-
-                                if (tile.Entity != null)
-                                {
-                                    if (tile.Entity.Has<Interactable>())
-                                    {
-                                        // TODO: temp
-                                        Interactable interactable = tile.Entity.Get<Interactable>();
-                                        interactable.MarkInteraction(InteractionType.Destruct);
                                     }
                                 }
                             }

@@ -1,138 +1,59 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Technolithic
+﻿namespace Technolithic
 {
     public class DepositCmp : BuildingCmp
     {
         public int CurrentStage { get; set; }
 
-        private bool isMarkedToObtain = false;
-        public bool IsMarkedToObtain 
-        {
-            get => isMarkedToObtain; 
-            set
-            {
-                isMarkedToObtain = value;
-
-                if(isMarkedToObtain)
-                {
-                    if (BuildingTemplate.Deposit.RequiredToolType == ToolType.Pick)
-                    {
-                        foreach (var tileInfo in TilesInfosList)
-                        {
-                            tileInfo.Tile.MarkType = MarkType.Mine;
-                        }
-                    }
-                    else
-                    {
-                        foreach (var tileInfo in TilesInfosList)
-                        {
-                            tileInfo.Tile.MarkType = MarkType.Gather;
-                        }
-                    }
-                }
-                else
-                {
-                    foreach (var tileInfo in TilesInfosList)
-                    {
-                        tileInfo.Tile.MarkType = MarkType.None;
-                    }
-                }
-            }
-        }
-
-        public float MiningCurrentTime { get; set; }
+        private DepositData _depositData;
 
         public DepositCmp(BuildingTemplate buildingTemplate, Direction direction) : base(buildingTemplate, direction)
         {
-            IsReserved = false;
-            MiningCurrentTime = 0;
             CurrentStage = 0;
+
+            _depositData = buildingTemplate.DepositData;
         }
 
         public override void Begin()
         {
             base.Begin();
 
-            Sprite.CurrentAnimation.Frames[0] = BuildingTemplate.Deposit.StagesTextures[CurrentStage];
+            Sprite.CurrentAnimation.Frames[0] = _depositData.StagesTextures[CurrentStage];
         }
 
-        public bool ProcessInteraction(float speed)
+        public override void CompleteInteraction(InteractionType interactionType)
         {
-            MiningCurrentTime += speed;
+            base.CompleteInteraction(interactionType);
 
-            if(MiningCurrentTime >= BuildingTemplate.Deposit.MiningTime)
+            if (interactionType == _depositData.InteractionType)
             {
-                MiningCurrentTime = 0;
-
-                int dropPerCollect = BuildingTemplate.Deposit.DropPerCollect;
-
-                Tile lootTile = GetCenterTile();
-
-                lootTile.Inventory.AddCargo(BuildingTemplate.Deposit.DepositResource, dropPerCollect);
+                foreach(var kvp in _depositData.RealLoot)
+                {
+                    GetCenterTile().Inventory.AddCargo(kvp.Key, kvp.Value);
+                }
 
                 CurrentStage++;
 
-                if (CurrentStage == BuildingTemplate.Deposit.Stages)
+                if (CurrentStage == _depositData.Stages)
                 {
                     DestructBuilding();
                 }
                 else
                 {
-                    Sprite.CurrentAnimation.Frames[0] = BuildingTemplate.Deposit.StagesTextures[CurrentStage];
+                    Sprite.CurrentAnimation.Frames[0] = _depositData.StagesTextures[CurrentStage];
                 }
-
-                return true;
             }
-
-            return false;
-        }
-
-        public bool CanBeObtained()
-        {
-            return CurrentStage < BuildingTemplate.Deposit.Stages;
         }
 
         public override void CompleteBuilding()
         {
             base.CompleteBuilding();
 
-            if (BuildingTemplate.Deposit.RequiredToolType == ToolType.Pick)
-            {
-                GameplayScene.WorldManager.MineableDeposits.Add(this);
-            }
-            else
-            {
-                GameplayScene.WorldManager.GatherableDeposits.Add(this);
-            }
-        }
+            DepositData depositData = BuildingTemplate.DepositData;
 
-        public override void DestructBuilding()
-        {
-            base.DestructBuilding();
+            AddAvailableInteraction(depositData.InteractionType, depositData.ToolRequired);
+            SetInteractionDuration(depositData.InteractionType, depositData.InteractionDurationInHours * WorldState.MINUTES_PER_HOUR);
 
-            if (BuildingTemplate.Deposit.RequiredToolType == ToolType.Pick)
-            {
-                GameplayScene.WorldManager.MineableDeposits.Remove(this);
-            }
-            else
-            {
-                GameplayScene.WorldManager.GatherableDeposits.Remove(this);
-            }
-        }
-
-        public override string GetInformation()
-        {
-            string info = base.GetInformation();
-
-            info += $"{Localization.GetLocalizedText("resource")}: {BuildingTemplate.Deposit.DepositResource.Name}";
-
-            return info;
+            ActivateInteraction(depositData.InteractionType);
         }
 
         public override BuildingSaveData GetSaveData()
@@ -142,12 +63,9 @@ namespace Technolithic
             if (IsBuilt)
             {
                 saveData.DepositCurrentStage = CurrentStage;
-                saveData.IsMarkedToObtain = IsMarkedToObtain;
-                saveData.MiningCurrentTime = MiningCurrentTime;
             }
 
             return saveData;
         }
-
     }
 }

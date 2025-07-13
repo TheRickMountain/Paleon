@@ -29,9 +29,12 @@ namespace Technolithic
             actionsButtons = new Dictionary<MyAction, BigButton>();
             buttonsActions = new Dictionary<BigButton, MyAction>();
 
-            CreateActionButton(MyAction.Gather, ResourceManager.GatherIcon, Localization.GetLocalizedText("gather"), 
+            CreateActionButton(MyAction.GatherStone, ResourceManager.GatherStoneIcon, Localization.GetLocalizedText("gather_stone"), 
                 true, Keys.G);
-            
+
+            CreateActionButton(MyAction.GatherWood, ResourceManager.GatherWoodIcon, Localization.GetLocalizedText("gather_wood"),
+                true, Keys.Y);
+
             CreateActionButton(MyAction.Mine, ResourceManager.MineIcon, Localization.GetLocalizedText("mine"), 
                 false, Keys.M);
             

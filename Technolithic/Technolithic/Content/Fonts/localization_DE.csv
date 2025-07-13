@@ -246,6 +246,8 @@ game_finished,Spiel beendet
 game_menu,Menü
 gas,Gas
 gather,Sammeln
+gather_stone,Gather stone
+gather_wood,Gather wood
 gathering,Sammeln
 gathering_labor,Gathering
 grain_processing,Getreideverarbeitung
@@ -327,7 +329,7 @@ millstone,Mühlstein
 mine,Abbauen
 mine_description,Wird zum Abbau von Ressourcen aus Minen verwendet. Erzeugt Vorkommen um sich herum
 mine_mine,Bergwerk
-mining,Minenarbeit
+mining_labor,Minenarbeit
 moderate,Moderate
 moisture,Feuchtigkeit
 mortar_and_pestle,Mörser und Stößel

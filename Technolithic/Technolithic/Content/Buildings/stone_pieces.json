@@ -12,13 +12,14 @@
   "destructible": false,
   "movementSpeed": 50,
   "constructionTime": 1,
-  "deposit": {
-    "stages": 1,
-    "depositMax": 4,
-    "dropPerCollect": 4,
-    "requiredToolType": "None",
-    "depositResource": "stone",
-    "miningTime": 20
+  "DepositData": {
+    "InteractionType": "GatherStone",
+    "InteractionDurationInHours": 0.8,
+    "ToolRequired": false,
+    "Loot": {
+      "stone": 3
+    },
+    "Stages": 2
   },
   "texture": {
     "name": "stone_pieces",

@@ -23,8 +23,6 @@ namespace Technolithic
         private BigButton irrigateButton;
         private BigButton fertilizeButton;
         private BigButton copySettingsButton;
-        private BigButton gatherButton;
-        private BigButton mineButton;
         private BigButton priorityButton;
         private BigButton cleanUpManureButton;
         private BigButton autoMineSpawnedDepositsButton;
@@ -77,10 +75,6 @@ namespace Technolithic
             copySettingsButton.GetComponent<ButtonScript>().AddOnClickedCallback(OnCopySettingsButtonPressedCallback);
             copySettingsButton.Tooltips = Localization.GetLocalizedText("copy_settings");
 
-            mineButton = new BigButton(ParentNode.Scene, ResourceManager.MineIcon, true);
-            mineButton.GetComponent<ButtonScript>().AddOnClickedCallback(OnMineButtonPressedCallback);
-            mineButton.Tooltips = Localization.GetLocalizedText("mine");
-
             cleanUpManureButton = new BigButton(ParentNode.Scene, ItemDatabase.GetItemByName("manure").Icon, true);
             cleanUpManureButton.GetComponent<ButtonScript>().AddOnClickedCallback(OnCleanUpManureButtonPressedCallback);
             cleanUpManureButton.Tooltips = Localization.GetLocalizedText("clean_up_manure");
@@ -104,10 +98,6 @@ namespace Technolithic
             returnHomeButton.Name = "ReturnHomeButton";
             (returnHomeButton.GetChildByName("Text") as MyText).Text = Localization.GetLocalizedText("return_to_the_future");
             returnHomeButton.CenterText();
-
-            gatherButton = new BigButton(ParentNode.Scene, ResourceManager.GatherIcon, true);
-            gatherButton.GetComponent<ButtonScript>().AddOnClickedCallback(OnGatherButtonPressedCallback);
-            gatherButton.Tooltips = Localization.GetLocalizedText("gather");
 
             ParentNode.GetChildByName("StatsTab").GetComponent<ButtonScript>().AddOnClickedCallback(SetTab);
             ParentNode.GetChildByName("InventoryTab").GetComponent<ButtonScript>().AddOnClickedCallback(SetTab);
@@ -216,12 +206,6 @@ namespace Technolithic
             GameplayScene.WorldManager.SetMyAction(MyAction.CopySettings, ResourceManager.CopyIcon);
         }
 
-        public void OnMineButtonPressedCallback(bool value, ButtonScript buttonScript)
-        {
-            DepositCmp depositCmp = selectedBuilding as DepositCmp;
-            depositCmp.IsMarkedToObtain = !depositCmp.IsMarkedToObtain;
-        }
-
         public void OnCleanUpManureButtonPressedCallback(bool value, ButtonScript buttonScript)
         {
             AnimalPenBuildingCmp animalPen = selectedBuilding as AnimalPenBuildingCmp;
@@ -249,15 +233,6 @@ namespace Technolithic
         {
             TimeMachine timeMachine = selectedBuilding as TimeMachine;
             timeMachine.ReturnHome = true;
-        }
-
-        public void OnGatherButtonPressedCallback(bool value, ButtonScript buttonScript)
-        {
-            if (selectedBuilding is DepositCmp)
-            {
-                DepositCmp depositCmp = selectedBuilding as DepositCmp;
-                depositCmp.IsMarkedToObtain = !depositCmp.IsMarkedToObtain;
-            }
         }
 
         public void FertilizeBuilding(bool value, ButtonScript sender)
@@ -445,33 +420,6 @@ namespace Technolithic
                     }
 
                     buttonsListView.AddItem(priorityButton);
-                }
-                else if(selectedBuilding.BuildingTemplate.BuildingType == BuildingType.Deposit)
-                {
-                    DepositCmp depositCmp = selectedBuilding as DepositCmp;
-
-                    if(depositCmp.BuildingTemplate.Deposit.RequiredToolType == ToolType.Pick)
-                    {
-                        if (!GameplayScene.Instance.ProgressTree.IsTechnologyUnlocked(TechnologyDatabase.StoneTools))
-                        {
-                            mineButton.GetComponent<ButtonScript>().IsDisabled = true;
-                            mineButton.Tooltips = $"{Localization.GetLocalizedText("mine")}\n{Localization.GetLocalizedText("required_technology")}:\n" +
-                                    $"{TechnologyDatabase.StoneTools.Name}";
-                        }
-                        else
-                        {
-                            mineButton.GetComponent<ButtonScript>().IsDisabled = false;
-                            mineButton.Tooltips = $"{Localization.GetLocalizedText("mine")}";
-                            mineButton.GetComponent<ButtonScript>().IsSelected = depositCmp.IsMarkedToObtain;
-                        }
-
-                        buttonsListView.AddItem(mineButton);
-                    }
-                    else
-                    {
-                        gatherButton.GetComponent<ButtonScript>().IsSelected = depositCmp.IsMarkedToObtain;
-                        buttonsListView.AddItem(gatherButton);
-                    }
                 }
                 else if(selectedBuilding.BuildingTemplate.BuildingType == BuildingType.AnimalPen)
                 {

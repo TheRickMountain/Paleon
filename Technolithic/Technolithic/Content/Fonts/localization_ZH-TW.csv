@@ -246,6 +246,8 @@ game_finished,遊戲結束
 game_menu,遊戲選單
 gas,煤氣
 gather,收集
+gather_stone,Gather stone
+gather_wood,Gather wood
 gathering,收集
 gathering_labor,Gathering
 grain_processing,穀物加工
@@ -327,7 +329,7 @@ millstone,石磨
 mine,開採
 mine_description,在周圍產出可開採的資源。
 mine_mine,礦井
-mining,開採
+mining_labor,開採
 moderate,溫和
 moisture,水分
 mortar_and_pestle,石臼和杵

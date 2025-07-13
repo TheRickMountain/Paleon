@@ -246,6 +246,8 @@ game_finished,Jogo finalizado
 game_menu,Menu
 gas,Gas
 gather,Coletar
+gather_stone,Gather stone
+gather_wood,Gather wood
 gathering,Coleta
 gathering_labor,Gathering
 grain_processing,Processamento de grão
@@ -327,7 +329,7 @@ millstone,Mó de moinho
 mine,Minerar
 mine_description,Used to extract resources from mines. Generates deposits around itself
 mine_mine,Minha
-mining,Mineração
+mining_labor,Mineração
 moderate,Moderate
 moisture,Umidade
 mortar_and_pestle,Almofariz com pilão

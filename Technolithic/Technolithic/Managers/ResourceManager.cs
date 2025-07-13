@@ -60,7 +60,8 @@ namespace Technolithic
 
         public static MyTexture SunAndMoonSprite { get; private set; }
         public static MyTexture SunAndMoonPointerSprite { get; private set; }
-        public static MyTexture GatherIcon { get; private set; }
+        public static MyTexture GatherStoneIcon { get; private set; }
+        public static MyTexture GatherWoodIcon { get; private set; }
         public static MyTexture MineIcon { get; private set; }
         public static MyTexture MiningIcon { get; private set; }
         public static MyTexture LampIcon { get; private set; }
@@ -216,7 +217,8 @@ namespace Technolithic
 
             RotateSprite = uiSpriteSheet.GetSubtexture(80, 160, 32, 32);
 
-            GatherIcon = uiSpriteSheet.GetSubtexture(96, 0, 16, 16);
+            GatherStoneIcon = uiSpriteSheet.GetSubtexture(48, 128, 16, 16);
+            GatherWoodIcon = uiSpriteSheet.GetSubtexture(64, 128, 16, 16);
             MineIcon = uiSpriteSheet.GetSubtexture(128, 0, 16, 16);
             LampIcon = uiSpriteSheet.GetSubtexture(80, 64, 16, 16);
             MetallurgyIcon = uiSpriteSheet.GetSubtexture(224, 16, 16, 16);

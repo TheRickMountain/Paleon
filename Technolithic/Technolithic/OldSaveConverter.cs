@@ -227,6 +227,13 @@ namespace Technolithic
                         creatureSaveData.LaborTypePriorityPair.Remove("Gather");
                         creatureSaveData.LaborTypePriorityPair.Add(LaborType.Gathering.ToString(), value);
                     }
+
+                    if (creatureSaveData.LaborTypePriorityPair != null && creatureSaveData.LaborTypePriorityPair.ContainsKey("Mine"))
+                    {
+                        var value = creatureSaveData.LaborTypePriorityPair["Mine"];
+                        creatureSaveData.LaborTypePriorityPair.Remove("Mine");
+                        creatureSaveData.LaborTypePriorityPair.Add(LaborType.Mining.ToString(), value);
+                    }
                 }
             }
         }

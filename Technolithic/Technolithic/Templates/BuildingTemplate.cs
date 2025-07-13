@@ -108,7 +108,7 @@ namespace Technolithic
         public Storage Storage { get; private set; }
         public Trap Trap { get; private set; }
         public Assignable Assignable { get; private set; }
-        public Deposit Deposit { get; private set; }
+        public DepositData DepositData { get; private set; }
         public MineData MineData { get; private set; }
         public Crafter Crafter { get; private set; }
         public BeeHiveData BeeHiveData { get; private set; }
@@ -362,9 +362,10 @@ namespace Technolithic
                 AnimalPenData = new AnimalPenData(JObject);
             }
 
-            if(!JObject["deposit"].IsNullOrEmpty())
+            if (!JObject["DepositData"].IsNullOrEmpty())
             {
-                Deposit = new Deposit(JObject);
+                DepositData = JsonSerializer.CreateDefault().Deserialize<DepositData>(JObject["DepositData"].CreateReader());
+                DepositData.Initialize(Textures);
             }
 
             if(!JObject["MineData"].IsNullOrEmpty())

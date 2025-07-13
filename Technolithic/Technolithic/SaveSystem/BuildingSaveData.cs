@@ -51,9 +51,7 @@ namespace Technolithic
         public int FishTrapCurrentNumberOfUses { get; set; }
 
         // Deposit region
-        public bool IsMarkedToObtain { get; set; }
         public int DepositCurrentStage { get; set; }
-        public float MiningCurrentTime { get; set; }
 
         public bool IsBeeHiveEmpty { get; set; }
         public float BeeHiveCurrentPercentProgress { get; set; }

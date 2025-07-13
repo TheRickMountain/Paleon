@@ -11,7 +11,10 @@ namespace Technolithic
         Destruct,
         CollectWildHoney,
         CollectHoney,
-        CatchFish
+        CatchFish,
+        GatherStone,
+        GatherWood,
+        Mine
     }
 
     public class InteractionsDatabase
@@ -61,6 +64,27 @@ namespace Technolithic
                 LaborType.Fish,
                 Localization.GetLocalizedText("catch_fish"),
                 ResourceManager.CatchFishIcon,
+                Color.Orange));
+
+            // TODO: icon
+            // TDOO: localization
+
+            AddInteractionData(new InteractionData(InteractionType.GatherWood,
+                LaborType.Gathering,
+                Localization.GetLocalizedText("gather_wood"),
+                ResourceManager.GatherWoodIcon,
+                Color.Orange));
+
+            AddInteractionData(new InteractionData(InteractionType.GatherStone,
+                LaborType.Gathering,
+                Localization.GetLocalizedText("gather_stone"),
+                ResourceManager.GatherStoneIcon,
+                Color.Orange));
+
+            AddInteractionData(new InteractionData(InteractionType.Mine,
+                LaborType.Mining,
+                Localization.GetLocalizedText("mine"),
+                ResourceManager.MineIcon,
                 Color.Orange));
         }
 

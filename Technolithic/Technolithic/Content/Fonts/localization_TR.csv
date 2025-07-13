@@ -246,6 +246,8 @@ game_finished,Oyun bitti
 game_menu,Oyun menüsü
 gas,Gaz
 gather,Topla
+gather_stone,Gather stone
+gather_wood,Gather wood
 gathering,Toplamak
 gathering_labor,Gathering
 grain_processing,Tahil isleme
@@ -327,7 +329,7 @@ millstone,Degirmen tasi
 mine,Kaz
 mine_description,Maden cevresinde otomatik olarak olusturulacak.
 mine_mine,Madencilik
-mining,Madencilik
+mining_labor,Madencilik
 moderate,Iliman
 moisture,Nem
 mortar_and_pestle,Havan tokmagi

@@ -246,6 +246,8 @@ game_finished,ゲーム終了
 game_menu,ゲームメニュー
 gas,ガス
 gather,収集
+gather_stone,Gather stone
+gather_wood,Gather wood
 gathering,収集
 gathering_labor,Gathering
 grain_processing,穀物加工
@@ -328,7 +330,7 @@ millstone,石臼
 mine,採掘
 mine_description,鉱山から資源を抽出するために使用。それ自身の周囲に堆積物を生み出します
 mine_mine,採掘
-mining,採掘
+mining_labor,採掘
 moderate,並み
 moisture,水分
 mortar_and_pestle,すり鉢とすりこぎ

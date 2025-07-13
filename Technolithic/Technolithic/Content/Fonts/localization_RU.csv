@@ -246,6 +246,8 @@ game_finished,Игра завершена
 game_menu,Меню
 gas,Газ
 gather,Собирать
+gather_stone,Собирать камень
+gather_wood,Собирать древесину
 gathering,Сбор
 gathering_labor,Собирательство
 grain_processing,Обработка зерна
@@ -327,7 +329,7 @@ millstone,Жёрнов
 mine,Добывать
 mine_description,Используется для извлечения залежей из шахт. Спавнит залежи вокруг себя
 mine_mine,Шахта
-mining,Горное дело
+mining_labor,Добыча полезных ископаемых
 moderate,Умеренный
 moisture,Влажность
 mortar_and_pestle,Ступа
@@ -460,7 +462,7 @@ stone_floor,Каменный пол
 stone_harpoon,Каменный гарпун
 stone_hoe,Каменная мотыга
 stone_pick,Каменная кирка
-stone_pieces,Кусочки камня
+stone_pieces,Кусочки камней
 stone_sickle,Каменный серп
 stone_spear,Каменное копье
 stone_tools,Каменные инструменты
@@ -564,7 +566,7 @@ winter_cold,Зимний холод
 wolf,Волк
 wolf_domestication,Одомашнивание волка
 wood,Древесина
-wood_pieces,Кусочки дерева
+wood_pieces,Кусочки древесины
 woodcutting,Рубка
 wooden_cart,Деревянная тележка
 wooden_gate,Деревянные ворота

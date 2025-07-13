@@ -21,7 +21,8 @@ namespace Technolithic
         DestructSurface,
         CopySettings,
         Mine,
-        Gather,
+        GatherStone,
+        GatherWood,
         BuildIrrigationCanal,
         DestructIrrigationCanal,
         None

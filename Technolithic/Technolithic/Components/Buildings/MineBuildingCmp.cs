@@ -50,7 +50,7 @@ namespace Technolithic
                         continue;
                     }
 
-                    deposit.Get<DepositCmp>().IsMarkedToObtain = AutoMineSpawnedDeposits;
+                    deposit.Get<DepositCmp>().MarkInteraction(InteractionType.Mine);
                 }
             }
         }

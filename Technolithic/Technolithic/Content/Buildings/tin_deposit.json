@@ -12,12 +12,14 @@
   "destructible": false,
   "movementSpeed": 50,
   "constructionTime": 1,
-  "deposit": {
-    "stages": 3,
-    "dropPerCollect": 3,
-    "requiredToolType": "Pick",
-    "depositResource": "tin_ore",
-    "miningTime": 75
+  "DepositData": {
+    "InteractionType": "Mine",
+    "InteractionDurationInHours": 3,
+    "ToolRequired": true,
+    "Loot": {
+      "tin_ore": 3
+    },
+    "Stages": 3
   },
   "texture": {
     "name": "tin_deposit",

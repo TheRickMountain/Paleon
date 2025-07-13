@@ -395,9 +395,6 @@ namespace Technolithic
                             case BuildingType.Deposit:
                                 {
                                     DepositCmp depositCmp = buildingCmp as DepositCmp;
-
-                                    depositCmp.IsMarkedToObtain = buildingSaveData.IsMarkedToObtain;
-                                    depositCmp.MiningCurrentTime = buildingSaveData.MiningCurrentTime;
                                     depositCmp.CurrentStage = buildingSaveData.DepositCurrentStage;
                                 }
                                 break;

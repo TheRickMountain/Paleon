@@ -645,7 +645,8 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Mine"]
+      "LaborTypes": ["Mining"],
+      "InteractionTypes": ["Mine"]
     }
   },
   "copper_pick": {
@@ -670,7 +671,8 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Mine"]
+      "LaborTypes": ["Mining"],
+      "InteractionTypes": ["Mine"]
     }
   },
   "bronze_pick": {
@@ -695,7 +697,8 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Mine"]
+      "LaborTypes": ["Mining"],
+      "InteractionTypes": ["Mine"]
     }
   },
   "iron_pick": {
@@ -720,7 +723,8 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Mine"]
+      "LaborTypes": ["Mining"],
+      "InteractionTypes": ["Mine"]
     }
   },
   "wooden_spear": {

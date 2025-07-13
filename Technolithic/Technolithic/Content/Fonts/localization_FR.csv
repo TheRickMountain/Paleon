@@ -246,6 +246,8 @@ game_finished,Partie terminée
 game_menu,Menu
 gas,Gaz
 gather,Ramasser
+gather_stone,Gather stone
+gather_wood,Gather wood
 gathering,Collecte
 gathering_labor,Gathering
 grain_processing,Travail du grain
@@ -327,7 +329,7 @@ millstone,Meule
 mine,Miner
 mine_description,Utilisé pour extraire les ressources des mines. Génère des gisements tout autour
 mine_mine,Mine
-mining,Extraction minière
+mining_labor,Extraction minière
 moderate,Modéré
 moisture,Humidité
 mortar_and_pestle,Mortier et pilon

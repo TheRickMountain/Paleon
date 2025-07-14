@@ -44,7 +44,7 @@ namespace Technolithic
         {
             languageKeyValuePair = new Dictionary<string, Dictionary<string, string>>();
 
-            string localizationDirectory = Path.Combine(Engine.ContentDirectory, "Fonts");
+            string localizationDirectory = Path.Combine(Engine.ContentDirectory, "Localizations");
             string[] localizationFiles = Directory.GetFiles(localizationDirectory, "localization_*.csv");
 
             foreach (string filePath in localizationFiles)

@@ -54,8 +54,6 @@ namespace Technolithic
 
         public Dictionary<LaborType, List<CrafterBuildingCmp>> AutoCrafterBuildings { get; set; } = new Dictionary<LaborType, List<CrafterBuildingCmp>>();
 
-        public List<CreaturePoweredEnergySource> CreaturePoweredEnergySources { get; set; } = new();
-
         public int TotalSettlersCount { get; private set; } = 0;
 
         public int WildAnimalsNumber { get; set; } = 0;
@@ -76,7 +74,6 @@ namespace Technolithic
         private SupplyFuelLabor supplyFuelLabor = new SupplyFuelLabor();
         private AnimalDomesticateLabor animalDomesticateLabor = new AnimalDomesticateLabor();
         private SettlerHuntLabor settlerHuntLabor = new SettlerHuntLabor();
-        private EnergyProductionLabor energyProductionLabor = new EnergyProductionLabor();
 
         public Action<int> CbOnSettlersCountChanged { get; set; }
 
@@ -142,10 +139,6 @@ namespace Technolithic
             settlerHuntLabor.Repeat = true;
             settlerHuntLabor.IsMultiCreatureLabor = true;
             LaborManager.Add(settlerHuntLabor);
-
-            energyProductionLabor.Repeat = true;
-            energyProductionLabor.IsMultiCreatureLabor= true;
-            LaborManager.Add(energyProductionLabor);
 
             // Создание CraftLabor на основе LaborType крафтеров
             foreach (var kvp in Engine.Instance.Buildings)

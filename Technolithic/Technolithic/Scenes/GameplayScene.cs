@@ -1244,11 +1244,32 @@ namespace Technolithic
                 {
                     foreach(InteractionType interactionType in interactable.AvailableInteractions)
                     {
-                        if(interactable.IsInteractionMarked(interactionType) && 
-                            interactable.IsInteractionActivated(interactionType))
+                        InteractionData interactionData = interactionsDatabase.GetInteractionData(interactionType);
+
+                        if (interactionData == null) continue;
+
+                        if(interactable.IsInteractionActivated(interactionType))
                         {
-                            InteractionData interactionData = interactionsDatabase.GetInteractionData(interactionType);
-                            interactionData?.Icon?.Draw(entity.Position, Color.White * 0.75f);
+                            switch(interactionData.IconDisplayState)
+                            {
+                                case InteractionIconDisplayState.OnMarked:
+                                    {
+                                        if(interactable.IsInteractionMarked(interactionType))
+                                        {
+                                            interactionData.Icon?.Draw(entity.Position, Color.White * 0.75f);
+                                        }
+                                    }
+                                    break;
+                                case InteractionIconDisplayState.OnUnmarked:
+                                    {
+                                        if (interactable.IsInteractionMarked(interactionType) == false)
+                                        {
+                                            interactionData.Icon?.Draw(entity.Position, Color.White * 0.75f);
+                                            ResourceManager.DisableIcon.Draw(entity.Position, Color.White * 0.75f);
+                                        }
+                                    }
+                                    break;
+                            }
                         }
                     }
                 }

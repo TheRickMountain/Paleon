@@ -15,7 +15,8 @@ namespace Technolithic
         GatherStone,
         GatherWood,
         Mine,
-        AutoCleanPen
+        AutoCleanPen,
+        ProduceEnergy
     }
 
     public class InteractionsDatabase
@@ -35,61 +36,78 @@ namespace Technolithic
                 LaborType.Chop,
                 Localization.GetLocalizedText("chop"),
                 ResourceManager.ChopIcon,
-                Color.Orange));
+                Color.Orange,
+                InteractionIconDisplayState.OnMarked));
 
             AddInteractionData(new InteractionData(InteractionType.EmptyFishTrap,
                 LaborType.Fish,
                 Localization.GetLocalizedText("automatically_empty_the_trap"),
                 ResourceManager.EmptyFishTrapIcon,
-                Color.Orange));
+                Color.Orange,
+                InteractionIconDisplayState.OnMarked));
 
             AddInteractionData(new InteractionData(InteractionType.Destruct,
                 LaborType.Build,
                 Localization.GetLocalizedText("destruct"),
                 ResourceManager.DestructIcon,
-                Color.Red));
+                Color.Red,
+                InteractionIconDisplayState.OnMarked));
 
             AddInteractionData(new InteractionData(InteractionType.CollectWildHoney,
                 LaborType.Gathering,
                 Localization.GetLocalizedText("auto_collect_wild_honey"),
                 ResourceManager.CollectHoneyIcon,
-                Color.Orange));
+                Color.Orange,
+                InteractionIconDisplayState.OnMarked));
 
             AddInteractionData(new InteractionData(InteractionType.CollectHoney,
                 LaborType.Beekeeping,
                 Localization.GetLocalizedText("auto_collect_honey"),
                 ResourceManager.CollectHoneyIcon,
-                Color.Orange));
+                Color.Orange,
+                InteractionIconDisplayState.OnMarked));
 
             AddInteractionData(new InteractionData(InteractionType.CatchFish,
                 LaborType.Fish,
                 Localization.GetLocalizedText("catch_fish"),
                 ResourceManager.CatchFishIcon,
-                Color.Orange));
+                Color.Orange, 
+                InteractionIconDisplayState.OnUnmarked));
 
             AddInteractionData(new InteractionData(InteractionType.GatherWood,
                 LaborType.Gathering,
                 Localization.GetLocalizedText("gather_wood"),
                 ResourceManager.GatherWoodIcon,
-                Color.Orange));
+                Color.Orange,
+                InteractionIconDisplayState.OnMarked));
 
             AddInteractionData(new InteractionData(InteractionType.GatherStone,
                 LaborType.Gathering,
                 Localization.GetLocalizedText("gather_stone"),
                 ResourceManager.GatherStoneIcon,
-                Color.Orange));
+                Color.Orange,
+                InteractionIconDisplayState.OnMarked));
 
             AddInteractionData(new InteractionData(InteractionType.Mine,
                 LaborType.Mining,
                 Localization.GetLocalizedText("mine"),
                 ResourceManager.MineIcon,
-                Color.Orange));
+                Color.Orange,
+                InteractionIconDisplayState.OnMarked));
 
             AddInteractionData(new InteractionData(InteractionType.AutoCleanPen,
                 LaborType.Ranching,
                 Localization.GetLocalizedText("auto_clean_pen"),
                 ResourceManager.CleanUpIcon,
-                Color.Orange));
+                Color.Orange,
+                InteractionIconDisplayState.OnMarked));
+
+            AddInteractionData(new InteractionData(InteractionType.ProduceEnergy,
+                LaborType.EnergyProduction,
+                Localization.GetLocalizedText("produce_energy"),
+                ResourceManager.ProduceEnergyIcon,
+                Color.Orange,
+                InteractionIconDisplayState.OnUnmarked));
         }
 
         private void AddInteractionData(InteractionData interactionData)

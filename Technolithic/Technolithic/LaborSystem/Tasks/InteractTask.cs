@@ -7,6 +7,7 @@ namespace Technolithic
         private Interactable _interactable;
         private InteractionData _interactionData;
         private InteractionType _interactionType;
+        private bool _isEndless;
 
         public InteractTask(CreatureCmp creatureCmp, Interactable interactable, InteractionData interactionData) 
             : base(creatureCmp)
@@ -14,6 +15,7 @@ namespace Technolithic
             _interactable = interactable;
             _interactionData = interactionData;
             _interactionType = _interactionData.InteractionType;
+            _isEndless = (int)interactable.GetInteractionDuration(_interactionType) <= 0;
         }
 
         public override void Begin()
@@ -50,6 +52,12 @@ namespace Technolithic
             {
                 case MovementState.Success:
                     {
+                        if (_isEndless)
+                        {
+                            _interactable.ProcessInteraction(_interactionType, Owner);
+                            return;
+                        }
+                        
                         Owner.Slider.Active = true;
 
                         float efficiency = Owner.CreatureEquipment.GetInteractionEfficiency(_interactionType);
@@ -67,6 +75,8 @@ namespace Technolithic
 
                         Owner.Slider.SetValue(0, 1.0f, _interactable.GetInteractionProgressPercent(_interactionType),
                             _interactionData.ProgressBarColor);
+
+                        _interactable.ProcessInteraction(_interactionType, Owner);
 
                         if (interactionProgress >= interactionDuration)
                         {

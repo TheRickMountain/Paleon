@@ -162,16 +162,33 @@ namespace Technolithic
 
                 if (interactionButtonDict.ContainsKey(interactionType) == false)
                 {
-                    interactionButton = new BigButton(ParentNode.Scene, interactionData.Icon, true);
+                    interactionButton = new BigButton(ParentNode.Scene, interactionData.Icon, false);
                     interactionButtonDict[interactionType] = interactionButton;
                     interactionButton.ButtonScript.Pressed += Interactable_InteractionButton_Pressed;
                     interactionButton.SetMetadata("interaction_data", interactionData);
+
+                    MImageUI disableIcon = new MImageUI(interactionButton.Scene);
+                    disableIcon.X = 8;
+                    disableIcon.Y = 8;
+                    disableIcon.Width = 32;
+                    disableIcon.Height = 32;
+                    disableIcon.Name = "disable_icon";
+                    disableIcon.Image.Texture = ResourceManager.DisableIcon;
+
+                    interactionButton.AddChildNode(disableIcon);
                 }
 
                 interactionButton = interactionButtonDict[interactionType];
                 interactionButton.SetMetadata("interactable", selectedInteractable);
 
-                interactionButton.ButtonScript.IsSelected = selectedInteractable.IsInteractionMarked(interactionType);
+                if (selectedInteractable.IsInteractionMarked(interactionType))
+                {
+                    (interactionButton.GetChildByName("disable_icon") as MImageUI).Image.Visible = true;
+                }
+                else
+                {
+                    (interactionButton.GetChildByName("disable_icon") as MImageUI).Image.Visible = false;
+                }
 
                 interactionButton.Tooltips = GenerateInteractionTooltip(building, interactionData);
 
@@ -503,14 +520,24 @@ namespace Technolithic
         {
             InteractionData interactionData = buttonScript.ParentNode.GetMetadata<InteractionData>("interaction_data");
             Interactable interactable = buttonScript.ParentNode.GetMetadata<Interactable>("interactable");
+            InteractionType interactionType = interactionData.InteractionType;
 
-            if (buttonScript.IsSelected)
+            if(selectedInteractable.IsInteractionMarked(interactionType))
             {
-                selectedInteractable.MarkInteraction(interactionData.InteractionType);
+                selectedInteractable.UnmarkInteraction(interactionType);
             }
             else
             {
-                selectedInteractable.UnmarkInteraction(interactionData.InteractionType);
+                selectedInteractable.MarkInteraction(interactionType);
+            }
+
+            if (selectedInteractable.IsInteractionMarked(interactionData.InteractionType))
+            {
+                (buttonScript.ParentNode.GetChildByName("disable_icon") as MImageUI).Image.Visible = true;
+            }
+            else
+            {
+                (buttonScript.ParentNode.GetChildByName("disable_icon") as MImageUI).Image.Visible = false;
             }
 
             buttonScript.ParentNode.Tooltips = GenerateInteractionTooltip(interactable, interactionData);

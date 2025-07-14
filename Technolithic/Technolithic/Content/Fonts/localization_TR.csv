@@ -389,6 +389,7 @@ primitive_dwelling,Ilkel konut
 primitive_medicine,Ilkel tip
 primitive_school_description,Bilgi puani kazanmak icin kullanilir
 priority,oncelik
+produce_energy,Produce energy
 production,Üretim
 production_limit,Üretim limiti
 productivity,Verimlilik

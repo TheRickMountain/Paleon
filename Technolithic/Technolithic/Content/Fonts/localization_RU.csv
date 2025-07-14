@@ -389,6 +389,7 @@ primitive_dwelling,Примитивное жилище
 primitive_medicine,Примитивная медицина
 primitive_school_description,Используется для зарабатывания очков знаний
 priority,Приоритет
+produce_energy,Производить энергию
 production,Производство
 production_limit,Лимит производства
 productivity,Продуктивность

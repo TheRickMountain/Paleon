@@ -389,6 +389,7 @@ primitive_dwelling,Habitação primitiva
 primitive_medicine,Primitive medicine
 primitive_school_description,Usado para ganhar pontos de conhecimento
 priority,Prioridade
+produce_energy,Produce energy
 production,Produção
 production_limit,Limite de produção
 productivity,Productivity

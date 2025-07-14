@@ -389,6 +389,7 @@ primitive_dwelling,原始的住所。
 primitive_medicine,原始醫學
 primitive_school_description,用來獲得知識點數。
 priority,優先度
+produce_energy,Produce energy
 production,生產
 production_limit,產量限制
 productivity,產量

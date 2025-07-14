@@ -17,18 +17,35 @@ namespace Technolithic
             
         }
 
+        public override void ProcessInteraction(InteractionType interactionType, CreatureCmp creature)
+        {
+            base.ProcessInteraction(interactionType, creature);
+
+            switch(interactionType)
+            {
+                case InteractionType.ProduceEnergy:
+                    {
+                        CurrentCreature = creature;
+                    }
+                    break;
+            }
+        }
+
+        public override void UpdateCompleted()
+        {
+            base.UpdateCompleted();
+
+            CurrentCreature = null;
+        }
+
         public override void CompleteBuilding()
         {
             base.CompleteBuilding();
 
-            GameplayScene.WorldManager.CreaturePoweredEnergySources.Add(this);
-        }
-
-        public override void DestructBuilding()
-        {
-            base.DestructBuilding();
-
-            GameplayScene.WorldManager.CreaturePoweredEnergySources.Remove(this);
+            AddAvailableInteraction(InteractionType.ProduceEnergy, false);
+            ActivateInteraction(InteractionType.ProduceEnergy);
+            SetInteractionDuration(InteractionType.ProduceEnergy, 0);
+            MarkInteraction(InteractionType.ProduceEnergy);
         }
 
         public override int GetActualEnergyOutput()

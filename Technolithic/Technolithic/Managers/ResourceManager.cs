@@ -126,6 +126,8 @@ namespace Technolithic
         public static MyTexture DiscordIcon { get; private set; }
         public static MyTexture CatchFishIcon { get; private set; }
         public static MyTexture CleanUpIcon { get; private set; }
+        public static MyTexture DisableIcon { get; private set; }
+        public static MyTexture ProduceEnergyIcon { get; private set; }
 
         public static SoundEffectInstance BuildingSoundEffect { get; private set; }
         public static SoundEffectInstance ClickSoundEffect { get; private set; }
@@ -250,6 +252,8 @@ namespace Technolithic
             DiscordIcon = uiSpriteSheet.GetSubtexture(240, 240, 16, 16);
             CatchFishIcon = uiSpriteSheet.GetSubtexture(112, 128, 16, 16);
             CleanUpIcon = uiSpriteSheet.GetSubtexture(32, 0, 16, 16);
+            DisableIcon = uiSpriteSheet.GetSubtexture(32, 176, 16, 16);
+            ProduceEnergyIcon = uiSpriteSheet.GetSubtexture(32, 192, 16, 16);
 
             MyTexture emotest = GetTexture("emotest");
             HungerThought = emotest.GetSubtexture(16, 0, 16, 16);

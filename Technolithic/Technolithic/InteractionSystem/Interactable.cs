@@ -99,6 +99,12 @@ namespace Technolithic
             return _interactionHandler.GetInteractionDuration(interactionType);
         }
 
+        /// <summary>
+        /// Sets the time required to complete a specific interaction type.
+        /// </summary>
+        /// <param name="interactionType">The type of interaction to modify.</param>
+        /// <param name="duration">The time in seconds required to complete the interaction. A value of 0 
+        /// indicates an endless interaction that will not complete automatically over time.</param>
         protected void SetInteractionDuration(InteractionType interactionType, float duration)
         {
             _interactionHandler.SetInteractionDuration(interactionType, duration);
@@ -134,6 +140,8 @@ namespace Technolithic
         }
 
         public virtual void CompleteInteraction(InteractionType interactionType) { }
+
+        public virtual void ProcessInteraction(InteractionType interactionType, CreatureCmp creature) { }
 
         public void Reserve()
         {

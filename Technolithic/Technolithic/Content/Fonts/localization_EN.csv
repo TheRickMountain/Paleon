@@ -389,6 +389,7 @@ primitive_dwelling,Primitive dwelling
 primitive_medicine,Primitive medicine
 primitive_school_description,Used to earn knowledge points
 priority,Priority
+produce_energy,Produce energy
 production,Production
 production_limit,Production limit
 productivity,Productivity

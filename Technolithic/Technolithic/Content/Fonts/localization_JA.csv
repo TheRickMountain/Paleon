@@ -391,6 +391,7 @@ primitive_dwelling,原始の居住施設
 primitive_medicine,原始医学
 primitive_school_description,知識ポイントを獲得するために使用
 priority,優先度
+produce_energy,Produce energy
 production,製造
 production_limit,生産限界
 productivity,生産性

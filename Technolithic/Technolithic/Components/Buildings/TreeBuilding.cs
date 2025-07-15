@@ -104,13 +104,11 @@ namespace Technolithic
 
         private void DropLoot()
         {
-            Tile tile = GetApproachableTile();
-
             foreach (var kvp in treeData.GetGrowthStageLoot(_growthStage))
             {
                 Item item = kvp.Key;
                 int amount = kvp.Value;
-                tile.Inventory.AddCargo(new ItemContainer(item, amount, item.Durability));
+                GetCenterTile().Inventory.AddCargo(new ItemContainer(item, amount, item.Durability));
             }
         }
 

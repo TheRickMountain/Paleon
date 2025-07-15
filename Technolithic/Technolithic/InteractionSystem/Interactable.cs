@@ -214,8 +214,6 @@ namespace Technolithic
 
         public abstract Tile GetApproachableTile(CreatureCmp creature);
 
-        public abstract Tile GetApproachableTile();
-
         public abstract Tile GetApproachableTile(int zoneId);
 
         public abstract IEnumerable<Tile> GetApproachableTiles();

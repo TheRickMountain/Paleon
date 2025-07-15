@@ -268,7 +268,7 @@ namespace Technolithic
                     Item item = kvp.Key;
                     int weight = kvp.Value;
 
-                    GetApproachableTile().Inventory.AddCargo(new ItemContainer(item, weight, item.Durability));
+                    GetCenterTile().Inventory.AddCargo(new ItemContainer(item, weight, item.Durability));
                 }
             }
 
@@ -446,7 +446,7 @@ namespace Technolithic
 
                     foreach (var itemContainer in Inventory.PopItem(item, itemCount))
                     {
-                        GetApproachableTile().Inventory.AddCargo(itemContainer);
+                        GetCenterTile().Inventory.AddCargo(itemContainer);
                     }
                 }
             }

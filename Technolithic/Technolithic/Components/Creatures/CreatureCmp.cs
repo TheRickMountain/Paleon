@@ -34,7 +34,7 @@ namespace Technolithic
         Old = 2
     }
 
-    public abstract class CreatureCmp : Component
+    public abstract class CreatureCmp : Interactable
     {
         public Guid Id { get; set; }
 
@@ -743,6 +743,28 @@ namespace Technolithic
         public int GetRoomId()
         {
             return Movement.CurrentTile.GetRoomId();
+        }
+
+        public override Tile GetApproachableTile(CreatureCmp creature)
+        {
+            return GetApproachableTile(creature.Movement.CurrentTile.GetRoomId());
+        }
+
+        public override Tile GetApproachableTile(int zoneId)
+        {
+            if (Movement.CurrentTile.GetRoomId() != zoneId) return null;
+
+            if (Movement.CurrentTile.IsWalkable == false) return null;
+
+            return Movement.CurrentTile;
+        }
+
+        public override IEnumerable<Tile> GetApproachableTiles()
+        {
+            if(Movement.CurrentTile.IsWalkable)
+            {
+                yield return Movement.CurrentTile;
+            }
         }
 
         public virtual CreatureSaveData GetSaveData()

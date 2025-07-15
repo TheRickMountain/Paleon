@@ -22,7 +22,7 @@ namespace Technolithic
         {
             base.BeforeUpdate();
 
-            Owner.Movement.SetPath(farmPlot.GetApproachableTile(), false);
+            Owner.Movement.SetPath(farmPlot.GetApproachableTile(Owner), false);
 
             Owner.Slider.SetValue(0, farmPlot.DestructingMaxProgress, farmPlot.DestructingCurrentProgress, Color.Orange);
         }

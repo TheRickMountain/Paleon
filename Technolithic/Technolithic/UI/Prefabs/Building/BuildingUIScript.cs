@@ -565,7 +565,9 @@ namespace Technolithic
                 tooltip += interactionData.DisplayName.Paint(Color.Orange);
             }
 
-            tooltip += $"\n{Localization.GetLocalizedText("labor_type")}: {Labor.GetLaborString(interactionData.LaborType)}";
+            LaborType laborType = interactable.GetAssociatedLaborType(interactionType);
+
+            tooltip += $"\n{Localization.GetLocalizedText("labor_type")}: {Labor.GetLaborString(laborType)}";
 
             if (interactable.DoesInteractionRequireTool(interactionType))
             {

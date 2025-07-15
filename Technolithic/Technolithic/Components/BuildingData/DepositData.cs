@@ -5,6 +5,7 @@ namespace Technolithic
 {
     public class DepositData
     {
+        public LaborType LaborType { get; init; }
         public InteractionType InteractionType { get; init; }
         public float InteractionDurationInHours { get; init; }
         public bool ToolRequired { get; init; }

@@ -464,8 +464,8 @@ namespace Technolithic
 
             if(BuildingTemplate.IsDestructible)
             {
-                // TODO: some buildings may require a tool for demolition
-                AddAvailableInteraction(InteractionType.Destruct, false);
+                // TODO: some buildings may require a tool for deconstruction
+                AddAvailableInteraction(InteractionType.Destruct, LaborType.Build, false);
 
                 SetInteractionDuration(InteractionType.Destruct, BuildingTemplate.ConstructionTime);
                 ActivateInteraction(InteractionType.Destruct);
@@ -839,6 +839,18 @@ namespace Technolithic
             }
 
             return null;
+        }
+
+        public override IEnumerable<Tile> GetApproachableTiles()
+        {
+            for (int i = 0; i < TargetTiles.Count; ++i)
+            {
+                Tile tile = TargetTiles[i];
+
+                if (tile.IsWalkable == false) continue;
+
+                yield return tile;
+            }
         }
 
         // TODO: переделать

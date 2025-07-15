@@ -37,7 +37,8 @@ namespace Technolithic
         Medicine = 25,
         Cure = 26,
         Farm = 29,
-        EnergyProduction = 30
+        EnergyProduction = 30,
+        Metallurgy = 31
     }
 
     public abstract class Labor
@@ -205,6 +206,8 @@ namespace Technolithic
                     return Localization.GetLocalizedText("planting");
                 case LaborType.EnergyProduction:
                     return Localization.GetLocalizedText("energy_production");
+                case LaborType.Metallurgy:
+                    return Localization.GetLocalizedText("metallurgy");
                 default:
                     return laborType.ToString();
 
@@ -249,6 +252,8 @@ namespace Technolithic
                     return ResourceManager.GetTexture("ui").GetSubtexture(96, 224, 16, 16);
                 case LaborType.EnergyProduction:
                     return ResourceManager.EnergyProductionIcon;
+                case LaborType.Metallurgy:
+                    return ResourceManager.MetallurgyIcon;
                 default:
                     return RenderManager.Pixel;
 

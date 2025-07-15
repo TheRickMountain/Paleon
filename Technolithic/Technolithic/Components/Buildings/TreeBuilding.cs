@@ -71,7 +71,7 @@ namespace Technolithic
         {
             base.CompleteBuilding();
 
-            AddAvailableInteraction(InteractionType.Chop, true);
+            AddAvailableInteraction(InteractionType.Chop, LaborType.Chop, true);
 
             // INFO: The tree can be cut down at any stage of growth
             ActivateInteraction(InteractionType.Chop);

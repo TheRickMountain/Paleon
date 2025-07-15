@@ -1248,28 +1248,26 @@ namespace Technolithic
 
                         if (interactionData == null) continue;
 
-                        if(interactable.IsInteractionActivated(interactionType))
+                        switch (interactionData.IconDisplayState)
                         {
-                            switch(interactionData.IconDisplayState)
-                            {
-                                case InteractionIconDisplayState.OnMarked:
+                            case InteractionIconDisplayState.OnMarked:
+                                {
+                                    if (interactable.IsInteractionActivated(interactionType) && 
+                                        interactable.IsInteractionMarked(interactionType))
                                     {
-                                        if(interactable.IsInteractionMarked(interactionType))
-                                        {
-                                            interactionData.Icon?.Draw(entity.Position, Color.White * 0.75f);
-                                        }
+                                        interactionData.Icon?.Draw(entity.Position, Color.White * 0.75f);
                                     }
-                                    break;
-                                case InteractionIconDisplayState.OnUnmarked:
+                                }
+                                break;
+                            case InteractionIconDisplayState.OnUnmarked:
+                                {
+                                    if (interactable.IsInteractionMarked(interactionType) == false)
                                     {
-                                        if (interactable.IsInteractionMarked(interactionType) == false)
-                                        {
-                                            interactionData.Icon?.Draw(entity.Position, Color.White * 0.75f);
-                                            ResourceManager.DisableIcon.Draw(entity.Position, Color.White * 0.75f);
-                                        }
+                                        interactionData.Icon?.Draw(entity.Position, Color.White * 0.75f);
+                                        ResourceManager.DisableIcon.Draw(entity.Position, Color.White * 0.75f);
                                     }
-                                    break;
-                            }
+                                }
+                                break;
                         }
                     }
                 }

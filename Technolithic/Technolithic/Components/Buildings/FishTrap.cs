@@ -56,7 +56,7 @@ namespace Technolithic
         {
             base.CompleteBuilding();
 
-            AddAvailableInteraction(InteractionType.EmptyFishTrap, false);
+            AddAvailableInteraction(InteractionType.EmptyFishTrap, LaborType.Fish, false);
             SetInteractionDuration(InteractionType.EmptyFishTrap, 5.0f);
 
             MarkInteraction(InteractionType.EmptyFishTrap);

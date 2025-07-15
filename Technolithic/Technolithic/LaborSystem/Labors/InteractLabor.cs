@@ -1,4 +1,7 @@
-﻿namespace Technolithic
+﻿using System;
+using System.Collections.Generic;
+
+namespace Technolithic
 {
     public class InteractLabor : Labor
     {
@@ -16,20 +19,19 @@
         {
             int creatureZoneId = creature.GetRoomId();
 
-            foreach(InteractionData interactionData in _intearactionsDatabase.GetLaborInteractions(LaborType))
+            var interactionPairs = _interactablesManager.GetInteractionPairs(creatureZoneId, LaborType);
+
+            if (interactionPairs == null) return false;
+
+            // TODO: выбрать наиближайшую сущность (по комнате) для взаимодействия
+            // TODO: временно выбираем первую сущность из списка
+            foreach ((Interactable interactable, InteractionType interactionType) in interactionPairs)
             {
-                InteractionType interactionType = interactionData.InteractionType;
-
-                // TODO: Required to get "interactables" list to find the closest one
-                Interactable interactable = _interactablesManager.GetFirstInteractable(creatureZoneId, interactionType);
-
-                if (interactable == null) continue;
-
                 if (creature.CreatureEquipment.HasTool(interactionType) == false)
                 {
                     var tuplePair = GameplayScene.WorldManager.FindTool(creature, interactionType);
 
-                    if(tuplePair.Item1 != null)
+                    if (tuplePair.Item1 != null)
                     {
                         Inventory inventory = tuplePair.Item1;
                         Item item = tuplePair.Item2;
@@ -42,6 +44,8 @@
                         continue;
                     }
                 }
+
+                InteractionData interactionData = _intearactionsDatabase.GetInteractionData(interactionType);
 
                 InteractTask interactTask = new InteractTask(creature, interactable, interactionData);
                 AddTask(creature, interactTask);

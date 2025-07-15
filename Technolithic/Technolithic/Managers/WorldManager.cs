@@ -50,7 +50,7 @@ namespace Technolithic
         public HashSet<AnimalCmp> AnimalsToDomesticate { get; set; } = new HashSet<AnimalCmp>();
         public HashSet<AnimalCmp> AnimalsToHunt { get; set; } = new HashSet<AnimalCmp>();
 
-        public Dictionary<LaborType, List<CrafterBuildingCmp>> CrafterBuildings { get; set; } = new Dictionary<LaborType, List<CrafterBuildingCmp>>();
+        public List<CrafterBuildingCmp> ManualCrafters { get; private set; } = new();
 
         public Dictionary<LaborType, List<CrafterBuildingCmp>> AutoCrafterBuildings { get; set; } = new Dictionary<LaborType, List<CrafterBuildingCmp>>();
 
@@ -107,7 +107,7 @@ namespace Technolithic
             
             interactablesManager = new InteractablesManager(interactionsDatabase);
             
-            foreach(LaborType laborType in interactionsDatabase.GetInvolvedTypesOfLabor())
+            foreach(LaborType laborType in Labor.GetWorkLaborEnumerator())
             {
                 InteractLabor interactLabor = new InteractLabor(laborType,
                     interactionsDatabase, interactablesManager);
@@ -146,16 +146,6 @@ namespace Technolithic
                 if (kvp.Value.BuildingType == BuildingType.Crafter)
                 {
                     Crafter crafter = kvp.Value.Crafter;
-
-                    if (CrafterBuildings.ContainsKey(crafter.LaborType) == false)
-                    {
-                        CrafterBuildings.Add(crafter.LaborType, new List<CrafterBuildingCmp>());
-
-                        CraftLabor craftLabor = new CraftLabor(crafter.LaborType);
-                        craftLabor.Repeat = true;
-                        craftLabor.IsMultiCreatureLabor = true;
-                        LaborManager.Add(craftLabor);
-                    }
 
                     if (AutoCrafterBuildings.ContainsKey(crafter.LaborType) == false)
                     {

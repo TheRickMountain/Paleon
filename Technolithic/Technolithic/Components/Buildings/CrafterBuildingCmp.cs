@@ -65,9 +65,55 @@ namespace Technolithic
             }
         }
 
+        public override void OnInteractionStarted(InteractionType interactionType, CreatureCmp creature)
+        {
+            base.OnInteractionStarted(interactionType, creature);
+
+            switch (interactionType)
+            {
+                case InteractionType.Craft:
+                    {
+                        isCrafting = true;
+                        IsTurnedOn = true;
+                    }
+                    break;
+            }
+        }
+
+        public override void OnInteractionEnded(InteractionType interactionType, CreatureCmp creature)
+        {
+            base.OnInteractionEnded(interactionType, creature);
+
+            switch(interactionType)
+            {
+                case InteractionType.Craft:
+                    {
+                        isCrafting = false;
+                        IsTurnedOn = false;
+                    }
+                    break;
+            }
+        }
+
         public override void UpdateCompleted()
         {
             base.UpdateCompleted();
+
+            if (CanCraft)
+            {
+                if (IsInteractionActivated(InteractionType.Craft) == false)
+                {
+                    ActivateInteraction(InteractionType.Craft);
+                    SetInteractionDuration(InteractionType.Craft, TargetCraftingRecipe.Time); // TODO: convert to TimeInHours
+                }
+            }
+            else
+            {
+                if (IsInteractionActivated(InteractionType.Craft))
+                {
+                    DeactivateInteraction(InteractionType.Craft);
+                }
+            }
 
             if (Crafter.IsAutocrafter && CanCraft && IsPrepared)
             {
@@ -85,6 +131,34 @@ namespace Technolithic
             }
         }
 
+        public override void CompleteInteraction(InteractionType interactionType)
+        {
+            base.CompleteInteraction(interactionType);
+
+            switch(interactionType)
+            {
+                case InteractionType.Craft:
+                    {
+                        CraftItem();
+                    }
+                    break;
+            }
+        }
+
+        public override void ProcessInteraction(InteractionType interactionType, CreatureCmp creature)
+        {
+            base.ProcessInteraction(interactionType, creature);
+
+            switch(interactionType)
+            {
+                case InteractionType.Craft:
+                    {
+                        CurrentCraftingProgress = (int)GetInteractionProgress(interactionType);
+                    }
+                    break;
+            }
+        }
+
         public CraftingState ProcessCraft(CreatureCmp creatureCmp)
         {
             isCrafting = true;
@@ -94,7 +168,7 @@ namespace Technolithic
 
             if (CurrentCraftingProgress >= TargetCraftingRecipe.Time)
             {
-                CraftItem(creatureCmp);
+                CraftItem();
 
                 isCrafting = false;
                 IsPrepared = false;
@@ -132,7 +206,7 @@ namespace Technolithic
             }
         }
 
-        public void CraftItem(CreatureCmp creatureCmp)
+        public void CraftItem()
         {
             if (TargetCraftingRecipe.MainItem == ItemDatabase.GetItemByName("knowledge_points"))
             {
@@ -481,9 +555,20 @@ namespace Technolithic
         {
             base.CompleteBuilding();
 
+            if(Crafter.IsAutocrafter)
+            {
+
+            }
+            else
+            {
+                AddAvailableInteraction(InteractionType.Craft, Crafter.LaborType, false);
+
+                MarkInteraction(InteractionType.Craft);
+            }
+
             if (Crafter.IsAutocrafter == false)
             {
-                GameplayScene.WorldManager.CrafterBuildings[Crafter.LaborType].Add(this);
+                GameplayScene.WorldManager.ManualCrafters.Add(this);
             }
             else
             {
@@ -515,7 +600,7 @@ namespace Technolithic
 
             if (Crafter.IsAutocrafter == false)
             {
-                GameplayScene.WorldManager.CrafterBuildings[Crafter.LaborType].Remove(this);
+                GameplayScene.WorldManager.ManualCrafters.Remove(this);
             }
             else
             {

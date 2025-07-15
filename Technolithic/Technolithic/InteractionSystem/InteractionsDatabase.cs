@@ -16,14 +16,12 @@ namespace Technolithic
         GatherWood,
         Mine,
         AutoCleanPen,
-        ProduceEnergy
+        ProduceEnergy,
+        Craft
     }
 
     public class InteractionsDatabase
     {
-
-        private Dictionary<LaborType, List<InteractionData>> laborInteractionsDict = new();
-
         private List<InteractionData> allInteractions = new();
         private Dictionary<InteractionType, InteractionData> interactionTypeDataDict = new();
 
@@ -33,79 +31,85 @@ namespace Technolithic
         {
             AddInteractionData(new InteractionData(
                 InteractionType.Chop,
-                LaborType.Chop,
                 Localization.GetLocalizedText("chop"),
                 ResourceManager.ChopIcon,
                 Color.Orange,
                 InteractionIconDisplayState.OnMarked));
 
-            AddInteractionData(new InteractionData(InteractionType.EmptyFishTrap,
-                LaborType.Fish,
+            AddInteractionData(new InteractionData(
+                InteractionType.EmptyFishTrap,
                 Localization.GetLocalizedText("automatically_empty_the_trap"),
                 ResourceManager.EmptyFishTrapIcon,
                 Color.Orange,
                 InteractionIconDisplayState.OnMarked));
 
-            AddInteractionData(new InteractionData(InteractionType.Destruct,
-                LaborType.Build,
+            AddInteractionData(new InteractionData(
+                InteractionType.Destruct,
                 Localization.GetLocalizedText("destruct"),
                 ResourceManager.DestructIcon,
                 Color.Red,
                 InteractionIconDisplayState.OnMarked));
 
-            AddInteractionData(new InteractionData(InteractionType.CollectWildHoney,
-                LaborType.Gathering,
+            AddInteractionData(new InteractionData(
+                InteractionType.CollectWildHoney,
                 Localization.GetLocalizedText("auto_collect_wild_honey"),
                 ResourceManager.CollectHoneyIcon,
                 Color.Orange,
                 InteractionIconDisplayState.OnMarked));
 
-            AddInteractionData(new InteractionData(InteractionType.CollectHoney,
-                LaborType.Beekeeping,
+            AddInteractionData(new InteractionData(
+                InteractionType.CollectHoney,
                 Localization.GetLocalizedText("auto_collect_honey"),
                 ResourceManager.CollectHoneyIcon,
                 Color.Orange,
                 InteractionIconDisplayState.OnMarked));
 
-            AddInteractionData(new InteractionData(InteractionType.CatchFish,
-                LaborType.Fish,
+            AddInteractionData(new InteractionData(
+                InteractionType.CatchFish,
                 Localization.GetLocalizedText("catch_fish"),
                 ResourceManager.CatchFishIcon,
                 Color.Orange, 
                 InteractionIconDisplayState.OnUnmarked));
 
-            AddInteractionData(new InteractionData(InteractionType.GatherWood,
-                LaborType.Gathering,
+            AddInteractionData(new InteractionData(
+                InteractionType.GatherWood,
                 Localization.GetLocalizedText("gather_wood"),
                 ResourceManager.GatherWoodIcon,
                 Color.Orange,
                 InteractionIconDisplayState.OnMarked));
 
-            AddInteractionData(new InteractionData(InteractionType.GatherStone,
-                LaborType.Gathering,
+            AddInteractionData(new InteractionData(
+                InteractionType.GatherStone,
                 Localization.GetLocalizedText("gather_stone"),
                 ResourceManager.GatherStoneIcon,
                 Color.Orange,
                 InteractionIconDisplayState.OnMarked));
 
-            AddInteractionData(new InteractionData(InteractionType.Mine,
-                LaborType.Mining,
+            AddInteractionData(new InteractionData(
+                InteractionType.Mine,
                 Localization.GetLocalizedText("mine"),
                 ResourceManager.MineIcon,
                 Color.Orange,
                 InteractionIconDisplayState.OnMarked));
 
-            AddInteractionData(new InteractionData(InteractionType.AutoCleanPen,
-                LaborType.Ranching,
+            AddInteractionData(new InteractionData(
+                InteractionType.AutoCleanPen,
                 Localization.GetLocalizedText("auto_clean_pen"),
                 ResourceManager.CleanUpIcon,
                 Color.Orange,
                 InteractionIconDisplayState.OnMarked));
 
-            AddInteractionData(new InteractionData(InteractionType.ProduceEnergy,
-                LaborType.EnergyProduction,
+            AddInteractionData(new InteractionData(
+                InteractionType.ProduceEnergy,
                 Localization.GetLocalizedText("produce_energy"),
                 ResourceManager.ProduceEnergyIcon,
+                Color.Orange,
+                InteractionIconDisplayState.OnUnmarked));
+
+            AddInteractionData(new InteractionData(
+                InteractionType.Craft,
+                Localization.GetLocalizedText("craft_an_item"),
+                ResourceManager.CraftIcon,
                 Color.Orange,
                 InteractionIconDisplayState.OnUnmarked));
         }
@@ -114,32 +118,9 @@ namespace Technolithic
         {
             Debug.Assert(interactionData != null);
 
-            LaborType laborType = interactionData.LaborType;
-            if (laborInteractionsDict.ContainsKey(laborType) == false)
-            {
-                laborInteractionsDict.Add(laborType, new List<InteractionData>());
-            }
-
-            laborInteractionsDict[laborType].Add(interactionData);
-
             allInteractions.Add(interactionData);
 
             interactionTypeDataDict.Add(interactionData.InteractionType, interactionData);
-        }
-
-        public IReadOnlyList<InteractionData> GetLaborInteractions(LaborType laborType)
-        {
-            Debug.Assert(laborInteractionsDict.ContainsKey(laborType));
-
-            return laborInteractionsDict[laborType];
-        }
-    
-        public IEnumerable<LaborType> GetInvolvedTypesOfLabor()
-        {
-            foreach(LaborType laborType in laborInteractionsDict.Keys)
-            {
-                yield return laborType;
-            }
         }
 
         public InteractionData GetInteractionData(InteractionType interactionType)

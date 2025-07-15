@@ -13,7 +13,7 @@
   "movementSpeed": 50,
   "constructionTime": 25,
   "crafter": {
-    "laborType": "Craft",
+    "laborType": "Metallurgy",
     "autocrafter": false,
     "recipes": [
       {

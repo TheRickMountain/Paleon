@@ -9,6 +9,8 @@ namespace Technolithic
         private InteractionType _interactionType;
         private bool _isEndless;
 
+        private bool _isInteractionStarted = false;
+
         public InteractTask(CreatureCmp creatureCmp, Interactable interactable, InteractionData interactionData) 
             : base(creatureCmp)
         {
@@ -52,6 +54,13 @@ namespace Technolithic
             {
                 case MovementState.Success:
                     {
+                        if (_isInteractionStarted == false)
+                        {
+                            _isInteractionStarted = true;
+
+                            _interactable.OnInteractionStarted(_interactionType, Owner);
+                        }
+
                         if (_isEndless)
                         {
                             _interactable.ProcessInteraction(_interactionType, Owner);
@@ -116,6 +125,8 @@ namespace Technolithic
             _interactable.Unreserve();
 
             Owner.CreatureEquipment.ToolItemContainer = null;
+
+            _interactable.OnInteractionEnded(_interactionType, Owner);
         }
 
         public override void Cancel()
@@ -129,6 +140,8 @@ namespace Technolithic
             _interactable.Unreserve();
 
             Owner.CreatureEquipment.ToolItemContainer = null;
+
+            _interactable.OnInteractionEnded(_interactionType, Owner);
         }
 
         private bool IsTaskValid()

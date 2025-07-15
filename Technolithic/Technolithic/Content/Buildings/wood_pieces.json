@@ -13,6 +13,7 @@
   "movementSpeed": 50,
   "constructionTime": 1,
   "DepositData": {
+    "LaborType": "Gathering",
     "InteractionType": "GatherWood",
     "InteractionDurationInHours": 0.8,
     "ToolRequired": false,

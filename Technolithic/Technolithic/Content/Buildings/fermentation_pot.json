@@ -13,7 +13,7 @@
   "movementSpeed": 50,
   "constructionTime": 10,
   "crafter": {
-    "laborType": "Craft",
+    "laborType": "Cook",
     "autocrafter": true,
     "recipes": [
       {

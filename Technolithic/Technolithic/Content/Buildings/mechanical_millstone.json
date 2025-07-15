@@ -4,7 +4,7 @@
   "width": 2,
   "height": 2,
   "type": "Crafter",
-  "category": "Production",
+  "category": "Food",
   "animated": true,
   "rotatable": false,
   "cloneable": true,
@@ -17,7 +17,7 @@
     "EnergyType": "Kinetic"
   },
   "crafter": {
-    "laborType": "Craft",
+    "laborType": "Cook",
     "autocrafter": true,
     "recipes": [
       {

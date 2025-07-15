@@ -1,15 +1,25 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Technolithic
 {
     public abstract class Interactable : Component
     {
+        public const int MIN_PRIORITY = 1;
+        public const int MAX_PRIORITY = 9;
+        public const int DEFAULT_PRIORITY = 5;
+
         private InteractionHandler _interactionHandler;
 
         private InteractablesManager _interactablesManager;
 
         private bool _isReserved = false;
         private bool _isDestroyed = false;
+
+        private Dictionary<InteractionType, LaborType> _interactionLaborMap = new();
+
+        // TODO: при смене приоритета нужно уведомить об этом _interactablesManager
+        public int Priority { get; private set; } = DEFAULT_PRIORITY;
 
         public IReadOnlySet<InteractionType> AvailableInteractions => _interactionHandler.AvailableInteractions;
 
@@ -23,11 +33,26 @@ namespace Technolithic
             _interactablesManager = interactablesManager;
         }
 
-        protected void AddAvailableInteraction(InteractionType interactionType, bool toolRequired)
+        protected void AddAvailableInteraction(InteractionType interactionType, LaborType associatedLaborType, bool toolRequired)
         {
             if (_isDestroyed) return;
 
+            Debug.Assert(_interactionLaborMap.ContainsKey(interactionType) == false,
+                "The interaction type is already associated with another labor type");
+
+            _interactionLaborMap.Add(interactionType, associatedLaborType);
+
             _interactionHandler.AddAvailableInteraction(interactionType, toolRequired);
+        }
+
+        public LaborType GetAssociatedLaborType(InteractionType interactionType)
+        {
+            if (_interactionLaborMap.ContainsKey(interactionType) == false)
+            {
+                return LaborType.None;
+            }
+
+            return _interactionLaborMap[interactionType];
         }
 
         public bool DoesInteractionRequireTool(InteractionType interactionType)
@@ -50,7 +75,9 @@ namespace Technolithic
 
             if (IsInteractionMarked(interactionType) == false) return;
 
-            _interactablesManager?.AddInteractable(interactionType, this);
+            LaborType associatedLaborType = _interactionLaborMap[interactionType];
+
+            _interactablesManager?.AddInteractable(this, associatedLaborType, interactionType);
         }
 
         protected void DeactivateInteraction(InteractionType interactionType)
@@ -61,7 +88,9 @@ namespace Technolithic
 
             if (ShouldRemoveFromManager(interactionType) == false) return;
 
-            _interactablesManager.RemoveInteractable(interactionType, this);
+            LaborType associatedLaborType = _interactionLaborMap[interactionType];
+
+            _interactablesManager.RemoveInteractable(this, associatedLaborType, interactionType);
         }
 
         public bool IsInteractionMarked(InteractionType interactionType)
@@ -80,7 +109,9 @@ namespace Technolithic
 
             if (_interactionHandler.IsInteractionActivated(interactionType) == false) return;
 
-            _interactablesManager?.AddInteractable(interactionType, this);
+            LaborType associatedLaborType = _interactionLaborMap[interactionType];
+
+            _interactablesManager?.AddInteractable(this, associatedLaborType, interactionType);
         }
 
         public void UnmarkInteraction(InteractionType interactionType)
@@ -91,7 +122,9 @@ namespace Technolithic
 
             if (ShouldRemoveFromManager(interactionType) == false) return;
 
-            _interactablesManager.RemoveInteractable(interactionType, this);
+            LaborType associatedLaborType = _interactionLaborMap[interactionType];
+
+            _interactablesManager.RemoveInteractable(this, associatedLaborType, interactionType);
         }
 
         public float GetInteractionDuration(InteractionType interactionType)
@@ -139,9 +172,13 @@ namespace Technolithic
             SetInteractionProgress(interactionType, 0);
         }
 
+        public virtual void OnInteractionStarted(InteractionType interactionType, CreatureCmp creature) { }
+
         public virtual void CompleteInteraction(InteractionType interactionType) { }
 
         public virtual void ProcessInteraction(InteractionType interactionType, CreatureCmp creature) { }
+
+        public virtual void OnInteractionEnded(InteractionType interactionType, CreatureCmp creature) { }
 
         public void Reserve()
         {
@@ -151,7 +188,9 @@ namespace Technolithic
 
             foreach(InteractionType interactionType in _interactionHandler.AvailableInteractions)
             {
-                _interactablesManager.RemoveInteractable(interactionType, this);
+                LaborType associatedLaborType = _interactionLaborMap[interactionType];
+
+                _interactablesManager.RemoveInteractable(this, associatedLaborType, interactionType);
             }
         }
 
@@ -166,7 +205,9 @@ namespace Technolithic
                 if(_interactionHandler.IsInteractionMarked(interactionType) && 
                     _interactionHandler.IsInteractionActivated(interactionType))
                 {
-                    _interactablesManager.AddInteractable(interactionType, this);
+                    LaborType associatedLaborType = _interactionLaborMap[interactionType];
+
+                    _interactablesManager?.AddInteractable(this, associatedLaborType, interactionType);
                 }
             }
         }
@@ -176,6 +217,8 @@ namespace Technolithic
         public abstract Tile GetApproachableTile();
 
         public abstract Tile GetApproachableTile(int zoneId);
+
+        public abstract IEnumerable<Tile> GetApproachableTiles();
 
         public void Destroy()
         {
@@ -187,7 +230,9 @@ namespace Technolithic
 
                 DeactivateInteraction(interactionType);
 
-                _interactablesManager.RemoveInteractable(interactionType, this);
+                LaborType associatedLaborType = _interactionLaborMap[interactionType];
+
+                _interactablesManager.RemoveInteractable(this, associatedLaborType, interactionType);
             }
 
             _isDestroyed = true;

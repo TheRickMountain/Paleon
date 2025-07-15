@@ -88,12 +88,12 @@ namespace Technolithic
             // TODO: время сбора нужно загрузить из json файла
             if(BuildingTemplate.BeeHiveData.IsWild)
             {
-                AddAvailableInteraction(InteractionType.CollectWildHoney, false);
+                AddAvailableInteraction(InteractionType.CollectWildHoney, LaborType.Gathering, false);
                 SetInteractionDuration(InteractionType.CollectWildHoney, 5.0f);
             }
             else
             {
-                AddAvailableInteraction(InteractionType.CollectHoney, false);
+                AddAvailableInteraction(InteractionType.CollectHoney, LaborType.Beekeeping, false);
                 SetInteractionDuration(InteractionType.CollectHoney, 5.0f);
 
                 MarkInteraction(InteractionType.CollectHoney);

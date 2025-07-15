@@ -50,7 +50,7 @@
 
             DepositData depositData = BuildingTemplate.DepositData;
 
-            AddAvailableInteraction(depositData.InteractionType, depositData.ToolRequired);
+            AddAvailableInteraction(depositData.InteractionType, depositData.LaborType, depositData.ToolRequired);
             SetInteractionDuration(depositData.InteractionType, depositData.InteractionDurationInHours * WorldState.MINUTES_PER_HOUR);
 
             ActivateInteraction(depositData.InteractionType);

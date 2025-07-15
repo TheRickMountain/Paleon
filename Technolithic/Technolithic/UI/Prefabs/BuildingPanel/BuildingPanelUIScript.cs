@@ -31,7 +31,7 @@ namespace Technolithic
             CreateCategoryButtons(BuildingCategory.Agriculture, Localization.GetLocalizedText("agriculture"), ResourceManager.AgricultureIcon);
             CreateCategoryButtons(BuildingCategory.Metallurgy, Localization.GetLocalizedText("metallurgy"), ResourceManager.MetallurgyIcon);
             CreateCategoryButtons(BuildingCategory.Mechanisms, Localization.GetLocalizedText("mechanisms"), ResourceManager.MechanismIcon);
-            CreateCategoryButtons(BuildingCategory.Mining, Localization.GetLocalizedText("mining"), ResourceManager.MiningIcon);
+            CreateCategoryButtons(BuildingCategory.Mining, Localization.GetLocalizedText("mining_labor"), ResourceManager.MiningIcon);
             CreateCategoryButtons(BuildingCategory.Knowledge, Localization.GetLocalizedText("knowledge"), ResourceManager.LampIcon);
             CreateCategoryButtons(BuildingCategory.Medicine, Localization.GetLocalizedText("medicine"), ResourceManager.MedicineIcon);
 

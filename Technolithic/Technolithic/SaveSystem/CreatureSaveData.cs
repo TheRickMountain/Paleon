@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Technolithic
 {
-    public class CreatureSaveData
+    public class CreatureSaveData : InteractableSaveData
     {
 
         public Guid Id { get; set; }
@@ -49,7 +49,6 @@ namespace Technolithic
 
         public bool Hunt { get; set; }
         public bool Domesticate { get; set; }
-        public bool Slaughter { get; set; }
         public bool GatherProduct { get; set; }
 
         public bool WasAttacked { get; set; }

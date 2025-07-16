@@ -9,7 +9,7 @@ namespace Technolithic
 
         private HashSet<int> zoneIdsBuffer = new();
 
-        public InteractablesManager(InteractionsDatabase interactionsDatabase)
+        public InteractablesManager()
         {
             zoneLaborGroupDict = new();
         }

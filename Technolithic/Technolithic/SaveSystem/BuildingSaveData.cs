@@ -1,18 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Technolithic
 {
-    public class BuildingSaveData
+    public class BuildingSaveData : InteractableSaveData
     {
-        public List<InteractionType> MarkedInteractions;
-        public Dictionary<InteractionType, float> InteractionPercentProgressDict;
-
         public string BuildingTemplateName { get; set; }
         public Point[,] Tiles { get; set; }
         public bool IsBuilt { get; set; }

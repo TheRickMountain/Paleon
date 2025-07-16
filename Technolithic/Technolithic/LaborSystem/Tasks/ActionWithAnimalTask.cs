@@ -94,11 +94,6 @@ namespace Technolithic
                                         animal.TryToGatherProduct();
                                     }
                                     break;
-                                case ActionWithAnimal.Slaughtering:
-                                    {
-                                        animal.Die("");
-                                    }
-                                    break;
                             }
 
                             Owner.Slider.Active = false;

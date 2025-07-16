@@ -17,7 +17,8 @@ namespace Technolithic
         Mine,
         AutoCleanPen,
         ProduceEnergy,
-        Craft
+        Craft,
+        Slaughter
     }
 
     public class InteractionsDatabase
@@ -112,6 +113,13 @@ namespace Technolithic
                 ResourceManager.CraftIcon,
                 Color.Orange,
                 InteractionIconDisplayState.OnUnmarked));
+
+            AddInteractionData(new InteractionData(
+                InteractionType.Slaughter,
+                Localization.GetLocalizedText("slaughter"),
+                ResourceManager.SlaughterIcon,
+                Color.Orange,
+                InteractionIconDisplayState.OnMarked));
         }
 
         private void AddInteractionData(InteractionData interactionData)

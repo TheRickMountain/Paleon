@@ -85,6 +85,8 @@ namespace Technolithic
 
         public FrameCounter FrameCounter { get; private set; }
 
+        public static InteractionsDatabase InteractionsDatabase { get; private set; }
+
         private bool resizing = false;
 
         private bool isSteamRunning = false;
@@ -162,6 +164,8 @@ namespace Technolithic
             ImportSeasons();
 
             TechnologyDatabase.Initialize(ContentDirectory);
+
+            InteractionsDatabase = new InteractionsDatabase();
 
             MainMenuScene = new MainMenuScene();
 

@@ -157,7 +157,7 @@ namespace Technolithic
             Price = JObject["Price"].IsNullOrEmpty() ? 0 : JObject["Price"].Value<int>();
         }
 
-        public Entity CreateEntity(int x, int y, int daysUntilAging)
+        public Entity CreateEntity(int daysUntilAging, InteractablesManager interactablesManager)
         {
             Entity entity = new Entity();
 
@@ -194,6 +194,8 @@ namespace Technolithic
             creatureStats.Energy.DissatisfiedThreshold = (20f * creatureStats.Energy.MaxValue) / 100f;
 
             AnimalCmp animalCmp = new AnimalCmp(creatureStats, this);
+            animalCmp.SetInteractablesManager(interactablesManager);
+            animalCmp.Initialize();
 
             animalCmp.DaysUntilAging = daysUntilAging;
 
@@ -209,9 +211,6 @@ namespace Technolithic
                 -(TextureHeight - Engine.TILE_SIZE), 
                 TextureWidth, TextureHeight, SelectableType.Animal));
             entity.Add(new MovementCmp());
-
-            entity.Position.X = x * Engine.TILE_SIZE;
-            entity.Position.Y = y * Engine.TILE_SIZE;
 
             return entity;
         }

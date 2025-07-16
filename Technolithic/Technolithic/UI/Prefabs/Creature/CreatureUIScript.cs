@@ -9,13 +9,12 @@ using System.Threading.Tasks;
 namespace Technolithic
 { 
 
-    public class CreatureUIScript : MScript
+    public class CreatureUIScript : InteractableUIScript
     {
         private CreatureCmp selectedCreature;
 
         private MNode huntButton;
         private MNode domesticateButton;
-        private MNode slaughterButton;
         private MNode gatherProductButton;
         private MNode assignPetButton;
 
@@ -29,13 +28,14 @@ namespace Technolithic
 
         private SmallButton renameButton;
 
-        public CreatureUIScript() : base(true)
+        public CreatureUIScript()
         {
 
         }
 
         public override void Awake()
         {
+            
         }
 
         public override void Begin()
@@ -56,10 +56,6 @@ namespace Technolithic
 
             domesticateButton = new BigButton(ParentNode.Scene, ResourceManager.DomesticateIcon, true);
             domesticateButton.GetComponent<ButtonScript>().AddOnClickedCallback(Domesticate);
-
-            slaughterButton = new BigButton(ParentNode.Scene, ResourceManager.SlaughterIcon, true);
-            slaughterButton.Tooltips = Localization.GetLocalizedText("slaughter");
-            slaughterButton.GetComponent<ButtonScript>().AddOnClickedCallback(Slaughter);
 
             gatherProductButton = new BigButton(ParentNode.Scene, RenderManager.Pixel, true);
             gatherProductButton.GetComponent<ButtonScript>().AddOnClickedCallback(GatherProduct);
@@ -149,12 +145,6 @@ namespace Technolithic
                     buttonsListView.AddItem(huntButton);
                 }
 
-                if (animal.CanSlaughter)
-                {
-                    slaughterButton.GetComponent<ButtonScript>().IsSelected = animal.Slaughter;
-                    buttonsListView.AddItem(slaughterButton);
-                }
-
                 if (animal.CanGatherProduct)
                 {
                     Item product = animal.AnimalTemplate.AnimalProduct.Product;
@@ -169,6 +159,8 @@ namespace Technolithic
             {
                 buttonsListView.AddItem(assignPetButton);
             }
+
+            SetInteractable(creature);
         }
 
         private void Hunt(bool value, ButtonScript script)
@@ -180,12 +172,6 @@ namespace Technolithic
             {
                 domesticateButton.GetComponent<ButtonScript>().IsSelected = false;
             }
-        }
-
-        private void Slaughter(bool value, ButtonScript script)
-        {
-            AnimalCmp animal = selectedCreature as AnimalCmp;
-            animal.Slaughter = value;
         }
 
         private void Domesticate(bool value, ButtonScript script)

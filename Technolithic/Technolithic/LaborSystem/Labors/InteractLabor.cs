@@ -5,13 +5,10 @@ namespace Technolithic
 {
     public class InteractLabor : Labor
     {
-        private InteractionsDatabase _intearactionsDatabase;
         private InteractablesManager _interactablesManager;
 
-        public InteractLabor(LaborType laborType, InteractionsDatabase intearactionsDatabase, 
-            InteractablesManager interactablesManager) : base(laborType)
+        public InteractLabor(LaborType laborType, InteractablesManager interactablesManager) : base(laborType)
         {
-            _intearactionsDatabase = intearactionsDatabase;
             _interactablesManager = interactablesManager;
         }
 
@@ -45,7 +42,7 @@ namespace Technolithic
                     }
                 }
 
-                InteractionData interactionData = _intearactionsDatabase.GetInteractionData(interactionType);
+                InteractionData interactionData = Engine.InteractionsDatabase.GetInteractionData(interactionType);
 
                 InteractTask interactTask = new InteractTask(creature, interactable, interactionData);
                 AddTask(creature, interactTask);

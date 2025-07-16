@@ -649,6 +649,8 @@ namespace Technolithic
 
         public virtual void Die(string reasonMessage, bool throwLoot = true)
         {
+            Destroy();
+
             IsDead = true;
 
             // Если существо находилось в здании, то выйти оттуда
@@ -770,6 +772,8 @@ namespace Technolithic
         public virtual CreatureSaveData GetSaveData()
         {
             CreatureSaveData creatureSaveData = new CreatureSaveData();
+
+            FillSaveData(creatureSaveData);
 
             creatureSaveData.Tools = new List<Tuple<int, int, float>>();
 

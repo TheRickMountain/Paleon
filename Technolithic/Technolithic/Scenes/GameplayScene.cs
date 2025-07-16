@@ -80,12 +80,8 @@ namespace Technolithic
         private float backgroundSongPauseTimer = 0;
         private int pauseBetweenBackgroundSongs = 600;
 
-        private InteractionsDatabase interactionsDatabase;
-
         public GameplayScene(string saveFileName, int worldSize, string worldName)
         {
-            interactionsDatabase = new InteractionsDatabase();
-
             MediaPlayer.Stop();
             MediaPlayer.IsMuted = false;
 
@@ -136,7 +132,7 @@ namespace Technolithic
             {
                 ProgressTree = new ProgressTree(null);
 
-                WorldManager = new WorldManager(null, interactionsDatabase, ProgressTree);
+                WorldManager = new WorldManager(null, ProgressTree);
                 WorldManager.Begin();
 
                 AchievementManager = new AchievementManager(null);
@@ -217,7 +213,7 @@ namespace Technolithic
 
                 ProgressTree = new ProgressTree(saveManager.Data.ProgressTreeSaveData);
 
-                WorldManager = new WorldManager(saveManager.Data.WorldManagerSaveData, interactionsDatabase, ProgressTree);
+                WorldManager = new WorldManager(saveManager.Data.WorldManagerSaveData, ProgressTree);
                 WorldManager.Begin();
 
                 AchievementManager = new AchievementManager(saveManager.Data.UnlockedAchievements);
@@ -520,6 +516,8 @@ namespace Technolithic
                             buildingCmp.SetInteractionProgressPercent(interactionType, percentProgress);
                         }
                     }
+
+                    buildingCmp.Priority = buildingSaveData.Priority;
                 }
 
                 Dictionary<Guid, CreatureCmp> creaturesById = new Dictionary<Guid, CreatureCmp>();
@@ -528,6 +526,8 @@ namespace Technolithic
 
                 foreach (var creatureSaveData in saveManager.Data.CreatureSaveDatas)
                 {
+                    CreatureCmp creature = null;
+
                     switch (creatureSaveData.CreatureType)
                     {
                         case CreatureType.Settler:
@@ -537,6 +537,7 @@ namespace Technolithic
 
                                 Settler settlerEntity = SpawnSettler(creatureSaveData.X, creatureSaveData.Y, settlerInfo);
                                 SettlerCmp settlerCmp = settlerEntity.Get<SettlerCmp>();
+                                creature = settlerCmp;
                                 settlerCmp.Id = creatureSaveData.Id;
                                 if(settlerCmp.Id == Guid.Empty)
                                 {
@@ -642,6 +643,7 @@ namespace Technolithic
                             {
                                 AnimalTemplate animalTemplate = AnimalTemplateDatabase.GetAnimalTemplateByName(creatureSaveData.AnimalTemplateName);
                                 AnimalCmp animalCmp = SpawnAnimal(creatureSaveData.X, creatureSaveData.Y, animalTemplate, creatureSaveData.DaysUntilAging);
+                                creature = animalCmp;
                                 animalCmp.Name = creatureSaveData.Name;
                                 animalCmp.Id = creatureSaveData.Id;
                                 if (animalCmp.Id == Guid.Empty)
@@ -730,7 +732,6 @@ namespace Technolithic
 
                                 animalCmp.Hunt = creatureSaveData.Hunt;
                                 animalCmp.Domesticate = creatureSaveData.Domesticate;
-                                animalCmp.Slaughter = creatureSaveData.Slaughter;
                                 animalCmp.GatherProduct = creatureSaveData.GatherProduct;
 
                                 if (creatureSaveData.StatusEffects != null)
@@ -747,6 +748,40 @@ namespace Technolithic
                             break;
                     }
 
+                    if(creature != null)
+                    {
+                        if (creatureSaveData.MarkedInteractions != null)
+                        {
+                            foreach (InteractionType interactionType in creature.AvailableInteractions)
+                            {
+                                if (creatureSaveData.MarkedInteractions.Contains(interactionType))
+                                {
+                                    creature.MarkInteraction(interactionType);
+                                }
+                                else
+                                {
+                                    creature.UnmarkInteraction(interactionType);
+                                }
+                            }
+                        }
+
+                        if (creatureSaveData.InteractionPercentProgressDict != null)
+                        {
+                            foreach (InteractionType interactionType in creature.AvailableInteractions)
+                            {
+                                float percentProgress = 0.0f;
+
+                                if (creatureSaveData.InteractionPercentProgressDict.ContainsKey(interactionType))
+                                {
+                                    percentProgress = creatureSaveData.InteractionPercentProgressDict[interactionType];
+                                }
+
+                                creature.SetInteractionProgressPercent(interactionType, percentProgress);
+                            }
+                        }
+
+                        creature.Priority = creatureSaveData.Priority;
+                    }
                 }
 
                 int tilemapHalf = (WorldSize * Engine.TILE_SIZE) / 2;
@@ -1242,34 +1277,16 @@ namespace Technolithic
                 Interactable interactable = entity.Get<Interactable>();
                 if(interactable != null)
                 {
-                    foreach(InteractionType interactionType in interactable.AvailableInteractions)
-                    {
-                        InteractionData interactionData = interactionsDatabase.GetInteractionData(interactionType);
+                    RenderInteractableMarks(interactable);
+                }
+            }
 
-                        if (interactionData == null) continue;
-
-                        switch (interactionData.IconDisplayState)
-                        {
-                            case InteractionIconDisplayState.OnMarked:
-                                {
-                                    if (interactable.IsInteractionActivated(interactionType) && 
-                                        interactable.IsInteractionMarked(interactionType))
-                                    {
-                                        interactionData.Icon?.Draw(entity.Position, Color.White * 0.75f);
-                                    }
-                                }
-                                break;
-                            case InteractionIconDisplayState.OnUnmarked:
-                                {
-                                    if (interactable.IsInteractionMarked(interactionType) == false)
-                                    {
-                                        interactionData.Icon?.Draw(entity.Position, Color.White * 0.75f);
-                                        ResourceManager.DisableIcon.Draw(entity.Position, Color.White * 0.75f);
-                                    }
-                                }
-                                break;
-                        }
-                    }
+            foreach (Entity entity in CreatureLayer.Entities)
+            {
+                Interactable interactable = entity.Get<Interactable>();
+                if (interactable != null)
+                {
+                    RenderInteractableMarks(interactable);
                 }
             }
 
@@ -1289,14 +1306,41 @@ namespace Technolithic
             RenderManager.SpriteBatch.End();
         }
 
-        public void AddEntity(Entity entity)
+        private void RenderInteractableMarks(Interactable interactable)
         {
-            entityLayer.Add(entity);
+            Entity entity = interactable.Entity;
+            foreach (InteractionType interactionType in interactable.AvailableInteractions)
+            {
+                InteractionData interactionData = Engine.InteractionsDatabase.GetInteractionData(interactionType);
+
+                if (interactionData == null) continue;
+
+                switch (interactionData.IconDisplayState)
+                {
+                    case InteractionIconDisplayState.OnMarked:
+                        {
+                            if (interactable.IsInteractionActivated(interactionType) &&
+                                interactable.IsInteractionMarked(interactionType))
+                            {
+                                interactionData.Icon?.Draw(entity.Position, Color.White * 0.75f);
+                            }
+                        }
+                        break;
+                    case InteractionIconDisplayState.OnUnmarked:
+                        {
+                            if (interactable.IsInteractionMarked(interactionType) == false)
+                            {
+                                interactionData.Icon?.Draw(entity.Position, Color.White * 0.75f);
+                                ResourceManager.DisableIcon.Draw(entity.Position, Color.White * 0.75f);
+                            }
+                        }
+                        break;
+                }
+            }
         }
 
-        public void AddEntity(Entity entity, Tile tile)
+        public void AddEntity(Entity entity)
         {
-            tile.Entity = entity;
             entityLayer.Add(entity);
         }
 
@@ -1351,9 +1395,8 @@ namespace Technolithic
 
         public AnimalCmp SpawnAnimal(int tileX, int tileY, AnimalTemplate animalTemplate, int daysUntilAging)
         {
-            Entity animal = animalTemplate.CreateEntity(tileX, tileY, daysUntilAging);
+            Entity animal = WorldManager.SpawnAnimal(animalTemplate, tileX, tileY, daysUntilAging);
 
-            WorldManager.AddCreature(animal.Get<AnimalCmp>());
             CreatureLayer.Add(animal);
 
             return animal.Get<AnimalCmp>();

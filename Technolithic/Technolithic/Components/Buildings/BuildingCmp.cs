@@ -935,22 +935,7 @@ namespace Technolithic
         {
             BuildingSaveData buildingSaveData = new BuildingSaveData();
 
-            // TODO: Interactable needs its own method for getting saves
-            buildingSaveData.MarkedInteractions = new List<InteractionType>();
-            buildingSaveData.InteractionPercentProgressDict = new Dictionary<InteractionType, float>();
-            foreach(InteractionType interactionType in AvailableInteractions)
-            {
-                if(IsInteractionMarked(interactionType))
-                {
-                    buildingSaveData.MarkedInteractions.Add(interactionType);
-                }
-
-                float interactionProgress = GetInteractionProgressPercent(interactionType);
-                if (interactionProgress > 0)
-                {
-                    buildingSaveData.InteractionPercentProgressDict.Add(interactionType, interactionProgress);
-                }
-            }
+            FillSaveData(buildingSaveData);
 
             buildingSaveData.BuildingTemplateName = BuildingTemplate.Json;
             buildingSaveData.BuildingProgress = ConstructionProgress;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Technolithic
@@ -18,8 +19,21 @@ namespace Technolithic
 
         private Dictionary<InteractionType, LaborType> _interactionLaborMap = new();
 
-        // TODO: при смене приоритета нужно уведомить об этом _interactablesManager
-        public int Priority { get; private set; } = DEFAULT_PRIORITY;
+        private int _priority = DEFAULT_PRIORITY;
+        public int Priority 
+        {
+            get => _priority;
+            set
+            {
+                int newPriority = MathHelper.Clamp(value, MIN_PRIORITY, MAX_PRIORITY);
+
+                if (_priority == newPriority) return;
+
+                _priority = newPriority;
+
+                // TODO: resort entities in _interactablesManager
+            }
+        }
 
         public IReadOnlySet<InteractionType> AvailableInteractions => _interactionHandler.AvailableInteractions;
 
@@ -77,7 +91,7 @@ namespace Technolithic
 
             LaborType associatedLaborType = _interactionLaborMap[interactionType];
 
-            _interactablesManager?.AddInteractable(this, associatedLaborType, interactionType);
+            _interactablesManager.AddInteractable(this, associatedLaborType, interactionType);
         }
 
         protected void DeactivateInteraction(InteractionType interactionType)
@@ -111,7 +125,7 @@ namespace Technolithic
 
             LaborType associatedLaborType = _interactionLaborMap[interactionType];
 
-            _interactablesManager?.AddInteractable(this, associatedLaborType, interactionType);
+            _interactablesManager.AddInteractable(this, associatedLaborType, interactionType);
         }
 
         public void UnmarkInteraction(InteractionType interactionType)
@@ -207,7 +221,7 @@ namespace Technolithic
                 {
                     LaborType associatedLaborType = _interactionLaborMap[interactionType];
 
-                    _interactablesManager?.AddInteractable(this, associatedLaborType, interactionType);
+                    _interactablesManager.AddInteractable(this, associatedLaborType, interactionType);
                 }
             }
         }
@@ -279,5 +293,25 @@ namespace Technolithic
         }
 
         #endregion
+
+        public void FillSaveData(InteractableSaveData saveData)
+        {
+            saveData.MarkedInteractions = new List<InteractionType>();
+            saveData.InteractionPercentProgressDict = new Dictionary<InteractionType, float>();
+            saveData.Priority = Priority;
+            foreach (InteractionType interactionType in AvailableInteractions)
+            {
+                if (IsInteractionMarked(interactionType))
+                {
+                    saveData.MarkedInteractions.Add(interactionType);
+                }
+
+                float interactionProgress = GetInteractionProgressPercent(interactionType);
+                if (interactionProgress > 0)
+                {
+                    saveData.InteractionPercentProgressDict.Add(interactionType, interactionProgress);
+                }
+            }
+        }
     }
 }

@@ -57,7 +57,6 @@ namespace Technolithic
         public int TotalSettlersCount { get; private set; } = 0;
 
         public int WildAnimalsNumber { get; set; } = 0;
-        public int DomesticatedAnimalsNumber { get; set; } = 0;
 
 
         public List<Item> SettlerBeverageRation = new List<Item>();
@@ -93,24 +92,21 @@ namespace Technolithic
         private Queue<SelectableCmp> selectablesQueue = new Queue<SelectableCmp>();
 
         private InteractablesManager interactablesManager;
-        private InteractionsDatabase interactionsDatabase;
         private ProgressTree progressTree;
 
-        public WorldManager(WorldManagerSaveData saveData, InteractionsDatabase interactionsDatabase, ProgressTree progressTree)
+        public WorldManager(WorldManagerSaveData saveData, ProgressTree progressTree)
         {
             ItemsDecayer = new ItemsDecayer();
             StorageManager = new StorageManager();
             LaborManager = new LaborManager();
             buildingManager = new BuildingManager();
-            this.interactionsDatabase = interactionsDatabase;
             this.progressTree = progressTree;
             
-            interactablesManager = new InteractablesManager(interactionsDatabase);
+            interactablesManager = new InteractablesManager();
             
             foreach(LaborType laborType in Labor.GetWorkLaborEnumerator())
             {
-                InteractLabor interactLabor = new InteractLabor(laborType,
-                    interactionsDatabase, interactablesManager);
+                InteractLabor interactLabor = new InteractLabor(laborType, interactablesManager);
                 interactLabor.Repeat = true;
                 interactLabor.IsMultiCreatureLabor = true;
                 LaborManager.Add(interactLabor);
@@ -244,6 +240,19 @@ namespace Technolithic
             pickSprite = new AnimatedSprite(16, 16);
             pickSprite.Add("idle", new Animation(ResourceManager.PickAnimation, 8, 0, 16, 16, 0, 0));
             pickSprite.Active = false;
+        }
+
+        public Entity SpawnAnimal(AnimalTemplate animalTemplate, int tileX, int tileY, int daysUntilAging)
+        {
+            Entity entity = animalTemplate.CreateEntity(daysUntilAging, interactablesManager);
+
+            entity.Position.X = tileX * Engine.TILE_SIZE;
+            entity.Position.Y = tileY * Engine.TILE_SIZE;
+
+            CreatureCmp creatureCmp = entity.Get<CreatureCmp>();
+            creatureCmp.OnCreatureDieCallback += RemoveCreature;
+
+            return entity;
         }
 
         public void AddCreature(CreatureCmp creatureCmp)
@@ -839,8 +848,7 @@ namespace Technolithic
                     GameplayScene.UIRootNodeScript.OpenCreatureUI(selectable.Entity.Get<CreatureCmp>());
                     break;
                 case SelectableType.Building:
-                    GameplayScene.UIRootNodeScript.OpenBuildingUI(selectable.Entity.Get<BuildingCmp>(),
-                        interactionsDatabase, progressTree);
+                    GameplayScene.UIRootNodeScript.OpenBuildingUI(selectable.Entity.Get<BuildingCmp>(), progressTree);
                     break;
                 case SelectableType.ItemContainers:
                     GameplayScene.UIRootNodeScript.OpenItemStackUI(GameplayScene.MouseTile);
@@ -1039,51 +1047,44 @@ namespace Technolithic
             {
                 selectedRectangle = Rectangle.Empty;
 
-                Tile[,] tiles = SelectTiles(firstSelectedTile, GameplayScene.MouseTile);
-
-                // TODO: temp (Need to implement a GameAction system like in Paleon Reinvented)
-                for (int x = 0; x < tiles.GetLength(0); x++)
+                List<Tile> selectedTiles = SelectTilesV2(firstSelectedTile, GameplayScene.MouseTile);
+                foreach(Interactable interactable in GetInteractablesOnTiles(selectedTiles))
                 {
-                    for (int y = 0; y < tiles.GetLength(1); y++)
+                    // TODO: temp (Need to implement a GameAction system like in Paleon Reinvented)
+                    switch (action)
                     {
-                        Tile tile = tiles[x, y];
-
-                        if (tile.Entity != null)
-                        {
-                            Interactable interactable = tile.Entity.Get<Interactable>();
-                            if (interactable != null)
+                        case MyAction.Chop:
+                            interactable.MarkInteraction(InteractionType.Chop);
+                            break;
+                        case MyAction.Mine:
+                            interactable.MarkInteraction(InteractionType.Mine);
+                            break;
+                        case MyAction.GatherStone:
+                            interactable.MarkInteraction(InteractionType.GatherStone);
+                            break;
+                        case MyAction.GatherWood:
+                            interactable.MarkInteraction(InteractionType.GatherWood);
+                            break;
+                        case MyAction.Destruct:
+                            interactable.MarkInteraction(InteractionType.Destruct);
+                            break;
+                        case MyAction.Slaughter:
+                            interactable.MarkInteraction(InteractionType.Slaughter);
+                            break;
+                        case MyAction.Cancel:
                             {
-                                switch(action)
-                                {
-                                    case MyAction.Chop:
-                                        interactable.MarkInteraction(InteractionType.Chop);
-                                        break;
-                                    case MyAction.Mine:
-                                        interactable.MarkInteraction(InteractionType.Mine);
-                                        break;
-                                    case MyAction.GatherStone:
-                                        interactable.MarkInteraction(InteractionType.GatherStone);
-                                        break;
-                                    case MyAction.GatherWood:
-                                        interactable.MarkInteraction(InteractionType.GatherWood);
-                                        break;
-                                    case MyAction.Destruct:
-                                        interactable.MarkInteraction(InteractionType.Destruct);
-                                        break;
-                                    case MyAction.Cancel:
-                                        {
-                                            interactable.UnmarkInteraction(InteractionType.Chop);
-                                            interactable.UnmarkInteraction(InteractionType.Mine);
-                                            interactable.UnmarkInteraction(InteractionType.GatherStone);
-                                            interactable.UnmarkInteraction(InteractionType.GatherWood);
-                                            interactable.UnmarkInteraction(InteractionType.Destruct);
-                                        }
-                                        break;
-                                }
+                                interactable.UnmarkInteraction(InteractionType.Chop);
+                                interactable.UnmarkInteraction(InteractionType.Mine);
+                                interactable.UnmarkInteraction(InteractionType.GatherStone);
+                                interactable.UnmarkInteraction(InteractionType.GatherWood);
+                                interactable.UnmarkInteraction(InteractionType.Destruct);
+                                interactable.UnmarkInteraction(InteractionType.Slaughter);
                             }
-                        }
+                            break;
                     }
                 }
+
+                Tile[,] tiles = SelectTiles(firstSelectedTile, GameplayScene.MouseTile);
 
                 switch (action)
                 {
@@ -1172,48 +1173,8 @@ namespace Technolithic
                             }
                         }
                         break;
-                    case MyAction.Slaughter:
-                        {
-                            List<Tile> selectedTiles = new List<Tile>();
-
-                            for (int x = 0; x < tiles.GetLength(0); x++)
-                            {
-                                for (int y = 0; y < tiles.GetLength(1); y++)
-                                {
-                                    Tile tile = tiles[x, y];
-
-                                    selectedTiles.Add(tile);
-                                }
-                            }
-
-                            foreach (var creature in GameplayScene.Instance.CreatureLayer.Entities)
-                            {
-                                AnimalCmp animal = creature.Get<AnimalCmp>();
-                                if (animal != null && animal.IsDomesticated)
-                                {
-                                    Tile animalTile = animal.Movement.CurrentTile;
-                                    if(selectedTiles.Contains(animalTile))
-                                    {
-                                        animal.Slaughter = true;
-                                    }
-                                }
-                            }
-                        }
-                        break;
                     case MyAction.Hunt:
                         {
-                            List<Tile> selectedTiles = new List<Tile>();
-
-                            for (int x = 0; x < tiles.GetLength(0); x++)
-                            {
-                                for (int y = 0; y < tiles.GetLength(1); y++)
-                                {
-                                    Tile tile = tiles[x, y];
-
-                                    selectedTiles.Add(tile);
-                                }
-                            }
-
                             foreach (var creature in GameplayScene.Instance.CreatureLayer.Entities)
                             {
                                 AnimalCmp animal = creature.Get<AnimalCmp>();
@@ -1592,6 +1553,61 @@ namespace Technolithic
                 for (int y = firstY; y < lastY + 1; y++)
                 {
                     tiles[x - firstX, y - firstY] = GameplayScene.Instance.World.GetTileAt(x, y);
+                }
+            }
+
+            return tiles;
+        }
+
+        private IEnumerable<Interactable> GetInteractablesOnTiles(List<Tile> tiles)
+        {
+            foreach (Tile tile in tiles)
+            {
+                if(tile.Entity != null)
+                {
+                    Interactable interactable = tile.Entity.Get<Interactable>();
+                    if(interactable != null)
+                    {
+                        yield return interactable;
+                    }
+                }
+            }
+
+            foreach (Entity entity in GameplayScene.Instance.CreatureLayer.Entities)
+            {
+                Interactable interactable = entity.Get<Interactable>();
+                if (interactable is CreatureCmp creature)
+                {
+                    // TODO: костыль
+                    if (tiles.Contains(creature.Movement.CurrentTile))
+                    {
+                        yield return interactable;
+                    }
+                }
+            }
+        }
+
+        private List<Tile> SelectTilesV2(Tile firstTile, Tile lastTile)
+        {
+            int firstX = firstTile.X;
+            int firstY = firstTile.Y;
+
+            int lastX = lastTile.X;
+            int lastY = lastTile.Y;
+
+            if (firstX > lastX)
+                MathUtils.Replace(ref firstX, ref lastX);
+
+            if (firstY > lastY)
+                MathUtils.Replace(ref firstY, ref lastY);
+
+            List<Tile> tiles = new List<Tile>();
+
+            for (int x = firstX; x < lastX + 1; x++)
+            {
+                for (int y = firstY; y < lastY + 1; y++)
+                {
+                    tiles.Add(GameplayScene.Instance.World.GetTileAt(x, y));
                 }
             }
 

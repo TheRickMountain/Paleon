@@ -11,10 +11,8 @@ namespace Technolithic
     {
         private bool hunt;
         private bool domesticate;
-        private bool slaughter;
         private bool gatherProduct;
 
-        private ActionWithAnimalLabor slaughterLabor;
         private ActionWithAnimalLabor gatherProductLabor;
 
         public AnimalPenBuildingCmp TargetAnimalPen { get; set; }
@@ -92,41 +90,6 @@ namespace Technolithic
             }
         }
 
-        public bool Slaughter
-        {
-            get { return slaughter; }
-            set
-            {
-                if (slaughter == value)
-                    return;
-
-                slaughter = value;
-
-                if (slaughter)
-                {
-                    slaughterLabor = new ActionWithAnimalLabor(LaborType.Ranching, this, ActionWithAnimal.Slaughtering);
-                    GameplayScene.WorldManager.LaborManager.Add(slaughterLabor);
-
-                    if(GatherProduct)
-                        GatherProduct = false;
-
-                    indicator.Active = true;
-                    indicator.Texture = ResourceManager.SlaughterIcon;
-
-                }
-                else
-                {
-                    if (slaughterLabor != null)
-                    {
-                        slaughterLabor.CancelAndClearAllTasksAndComplete();
-                        slaughterLabor = null;
-                    }
-
-                    indicator.Active = false;
-                }
-            }
-        }
-
         public bool GatherProduct
         {
             get { return gatherProduct; }
@@ -139,8 +102,7 @@ namespace Technolithic
 
                 if (gatherProduct)
                 {
-                    if (Slaughter)
-                        Slaughter = false;
+
                 }
                 else
                 {
@@ -154,8 +116,6 @@ namespace Technolithic
         }
 
         public bool CanGatherProduct => AnimalTemplate.AnimalProduct != null;
-
-        public bool CanSlaughter => IsDomesticated;
 
         public bool CanHunt
         {
@@ -201,6 +161,7 @@ namespace Technolithic
         private AnimalWanderLabor wanderLabor;
         private AnimalFertilizationLabor animalFertilizationLabor;
 
+        // TODO: remove after migration to interaction system
         private Sprite indicator;
 
         public bool WasAttacked { get; set; } = false;
@@ -292,6 +253,23 @@ namespace Technolithic
             DaysUntilAging = AnimalTemplate.DaysUntilAging;
         }
 
+        // TODO: нужно перестать вызывать этот метод вручную, так как при изменениях, я могу случайно забыть вызвать его
+        // и система взаимодействий перестанет работать
+        public void Initialize()
+        {
+            if (AnimalTemplate.IsWild)
+            {
+
+            }
+            else
+            {
+                AddAvailableInteraction(InteractionType.Slaughter, LaborType.Ranching, false);
+                SetInteractionDuration(InteractionType.Slaughter, 1.0f);
+
+                ActivateInteraction(InteractionType.Slaughter);
+            }
+        }
+
         public override void Begin()
         {
             base.Begin();
@@ -307,9 +285,19 @@ namespace Technolithic
             {
                 GameplayScene.WorldManager.WildAnimalsNumber++;
             }
-            else
+        }
+
+        public override void CompleteInteraction(InteractionType interactionType)
+        {
+            base.CompleteInteraction(interactionType);
+
+            switch (interactionType)
             {
-                GameplayScene.WorldManager.DomesticatedAnimalsNumber++;
+                case InteractionType.Slaughter:
+                    {
+                        Die("");
+                    }
+                    break;
             }
         }
 
@@ -541,7 +529,11 @@ namespace Technolithic
                             if (IsDomesticated)
                             {
                                 adultAnimal.GatherProduct = true;
-                                adultAnimal.Slaughter = Slaughter;
+
+                                if(IsInteractionMarked(InteractionType.Slaughter))
+                                {
+                                    adultAnimal.MarkInteraction(InteractionType.Slaughter);
+                                }
                             }
                             else
                             {
@@ -558,7 +550,7 @@ namespace Technolithic
                             AnimalCmp oldAnimal = GameplayScene.Instance.SpawnAnimal(spawnTile.X, spawnTile.Y, oldAnimalTemplate, oldAnimalTemplate.DaysUntilAging);
                             if (IsDomesticated)
                             {
-                                oldAnimal.Slaughter = true;
+                                oldAnimal.MarkInteraction(InteractionType.Slaughter);
                             }
                             else
                             {
@@ -847,8 +839,6 @@ namespace Technolithic
                     GameplayScene.UIRootNodeScript.NotificationsUI.GetComponent<NotificationsUIScript>()
                         .AddNotification(reasonMessage, NotificationLevel.INFO, Entity);
                 }
-
-                GameplayScene.WorldManager.DomesticatedAnimalsNumber--;
             }
         }
 
@@ -971,7 +961,6 @@ namespace Technolithic
 
             creatureSaveData.Hunt = Hunt;
             creatureSaveData.Domesticate = Domesticate;
-            creatureSaveData.Slaughter = Slaughter;
             creatureSaveData.GatherProduct = GatherProduct;
             creatureSaveData.WasAttacked = WasAttacked;
             creatureSaveData.ProductReadyPercent = ProductReadyPercent;

@@ -463,11 +463,11 @@ namespace Technolithic
             OpenEntityPanel(buildingListUI, true);
         }
 
-        public void OpenBuildingUI(BuildingCmp building, InteractionsDatabase interactionsDatabase, ProgressTree progressTree)
+        public void OpenBuildingUI(BuildingCmp building, ProgressTree progressTree)
         {
             CloseEntityPanel();
 
-            buildingUI.GetComponent<BuildingUIScript>().SetBuilding(building, interactionsDatabase, progressTree);
+            buildingUI.GetComponent<BuildingUIScript>().SetBuilding(building, progressTree);
             OpenEntityPanel(buildingUI);
 
             if (building.IsBuilt)

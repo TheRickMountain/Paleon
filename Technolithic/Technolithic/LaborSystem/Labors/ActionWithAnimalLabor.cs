@@ -8,7 +8,6 @@ namespace Technolithic
     public enum ActionWithAnimal
     {
         GatherProduct,
-        Slaughtering,
         Domesticating
     }
 

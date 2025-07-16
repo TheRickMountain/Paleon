@@ -242,12 +242,9 @@ namespace Technolithic
             pickSprite.Active = false;
         }
 
-        public Entity SpawnAnimal(AnimalTemplate animalTemplate, int tileX, int tileY, int daysUntilAging)
+        public Entity SpawnAnimal(AnimalTemplate animalTemplate, Tile spawnTile, int daysUntilAging)
         {
-            Entity entity = animalTemplate.CreateEntity(daysUntilAging, interactablesManager);
-
-            entity.Position.X = tileX * Engine.TILE_SIZE;
-            entity.Position.Y = tileY * Engine.TILE_SIZE;
+            Entity entity = animalTemplate.CreateEntity(daysUntilAging, interactablesManager, spawnTile);
 
             CreatureCmp creatureCmp = entity.Get<CreatureCmp>();
             creatureCmp.OnCreatureDieCallback += RemoveCreature;

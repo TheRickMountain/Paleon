@@ -104,7 +104,8 @@ namespace Technolithic
 
         public StatusEffectsManager StatusEffectsManager { get; private set; }
 
-        public CreatureCmp(MyTexture bodyTexture, MyTexture hairTexture, string name, CreatureStats stats, float moveSpeed, CreatureType creatureType) : base(true, true)
+        public CreatureCmp(MyTexture bodyTexture, MyTexture hairTexture, string name, CreatureStats stats, float moveSpeed,
+            CreatureType creatureType, Tile spawnTile) : base(true, true)
         {
             Id = Guid.NewGuid();
 
@@ -183,6 +184,10 @@ namespace Technolithic
             attackRechargeTimer = new Timer();
 
             StatusEffectsManager = new StatusEffectsManager();
+
+            Movement = new MovementCmp(spawnTile);
+            Movement.RegisterOnDirectionChangedCallback(ChangeDirection);
+            Movement.Speed = Speed;
         }
 
         public override void Awake()
@@ -197,9 +202,6 @@ namespace Technolithic
             ChangeDirection(CurrentDirection);
 
             CreatureThoughts = Entity.Get<CreatureThoughts>();
-            Movement = Entity.Get<MovementCmp>();
-            Movement.RegisterOnDirectionChangedCallback(ChangeDirection);
-            Movement.Speed = Speed;
 
             CargoImage.Entity = Entity;
             AttackSprite.Entity = Entity;
@@ -207,6 +209,9 @@ namespace Technolithic
 
         public override void Update()
         {
+            Movement.Update();
+            Entity.Position = Movement.Position;
+
             if (knockbackOffset.X != 0)
             {
                 if (knockbackOffset.X > 0)

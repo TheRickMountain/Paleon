@@ -188,8 +188,9 @@ namespace Technolithic
 
         public int DaysUntilAging { get; set; }
 
-        public AnimalCmp(CreatureStats stats, AnimalTemplate animalTemplate) 
-            : base(animalTemplate.Texture, null, animalTemplate.Name, stats, animalTemplate.MovementSpeed, CreatureType.Animal)
+        public AnimalCmp(CreatureStats stats, AnimalTemplate animalTemplate, Tile spawnTile) 
+            : base(animalTemplate.Texture, null, animalTemplate.Name, stats, animalTemplate.MovementSpeed, CreatureType.Animal,
+                  spawnTile)
         {
             AnimalTemplate = animalTemplate;
 

@@ -1374,9 +1374,8 @@ namespace Technolithic
 
         public Settler SpawnSettler(int x, int y, SettlerInfo settlerInfo, Dictionary<Item, bool> foodRationFilters = null)
         {
-            Settler settler = new Settler(settlerInfo, WorldManager.SettlerBeverageRation);
-            settler.Position.X = x * Engine.TILE_SIZE;
-            settler.Position.Y = y * Engine.TILE_SIZE;
+            Tile spawnTile = World.GetTileAt(x, y);
+            Settler settler = new Settler(settlerInfo, WorldManager.SettlerBeverageRation, spawnTile);
             WorldManager.AddCreature(settler.Get<SettlerCmp>());
             CreatureLayer.Add(settler);
 
@@ -1395,7 +1394,8 @@ namespace Technolithic
 
         public AnimalCmp SpawnAnimal(int tileX, int tileY, AnimalTemplate animalTemplate, int daysUntilAging)
         {
-            Entity animal = WorldManager.SpawnAnimal(animalTemplate, tileX, tileY, daysUntilAging);
+            Tile spawnTile = World.GetTileAt(tileX, tileY);
+            Entity animal = WorldManager.SpawnAnimal(animalTemplate, spawnTile, daysUntilAging);
 
             CreatureLayer.Add(animal);
 

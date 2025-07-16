@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Technolithic
 {
-    public class MovementCmp : Component
+    public class MovementCmp
     {
+        public Vector2 Position { get; private set; }
         public Tile CurrentTile { get; private set; }
         public MovementState MovementState { get; private set; } = MovementState.Success;
 
@@ -37,20 +38,15 @@ namespace Technolithic
 
         private Action<Direction> cbOnDirectionChanged;
 
-        public MovementCmp() : base(true, false)
+        public MovementCmp(Tile initTile)
         {
             Speed = 1;
             Direction = Direction.LEFT;
+            CurrentTile = NextTile = initTile;
+            Position = new Vector2(CurrentTile.X * Engine.TILE_SIZE, CurrentTile.Y * Engine.TILE_SIZE);
         }
 
-        public override void Begin()
-        {
-            int x = (int)(Entity.X / Engine.TILE_SIZE);
-            int y = (int)(Entity.Y / Engine.TILE_SIZE);
-            CurrentTile = NextTile = GameplayScene.Instance.World.GetTileAt(x, y);
-        }
-
-        public override void Update()
+        public void Update()
         {
             switch (MovementState)
             {
@@ -103,9 +99,8 @@ namespace Technolithic
 
         public void Teleport(Tile tile)
         {
-            Entity.X = tile.X * Engine.TILE_SIZE;
-            Entity.Y = tile.Y * Engine.TILE_SIZE;
-            Begin();
+            CurrentTile = NextTile = tile;
+            Position = new Vector2(CurrentTile.X * Engine.TILE_SIZE, CurrentTile.Y * Engine.TILE_SIZE);
         }
 
         public void RebuildPath(Tile tile)
@@ -153,24 +148,6 @@ namespace Technolithic
             return targetTile.Room != null && CurrentTile.Room.Id == targetTile.Room.Id;
         }
 
-        public void RenderPath()
-        {
-            if (path != null)
-            {
-                for (int i = 0; i < path.Count; i++)
-                {
-                    if (i + 1 < path.Count)
-                    {
-                        Tile first = path[i];
-                        Tile next = path[i + 1];
-
-                        RenderManager.Line(new Vector2(first.X * Engine.TILE_SIZE + Engine.TILE_SIZE / 2, first.Y * Engine.TILE_SIZE + Engine.TILE_SIZE / 2),
-                            new Vector2(next.X * Engine.TILE_SIZE + Engine.TILE_SIZE / 2, next.Y * Engine.TILE_SIZE + Engine.TILE_SIZE / 2), Color.White * 0.5f);
-                    }
-                }
-            }
-        }
-
         public void ResetPath()
         {
             path = null;
@@ -200,8 +177,9 @@ namespace Technolithic
                 movementPerc = 0;
             }
 
-            Entity.X = MathUtils.Lerp(CurrentTile.X, NextTile.X, movementPerc) * Engine.TILE_SIZE;
-            Entity.Y = MathUtils.Lerp(CurrentTile.Y, NextTile.Y, movementPerc) * Engine.TILE_SIZE;
+            float posX = MathUtils.Lerp(CurrentTile.X, NextTile.X, movementPerc) * Engine.TILE_SIZE;
+            float posY = MathUtils.Lerp(CurrentTile.Y, NextTile.Y, movementPerc) * Engine.TILE_SIZE;
+            Position = new Vector2(posX, posY);
         }
 
         private bool RebuildPath(TilePath path)

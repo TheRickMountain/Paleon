@@ -10,7 +10,7 @@ namespace Technolithic
     public class Settler : Entity
     {
 
-        public Settler(SettlerInfo settlerInfo, List<Item> beverageRation) : base()
+        public Settler(SettlerInfo settlerInfo, List<Item> beverageRation, Tile spawnTile) : base()
         {
             Add(new CreatureThoughts());
 
@@ -23,7 +23,7 @@ namespace Technolithic
             creatureStats.Temperature.Active = true;
 
 
-            SettlerCmp settler = new SettlerCmp(settlerInfo, creatureStats, 4.6f);
+            SettlerCmp settler = new SettlerCmp(settlerInfo, creatureStats, 4.6f, spawnTile);
 
             Add(settler);
 
@@ -38,8 +38,6 @@ namespace Technolithic
             }
 
             Add(new SelectableCmp(0, -8, 16, 24, SelectableType.Settler));
-
-            Add(new MovementCmp());
         }
 
     }

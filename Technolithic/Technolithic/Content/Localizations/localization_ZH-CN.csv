@@ -188,6 +188,7 @@ disconnected,未连接
 dog,狗
 dolmen,巨石墓
 domesticate,驯化
+domestication_chance_x_percent,Domestication chance: {0}%
 drop_spindle,紡线锤
 dry_fish,鱼干
 dry_manure_fuel,干粪燃料
@@ -295,6 +296,7 @@ iron_spear,铁矛
 irrigate,浇水
 irrigation,浇水
 irrigation_canals,水渠
+item_required,Item required
 items,物品
 kiln,陶窯
 kinetic,动力学

@@ -242,8 +242,7 @@ namespace Technolithic
 
                 if (showDebugInfo)
                 {
-                    debugInfoText.Text = lastTile.GetInformation() + $"\nFPS: {(int)Engine.Instance.FrameCounter.AverageFramesPerSecond}\n" +
-                        $"Animals to domesticate amount: {GameplayScene.WorldManager.AnimalsToDomesticate.Count}";
+                    debugInfoText.Text = lastTile.GetInformation() + $"\nFPS: {(int)Engine.Instance.FrameCounter.AverageFramesPerSecond}";
                 }
             }
 

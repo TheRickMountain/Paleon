@@ -188,6 +188,7 @@ disconnected,Baglanti kesildi
 dog,Kopek
 dolmen,Mezar
 domesticate,Evcillestirmek
+domestication_chance_x_percent,Domestication chance: {0}%
 drop_spindle,Egirmen
 dry_fish,Kurutulmus balik
 dry_manure_fuel,Tezek
@@ -295,6 +296,7 @@ iron_spear,Demir mizrak
 irrigate,Sulama
 irrigation,Sulama yapmak
 irrigation_canals,Sulama kanali
+item_required,Item required
 items,Esyalar
 kiln,Seramik firini
 kinetic,Kinetik

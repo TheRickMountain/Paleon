@@ -731,8 +731,6 @@ namespace Technolithic
                                 animalCmp.IsReadyToFertilization = creatureSaveData.IsReadyToFertilization;
 
                                 animalCmp.Hunt = creatureSaveData.Hunt;
-                                animalCmp.Domesticate = creatureSaveData.Domesticate;
-                                animalCmp.GatherProduct = creatureSaveData.GatherProduct;
 
                                 if (creatureSaveData.StatusEffects != null)
                                 {

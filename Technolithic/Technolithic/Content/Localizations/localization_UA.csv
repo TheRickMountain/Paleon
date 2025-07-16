@@ -188,6 +188,7 @@ disconnected,Від'єднаний
 dog,Собака
 dolmen,Дольмен
 domesticate,Приручити
+domestication_chance_x_percent,Domestication chance: {0}%
 drop_spindle,Веретено
 dry_fish,Сушена риба
 dry_manure_fuel,Кізяк
@@ -295,6 +296,7 @@ iron_spear,Залізний спис
 irrigate,Зрошувати
 irrigation,Зрошення
 irrigation_canals,Орошувальні канали
+item_required,Item required
 items,Предмети
 kiln,Піч для випалювання
 kinetic,Kinetic

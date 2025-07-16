@@ -17,7 +17,7 @@
     "movementSpeed":  4.6,
     "DomesticationData":  {
                               "TamedForm":  "dog_female_old",
-                              "Chance":  10
+                              "Chance":  0.1
                           },
     "canProtect":  true,
     "isWild":  true,

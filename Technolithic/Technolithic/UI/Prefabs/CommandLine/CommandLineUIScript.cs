@@ -479,6 +479,17 @@ namespace Technolithic
             }
         }
 
+        [Command("fill_animal_product")]
+        private static void FillAnimalProduct()
+        {
+            Entity entity = GameplayScene.WorldManager.GetSelectedEntity();
+            AnimalCmp animalCmp = entity?.Get<AnimalCmp>();
+            if (animalCmp != null)
+            {
+                animalCmp.ProductReadyPercent = 100;
+            }
+        }
+
         [Command("hit_lightning")]
         private static void HitLightning()
         {

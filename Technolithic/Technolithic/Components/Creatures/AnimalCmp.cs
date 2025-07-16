@@ -10,10 +10,6 @@ namespace Technolithic
     public class AnimalCmp : CreatureCmp
     {
         private bool hunt;
-        private bool domesticate;
-        private bool gatherProduct;
-
-        private ActionWithAnimalLabor gatherProductLabor;
 
         public AnimalPenBuildingCmp TargetAnimalPen { get; set; }
 
@@ -40,9 +36,6 @@ namespace Technolithic
                         wasInformed = true;
                     }
 
-                    if (Domesticate)
-                        Domesticate = false;
-
                     indicator.Active = true;
                     indicator.Texture = ResourceManager.HuntIcon;
 
@@ -56,66 +49,6 @@ namespace Technolithic
                 }
             }
         }
-
-        public bool Domesticate 
-        {
-            get { return domesticate; }
-            set
-            {
-                if (CanDomesticate == false)
-                    return;
-
-                if (domesticate == value)
-                    return;
-
-                domesticate = value;
-
-                if (domesticate)
-                {
-                    // Can't be haunted and tamed at the same time
-                    if (Hunt)
-                        Hunt = false;
-                
-                    indicator.Active = true;
-                    indicator.Texture = ResourceManager.DomesticateIcon;
-
-                    GameplayScene.WorldManager.AnimalsToDomesticate.Add(this);
-                }
-                else
-                {
-                    indicator.Active = false;
-
-                    GameplayScene.WorldManager.AnimalsToDomesticate.Remove(this);
-                }
-            }
-        }
-
-        public bool GatherProduct
-        {
-            get { return gatherProduct; }
-            set
-            {
-                if (gatherProduct == value)
-                    return;
-
-                gatherProduct = value;
-
-                if (gatherProduct)
-                {
-
-                }
-                else
-                {
-                    if (gatherProductLabor != null)
-                    {
-                        gatherProductLabor.CancelAndClearAllTasksAndComplete();
-                        gatherProductLabor = null;
-                    }
-                }
-            }
-        }
-
-        public bool CanGatherProduct => AnimalTemplate.AnimalProduct != null;
 
         public bool CanHunt
         {
@@ -152,7 +85,6 @@ namespace Technolithic
 
         public AnimalTemplate AnimalTemplate { get; private set; }
 
-        private bool readyToGatherProduct = false;
         public float ProductReadyPercent { get; set; } = 0;
         private float percentPerMinute;
 
@@ -260,7 +192,15 @@ namespace Technolithic
         {
             if (AnimalTemplate.IsWild)
             {
+                if(AnimalTemplate.DomesticationData != null)
+                {
+                    AddAvailableInteraction(InteractionType.Domesticate, LaborType.Ranching, false);
+                    SetInteractionDuration(InteractionType.Domesticate, 1.0f);
+                    Item[] interactionItems = AnimalTemplate.Ration.ToArray();
+                    SetInteractionItems(InteractionType.Domesticate, true, interactionItems);
 
+                    ActivateInteraction(InteractionType.Domesticate);
+                }
             }
             else
             {
@@ -268,6 +208,21 @@ namespace Technolithic
                 SetInteractionDuration(InteractionType.Slaughter, 1.0f);
 
                 ActivateInteraction(InteractionType.Slaughter);
+
+                AnimalProduct animalProduct = AnimalTemplate.AnimalProduct;
+                if (animalProduct != null)
+                {
+                    AddAvailableInteraction(InteractionType.GatherAnimalProduct, LaborType.Ranching, false);
+                    SetInteractionDuration(InteractionType.GatherAnimalProduct, 1.0f);
+
+                    Item requiredItem = animalProduct.RequiredItem;
+                    if (requiredItem != null)
+                    {
+                        SetInteractionItems(InteractionType.GatherAnimalProduct, true, requiredItem);
+                    }
+
+                    MarkInteraction(InteractionType.GatherAnimalProduct);
+                }
             }
         }
 
@@ -297,6 +252,28 @@ namespace Technolithic
                 case InteractionType.Slaughter:
                     {
                         Die("");
+                    }
+                    break;
+                case InteractionType.GatherAnimalProduct:
+                    {
+                        ProductReadyPercent = 0;
+
+                        Item product = AnimalTemplate.AnimalProduct.Product;
+                        Movement.CurrentTile.Inventory.AddCargo(new ItemContainer(product, 1, product.Durability));
+                    }
+                    break;
+                case InteractionType.Domesticate:
+                    {
+                        float domesticationChance = AnimalTemplate.DomesticationData.Chance;
+
+                        if (Calc.Random.Chance(domesticationChance))
+                        {
+                            TurnToDomesticated();
+                        }
+                        else
+                        {
+                            CreatureThoughts?.AddThought("nevermind", 3);
+                        }
                     }
                     break;
             }
@@ -356,25 +333,34 @@ namespace Technolithic
                     StatusEffectsManager.RemoveStatusEffect(StatusEffectId.Hunger);
                 }
 
-                if (AnimalTemplate.AnimalProduct != null)
+                if(AnimalTemplate.AnimalProduct != null)
                 {
-                    if (readyToGatherProduct)
+                    if (ProductReadyPercent >= 100)
                     {
-                        if (gatherProduct && (gatherProductLabor == null || gatherProductLabor.IsCompleted))
+                        if(IsInteractionActivated(InteractionType.GatherAnimalProduct) == false)
                         {
-                            gatherProductLabor = new ActionWithAnimalLabor(LaborType.Ranching, this, ActionWithAnimal.GatherProduct);
-                            GameplayScene.WorldManager.LaborManager.Add(gatherProductLabor);
+                            ActivateInteraction(InteractionType.GatherAnimalProduct);
                         }
                     }
                     else
                     {
+                        if (IsInteractionActivated(InteractionType.GatherAnimalProduct))
+                        {
+                            DeactivateInteraction(InteractionType.GatherAnimalProduct);
+                        }
+                    }
+                }
+
+                if (AnimalTemplate.AnimalProduct != null)
+                {
+                    if(ProductReadyPercent < 100)
+                    {
                         float productivityModificator = CreatureStats.Productivity.CurrentValue / 100f;
                         ProductReadyPercent += (percentPerMinute * productivityModificator) * Engine.GameDeltaTime;
-                        if (ProductReadyPercent >= 100)
-                        {
-                            readyToGatherProduct = true;
-                            ProductReadyPercent = 100;
-                        }
+                    }
+                    else
+                    {
+                        ProductReadyPercent = 100;
                     }
                 }
 
@@ -529,7 +515,7 @@ namespace Technolithic
                             AnimalCmp adultAnimal = GameplayScene.Instance.SpawnAnimal(spawnTile.X, spawnTile.Y, adultAnimalTemplate, adultAnimalTemplate.DaysUntilAging);
                             if (IsDomesticated)
                             {
-                                adultAnimal.GatherProduct = true;
+                                adultAnimal.MarkInteraction(InteractionType.GatherAnimalProduct);
 
                                 if(IsInteractionMarked(InteractionType.Slaughter))
                                 {
@@ -538,7 +524,7 @@ namespace Technolithic
                             }
                             else
                             {
-                                adultAnimal.Domesticate = Domesticate;
+                                adultAnimal.MarkInteraction(InteractionType.Domesticate);
                             }
 
                             Die(null, false);
@@ -555,7 +541,7 @@ namespace Technolithic
                             }
                             else
                             {
-                                oldAnimal.Domesticate = Domesticate;
+                                oldAnimal.MarkInteraction(InteractionType.Domesticate);
                             }
 
                             Die(null, false);
@@ -767,37 +753,12 @@ namespace Technolithic
             return damageValue;
         }
 
-        public AnimalCmp TryToDomesticate(CreatureCmp creature)
-        {
-            Domesticate = false;
-
-            int domesticationChance = AnimalTemplate.DomesticationData.Chance;
-
-            if(MyRandom.ProbabilityChance(domesticationChance))
-            {
-                return TurnToDomesticated();
-            }
-
-            CreatureThoughts?.AddThought("nevermind", 3);
-
-            return null;
-        }
-
         public AnimalCmp TurnToDomesticated()
         {
             AnimalTemplate tamedAnimalTemplate = AnimalTemplate.DomesticationData.TamedFormAnimalTemplate;
             Tile spawnTile = Movement.CurrentTile;
             Die(null, false);
             return GameplayScene.Instance.SpawnAnimal(spawnTile.X, spawnTile.Y, tamedAnimalTemplate, DaysUntilAging);
-        }
-
-        public void TryToGatherProduct()
-        {
-            readyToGatherProduct = false;
-            ProductReadyPercent = 0;
-
-            Item product = AnimalTemplate.AnimalProduct.Product;
-            Movement.CurrentTile.Inventory.AddCargo(new ItemContainer(product, 1, product.Durability));
         }
 
         public override void Die(string reasonMessage, bool throwLoot = true)
@@ -808,9 +769,6 @@ namespace Technolithic
             GameplayScene.Instance.WorldState.NextHourStarted -= OnNextHourStarted;
 
             base.Die(reasonMessage);
-
-            GatherProduct = false;
-            Domesticate = false;
 
             if(TargetAnimalPen != null)
             {
@@ -891,6 +849,12 @@ namespace Technolithic
                 baseInfo += $"\n{Localization.GetLocalizedText("assigned_to", Parent.Name)}";
             }
 
+            if(AnimalTemplate.DomesticationData != null)
+            {
+                int domesticationChance = (int)(AnimalTemplate.DomesticationData.Chance * 100);
+                baseInfo += $"\n{Localization.GetLocalizedText("domestication_chance_x_percent", domesticationChance)}";
+            }
+
             return baseInfo;
         }
 
@@ -961,8 +925,6 @@ namespace Technolithic
             creatureSaveData.DaysUntilAging = DaysUntilAging;
 
             creatureSaveData.Hunt = Hunt;
-            creatureSaveData.Domesticate = Domesticate;
-            creatureSaveData.GatherProduct = GatherProduct;
             creatureSaveData.WasAttacked = WasAttacked;
             creatureSaveData.ProductReadyPercent = ProductReadyPercent;
             creatureSaveData.AnimalTemplateName = AnimalTemplate.Json;

@@ -10,7 +10,7 @@ namespace Technolithic
     public class DomesticationData
     {
         public string TamedForm { get; set; }
-        public int Chance { get; set; }
+        public float Chance { get; set; }
 
         [JsonIgnore]
         public AnimalTemplate TamedFormAnimalTemplate { get; set; }

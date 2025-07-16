@@ -188,6 +188,7 @@ disconnected,Disconnected
 dog,Dog
 dolmen,Dolmen
 domesticate,Domesticate
+domestication_chance_x_percent,Domestication chance: {0}%
 drop_spindle,Drop spindle
 dry_fish,Dry fish
 dry_manure_fuel,Dry manure fuel
@@ -295,6 +296,7 @@ iron_spear,Iron spear
 irrigate,Irrigate
 irrigation,Irrigation
 irrigation_canals,Irrigation canals
+item_required,Item required
 items,Items
 kiln,Kiln
 kinetic,Kinetic

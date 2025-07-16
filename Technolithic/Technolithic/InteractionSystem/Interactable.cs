@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Technolithic
 {
@@ -18,6 +19,8 @@ namespace Technolithic
         private bool _isDestroyed = false;
 
         private Dictionary<InteractionType, LaborType> _interactionLaborMap = new();
+        private Dictionary<InteractionType, List<Item>> _interactionItemsMap = new();
+        private Dictionary<InteractionType, bool> _interactionRequireItemsMap = new();
 
         private int _priority = DEFAULT_PRIORITY;
         public int Priority 
@@ -57,6 +60,26 @@ namespace Technolithic
             _interactionLaborMap.Add(interactionType, associatedLaborType);
 
             _interactionHandler.AddAvailableInteraction(interactionType, toolRequired);
+        }
+
+        protected void SetInteractionItems(InteractionType interactionType, bool isItemRequired, params Item[] items)
+        {
+            _interactionItemsMap.Add(interactionType, items.ToList());
+            _interactionRequireItemsMap.Add(interactionType, isItemRequired);
+        }
+
+        public IReadOnlyList<Item> GetInteractionItems(InteractionType interactionType)
+        {
+            if (_interactionItemsMap.ContainsKey(interactionType) == false) return null;
+
+            return _interactionItemsMap[interactionType];
+        }
+
+        public bool DoesInteractionRequireItems(InteractionType interactionType)
+        {
+            if (_interactionRequireItemsMap.ContainsKey(interactionType) == false) return false;
+
+            return _interactionRequireItemsMap[interactionType];
         }
 
         public LaborType GetAssociatedLaborType(InteractionType interactionType)

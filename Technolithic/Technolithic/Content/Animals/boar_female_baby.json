@@ -17,7 +17,7 @@
     "movementSpeed":  3.7,
     "DomesticationData":  {
                               "TamedForm":  "pig_female_baby",
-                              "Chance":  100
+                              "Chance":  1.0
                           },
     "canProtect":  false,
     "isWild":  true,

@@ -18,7 +18,9 @@ namespace Technolithic
         AutoCleanPen,
         ProduceEnergy,
         Craft,
-        Slaughter
+        Slaughter,
+        GatherAnimalProduct,
+        Domesticate
     }
 
     public class InteractionsDatabase
@@ -118,6 +120,20 @@ namespace Technolithic
                 InteractionType.Slaughter,
                 Localization.GetLocalizedText("slaughter"),
                 ResourceManager.SlaughterIcon,
+                Color.Orange,
+                InteractionIconDisplayState.OnMarked));
+
+            AddInteractionData(new InteractionData(
+                InteractionType.GatherAnimalProduct,
+                "gather_animal_product", // TODO: localization
+                RenderManager.Pixel, // TODO: icon
+                Color.Orange,
+                InteractionIconDisplayState.OnMarked));
+
+            AddInteractionData(new InteractionData(
+                InteractionType.Domesticate,
+                Localization.GetLocalizedText("domesticate"),
+                ResourceManager.DomesticateIcon,
                 Color.Orange,
                 InteractionIconDisplayState.OnMarked));
         }

@@ -11,7 +11,17 @@ namespace Technolithic
         #region Random
         
         public static Random Random { get; } = new Random();
-        
+
+        public static bool Chance(this Random random, float chance)
+        {
+            return random.NextFloat() < chance;
+        }
+
+        public static float NextFloat(this Random random)
+        {
+            return (float)random.NextDouble();
+        }
+
         public static T Choose<T>(this Random random, List<T> choices)
         {
             return choices[random.Next(choices.Count)];

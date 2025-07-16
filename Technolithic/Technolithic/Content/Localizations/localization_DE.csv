@@ -188,6 +188,7 @@ disconnected,Getrennt
 dog,Hund
 dolmen,Dolmen
 domesticate,Domestizieren
+domestication_chance_x_percent,Domestication chance: {0}%
 drop_spindle,Handspindel
 dry_fish,Trockenfisch
 dry_manure_fuel,Getrockneten Dung
@@ -295,6 +296,7 @@ iron_spear,Eisenspeer
 irrigate,Bewässern
 irrigation,Bewässerung
 irrigation_canals,Bewässerungskanäle
+item_required,Item required
 items,Items
 kiln,Brennofen
 kinetic,Kinetic

@@ -14,8 +14,6 @@ namespace Technolithic
         private CreatureCmp selectedCreature;
 
         private MNode huntButton;
-        private MNode domesticateButton;
-        private MNode gatherProductButton;
         private MNode assignPetButton;
 
         private Dictionary<Tab, MNode> tabNodes = new Dictionary<Tab, MNode>();
@@ -53,12 +51,6 @@ namespace Technolithic
             huntButton = new BigButton(ParentNode.Scene, ResourceManager.HuntIcon, true);
             huntButton.Tooltips = Localization.GetLocalizedText("hunt");
             huntButton.GetComponent<ButtonScript>().AddOnClickedCallback(Hunt);
-
-            domesticateButton = new BigButton(ParentNode.Scene, ResourceManager.DomesticateIcon, true);
-            domesticateButton.GetComponent<ButtonScript>().AddOnClickedCallback(Domesticate);
-
-            gatherProductButton = new BigButton(ParentNode.Scene, RenderManager.Pixel, true);
-            gatherProductButton.GetComponent<ButtonScript>().AddOnClickedCallback(GatherProduct);
 
             assignPetButton = new BigButton(ParentNode.Scene, ResourceManager.PetIcon, false);
             assignPetButton.Tooltips = Localization.GetLocalizedText("assign_a_pet");
@@ -127,32 +119,10 @@ namespace Technolithic
             {
                 AnimalCmp animal = (AnimalCmp)creature;
 
-                if (animal.CanDomesticate)
-                {
-                    domesticateButton.GetComponent<ButtonScript>().IsSelected = animal.Domesticate;
-
-                    int domesticationChance = animal.AnimalTemplate.DomesticationData.Chance;
-
-                    domesticateButton.Tooltips = $"{Localization.GetLocalizedText("domesticate")}\n" +
-                        $"{Localization.GetLocalizedText("chance")}: {domesticationChance}%";
-
-                    buttonsListView.AddItem(domesticateButton);
-                }
-
                 if (animal.CanHunt)
                 {
                     huntButton.GetComponent<ButtonScript>().IsSelected = animal.Hunt;
                     buttonsListView.AddItem(huntButton);
-                }
-
-                if (animal.CanGatherProduct)
-                {
-                    Item product = animal.AnimalTemplate.AnimalProduct.Product;
-
-                    gatherProductButton.GetComponent<ButtonScript>().IsSelected = animal.GatherProduct;
-                    gatherProductButton.GetChildByName("Icon").GetComponent<MImageCmp>().Texture = product.Icon;
-                    gatherProductButton.Tooltips = $"{Localization.GetLocalizedText("gather")}: {product.Name}";
-                    buttonsListView.AddItem(gatherProductButton);
                 }
             }
             else if(creature is SettlerCmp)
@@ -167,28 +137,6 @@ namespace Technolithic
         {
             AnimalCmp animal = selectedCreature as AnimalCmp;
             animal.Hunt = value;
-
-            if (value)
-            {
-                domesticateButton.GetComponent<ButtonScript>().IsSelected = false;
-            }
-        }
-
-        private void Domesticate(bool value, ButtonScript script)
-        {
-            AnimalCmp animal = selectedCreature as AnimalCmp;
-            animal.Domesticate = value;
-
-            if (value)
-            {
-                huntButton.GetComponent<ButtonScript>().IsSelected = false;
-            }
-        }
-
-        private void GatherProduct(bool value, ButtonScript script)
-        {
-            AnimalCmp animal = selectedCreature as AnimalCmp;
-            animal.GatherProduct = value;
         }
 
         private void OnAssignPetButtonPressed(bool value, ButtonScript script)

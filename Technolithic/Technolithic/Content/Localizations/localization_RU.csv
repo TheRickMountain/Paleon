@@ -188,6 +188,7 @@ disconnected,Отключен
 dog,Собака
 dolmen,Дольмен
 domesticate,Приручить
+domestication_chance_x_percent,Шанс одомашивания: {0}%
 drop_spindle,Веретено
 dry_fish,Сушеная рыба
 dry_manure_fuel,Кизяк
@@ -295,6 +296,7 @@ iron_spear,Железное копье
 irrigate,Орошать
 irrigation,Орошение
 irrigation_canals,Оросительные каналы
+item_required,Требуется предмет
 items,Предметы
 kiln,Печь для обжига
 kinetic,Кинетический

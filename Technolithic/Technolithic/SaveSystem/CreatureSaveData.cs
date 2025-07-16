@@ -48,8 +48,6 @@ namespace Technolithic
         public float Happiness { get; set; }
 
         public bool Hunt { get; set; }
-        public bool Domesticate { get; set; }
-        public bool GatherProduct { get; set; }
 
         public bool WasAttacked { get; set; }
         public float ProductReadyPercent { get; set; }

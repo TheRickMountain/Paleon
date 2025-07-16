@@ -93,6 +93,8 @@ namespace Technolithic
 
                             _interactable.ResetProgress(_interactionType);
 
+                            Owner.Inventory.ClearCargo();
+
                             Owner.CreatureEquipment.DecreaseToolDurability(_interactionType, 1);
 
                             Owner.Slider.Active = false;
@@ -126,6 +128,8 @@ namespace Technolithic
 
             Owner.CreatureEquipment.ToolItemContainer = null;
 
+            Owner.Inventory.ThrowCargo(Owner.Movement.CurrentTile);
+
             _interactable.OnInteractionEnded(_interactionType, Owner);
         }
 
@@ -140,6 +144,8 @@ namespace Technolithic
             _interactable.Unreserve();
 
             Owner.CreatureEquipment.ToolItemContainer = null;
+
+            Owner.Inventory.ThrowCargo(Owner.Movement.CurrentTile);
 
             _interactable.OnInteractionEnded(_interactionType, Owner);
         }

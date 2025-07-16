@@ -17,7 +17,7 @@
     "movementSpeed":  4.2,
     "DomesticationData":  {
                               "TamedForm":  "horse_male_adult",
-                              "Chance":  50
+                              "Chance":  0.5
                           },
     "canProtect":  false,
     "isWild":  true,

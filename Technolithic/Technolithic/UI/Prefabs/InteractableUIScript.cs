@@ -128,6 +128,17 @@ namespace Technolithic
                 }
             }
 
+            var interactionItems = interactable.GetInteractionItems(interactionType);
+            if(interactionItems != null)
+            {
+                tooltip += $"\n{Localization.GetLocalizedText("item_required")}:".Paint(Color.Yellow);
+
+                foreach(Item item in interactionItems)
+                {
+                    tooltip += $"\n- {item.Name}";
+                }
+            }
+
             return tooltip;
         }
     }

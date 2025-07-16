@@ -47,7 +47,6 @@ namespace Technolithic
         public List<BuildingCmp> FuelConsumerBuildings { get; set; } = new List<BuildingCmp>();
         public List<AnimalPenBuildingCmp> AnimalPenBuildings { get; set; } = new List<AnimalPenBuildingCmp>();
 
-        public HashSet<AnimalCmp> AnimalsToDomesticate { get; set; } = new HashSet<AnimalCmp>();
         public HashSet<AnimalCmp> AnimalsToHunt { get; set; } = new HashSet<AnimalCmp>();
 
         public List<CrafterBuildingCmp> ManualCrafters { get; private set; } = new();
@@ -71,7 +70,6 @@ namespace Technolithic
         private SupplyFromStorageLabor supplyStorageLabor = new SupplyFromStorageLabor();
         private SupplyFromTileLabor supplyFromTileLabor = new SupplyFromTileLabor();
         private SupplyFuelLabor supplyFuelLabor = new SupplyFuelLabor();
-        private AnimalDomesticateLabor animalDomesticateLabor = new AnimalDomesticateLabor();
         private SettlerHuntLabor settlerHuntLabor = new SettlerHuntLabor();
 
         public Action<int> CbOnSettlersCountChanged { get; set; }
@@ -127,10 +125,6 @@ namespace Technolithic
             supplyFuelLabor.Repeat = true;
             supplyFuelLabor.IsMultiCreatureLabor = true;
             LaborManager.Add(supplyFuelLabor);
-
-            animalDomesticateLabor.Repeat = true;
-            animalDomesticateLabor.IsMultiCreatureLabor = true;
-            LaborManager.Add(animalDomesticateLabor);
 
             settlerHuntLabor.Repeat = true;
             settlerHuntLabor.IsMultiCreatureLabor = true;

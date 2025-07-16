@@ -188,6 +188,7 @@ disconnected,Déconnecté
 dog,Chien
 dolmen,Dolmen
 domesticate,Domestiquer
+domestication_chance_x_percent,Domestication chance: {0}%
 drop_spindle,Fuseau
 dry_fish,Poisson séché
 dry_manure_fuel,Bouse séchée
@@ -295,6 +296,7 @@ iron_spear,Lance en fer
 irrigate,Arroser
 irrigation,Irrigation
 irrigation_canals,Canaux d'irrigation
+item_required,Item required
 items,Objets
 kiln,Four
 kinetic,Cinétique

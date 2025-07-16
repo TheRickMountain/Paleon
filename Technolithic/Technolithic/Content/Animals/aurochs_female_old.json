@@ -17,7 +17,7 @@
     "movementSpeed":  3.5,
     "DomesticationData":  {
                               "TamedForm":  "cattle_female_old",
-                              "Chance":  10
+                              "Chance":  0.1
                           },
     "canProtect":  false,
     "isWild":  true,

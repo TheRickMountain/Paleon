@@ -20,7 +20,7 @@ namespace Technolithic
 
         private Dictionary<InteractionType, LaborType> _interactionLaborMap = new();
         private Dictionary<InteractionType, List<Item>> _interactionItemsMap = new();
-        private Dictionary<InteractionType, bool> _interactionRequireItemsMap = new();
+        private HashSet<InteractionType> _interactionsThatRequireItems = new();
 
         private int _priority = DEFAULT_PRIORITY;
         public int Priority 
@@ -65,7 +65,11 @@ namespace Technolithic
         protected void SetInteractionItems(InteractionType interactionType, bool isItemRequired, params Item[] items)
         {
             _interactionItemsMap.Add(interactionType, items.ToList());
-            _interactionRequireItemsMap.Add(interactionType, isItemRequired);
+
+            if (isItemRequired)
+            {
+                _interactionsThatRequireItems.Add(interactionType);
+            }
         }
 
         public IReadOnlyList<Item> GetInteractionItems(InteractionType interactionType)
@@ -77,9 +81,7 @@ namespace Technolithic
 
         public bool DoesInteractionRequireItems(InteractionType interactionType)
         {
-            if (_interactionRequireItemsMap.ContainsKey(interactionType) == false) return false;
-
-            return _interactionRequireItemsMap[interactionType];
+            return _interactionsThatRequireItems.Contains(interactionType);
         }
 
         public LaborType GetAssociatedLaborType(InteractionType interactionType)

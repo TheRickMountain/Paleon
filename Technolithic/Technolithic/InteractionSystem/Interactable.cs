@@ -34,7 +34,7 @@ namespace Technolithic
 
                 _priority = newPriority;
 
-                // TODO: resort entities in _interactablesManager
+                _interactablesManager.ResortByPriority(this);
             }
         }
 

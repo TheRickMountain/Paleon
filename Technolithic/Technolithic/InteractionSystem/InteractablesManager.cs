@@ -51,6 +51,29 @@ namespace Technolithic
             }
         }
 
+        public void ResortByPriority(Interactable interactable)
+        {
+            zoneIdsBuffer.Clear();
+
+            foreach (Tile tile in interactable.GetApproachableTiles())
+            {
+                zoneIdsBuffer.Add(tile.GetRoomId());
+            }
+
+            foreach(int zoneId in zoneIdsBuffer)
+            {
+                if (zoneLaborGroupDict.TryGetValue(zoneId, out LaborInteractionsGroup laborInteractionsGroup))
+                {
+                    foreach(InteractionType interactionType in interactable.AvailableInteractions)
+                    {
+                        LaborType laborType = interactable.GetAssociatedLaborType(interactionType);
+
+                        laborInteractionsGroup.ResortByPriority(laborType);
+                    }
+                }
+            }
+        }
+
         public IReadOnlyList<(Interactable, InteractionType)> GetInteractionPairs(int zoneId, LaborType laborType)
         {
             if (zoneLaborGroupDict.ContainsKey(zoneId) == false) return null;

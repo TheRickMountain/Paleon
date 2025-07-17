@@ -490,6 +490,17 @@ namespace Technolithic
             }
         }
 
+        [Command("set_priority")]
+        private static void SetPriority(int value)
+        {
+            Entity entity = GameplayScene.WorldManager.GetSelectedEntity();
+            Interactable interactable = entity?.Get<Interactable>();
+            if (interactable != null)
+            {
+                interactable.Priority = value;
+            }
+        }
+
         [Command("hit_lightning")]
         private static void HitLightning()
         {

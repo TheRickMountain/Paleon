@@ -125,7 +125,7 @@ namespace Technolithic
                 {
                     if (t1.Chunk == this)
                     {
-                        if (t1.Room.Id != tile.Room.Id)
+                        if (t1.Room.ZoneId != tile.Room.ZoneId)
                             ProcessTile(t1, tile.Room);
                     }
                     else
@@ -195,9 +195,9 @@ namespace Technolithic
 
                         foreach (Room r2 in r1.Neighbours)
                         {
-                            if (r2.Id != r1.Id)
+                            if (r2.ZoneId != r1.ZoneId)
                             {
-                                r2.Id = r1.Id;
+                                r2.ZoneId = r1.ZoneId;
                                 queue.Enqueue(r2);
                             }
                         }
@@ -210,7 +210,7 @@ namespace Technolithic
         {
             foreach (Room r in rs)
             {
-                if (room != r && room.Id == r.Id)
+                if (room != r && room.ZoneId == r.ZoneId)
                     return true;
             }
             return false;
@@ -220,7 +220,7 @@ namespace Technolithic
         {
             foreach (Room r in rs)
             {
-                if (tile.Room.Id == r.Id)
+                if (tile.Room.ZoneId == r.ZoneId)
                     return true;
             }
             return false;

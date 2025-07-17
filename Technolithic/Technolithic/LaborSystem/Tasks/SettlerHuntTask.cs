@@ -44,7 +44,7 @@ namespace Technolithic
                 return;
             }
 
-            if (Owner.Movement.CurrentTile.GetRoomId() != TargetAnimal.Movement.CurrentTile.GetRoomId())
+            if (Owner.Movement.CurrentTile.GetZoneId() != TargetAnimal.Movement.CurrentTile.GetZoneId())
             {
                 State = TaskState.Failed;
                 return;

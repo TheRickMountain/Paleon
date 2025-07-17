@@ -107,7 +107,7 @@ namespace Technolithic
         private void OnItemToAddAddedCallback(Inventory senderInventory, Item toAddItem, int toAddWeight)
         {
             StorageBuildingCmp storageBuildingCmp = senderInventory.BuildingCmp as StorageBuildingCmp;
-            int roomId = senderInventory.GetRoom().Id;
+            int roomId = senderInventory.GetRoom().ZoneId;
 
             if (toAddWeight > 0)
             {
@@ -154,7 +154,7 @@ namespace Technolithic
             itemsCount[item] += weight;
 
             StorageBuildingCmp storageBuildingCmp = senderInventory.BuildingCmp as StorageBuildingCmp;
-            int roomId = senderInventory.GetRoom().Id;
+            int roomId = senderInventory.GetRoom().ZoneId;
 
             OnItemsCountChangedCallback?.Invoke(item, itemsCount[item]);
         }
@@ -167,7 +167,7 @@ namespace Technolithic
             itemsCount[removedItem] -= count;
 
             StorageBuildingCmp storageBuildingCmp = (senderInventory.BuildingCmp as StorageBuildingCmp);
-            int roomId = senderInventory.GetRoom().Id;
+            int roomId = senderInventory.GetRoom().ZoneId;
 
             int emptySpaceCount = storageBuildingCmp.EmptySpaceCount;
 
@@ -210,7 +210,7 @@ namespace Technolithic
             if (emptySpaceCount <= 0)
                 return;
 
-            int roomId = storageBuildingCmp.GetCenterTile().Room.Id;
+            int roomId = storageBuildingCmp.GetCenterTile().Room.ZoneId;
 
             // allow all items
             if (allowedItem == null)
@@ -234,7 +234,7 @@ namespace Technolithic
 
         private void OnStorageItemsFilterForbiddenCallback(StorageBuildingCmp storageBuildingCmp, Item forbiddenItem)
         {
-            int roomId = storageBuildingCmp.GetCenterTile().Room.Id;
+            int roomId = storageBuildingCmp.GetCenterTile().Room.ZoneId;
 
             // remove all items
             if (forbiddenItem == null)
@@ -268,7 +268,7 @@ namespace Technolithic
 
         private void OnStorageCapacityChanged(StorageBuildingCmp storageBuildingCmp)
         {
-            int roomId = storageBuildingCmp.GetCenterTile().Room.Id;
+            int roomId = storageBuildingCmp.GetCenterTile().Room.ZoneId;
 
             int emptySpaceCount = storageBuildingCmp.EmptySpaceCount;
 
@@ -305,7 +305,7 @@ namespace Technolithic
 
         private void RemoveStorageFromAllCollections(StorageBuildingCmp storageBuildingCmp)
         {
-            int roomId = storageBuildingCmp.GetCenterTile().Room.Id;
+            int roomId = storageBuildingCmp.GetCenterTile().Room.ZoneId;
             Inventory storageInventory = storageBuildingCmp.Inventory;
 
             foreach (var kvp in ItemDatabase.Items)

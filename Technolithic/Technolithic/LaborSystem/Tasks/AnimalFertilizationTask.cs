@@ -32,7 +32,7 @@ namespace Technolithic
 
         public override void UpdateTask()
         {
-            if (targetFemaleAnimal.IsDead || targetFemaleAnimal.Movement.CurrentTile.GetRoomId() != targetFemaleAnimal.Movement.CurrentTile.GetRoomId())
+            if (targetFemaleAnimal.IsDead || targetFemaleAnimal.Movement.CurrentTile.GetZoneId() != targetFemaleAnimal.Movement.CurrentTile.GetZoneId())
             {
                 State = TaskState.Failed;
                 return;

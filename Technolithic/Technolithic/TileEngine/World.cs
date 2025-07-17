@@ -516,9 +516,9 @@ namespace Technolithic
 
                     foreach (Room room in chunk.Rooms)
                     {
-                        if (ids.Contains(room.Id) == false)
+                        if (ids.Contains(room.ZoneId) == false)
                         {
-                            ids.Add(room.Id);
+                            ids.Add(room.ZoneId);
                         }
                     }
                 }

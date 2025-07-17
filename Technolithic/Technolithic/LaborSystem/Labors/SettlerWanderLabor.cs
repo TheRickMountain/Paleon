@@ -25,7 +25,7 @@ namespace Technolithic
             if(GameplayScene.WorldManager.HomeArea.Count > 0)
             {
                 Tile randomTile = GameplayScene.WorldManager.HomeArea[MyRandom.Range(GameplayScene.WorldManager.HomeArea.Count)];
-                if (randomTile.Room != null && randomTile.Room.Id == creature.Movement.CurrentTile.Room.Id)
+                if (randomTile.Room != null && randomTile.Room.ZoneId == creature.Movement.CurrentTile.Room.ZoneId)
                 {
                     targetTile = randomTile;
                 }

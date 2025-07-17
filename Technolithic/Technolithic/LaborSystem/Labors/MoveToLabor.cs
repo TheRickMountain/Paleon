@@ -20,7 +20,7 @@ namespace Technolithic
             if (TargetTile.Room == null)
                 return false;
 
-            if (creature.Movement.CurrentTile.GetRoomId() != TargetTile.GetRoomId())
+            if (creature.Movement.CurrentTile.GetZoneId() != TargetTile.GetZoneId())
                 return false;
 
             if (creature.Movement.CurrentTile == TargetTile)

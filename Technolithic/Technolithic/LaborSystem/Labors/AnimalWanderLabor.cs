@@ -65,7 +65,7 @@ namespace Technolithic
                     if (animal.TargetAnimalPen != null)
                     {
                         Tile randomTile = animal.TargetAnimalPen.TilesInfosList[MyRandom.Range(animal.TargetAnimalPen.TilesInfosList.Count - 1)].Tile;
-                        if (randomTile.Room != null && randomTile.Room.Id == creature.Movement.CurrentTile.Room.Id)
+                        if (randomTile.Room != null && randomTile.Room.ZoneId == creature.Movement.CurrentTile.Room.ZoneId)
                         {
                             targetTile = randomTile;
                         }
@@ -78,7 +78,7 @@ namespace Technolithic
                 if (GameplayScene.WorldManager.HomeArea.Count > 0 && creature.IsDomesticated)
                 {
                     Tile randomTile = GameplayScene.WorldManager.HomeArea[MyRandom.Range(GameplayScene.WorldManager.HomeArea.Count)];
-                    if (randomTile.Room != null && randomTile.Room.Id == creature.Movement.CurrentTile.Room.Id)
+                    if (randomTile.Room != null && randomTile.Room.ZoneId == creature.Movement.CurrentTile.Room.ZoneId)
                     {
                         targetTile = randomTile;
                     }

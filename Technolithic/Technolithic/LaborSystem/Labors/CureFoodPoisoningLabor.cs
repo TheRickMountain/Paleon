@@ -35,7 +35,7 @@ namespace Technolithic
 
         private Tuple<Inventory, Item> FindCure(CreatureCmp creatureCmp)
         {
-            int creatureRoomId = creatureCmp.Movement.CurrentTile.Room.Id;
+            int creatureRoomId = creatureCmp.Movement.CurrentTile.Room.ZoneId;
             // Сначала ищем на складе
             foreach (var item in ItemDatabase.StatusEffectRemovers[StatusEffectId.FoodPoisoning])
             {

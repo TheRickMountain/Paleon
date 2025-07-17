@@ -139,13 +139,13 @@ namespace Technolithic
             if (adjacent)
             {
                 foreach (Tile n in targetTile.GetNeighbourTiles())
-                    if (n.Room != null && CurrentTile.Room.Id == n.Room.Id)
+                    if (n.Room != null && CurrentTile.Room.ZoneId == n.Room.ZoneId)
                         return true;
 
                 return false;
             }
 
-            return targetTile.Room != null && CurrentTile.Room.Id == targetTile.Room.Id;
+            return targetTile.Room != null && CurrentTile.Room.ZoneId == targetTile.Room.ZoneId;
         }
 
         public void ResetPath()
@@ -185,7 +185,7 @@ namespace Technolithic
         private bool RebuildPath(TilePath path)
         {
             // Если путь к тайлу существует
-            if (path[0].Room != null && CurrentTile.Room.Id == path[0].Room.Id)
+            if (path[0].Room != null && CurrentTile.Room.ZoneId == path[0].Room.ZoneId)
             {
                 // Проверяем нет ли препятствий на пути
                 foreach (Tile tile in path.Tiles)

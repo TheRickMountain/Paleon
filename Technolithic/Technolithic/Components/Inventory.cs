@@ -257,7 +257,7 @@ namespace Technolithic
                 inventoryReserved[item] += weight;
 
             int availableWeight = GetAvailableItemCount(item);
-            int roomId = GetRoom() == null ? -1 : GetRoom().Id;
+            int roomId = GetRoom() == null ? -1 : GetRoom().ZoneId;
 
             if(Tile != null)
             {
@@ -422,7 +422,7 @@ namespace Technolithic
 
         public Tile GetReachableTile(CreatureCmp creatureCmp)
         {
-            if(Tile != null && Tile.Room != null && Tile.Room.Id == creatureCmp.Movement.CurrentTile.Room.Id)
+            if(Tile != null && Tile.Room != null && Tile.Room.ZoneId == creatureCmp.Movement.CurrentTile.Room.ZoneId)
             {
                 return Tile;
             }

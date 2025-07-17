@@ -52,7 +52,7 @@ namespace Technolithic
             {
                 case MovementState.Success:
                     {
-                        if(putToBuilding.GetCenterTile().Room.Id != Owner.Movement.CurrentTile.Room.Id)
+                        if(putToBuilding.GetCenterTile().Room.ZoneId != Owner.Movement.CurrentTile.Room.ZoneId)
                         {
                             State = TaskState.Failed;
                             CustomCancel();
@@ -115,7 +115,7 @@ namespace Technolithic
                     break;
                 case MovementState.Running:
                     {
-                        if (putToBuilding.GetCenterTile().Room.Id != Owner.Movement.CurrentTile.Room.Id)
+                        if (putToBuilding.GetCenterTile().Room.ZoneId != Owner.Movement.CurrentTile.Room.ZoneId)
                         {
                             State = TaskState.Failed;
                             CustomCancel();

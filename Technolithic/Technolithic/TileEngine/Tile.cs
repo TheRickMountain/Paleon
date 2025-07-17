@@ -529,7 +529,7 @@ namespace Technolithic
             if (Room == null)
                 return;
 
-            int roomId = Room.Id;
+            int roomId = Room.ZoneId;
 
             if(weight > 0)
             {
@@ -559,7 +559,7 @@ namespace Technolithic
             if (Room == null)
                 return;
 
-            int roomId = Room.Id;
+            int roomId = Room.ZoneId;
 
             int availableWeight = senderInventory.GetAvailableItemCount(item);
             if(availableWeight <= 0)
@@ -711,8 +711,8 @@ namespace Technolithic
 
         public string GetInformation()
         {
-            int roomId = Room != null ? Room.Id : -1;
-            string info = $"X {X}, Y {Y} | Room id {roomId} | Movement speed {MovementSpeedPercent}%";
+            int zondId = Room != null ? Room.ZoneId : -1;
+            string info = $"X {X}, Y {Y} | Zone id {zondId} | Movement speed {MovementSpeedPercent}%";
 
             return info;
         }
@@ -727,9 +727,9 @@ namespace Technolithic
             return vector;
         }
 
-        public int GetRoomId()
+        public int GetZoneId()
         {
-            return Room == null ? -1 : Room.Id;
+            return Room == null ? -1 : Room.ZoneId;
         }
 
     }

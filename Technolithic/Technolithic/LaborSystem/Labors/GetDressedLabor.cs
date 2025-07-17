@@ -41,7 +41,7 @@ namespace Technolithic
 
         private Tuple<Inventory, Item> FindClothing(CreatureCmp creatureCmp)
         {
-            int creatureRoomId = creatureCmp.Movement.CurrentTile.Room.Id;
+            int creatureRoomId = creatureCmp.Movement.CurrentTile.Room.ZoneId;
 
             List<Item> clothesList = null;
 

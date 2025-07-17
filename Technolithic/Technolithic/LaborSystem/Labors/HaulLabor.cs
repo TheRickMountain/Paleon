@@ -17,7 +17,7 @@ namespace Technolithic
             Item itemToTake = null;
             Tile takeFromTile = null;
             StorageBuildingCmp putToStorage = null;
-            int creatureRoomId = creature.Movement.CurrentTile.Room.Id;
+            int creatureRoomId = creature.Movement.CurrentTile.Room.ZoneId;
 
             foreach(var kvp in GameplayScene.WorldManager.TilesThatHaveItems[creatureRoomId])
             {

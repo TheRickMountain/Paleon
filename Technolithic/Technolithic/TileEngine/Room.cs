@@ -10,7 +10,7 @@ namespace Technolithic
     public class Room
     {
 
-        public int Id { get; set; }
+        public int ZoneId { get; set; }
 
         public List<Tile> Tiles { get; private set; }
 
@@ -21,9 +21,9 @@ namespace Technolithic
             get { return Tiles.Count; }
         }
 
-        public Room(int id)
+        public Room(int zoneId)
         {
-            Id = id;
+            ZoneId = zoneId;
             Tiles = new List<Tile>();
             Neighbours = new List<Room>();
         }

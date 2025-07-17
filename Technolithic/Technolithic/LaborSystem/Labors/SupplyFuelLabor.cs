@@ -95,7 +95,7 @@ namespace Technolithic
 
         private Inventory GetStorageInventoryWithItem(Item item, CreatureCmp creatureCmp)
         {
-            int roomId = creatureCmp.Movement.CurrentTile.Room.Id;
+            int roomId = creatureCmp.Movement.CurrentTile.Room.ZoneId;
 
             if (!GameplayScene.WorldManager.StoragesThatHaveItemsV2.ContainsKey(item))
                 return null;
@@ -114,7 +114,7 @@ namespace Technolithic
 
         private Inventory GetTileInventoryWithItem(Item item, CreatureCmp creatureCmp)
         {
-            int roomId = creatureCmp.Movement.CurrentTile.Room.Id;
+            int roomId = creatureCmp.Movement.CurrentTile.Room.ZoneId;
 
             if (!GameplayScene.WorldManager.TilesThatHaveItems[roomId].ContainsKey(item))
                 return null;

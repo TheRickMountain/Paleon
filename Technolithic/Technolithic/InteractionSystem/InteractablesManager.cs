@@ -20,7 +20,7 @@ namespace Technolithic
 
             foreach (Tile tile in interactable.GetApproachableTiles())
             {
-                zoneIdsBuffer.Add(tile.GetRoomId());
+                zoneIdsBuffer.Add(tile.GetZoneId());
             }
 
             foreach (int zoneId in zoneIdsBuffer)
@@ -40,7 +40,7 @@ namespace Technolithic
 
             foreach (Tile tile in interactable.GetApproachableTiles())
             {
-                zoneIdsBuffer.Add(tile.GetRoomId());
+                zoneIdsBuffer.Add(tile.GetZoneId());
             }
 
             foreach (int zoneId in zoneIdsBuffer)
@@ -57,7 +57,7 @@ namespace Technolithic
 
             foreach (Tile tile in interactable.GetApproachableTiles())
             {
-                zoneIdsBuffer.Add(tile.GetRoomId());
+                zoneIdsBuffer.Add(tile.GetZoneId());
             }
 
             foreach(int zoneId in zoneIdsBuffer)

@@ -22,7 +22,7 @@ namespace Technolithic
             if (TargetCreature.IsHidden)
                 return false;
 
-            if (creature.Movement.CurrentTile.GetRoomId() != TargetCreature.Movement.CurrentTile.GetRoomId())
+            if (creature.Movement.CurrentTile.GetZoneId() != TargetCreature.Movement.CurrentTile.GetZoneId())
                 return false;
 
             return true;

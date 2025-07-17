@@ -41,7 +41,7 @@ namespace Technolithic
                 if (checkAnimal != null && checkAnimal.AnimalTemplate.Kind == maleAnimal.AnimalTemplate.Kind
                     && checkAnimal.IsDead == false && checkAnimal.IsDomesticated && checkAnimal.AgeState == AgeState.Adult
                     && checkAnimal.IsPregnant == false && checkAnimal.IsReserved == false
-                    && checkAnimal.Movement.CurrentTile.GetRoomId() == maleAnimal.Movement.CurrentTile.GetRoomId()
+                    && checkAnimal.Movement.CurrentTile.GetZoneId() == maleAnimal.Movement.CurrentTile.GetZoneId()
                     && checkAnimal.AnimalTemplate.Gender == Gender.F
                     && checkAnimal.TargetAnimalPen == maleAnimal.TargetAnimalPen)
                 {

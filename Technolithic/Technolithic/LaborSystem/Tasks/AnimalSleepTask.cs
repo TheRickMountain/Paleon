@@ -43,7 +43,7 @@ namespace Technolithic
                 if (animal.TargetAnimalPen != null)
                 {
                     Tile randomTile = animal.TargetAnimalPen.TilesInfosList[MyRandom.Range(animal.TargetAnimalPen.TilesInfosList.Count - 1)].Tile;
-                    if (randomTile.Room != null && randomTile.Room.Id == animal.Movement.CurrentTile.Room.Id)
+                    if (randomTile.Room != null && randomTile.Room.ZoneId == animal.Movement.CurrentTile.Room.ZoneId)
                     {
                         targetTile = randomTile;
                     }

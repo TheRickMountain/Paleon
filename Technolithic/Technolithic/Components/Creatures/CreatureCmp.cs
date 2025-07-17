@@ -750,17 +750,17 @@ namespace Technolithic
 
         public int GetRoomId()
         {
-            return Movement.CurrentTile.GetRoomId();
+            return Movement.CurrentTile.GetZoneId();
         }
 
         public override Tile GetApproachableTile(CreatureCmp creature)
         {
-            return GetApproachableTile(creature.Movement.CurrentTile.GetRoomId());
+            return GetApproachableTile(creature.Movement.CurrentTile.GetZoneId());
         }
 
         public override Tile GetApproachableTile(int zoneId)
         {
-            if (Movement.CurrentTile.GetRoomId() != zoneId) return null;
+            if (Movement.CurrentTile.GetZoneId() != zoneId) return null;
 
             if (Movement.CurrentTile.IsWalkable == false) return null;
 

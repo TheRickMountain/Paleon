@@ -329,7 +329,7 @@ namespace Technolithic
 
         public (Inventory, Item) FindTool(CreatureCmp creature, InteractionType interactionType)
         {
-            int zoneId = creature.Movement.CurrentTile.Room.Id;
+            int zoneId = creature.Movement.CurrentTile.Room.ZoneId;
             StorageBuildingCmp storage = StorageManager.GetStorageWithTool(creature, interactionType);
             if (storage != null)
             {
@@ -356,7 +356,7 @@ namespace Technolithic
 
         public Tuple<Inventory, Item> FindTool(CreatureCmp creature, ToolType toolType)
         {
-            int creatureRoomId = creature.Movement.CurrentTile.Room.Id;
+            int creatureRoomId = creature.Movement.CurrentTile.Room.ZoneId;
 
             // Сначала ищем на складе
             StorageBuildingCmp storage = StorageManager.GetStorageWithToolItem(creature, toolType);
@@ -605,7 +605,7 @@ namespace Technolithic
                     {
                         foreach (var inventory in kvp2.Value)
                         {
-                            int inventoryRoomId = inventory.GetRoom() == null ? -1 : inventory.GetRoom().Id;
+                            int inventoryRoomId = inventory.GetRoom() == null ? -1 : inventory.GetRoom().ZoneId;
                             
                             if (collection[inventoryRoomId].ContainsKey(kvp2.Key) == false)
                                 collection[inventoryRoomId].Add(kvp2.Key, new List<Inventory>());
@@ -900,7 +900,7 @@ namespace Technolithic
                 foreach (var checkTile in GetUnoccupiedTilesNearOf(targetTile))
                 {
                     // Тайл находится вне досягаемости поселенца
-                    if (settler.Movement.CurrentTile.GetRoomId() != checkTile.GetRoomId())
+                    if (settler.Movement.CurrentTile.GetZoneId() != checkTile.GetZoneId())
                         continue;
 
                     // Поселенец перестает занимать тайл, который занимал

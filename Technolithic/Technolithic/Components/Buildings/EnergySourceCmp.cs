@@ -11,8 +11,8 @@ namespace Technolithic
 
         public int AvailablePower { get; set; }
 
-        public EnergySourceCmp(BuildingTemplate buildingTemplate, Direction direction)
-            : base(buildingTemplate, direction)
+        public EnergySourceCmp(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager)
+            : base(buildingTemplate, direction, interactablesManager)
         {
 
         }

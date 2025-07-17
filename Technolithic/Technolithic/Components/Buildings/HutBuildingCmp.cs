@@ -17,8 +17,8 @@ namespace Technolithic
 
         private List<CreatureCmp> assignedCreatures;
 
-        public HutBuildingCmp(BuildingTemplate buildingTemplate, Direction direction)
-            : base(buildingTemplate, direction)
+        public HutBuildingCmp(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager)
+            : base(buildingTemplate, direction, interactablesManager)
         {
             Assignable = buildingTemplate.Assignable;
             InsideCreatures = new List<CreatureCmp>();

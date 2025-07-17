@@ -20,7 +20,8 @@ namespace Technolithic
         Craft,
         Slaughter,
         GatherAnimalProduct,
-        Domesticate
+        Domesticate,
+        Hunt
     }
 
     public class InteractionsDatabase
@@ -134,6 +135,13 @@ namespace Technolithic
                 InteractionType.Domesticate,
                 Localization.GetLocalizedText("domesticate"),
                 ResourceManager.DomesticateIcon,
+                Color.Orange,
+                InteractionIconDisplayState.OnMarked));
+
+            AddInteractionData(new InteractionData(
+                InteractionType.Hunt,
+                Localization.GetLocalizedText("hunt"),
+                ResourceManager.HuntIcon,
                 Color.Orange,
                 InteractionIconDisplayState.OnMarked));
         }

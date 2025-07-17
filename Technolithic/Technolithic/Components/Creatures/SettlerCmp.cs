@@ -33,10 +33,11 @@ namespace Technolithic
 
         private float vomitingTimer;
 
-        public SettlerCmp(SettlerInfo settlerInfo, CreatureStats stats, float moveSpeed, Tile spawnTile) 
+        public SettlerCmp(SettlerInfo settlerInfo, CreatureStats stats, float moveSpeed, Tile spawnTile, 
+            InteractablesManager interactablesManager) 
             : base(ResourceManager.CreaturesTileset[settlerInfo.BodyTextureId], 
                   ResourceManager.HairsTileset[settlerInfo.HairTextureId], settlerInfo.Name, stats, moveSpeed, CreatureType.Settler,
-                  spawnTile)
+                  spawnTile, interactablesManager)
         {
             this.settlerInfo = settlerInfo;
 

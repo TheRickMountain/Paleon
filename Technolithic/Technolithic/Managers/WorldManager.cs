@@ -47,8 +47,6 @@ namespace Technolithic
         public List<BuildingCmp> FuelConsumerBuildings { get; set; } = new List<BuildingCmp>();
         public List<AnimalPenBuildingCmp> AnimalPenBuildings { get; set; } = new List<AnimalPenBuildingCmp>();
 
-        public HashSet<AnimalCmp> AnimalsToHunt { get; set; } = new HashSet<AnimalCmp>();
-
         public List<CrafterBuildingCmp> ManualCrafters { get; private set; } = new();
 
         public Dictionary<LaborType, List<CrafterBuildingCmp>> AutoCrafterBuildings { get; set; } = new Dictionary<LaborType, List<CrafterBuildingCmp>>();
@@ -70,7 +68,6 @@ namespace Technolithic
         private SupplyFromStorageLabor supplyStorageLabor = new SupplyFromStorageLabor();
         private SupplyFromTileLabor supplyFromTileLabor = new SupplyFromTileLabor();
         private SupplyFuelLabor supplyFuelLabor = new SupplyFuelLabor();
-        private SettlerHuntLabor settlerHuntLabor = new SettlerHuntLabor();
 
         public Action<int> CbOnSettlersCountChanged { get; set; }
 
@@ -125,10 +122,6 @@ namespace Technolithic
             supplyFuelLabor.Repeat = true;
             supplyFuelLabor.IsMultiCreatureLabor = true;
             LaborManager.Add(supplyFuelLabor);
-
-            settlerHuntLabor.Repeat = true;
-            settlerHuntLabor.IsMultiCreatureLabor = true;
-            LaborManager.Add(settlerHuntLabor);
 
             // Создание CraftLabor на основе LaborType крафтеров
             foreach (var kvp in Engine.Instance.Buildings)
@@ -246,15 +239,17 @@ namespace Technolithic
             return entity;
         }
 
-        public void AddCreature(CreatureCmp creatureCmp)
+        public Entity SpawnSettler(SettlerInfo settlerInfo, Tile spawnTile)
         {
+            Settler settler = new Settler(settlerInfo, SettlerBeverageRation, spawnTile, interactablesManager);
+
+            CreatureCmp creatureCmp = settler.Get<CreatureCmp>();
             creatureCmp.OnCreatureDieCallback += RemoveCreature;
 
-            if (creatureCmp.CreatureType == CreatureType.Settler)
-            {
-                TotalSettlersCount++;
-                CbOnSettlersCountChanged?.Invoke(TotalSettlersCount);
-            }
+            TotalSettlersCount++;
+            CbOnSettlersCountChanged?.Invoke(TotalSettlersCount);
+
+            return settler;
         }
 
         private void RemoveCreature(CreatureCmp creatureCmp)
@@ -1062,6 +1057,9 @@ namespace Technolithic
                         case MyAction.Slaughter:
                             interactable.MarkInteraction(InteractionType.Slaughter);
                             break;
+                        case MyAction.Hunt:
+                            interactable.MarkInteraction(InteractionType.Hunt);
+                            break;
                         case MyAction.Cancel:
                             {
                                 interactable.UnmarkInteraction(InteractionType.Chop);
@@ -1070,6 +1068,7 @@ namespace Technolithic
                                 interactable.UnmarkInteraction(InteractionType.GatherWood);
                                 interactable.UnmarkInteraction(InteractionType.Destruct);
                                 interactable.UnmarkInteraction(InteractionType.Slaughter);
+                                interactable.UnmarkInteraction(InteractionType.Hunt);
                             }
                             break;
                     }
@@ -1160,22 +1159,6 @@ namespace Technolithic
                                     Tile tile = tiles[x, y];
 
                                     TryToBuild(Engine.Instance.Buildings["destruct_irrigation_canal"], tile.X, tile.Y, Direction.DOWN);
-                                }
-                            }
-                        }
-                        break;
-                    case MyAction.Hunt:
-                        {
-                            foreach (var creature in GameplayScene.Instance.CreatureLayer.Entities)
-                            {
-                                AnimalCmp animal = creature.Get<AnimalCmp>();
-                                if (animal != null && animal.IsDomesticated == false)
-                                {
-                                    Tile animalTile = animal.Movement.CurrentTile;
-                                    if (selectedTiles.Contains(animalTile))
-                                    {
-                                        animal.Hunt = true;
-                                    }
                                 }
                             }
                         }

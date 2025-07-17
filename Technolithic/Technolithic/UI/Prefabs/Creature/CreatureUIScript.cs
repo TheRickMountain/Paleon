@@ -13,7 +13,6 @@ namespace Technolithic
     {
         private CreatureCmp selectedCreature;
 
-        private MNode huntButton;
         private MNode assignPetButton;
 
         private Dictionary<Tab, MNode> tabNodes = new Dictionary<Tab, MNode>();
@@ -47,10 +46,6 @@ namespace Technolithic
             ParentNode.AddChildNode(renameButton);
 
             statsListView = ParentNode.GetChildByName("StatsListView").GetComponent<ListViewUIScript>();
-
-            huntButton = new BigButton(ParentNode.Scene, ResourceManager.HuntIcon, true);
-            huntButton.Tooltips = Localization.GetLocalizedText("hunt");
-            huntButton.GetComponent<ButtonScript>().AddOnClickedCallback(Hunt);
 
             assignPetButton = new BigButton(ParentNode.Scene, ResourceManager.PetIcon, false);
             assignPetButton.Tooltips = Localization.GetLocalizedText("assign_a_pet");
@@ -115,28 +110,12 @@ namespace Technolithic
             ListViewUIScript buttonsListView = ParentNode.GetChildByName("ButtonsListView").GetComponent<ListViewUIScript>();
             buttonsListView.Clear();
 
-            if (creature is AnimalCmp)
-            {
-                AnimalCmp animal = (AnimalCmp)creature;
-
-                if (animal.CanHunt)
-                {
-                    huntButton.GetComponent<ButtonScript>().IsSelected = animal.Hunt;
-                    buttonsListView.AddItem(huntButton);
-                }
-            }
-            else if(creature is SettlerCmp)
+            if (creature is SettlerCmp)
             {
                 buttonsListView.AddItem(assignPetButton);
             }
 
             SetInteractable(creature);
-        }
-
-        private void Hunt(bool value, ButtonScript script)
-        {
-            AnimalCmp animal = selectedCreature as AnimalCmp;
-            animal.Hunt = value;
         }
 
         private void OnAssignPetButtonPressed(bool value, ButtonScript script)

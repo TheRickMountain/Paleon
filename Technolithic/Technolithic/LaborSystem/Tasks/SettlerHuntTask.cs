@@ -21,7 +21,7 @@ namespace Technolithic
 
         public override void Begin()
         {
-            TargetAnimal.IsReserved = true;
+            TargetAnimal.Reserve();
         }
 
         public override void BeforeUpdate()
@@ -38,13 +38,13 @@ namespace Technolithic
                 return;
             }
 
-            if(TargetAnimal.IsHidden || TargetAnimal.Hunt == false)
+            if(TargetAnimal.IsHidden || IsTaskValid() == false)
             {
                 State = TaskState.Failed;
                 return;
             }
 
-            if (Owner.Movement.CurrentTile.Room.Id != TargetAnimal.Movement.CurrentTile.Room.Id)
+            if (Owner.Movement.CurrentTile.GetRoomId() != TargetAnimal.Movement.CurrentTile.GetRoomId())
             {
                 State = TaskState.Failed;
                 return;
@@ -104,7 +104,7 @@ namespace Technolithic
         {
             base.Complete();
 
-            TargetAnimal.IsReserved = false;
+            TargetAnimal.Unreserve();
 
             Owner.CreatureEquipment.ToolItemContainer = null;
         }
@@ -113,11 +113,17 @@ namespace Technolithic
         {
             base.Cancel();
 
-            TargetAnimal.IsReserved = false;
+            TargetAnimal.Unreserve();
 
             Owner.Movement.ResetPath();
 
             Owner.CreatureEquipment.ToolItemContainer = null;
+        }
+
+        private bool IsTaskValid()
+        {
+            return TargetAnimal.IsInteractionMarked(InteractionType.Hunt) &&
+                TargetAnimal.IsInteractionActivated(InteractionType.Hunt);
         }
     }
 }

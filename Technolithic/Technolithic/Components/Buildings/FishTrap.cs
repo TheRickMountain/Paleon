@@ -26,7 +26,8 @@ namespace Technolithic
         private const int MAX_NUMBER_OF_USES = 6;
         public int CurrentNumberOfUses { get; set; } = 6;
 
-        public FishTrap(BuildingTemplate buildingTemplate, Direction direction) : base(buildingTemplate, direction)
+        public FishTrap(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager) 
+            : base(buildingTemplate, direction, interactablesManager)
         {
 
         }

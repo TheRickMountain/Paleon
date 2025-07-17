@@ -16,8 +16,8 @@ namespace Technolithic
         // Максимальное количество для самого дорогого товара
         private const int BASE_QUANTITY = 5;
 
-        public TradingPostBuildingCmp(BuildingTemplate buildingTemplate, Direction direction)
-            : base(buildingTemplate, direction)
+        public TradingPostBuildingCmp(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager)
+            : base(buildingTemplate, direction, interactablesManager)
         {
             goods = new Dictionary<ITradable, int>();
         }

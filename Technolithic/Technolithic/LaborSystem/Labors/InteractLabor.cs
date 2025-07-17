@@ -25,58 +25,116 @@ namespace Technolithic
             // TODO: временно выбираем первую сущность из списка
             foreach ((Interactable interactable, InteractionType interactionType) in interactionPairs)
             {
-                Inventory inventoryWithTool = null;
-                Item requiredTool = null;
-
-                if(creature.CreatureEquipment.HasTool(interactionType) == false)
+                if (interactionType == InteractionType.Hunt)
                 {
-                    var invToolTuple = TryFindTool(creature, interactionType);
-                    if (invToolTuple.Item1 != null)
+                    // TODO: нужно придумать как один раз вычислить наличие оружия у поселенца, чтобы не искать
+                    // его для каждого взаимодействия (это относится и для поиска обычного взаимодействия)
+                    bool hasAnyWeapon = false;
+
+                    if (creature.CreatureEquipment.HasTool(ToolType.HuntingMelee) == false)
                     {
-                        inventoryWithTool = invToolTuple.Item1;
-                        requiredTool = invToolTuple.Item2;
+                        var tuplePair = GameplayScene.WorldManager.FindTool(creature, ToolType.HuntingMelee);
+
+                        if (tuplePair?.Item1 != null)
+                        {
+                            Inventory inventory = tuplePair.Item1;
+                            Item item = tuplePair.Item2;
+
+                            EquipItemTask equipTask = new EquipItemTask(creature, inventory, item);
+                            AddTask(creature, equipTask);
+
+                            hasAnyWeapon = true;
+                        }
                     }
                     else
                     {
-                        if (interactable.DoesInteractionRequireTool(interactionType))
+                        hasAnyWeapon = true;
+                    }
+
+                    if (creature.CreatureEquipment.HasTool(ToolType.HuntingRange) == false)
+                    {
+                        var tuplePair = GameplayScene.WorldManager.FindTool(creature, ToolType.HuntingRange);
+
+                        if (tuplePair?.Item1 != null)
                         {
-                            return false;
+                            Inventory inventory = tuplePair.Item1;
+                            Item item = tuplePair.Item2;
+
+                            EquipItemTask equipTask = new EquipItemTask(creature, inventory, item);
+                            AddTask(creature, equipTask);
+
+                            hasAnyWeapon = true;
                         }
                     }
-                }
+                    else
+                    {
+                        hasAnyWeapon = true;
+                    }
 
-                Inventory inventoryWithItem = null;
-                Item requiredItem = null;
+                    if (hasAnyWeapon == false)
+                    {
+                        continue;
+                    }
 
-                var invItemTuple = TryFindItem(creature, interactable.GetInteractionItems(interactionType));
-                if(invItemTuple.Item1 != null)
-                {
-                    inventoryWithItem = invItemTuple.Item1;
-                    requiredItem = invItemTuple.Item2;
+                    SettlerHuntTask huntTask = new SettlerHuntTask(creature, interactable as AnimalCmp);
+                    AddTask(creature, huntTask);
+                    return true;
                 }
                 else
                 {
-                    if(interactable.DoesInteractionRequireItems(interactionType))
+                    Inventory inventoryWithTool = null;
+                    Item requiredTool = null;
+
+                    if (creature.CreatureEquipment.HasTool(interactionType) == false)
                     {
-                        return false;
+                        var invToolTuple = TryFindTool(creature, interactionType);
+                        if (invToolTuple.Item1 != null)
+                        {
+                            inventoryWithTool = invToolTuple.Item1;
+                            requiredTool = invToolTuple.Item2;
+                        }
+                        else
+                        {
+                            if (interactable.DoesInteractionRequireTool(interactionType))
+                            {
+                                continue;
+                            }
+                        }
                     }
+
+                    Inventory inventoryWithItem = null;
+                    Item requiredItem = null;
+
+                    var invItemTuple = TryFindItem(creature, interactable.GetInteractionItems(interactionType));
+                    if (invItemTuple.Item1 != null)
+                    {
+                        inventoryWithItem = invItemTuple.Item1;
+                        requiredItem = invItemTuple.Item2;
+                    }
+                    else
+                    {
+                        if (interactable.DoesInteractionRequireItems(interactionType))
+                        {
+                            continue;
+                        }
+                    }
+
+                    if (inventoryWithTool != null)
+                    {
+                        AddTask(creature, new EquipItemTask(creature, inventoryWithTool, requiredTool));
+                    }
+
+                    if (inventoryWithItem != null)
+                    {
+                        AddTask(creature, new TakeItemFromInventoryTask(creature, inventoryWithItem, requiredItem, 1));
+                    }
+
+                    InteractionData interactionData = Engine.InteractionsDatabase.GetInteractionData(interactionType);
+
+                    InteractTask interactTask = new InteractTask(creature, interactable, interactionData);
+                    AddTask(creature, interactTask);
+                    return true;
                 }
-
-                if(inventoryWithTool != null)
-                {
-                    AddTask(creature, new EquipItemTask(creature, inventoryWithTool, requiredTool));
-                }
-
-                if(inventoryWithItem != null)
-                {
-                    AddTask(creature, new TakeItemFromInventoryTask(creature, inventoryWithItem, requiredItem, 1));
-                }
-
-                InteractionData interactionData = Engine.InteractionsDatabase.GetInteractionData(interactionType);
-
-                InteractTask interactTask = new InteractTask(creature, interactable, interactionData);
-                AddTask(creature, interactTask);
-                return true;
             }
 
             return false;

@@ -15,8 +15,8 @@ namespace Technolithic
 
         private float timer = 0.0f;
 
-        public TreeBuilding(BuildingTemplate buildingTemplate, Direction direction) 
-            : base(buildingTemplate, direction)
+        public TreeBuilding(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager) 
+            : base(buildingTemplate, direction, interactablesManager)
         {
             treeData = buildingTemplate.TreeData;
         }

@@ -412,80 +412,79 @@ namespace Technolithic
             switch (BuildingType)
             {
                 case BuildingType.Hut:
-                    buildingCmp = new HutBuildingCmp(this, direction);
+                    buildingCmp = new HutBuildingCmp(this, direction, interactablesManager);
                     break;
                 case BuildingType.Crafter:
-                    buildingCmp = new CrafterBuildingCmp(this, direction);
+                    buildingCmp = new CrafterBuildingCmp(this, direction, interactablesManager);
                     break;
                 case BuildingType.Stockpile:
-                    buildingCmp = new StorageBuildingCmp(this, direction);
+                    buildingCmp = new StorageBuildingCmp(this, direction, interactablesManager);
                     break;
                 case BuildingType.Wall:
-                    buildingCmp = new WallCmp(this, direction);
+                    buildingCmp = new WallCmp(this, direction, interactablesManager);
                     break;
                 case BuildingType.FarmPlot:
-                    buildingCmp = new FarmPlot(this, direction);
+                    buildingCmp = new FarmPlot(this, direction, interactablesManager);
                     break;
                 case BuildingType.Gate:
-                    buildingCmp = new GateCmp(this, direction);
+                    buildingCmp = new GateCmp(this, direction, interactablesManager);
                     break;
                 case BuildingType.FishingPlace:
-                    buildingCmp = new FishingPlaceCmp(this, direction);
+                    buildingCmp = new FishingPlaceCmp(this, direction, interactablesManager);
                     break;
                 case BuildingType.FishTrap:
-                    buildingCmp = new FishTrap(this, direction);
+                    buildingCmp = new FishTrap(this, direction, interactablesManager);
                     break;
                 case BuildingType.Deposit:
-                    buildingCmp = new DepositCmp(this, direction);
+                    buildingCmp = new DepositCmp(this, direction, interactablesManager);
                     break;
                 case BuildingType.BuildIrrigationCanal:
-                    buildingCmp = new BuildIrrigationCanalCmp(this, direction);
+                    buildingCmp = new BuildIrrigationCanalCmp(this, direction, interactablesManager);
                     break;
                 case BuildingType.DestructIrrigationCanal:
-                    buildingCmp = new DestructIrrigationCanalCmp(this, direction);
+                    buildingCmp = new DestructIrrigationCanalCmp(this, direction, interactablesManager);
                     break;
                 case BuildingType.WindPoweredEnergySource:
-                    buildingCmp = new WindPoweredEnergySourceCmp(this, direction);
+                    buildingCmp = new WindPoweredEnergySourceCmp(this, direction, interactablesManager);
                     break;
                 case BuildingType.CreaturePoweredEnergySource:
-                    buildingCmp = new CreaturePoweredEnergySource(this, direction);
+                    buildingCmp = new CreaturePoweredEnergySource(this, direction, interactablesManager);
                     break;
                 case BuildingType.BeeHive:
-                    buildingCmp = new BeeHiveBuildingCmp(this, direction);
+                    buildingCmp = new BeeHiveBuildingCmp(this, direction, interactablesManager);
                     break;
                 case BuildingType.TimeMachine:
-                    buildingCmp = new TimeMachine(this, direction);
+                    buildingCmp = new TimeMachine(this, direction, interactablesManager);
                     break;
                 case BuildingType.AnimalPen:
-                    buildingCmp = new AnimalPenBuildingCmp(this, direction);
+                    buildingCmp = new AnimalPenBuildingCmp(this, direction, interactablesManager);
                     break;
                 case BuildingType.Mine:
-                    buildingCmp = new MineBuildingCmp(this, direction);
+                    buildingCmp = new MineBuildingCmp(this, direction, interactablesManager);
                     break;
                 case BuildingType.Lighter:
-                    buildingCmp = new LighterCmp(this, direction);
+                    buildingCmp = new LighterCmp(this, direction, interactablesManager);
                     break;
                 case BuildingType.Noria:
-                    buildingCmp = new NoriaBuildingCmp(this, direction);
+                    buildingCmp = new NoriaBuildingCmp(this, direction, interactablesManager);
                     break;
                 case BuildingType.Surface:
-                    buildingCmp = new SurfaceBuilding(this, direction);
+                    buildingCmp = new SurfaceBuilding(this, direction, interactablesManager);
                     break;
                 case BuildingType.DestructSurface:
-                    buildingCmp = new DestructSurfaceBuilding(this, direction);
+                    buildingCmp = new DestructSurfaceBuilding(this, direction, interactablesManager);
                     break;
                 case BuildingType.TradingPost:
-                    buildingCmp = new TradingPostBuildingCmp(this, direction);
+                    buildingCmp = new TradingPostBuildingCmp(this, direction, interactablesManager);
                     break;
                 case BuildingType.Tree:
-                    buildingCmp = new TreeBuilding(this, direction);
+                    buildingCmp = new TreeBuilding(this, direction, interactablesManager);
                     break;
                 case BuildingType.None:
-                    buildingCmp = new BuildingCmp(this, direction);
+                    buildingCmp = new BuildingCmp(this, direction, interactablesManager);
                     break;
             }
 
-            buildingCmp.SetInteractablesManager(interactablesManager);
             entity.Add(buildingCmp);
 
             switch(direction)

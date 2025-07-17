@@ -730,8 +730,6 @@ namespace Technolithic
                                 animalCmp.NextFertilizationHoursSum = creatureSaveData.NextFertilizationHoursSum;
                                 animalCmp.IsReadyToFertilization = creatureSaveData.IsReadyToFertilization;
 
-                                animalCmp.Hunt = creatureSaveData.Hunt;
-
                                 if (creatureSaveData.StatusEffects != null)
                                 {
                                     foreach (var kvp in creatureSaveData.StatusEffects)
@@ -1373,8 +1371,8 @@ namespace Technolithic
         public Settler SpawnSettler(int x, int y, SettlerInfo settlerInfo, Dictionary<Item, bool> foodRationFilters = null)
         {
             Tile spawnTile = World.GetTileAt(x, y);
-            Settler settler = new Settler(settlerInfo, WorldManager.SettlerBeverageRation, spawnTile);
-            WorldManager.AddCreature(settler.Get<SettlerCmp>());
+            Settler settler = WorldManager.SpawnSettler(settlerInfo, spawnTile) as Settler;
+
             CreatureLayer.Add(settler);
 
             if (foodRationFilters != null)

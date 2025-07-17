@@ -9,7 +9,8 @@ namespace Technolithic
     public class DestructIrrigationCanalCmp : BuildingCmp
     {
 
-        public DestructIrrigationCanalCmp(BuildingTemplate buildingTemplate, Direction direction) : base(buildingTemplate, direction)
+        public DestructIrrigationCanalCmp(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager) 
+            : base(buildingTemplate, direction, interactablesManager)
         {
         }
 

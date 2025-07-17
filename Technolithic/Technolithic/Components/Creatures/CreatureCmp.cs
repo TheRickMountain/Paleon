@@ -105,7 +105,8 @@ namespace Technolithic
         public StatusEffectsManager StatusEffectsManager { get; private set; }
 
         public CreatureCmp(MyTexture bodyTexture, MyTexture hairTexture, string name, CreatureStats stats, float moveSpeed,
-            CreatureType creatureType, Tile spawnTile) : base(true, true)
+            CreatureType creatureType, Tile spawnTile,
+            InteractablesManager interactablesManager) : base(interactablesManager)
         {
             Id = Guid.NewGuid();
 

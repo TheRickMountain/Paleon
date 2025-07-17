@@ -11,7 +11,8 @@ namespace Technolithic
         private Tile centerTile;
         private Tile directionTile;
 
-        public NoriaBuildingCmp(BuildingTemplate buildingTemplate, Direction direction) : base(buildingTemplate, direction)
+        public NoriaBuildingCmp(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager) 
+            : base(buildingTemplate, direction, interactablesManager)
         {
 
         }

@@ -3,7 +3,8 @@
     public class BuildIrrigationCanalCmp : BuildingCmp
     {
 
-        public BuildIrrigationCanalCmp(BuildingTemplate buildingTemplate, Direction direction) : base(buildingTemplate, direction)
+        public BuildIrrigationCanalCmp(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager) 
+            : base(buildingTemplate, direction, interactablesManager)
         {
         }
 

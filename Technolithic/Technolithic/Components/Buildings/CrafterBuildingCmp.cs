@@ -49,8 +49,8 @@ namespace Technolithic
 
         public bool IsPrepared { get; set; }
 
-        public CrafterBuildingCmp(BuildingTemplate buildingTemplate, Direction direction)
-            : base(buildingTemplate, direction)
+        public CrafterBuildingCmp(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager)
+            : base(buildingTemplate, direction, interactablesManager)
         {
             craftingRecipesToCraft = new Dictionary<CraftingRecipe, int>();
 

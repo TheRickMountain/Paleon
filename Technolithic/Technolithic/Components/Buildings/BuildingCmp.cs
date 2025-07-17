@@ -65,7 +65,8 @@ namespace Technolithic
 
         private float gearRotation = 0;
 
-        public BuildingCmp(BuildingTemplate buildingTemplate, Direction direction) : base(true, true)
+        public BuildingCmp(BuildingTemplate buildingTemplate, Direction direction,
+            InteractablesManager interactablesManager) : base(interactablesManager)
         {
             BuildingTemplate = buildingTemplate;
             if (BuildingTemplate.Rotatable == false)

@@ -9,54 +9,12 @@ namespace Technolithic
 {
     public class AnimalCmp : CreatureCmp
     {
-        private bool hunt;
-
         public AnimalPenBuildingCmp TargetAnimalPen { get; set; }
-
-        private static bool wasInformed = false;
-
-        public bool Hunt 
-        { 
-            get { return hunt; } 
-            set
-            {
-                if (hunt == value)
-                    return;
-
-                hunt = value;
-
-                if (hunt)
-                {
-                    if (wasInformed == false)
-                    {
-                        GameplayScene.UIRootNodeScript?.NotificationsUI.GetComponent<NotificationsUIScript>()
-                        .AddNotification(Localization.GetLocalizedText("to_do_the_job_of_x_you_need_tools", $"\"{Labor.GetLaborString(LaborType.Hunt)}\""), 
-                        NotificationLevel.INFO, Entity);
-
-                        wasInformed = true;
-                    }
-
-                    indicator.Active = true;
-                    indicator.Texture = ResourceManager.HuntIcon;
-
-                    GameplayScene.WorldManager.AnimalsToHunt.Add(this);
-                }
-                else
-                {
-                    indicator.Active = false;
-
-                    GameplayScene.WorldManager.AnimalsToHunt.Remove(this);
-                }
-            }
-        }
 
         public bool CanHunt
         {
             get
             {
-                if (IsDomesticated)
-                    return false;
-
                 if (IsHidden)
                     return false;
 
@@ -68,9 +26,6 @@ namespace Technolithic
         {
             get
             {
-                if (IsDomesticated)
-                    return false;
-
                 if (WasAttacked) // нельзя приручить атакованное животное
                     return false;
 
@@ -92,9 +47,6 @@ namespace Technolithic
         private AnimalEatLabor eatLabor;
         private AnimalWanderLabor wanderLabor;
         private AnimalFertilizationLabor animalFertilizationLabor;
-
-        // TODO: remove after migration to interaction system
-        private Sprite indicator;
 
         public bool WasAttacked { get; set; } = false;
 
@@ -120,9 +72,9 @@ namespace Technolithic
 
         public int DaysUntilAging { get; set; }
 
-        public AnimalCmp(CreatureStats stats, AnimalTemplate animalTemplate, Tile spawnTile) 
+        public AnimalCmp(CreatureStats stats, AnimalTemplate animalTemplate, Tile spawnTile, InteractablesManager interactablesManager) 
             : base(animalTemplate.Texture, null, animalTemplate.Name, stats, animalTemplate.MovementSpeed, CreatureType.Animal,
-                  spawnTile)
+                  spawnTile, interactablesManager)
         {
             AnimalTemplate = animalTemplate;
 
@@ -159,14 +111,6 @@ namespace Technolithic
             animalFertilizationLabor = new AnimalFertilizationLabor();
             animalFertilizationLabor.Repeat = true;
 
-            indicator = new Sprite(RenderManager.Pixel);
-            indicator.Color = Color.White * 0.75f;
-            indicator.Width = 16;
-            indicator.Height = 16;
-            indicator.Active = false;
-            indicator.X = 4;
-            indicator.Y = -AnimalTemplate.TextureHeight;
-
             if (AnimalTemplate.AnimalProduct != null)
             {
                 percentPerMinute = AnimalTemplate.AnimalProduct.PercentPerDay / (WorldState.HOURS_PER_CYCLE * WorldState.MINUTES_PER_HOUR);
@@ -178,7 +122,7 @@ namespace Technolithic
             BodyImage.X = (Engine.TILE_SIZE / 2) - (AnimalTemplate.TextureWidth / 2);
             BodyImage.Y = -(AnimalTemplate.TextureHeight - Engine.TILE_SIZE);
 
-            if(IsDomesticated)
+            if(AnimalTemplate.IsWild == false)
             {
                 CanBeRenamed = true;
             }
@@ -192,6 +136,9 @@ namespace Technolithic
         {
             if (AnimalTemplate.IsWild)
             {
+                AddAvailableInteraction(InteractionType.Hunt, LaborType.Hunt, true);
+                ActivateInteraction(InteractionType.Hunt);
+
                 if(AnimalTemplate.DomesticationData != null)
                 {
                     AddAvailableInteraction(InteractionType.Domesticate, LaborType.Ranching, false);
@@ -229,8 +176,6 @@ namespace Technolithic
         public override void Begin()
         {
             base.Begin();
-
-            indicator.Entity = Entity;
 
             NextFertilizationHoursSum = MyRandom.Range(WorldState.HOURS_PER_CYCLE, WorldState.HOURS_PER_CYCLE + WorldState.HOURS_PER_CYCLE / 2);
 
@@ -467,14 +412,6 @@ namespace Technolithic
             }
         }
 
-        public override void Render()
-        {
-            base.Render();
-
-            if (indicator.Active)
-                indicator.Render();
-        }
-
         private Timer wanderTimer = new Timer();
         private int idleTime = 8;
 
@@ -524,7 +461,10 @@ namespace Technolithic
                             }
                             else
                             {
-                                adultAnimal.MarkInteraction(InteractionType.Domesticate);
+                                if (IsInteractionMarked(InteractionType.Domesticate))
+                                {
+                                    adultAnimal.MarkInteraction(InteractionType.Domesticate);
+                                }
                             }
 
                             Die(null, false);
@@ -541,7 +481,10 @@ namespace Technolithic
                             }
                             else
                             {
-                                oldAnimal.MarkInteraction(InteractionType.Domesticate);
+                                if (IsInteractionMarked(InteractionType.Domesticate))
+                                {
+                                    oldAnimal.MarkInteraction(InteractionType.Domesticate);
+                                }
                             }
 
                             Die(null, false);
@@ -650,46 +593,46 @@ namespace Technolithic
                 }
             }
 
-            if(AnimalTemplate.IsPet && Parent != null && Parent.GetRoomId() == GetRoomId())
-            {
-                if(Parent.CurrentLabor != null && Parent.CurrentLabor.LaborType == LaborType.Hunt)
-                {
-                    if (Parent.CurrentLabor is SettlerHuntLabor)
-                    {
-                        SettlerHuntLabor parentHuntLabor = Parent.CurrentLabor as SettlerHuntLabor;
+            //if(AnimalTemplate.IsPet && Parent != null && Parent.GetRoomId() == GetRoomId())
+            //{
+            //    if(Parent.CurrentLabor != null && Parent.CurrentLabor.LaborType == LaborType.Hunt)
+            //    {
+            //        if (Parent.CurrentLabor is SettlerHuntLabor)
+            //        {
+            //            SettlerHuntLabor parentHuntLabor = Parent.CurrentLabor as SettlerHuntLabor;
 
-                        AnimalCmp parentTargetAnimal = parentHuntLabor.GetTasks(Parent)
-                            .Where(x => x is SettlerHuntTask)
-                            .Select(x => (x as SettlerHuntTask).TargetAnimal)
-                            .First();
+            //            AnimalCmp parentTargetAnimal = parentHuntLabor.GetTasks(Parent)
+            //                .Where(x => x is SettlerHuntTask)
+            //                .Select(x => (x as SettlerHuntTask).TargetAnimal)
+            //                .First();
 
-                        AnimalHuntLabor huntLabor = new AnimalHuntLabor(parentTargetAnimal);
+            //            AnimalHuntLabor huntLabor = new AnimalHuntLabor(parentTargetAnimal);
 
-                        if (huntLabor.Check(this))
-                        {
-                            GameplayScene.Instance.AchievementManager.UnlockAchievement(AchievementId.BEST_FRIENDS_FOREVER);
+            //            if (huntLabor.Check(this))
+            //            {
+            //                GameplayScene.Instance.AchievementManager.UnlockAchievement(AchievementId.BEST_FRIENDS_FOREVER);
 
-                            return huntLabor;
-                        }
-                    }
-                    else if(Parent.CurrentLabor is AttackLabor)
-                    {
-                        AttackLabor parentAttackLabor = Parent.CurrentLabor as AttackLabor;
+            //                return huntLabor;
+            //            }
+            //        }
+            //        else if(Parent.CurrentLabor is AttackLabor)
+            //        {
+            //            AttackLabor parentAttackLabor = Parent.CurrentLabor as AttackLabor;
 
-                        AttackLabor attackLabor = new AttackLabor(parentAttackLabor.TargetCreature);
+            //            AttackLabor attackLabor = new AttackLabor(parentAttackLabor.TargetCreature);
 
-                        if(attackLabor.Check(this))
-                        {
-                            attackLabor.CreateTasks(this);
-                            attackLabor.InitTasks(this);
+            //            if(attackLabor.Check(this))
+            //            {
+            //                attackLabor.CreateTasks(this);
+            //                attackLabor.InitTasks(this);
 
-                            GameplayScene.Instance.AchievementManager.UnlockAchievement(AchievementId.BEST_FRIENDS_FOREVER);
+            //                GameplayScene.Instance.AchievementManager.UnlockAchievement(AchievementId.BEST_FRIENDS_FOREVER);
 
-                            return attackLabor;
-                        }
-                    }
-                }
-            }
+            //                return attackLabor;
+            //            }
+            //        }
+            //    }
+            //}
 
             if (wanderTimer.GetTime() > idleTime && wanderLabor.Check(this))
             {
@@ -763,8 +706,6 @@ namespace Technolithic
 
         public override void Die(string reasonMessage, bool throwLoot = true)
         {
-            indicator.Active = false;
-
             GameplayScene.Instance.WorldState.OnNextDayStartedCallback -= OnNextDayStarted;
             GameplayScene.Instance.WorldState.NextHourStarted -= OnNextHourStarted;
 
@@ -924,7 +865,6 @@ namespace Technolithic
 
             creatureSaveData.DaysUntilAging = DaysUntilAging;
 
-            creatureSaveData.Hunt = Hunt;
             creatureSaveData.WasAttacked = WasAttacked;
             creatureSaveData.ProductReadyPercent = ProductReadyPercent;
             creatureSaveData.AnimalTemplateName = AnimalTemplate.Json;

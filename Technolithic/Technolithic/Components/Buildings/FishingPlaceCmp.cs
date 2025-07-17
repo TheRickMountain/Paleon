@@ -12,7 +12,8 @@ namespace Technolithic
 
         private static bool wasInformed = false;
 
-        public FishingPlaceCmp(BuildingTemplate buildingTemplate, Direction direction) : base(buildingTemplate, direction)
+        public FishingPlaceCmp(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager) 
+            : base(buildingTemplate, direction, interactablesManager)
         {
 
         }

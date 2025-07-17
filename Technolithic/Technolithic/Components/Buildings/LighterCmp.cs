@@ -9,8 +9,8 @@ namespace Technolithic
     public class LighterCmp : BuildingCmp
     {
 
-        public LighterCmp(BuildingTemplate buildingTemplate, Direction direction) 
-            : base(buildingTemplate, direction)
+        public LighterCmp(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager) 
+            : base(buildingTemplate, direction, interactablesManager)
         {
 
         }

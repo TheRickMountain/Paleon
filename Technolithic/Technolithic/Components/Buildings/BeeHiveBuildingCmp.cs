@@ -28,7 +28,8 @@ namespace Technolithic
         private float baseSpeedPerMinute;
         private float additionalSpeedPerMinute;
 
-        public BeeHiveBuildingCmp(BuildingTemplate buildingTemplate, Direction direction) : base(buildingTemplate, direction)
+        public BeeHiveBuildingCmp(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager) 
+            : base(buildingTemplate, direction, interactablesManager)
         {
             float progressPerHour = BuildingTemplate.BeeHiveData.HoneyGenerationSpeed / WorldState.HOURS_PER_CYCLE;
             baseSpeedPerMinute = progressPerHour / WorldState.MINUTES_PER_HOUR;

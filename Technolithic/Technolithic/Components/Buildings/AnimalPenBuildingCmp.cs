@@ -25,8 +25,8 @@ namespace Technolithic
 
         private const float MAX_PERCENT_PER_DAY = 75;
 
-        public AnimalPenBuildingCmp(BuildingTemplate buildingTemplate, Direction direction) 
-            : base(buildingTemplate, direction)
+        public AnimalPenBuildingCmp(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager) 
+            : base(buildingTemplate, direction, interactablesManager)
         {
 
         }

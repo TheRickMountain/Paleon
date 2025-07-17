@@ -15,8 +15,8 @@ namespace Technolithic
 
         public GateState State { get; private set; } = GateState.Opened;
 
-        public GateCmp(BuildingTemplate buildingTemplate, Direction direction) 
-            : base(buildingTemplate, direction)
+        public GateCmp(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager) 
+            : base(buildingTemplate, direction, interactablesManager)
         {
         }
 

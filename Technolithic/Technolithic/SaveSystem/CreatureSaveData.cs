@@ -47,8 +47,6 @@ namespace Technolithic
         public float Temperature { get; set; }
         public float Happiness { get; set; }
 
-        public bool Hunt { get; set; }
-
         public bool WasAttacked { get; set; }
         public float ProductReadyPercent { get; set; }
         public CreatureType CreatureType { get; set; }

@@ -17,8 +17,8 @@ namespace Technolithic
 
         private Slider miningProgressSlider;
 
-        public MineBuildingCmp(BuildingTemplate buildingTemplate, Direction direction) 
-            : base(buildingTemplate, direction)
+        public MineBuildingCmp(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager) 
+            : base(buildingTemplate, direction, interactablesManager)
         {
 
         }

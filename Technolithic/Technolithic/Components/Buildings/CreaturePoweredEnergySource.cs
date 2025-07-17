@@ -11,8 +11,8 @@ namespace Technolithic
 
         public CreatureCmp CurrentCreature { get; set; }
 
-        public CreaturePoweredEnergySource(BuildingTemplate buildingTemplate, Direction direction) 
-            : base(buildingTemplate, direction)
+        public CreaturePoweredEnergySource(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager) 
+            : base(buildingTemplate, direction, interactablesManager)
         {
             
         }

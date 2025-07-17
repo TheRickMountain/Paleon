@@ -40,14 +40,10 @@ namespace Technolithic
 
         public IReadOnlySet<InteractionType> AvailableInteractions => _interactionHandler.AvailableInteractions;
 
-        public Interactable(bool active, bool visible) : base(active, visible)
-        {
-            _interactionHandler = new InteractionHandler();
-        }
-
-        public void SetInteractablesManager(InteractablesManager interactablesManager)
+        public Interactable(InteractablesManager interactablesManager) : base(true, true)
         {
             _interactablesManager = interactablesManager;
+            _interactionHandler = new InteractionHandler();
         }
 
         protected void AddAvailableInteraction(InteractionType interactionType, LaborType associatedLaborType, bool toolRequired)

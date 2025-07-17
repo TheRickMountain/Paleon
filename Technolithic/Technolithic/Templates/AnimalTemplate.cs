@@ -193,8 +193,7 @@ namespace Technolithic
             creatureStats.Energy.SatisfiedThreshold = (95f * creatureStats.Energy.MaxValue) / 100f;
             creatureStats.Energy.DissatisfiedThreshold = (20f * creatureStats.Energy.MaxValue) / 100f;
 
-            AnimalCmp animalCmp = new AnimalCmp(creatureStats, this, spawnTile);
-            animalCmp.SetInteractablesManager(interactablesManager);
+            AnimalCmp animalCmp = new AnimalCmp(creatureStats, this, spawnTile, interactablesManager);
             animalCmp.Initialize();
 
             animalCmp.DaysUntilAging = daysUntilAging;

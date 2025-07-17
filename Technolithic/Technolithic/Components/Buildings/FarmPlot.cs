@@ -153,8 +153,8 @@ namespace Technolithic
 
         private Dictionary<Season, int> seasonVariationSet = new Dictionary<Season, int>();
 
-        public FarmPlot(BuildingTemplate buildingTemplate, Direction direction)
-            : base(buildingTemplate, direction)
+        public FarmPlot(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager)
+            : base(buildingTemplate, direction, interactablesManager)
         {
             timer = new Timer();
             PlantData = BuildingTemplate.PlantData;

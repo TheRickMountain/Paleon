@@ -6,7 +6,8 @@
 
         private DepositData _depositData;
 
-        public DepositCmp(BuildingTemplate buildingTemplate, Direction direction) : base(buildingTemplate, direction)
+        public DepositCmp(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager) 
+            : base(buildingTemplate, direction, interactablesManager)
         {
             CurrentStage = 0;
 

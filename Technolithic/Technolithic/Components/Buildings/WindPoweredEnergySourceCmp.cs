@@ -9,8 +9,8 @@ namespace Technolithic
     public class WindPoweredEnergySourceCmp : EnergySourceCmp
     {
 
-        public WindPoweredEnergySourceCmp(BuildingTemplate buildingTemplate, Direction direction) 
-            : base(buildingTemplate, direction)
+        public WindPoweredEnergySourceCmp(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager) 
+            : base(buildingTemplate, direction, interactablesManager)
         {
             
         }

@@ -9,8 +9,8 @@ namespace Technolithic
     public class WallCmp : BuildingCmp
     {
 
-        public WallCmp(BuildingTemplate buildingTemplate, Direction direction) 
-            : base(buildingTemplate, direction)
+        public WallCmp(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager) 
+            : base(buildingTemplate, direction, interactablesManager)
         {
             
         }

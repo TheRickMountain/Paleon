@@ -9,8 +9,8 @@ namespace Technolithic
     public class SurfaceBuilding : BuildingCmp
     {
 
-        public SurfaceBuilding(BuildingTemplate buildingTemplate, Direction direction) 
-            : base(buildingTemplate, direction)
+        public SurfaceBuilding(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager) 
+            : base(buildingTemplate, direction, interactablesManager)
         {
             ThrowBuildingRecipeItemsAfterDestructing = false;
         }

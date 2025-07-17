@@ -593,46 +593,47 @@ namespace Technolithic
                 }
             }
 
-            //if(AnimalTemplate.IsPet && Parent != null && Parent.GetRoomId() == GetRoomId())
-            //{
-            //    if(Parent.CurrentLabor != null && Parent.CurrentLabor.LaborType == LaborType.Hunt)
-            //    {
-            //        if (Parent.CurrentLabor is SettlerHuntLabor)
-            //        {
-            //            SettlerHuntLabor parentHuntLabor = Parent.CurrentLabor as SettlerHuntLabor;
+            if (AnimalTemplate.IsPet && Parent != null && Parent.GetRoomId() == GetRoomId())
+            {
+                if (Parent.CurrentLabor != null && Parent.CurrentLabor.LaborType == LaborType.Hunt)
+                {
+                    if (Parent.CurrentLabor is AttackLabor)
+                    {
+                        AttackLabor parentAttackLabor = Parent.CurrentLabor as AttackLabor;
 
-            //            AnimalCmp parentTargetAnimal = parentHuntLabor.GetTasks(Parent)
-            //                .Where(x => x is SettlerHuntTask)
-            //                .Select(x => (x as SettlerHuntTask).TargetAnimal)
-            //                .First();
+                        AttackLabor attackLabor = new AttackLabor(parentAttackLabor.TargetCreature);
 
-            //            AnimalHuntLabor huntLabor = new AnimalHuntLabor(parentTargetAnimal);
+                        if (attackLabor.Check(this))
+                        {
+                            attackLabor.CreateTasks(this);
+                            attackLabor.InitTasks(this);
 
-            //            if (huntLabor.Check(this))
-            //            {
-            //                GameplayScene.Instance.AchievementManager.UnlockAchievement(AchievementId.BEST_FRIENDS_FOREVER);
+                            GameplayScene.Instance.AchievementManager.UnlockAchievement(AchievementId.BEST_FRIENDS_FOREVER);
 
-            //                return huntLabor;
-            //            }
-            //        }
-            //        else if(Parent.CurrentLabor is AttackLabor)
-            //        {
-            //            AttackLabor parentAttackLabor = Parent.CurrentLabor as AttackLabor;
+                            return attackLabor;
+                        }
+                    }
+                    else
+                    {
+                        AnimalCmp parentsTargetAnimal = Parent.CurrentLabor.GetTasks(Parent)
+                            .Where(x => x is SettlerHuntTask)
+                            .Select(x => (x as SettlerHuntTask).TargetAnimal)
+                            .First();
 
-            //            AttackLabor attackLabor = new AttackLabor(parentAttackLabor.TargetCreature);
+                        if (parentsTargetAnimal != null)
+                        {
+                            AnimalHuntLabor huntLabor = new AnimalHuntLabor(parentsTargetAnimal);
 
-            //            if(attackLabor.Check(this))
-            //            {
-            //                attackLabor.CreateTasks(this);
-            //                attackLabor.InitTasks(this);
+                            if (huntLabor.Check(this))
+                            {
+                                GameplayScene.Instance.AchievementManager.UnlockAchievement(AchievementId.BEST_FRIENDS_FOREVER);
 
-            //                GameplayScene.Instance.AchievementManager.UnlockAchievement(AchievementId.BEST_FRIENDS_FOREVER);
-
-            //                return attackLabor;
-            //            }
-            //        }
-            //    }
-            //}
+                                return huntLabor;
+                            }
+                        }
+                    }
+                }
+            }
 
             if (wanderTimer.GetTime() > idleTime && wanderLabor.Check(this))
             {

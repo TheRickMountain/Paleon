@@ -31,19 +31,6 @@ namespace Technolithic
         IrrigationCanalFull = 14
     }
 
-    public enum MarkType
-    {
-        None = 0,
-        Chop = 1,
-        ChopCompletely = 2,
-        Cut = 4,
-        CutCompletely = 19,
-        Mine = 8,
-        Gather = 6,
-        GatherLiquids = 17,
-        Destruct = 16
-    }
-
     public class Tile
     {
         public int X { get; private set; }
@@ -87,7 +74,6 @@ namespace Technolithic
         private TileMap surfaceTileMap;
         private TileMap blockTileMap;
         private TileMap itemTileMap;
-        private TileMap markTileMap;
 
         private Room room;
         public Room Room 
@@ -177,21 +163,6 @@ namespace Technolithic
                 }
 
                 UpdateMovementSpeedPercent();
-            }
-        }
-
-        private MarkType markType = MarkType.None;
-        public MarkType MarkType
-        {
-            get { return markType; }
-            set
-            {
-                if (markType == value)
-                    return;
-
-                markType = value;
-
-                markTileMap.SetCell(X, Y, (int)markType, Color.White * 0.75f);
             }
         }
 
@@ -292,7 +263,7 @@ namespace Technolithic
         public bool IsIlluminated { get; set; } = false;
 
         public Tile(int x, int y, TileMap summerGroundTileMap, TileMap autumnGroundTileMap, TileMap winterGroundTileMap, TileMap springGroundTileMap, TileMap groundTopTileMap, TileMap surfaceTileMap, TileMap blockTileMap, 
-            TileMap itemTileMap, TileMap markTileMap)
+            TileMap itemTileMap)
         {
             X = x;
             Y = y;
@@ -308,7 +279,6 @@ namespace Technolithic
             this.surfaceTileMap = surfaceTileMap;
             this.blockTileMap = blockTileMap;
             this.itemTileMap = itemTileMap;
-            this.markTileMap = markTileMap;
 
             Inventory = new Inventory(this);
             Inventory.IsStorage = true;
@@ -716,7 +686,6 @@ namespace Technolithic
             tileData.GroundType = (int)GroundType;
             tileData.GroundTopType = (int)GroundTopType;
             tileData.SurfaceId = SurfaceId;
-            tileData.MarkType = (int)MarkType;
             tileData.MoistureLevel = MoistureLevel;
             tileData.FertilizerLevel = FertilizerLevel;
             tileData.IrrigationStrength = IrrigationStrength;

@@ -11,9 +11,9 @@ namespace Technolithic
     public enum MyAction
     {
         Build,
-        CutCompletely,
+        Uproot,
         Chop,
-        Cut,
+        AutoHarvest,
         Hunt,
         Slaughter,
         Cancel,

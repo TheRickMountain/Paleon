@@ -63,6 +63,7 @@ aurochs,Yaban oküzü
 auto_clean_pen,Auto-clean pen
 auto_collect_honey,Automatically collect honey
 auto_collect_wild_honey,Automatically collect wild honey
+auto_harvest,Auto-harvest
 automatically_empty_the_trap,Automatically empty the trap
 automatically_mine_spawned_deposits,Kaynaklar otomatik olarak olusturulacak
 autumn,Sonbahar
@@ -516,6 +517,7 @@ turn_off_music,Müzigi kapat
 turn_on_music,Müzigi ac
 unassign_from,Unassign from {0}
 unfired_pot,Pismemis comlek
+uproot,Uproot
 used_for_automated_grinding_of_grain,Tahil ogütmede kullanilir
 used_for_coal_production,Komür üretimi icin kullanilir
 used_for_cooking,Yemek pisirmek icin kullanilir

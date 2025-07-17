@@ -63,6 +63,7 @@ aurochs,Тур
 auto_clean_pen,Авто-чистка загона
 auto_collect_honey,Автоматически собирать мед
 auto_collect_wild_honey,Автоматически собирать дикий мед
+auto_harvest,Авто-сбор урожая
 automatically_empty_the_trap,Автоматически опустошать ловушку
 automatically_mine_spawned_deposits,Automatically mine spawned deposits
 autumn,Осень
@@ -516,6 +517,7 @@ turn_off_music,Выключить музыку
 turn_on_music,Включить музыку
 unassign_from,Открепить от {0}
 unfired_pot,Необожженный горшок
+uproot,Выкорчевать
 used_for_automated_grinding_of_grain,Используется для автоматического помола зерна
 used_for_coal_production,Используется для производства угля
 used_for_cooking,Используется для приготовления пищи

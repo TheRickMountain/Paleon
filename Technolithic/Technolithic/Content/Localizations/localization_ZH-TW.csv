@@ -63,6 +63,7 @@ aurochs,原牛
 auto_clean_pen,Auto-clean pen
 auto_collect_honey,Automatically collect honey
 auto_collect_wild_honey,Automatically collect wild honey
+auto_harvest,Auto-harvest
 automatically_empty_the_trap,Automatically empty the trap
 automatically_mine_spawned_deposits,自動開採生成的礦物。
 autumn,秋
@@ -515,6 +516,7 @@ turn_off_music,關閉音樂
 turn_on_music,開啟音樂
 unassign_from,取消指派給 {0}  
 unfired_pot,未燒製的罐
+uproot,Uproot
 used_for_automated_grinding_of_grain,利用風力研磨穀物。
 used_for_coal_production,生產煤炭。
 used_for_cooking,用來料理。

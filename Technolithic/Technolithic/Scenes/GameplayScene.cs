@@ -324,11 +324,8 @@ namespace Technolithic
                                         farmPlot.MakeWild();
                                     }
 
-                                    farmPlot.Harvest = buildingSaveData.Harvest;
-                                    farmPlot.Chop = buildingSaveData.Chop;
                                     farmPlot.Fertilize = buildingSaveData.Fertilize;
                                     farmPlot.Irrigate = buildingSaveData.Irrigate;
-                                    farmPlot.DestructingCurrentProgress = buildingSaveData.HarvestingCurrentProgress;
                                 }
                                 break;
                             case BuildingType.Gate:
@@ -1264,8 +1261,6 @@ namespace Technolithic
                     }
                 }
             }
-
-            World.RenderMarkTileMap();
 
             // TODO: Before refactoring, I will place the rendering of the marked interactables here
             foreach(Entity entity in entityLayer.Entities)

@@ -26,7 +26,6 @@ namespace Technolithic
         private TileMap surfaceTileMap;
         private TileMap blockTileMap;
         private TileMap itemTileMap;
-        private TileMap markTileMap;
 
         private Point tileMapCamMin = new Point();
         private Point tileMapCamMax = new Point();
@@ -52,7 +51,6 @@ namespace Technolithic
             surfaceTileMap = new TileMap(TextureBank.SurfaceTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Sides);
             blockTileMap = new TileMap(TextureBank.BlockTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
             itemTileMap = new TileMap(TextureBank.GroundTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
-            markTileMap = new TileMap(TextureBank.UiTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
 
             CreateTiles();
             InitTilesNeighbours();
@@ -79,7 +77,6 @@ namespace Technolithic
                         tile.GroundType = Utils.CheckAndGetCorrectEnum(tileSaveData.GroundType, GroundType.Ground);
                         tile.GroundTopType = Utils.CheckAndGetCorrectEnum(tileSaveData.GroundTopType, GroundTopType.None);
                         tile.SurfaceId = tileSaveData.SurfaceId;
-                        tile.MarkType = Utils.CheckAndGetCorrectEnum(tileSaveData.MarkType, MarkType.None);
 
                         tile.MoistureLevel = tileSaveData.MoistureLevel;
                         tile.FertilizerLevel = tileSaveData.FertilizerLevel;
@@ -419,7 +416,7 @@ namespace Technolithic
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    Tile tile = new Tile(x, y, summerGroundTileMap, autumnGroundTileMap, winterGroundTileMap, springGroundTileMap, groundTopTileMap, surfaceTileMap, blockTileMap, itemTileMap, markTileMap);
+                    Tile tile = new Tile(x, y, summerGroundTileMap, autumnGroundTileMap, winterGroundTileMap, springGroundTileMap, groundTopTileMap, surfaceTileMap, blockTileMap, itemTileMap);
                     tiles[x, y] = tile;
                 }
             }
@@ -540,7 +537,6 @@ namespace Technolithic
             surfaceTileMap.RenderUpdate();
             blockTileMap.RenderUpdate();
             itemTileMap.RenderUpdate();
-            markTileMap.RenderUpdate();
         }
 
         public void RenderSummerGroundTileMap(float alpha)
@@ -593,11 +589,6 @@ namespace Technolithic
         public void RenderItemTileMap()
         {
             itemTileMap.Render(tileMapCamMin, tileMapCamMax);
-        }
-
-        public void RenderMarkTileMap()
-        {
-            markTileMap.Render(tileMapCamMin, tileMapCamMax);
         }
 
         public Tile GetTileAt(int x, int y)

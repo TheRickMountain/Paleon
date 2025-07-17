@@ -8,79 +8,8 @@ namespace Technolithic
 {
     public class FarmPlot : BuildingCmp
     {
-
-        private bool harvest;
-        private bool chop;
         private bool fertilize;
         private bool irrigate;
-
-        public bool Harvest
-        {
-            get { return harvest; }
-            set
-            {
-                if (harvest == value)
-                    return;
-
-                harvest = value;
-
-                if (harvest)
-                {
-                    Chop = false;
-                }
-                else if (harvest == false)
-                {
-                    if (harvestLabor != null)
-                    {
-                        harvestLabor.CancelAndClearAllTasksAndComplete();
-                        harvestLabor = null;
-                    }
-                }
-            }
-        }
-
-        public bool Chop
-        {
-            get { return chop; }
-            set
-            {
-                if (chop == value)
-                    return;
-
-                chop = value;
-
-                if (chop)
-                {
-                    Harvest = false;
-
-                    MarkType markType = MarkType.None;
-                    LaborType laborType = LaborType.None;
-
-                    switch (PlantData.ToolType)
-                    {
-                        case ToolType.Harvesting:
-                            markType = MarkType.CutCompletely;
-                            laborType = LaborType.Harvest;
-                            break;
-                        case ToolType.Woodcutting:
-                            markType = MarkType.ChopCompletely;
-                            laborType = LaborType.Chop;
-                            break;
-                    }
-
-                    chopLabor = new ChopLabor(this, markType, laborType);
-                    GameplayScene.WorldManager.LaborManager.Add(chopLabor);
-                }
-                else
-                {
-                    if (chopLabor != null)
-                    {
-                        chopLabor.CancelAndClearAllTasksAndComplete();
-                        chopLabor = null;
-                    }
-                }
-            }
-        }
 
         public bool Fertilize
         {
@@ -122,9 +51,6 @@ namespace Technolithic
             }
         }
 
-        protected ChopLabor chopLabor;
-        protected HarvestLabor harvestLabor;
-
         protected float growthPercent = 0;
 
         private int lastGrowthPercent = -1;
@@ -138,9 +64,6 @@ namespace Technolithic
         private float irrigatedBoost = 2f; // В сколько раз ускоряется рост растения при орошении
         private float moistureAbsorptionRate = 0.0833333333f; // 50% per day / 600 minutes per day
         private float fertilizerAbsorptionRate = 0.0555555555f; // 33% per day / 600 minutes per day
-
-        public float DestructingCurrentProgress { get; set; }
-        public float DestructingMaxProgress { get; private set; }
 
         public bool IsWild { get; private set; }
 
@@ -164,6 +87,16 @@ namespace Technolithic
         {
             base.CompleteBuilding();
 
+            // TODO: для этого действия МОЖНО (но необязательно использовать инструмент)
+            if (PlantData.Fruits != null)
+            {
+                AddAvailableInteraction(InteractionType.AutoHarvest, LaborType.Harvest, false);
+            }
+
+            // TODO: для этого действия МОЖНО (но необязательно использовать инструмент)
+            AddAvailableInteraction(InteractionType.Uproot, LaborType.Harvest, false);
+            ActivateInteraction(InteractionType.Uproot);
+
             potOfWater = ItemDatabase.GetItemByName("pot_of_water");
             manure = ItemDatabase.GetItemByName("manure");
 
@@ -175,8 +108,14 @@ namespace Technolithic
 
             GetCenterTile().PlantData = PlantData;
 
-            DestructingMaxProgress = PlantData.MaxStrength * (growthPercent / 100f);
-            DestructingCurrentProgress = 0;
+            if (PlantData.Fruits != null)
+            {
+                SetInteractionDuration(InteractionType.AutoHarvest, PlantData.MaxStrength * (growthPercent / 100f));
+                SetInteractionProgress(InteractionType.AutoHarvest, 0);
+            }
+
+            SetInteractionDuration(InteractionType.Uproot, PlantData.MaxStrength * (growthPercent / 100f));
+            SetInteractionProgress(InteractionType.Uproot, 0);
 
             seasonVariationSet[Season.Summer] = PlantData.GetSeasonVariation(Season.Summer);
             seasonVariationSet[Season.Autumn] = PlantData.GetSeasonVariation(Season.Autumn);
@@ -192,6 +131,24 @@ namespace Technolithic
         public override void UpdateCompleted()
         {
             base.UpdateCompleted();
+
+            if (PlantData.Fruits != null)
+            {
+                if (growthPercent >= 100)
+                {
+                    if (IsInteractionActivated(InteractionType.AutoHarvest) == false)
+                    {
+                        ActivateInteraction(InteractionType.AutoHarvest);
+                    }
+                }
+                else
+                {
+                    if (IsInteractionActivated(InteractionType.AutoHarvest))
+                    {
+                        DeactivateInteraction(InteractionType.AutoHarvest);
+                    }
+                }
+            }
 
             if (timer.GetTime() > 1.0f)
             {
@@ -260,8 +217,14 @@ namespace Technolithic
 
             this.growthPercent = growthPercent;
 
-            DestructingMaxProgress = PlantData.MaxStrength * (growthPercent / 100f);
-            DestructingCurrentProgress = 0;
+            if (PlantData.Fruits != null)
+            {
+                SetInteractionDuration(InteractionType.AutoHarvest, PlantData.MaxStrength * (growthPercent / 100f));
+                SetInteractionProgress(InteractionType.AutoHarvest, 0);
+            }
+
+            SetInteractionDuration(InteractionType.Uproot, PlantData.MaxStrength * (growthPercent / 100f));
+            SetInteractionProgress(InteractionType.Uproot, 0);
 
             currentStage = -1;
             AddGrowingProgress(0);
@@ -269,42 +232,53 @@ namespace Technolithic
             UpdateFarmPlotView();
         }
 
-        public void TryToChop()
+        public override void CompleteInteraction(InteractionType interactionType)
         {
-            HarvestPlant();
+            base.CompleteInteraction(interactionType);
 
-            DestructBuilding();
-        }
-
-        public void TryToHarvest(CreatureCmp creatureCmp)
-        {
-            HarvestPlant();
-
-            if (PlantData.RemoveAfterHarvest)
+            switch (interactionType)
             {
-                DestructBuilding();
+                case InteractionType.AutoHarvest:
+                    {
+                        HarvestPlant();
 
-                // Если растение было посажено поселенцем, то после сбора урожая это же растения будет посажено заново
-                if (IsWild == false)
-                {
-                    Entity newFarmPlotEntity = GameplayScene.WorldManager.TryToBuild(BuildingTemplate, 
-                        GetCenterTile().X, GetCenterTile().Y, Direction);
-                    FarmPlot newFarmPlot = newFarmPlotEntity.Get<FarmPlot>();
-                    newFarmPlot.Irrigate = Irrigate;
-                    newFarmPlot.Fertilize = Fertilize;
-                }
-            }
-            else
-            {
-                DestructingCurrentProgress = 0;
-                growthPercent = 70;
-                AddGrowingProgress(0);
+                        if (PlantData.RemoveAfterHarvest)
+                        {
+                            DestructBuilding();
+
+                            // Если растение было посажено поселенцем, то после сбора урожая это же растения будет посажено заново
+                            if (IsWild == false)
+                            {
+                                Entity newFarmPlotEntity = GameplayScene.WorldManager.TryToBuild(BuildingTemplate,
+                                    GetCenterTile().X, GetCenterTile().Y, Direction);
+                                FarmPlot newFarmPlot = newFarmPlotEntity.Get<FarmPlot>();
+                                newFarmPlot.Irrigate = Irrigate;
+                                newFarmPlot.Fertilize = Fertilize;
+                            }
+                        }
+                        else
+                        {
+                            SetInteractionProgress(InteractionType.AutoHarvest, 0);
+                            SetInteractionProgress(InteractionType.Uproot, 0);
+
+                            growthPercent = 70;
+                            AddGrowingProgress(0);
+                        }
+                    }
+                    break;
+                case InteractionType.Uproot:
+                    {
+                        HarvestPlant();
+
+                        DestructBuilding();
+                    }
+                    break;
             }
         }
 
         private void HarvestPlant()
         {
-            if (PlantData.Fruits != null && growthPercent == 100)
+            if (PlantData.Fruits != null && growthPercent >= 100)
             {
                 int additionalFruitsWeight = 0;
 
@@ -396,33 +370,6 @@ namespace Technolithic
             float growthSpeedPerMinute = GetGrowthSpeedPerMinute();
 
             AddGrowingProgress(growthSpeedPerMinute);
-
-            if (PlantData.Fruits != null)
-            {
-                if (growthPercent == 100)
-                {
-                    if (harvest == true && (harvestLabor == null || harvestLabor.IsCompleted))
-                    {
-                        MarkType markType = MarkType.None;
-                        LaborType laborType = LaborType.None;
-
-                        switch (PlantData.ToolType)
-                        {
-                            case ToolType.Harvesting:
-                                markType = MarkType.Cut;
-                                laborType = LaborType.Harvest;
-                                break;
-                            case ToolType.Woodcutting:
-                                markType = MarkType.Chop;
-                                laborType = LaborType.Chop;
-                                break;
-                        }
-
-                        harvestLabor = new HarvestLabor(this, markType, laborType);
-                        GameplayScene.WorldManager.LaborManager.Add(harvestLabor);
-                    }
-                }
-            }
         }
 
         public void AddGrowingProgress(float value)
@@ -451,7 +398,12 @@ namespace Technolithic
                 currentStage = newStage;
             }
 
-            DestructingMaxProgress = PlantData.MaxStrength * (growthPercent / 100f);
+            if (PlantData.Fruits != null)
+            {
+                SetInteractionDuration(InteractionType.AutoHarvest, PlantData.MaxStrength * (growthPercent / 100f));
+            }
+
+            SetInteractionDuration(InteractionType.Uproot, PlantData.MaxStrength * (growthPercent / 100f));
 
             int textureVariationId = seasonVariationSet[GameplayScene.Instance.WorldState.CurrentSeason];
             Sprite.CurrentAnimation.Frames[0] = PlantData.VariationsTextures[textureVariationId][currentStage];
@@ -517,11 +469,8 @@ namespace Technolithic
                 buildingSaveData.IsWild = IsWild;
                 buildingSaveData.Irrigate = Irrigate;
                 buildingSaveData.Fertilize = Fertilize;
-                buildingSaveData.Chop = Chop;
-                buildingSaveData.Harvest = Harvest;
                 buildingSaveData.GrowthPercent = growthPercent;
                 buildingSaveData.AdditionalHarvestScrore = additionalHarvestScore;
-                buildingSaveData.HarvestingCurrentProgress = DestructingCurrentProgress;
             }
 
             return buildingSaveData;

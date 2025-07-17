@@ -21,7 +21,9 @@ namespace Technolithic
         Slaughter,
         GatherAnimalProduct,
         Domesticate,
-        Hunt
+        Hunt,
+        AutoHarvest,
+        Uproot
     }
 
     public class InteractionsDatabase
@@ -143,6 +145,20 @@ namespace Technolithic
                 Localization.GetLocalizedText("hunt"),
                 ResourceManager.HuntIcon,
                 Color.Orange,
+                InteractionIconDisplayState.OnMarked));
+
+            AddInteractionData(new InteractionData(
+                InteractionType.AutoHarvest,
+                Localization.GetLocalizedText("auto_harvest"),
+                ResourceManager.AutoHarvestIcon,
+                Color.Orange,
+                InteractionIconDisplayState.OnMarked));
+
+            AddInteractionData(new InteractionData(
+                InteractionType.Uproot,
+                Localization.GetLocalizedText("uproot"),
+                ResourceManager.UprootIcon,
+                Color.Red,
                 InteractionIconDisplayState.OnMarked));
         }
 

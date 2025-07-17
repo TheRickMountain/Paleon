@@ -50,7 +50,7 @@ namespace Technolithic
 
                             if(building.BuildingTemplate.PlantData != null)
                             {
-                                (building as FarmPlot).Harvest = true;
+                                building.MarkInteraction(InteractionType.AutoHarvest);
                             }
                                 
                             State = TaskState.Success;

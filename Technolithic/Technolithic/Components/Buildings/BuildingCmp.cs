@@ -687,11 +687,6 @@ namespace Technolithic
                 smokeTimer.OnTimeout -= OnSmokeTimerTimeout;
             }
 
-            foreach (var tileInfo in TilesInfosList)
-            {
-                tileInfo.Tile.MarkType = MarkType.None;
-            }
-
             IsBuilt = false;
 
             if (BuildingTemplate.LightEmitter != null)

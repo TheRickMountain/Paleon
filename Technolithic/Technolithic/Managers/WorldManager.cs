@@ -1060,6 +1060,12 @@ namespace Technolithic
                         case MyAction.Hunt:
                             interactable.MarkInteraction(InteractionType.Hunt);
                             break;
+                        case MyAction.AutoHarvest:
+                            interactable.MarkInteraction(InteractionType.AutoHarvest);
+                            break;
+                        case MyAction.Uproot:
+                            interactable.MarkInteraction(InteractionType.Uproot);
+                            break;
                         case MyAction.Cancel:
                             {
                                 interactable.UnmarkInteraction(InteractionType.Chop);
@@ -1069,6 +1075,8 @@ namespace Technolithic
                                 interactable.UnmarkInteraction(InteractionType.Destruct);
                                 interactable.UnmarkInteraction(InteractionType.Slaughter);
                                 interactable.UnmarkInteraction(InteractionType.Hunt);
+                                interactable.UnmarkInteraction(InteractionType.AutoHarvest);
+                                interactable.UnmarkInteraction(InteractionType.Uproot);
                             }
                             break;
                     }
@@ -1159,42 +1167,6 @@ namespace Technolithic
                                     Tile tile = tiles[x, y];
 
                                     TryToBuild(Engine.Instance.Buildings["destruct_irrigation_canal"], tile.X, tile.Y, Direction.DOWN);
-                                }
-                            }
-                        }
-                        break;
-                    case MyAction.CutCompletely:
-                        for (int x = 0; x < tiles.GetLength(0); x++)
-                        {
-                            for (int y = 0; y < tiles.GetLength(1); y++)
-                            {
-                                Tile tile = tiles[x, y];
-
-                                if (tile.Entity != null)
-                                {
-                                    FarmPlot wildFarmPlot = tile.Entity.Get<FarmPlot>();
-                                    if (wildFarmPlot != null && wildFarmPlot.IsBuilt && wildFarmPlot.PlantData.ToolType == ToolType.Harvesting)
-                                    {
-                                        wildFarmPlot.Chop = true;
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case MyAction.Cut:
-                        for (int x = 0; x < tiles.GetLength(0); x++)
-                        {
-                            for (int y = 0; y < tiles.GetLength(1); y++)
-                            {
-                                Tile tile = tiles[x, y];
-
-                                if (tile.Entity != null)
-                                {
-                                    FarmPlot wildFarmPlot = tile.Entity.Get<FarmPlot>();
-                                    if (wildFarmPlot != null && wildFarmPlot.IsBuilt && wildFarmPlot.PlantData.ToolType == ToolType.Harvesting)
-                                    {
-                                        wildFarmPlot.Harvest = true;
-                                    }
                                 }
                             }
                         }
@@ -1322,22 +1294,6 @@ namespace Technolithic
                                         if (!building.IsBuilt)
                                         {
                                             building.CancelBuilding();
-                                        }
-                                        else
-                                        {
-                                            if(building is FarmPlot)
-                                            {
-                                                FarmPlot farmPlot = building as FarmPlot;
-                                                if(farmPlot.Chop)
-                                                {
-                                                    farmPlot.Chop = false;
-                                                }
-
-                                                if(farmPlot.Harvest)
-                                                {
-                                                    farmPlot.Harvest = false;
-                                                }
-                                            }
                                         }
                                     }
                                 }

@@ -34,8 +34,8 @@ namespace Technolithic
         public static MyTexture TurnOnIcon { get; private set; }
         public static MyTexture DestructIcon { get; private set; }
         public static MyTexture ChopIcon { get; private set; }
-        public static MyTexture CutIcon { get; private set; }
-        public static MyTexture CutCompletelyIcon { get; private set; }
+        public static MyTexture AutoHarvestIcon { get; private set; }
+        public static MyTexture UprootIcon { get; private set; }
         public static MyTexture FoodIcon { get; private set; }
         public static MyTexture Slot24 { get; private set; }
         public static MyTexture ExclamationMarkIcon { get; private set; }
@@ -194,8 +194,8 @@ namespace Technolithic
             TurnOnIcon = uiSpriteSheet.GetSubtexture(240, 48, 16, 16);
             DestructIcon = uiSpriteSheet.GetSubtexture(0, 16, 16, 16);
             ChopIcon = uiSpriteSheet.GetSubtexture(16, 0, 16, 16);
-            CutIcon = uiSpriteSheet.GetSubtexture(64, 0, 16, 16);
-            CutCompletelyIcon = uiSpriteSheet.GetSubtexture(48, 16, 16, 16);
+            AutoHarvestIcon = uiSpriteSheet.GetSubtexture(64, 0, 16, 16);
+            UprootIcon = uiSpriteSheet.GetSubtexture(48, 16, 16, 16);
             SunAndMoonSprite = uiSpriteSheet.GetSubtexture(192, 96, 32, 32);
             SunAndMoonPointerSprite = uiSpriteSheet.GetSubtexture(224, 96, 32, 32);
             FoodIcon = uiSpriteSheet.GetSubtexture(96, 16, 16, 16);

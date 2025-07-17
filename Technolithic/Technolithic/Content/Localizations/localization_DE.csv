@@ -63,6 +63,7 @@ aurochs,Auerochse
 auto_clean_pen,Auto-clean pen
 auto_collect_honey,Automatically collect honey
 auto_collect_wild_honey,Automatically collect wild honey
+auto_harvest,Auto-harvest
 automatically_empty_the_trap,Automatically empty the trap
 automatically_mine_spawned_deposits,Automatischer Abbau von gespawnten Vorkommen
 autumn,Herbst
@@ -516,6 +517,7 @@ turn_off_music, Musik aus
 turn_on_music,Musik ein
 unassign_from,Unassign from {0}
 unfired_pot,Unfired pot
+uproot,Uproot
 used_for_automated_grinding_of_grain,Zum automatischen Mahlen von Getreide
 used_for_coal_production,Für die Herstellung von Holzkohle
 used_for_cooking,Zum Kochen

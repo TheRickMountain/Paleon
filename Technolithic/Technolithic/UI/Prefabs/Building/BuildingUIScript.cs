@@ -16,13 +16,11 @@ namespace Technolithic
         private MyPanelUI panel;
 
         private BigButton cancelButton;
-        private BigButton cutChopButton;
-        private BigButton cutChopCompletelyButton;
         private BigButton cloneButton;
         private BigButton irrigateButton;
         private BigButton fertilizeButton;
-        private BigButton copySettingsButton;
-        private BigButton priorityButton;
+        private BigButton copySettingsButton; // TODO: эту кнопку нужно перенести в дополнительные окна, где непосредственно расположены все настройки
+        private BigButton priorityButton; 
         private BigButton autoMineSpawnedDepositsButton;
         private BigButton tradeButton;
         private MTextButtonUI returnHomeButton;
@@ -49,12 +47,6 @@ namespace Technolithic
             cancelButton = new BigButton(ParentNode.Scene, ResourceManager.CancelIcon, true);
             cancelButton.GetComponent<ButtonScript>().AddOnClickedCallback(CancelBuilding);
             cancelButton.Tooltips = Localization.GetLocalizedText("cancel");
-
-            cutChopButton = new BigButton(ParentNode.Scene, RenderManager.Pixel, true);
-            cutChopButton.GetComponent<ButtonScript>().AddOnClickedCallback(HarvestBuilding);
-
-            cutChopCompletelyButton = new BigButton(ParentNode.Scene, RenderManager.Pixel, true);
-            cutChopCompletelyButton.GetComponent<ButtonScript>().AddOnClickedCallback(ChopBuilding);
 
             cloneButton = new BigButton(ParentNode.Scene, RenderManager.Pixel, false);
             cloneButton.Tooltips = Localization.GetLocalizedText("clone") + " [Q]";
@@ -219,22 +211,6 @@ namespace Technolithic
             CloseUI(selectedBuilding);
         }
 
-        public void ChopBuilding(bool value, ButtonScript sender)
-        {
-            FarmPlot wildFarmPlot = selectedBuilding as FarmPlot;
-            wildFarmPlot.Chop = !wildFarmPlot.Chop;
-
-            UpdateButtons();
-        }
-
-        public void HarvestBuilding(bool value, ButtonScript sender)
-        {
-            FarmPlot wildFarmPlot = selectedBuilding as FarmPlot;
-            wildFarmPlot.Harvest = !wildFarmPlot.Harvest;
-
-            UpdateButtons();
-        }
-
         public void CancelBuilding(bool value, ButtonScript sender)
         {
             selectedBuilding.CancelBuilding();
@@ -315,57 +291,6 @@ namespace Technolithic
                             buttonsListView.AddItem(fertilizeButton);
                         }
                     }
-
-                    // *** Harvest button
-                    if (farmPlot.PlantData.Fruits != null)
-                    {
-                        cutChopButton.GetComponent<ButtonScript>().IsDisabled = false;
-
-                        if (farmPlot.PlantData.ToolType == ToolType.Harvesting)
-                        {
-                            cutChopButton.GetChildByName("Icon").GetComponent<MImageCmp>().Texture = ResourceManager.CutIcon;
-
-                            cutChopButton.GetComponent<ButtonScript>().IsSelected = farmPlot.Harvest;
-
-                            cutChopButton.Tooltips = Localization.GetLocalizedText("cut_automatically") + "\n" +
-                "/c[#919090]" + Localization.GetLocalizedText("сut_automatically_description") + "/cd";
-                        }
-                        else if (farmPlot.PlantData.ToolType == ToolType.Woodcutting)
-                        {
-                            cutChopButton.GetChildByName("Icon").GetComponent<MImageCmp>().Texture = ResourceManager.ChopIcon;
-
-                            if(!GameplayScene.Instance.ProgressTree.IsTechnologyUnlocked(TechnologyDatabase.StoneTools))
-                            {
-                                cutChopButton.GetComponent<ButtonScript>().IsDisabled = true;
-                                cutChopButton.Tooltips = Localization.GetLocalizedText("сhop_automatically") + "\n" +
-                "/c[#919090]" + Localization.GetLocalizedText("сhop_automatically_description") + "/cd\n" + 
-                $"/c[#FFA500]{Localization.GetLocalizedText("required_technology")}:\n" +
-                                    $"{TechnologyDatabase.StoneTools.Name}/cd";
-                            }
-                            else
-                            {
-                                cutChopButton.GetComponent<ButtonScript>().IsSelected = farmPlot.Harvest;
-                                cutChopButton.Tooltips = Localization.GetLocalizedText("сhop_automatically") + "\n" +
-                "/c[#919090]" + Localization.GetLocalizedText("сhop_automatically_description") + "/cd";
-                            }
-                        }
-
-                        buttonsListView.AddItem(cutChopButton);
-                    }
-
-                    // *** Chop button
-                    cutChopCompletelyButton.GetComponent<ButtonScript>().IsDisabled = false;
-
-                    if (farmPlot.PlantData.ToolType == ToolType.Harvesting)
-                    {
-                        cutChopCompletelyButton.GetChildByName("Icon").GetComponent<MImageCmp>().Texture = ResourceManager.CutCompletelyIcon;
-
-                        cutChopCompletelyButton.GetComponent<ButtonScript>().IsSelected = farmPlot.Chop;
-
-                        cutChopCompletelyButton.Tooltips = Localization.GetLocalizedText("cut_now");
-                    }
-
-                    buttonsListView.AddItem(cutChopCompletelyButton);
                 }
                 else if(selectedBuilding.BuildingTemplate.BuildingType == BuildingType.TimeMachine)
                 {

@@ -63,6 +63,7 @@ aurochs,野生牛
 auto_clean_pen,Auto-clean pen
 auto_collect_honey,Automatically collect honey
 auto_collect_wild_honey,Automatically collect wild honey
+auto_harvest,Auto-harvest
 automatically_empty_the_trap,Automatically empty the trap
 automatically_mine_spawned_deposits,生成された鉱床を自動的に採掘
 autumn,秋
@@ -518,6 +519,7 @@ turn_off_music,音楽を消す
 turn_on_music,音楽を再生
 unassign_from,{0}から割り当て解除
 unfired_pot,素焼きの壺
+uproot,Uproot
 used_for_automated_grinding_of_grain,穀物の自動粉砕に使用
 used_for_coal_production,木炭生産に使用
 used_for_cooking,調理に使用

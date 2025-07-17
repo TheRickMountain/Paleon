@@ -9,6 +9,8 @@ namespace Technolithic
         private InteractionType _interactionType;
         private bool _isEndless;
 
+        private Tile _targetTile;
+
         private bool _isInteractionStarted = false;
 
         public InteractTask(CreatureCmp creatureCmp, Interactable interactable, InteractionData interactionData) 
@@ -27,10 +29,10 @@ namespace Technolithic
 
         public override void BeforeUpdate()
         {
-            Tile tile = _interactable.GetApproachableTile(Owner);
-            if (tile != null)
+            _targetTile = _interactable.GetApproachableTile(Owner);
+            if (_targetTile != null)
             {
-                Owner.Movement.SetPath(tile, false);
+                Owner.Movement.SetPath(_targetTile, false);
                 Owner.Slider.SetValue(0, 1.0f, _interactable.GetInteractionProgressPercent(_interactionType), 
                     _interactionData.ProgressBarColor);
             }
@@ -54,6 +56,14 @@ namespace Technolithic
             {
                 case MovementState.Success:
                     {
+                        Tile newTargetTile = _interactable.GetApproachableTile(Owner);
+                        if (_targetTile != newTargetTile)
+                        {
+                            _targetTile = newTargetTile;
+                            Owner.Movement.SetPath(_targetTile, false);
+                            return;
+                        }
+
                         if (_isInteractionStarted == false)
                         {
                             _isInteractionStarted = true;
@@ -111,6 +121,12 @@ namespace Technolithic
                 case MovementState.Running:
                     {
                         State = TaskState.Running;
+
+                        Tile newTargetTile = _interactable.GetApproachableTile(Owner);
+                        if (_targetTile != newTargetTile)
+                        {
+                            Owner.Movement.ResetPath();
+                        }
                     }
                     break;
             }

@@ -72,6 +72,8 @@ namespace Technolithic
 
         public int DaysUntilAging { get; set; }
 
+        private bool isFrozen = false; // INFO: Animal can't work, eat, sleep when it's frozen
+
         public AnimalCmp(CreatureStats stats, AnimalTemplate animalTemplate, Tile spawnTile, InteractablesManager interactablesManager) 
             : base(animalTemplate.Texture, null, animalTemplate.Name, stats, animalTemplate.MovementSpeed, CreatureType.Animal,
                   spawnTile, interactablesManager)
@@ -224,6 +226,40 @@ namespace Technolithic
             }
         }
 
+        public override void OnInteractionStarted(InteractionType interactionType, CreatureCmp creature)
+        {
+            base.OnInteractionStarted(interactionType, creature);
+
+            switch(interactionType)
+            {
+                case InteractionType.Domesticate:
+                case InteractionType.GatherAnimalProduct:
+                case InteractionType.Slaughter:
+                    {
+                        isFrozen = true;
+
+                        CancelLabor();
+                    }
+                    break;
+            }
+        }
+
+        public override void OnInteractionEnded(InteractionType interactionType, CreatureCmp creature)
+        {
+            base.OnInteractionEnded(interactionType, creature);
+
+            switch (interactionType)
+            {
+                case InteractionType.Domesticate:
+                case InteractionType.GatherAnimalProduct:
+                case InteractionType.Slaughter:
+                    {
+                        isFrozen = false;
+                    }
+                    break;
+            }
+        }
+
         protected override void ChangeDirection(Direction direction)
         {
             base.ChangeDirection(direction);
@@ -309,7 +345,7 @@ namespace Technolithic
                     }
                 }
 
-                if (IsReserved == false)
+                if (isFrozen == false)
                 {
                     if (CreatureStats.Hunger.IsDissatisfied() && (CurrentLabor == null || CurrentLabor.LaborType != LaborType.Eat))
                     {

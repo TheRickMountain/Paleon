@@ -587,6 +587,7 @@ work,Работа
 workers,Рабочие
 workshop,Мастерская
 world_name,Наименование мира
+world_seed,Зерно мира
 world_settings,Настройки мира
 world_size,Размер мира
 world_with_that_name_already_exists,Мир с таким именем уже существует

@@ -587,6 +587,7 @@ work,calismak
 workers,Isciler
 workshop,Atolye
 world_name,Dünya adi
+world_seed,World seed
 world_settings,Dünya ayarlari
 world_size,Dünya boyutu
 world_with_that_name_already_exists,Ayni isimli dünya var

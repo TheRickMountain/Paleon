@@ -15,8 +15,6 @@ namespace Technolithic
             textInput.Name = "TextInput";
             textInput.Width = Engine.Width - 40;
             textInput.Height = 40;
-            textInput.GetComponent<MTextInputScript>().AllowIllegalSigns = true;
-            textInput.GetComponent<MTextInputScript>().CharactersLimit = 200;
 
             Width = textInput.Width;
             Height = textInput.Height;

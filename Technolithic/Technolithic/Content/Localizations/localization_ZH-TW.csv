@@ -586,6 +586,7 @@ work,工作
 workers,工作者
 workshop,工作坊
 world_name,世界名稱
+world_seed,World seed
 world_settings,世界設定
 world_size,世界規模
 world_with_that_name_already_exists,已存在同名世界。

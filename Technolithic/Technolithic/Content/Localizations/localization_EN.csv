@@ -587,6 +587,7 @@ work,Work
 workers,Workers
 workshop,Workshop
 world_name,World name
+world_seed,World seed
 world_settings,World settings
 world_size,World size
 world_with_that_name_already_exists,World with that name already exists

@@ -280,7 +280,7 @@ namespace Technolithic
 
         public void LoadSave(bool value, ButtonScript sender)
         {
-            Engine.Scene = new GameplayScene(sender.ParentNode.GetMetadata<string>("save"), 0, selectedSaveFolder);
+            Engine.Scene = new GameplayScene(sender.ParentNode.GetMetadata<string>("save"), selectedSaveFolder);
             Close(true, null);
         }
 

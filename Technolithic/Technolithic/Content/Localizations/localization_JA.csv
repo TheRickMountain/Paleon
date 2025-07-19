@@ -589,6 +589,7 @@ work,労働
 workers,労働者
 workshop,作業場
 world_name,ワールド名
+world_seed,World seed
 world_settings,ワールド設定
 world_size,ワールド・サイズ
 world_with_that_name_already_exists,そのワールド名はすでに存在しています

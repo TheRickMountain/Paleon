@@ -80,7 +80,158 @@ namespace Technolithic
         private float backgroundSongPauseTimer = 0;
         private int pauseBetweenBackgroundSongs = 600;
 
-        public GameplayScene(string saveFileName, int worldSize, string worldName)
+        public GameplayScene(WorldSettings worldSettings)
+        {
+            MediaPlayer.Stop();
+            MediaPlayer.IsMuted = false;
+
+            backgroundSongs = new List<Song>
+            {
+                ResourceManager.GetSong("music_1"),
+                ResourceManager.GetSong("music_2")
+            };
+
+            backgroundSongIndex = MyRandom.Range(0, backgroundSongs.Count);
+
+            MediaPlayer.Play(backgroundSongs[backgroundSongIndex]);
+
+            WorldName = worldSettings.Name;
+
+            WorldSize = worldSettings.Size;
+
+            MouseOnUI = false;
+            OnGameMenu = false;
+
+            Instance = this;
+
+            entityLayer = CreateLayer("Entity");
+            entityLayer.Entities.SortByYAxisWhenAdded = true;
+            CreatureLayer = CreateLayer("Creature");
+            CreatureLayer.Entities.SortByYAxisAlways = true;
+
+            Penumbra = new PenumbraComponent(Engine.Instance);
+            Penumbra.Initialize();
+
+            GameplayCamera = new GameplayCamera(false);
+            entityLayer.Add(GameplayCamera);
+
+            ProgressTree = new ProgressTree(null);
+
+            WorldManager = new WorldManager(null, ProgressTree);
+            WorldManager.Begin();
+
+            AchievementManager = new AchievementManager(null);
+            TotalResourcesChart = new TotalResourcesChart();
+            ResourcesLimitManager = new ResourcesLimitManager(null);
+            ProblemIndicatorManager = new ProblemIndicatorManager();
+            World = new World(WorldSize, WorldSize, null);
+            WorldState = new WorldState(null);
+            WeatherSoundManager = new WeatherSoundManager(WorldState);
+            NomadsManager = new NomadsManager(null);
+            AnimalSpawnManager = new AnimalSpawnManager();
+            TradingSystem = new TradingSystem();
+
+            WorldGenerator worldGenerator = new WorldGenerator(World, WorldManager, worldSettings);
+            worldGenerator.GenerateWorld();
+
+            WorldManager.GenerateWorld();
+
+            WaterChunkManager = new WaterChunkManager();
+            EnergyManager = new EnergyManager();
+            PrecipitationManager = new PrecipitationManager(WorldState.CurrentSeason);
+
+            // Initializing water chunk manager
+            Dictionary<MChunk, WaterChunk> chunkWaterChunkKvp = new Dictionary<MChunk, WaterChunk>();
+            List<WaterChunk> waterChunks = new List<WaterChunk>();
+
+            for (int x = 0; x < World.Width; x++)
+            {
+                for (int y = 0; y < World.Height; y++)
+                {
+                    Tile tile = World.GetTileAt(x, y);
+
+                    if (tile.GroundTopType == GroundTopType.Water || tile.GroundTopType == GroundTopType.DeepWater)
+                    {
+                        if (chunkWaterChunkKvp.ContainsKey(tile.Chunk) == false)
+                        {
+                            Color color = ((tile.Chunk.Y * (World.Width / MChunk.CHUNK_SIZE) + tile.Chunk.X) + tile.Chunk.Y % 2) % 2 == 1 ? Color.Yellow : Color.Orange;
+                            WaterChunk waterChunk = new WaterChunk();
+                            waterChunk.Color = color * 0.25f;
+                            waterChunks.Add(waterChunk);
+                            chunkWaterChunkKvp.Add(tile.Chunk, waterChunk);
+                        }
+
+                        chunkWaterChunkKvp[tile.Chunk].AddTile(tile);
+                    }
+                }
+            }
+
+            // Удаление чанков, которые не соответствуют требованиям, иначе привязываем к тайлам
+            for (int i = waterChunks.Count - 1; i >= 0; i--)
+            {
+                if (waterChunks[i].IsUnrequired)
+                {
+                    waterChunks.RemoveAt(i);
+                }
+                else
+                {
+                    WaterChunkManager.AddWaterChunk(waterChunks[i]);
+                    waterChunks[i].Initialize(-1);
+                }
+            }
+
+            SpawnSettler(80, 50, SettlerGenerator.GenerateSettler());
+            SpawnSettler(81, 50, SettlerGenerator.GenerateSettler());
+            SpawnSettler(80, 51, SettlerGenerator.GenerateSettler());
+            SpawnSettler(81, 51, SettlerGenerator.GenerateSettler());
+            SpawnSettler(82, 50, SettlerGenerator.GenerateSettler());
+
+            RenderManager.MainCamera.Position = new Vector2(80 * Engine.TILE_SIZE, 51 * Engine.TILE_SIZE);
+            RenderManager.MainCamera.Zoom = 2.0f;
+
+            WorldState.OnNextDayStartedCallback += PrecipitationManager.OnDayChanged;
+
+            NomadsManager.Begin();
+            WorldState.NextHourStarted += NomadsManager.NextHour;
+
+            AnimalSpawnManager.Begin();
+            WorldState.NextHourStarted += AnimalSpawnManager.NextHour;
+
+            // Если на карте нет ни одного улья, то раз в день, с 5-ти процентным шансом, на карте может заспавниться дикий улей
+            WorldState.OnNextDayStartedCallback += SpawnBeeHivesIfThereIsNo;
+
+            TradingSystem.Begin();
+
+            UpdateLists();
+
+            WeatherSoundManager.Begin();
+
+            StormManager = new StormManager();
+            SmokeManager = new SmokeManager();
+            MessageManager = new MMessageManager();
+            BuildingRangeRenderer = new BuildingRangeRenderer();
+
+            uiRootNode = new UIRootNode(this);
+            UIRootNodeScript = uiRootNode.GetComponent<UIRootNodeScript>();
+
+            uiRootNode.Awake();
+            uiRootNode.Begin();
+
+            if (ProgressTree.AreAllTechnologiesUnlocked())
+            {
+                AchievementManager.UnlockAchievement(AchievementId.ENGINE_OF_PROGRESS);
+            }
+
+            ProgressTree.TechnologyUnlocked += (x) =>
+            {
+                if (ProgressTree.AreAllTechnologiesUnlocked())
+                {
+                    AchievementManager.UnlockAchievement(AchievementId.ENGINE_OF_PROGRESS);
+                }
+            };
+        }
+
+        public GameplayScene(string saveFileName, string worldName)
         {
             MediaPlayer.Stop();
             MediaPlayer.IsMuted = false;
@@ -97,19 +248,12 @@ namespace Technolithic
 
             WorldName = worldName;
 
-            if (string.IsNullOrEmpty(saveFileName))
+            SaveManager saveManager = new StorageSaveManager(Path.Combine("Saves", worldName), saveFileName);
+            saveManager.Load();
+            WorldSize = saveManager.Data.WorldSize;
+            if (WorldSize == 0)
             {
-                WorldSize = worldSize;
-            }
-            else
-            {
-                SaveManager saveManager = new StorageSaveManager(Path.Combine("Saves", worldName), saveFileName);
-                saveManager.Load();
-                WorldSize = saveManager.Data.WorldSize;
-                if (WorldSize == 0)
-                {
-                    WorldSize = 128;
-                }
+                WorldSize = 128;
             }
 
             MouseOnUI = false;
@@ -130,85 +274,10 @@ namespace Technolithic
 
             if (string.IsNullOrEmpty(saveFileName))
             {
-                ProgressTree = new ProgressTree(null);
-
-                WorldManager = new WorldManager(null, ProgressTree);
-                WorldManager.Begin();
-
-                AchievementManager = new AchievementManager(null);
-                TotalResourcesChart = new TotalResourcesChart();
-                ResourcesLimitManager = new ResourcesLimitManager(null);
-                ProblemIndicatorManager = new ProblemIndicatorManager();
-                World = new World(WorldSize, WorldSize, null);
-                World.Begin(null);
-                WorldState = new WorldState(null);
-                WeatherSoundManager = new WeatherSoundManager(WorldState);
-                NomadsManager = new NomadsManager(null);
-                AnimalSpawnManager = new AnimalSpawnManager();
-                TradingSystem = new TradingSystem();
                 
-                WorldGenerator worldGenerator = new WorldGenerator(World, WorldManager);
-
-                WorldManager.GenerateWorld();
-
-                WaterChunkManager = new WaterChunkManager();
-                EnergyManager = new EnergyManager();
-                PrecipitationManager = new PrecipitationManager(WorldState.CurrentSeason);
-
-                // Initializing water chunk manager
-                Dictionary<MChunk, WaterChunk> chunkWaterChunkKvp = new Dictionary<MChunk, WaterChunk>();
-                List<WaterChunk> waterChunks = new List<WaterChunk>();
-
-                for (int x = 0; x < World.Width; x++)
-                {
-                    for (int y = 0; y < World.Height; y++)
-                    {
-                        Tile tile = World.GetTileAt(x, y);
-
-                        if (tile.GroundTopType == GroundTopType.Water || tile.GroundTopType == GroundTopType.DeepWater)
-                        {
-                            if (chunkWaterChunkKvp.ContainsKey(tile.Chunk) == false)
-                            {
-                                Color color = ((tile.Chunk.Y * (World.Width / MChunk.CHUNK_SIZE) + tile.Chunk.X) + tile.Chunk.Y % 2) % 2 == 1 ? Color.Yellow : Color.Orange;
-                                WaterChunk waterChunk = new WaterChunk();
-                                waterChunk.Color = color * 0.25f;
-                                waterChunks.Add(waterChunk);
-                                chunkWaterChunkKvp.Add(tile.Chunk, waterChunk);
-                            }
-
-                            chunkWaterChunkKvp[tile.Chunk].AddTile(tile);
-                        }
-                    }
-                }
-
-                // Удаление чанков, которые не соответствуют требованиям, иначе привязываем к тайлам
-                for (int i = waterChunks.Count - 1; i >= 0; i--)
-                {
-                    if (waterChunks[i].IsUnrequired)
-                    {
-                        waterChunks.RemoveAt(i);
-                    }
-                    else
-                    {
-                        WaterChunkManager.AddWaterChunk(waterChunks[i]);
-                        waterChunks[i].Initialize(-1);
-                    }
-                }
-
-                SpawnSettler(80, 50, SettlerGenerator.GenerateSettler());
-                SpawnSettler(81, 50, SettlerGenerator.GenerateSettler());
-                SpawnSettler(80, 51, SettlerGenerator.GenerateSettler());
-                SpawnSettler(81, 51, SettlerGenerator.GenerateSettler());
-                SpawnSettler(82, 50, SettlerGenerator.GenerateSettler());
-
-                RenderManager.MainCamera.Position = new Vector2(80 * Engine.TILE_SIZE, 51 * Engine.TILE_SIZE);
-                RenderManager.MainCamera.Zoom = 2.0f;
             }
             else
             {
-                SaveManager saveManager = new StorageSaveManager(Path.Combine("Saves", worldName), saveFileName);
-                saveManager.Load();
-
                 OldSaveConverter.Convert(saveManager);
 
                 ProgressTree = new ProgressTree(saveManager.Data.ProgressTreeSaveData);
@@ -222,7 +291,6 @@ namespace Technolithic
                 ProblemIndicatorManager = new ProblemIndicatorManager();
 
                 World = new World(WorldSize, WorldSize, saveManager.Data.WorldSaveData);
-                World.Begin(saveManager.Data.WorldSaveData);
                 WorldState = new WorldState(saveManager.Data.WorldStateSaveData);
                 WeatherSoundManager = new WeatherSoundManager(WorldState);
                 NomadsManager = new NomadsManager(saveManager.Data.NomadsManagerSaveData);

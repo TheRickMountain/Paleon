@@ -1,12 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Technolithic
 {
@@ -19,8 +14,18 @@ namespace Technolithic
         private KeyboardState oldState;
         private KeyboardState currentState;
         private string currentText = "";
-        public string CurrentText 
-        { 
+        private string lastText = "";
+        private bool underscore;
+        private float underscoreCounter;
+        private float repeatCounter = 0;
+        private Keys? repeatKey = null;
+        private bool hasFocus = false;
+        
+        private MyText text;
+        private MyText underscoreText;
+
+        public string CurrentText
+        {
             get { return currentText; }
             set
             {
@@ -32,23 +37,24 @@ namespace Technolithic
                 OnCurrentTextChanges?.Invoke(currentText);
             }
         }
-        private string lastText = "";
-        private bool underscore;
-        private float underscoreCounter;
-        private float repeatCounter = 0;
-        private Keys? repeatKey = null;
-        
-        private MyText text;
-        private MyText underscoreText;
 
-        public int CharactersLimit { get; set; } = 20;
-        public bool AllowIllegalSigns { get; set; } = false;
+        private InputValidator validator;
 
         public Action<string> OnCurrentTextChanges { get; set; }
 
         public MTextInputScript() : base(true)
         {
+            validator = new InputValidator();
 
+            text = new MyText(null);
+            text.Text = "";
+            text.X = 8;
+            text.Y = 6;
+            
+            underscoreText = new MyText(null);
+            underscoreText.Text = "|";
+            underscoreText.X = 8;
+            underscoreText.Y = 6;
         }
 
         public void ResetText()
@@ -66,24 +72,42 @@ namespace Technolithic
 
         public override void Begin()
         {
-            text = new MyText(ParentNode.Scene);
-            text.Text = "";
-            text.X = 8;
-            text.Y = 6;
             ParentNode.AddChildNode(text);
-
-            underscoreText = new MyText(ParentNode.Scene);
-            underscoreText.Text = "|";
-            underscoreText.X = 8;
-            underscoreText.Y = 6;
             ParentNode.AddChildNode(underscoreText);
         }
 
         public override void Update(int mouseX, int mouseY)
         {
-            oldState = currentState;
-            currentState = Keyboard.GetState();
+            if (MInput.Mouse.PressedLeftButton)
+            {
+                if (ParentNode.Intersects(mouseX, mouseY))
+                {
+                    hasFocus = true;
+                }
+                else
+                {
+                    hasFocus = false;
+                }
+            }
 
+            if (hasFocus == false)
+            {
+                underscoreText.Active = false;
+                return;
+            }
+
+            UpdateCursor();
+            HandleKeyboardInput();
+        }
+
+        public MTextInputScript AddValidationRule(IInputValidationRule rule)
+        {
+            validator.AddRule(rule);
+            return this;
+        }
+
+        private void UpdateCursor()
+        {
             underscoreCounter += Engine.DeltaTime;
             while (underscoreCounter >= UNDERSCORE_TIME)
             {
@@ -91,312 +115,126 @@ namespace Technolithic
                 underscore = !underscore;
             }
 
-            underscoreText.Active = underscore;
+            underscoreText.Active = underscore && hasFocus;
+        }
 
-            if (repeatKey.HasValue)
-            {
-                if (currentState[repeatKey.Value] == KeyState.Down)
-                {
-                    underscoreText.Active = true;
-                    repeatCounter += Engine.DeltaTime;
+        private void HandleKeyboardInput()
+        {
+            oldState = currentState;
+            currentState = Keyboard.GetState();
 
-                    while (repeatCounter >= REPEAT_DELAY)
-                    {
-                        HandleKey(repeatKey.Value);
-                        repeatCounter -= REPEAT_EVERY;
-
-                        text.Text = CurrentText;
-                        underscoreText.X = text.TextWidth + 4;
-                    }
-                }
-                else
-                {
-                    repeatKey = null;
-                    repeatCounter = 0;
-                }
-            }
+            HandleKeyRepeat();
 
             foreach (Keys key in currentState.GetPressedKeys())
             {
                 if (oldState[key] == KeyState.Up)
                 {
-                    lastText = CurrentText;
-                    HandleKey(key);
-                    
-                    if(CurrentText.Length > CharactersLimit)
-                    {
-                        CurrentText = lastText;
-                    }
-
-                    text.Text = CurrentText;
-                    underscoreText.X = text.TextWidth + 4;
+                    ProcessKey(key);
                     break;
                 }
             }
         }
 
-        private void HandleKey(Keys key)
+        private void HandleKeyRepeat()
         {
-            switch (key)
+            if (repeatKey.HasValue && currentState[repeatKey.Value] == KeyState.Down)
             {
-                default:
-                    if (key.ToString().Length == 1)
-                    {
-                        if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                            CurrentText += key.ToString();
-                        else
-                            CurrentText += key.ToString().ToLower();
-                    }
-                    break;
-
-                case (Keys.D1):
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '!';
-                    }
-                    else
-                    {
-                        CurrentText += '1';
-                    }
-                    break;
-                case (Keys.D2):
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '@';
-                    }
-                    else
-                    {
-                        CurrentText += '2';
-                    }
-                    break;
-                case (Keys.D3):
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '#';
-                    }
-                    else
-                    {
-                        CurrentText += '3';
-                    }
-                    break;
-                case (Keys.D4):
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '$';
-                    }
-                    else
-                    {
-                        CurrentText += '4';
-                    }
-                    break;
-                case (Keys.D5):
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '%';
-                    }
-                    else
-                    {
-                        CurrentText += '5';
-                    }
-                    break;
-                case (Keys.D6):
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '^';
-                    }
-                    else
-                    {
-                        CurrentText += '6';
-                    }
-                    break;
-                case (Keys.D7):
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '&';
-                    }
-                    else
-                    {
-                        CurrentText += '7';
-                    }
-                    break;
-                case (Keys.D8):
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '*';
-                    }
-                    else
-                    {
-                        CurrentText += '8';
-                    }
-                    break;
-                case (Keys.D9):
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '(';
-                    }
-                    else
-                    {
-                        CurrentText += '9';
-                    }
-                    break;
-                case (Keys.D0):
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += ')';
-                    }
-                    else
-                    {
-                        CurrentText += '0';
-                    }
-                    break;
-                case (Keys.OemComma):
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '<';
-                    }
-                    else
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += ',';
-                    }
-                    break;
-                case Keys.OemPeriod:
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '>';
-                    }
-                    else
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '.';
-                    }
-                    break;
-                case Keys.OemQuestion:
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '?';
-                    }
-                    else
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '/';
-                    }
-                    break;
-                case Keys.OemSemicolon:
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += ':';
-                    }
-                    else
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += ';';
-                    }
-                    break;
-                case Keys.OemQuotes:
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '"';
-                    }
-                    else
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '\'';
-                    }
-                    break;
-                case Keys.OemBackslash:
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '|';
-                    }
-                    else
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '\\';
-                    }
-                    break;
-                case Keys.OemOpenBrackets:
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '{';
-                    }
-                    else
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '[';
-                    }
-                    break;
-                case Keys.OemCloseBrackets:
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '}';
-                    }
-                    else
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += ']';
-                    }
-                    break;
-                case Keys.OemMinus:
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '_';
-                    }
-                    else
-                    {
-                        CurrentText += '-';
-                    }
-                    break;
-                case Keys.OemPlus:
-                    if (currentState[Keys.LeftShift] == KeyState.Down || currentState[Keys.RightShift] == KeyState.Down)
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '+';
-                    }
-                    else
-                    {
-                        if (AllowIllegalSigns)
-                            CurrentText += '=';
-                    }
-                    break;
-
-                case Keys.Space:
-                    repeatKey = Keys.Space;
-                    CurrentText += " ";
-                    break;
-                case Keys.Back:
-                    repeatKey = Keys.Back;
-                    if (CurrentText.Length > 0)
-                        CurrentText = CurrentText.Substring(0, CurrentText.Length - 1);
-                    break;
-                case Keys.Delete:
-                    CurrentText = "";
-                    break;
+                repeatCounter += Engine.DeltaTime;
+                if (repeatCounter >= REPEAT_DELAY)
+                {
+                    ProcessKey(repeatKey.Value);
+                    repeatCounter -= REPEAT_EVERY;
+                }
+            }
+            else
+            {
+                repeatKey = null;
+                repeatCounter = 0;
             }
         }
 
-        public override void Render()
+        private void ProcessKey(Keys key)
         {
-            base.Render();
+            string newText = currentText;
+            char charToAdd = GetCharFromKey(key);
+
+            if (charToAdd != '\0')
+            {
+                if (validator.ValidateInput(currentText, charToAdd, currentText.Length))
+                {
+                    newText += charToAdd;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                // Специальные клавиши
+                switch (key)
+                {
+                    case Keys.Space:
+                        if (validator.ValidateInput(currentText, ' ', currentText.Length))
+                        {
+                            repeatKey = Keys.Space;
+                            newText += " ";
+                        }
+                        else
+                        {
+                            return;
+                        }
+                        break;
+                    case Keys.Back:
+                        repeatKey = Keys.Back;
+                        if (currentText.Length > 0)
+                            newText = currentText.Substring(0, currentText.Length - 1);
+                        break;
+                    case Keys.Delete:
+                        newText = "";
+                        break;
+                    default:
+                        return;
+                }
+            }
+
+            CurrentText = newText;
+        }
+
+        private char GetCharFromKey(Keys key)
+        {
+            bool shift = currentState[Keys.LeftShift] == KeyState.Down ||
+                        currentState[Keys.RightShift] == KeyState.Down;
+
+            // Letters
+            if (key >= Keys.A && key <= Keys.Z)
+                return shift ? key.ToString()[0] : key.ToString().ToLower()[0];
+
+            // Numbers and symbols
+            switch (key)
+            {
+                case Keys.D1: return shift ? '!' : '1';
+                case Keys.D2: return shift ? '@' : '2';
+                case Keys.D3: return shift ? '#' : '3';
+                case Keys.D4: return shift ? '$' : '4';
+                case Keys.D5: return shift ? '%' : '5';
+                case Keys.D6: return shift ? '^' : '6';
+                case Keys.D7: return shift ? '&' : '7';
+                case Keys.D8: return shift ? '*' : '8';
+                case Keys.D9: return shift ? '(' : '9';
+                case Keys.D0: return shift ? ')' : '0';
+                case Keys.OemMinus: return shift ? '_' : '-';
+                case Keys.OemPlus: return shift ? '+' : '=';
+                case Keys.OemComma: return shift ? '<' : ',';
+                case Keys.OemPeriod: return shift ? '>' : '.';
+                case Keys.OemQuestion: return shift ? '?' : '/';
+                case Keys.OemSemicolon: return shift ? ':' : ';';
+                case Keys.OemQuotes: return shift ? '"' : '\'';
+                case Keys.OemOpenBrackets: return shift ? '{' : '[';
+                case Keys.OemCloseBrackets: return shift ? '}' : ']';
+                case Keys.OemBackslash: return shift ? '|' : '\\';
+                default: return '\0';
+            }
         }
     }
 }

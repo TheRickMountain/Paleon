@@ -19,6 +19,8 @@ namespace Technolithic
 
         private int selectedWorldSize = 0;
 
+        private MTextInput worldSeedInput;
+
         private MTextInput worldNameInput;
 
         private MyText attentionText;
@@ -27,7 +29,7 @@ namespace Technolithic
 
         public WorldSettingsUIScript() : base(true)
         {
-
+            
         }
 
         public override void Awake()
@@ -46,6 +48,22 @@ namespace Technolithic
             MNode listView = ParentNode.GetChildByName("ListView");
             ListViewUIScript listViewScript = listView.GetComponent<ListViewUIScript>();
 
+            MyText worldSeedText = new MyText(ParentNode.Scene);
+            worldSeedText.Text = Localization.GetLocalizedText("world_seed");
+            worldSeedText.Color = Color.LightGreen;
+            listViewScript.AddItem(worldSeedText);
+
+            Random random = new Random();
+            worldSeedInput = new MTextInput(ParentNode.Scene);
+            worldSeedInput.Width = 300 - 16;
+            worldSeedInput.Height = 48;
+            worldSeedInput.GetComponent<MTextInputScript>().CurrentText = $"{random.Next(1, int.MaxValue)}";
+            worldSeedInput.GetComponent<MTextInputScript>()
+                .AddValidationRule(new MaxLengthRule(int.MaxValue.ToString().Length))
+                .AddValidationRule(new NumericRule(int.MaxValue, false));
+            worldSeedInput.GetComponent<MTextInputScript>().OnCurrentTextChanges += OnWorldSeedChangedCallback;
+            listViewScript.AddItem(worldSeedInput);
+
             MyText worldNameText = new MyText(ParentNode.Scene);
             worldNameText.Text = Localization.GetLocalizedText("world_name");
             worldNameText.Color = Color.LightGreen;
@@ -54,6 +72,9 @@ namespace Technolithic
             worldNameInput = new MTextInput(ParentNode.Scene);
             worldNameInput.Width = 300 - 16;
             worldNameInput.Height = 48;
+            worldNameInput.GetComponent<MTextInputScript>()
+                .AddValidationRule(new MaxLengthRule(200))
+                .AddValidationRule(new AlphaNumericRule(true, true, false));
             worldNameInput.GetComponent<MTextInputScript>().OnCurrentTextChanges += OnWorldNameChangedCallback;
             listViewScript.AddItem(worldNameInput);
 
@@ -109,6 +130,11 @@ namespace Technolithic
             RecheckCreateButton();
         }
 
+        private void OnWorldSeedChangedCallback(string text)
+        {
+            RecheckCreateButton();
+        }
+
         private void RecheckCreateButton()
         {
             bool isDisabled = false;
@@ -124,6 +150,16 @@ namespace Technolithic
             }
 
             if (string.IsNullOrWhiteSpace(worldNameInput.GetComponent<MTextInputScript>().CurrentText))
+            {
+                isDisabled = true;
+            }
+
+            if (string.IsNullOrEmpty(worldSeedInput.GetComponent<MTextInputScript>().CurrentText))
+            {
+                isDisabled = true;
+            }
+
+            if (string.IsNullOrWhiteSpace(worldSeedInput.GetComponent<MTextInputScript>().CurrentText))
             {
                 isDisabled = true;
             }
@@ -215,9 +251,19 @@ namespace Technolithic
         {
             ParentNode.Active = false;
 
-            Engine.Scene = new GameplayScene(null, selectedWorldSize, worldNameInput.GetComponent<MTextInputScript>().CurrentText);
+            string seedString = worldSeedInput.GetComponent<MTextInputScript>().CurrentText;
+
+            WorldSettings worldSettings = new WorldSettings()
+            {
+                Size = selectedWorldSize,
+                Name = worldNameInput.GetComponent<MTextInputScript>().CurrentText,
+                Seed = int.Parse(seedString),
+            };
+
+            Engine.Scene = new GameplayScene(worldSettings);
 
             worldNameInput.GetComponent<MTextInputScript>().ResetText();
+            worldSeedInput.GetComponent<MTextInputScript>().ResetText();
         }
     }
 }

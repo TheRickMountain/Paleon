@@ -587,6 +587,7 @@ work,Arbeiten
 workers,Arbeiter
 workshop,Werkstatt
 world_name,Name der Welt
+world_seed,World seed
 world_settings,Welteinstellungen
 world_size,Größe der Welt
 world_with_that_name_already_exists,Eine Welt mit diesem Namen existiert bereits

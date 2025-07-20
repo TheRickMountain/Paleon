@@ -110,11 +110,11 @@ namespace Technolithic
 
             if (PlantData.Fruits != null)
             {
-                SetInteractionDuration(InteractionType.AutoHarvest, PlantData.MaxStrength * (growthPercent / 100f));
+                SetInteractionDuration(InteractionType.AutoHarvest, GetHarvestOrUprootInteractionDuration());
                 SetInteractionProgress(InteractionType.AutoHarvest, 0);
             }
 
-            SetInteractionDuration(InteractionType.Uproot, PlantData.MaxStrength * (growthPercent / 100f));
+            SetInteractionDuration(InteractionType.Uproot, GetHarvestOrUprootInteractionDuration());
             SetInteractionProgress(InteractionType.Uproot, 0);
 
             seasonVariationSet[Season.Summer] = PlantData.GetSeasonVariation(Season.Summer);
@@ -219,11 +219,11 @@ namespace Technolithic
 
             if (PlantData.Fruits != null)
             {
-                SetInteractionDuration(InteractionType.AutoHarvest, PlantData.MaxStrength * (growthPercent / 100f));
+                SetInteractionDuration(InteractionType.AutoHarvest, GetHarvestOrUprootInteractionDuration());
                 SetInteractionProgress(InteractionType.AutoHarvest, 0);
             }
 
-            SetInteractionDuration(InteractionType.Uproot, PlantData.MaxStrength * (growthPercent / 100f));
+            SetInteractionDuration(InteractionType.Uproot, GetHarvestOrUprootInteractionDuration());
             SetInteractionProgress(InteractionType.Uproot, 0);
 
             currentStage = -1;
@@ -400,10 +400,10 @@ namespace Technolithic
 
             if (PlantData.Fruits != null)
             {
-                SetInteractionDuration(InteractionType.AutoHarvest, PlantData.MaxStrength * (growthPercent / 100f));
+                SetInteractionDuration(InteractionType.AutoHarvest, GetHarvestOrUprootInteractionDuration());
             }
 
-            SetInteractionDuration(InteractionType.Uproot, PlantData.MaxStrength * (growthPercent / 100f));
+            SetInteractionDuration(InteractionType.Uproot, GetHarvestOrUprootInteractionDuration());
 
             int textureVariationId = seasonVariationSet[GameplayScene.Instance.WorldState.CurrentSeason];
             Sprite.CurrentAnimation.Frames[0] = PlantData.VariationsTextures[textureVariationId][currentStage];
@@ -476,5 +476,16 @@ namespace Technolithic
             return buildingSaveData;
         }
 
+        private float GetHarvestOrUprootInteractionDuration()
+        {
+            float duration = PlantData.MaxStrength * (growthPercent / 100f);
+
+            if (duration <= 0)
+            {
+                duration = 1.0f;
+            }
+
+            return duration;
+        }
     }
 }

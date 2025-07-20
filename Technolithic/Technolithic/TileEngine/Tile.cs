@@ -36,6 +36,8 @@ namespace Technolithic
         public int X { get; private set; }
         public int Y { get; private set; }
 
+        private World world;
+
         private bool isWalkable = true;
         public bool IsWalkable
         {
@@ -127,7 +129,7 @@ namespace Technolithic
                             {
                                 IrrigationLevel++;
 
-                                foreach (var tile in Utils.GetTilesInCircle(this, 3))
+                                foreach (var tile in world.GetTilesWithinRadius(this, 3))
                                 {
                                     tile.IrrigationLevel++;
                                 }
@@ -140,7 +142,7 @@ namespace Technolithic
                             {
                                 IrrigationLevel++;
 
-                                foreach (var tile in Utils.GetTilesInCircle(this, 3))
+                                foreach (var tile in world.GetTilesWithinRadius(this, 3))
                                 {
                                     tile.IrrigationLevel++;
                                 }
@@ -153,7 +155,7 @@ namespace Technolithic
                             {
                                 IrrigationLevel--;
 
-                                foreach (var tile in Utils.GetTilesInCircle(this, 3))
+                                foreach (var tile in world.GetTilesWithinRadius(this, 3))
                                 {
                                     tile.IrrigationLevel--;
                                 }
@@ -263,10 +265,11 @@ namespace Technolithic
         public bool IsIlluminated { get; set; } = false;
 
         public Tile(int x, int y, TileMap summerGroundTileMap, TileMap autumnGroundTileMap, TileMap winterGroundTileMap, TileMap springGroundTileMap, TileMap groundTopTileMap, TileMap surfaceTileMap, TileMap blockTileMap, 
-            TileMap itemTileMap)
+            TileMap itemTileMap, World world)
         {
             X = x;
             Y = y;
+            this.world = world;
 
             point = new Point(X, Y);
             vector = new Vector2(X, Y);
@@ -285,7 +288,7 @@ namespace Technolithic
             Inventory.OnItemAddedCallback += OnItemAddedCallback;
             Inventory.OnItemRemovedCallback += OnItemRemovedCallback;
 
-            foreach(EnergyType energyType in Enum.GetValues(typeof(EnergyType)))
+            foreach (EnergyType energyType in Enum.GetValues(typeof(EnergyType)))
             {
                 EnergySources.Add(energyType, new List<EnergySourceCmp>());
             }

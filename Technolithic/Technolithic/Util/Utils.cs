@@ -203,6 +203,33 @@ namespace Technolithic
             return newMatrix;
         }
 
+        public static List<Point> GetPointsWithinRadius(Point centerPoint, int radius)
+        {
+            List<Point> points = new List<Point>();
+
+            int centerX = centerPoint.X;
+            int centerY = centerPoint.Y;
+
+            int rr = radius * radius;
+
+            for (int x = centerX - radius; x < centerX + radius; x++)
+            {
+                for (int y = centerY - radius; y < centerY + radius; y++)
+                {
+                    int dx = centerX - x;
+                    int dy = centerY - y;
+
+                    if ((dx * dx + dy * dy) < rr)
+                    {
+                        points.Add(new Point(x, y));
+                    }
+                }
+            }
+
+            return points;
+        }
+
+        [Obsolete("Use built-in World GetTilesWithinRadius() method")]
         public static IEnumerable<Tile> GetTilesInCircle(Tile centerTile, int radius)
         {
             int centerX = centerTile.X;

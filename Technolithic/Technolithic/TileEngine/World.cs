@@ -126,7 +126,8 @@ namespace Technolithic
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    Tile tile = new Tile(x, y, summerGroundTileMap, autumnGroundTileMap, winterGroundTileMap, springGroundTileMap, groundTopTileMap, surfaceTileMap, blockTileMap, itemTileMap);
+                    Tile tile = new Tile(x, y, summerGroundTileMap, autumnGroundTileMap, winterGroundTileMap, 
+                        springGroundTileMap, groundTopTileMap, surfaceTileMap, blockTileMap, itemTileMap, this);
                     tiles[x, y] = tile;
                 }
             }
@@ -323,6 +324,17 @@ namespace Technolithic
             int randomY = MyRandom.Range(0, Height);
 
             return GetTileAt(randomX, randomY);
+        }
+
+        public IEnumerable<Tile> GetTilesWithinRadius(Tile centerTile, int radius)
+        {
+            List<Point> points = Utils.GetPointsWithinRadius(centerTile.GetAsPoint(), radius);
+
+            foreach(Point point in points)
+            {
+                Tile tile = GetTileAt(point);
+                if (tile != null) yield return tile;
+            }
         }
 
         public WorldSaveData GetSaveData()

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Technolithic
 {
@@ -169,7 +165,7 @@ namespace Technolithic
 
             foreach (Tile centerTile in randomTiles)
             {
-                foreach (Tile spawnTile in Utils.GetTilesInCircle(centerTile, radius))
+                foreach (Tile spawnTile in world.GetTilesWithinRadius(centerTile, radius))
                 {
                     if (MyRandom.ProbabilityChance(50)) continue;
 
@@ -339,7 +335,7 @@ namespace Technolithic
 
                 foreach (var randomTile in kvp.Value)
                 {
-                    foreach (var tile in Utils.GetTilesInCircle(randomTile, 8))
+                    foreach (var tile in world.GetTilesWithinRadius(randomTile, 8))
                     {
                         if (MyRandom.ProbabilityChance(10))
                         {

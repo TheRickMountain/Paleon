@@ -103,7 +103,7 @@ namespace Technolithic
                 Localization.GetLocalizedText("auto_clean_pen"),
                 ResourceManager.CleanUpIcon,
                 Color.Orange,
-                InteractionIconDisplayState.OnMarked));
+                InteractionIconDisplayState.OnUnmarked));
 
             AddInteractionData(new InteractionData(
                 InteractionType.ProduceEnergy,

@@ -1368,11 +1368,18 @@ namespace Technolithic
         private void RenderInteractableMarks(Interactable interactable)
         {
             Entity entity = interactable.Entity;
+            int counter = 0;
+            float iconScale = 0.5f;
             foreach (InteractionType interactionType in interactable.AvailableInteractions)
             {
                 InteractionData interactionData = Engine.InteractionsDatabase.GetInteractionData(interactionType);
 
                 if (interactionData == null) continue;
+
+                // TODO: нужно получать корректный размер иконки
+                float positionX = entity.Position.X + (Engine.TILE_SIZE * iconScale) * counter;
+                float positionY = entity.Position.Y;
+                Vector2 renderPosition = new Vector2(positionX, positionY);
 
                 switch (interactionData.IconDisplayState)
                 {
@@ -1381,7 +1388,8 @@ namespace Technolithic
                             if (interactable.IsInteractionActivated(interactionType) &&
                                 interactable.IsInteractionMarked(interactionType))
                             {
-                                interactionData.Icon?.Draw(entity.Position, Color.White * 0.75f);
+                                interactionData.Icon?.Draw(renderPosition, Vector2.Zero, Color.White * 0.75f, iconScale, 0);
+                                counter++;
                             }
                         }
                         break;
@@ -1389,8 +1397,9 @@ namespace Technolithic
                         {
                             if (interactable.IsInteractionMarked(interactionType) == false)
                             {
-                                interactionData.Icon?.Draw(entity.Position, Color.White * 0.75f);
-                                ResourceManager.DisableIcon.Draw(entity.Position, Color.White * 0.75f);
+                                interactionData.Icon?.Draw(renderPosition, Vector2.Zero, Color.White * 0.75f, iconScale, 0);
+                                ResourceManager.DisableIcon.Draw(renderPosition, Vector2.Zero, Color.White * 0.75f, iconScale, 0);
+                                counter++;
                             }
                         }
                         break;

@@ -235,6 +235,39 @@ namespace Technolithic
                         creatureSaveData.LaborTypePriorityPair.Add(LaborType.Mining.ToString(), value);
                     }
                 }
+
+                #region Wall
+                WorldSaveData worldSaveData = saveManager.Data.WorldSaveData;
+                List<BuildingSaveData> BuildingSaveDatas = saveManager.Data.BuildingSaveDatas;
+
+                for (int x = 0; x < worldSaveData.Width; x++)
+                {
+                    for (int y = 0; y < worldSaveData.Height; y++)
+                    {
+                        worldSaveData.Tiles[x, y].WallId = -1;
+                    }
+                }
+
+                List<string> wallNamesList = new List<string> { "mudbrick_wall", "brick_wall", "stone_wall", "palisade" };
+
+                for (int i = BuildingSaveDatas.Count - 1; i >= 0; i--)
+                {
+                    var buildingSaveData = BuildingSaveDatas[i];
+
+                    if (buildingSaveData.IsBuilt == false) continue;
+
+                    Point tile = buildingSaveData.Tiles[0, 0];
+
+                    string wallName = buildingSaveData.BuildingTemplateName;
+                    
+                    if (wallNamesList.Contains(wallName))
+                    {
+                        worldSaveData.Tiles[tile.X, tile.Y].WallId = Engine.Instance.Buildings[wallName].WallData.Id;
+
+                        BuildingSaveDatas.Remove(buildingSaveData);
+                    }
+                }
+                #endregion
             }
         }
 

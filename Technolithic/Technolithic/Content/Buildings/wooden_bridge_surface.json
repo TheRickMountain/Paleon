@@ -12,8 +12,6 @@
   "destructible": true,
   "movementSpeed": 100,
   "constructionTime": 10,
-  "toolRequired": false,
-  "connectWithOtherBlocks": false,
   "ingredients": [
     {
       "item": "wood",
@@ -23,11 +21,6 @@
   "ground_pattern": [
     [
       "I"
-    ]
-  ],
-  "walkable_pattern": [
-    [
-      true
     ]
   ],
   "target_pattern": [

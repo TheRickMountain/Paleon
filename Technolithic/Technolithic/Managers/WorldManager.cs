@@ -10,6 +10,7 @@ namespace Technolithic
         public StorageManager StorageManager { get; private set; }
         public LaborManager LaborManager { get; private set; }
 
+        private World _world;
         private BuildingManager buildingManager;
 
         public ItemsDecayer ItemsDecayer { get; private set; }
@@ -73,8 +74,6 @@ namespace Technolithic
 
         public List<Tile> HomeArea = new List<Tile>();
 
-        public List<BuildingCmp> WallsList = new List<BuildingCmp>();
-
         public BuildingSaveData BuildingSaveDataForCopy { get; set; } // used to copy settings
 
         public Dictionary<Item, HashSet<CrafterBuildingCmp>> CraftersSortedByMainItems { get; set; } = new Dictionary<Item, HashSet<CrafterBuildingCmp>>();
@@ -89,12 +88,13 @@ namespace Technolithic
         private InteractablesManager interactablesManager;
         private ProgressTree progressTree;
 
-        public WorldManager(WorldManagerSaveData saveData, ProgressTree progressTree)
+        public WorldManager(WorldManagerSaveData saveData, ProgressTree progressTree, World world)
         {
             ItemsDecayer = new ItemsDecayer();
             StorageManager = new StorageManager();
             LaborManager = new LaborManager();
             buildingManager = new BuildingManager();
+            _world = world;
             this.progressTree = progressTree;
             
             interactablesManager = new InteractablesManager();
@@ -406,12 +406,10 @@ namespace Technolithic
 
         public void GenerateWorld()
         {
-            World world = GameplayScene.Instance.World;
-
             // Генерация животных
             for (int i = 0; i < 20; i++)
             {
-                Tile randomTile = world.GetTileAt(MyRandom.Range(GameplayScene.WorldSize), MyRandom.Range(GameplayScene.WorldSize));
+                Tile randomTile = _world.GetTileAt(MyRandom.Range(GameplayScene.WorldSize), MyRandom.Range(GameplayScene.WorldSize));
                 if (randomTile.GroundTopType != GroundTopType.Water && randomTile.GroundTopType != GroundTopType.DeepWater)
                 {
                     AnimalTemplate animalTemplate = AnimalTemplateDatabase.GetRandomWildAnimalTemplate();
@@ -545,7 +543,7 @@ namespace Technolithic
             }
 
             // Добавление новых id в коллекции тайлов, строений и складов
-            List<int> roomsIds = GameplayScene.Instance.World.GetRoomsIds();
+            List<int> roomsIds = _world.GetRoomsIds();
             roomsIds.Add(-1);
             for (int i = 0; i < roomsIds.Count; i++)
             {
@@ -628,8 +626,8 @@ namespace Technolithic
             int x = GameplayScene.MouseTile.X;
             int y = GameplayScene.MouseTile.Y;
 
-            int worldWidth = GameplayScene.Instance.World.Width;
-            int worldHeight = GameplayScene.Instance.World.Height;
+            int worldWidth = _world.Width;
+            int worldHeight = _world.Height;
 
             int buildingWidth = buildingGroundPatternMatrix.GetLength(0);
             int buildingHeight = buildingGroundPatternMatrix.GetLength(1);
@@ -644,7 +642,7 @@ namespace Technolithic
                 y = worldHeight - buildingHeight;
             }
 
-            return GameplayScene.Instance.World.GetTileAt(x, y);
+            return _world.GetTileAt(x, y);
         }
 
         public void Render()
@@ -740,7 +738,7 @@ namespace Technolithic
             {
                 for (int j = y; j < y + rows; j++)
                 {
-                    yield return GameplayScene.Instance.World.GetTileAt(i, j);
+                    yield return _world.GetTileAt(i, j);
                 }
             }
         }
@@ -1337,9 +1335,9 @@ namespace Technolithic
             {
                 for (int j = y; j < y + rows; j++)
                 {
-                    Tile checkTile = GameplayScene.Instance.World.GetTileAt(i, j);
+                    Tile checkTile = _world.GetTileAt(i, j);
                     isValid = buildingManager.CheckTileByGroundPattern(buildingTemplate, localGroundPatternMatrix, 
-                        GameplayScene.Instance.World.GetTileAt(x, y), checkTile);
+                        _world.GetTileAt(x, y), checkTile);
                     if(isValid)
                     {
                         tiles[i - x, j - y] = checkTile;
@@ -1359,14 +1357,7 @@ namespace Technolithic
                 
             BuildingCmp newBuilding = entity.Get<BuildingCmp>();
 
-            if (entity.Get<BuildingCmp>().BuildingTemplate.BuildingType != BuildingType.Wall)
-            {
-                GameplayScene.Instance.AddEntity(entity);
-            }
-            else
-            {
-                WallsList.Add(newBuilding);
-            }
+            GameplayScene.Instance.AddEntity(entity);
 
             return entity;
         }
@@ -1482,7 +1473,7 @@ namespace Technolithic
             {
                 for (int y = firstY; y < lastY + 1; y++)
                 {
-                    tiles[x - firstX, y - firstY] = GameplayScene.Instance.World.GetTileAt(x, y);
+                    tiles[x - firstX, y - firstY] = _world.GetTileAt(x, y);
                 }
             }
 
@@ -1537,7 +1528,7 @@ namespace Technolithic
             {
                 for (int y = firstY; y < lastY + 1; y++)
                 {
-                    tiles.Add(GameplayScene.Instance.World.GetTileAt(x, y));
+                    tiles.Add(_world.GetTileAt(x, y));
                 }
             }
 

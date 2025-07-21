@@ -74,8 +74,10 @@ namespace Technolithic
         private TileMap springGroundTileMap;
         private TileMap groundTopTileMap;
         private TileMap surfaceTileMap;
-        private TileMap blockTileMap;
+        private TileMap wallTileMap;
         private TileMap itemTileMap;
+
+        private Hull hull;
 
         private Room room;
         public Room Room 
@@ -172,56 +174,61 @@ namespace Technolithic
         {
             get => surfaceTileMap.GetCellTerrainId(X, Y);
             set 
-            { 
+            {
+                int oldTerrainId = surfaceTileMap.GetCellTerrainId(X, Y);
+
+                if (oldTerrainId == value) return;
+
                 surfaceTileMap.SetCellTerrainId(X, Y, value);
 
                 UpdateMovementSpeedPercent();
             }
         }
 
-        private Hull hull;
-
-        private Entity entity;
-        public Entity Entity 
-        { 
-            get { return entity; } 
+        public int WallId
+        {
+            get => wallTileMap.GetCellTerrainId(X, Y);
             set
             {
-                entity = value;
+                int oldTerrainId = wallTileMap.GetCellTerrainId(X, Y);
 
-                OnEntityChangedCallback?.Invoke(entity);
+                if (oldTerrainId == value) return;
 
-                if (entity != null && entity.Get<WallCmp>() != null)
+                wallTileMap.SetCellTerrainId(X, Y, value);
+
+                UpdateMovementSpeedPercent();
+
+                if (value != -1)
                 {
-                    if (entity.Get<BuildingCmp>().IsBuilt && !entity.Get<BuildingCmp>().BuildingTemplate.LetLight)
+                    IsWalkable = false;
+                    StrengthValue = 100;
+
+                    if (hull == null)
                     {
                         hull = new Hull(new Vector2(0.5f), new Vector2(-0.5f, 0.5f), new Vector2(-0.5f), new Vector2(0.5f, -0.5f))
                         {
-                            Position = new Vector2(X * Engine.TILE_SIZE + Engine.TILE_SIZE / 2, 
+                            Position = new Vector2(X * Engine.TILE_SIZE + Engine.TILE_SIZE / 2,
                             Y * Engine.TILE_SIZE + Engine.TILE_SIZE / 2),
                             Scale = new Vector2(Engine.TILE_SIZE)
                         };
-
-                        GameplayScene.Instance.Penumbra.Hulls.Add(hull);
                     }
+
+                    GameplayScene.Instance.Penumbra.Hulls.Add(hull);
                 }
                 else
                 {
+                    IsWalkable = true;
+                    StrengthValue = 0;
+
                     if (hull != null)
+                    {
                         GameplayScene.Instance.Penumbra.Hulls.Remove(hull);
-
-                    hull = null;
+                    }
                 }
-
-                UpdateBlock(this);
-
-                foreach (Tile tile in GetAllNeighbourTiles())
-                    UpdateBlock(tile);
-
-                if (entity == null || entity.Get<BuildingCmp>().IsBuilt)
-                    UpdateMovementSpeedPercent();
             }
         }
+
+        public Entity Entity { get; set; }
 
         private PlantData plantData;
         public PlantData PlantData 
@@ -280,7 +287,7 @@ namespace Technolithic
             this.springGroundTileMap = springGroundTileMap;
             this.groundTopTileMap = groundTopTileMap;
             this.surfaceTileMap = surfaceTileMap;
-            this.blockTileMap = blockTileMap;
+            this.wallTileMap = blockTileMap;
             this.itemTileMap = itemTileMap;
 
             Inventory = new Inventory(this);
@@ -452,73 +459,6 @@ namespace Technolithic
                 groundTopTileMap.SetCell(tile.X, tile.Y, 0);
             }
         }
-     
-        private void UpdateBlock(Tile tile)
-        {
-            BuildingCmp building = tile?.Entity?.Get<BuildingCmp>();
-
-            if (building != null && (building.BuildingTemplate.BuildingType == BuildingType.Wall))
-            {
-                int top;
-                int left;
-                int right;
-                int bottom;
-
-                if (building.BuildingTemplate.ConnectWithOtherBlocks == true)
-                {
-                    BuildingCmp topBuilding = tile.TopTile?.Entity?.Get<BuildingCmp>();
-                    top = (topBuilding != null && (topBuilding.BuildingTemplate.BuildingType == BuildingType.Wall) 
-                        && topBuilding.BuildingTemplate.ConnectWithOtherBlocks) ? 1 : 0;
-
-                    BuildingCmp leftBuilding = tile.LeftTile?.Entity?.Get<BuildingCmp>();
-                    left = (leftBuilding != null && (leftBuilding.BuildingTemplate.BuildingType == BuildingType.Wall) 
-                        && leftBuilding.BuildingTemplate.ConnectWithOtherBlocks) ? 2 : 0;
-
-                    BuildingCmp rightBuilding = tile.RightTile?.Entity?.Get<BuildingCmp>();
-                    right = (rightBuilding != null && (rightBuilding.BuildingTemplate.BuildingType == BuildingType.Wall) 
-                        && rightBuilding.BuildingTemplate.ConnectWithOtherBlocks) ? 4 : 0;
-
-                    BuildingCmp bottomBuilding = tile.BottomTile?.Entity?.Get<BuildingCmp>();
-                    bottom = (bottomBuilding != null && (bottomBuilding.BuildingTemplate.BuildingType == BuildingType.Wall) 
-                        && bottomBuilding.BuildingTemplate.ConnectWithOtherBlocks) ? 8 : 0;
-                }
-                else
-                {
-                    BuildingCmp topBuilding = tile.TopTile?.Entity?.Get<BuildingCmp>();
-                    top = (topBuilding != null && (topBuilding.BuildingTemplate.BuildingType == BuildingType.Wall) && 
-                        topBuilding.BuildingTemplate.Name == building.BuildingTemplate.Name) ? 1 : 0;
-
-                    BuildingCmp leftBuilding = tile.LeftTile?.Entity?.Get<BuildingCmp>();
-                    left = (leftBuilding != null && (leftBuilding.BuildingTemplate.BuildingType == BuildingType.Wall) &&
-                        leftBuilding.BuildingTemplate.Name == building.BuildingTemplate.Name) ? 2 : 0;
-
-                    BuildingCmp rightBuilding = tile.RightTile?.Entity?.Get<BuildingCmp>();
-                    right = (rightBuilding != null && (rightBuilding.BuildingTemplate.BuildingType == BuildingType.Wall) &&
-                        rightBuilding.BuildingTemplate.Name == building.BuildingTemplate.Name) ? 4 : 0;
-
-                    BuildingCmp bottomBuilding = tile.BottomTile?.Entity?.Get<BuildingCmp>();
-                    bottom = (bottomBuilding != null && (bottomBuilding.BuildingTemplate.BuildingType == BuildingType.Wall) &&
-                        bottomBuilding.BuildingTemplate.Name == building.BuildingTemplate.Name) ? 8 : 0;
-                }
-
-                int bitmask = top + left + right + bottom;
-
-                bitmask += building.BuildingTemplate.TilesetOffset;
-
-                if (building.IsBuilt == false)
-                {
-                    blockTileMap.SetCell(tile.X, tile.Y, bitmask, Color.White * 0.5f);
-                }
-                else
-                {
-                    blockTileMap.SetCell(tile.X, tile.Y, bitmask);
-                }
-            }
-            else
-            {
-                blockTileMap.SetCell(tile.X, tile.Y, 0);
-            }
-        }  
 
         private void OnItemAddedCallback(Inventory senderInventory, Item item, int weight)
         {
@@ -689,6 +629,7 @@ namespace Technolithic
             tileData.GroundType = (int)GroundType;
             tileData.GroundTopType = (int)GroundTopType;
             tileData.SurfaceId = SurfaceId;
+            tileData.WallId = WallId;
             tileData.MoistureLevel = MoistureLevel;
             tileData.FertilizerLevel = FertilizerLevel;
             tileData.IrrigationStrength = IrrigationStrength;

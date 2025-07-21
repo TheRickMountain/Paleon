@@ -117,14 +117,16 @@ namespace Technolithic
 
             ProgressTree = new ProgressTree(null);
 
-            WorldManager = new WorldManager(null, ProgressTree);
+            World = new World(WorldSize, WorldSize);
+            WorldManager = new WorldManager(null, ProgressTree, World);
             WorldManager.Begin();
 
-            AchievementManager = new AchievementManager(null);
             TotalResourcesChart = new TotalResourcesChart();
+
+            AchievementManager = new AchievementManager(null);
             ResourcesLimitManager = new ResourcesLimitManager(null);
             ProblemIndicatorManager = new ProblemIndicatorManager();
-            World = new World(WorldSize, WorldSize, null);
+            
             WorldState = new WorldState(null);
             WeatherSoundManager = new WeatherSoundManager(WorldState);
             NomadsManager = new NomadsManager(null);
@@ -282,15 +284,18 @@ namespace Technolithic
 
                 ProgressTree = new ProgressTree(saveManager.Data.ProgressTreeSaveData);
 
-                WorldManager = new WorldManager(saveManager.Data.WorldManagerSaveData, ProgressTree);
+                World = new World(WorldSize, WorldSize);
+                WorldManager = new WorldManager(saveManager.Data.WorldManagerSaveData, ProgressTree, World);
                 WorldManager.Begin();
 
-                AchievementManager = new AchievementManager(saveManager.Data.UnlockedAchievements);
                 TotalResourcesChart = new TotalResourcesChart();
+
+                World.LoadFromSaveData(saveManager.Data.WorldSaveData);
+
+                AchievementManager = new AchievementManager(saveManager.Data.UnlockedAchievements);
                 ResourcesLimitManager = new ResourcesLimitManager(saveManager.Data.ResourcesLimits);
                 ProblemIndicatorManager = new ProblemIndicatorManager();
 
-                World = new World(WorldSize, WorldSize, saveManager.Data.WorldSaveData);
                 WorldState = new WorldState(saveManager.Data.WorldStateSaveData);
                 WeatherSoundManager = new WeatherSoundManager(WorldState);
                 NomadsManager = new NomadsManager(saveManager.Data.NomadsManagerSaveData);
@@ -1546,11 +1551,6 @@ namespace Technolithic
                 {
                     saveManager.Data.BuildingSaveDatas.Add(buildingCmp.GetSaveData());
                 }
-            }
-
-            foreach(var wall in GameplayScene.WorldManager.WallsList)
-            {
-                saveManager.Data.BuildingSaveDatas.Add(wall.GetSaveData());
             }
 
             saveManager.Data.CreatureSaveDatas = new List<CreatureSaveData>();

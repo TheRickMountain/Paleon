@@ -72,15 +72,9 @@ namespace Technolithic
         public LaborType BuildingLaborType { get; private set; }
         public ToolType BuildingToolType { get; private set; }
 
-        public bool ConnectWithOtherBlocks { get; private set; }
-
-        public int TilesetOffset { get; private set; }
-
         public bool Animated { get; private set; }
         public bool Rotatable { get; private set; }
         public bool Cloneable { get; private set; }
-
-        public bool LetLight { get; private set; }
 
         public int TextureWidth { get; private set; }
         public int TextureHeight { get; private set; }
@@ -91,7 +85,6 @@ namespace Technolithic
 
         public int ConstructionTime { get; private set; }
 
-        public bool[,] WalkablePattern;
         public bool[,] TargetPattern;
         public char[,] GroundPattern;
 
@@ -224,7 +217,6 @@ namespace Technolithic
                         Icons.Add(Direction.DOWN, texture);
                         Textures.Add(Direction.DOWN, texture);
 
-                        WalkablePattern = new bool[,] { { true } };
                         TargetPattern = new bool[,] { { false } };
                         RequireBuilding = true;
                     }
@@ -240,14 +232,6 @@ namespace Technolithic
                         Icons.Add(Direction.DOWN, texture);
                         Textures.Add(Direction.DOWN, texture);
 
-                        TilesetOffset = JObject["tilesetOffset"].Value<int>();
-                        LetLight = JObject["letLight"].Value<bool>();
-
-                        ConnectWithOtherBlocks = JObject["connectWithOtherBlocks"].Value<bool>();
-
-                        bool walkable = JObject["walkable"].Value<bool>();
-
-                        WalkablePattern = new bool[,] { { walkable } };
                         TargetPattern = new bool[,] { { false } };
                         RequireBuilding = true;
                     }
@@ -281,16 +265,13 @@ namespace Technolithic
                         Width = JObject["width"].Value<int>();
                         Height = JObject["height"].Value<int>();
 
-                        WalkablePattern = new bool[Width, Height];
                         TargetPattern = new bool[Width, Height];
 
                         for (int x = 0; x < Width; x++)
                         {
                             for (int y = 0; y < Height; y++)
                             {
-                                bool walkable = JObject["walkable_pattern"][y][x].Value<bool>();
                                 bool target = JObject["target_pattern"][y][x].Value<bool>();
-                                WalkablePattern[x, y] = walkable;
                                 TargetPattern[x, y] = target;
                             }
                         }
@@ -458,7 +439,7 @@ namespace Technolithic
                     buildingCmp = new StorageBuildingCmp(this, direction, interactablesManager);
                     break;
                 case BuildingType.Wall:
-                    buildingCmp = new WallCmp(this, direction, interactablesManager);
+                    buildingCmp = new WallBuilding(this, direction, interactablesManager);
                     break;
                 case BuildingType.FarmPlot:
                     buildingCmp = new FarmPlot(this, direction, interactablesManager);

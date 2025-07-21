@@ -84,41 +84,24 @@ namespace Technolithic
             Inventory = new Inventory(this);
             Inventory.IsStorage = false;
 
-            switch (buildingTemplate.BuildingType)
+            MyTexture texture = buildingTemplate.Textures[Direction];
+
+            int textureWidth = buildingTemplate.TextureWidth;
+            int textureHeight = buildingTemplate.TextureHeight;
+
+            if(Direction == Direction.LEFT || Direction == Direction.RIGHT)
             {
-                case BuildingType.Wall:
-                    break;
-                default:
-                    {
-                        MyTexture texture = buildingTemplate.Textures[Direction];
+                textureWidth = buildingTemplate.TextureHeight;
+                textureHeight = buildingTemplate.TextureWidth;
+            }
 
-                        int textureWidth = -1;
-                        int textureHeight = -1;
+            Sprite = new AnimatedSprite(textureWidth, textureHeight);
+            Sprite.Add("Idle", new Animation(texture, 1, 0, textureWidth, textureHeight, 0, 0, 1));
 
-                        switch (Direction)
-                        {
-                            case Direction.DOWN:
-                            case Direction.UP:
-                                textureWidth = buildingTemplate.TextureWidth;
-                                textureHeight = buildingTemplate.TextureHeight;
-                                break;
-                            case Direction.LEFT:
-                            case Direction.RIGHT:
-                                textureWidth = buildingTemplate.TextureHeight;
-                                textureHeight = buildingTemplate.TextureWidth;
-                                break;
-                        }
-
-                        Sprite = new AnimatedSprite(textureWidth, textureHeight);
-                        Sprite.Add("Idle", new Animation(texture, 1, 0, textureWidth, textureHeight, 0, 0, 1));
-
-                        if (buildingTemplate.Animated)
-                        {
-                            int frameCount = buildingTemplate.Textures[Direction].Width / textureWidth;
-                            Sprite.Add("Process", new Animation(texture, frameCount, 0, textureWidth, textureHeight, 0, textureHeight, 5));
-                        }
-                    }
-                    break;
+            if (buildingTemplate.Animated)
+            {
+                int frameCount = buildingTemplate.Textures[Direction].Width / textureWidth;
+                Sprite.Add("Process", new Animation(texture, frameCount, 0, textureWidth, textureHeight, 0, textureHeight, 5));
             }
 
             TilesInfosArray = new TileInfo[buildingTemplate.Width, buildingTemplate.Height];
@@ -129,7 +112,6 @@ namespace Technolithic
                 for (int y = 0; y < TilesInfosArray.GetLength(1); y++)
                 {
                     TileInfo tileInfo = new TileInfo(
-                        buildingTemplate.WalkablePattern[x, y],
                         buildingTemplate.TargetPattern[x, y],
                         buildingTemplate.GroundPattern[x, y]);
 
@@ -333,41 +315,23 @@ namespace Technolithic
                     TileInfo tileInfo = TilesInfosArray[column, row];
 
                     tileInfo.Tile = tile;
-
-                    switch (BuildingTemplate.BuildingType)
-                    {
-                        case BuildingType.Wall:
-                            tileInfo.Tile.Entity = Entity;
-                            break;
-                        default:
-                            tileInfo.Tile.Entity = Entity;
-                            break;
-                    }
+                    tileInfo.Tile.Entity = Entity;
                 }
             }
 
-            switch (BuildingTemplate.BuildingType)
-            {
-                case BuildingType.Wall:
-                    break;
-                default:
-                    {
-                        Sprite.Entity = Entity;
+            Sprite.Entity = Entity;
 
-                        Sprite.Color = Color.White * 0.5f;
+            Sprite.Color = Color.White * 0.5f;
 
-                        Sprite.SetOrigin(Sprite.Width / 2, Sprite.Height / 2);
+            Sprite.SetOrigin(Sprite.Width / 2, Sprite.Height / 2);
 
-                        int imageYOffset = TilesInfosArray.GetLength(1) * Engine.TILE_SIZE - Sprite.Height;
-                        int imageXOffset = (TilesInfosArray.GetLength(0) * Engine.TILE_SIZE - Sprite.Width) / 2;
+            int imageYOffset = TilesInfosArray.GetLength(1) * Engine.TILE_SIZE - Sprite.Height;
+            int imageXOffset = (TilesInfosArray.GetLength(0) * Engine.TILE_SIZE - Sprite.Width) / 2;
 
-                        Sprite.X = imageXOffset + Sprite.Width / 2;
-                        Sprite.Y = imageYOffset + Sprite.Height / 2;
+            Sprite.X = imageXOffset + Sprite.Width / 2;
+            Sprite.Y = imageYOffset + Sprite.Height / 2;
 
-                        Sprite.Play("Idle");
-                    }
-                    break;
-            }
+            Sprite.Play("Idle");
 
             // Добавляем все соседние тайлы занятые строением для доставки ресурсов
             foreach (var tileInfo in TilesInfosArray)
@@ -480,37 +444,7 @@ namespace Technolithic
                 smokeTimer.SetInterval(1.5f);
             }
 
-            switch (BuildingTemplate.BuildingType)
-            {
-                case BuildingType.Wall:
-                    {
-                        TileInfo tileInfo = TilesInfosArray[0, 0];
-                        tileInfo.Tile.IsWalkable = tileInfo.IsWalkable;
-
-                        if (tileInfo.Tile.IsWalkable == false)
-                            tileInfo.Tile.StrengthValue = 100;
-
-                        tileInfo.Tile.Entity = Entity;
-                    }
-                    break;
-                default:
-                    {
-                        Sprite.Color = Color.White;
-
-                        // Устанавливаем проходимость тайлов
-                        for (int c = 0; c < TilesInfosArray.GetLength(0); c++)
-                        {
-                            for (int r = 0; r < TilesInfosArray.GetLength(1); r++)
-                            {
-                                TileInfo tileInfo = TilesInfosArray[c, r];
-                                Tile tile = tileInfo.Tile;
-
-                                tile.IsWalkable = tileInfo.IsWalkable;
-                            }
-                        }
-                    }
-                    break;
-            }
+            Sprite.Color = Color.White;
 
             TargetTiles.Clear();
 
@@ -661,14 +595,7 @@ namespace Technolithic
 
             ThrowAllItems();
 
-            if (BuildingTemplate.BuildingType != BuildingType.Wall)
-            {
-                Entity.RemoveSelf();
-            }
-            else
-            {
-                GameplayScene.WorldManager.WallsList.Remove(this);
-            }
+            Entity.RemoveSelf();
 
             ClearInventoryRequiredWeight();
 
@@ -704,14 +631,7 @@ namespace Technolithic
                 ThrowItems(BuildingTemplate.BuildingRecipe);
             }
 
-            if (BuildingTemplate.BuildingType != BuildingType.Wall)
-            {
-                Entity.RemoveSelf();
-            }
-            else
-            {
-                GameplayScene.WorldManager.WallsList.Remove(this);
-            }
+            Entity.RemoveSelf();
 
             ClearInventoryRequiredWeight();
 
@@ -761,22 +681,7 @@ namespace Technolithic
 
                     Tile tile = TilesInfosArray[c, r].Tile;
 
-                    switch (BuildingTemplate.BuildingType)
-                    {
-                        case BuildingType.Wall:
-                            {
-                                tile.Entity = null;
-                                tile.IsWalkable = true;
-                                tile.StrengthValue = 0;
-                            }
-                            break;
-                        default:
-                            {
-                                tile.Entity = null;
-                                tile.IsWalkable = true;
-                            }
-                            break;
-                    }
+                    tile.Entity = null;
                 }
             }
         }

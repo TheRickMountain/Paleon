@@ -12,17 +12,10 @@
   "destructible": true,
   "movementSpeed": 95,
   "constructionTime": 5,
-  "toolRequired": false,
-  "connectWithOtherBlocks": false,
   "ingredients": [],
   "ground_pattern": [
     [
       "J"
-    ]
-  ],
-  "walkable_pattern": [
-    [
-      true
     ]
   ],
   "target_pattern": [

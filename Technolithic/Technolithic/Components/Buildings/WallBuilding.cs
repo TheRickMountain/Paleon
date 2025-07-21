@@ -1,9 +1,8 @@
 ﻿namespace Technolithic
 {
-    public class SurfaceBuilding : BuildingCmp
+    public class WallBuilding : BuildingCmp
     {
-
-        public SurfaceBuilding(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager) 
+        public WallBuilding(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager)
             : base(buildingTemplate, direction, interactablesManager)
         {
             ThrowBuildingRecipeItemsAfterDestructing = false;
@@ -15,10 +14,9 @@
 
             Tile centerTile = GetRealCenterTile();
 
-            centerTile.SurfaceId = BuildingTemplate.SurfaceData.Id;
+            centerTile.WallId = BuildingTemplate.WallData.Id;
 
             DestructBuilding();
         }
-
     }
 }

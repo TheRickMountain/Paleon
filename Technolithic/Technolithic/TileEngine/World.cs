@@ -30,18 +30,10 @@ namespace Technolithic
         private Point tileMapCamMin = new Point();
         private Point tileMapCamMax = new Point();
 
-        public World(int width, int height, WorldSaveData worldSaveData)
+        public World(int width, int height)
         {
-            if (worldSaveData != null)
-            {
-                Width = worldSaveData.Width;
-                Height = worldSaveData.Height;
-            }
-            else
-            {
-                Width = width;
-                Height = height;
-            }
+            Width = width;
+            Height = height;
 
             summerGroundTileMap = new TileMap(TextureBank.GroundTopTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
             autumnGroundTileMap = new TileMap(TextureBank.GroundTopTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
@@ -61,37 +53,38 @@ namespace Technolithic
 
             CreateChunks();
             InitChunksNeighbours();
+        }
 
-            if (worldSaveData != null)
+        public void LoadFromSaveData(WorldSaveData worldSaveData)
+        {
+            for (int x = 0; x < Width; x++)
             {
-                for (int x = 0; x < Width; x++)
+                for (int y = 0; y < Height; y++)
                 {
-                    for (int y = 0; y < Height; y++)
+                    TileSaveData tileSaveData = worldSaveData.Tiles[x, y];
+                    Tile tile = tiles[x, y];
+
+                    tile.GroundType = Utils.CheckAndGetCorrectEnum(tileSaveData.GroundType, GroundType.Ground);
+                    tile.GroundTopType = Utils.CheckAndGetCorrectEnum(tileSaveData.GroundTopType, GroundTopType.None);
+                    tile.SurfaceId = tileSaveData.SurfaceId;
+                    tile.WallId = tileSaveData.WallId;
+
+                    tile.MoistureLevel = tileSaveData.MoistureLevel;
+                    tile.FertilizerLevel = tileSaveData.FertilizerLevel;
+                    tile.IrrigationStrength = tileSaveData.IrrigationStrength;
+
+                    if (tileSaveData.InventoryItems != null)
                     {
-                        TileSaveData tileSaveData = worldSaveData.Tiles[x, y];
-                        Tile tile = tiles[x, y];
-
-                        tile.GroundType = Utils.CheckAndGetCorrectEnum(tileSaveData.GroundType, GroundType.Ground);
-                        tile.GroundTopType = Utils.CheckAndGetCorrectEnum(tileSaveData.GroundTopType, GroundTopType.None);
-                        tile.SurfaceId = tileSaveData.SurfaceId;
-
-                        tile.MoistureLevel = tileSaveData.MoistureLevel;
-                        tile.FertilizerLevel = tileSaveData.FertilizerLevel;
-                        tile.IrrigationStrength = tileSaveData.IrrigationStrength;
-
-                        if (tileSaveData.InventoryItems != null)
+                        foreach (var itemContainer in tileSaveData.InventoryItems)
                         {
-                            foreach (var itemContainer in tileSaveData.InventoryItems)
+                            Item item = ItemDatabase.GetItemById(itemContainer.Item1);
+                            if (item != null)
                             {
-                                Item item = ItemDatabase.GetItemById(itemContainer.Item1);
-                                if (item != null)
+                                int factWeight = itemContainer.Item2;
+                                float durability = itemContainer.Item3;
+                                if (factWeight != 0)
                                 {
-                                    int factWeight = itemContainer.Item2;
-                                    float durability = itemContainer.Item3;
-                                    if (factWeight != 0)
-                                    {
-                                        tile.Inventory.AddCargo(new ItemContainer(item, factWeight, durability));
-                                    }
+                                    tile.Inventory.AddCargo(new ItemContainer(item, factWeight, durability));
                                 }
                             }
                         }

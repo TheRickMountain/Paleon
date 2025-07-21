@@ -12,8 +12,6 @@
   "destructible": true,
   "movementSpeed": 100,
   "constructionTime": 5,
-  "toolRequired": false,
-  "connectWithOtherBlocks": false,
   "ingredients": [
     {
       "item": "stone",
@@ -23,11 +21,6 @@
   "ground_pattern": [
     [
       "J"
-    ]
-  ],
-  "walkable_pattern": [
-    [
-      true
     ]
   ],
   "target_pattern": [

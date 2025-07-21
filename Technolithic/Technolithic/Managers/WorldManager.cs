@@ -1311,6 +1311,19 @@ namespace Technolithic
                             }
                         }
                         break;
+                    case MyAction.DestructWall:
+                        for (int x = 0; x < tiles.GetLength(0); x++)
+                        {
+                            for (int y = 0; y < tiles.GetLength(1); y++)
+                            {
+                                Tile tile = tiles[x, y];
+
+                                BuildingTemplate destructPathBuildingTemplate = Engine.Instance.Buildings["destruct_wall"];
+
+                                TryToBuild(destructPathBuildingTemplate, tile.X, tile.Y, Direction.DOWN);
+                            }
+                        }
+                        break;
                 }
             }
         }

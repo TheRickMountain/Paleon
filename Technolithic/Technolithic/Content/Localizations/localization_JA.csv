@@ -181,6 +181,7 @@ deposit,貯蔵量
 destruct,破壊
 destruct_irrigation_canal,灌漑用水路の破壊
 destruct_surface,路面の破壊
+destruct_wall,Destruct wall
 dirt_path,土砂の道
 dirty_animal_pen,汚れた動物の囲い
 disable_all,全て無効

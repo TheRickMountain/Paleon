@@ -181,6 +181,7 @@ deposit,Vorkommen
 destruct,Zerstören
 destruct_irrigation_canal,Bewässerungskanal zerstören
 destruct_surface,Destruct surface
+destruct_wall,Destruct wall
 dirt_path,Trampelpfad
 dirty_animal_pen,Dirty animal pen
 disable_all,Alles deaktivieren

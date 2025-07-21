@@ -181,6 +181,7 @@ deposit,Dépôt
 destruct,Détruire
 destruct_irrigation_canal,Détruire canal d'irrigation
 destruct_surface,Destruct surface
+destruct_wall,Destruct wall
 dirt_path,Chemin de terre
 dirty_animal_pen,Enclos pour animal sale
 disable_all,Désactiver tout

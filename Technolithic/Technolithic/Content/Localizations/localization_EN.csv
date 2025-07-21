@@ -181,6 +181,7 @@ deposit,Deposit
 destruct,Destruct
 destruct_irrigation_canal,Destruct irrigation canal
 destruct_surface,Destruct surface
+destruct_wall,Destruct wall
 dirt_path,Dirt path
 dirty_animal_pen,Dirty animal pen
 disable_all,Disable all

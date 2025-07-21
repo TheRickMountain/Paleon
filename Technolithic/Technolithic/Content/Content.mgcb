@@ -997,6 +997,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/destruct_surface.png
 
+#begin Buildings/destruct_wall.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/destruct_wall.png
+
 #begin Buildings/dolmen.png
 /importer:TextureImporter
 /processor:TextureProcessor

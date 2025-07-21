@@ -181,6 +181,7 @@ deposit,礦床
 destruct,拆除
 destruct_irrigation_canal,拆除水渠
 destruct_surface,拆除地板
+destruct_wall,Destruct wall
 dirt_path,土路
 dirty_animal_pen,骯髒的畜欄
 disable_all,全部停用

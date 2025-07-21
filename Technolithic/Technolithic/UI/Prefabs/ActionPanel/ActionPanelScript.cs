@@ -70,7 +70,9 @@ namespace Technolithic
             
             CreateActionButton(MyAction.DestructSurface, ResourceManager.DestructSurfaceIcon, Localization.GetLocalizedText("destruct_surface"), 
                 true, Keys.Z);
-            
+
+            CreateActionButton(MyAction.DestructWall, ResourceManager.DestructWallIcon, Localization.GetLocalizedText("destruct_wall"),
+                true, Keys.U);
 
             GameplayScene.WorldManager.SetMyAction(MyAction.None, null);
 

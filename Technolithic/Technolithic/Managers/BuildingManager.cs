@@ -51,6 +51,8 @@ namespace Technolithic
             {
                 case 'A':
                     {
+                        if (checkTile.WallId != -1) return false;
+
                         if (checkTile.GroundTopType == GroundTopType.None)
                         {
                             return true;
@@ -59,7 +61,9 @@ namespace Technolithic
                     break;
                 case 'B':
                     {
-                        if(checkTile.GroundTopType == GroundTopType.Water)
+                        if (checkTile.WallId != -1) return false;
+
+                        if (checkTile.GroundTopType == GroundTopType.Water)
                         {
                             if(checkTile.SurfaceId == -1)
                             {
@@ -70,6 +74,8 @@ namespace Technolithic
                     break;
                 case 'C':
                     {
+                        if (checkTile.WallId != -1) return false;
+
                         if (checkTile.GroundTopType == GroundTopType.Clay ||
                                checkTile.GroundTopType == GroundTopType.Copper ||
                                checkTile.GroundTopType == GroundTopType.Iron ||
@@ -82,6 +88,8 @@ namespace Technolithic
                     break;
                 case 'D':
                     {
+                        if (checkTile.WallId != -1) return false;
+
                         if (checkTile.GroundTopType == GroundTopType.IrrigationCanalEmpty ||
                         checkTile.GroundTopType == GroundTopType.IrrigationCanalFull)
                         {
@@ -94,6 +102,8 @@ namespace Technolithic
                     break;
                 case 'G':
                     {
+                        if (checkTile.WallId != -1) return false;
+
                         if (checkTile.GroundTopType == GroundTopType.None)
                         {
                             return true;
@@ -109,6 +119,8 @@ namespace Technolithic
                     break;
                 case 'H':
                     {
+                        if (checkTile.WallId != -1) return false;
+
                         if (checkTile.GroundTopType == GroundTopType.Water || checkTile.GroundTopType == GroundTopType.DeepWater)
                         {
                             if (checkTile.SurfaceId == -1)
@@ -120,6 +132,8 @@ namespace Technolithic
                     break;
                 case 'I':
                     {
+                        if (checkTile.WallId != -1) return false;
+
                         if (checkTile.GroundTopType == GroundTopType.Water
                             || checkTile.GroundTopType == GroundTopType.DeepWater
                             || checkTile.GroundTopType == GroundTopType.IrrigationCanalEmpty
@@ -134,6 +148,8 @@ namespace Technolithic
                     break;
                 case 'J':
                     {
+                        if (checkTile.WallId != -1) return false;
+
                         if (checkTile.GroundTopType == GroundTopType.None)
                         {
                             if (checkTile.SurfaceId == -1)
@@ -145,7 +161,9 @@ namespace Technolithic
                     break;
                 case 'K':
                     {
-                        if(checkTile.GroundTopType == GroundTopType.None)
+                        if (checkTile.WallId != -1) return false;
+
+                        if (checkTile.GroundTopType == GroundTopType.None)
                         {
                             if(checkTile.SurfaceId == -1)
                             {
@@ -163,6 +181,8 @@ namespace Technolithic
                     break;
                 case 'L':
                     {
+                        if (checkTile.WallId != -1) return false;
+
                         if (checkTile.GroundTopType == GroundTopType.None)
                         {
                             if (checkTile.SurfaceId == -1)
@@ -181,7 +201,15 @@ namespace Technolithic
                     }
                     break;
                 case 'M':
-                    return checkTile.SurfaceId != -1;
+                    {
+                        if (checkTile.WallId != -1) return false;
+
+                        return checkTile.SurfaceId != -1;
+                    }
+                case 'N':
+                    {
+                        return checkTile.WallId != -1;
+                    }
             }
 
             return false;

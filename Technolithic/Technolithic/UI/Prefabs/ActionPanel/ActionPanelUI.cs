@@ -19,6 +19,7 @@ namespace Technolithic
         Cancel,
         Destruct,
         DestructSurface,
+        DestructWall,
         CopySettings,
         Mine,
         GatherStone,

@@ -181,6 +181,7 @@ deposit,Родовище
 destruct,Зруйнувати
 destruct_irrigation_canal,Зруйнувати орошувальний канал
 destruct_surface,Зруйнувати покриття
+destruct_wall,Destruct wall
 dirt_path,Грунтова стежина
 dirty_animal_pen,Брудний загін
 disable_all,Заборонити все

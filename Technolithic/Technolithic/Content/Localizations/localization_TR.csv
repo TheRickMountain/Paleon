@@ -181,6 +181,7 @@ deposit,Depozito
 destruct,Yik
 destruct_irrigation_canal,Sulama kanali yik
 destruct_surface,Yüzeyi yik
+destruct_wall,Destruct wall
 dirt_path,Toprak yol
 dirty_animal_pen,Kirli hayvan agili
 disable_all,Hepsini etkisiz hale getir

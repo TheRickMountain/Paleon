@@ -49,6 +49,7 @@ namespace Technolithic
         public static MyTexture PasteIcon { get; private set; }
         public static MyTexture TradingIcon { get; private set; }
         public static MyTexture DestructSurfaceIcon { get; private set; }
+        public static MyTexture DestructWallIcon { get; private set; }
         public static MyTexture FishTexture { get; private set; }
         public static MyTexture RemoveEquipmentIcon { get; private set; }
         public static MyTexture QuestionMarkIcon { get; private set; }
@@ -208,6 +209,7 @@ namespace Technolithic
             ResourcesLimitIcon = uiSpriteSheet.GetSubtexture(128, 96, 16, 16);
             ResourcesIcon = uiSpriteSheet.GetSubtexture(192, 80, 16, 16);
             DestructSurfaceIcon = uiSpriteSheet.GetSubtexture(0, 32, 16, 16);
+            DestructWallIcon = uiSpriteSheet.GetSubtexture(16, 32, 16, 16);
             MechanismIcon = uiSpriteSheet.GetSubtexture(0, 144, 16, 16);
             BeeIcon = uiSpriteSheet.GetSubtexture(144, 160, 16, 16);
             FishTexture = uiSpriteSheet.GetSubtexture(16, 208, 16, 16);

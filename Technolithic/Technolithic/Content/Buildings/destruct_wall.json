@@ -1,9 +1,9 @@
 {
-  "name_key": "destruct_surface",
-  "description_key": "destruct_surface",
+  "name_key": "destruct_wall",
+  "description_key": "destruct_wall",
   "width": 1,
   "height": 1,
-  "type": "DestructSurface",
+  "type": "DestructWall",
   "category": "None",
   "animated": false,
   "rotatable": false,
@@ -15,14 +15,14 @@
   "toolRequired": false,
   "connectWithOtherBlocks": false,
   "texture": {
-    "name": "destruct_surface",
+    "name": "destruct_wall",
     "width": 16,
     "height": 16
   },
   "ingredients": [],
   "ground_pattern": [
     [
-      "M"
+      "N"
     ]
   ],
   "walkable_pattern": [

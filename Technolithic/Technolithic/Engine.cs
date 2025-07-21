@@ -75,7 +75,8 @@ namespace Technolithic
 
         public Dictionary<string, BuildingTemplate> Buildings { get; private set; } = new Dictionary<string, BuildingTemplate>();
         public Dictionary<BuildingCategory, List<BuildingTemplate>> BuildingsByCategories = new Dictionary<BuildingCategory, List<BuildingTemplate>>();
-        public Dictionary<int, BuildingTemplate> SurfaceIdBuildingTemplate = new Dictionary<int, BuildingTemplate>();
+        public Dictionary<int, BuildingTemplate> SurfaceIdBuildingTemplate = new();
+        public Dictionary<int, BuildingTemplate> WallIdBuildingTemplate = new();
         public Dictionary<int, string> SeasonsLocalizations = new Dictionary<int, string>();
         public List<Item> SettlerRation { get; private set; } = new List<Item>();
         public WorldGenerationData WorldGenerationData { get; private set; }
@@ -235,6 +236,10 @@ namespace Technolithic
                     if(buildingTemplate.BuildingType == BuildingType.Surface)
                     {
                         SurfaceIdBuildingTemplate.Add(buildingTemplate.SurfaceData.Id, buildingTemplate);
+                    }
+                    else if(buildingTemplate.BuildingType == BuildingType.Wall)
+                    {
+                        WallIdBuildingTemplate.Add(buildingTemplate.WallData.Id, buildingTemplate);
                     }
                 }
             }

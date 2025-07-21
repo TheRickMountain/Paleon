@@ -33,6 +33,7 @@ namespace Technolithic
         Noria,
         Surface,
         DestructSurface,
+        DestructWall,
         TradingPost,
         Tree,
         None
@@ -491,6 +492,9 @@ namespace Technolithic
                     break;
                 case BuildingType.DestructSurface:
                     buildingCmp = new DestructSurfaceBuilding(this, direction, interactablesManager);
+                    break;
+                case BuildingType.DestructWall:
+                    buildingCmp = new DestructWallBuilding(this, direction, interactablesManager);
                     break;
                 case BuildingType.TradingPost:
                     buildingCmp = new TradingPostBuildingCmp(this, direction, interactablesManager);

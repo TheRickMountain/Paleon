@@ -181,6 +181,7 @@ deposit,Залежь
 destruct,Разрушить
 destruct_irrigation_canal,Разрушить оросительный канал
 destruct_surface,Разрушить покрытие
+destruct_wall,Разрушить стену
 dirt_path,Грунтовая тропинка
 dirty_animal_pen,Грязный загон
 disable_all,Запретить все

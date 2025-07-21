@@ -11,7 +11,8 @@ namespace Technolithic
     public enum TerrainConnection
     {
         Individual,
-        Sides
+        SidesRelative,
+        SidesAny
     }
 
     public class TileMap
@@ -143,7 +144,8 @@ namespace Technolithic
                         SetCellTileId(x, y, terrainId);
                     }
                     break;
-                case TerrainConnection.Sides:
+                case TerrainConnection.SidesRelative:
+                case TerrainConnection.SidesAny:
                     {
                         UpdateCellTerrain(x, y);
 
@@ -179,12 +181,26 @@ namespace Technolithic
 
             switch(terrainConnection)
             {
-                case TerrainConnection.Sides:
+                case TerrainConnection.SidesRelative:
                     {
                         bool top = GetCellTerrainId(x, y - 1) == terrainId;
                         bool left = GetCellTerrainId(x - 1, y) == terrainId;
                         bool right = GetCellTerrainId(x + 1, y) == terrainId;
                         bool bottom = GetCellTerrainId(x, y + 1) == terrainId;
+
+                        int regionTileId = NewBitmaskGenerator.Get4BitBitmask(top, left, right, bottom);
+
+                        int globalTileId = terrainId * 16 + regionTileId;
+
+                        SetCellTileId(x, y, globalTileId);
+                    }
+                    break;
+                case TerrainConnection.SidesAny:
+                    {
+                        bool top = GetCellTerrainId(x, y - 1) != -1;
+                        bool left = GetCellTerrainId(x - 1, y) != -1;
+                        bool right = GetCellTerrainId(x + 1, y) != -1;
+                        bool bottom = GetCellTerrainId(x, y + 1) != -1;
 
                         int regionTileId = NewBitmaskGenerator.Get4BitBitmask(top, left, right, bottom);
 

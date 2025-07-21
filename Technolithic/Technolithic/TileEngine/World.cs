@@ -48,8 +48,8 @@ namespace Technolithic
             winterGroundTileMap = new TileMap(TextureBank.GroundTopTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
             springGroundTileMap = new TileMap(TextureBank.GroundTopTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
             groundTopTileMap = new TileMap(TextureBank.GroundTopTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
-            surfaceTileMap = new TileMap(TextureBank.SurfaceTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Sides);
-            blockTileMap = new TileMap(TextureBank.BlockTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
+            surfaceTileMap = new TileMap(TextureBank.SurfaceTileset, Engine.TILE_SIZE, width, height, TerrainConnection.SidesRelative);
+            blockTileMap = new TileMap(TextureBank.BlockTileset, Engine.TILE_SIZE, width, height, TerrainConnection.SidesAny);
             itemTileMap = new TileMap(TextureBank.GroundTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
 
             CreateTiles();

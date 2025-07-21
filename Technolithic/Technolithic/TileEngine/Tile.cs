@@ -258,9 +258,6 @@ namespace Technolithic
 
         public int IrrigationLevel { get; set; }
 
-        private Point point;
-        private Vector2 vector;
-
         public Dictionary<EnergyType, List<EnergySourceCmp>> EnergySources { get; private set; } = new Dictionary<EnergyType, List<EnergySourceCmp>>();
 
         public float MoistureLevel { get; set; }
@@ -277,9 +274,6 @@ namespace Technolithic
             X = x;
             Y = y;
             this.world = world;
-
-            point = new Point(X, Y);
-            vector = new Vector2(X, Y);
 
             this.summerGroundTileMap = summerGroundTileMap;
             this.autumnGroundTileMap = autumnGroundTileMap;
@@ -663,12 +657,12 @@ namespace Technolithic
 
         public Point GetAsPoint()
         {
-            return point;
+            return new Point(X, Y);
         }
 
         public Vector2 GetAsVector()
         {
-            return vector;
+            return new Vector2(X, Y);
         }
 
         public int GetZoneId()

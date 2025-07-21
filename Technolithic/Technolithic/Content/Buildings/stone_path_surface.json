@@ -14,11 +14,6 @@
   "constructionTime": 5,
   "toolRequired": false,
   "connectWithOtherBlocks": false,
-  "texture": {
-    "name": "stone_path",
-    "width": 16,
-    "height": 16
-  },
   "ingredients": [
     {
       "item": "stone",

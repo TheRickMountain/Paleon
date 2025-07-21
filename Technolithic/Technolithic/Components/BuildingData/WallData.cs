@@ -1,9 +1,7 @@
 ﻿namespace Technolithic
 {
-    public class SurfaceData
+    public class WallData
     {
-
         public int Id { get; init; }
-
     }
 }

@@ -865,18 +865,6 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/bloomery.png
 
-#begin Buildings/brick_path.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Buildings/brick_path.png
-
 #begin Buildings/build_irrigation_canal.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1008,18 +996,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Buildings/destruct_surface.png
-
-#begin Buildings/dirt_path.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Buildings/dirt_path.png
 
 #begin Buildings/dolmen.png
 /importer:TextureImporter
@@ -1393,18 +1369,6 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/mudbrick_dryer.png
 
-#begin Buildings/mudbrick_path.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Buildings/mudbrick_path.png
-
 #begin Buildings/oak.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1548,18 +1512,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Buildings/stone_deposit.png
-
-#begin Buildings/stone_path.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Buildings/stone_path.png
 
 #begin Buildings/stone_pieces.png
 /importer:TextureImporter
@@ -1788,18 +1740,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Buildings/wood_pieces.png
-
-#begin Buildings/wooden_bridge.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Buildings/wooden_bridge.png
 
 #begin Buildings/wooden_gate.png
 /importer:TextureImporter

@@ -11,6 +11,10 @@
   "destructible": true,
   "movementSpeed": -1,
   "constructionTime": 10,
+  "WallData":
+  {
+    "Id": 9
+  },
   "ingredients": [
     {
       "item": "mudbrick",

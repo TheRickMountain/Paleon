@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Xna.Framework.Graphics;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -116,6 +117,7 @@ namespace Technolithic
         public PlantData PlantData { get; private set; }
         public SmokeGeneratorData SmokeGeneratorData { get; private set; }
         public SurfaceData SurfaceData { get; private set; }
+        public WallData WallData { get; private set; }
         public TreeData TreeData { get; private set; }
 
         public bool IsDestructible { get; private set; }
@@ -185,34 +187,74 @@ namespace Technolithic
 
             Cloneable = JObject["cloneable"].Value<bool>();
 
+            Textures = new Dictionary<Direction, MyTexture>();
+
+            if (BuildingType == BuildingType.Wall || BuildingType == BuildingType.Surface)
+            {
+                Width = 1;
+                Height = 1;
+
+                TextureWidth = Engine.TILE_SIZE;
+                TextureHeight = Engine.TILE_SIZE;
+
+                Animated = false;
+                Rotatable = false;
+            }
+
+            if (!JObject["SurfaceData"].IsNullOrEmpty())
+            {
+                SurfaceData = JsonSerializer.CreateDefault().Deserialize<SurfaceData>(JObject["SurfaceData"].CreateReader());
+            }
+
+            if (!JObject["WallData"].IsNullOrEmpty())
+            {
+                WallData = JsonSerializer.CreateDefault().Deserialize<WallData>(JObject["WallData"].CreateReader());
+            }
+
             switch (BuildingType)
             {
+                case BuildingType.Surface:
+                    {
+                        MyTexture texture = ResourceManager.GetTexture("surface_tileset").GetSubtexture(
+                            0, 
+                            Engine.TILE_SIZE * SurfaceData.Id,
+                            Engine.TILE_SIZE, 
+                            Engine.TILE_SIZE);
+
+                        Icons.Add(Direction.DOWN, texture);
+                        Textures.Add(Direction.DOWN, texture);
+
+                        WalkablePattern = new bool[,] { { true } };
+                        TargetPattern = new bool[,] { { false } };
+                        RequireBuilding = true;
+                    }
+                    break;
                 case BuildingType.Wall:
                     {
+                        MyTexture texture = ResourceManager.GetTexture("block_tileset").GetSubtexture(
+                            0, 
+                            Engine.TILE_SIZE * WallData.Id,
+                            Engine.TILE_SIZE, 
+                            Engine.TILE_SIZE);
+
+                        Icons.Add(Direction.DOWN, texture);
+                        Textures.Add(Direction.DOWN, texture);
+
                         TilesetOffset = JObject["tilesetOffset"].Value<int>();
                         LetLight = JObject["letLight"].Value<bool>();
 
                         ConnectWithOtherBlocks = JObject["connectWithOtherBlocks"].Value<bool>();
-
-                        Icons.Add(Direction.DOWN, ResourceManager.GetTexture("block_tileset").GetSubtexture(0, TilesetOffset, 16, 16));
 
                         bool walkable = JObject["walkable"].Value<bool>();
 
                         WalkablePattern = new bool[,] { { walkable } };
                         TargetPattern = new bool[,] { { false } };
                         RequireBuilding = true;
-
-                        Animated = false;
-
-                        Width = 1;
-                        Height = 1;
                     }
                     break;
                 default:
                     {
                         Rotatable = JObject["rotatable"].Value<bool>();
-
-                        Textures = new Dictionary<Direction, MyTexture>();
 
                         TextureWidth = JObject["texture"]["width"].Value<int>();
                         TextureHeight = JObject["texture"]["height"].Value<int>();
@@ -371,11 +413,6 @@ namespace Technolithic
             if(!JObject["MineData"].IsNullOrEmpty())
             {
                 MineData = JsonSerializer.CreateDefault().Deserialize<MineData>(JObject["MineData"].CreateReader());
-            }
-
-            if (!JObject["SurfaceData"].IsNullOrEmpty())
-            {
-                SurfaceData = JsonSerializer.CreateDefault().Deserialize<SurfaceData>(JObject["SurfaceData"].CreateReader());
             }
 
             if (!JObject["TreeData"].IsNullOrEmpty())

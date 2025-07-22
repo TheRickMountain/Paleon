@@ -77,15 +77,12 @@ namespace Technolithic
 
         public Color TimeOfDayColor { get; private set; }
 
-        public Action<int, Season> OnNextDayStartedCallback { get; set; }
+        public event Action<int, Season> OnNextDayStartedCallback;
         public Action<int> NextHourStarted { get; set; }
-
-        public float LastSeasonAlpha { get; private set; }
-        public float CurrentSeasonAlpha { get; private set; }
 
         public WindSpeed WindSpeed { get; private set; }
 
-        public WorldState(WorldStateSaveData worldStateSaveData)
+        public WorldState(WorldStateSaveData worldStateSaveData, WorldSettings worldSettings)
         {
             GenerateSchedule();
 
@@ -98,11 +95,8 @@ namespace Technolithic
 
                 CurrentWeather = Weather.Sun;
 
-                CurrentSeason = Season.Summer;
-                LastSeason = Season.Summer;
-
-                LastSeasonAlpha = 0.0f;
-                CurrentSeasonAlpha = 1.0f;
+                CurrentSeason = worldSettings.StartSeason;
+                LastSeason = worldSettings.StartSeason;
 
                 WindSpeed = WindSpeed.Moderate;
             }
@@ -114,8 +108,6 @@ namespace Technolithic
                 CurrentWeather = worldStateSaveData.CurrentWeather;
                 CurrentSeason = worldStateSaveData.CurrentSeason;
                 LastSeason = worldStateSaveData.LastSeason;
-                CurrentSeasonAlpha = worldStateSaveData.CurrentSeasonAlpha;
-                LastSeasonAlpha = worldStateSaveData.LastSeasonAlpha;
                 WindSpeed = worldStateSaveData.WindSpeed;
             }
         }
@@ -174,17 +166,6 @@ namespace Technolithic
                 NextDay();
             }
 
-            if(CurrentSeason != LastSeason)
-            {
-                CurrentSeasonAlpha = MathHelper.Clamp(CurrentSeasonAlpha + Engine.GameDeltaTime * 0.1f, 0.0f, 1.0f);
-                LastSeasonAlpha = MathHelper.Clamp(LastSeasonAlpha - Engine.GameDeltaTime * 0.1f, 0.0f, 1.0f);
-
-                if(LastSeasonAlpha <= 0)
-                {
-                    LastSeason = CurrentSeason;
-                }
-            }
-
             TimeOfDayColor = DayColorChanger.GetTimeOfDayColor(currentMinute, MINUTES_PER_HOUR, CurrentWeather, hourInfos);
         }
 
@@ -198,12 +179,6 @@ namespace Technolithic
             int currentSeasonNumber = seasonsPassedCount % seasonsCount;
             LastSeason = CurrentSeason;
             CurrentSeason = (Season)currentSeasonNumber;
-
-            if(LastSeason != CurrentSeason)
-            {
-                LastSeasonAlpha = 1.0f;
-                CurrentSeasonAlpha = 0.0f;
-            }
 
             WindSpeed = MyRandom.GetRandomEnumValue<WindSpeed>();
 
@@ -294,8 +269,6 @@ namespace Technolithic
             worldStateSaveData.CurrentWeather = CurrentWeather;
             worldStateSaveData.CurrentSeason = CurrentSeason;
             worldStateSaveData.LastSeason = LastSeason;
-            worldStateSaveData.CurrentSeasonAlpha = CurrentSeasonAlpha;
-            worldStateSaveData.LastSeasonAlpha = LastSeasonAlpha;
             worldStateSaveData.WindSpeed = WindSpeed;
 
             return worldStateSaveData;

@@ -69,7 +69,7 @@ namespace Technolithic
                 bool isDecayable = itemData["IsDecayable"].IsNullOrEmpty() ? false : itemData["IsDecayable"].Value<bool>();
                 bool isVirtual = itemData["IsVirtual"].IsNullOrEmpty() ? false : itemData["IsVirtual"].Value<bool>();
                 float spoilageRate = itemData["SpoilageRate"].IsNullOrEmpty() ? 0 : itemData["SpoilageRate"].Value<float>();
-                MyTexture icon = TextureBank.GroundTileset[id];
+                MyTexture icon = TextureBank.ItemTileset[id];
 
                 Item item = new Item(id, icon, name, itemCategory, value, durability, spoilageRate, isDecayable, isVirtual);
 

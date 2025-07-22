@@ -17,7 +17,21 @@ namespace Technolithic
 
     public class TileMap
     {
-        public Tileset Tileset { get; private set; }
+        private Tileset _tileset;
+        private bool _isTilesetChanged = false;
+
+        public Tileset Tileset 
+        {
+            get => _tileset; 
+            set
+            {
+                if (_tileset == value) return;
+                
+                _tileset = value;
+
+                _isTilesetChanged = true;
+            }
+        }
 
         public int TileSize { get; private set; }
 
@@ -74,13 +88,28 @@ namespace Technolithic
                     int chunkY = y * CHUNK_SIZE * TileSize;
 
                     chunks[x, y] = new Chunk(chunkX, chunkY, CHUNK_SIZE, TileSize);
-                    chunks[x, y].Tileset = Tileset;
                 }
             }
         }
 
         public void RenderUpdate()
         {
+            if (_isTilesetChanged)
+            {
+                _isTilesetChanged = false;
+
+                for (int x = 0; x < chunkColumns; x++)
+                {
+                    for (int y = 0; y < chunkRows; y++)
+                    {
+                        int chunkX = x * CHUNK_SIZE * TileSize;
+                        int chunkY = y * CHUNK_SIZE * TileSize;
+
+                        chunks[x, y].Tileset = Tileset;
+                    }
+                }
+            }
+
             for (int x = 0; x < chunkColumns; x++)
                 for (int y = 0; y < chunkRows; y++)
                     chunks[x, y].RenderUpdate();

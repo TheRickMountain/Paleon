@@ -13,8 +13,6 @@ namespace Technolithic
         public Weather CurrentWeather { get; set; }
         public Season CurrentSeason { get; set; }
         public Season LastSeason { get; set; }
-        public float CurrentSeasonAlpha { get; set; }
-        public float LastSeasonAlpha { get; set; }
         public int CurrentDay { get; set; }
         public int CurrentHour { get; set; }
         public float CurrentMinute { get; set; }

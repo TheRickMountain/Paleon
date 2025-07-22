@@ -5,5 +5,6 @@
         public int Seed { get; init; }
         public int Size { get; init; }
         public string Name { get; init; }
+        public Season StartSeason { get; init; }
     }
 }

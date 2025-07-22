@@ -117,7 +117,7 @@ namespace Technolithic
 
             ProgressTree = new ProgressTree(null);
 
-            World = new World(WorldSize, WorldSize);
+            World = new World(WorldSize, WorldSize, worldSettings.StartSeason);
             WorldManager = new WorldManager(null, ProgressTree, World);
             WorldManager.Begin();
 
@@ -127,7 +127,7 @@ namespace Technolithic
             ResourcesLimitManager = new ResourcesLimitManager(null);
             ProblemIndicatorManager = new ProblemIndicatorManager();
             
-            WorldState = new WorldState(null);
+            WorldState = new WorldState(null, worldSettings);
             WeatherSoundManager = new WeatherSoundManager(WorldState);
             NomadsManager = new NomadsManager(null);
             AnimalSpawnManager = new AnimalSpawnManager();
@@ -193,6 +193,8 @@ namespace Technolithic
 
             WorldState.OnNextDayStartedCallback += PrecipitationManager.OnDayChanged;
 
+            WorldState.OnNextDayStartedCallback += WorldState_OnNextDayStartedCallback;
+
             NomadsManager.Begin();
             WorldState.NextHourStarted += NomadsManager.NextHour;
 
@@ -231,6 +233,14 @@ namespace Technolithic
                     AchievementManager.UnlockAchievement(AchievementId.ENGINE_OF_PROGRESS);
                 }
             };
+        }
+
+        private void WorldState_OnNextDayStartedCallback(int day, Season season)
+        {
+            if (WorldState.CurrentSeason != WorldState.LastSeason)
+            {
+                World.OnSeasonChanged(WorldState.CurrentSeason);
+            }
         }
 
         public GameplayScene(string saveFileName, string worldName)
@@ -284,7 +294,8 @@ namespace Technolithic
 
                 ProgressTree = new ProgressTree(saveManager.Data.ProgressTreeSaveData);
 
-                World = new World(WorldSize, WorldSize);
+                WorldState = new WorldState(saveManager.Data.WorldStateSaveData, null);
+                World = new World(WorldSize, WorldSize, WorldState.CurrentSeason);
                 WorldManager = new WorldManager(saveManager.Data.WorldManagerSaveData, ProgressTree, World);
                 WorldManager.Begin();
 
@@ -296,7 +307,6 @@ namespace Technolithic
                 ResourcesLimitManager = new ResourcesLimitManager(saveManager.Data.ResourcesLimits);
                 ProblemIndicatorManager = new ProblemIndicatorManager();
 
-                WorldState = new WorldState(saveManager.Data.WorldStateSaveData);
                 WeatherSoundManager = new WeatherSoundManager(WorldState);
                 NomadsManager = new NomadsManager(saveManager.Data.NomadsManagerSaveData);
                 AnimalSpawnManager = new AnimalSpawnManager();
@@ -1226,45 +1236,7 @@ namespace Technolithic
                 SamplerState.PointClamp,
                 null, null, null, RenderManager.MainCamera.Transformation);
 
-            // Основные тайлмапы
-            if (WorldState.LastSeasonAlpha > 0)
-            {
-                switch (WorldState.LastSeason)
-                {
-                    case Season.Autumn:
-                        World.RenderAutumnGroundTileMap(WorldState.LastSeasonAlpha);
-                        break;
-                    case Season.Summer:
-                        World.RenderSummerGroundTileMap(WorldState.LastSeasonAlpha);
-                        break;
-                    case Season.Winter:
-                        World.RenderWinterGroundTileMap(WorldState.LastSeasonAlpha);
-                        break;
-                    case Season.Spring:
-                        World.RenderSpringGroundTileMap(WorldState.LastSeasonAlpha);
-                        break;
-                }
-            }
-
-            if (WorldState.CurrentSeasonAlpha > 0)
-            {
-                switch (WorldState.CurrentSeason)
-                {
-                    case Season.Autumn:
-                        World.RenderAutumnGroundTileMap(WorldState.CurrentSeasonAlpha);
-                        break;
-                    case Season.Summer:
-                        World.RenderSummerGroundTileMap(WorldState.CurrentSeasonAlpha);
-                        break;
-                    case Season.Winter:
-                        World.RenderWinterGroundTileMap(WorldState.CurrentSeasonAlpha);
-                        break;
-                    case Season.Spring:
-                        World.RenderSpringGroundTileMap(WorldState.CurrentSeasonAlpha);
-                        break;
-                }
-            }
-
+            World.RenderGroundTileMap();
             World.RenderGroundTopTileMap();
 
             WaterChunkManager.Render();

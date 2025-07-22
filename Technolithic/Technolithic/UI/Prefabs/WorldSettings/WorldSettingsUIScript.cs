@@ -258,6 +258,7 @@ namespace Technolithic
                 Size = selectedWorldSize,
                 Name = worldNameInput.GetComponent<MTextInputScript>().CurrentText,
                 Seed = int.Parse(seedString),
+                StartSeason = Season.Summer
             };
 
             Engine.Scene = new GameplayScene(worldSettings);

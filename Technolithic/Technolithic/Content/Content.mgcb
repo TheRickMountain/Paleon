@@ -1924,6 +1924,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/achievements_icons.png
 
+#begin Sprites/autumn_ground_tileset.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/autumn_ground_tileset.png
+
 #begin Sprites/block_tileset.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2104,6 +2116,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/snow_drop.png
 
+#begin Sprites/spring_ground_tileset.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/spring_ground_tileset.png
+
 #begin Sprites/star.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2115,6 +2139,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/star.png
+
+#begin Sprites/summer_ground_tileset.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/summer_ground_tileset.png
 
 #begin Sprites/surface_tileset.png
 /importer:TextureImporter
@@ -2163,6 +2199,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/vomiting.png
+
+#begin Sprites/winter_ground_tileset.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/winter_ground_tileset.png
 
 #begin Technologies/technologies_icons.png
 /importer:TextureImporter

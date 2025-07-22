@@ -1,10 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Technolithic
 {
@@ -18,10 +14,7 @@ namespace Technolithic
         private Tile[,] tiles;
         private MChunk[,] chunks;
 
-        private TileMap summerGroundTileMap;
-        private TileMap autumnGroundTileMap;
-        private TileMap winterGroundTileMap;
-        private TileMap springGroundTileMap;
+        private TileMap groundTileMap;
         private TileMap groundTopTileMap;
         private TileMap surfaceTileMap;
         private TileMap blockTileMap;
@@ -30,19 +23,25 @@ namespace Technolithic
         private Point tileMapCamMin = new Point();
         private Point tileMapCamMax = new Point();
 
-        public World(int width, int height)
+        public World(int width, int height, Season season)
         {
             Width = width;
             Height = height;
 
-            summerGroundTileMap = new TileMap(TextureBank.GroundTopTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
-            autumnGroundTileMap = new TileMap(TextureBank.GroundTopTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
-            winterGroundTileMap = new TileMap(TextureBank.GroundTopTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
-            springGroundTileMap = new TileMap(TextureBank.GroundTopTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
+            groundTileMap = new TileMap(null, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
+            
+            switch(season)
+            {
+                case Season.Summer: groundTileMap.Tileset = TextureBank.SummerGroundTileset; break;
+                case Season.Autumn: groundTileMap.Tileset = TextureBank.AutumnGroundTileset; break;
+                case Season.Winter: groundTileMap.Tileset = TextureBank.WinterGroundTileset; break;
+                case Season.Spring: groundTileMap.Tileset = TextureBank.SpringGroundTileset; break;
+            }
+            
             groundTopTileMap = new TileMap(TextureBank.GroundTopTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
             surfaceTileMap = new TileMap(TextureBank.SurfaceTileset, Engine.TILE_SIZE, width, height, TerrainConnection.SidesRelative);
             blockTileMap = new TileMap(TextureBank.BlockTileset, Engine.TILE_SIZE, width, height, TerrainConnection.SidesAny);
-            itemTileMap = new TileMap(TextureBank.GroundTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
+            itemTileMap = new TileMap(TextureBank.ItemTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
 
             CreateTiles();
             InitTilesNeighbours();
@@ -119,8 +118,7 @@ namespace Technolithic
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    Tile tile = new Tile(x, y, summerGroundTileMap, autumnGroundTileMap, winterGroundTileMap, 
-                        springGroundTileMap, groundTopTileMap, surfaceTileMap, blockTileMap, itemTileMap, this);
+                    Tile tile = new Tile(x, y, groundTileMap, groundTopTileMap, surfaceTileMap, blockTileMap, itemTileMap, this);
                     tiles[x, y] = tile;
                 }
             }
@@ -233,46 +231,16 @@ namespace Technolithic
 
         public void RenderUpdate()
         {
-            summerGroundTileMap.RenderUpdate();
-            autumnGroundTileMap.RenderUpdate();
-            winterGroundTileMap.RenderUpdate();
-            springGroundTileMap.RenderUpdate();
+            groundTileMap.RenderUpdate();
             groundTopTileMap.RenderUpdate();
             surfaceTileMap.RenderUpdate();
             blockTileMap.RenderUpdate();
             itemTileMap.RenderUpdate();
         }
 
-        public void RenderSummerGroundTileMap(float alpha)
+        public void RenderGroundTileMap()
         {
-            if (alpha > 0)
-            {
-                summerGroundTileMap.Render(tileMapCamMin, tileMapCamMax, Color.White * alpha);
-            }
-        }
-
-        public void RenderAutumnGroundTileMap(float alpha)
-        {
-            if (alpha > 0)
-            {
-                autumnGroundTileMap.Render(tileMapCamMin, tileMapCamMax, Color.White * alpha);
-            }
-        }
-
-        public void RenderWinterGroundTileMap(float alpha)
-        {
-            if (alpha > 0)
-            {
-                winterGroundTileMap.Render(tileMapCamMin, tileMapCamMax, Color.White * alpha);
-            }
-        }
-
-        public void RenderSpringGroundTileMap(float alpha)
-        {
-            if (alpha > 0)
-            {
-                springGroundTileMap.Render(tileMapCamMin, tileMapCamMax, Color.White * alpha);
-            }
+            groundTileMap.Render(tileMapCamMin, tileMapCamMax);
         }
 
         public void RenderGroundTopTileMap()
@@ -327,6 +295,17 @@ namespace Technolithic
             {
                 Tile tile = GetTileAt(point);
                 if (tile != null) yield return tile;
+            }
+        }
+
+        public void OnSeasonChanged(Season season)
+        {
+            switch (season)
+            {
+                case Season.Summer: groundTileMap.Tileset = TextureBank.SummerGroundTileset; break;
+                case Season.Autumn: groundTileMap.Tileset = TextureBank.AutumnGroundTileset; break;
+                case Season.Winter: groundTileMap.Tileset = TextureBank.WinterGroundTileset; break;
+                case Season.Spring: groundTileMap.Tileset = TextureBank.SpringGroundTileset; break;
             }
         }
 

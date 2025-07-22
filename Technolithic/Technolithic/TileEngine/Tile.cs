@@ -68,10 +68,7 @@ namespace Technolithic
         private List<Tile> neighbourTiles;
         private List<Tile> allNeighbourTiles;
 
-        private TileMap summerGroundTileMap;
-        private TileMap autumnGroundTileMap;
-        private TileMap winterGroundTileMap;
-        private TileMap springGroundTileMap;
+        private TileMap groundTileMap;
         private TileMap groundTopTileMap;
         private TileMap surfaceTileMap;
         private TileMap wallTileMap;
@@ -268,17 +265,14 @@ namespace Technolithic
 
         public bool IsIlluminated { get; set; } = false;
 
-        public Tile(int x, int y, TileMap summerGroundTileMap, TileMap autumnGroundTileMap, TileMap winterGroundTileMap, TileMap springGroundTileMap, TileMap groundTopTileMap, TileMap surfaceTileMap, TileMap blockTileMap, 
+        public Tile(int x, int y, TileMap groundTileMap, TileMap groundTopTileMap, TileMap surfaceTileMap, TileMap blockTileMap, 
             TileMap itemTileMap, World world)
         {
             X = x;
             Y = y;
             this.world = world;
 
-            this.summerGroundTileMap = summerGroundTileMap;
-            this.autumnGroundTileMap = autumnGroundTileMap;
-            this.winterGroundTileMap = winterGroundTileMap;
-            this.springGroundTileMap = springGroundTileMap;
+            this.groundTileMap = groundTileMap;
             this.groundTopTileMap = groundTopTileMap;
             this.surfaceTileMap = surfaceTileMap;
             this.wallTileMap = blockTileMap;
@@ -346,45 +340,27 @@ namespace Technolithic
 
             if (tile.GroundType == GroundType.Grass)
             {
-                summerGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 0, 10));
-                autumnGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 0, 25));
-                winterGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 11, 20));
-                springGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 11, 25));
+                groundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 0, 10));
             }
             else if (tile.GroundType == GroundType.FarmPlot)
             {
-                summerGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 0));
-                autumnGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 0));
-                winterGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 0));
-                springGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 0));
+                groundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 0));
             }
             else if (tile.GroundType == GroundType.FarmPlotFertilized)
             {
-                summerGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 10));
-                autumnGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 10));
-                winterGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 10));
-                springGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 10));
+                groundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 10));
             }
             else if (tile.GroundType == GroundType.FarmPlotWet)
             {
-                summerGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 5));
-                autumnGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 5));
-                winterGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 5));
-                springGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 5));
+                groundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 5));
             }
             else if (tile.GroundType == GroundType.FarmPlotWetFertilized)
             {
-                summerGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 15));
-                autumnGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 15));
-                winterGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 15));
-                springGroundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 15));
+                groundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 15));
             }
             else
             {
-                summerGroundTileMap.SetCell(tile.X, tile.Y, 992);
-                autumnGroundTileMap.SetCell(tile.X, tile.Y, 992);
-                winterGroundTileMap.SetCell(tile.X, tile.Y, 960);
-                springGroundTileMap.SetCell(tile.X, tile.Y, 992);
+                groundTileMap.SetCell(tile.X, tile.Y, 992);
             }
         }
 

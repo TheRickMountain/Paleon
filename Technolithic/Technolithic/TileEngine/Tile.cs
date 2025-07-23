@@ -15,17 +15,17 @@ namespace Technolithic
         FarmPlotFertilized = 3,
         FarmPlotWet = 4,
         FarmPlotWetFertilized = 5,
+        Stone = 6,
+        Clay = 7,
+        Iron = 8,
+        Tin = 9,
+        Copper = 10,
     }
 
     public enum GroundTopType
     {
         Water = 0,
         DeepWater = 1,
-        Stone = 2,
-        Clay = 3,
-        Iron = 5,
-        Tin = 6,
-        Copper = 7,
         None = 8,
         IrrigationCanalEmpty = 13,
         IrrigationCanalFull = 14
@@ -358,6 +358,26 @@ namespace Technolithic
             {
                 groundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 15));
             }
+            else if (tile.GroundType == GroundType.Stone)
+            {
+                groundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 0, 5));
+            }
+            else if (tile.GroundType == GroundType.Clay)
+            {
+                groundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 0, 15));
+            }
+            else if (tile.GroundType == GroundType.Iron)
+            {
+                groundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 11, 0));
+            }
+            else if (tile.GroundType == GroundType.Tin)
+            {
+                groundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 11, 5));
+            }
+            else if (tile.GroundType == GroundType.Copper)
+            {
+                groundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 11, 10));
+            }
             else
             {
                 groundTileMap.SetCell(tile.X, tile.Y, 992);
@@ -393,26 +413,6 @@ namespace Technolithic
                 else if(tile.GroundTopType == GroundTopType.DeepWater)
                 {
                     groundTopTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 11, 15));
-                }
-                else if(tile.GroundTopType == GroundTopType.Stone)
-                {
-                    groundTopTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 0, 5));
-                }
-                else if(tile.GroundTopType == GroundTopType.Clay)
-                {
-                    groundTopTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 0, 15));
-                }
-                else if(tile.GroundTopType == GroundTopType.Iron)
-                {
-                    groundTopTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 11, 0));
-                }
-                else if (tile.GroundTopType == GroundTopType.Tin)
-                {
-                    groundTopTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 11, 5));
-                }
-                else if (tile.GroundTopType == GroundTopType.Copper)
-                {
-                    groundTopTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 11, 10));
                 }
                 else if(tile.GroundTopType == GroundTopType.IrrigationCanalEmpty)
                 {

@@ -84,8 +84,8 @@ namespace Technolithic
         private BuildingTemplate FindDepositToSpawn()
         {
             Tile checkTile = TilesInfosArray[0, 0].Tile;
-            GroundTopType groundTopType = checkTile.GroundTopType;
-            string buildingTemplateKey = $"{groundTopType.ToString().ToLowerInvariant()}_deposit";
+            GroundType groundType = checkTile.GroundType;
+            string buildingTemplateKey = $"{groundType.ToString().ToLowerInvariant()}_deposit";
             return Engine.Instance.Buildings[buildingTemplateKey];
         }
 

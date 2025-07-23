@@ -53,6 +53,11 @@ namespace Technolithic
                     {
                         if (checkTile.WallId != -1) return false;
 
+                        if ((checkTile.GroundType == GroundType.Ground || checkTile.GroundType == GroundType.Grass) == false)
+                        {
+                            return false;
+                        }
+
                         if (checkTile.GroundTopType == GroundTopType.None)
                         {
                             return true;
@@ -76,11 +81,11 @@ namespace Technolithic
                     {
                         if (checkTile.WallId != -1) return false;
 
-                        if (checkTile.GroundTopType == GroundTopType.Clay ||
-                               checkTile.GroundTopType == GroundTopType.Copper ||
-                               checkTile.GroundTopType == GroundTopType.Iron ||
-                               checkTile.GroundTopType == GroundTopType.Stone ||
-                               checkTile.GroundTopType == GroundTopType.Tin)
+                        if (checkTile.GroundType == GroundType.Clay ||
+                               checkTile.GroundType == GroundType.Copper ||
+                               checkTile.GroundType == GroundType.Iron ||
+                               checkTile.GroundType == GroundType.Stone ||
+                               checkTile.GroundType == GroundType.Tin)
                         {
                             return true;
                         }

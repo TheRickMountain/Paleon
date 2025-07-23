@@ -19,9 +19,13 @@ namespace Technolithic
 
         public void GenerateWorld()
         {
+            CreateGround();
+
             GenerateWater();
 
             GenerateMixed();
+
+            GenerateGrass();
 
             int pointsAmount = 0;
 
@@ -42,6 +46,18 @@ namespace Technolithic
             foreach (string treeName in Engine.Instance.WorldGenerationData.Trees)
             {
                 GenerateTrees(treeName);
+            }
+        }
+
+        private void CreateGround()
+        {
+            for (int x = 0; x < _worldSettings.Size; x++)
+            {
+                for (int y = 0; y < _worldSettings.Size; y++)
+                {
+                    Tile tile = world.GetTileAt(x, y);
+                    tile.GroundType = GroundType.Ground;
+                }
             }
         }
 
@@ -135,22 +151,21 @@ namespace Technolithic
                     }
                 }
             }
+        }
 
-            // Генерация травы
-            for (int x = 0; x < GameplayScene.WorldSize; x++)
+        private void GenerateGrass()
+        {
+            for (int x = 0; x < _worldSettings.Size; x++)
             {
-                for (int y = 0; y < GameplayScene.WorldSize; y++)
+                for (int y = 0; y < _worldSettings.Size; y++)
                 {
                     Tile tile = world.GetTileAt(x, y);
-                    float clayHeight = clayGenerator.GenerateHeight(x, y);
-                    if (tile.GroundTopType == GroundTopType.None && clayHeight < 2.5f)
-                    {
-                        tile.GroundType = GroundType.Grass;
-                    }
-                    else
-                    {
-                        tile.GroundType = GroundType.Ground;
-                    }
+
+                    if (tile.GroundType != GroundType.Ground) continue;
+
+                    if (tile.GroundTopType != GroundTopType.None) continue;
+
+                    tile.GroundType = GroundType.Grass;
                 }
             }
         }
@@ -224,60 +239,60 @@ namespace Technolithic
         private void SpawnDeposits()
         {
             // Делаем 10 попыток генерации жил
-            Dictionary<GroundTopType, List<Tile>> depositsTiles = new Dictionary<GroundTopType, List<Tile>>();
+            Dictionary<GroundType, List<Tile>> depositsTiles = new Dictionary<GroundType, List<Tile>>();
 
-            depositsTiles.Add(GroundTopType.Stone, new List<Tile>());
-            depositsTiles.Add(GroundTopType.Clay, new List<Tile>());
-            depositsTiles.Add(GroundTopType.Copper, new List<Tile>());
-            depositsTiles.Add(GroundTopType.Iron, new List<Tile>());
-            depositsTiles.Add(GroundTopType.Tin, new List<Tile>());
+            depositsTiles.Add(GroundType.Stone, new List<Tile>());
+            depositsTiles.Add(GroundType.Clay, new List<Tile>());
+            depositsTiles.Add(GroundType.Copper, new List<Tile>());
+            depositsTiles.Add(GroundType.Iron, new List<Tile>());
+            depositsTiles.Add(GroundType.Tin, new List<Tile>());
 
             for (int i = 0; i < 10; i++)
             {
-                Tile tile = TrySpawnDepositAtRandomPosition(GroundTopType.Stone);
+                Tile tile = TrySpawnDepositAtRandomPosition(GroundType.Stone);
                 if (tile != null)
                 {
-                    depositsTiles[GroundTopType.Stone].Add(tile);
+                    depositsTiles[GroundType.Stone].Add(tile);
                     break;
                 }
             }
 
             for (int i = 0; i < 10; i++)
             {
-                Tile tile = TrySpawnDepositAtRandomPosition(GroundTopType.Clay);
+                Tile tile = TrySpawnDepositAtRandomPosition(GroundType.Clay);
                 if (tile != null)
                 {
-                    depositsTiles[GroundTopType.Clay].Add(tile);
+                    depositsTiles[GroundType.Clay].Add(tile);
                     break;
                 }
             }
 
             for (int i = 0; i < 10; i++)
             {
-                Tile tile = TrySpawnDepositAtRandomPosition(GroundTopType.Copper);
+                Tile tile = TrySpawnDepositAtRandomPosition(GroundType.Copper);
                 if (tile != null)
                 {
-                    depositsTiles[GroundTopType.Copper].Add(tile);
+                    depositsTiles[GroundType.Copper].Add(tile);
                     break;
                 }
             }
 
             for (int i = 0; i < 10; i++)
             {
-                Tile tile = TrySpawnDepositAtRandomPosition(GroundTopType.Iron);
+                Tile tile = TrySpawnDepositAtRandomPosition(GroundType.Iron);
                 if (tile != null)
                 {
-                    depositsTiles[GroundTopType.Iron].Add(tile);
+                    depositsTiles[GroundType.Iron].Add(tile);
                     break;
                 }
             }
 
             for (int i = 0; i < 10; i++)
             {
-                Tile tile = TrySpawnDepositAtRandomPosition(GroundTopType.Tin);
+                Tile tile = TrySpawnDepositAtRandomPosition(GroundType.Tin);
                 if (tile != null)
                 {
-                    depositsTiles[GroundTopType.Tin].Add(tile);
+                    depositsTiles[GroundType.Tin].Add(tile);
                     break;
                 }
             }
@@ -285,53 +300,53 @@ namespace Technolithic
             // Дополнительная генерация жил
             if (MyRandom.ProbabilityChance(50))
             {
-                Tile tile = TrySpawnDepositAtRandomPosition(GroundTopType.Stone);
+                Tile tile = TrySpawnDepositAtRandomPosition(GroundType.Stone);
                 if (tile != null)
                 {
-                    depositsTiles[GroundTopType.Stone].Add(tile);
+                    depositsTiles[GroundType.Stone].Add(tile);
                 }
             }
 
             if (MyRandom.ProbabilityChance(50))
             {
-                Tile tile = TrySpawnDepositAtRandomPosition(GroundTopType.Clay);
+                Tile tile = TrySpawnDepositAtRandomPosition(GroundType.Clay);
                 if (tile != null)
                 {
-                    depositsTiles[GroundTopType.Clay].Add(tile);
+                    depositsTiles[GroundType.Clay].Add(tile);
                 }
             }
 
             if (MyRandom.ProbabilityChance(50))
             {
-                Tile tile = TrySpawnDepositAtRandomPosition(GroundTopType.Copper);
+                Tile tile = TrySpawnDepositAtRandomPosition(GroundType.Copper);
                 if (tile != null)
                 {
-                    depositsTiles[GroundTopType.Copper].Add(tile);
+                    depositsTiles[GroundType.Copper].Add(tile);
                 }
             }
 
             if (MyRandom.ProbabilityChance(50))
             {
-                Tile tile = TrySpawnDepositAtRandomPosition(GroundTopType.Iron);
+                Tile tile = TrySpawnDepositAtRandomPosition(GroundType.Iron);
                 if (tile != null)
                 {
-                    depositsTiles[GroundTopType.Iron].Add(tile);
+                    depositsTiles[GroundType.Iron].Add(tile);
                 }
             }
 
             if (MyRandom.ProbabilityChance(50))
             {
-                Tile tile = TrySpawnDepositAtRandomPosition(GroundTopType.Tin);
+                Tile tile = TrySpawnDepositAtRandomPosition(GroundType.Tin);
                 if (tile != null)
                 {
-                    depositsTiles[GroundTopType.Tin].Add(tile);
+                    depositsTiles[GroundType.Tin].Add(tile);
                 }
             }
 
             // Генерация залежей вокруг жил
             foreach (var kvp in depositsTiles)
             {
-                GroundTopType groundTopType = kvp.Key;
+                GroundType groundType = kvp.Key;
 
                 foreach (var randomTile in kvp.Value)
                 {
@@ -339,7 +354,7 @@ namespace Technolithic
                     {
                         if (MyRandom.ProbabilityChance(10))
                         {
-                            string depositName = $"{groundTopType.ToString().ToLower()}_deposit";
+                            string depositName = $"{groundType.ToString().ToLower()}_deposit";
 
                             BuildingTemplate depositBuildingTemplate;
                             if (Engine.Instance.Buildings.TryGetValue(depositName, out depositBuildingTemplate))
@@ -356,12 +371,12 @@ namespace Technolithic
             }
         }
 
-        private Tile TrySpawnDepositAtRandomPosition(GroundTopType groundTopType)
+        private Tile TrySpawnDepositAtRandomPosition(GroundType groundType)
         {
             int randomX = MyRandom.Range(0, GameplayScene.WorldSize);
             int randomY = MyRandom.Range(0, GameplayScene.WorldSize);
 
-            if (TrySpawnDeposit(randomX, randomY, groundTopType))
+            if (TrySpawnDeposit(randomX, randomY, groundType))
             {
                 return world.GetTileAt(randomX, randomY);
             }
@@ -371,7 +386,7 @@ namespace Technolithic
             }
         }
 
-        private bool TrySpawnDeposit(int x, int y, GroundTopType groundTopType)
+        private bool TrySpawnDeposit(int x, int y, GroundType groundType)
         {
             for (int i = x - 1; i < x + 3; i++)
             {
@@ -387,6 +402,9 @@ namespace Technolithic
 
                     if (tile.GroundTopType != GroundTopType.None)
                         return false;
+
+                    if ((tile.GroundType == GroundType.Grass || tile.GroundType == GroundType.Ground) == false)
+                        return false;
                 }
             }
 
@@ -395,7 +413,7 @@ namespace Technolithic
                 for (int j = y; j < y + 2; j++)
                 {
                     Tile tile = world.GetTileAt(i, j);
-                    tile.GroundTopType = groundTopType;
+                    tile.GroundType = groundType;
                 }
             }
 

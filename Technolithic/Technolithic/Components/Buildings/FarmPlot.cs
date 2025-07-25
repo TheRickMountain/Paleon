@@ -300,27 +300,23 @@ namespace Technolithic
 
         private void UpdateFarmPlotView()
         {
-            if (IsWild || IsBuilt == false)
-            {
-                centerTile.GroundType = GroundType.Ground;
-            }
-            else
+            if(IsWild == false && IsBuilt)
             {
                 if (centerTile.MoistureLevel > 0 && centerTile.FertilizerLevel > 0)
                 {
-                    centerTile.GroundType = GroundType.FarmPlotWetFertilized;
+                    centerTile.GroundTopType = GroundTopType.MoistureFertilizer;
                 }
                 else if (centerTile.MoistureLevel > 0)
                 {
-                    centerTile.GroundType = GroundType.FarmPlotWet;
+                    centerTile.GroundTopType = GroundTopType.Moisture;
                 }
                 else if (centerTile.FertilizerLevel > 0)
                 {
-                    centerTile.GroundType = GroundType.FarmPlotFertilized;
+                    centerTile.GroundTopType = GroundTopType.Fertilizer;
                 }
                 else
                 {
-                    centerTile.GroundType = GroundType.FarmPlot;
+                    centerTile.GroundTopType = GroundTopType.None;
                 }
             }
         }
@@ -331,8 +327,6 @@ namespace Technolithic
 
             Irrigate = false;
             Fertilize = false;
-
-            UpdateFarmPlotView();
         }
 
         private float GetGrowthSpeedPerMinute()

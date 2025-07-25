@@ -74,6 +74,9 @@ namespace Technolithic
             CreateActionButton(MyAction.DestructWall, ResourceManager.DestructWallIcon, Localization.GetLocalizedText("destruct_wall"),
                 true, Keys.U);
 
+            CreateActionButton(MyAction.Plow, RenderManager.Pixel, Localization.GetLocalizedText("plow"),
+                false, Keys.I);
+
             GameplayScene.WorldManager.SetMyAction(MyAction.None, null);
 
             GameplayScene.Instance.ProgressTree.TechnologyUnlocked += UpdateButtons;

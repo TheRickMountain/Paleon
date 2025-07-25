@@ -1080,6 +1080,7 @@ namespace Technolithic
                                 interactable.UnmarkInteraction(InteractionType.Uproot);
                                 interactable.UnmarkInteraction(InteractionType.Construct);
                                 interactable.UnmarkInteraction(InteractionType.Plant);
+                                interactable.UnmarkInteraction(InteractionType.Plow);
                             }
                             break;
                     }
@@ -1144,6 +1145,19 @@ namespace Technolithic
                                     {
                                         settler.IsSelected = true;
                                     }
+                                }
+                            }
+                        }
+                        break;
+                    case MyAction.Plow:
+                        {
+                            for (int x = 0; x < tiles.GetLength(0); x++)
+                            {
+                                for (int y = 0; y < tiles.GetLength(1); y++)
+                                {
+                                    Tile tile = tiles[x, y];
+
+                                    TryToBuild(Engine.Instance.Buildings["plow"], tile.X, tile.Y, Direction.DOWN);
                                 }
                             }
                         }

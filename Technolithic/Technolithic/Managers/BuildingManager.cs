@@ -215,6 +215,30 @@ namespace Technolithic
                     {
                         return checkTile.WallId != -1;
                     }
+                case 'O':
+                    {
+                        if (checkTile.WallId != -1) return false;
+
+                        if (checkTile.SurfaceId != -1) return false;
+
+                        if (checkTile.GroundTopType != GroundTopType.None) return false;
+
+                        return checkTile.GroundType == GroundType.Grass || checkTile.GroundType == GroundType.Ground;
+                    }
+                case 'P':
+                    {
+                        if (checkTile.WallId != -1) return false;
+
+                        if (checkTile.SurfaceId != -1) return false;
+
+                        if (checkTile.GroundTopType == GroundTopType.IrrigationCanalFull ||
+                            checkTile.GroundTopType == GroundTopType.DeepWater ||
+                            checkTile.GroundTopType == GroundTopType.Water ||
+                            checkTile.GroundTopType == GroundTopType.IrrigationCanalEmpty) return false;
+
+                        return checkTile.GroundType == GroundType.FarmPlot || checkTile.GroundType == GroundType.Ground
+                            || checkTile.GroundType == GroundType.Grass;
+                    }
             }
 
             return false;

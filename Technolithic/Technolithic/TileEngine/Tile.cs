@@ -12,9 +12,6 @@ namespace Technolithic
         Ground = 0,
         Grass = 1,
         FarmPlot = 2,
-        FarmPlotFertilized = 3,
-        FarmPlotWet = 4,
-        FarmPlotWetFertilized = 5,
         Stone = 6,
         Clay = 7,
         Iron = 8,
@@ -28,7 +25,10 @@ namespace Technolithic
         DeepWater = 1,
         None = 8,
         IrrigationCanalEmpty = 13,
-        IrrigationCanalFull = 14
+        IrrigationCanalFull = 14,
+        Moisture = 15,
+        Fertilizer = 16,
+        MoistureFertilizer = 17
     }
 
     public class Tile
@@ -346,18 +346,6 @@ namespace Technolithic
             {
                 groundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 0));
             }
-            else if (tile.GroundType == GroundType.FarmPlotFertilized)
-            {
-                groundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 10));
-            }
-            else if (tile.GroundType == GroundType.FarmPlotWet)
-            {
-                groundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 5));
-            }
-            else if (tile.GroundType == GroundType.FarmPlotWetFertilized)
-            {
-                groundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 15));
-            }
             else if (tile.GroundType == GroundType.Stone)
             {
                 groundTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 0, 5));
@@ -422,6 +410,18 @@ namespace Technolithic
                 else if(tile.GroundTopType == GroundTopType.IrrigationCanalFull)
                 {
                     groundTopTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 25));
+                }
+                else if(tile.GroundTopType == GroundTopType.Moisture)
+                {
+                    groundTopTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 11, 0));
+                }
+                else if(tile.GroundTopType == GroundTopType.Fertilizer)
+                {
+                    groundTopTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 22, 0));
+                }
+                else if(tile.GroundTopType == GroundTopType.MoistureFertilizer)
+                {
+                    groundTopTileMap.SetCell(tile.X, tile.Y, BitmaskGenerator.GetTileNumber(bitmask, 512, Engine.TILE_SIZE, 0, 5));
                 }
             }
             else

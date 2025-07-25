@@ -1,0 +1,40 @@
+{
+  "name_key": "plow",
+  "description_key": "plow",
+  "width": 1,
+  "height": 1,
+  "type": "Plow",
+  "category": "None",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": false,
+  "destructible": true,
+  "movementSpeed": -1,
+  "texture": {
+    "name": "plow",
+    "width": 16,
+    "height": 16
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "O"
+    ]
+  ],
+  "ConstructionData": {
+    "LaborType": "Agriculture",
+    "InteractionType": "Plow",
+    "DurationInHours": 1.0,
+    "ToolUsageStatus": "Required",
+    "Ingredients": {}
+  }
+}

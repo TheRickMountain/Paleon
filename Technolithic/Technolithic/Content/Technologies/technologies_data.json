@@ -194,6 +194,7 @@
     "Age": "Neolithic",
     "RequiredXP": 500,
     "UnlockedBuildings": ["pea", "barley", "dandelion", "grape_bush", "flax", "haystack"],
+    "UnlockedActions": ["Plow"],
     "Parents": []
   },
   {

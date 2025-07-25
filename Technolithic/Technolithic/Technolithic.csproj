@@ -565,6 +565,12 @@
     <None Update="Content\Buildings\pit_head_winding_gear.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Content\Buildings\plow.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Buildings\plow.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
     <None Update="Content\Buildings\potters_wheel.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

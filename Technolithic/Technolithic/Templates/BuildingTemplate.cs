@@ -32,6 +32,7 @@ namespace Technolithic
         DestructWall,
         TradingPost,
         Tree,
+        Plow,
         None
     }
 
@@ -478,6 +479,9 @@ namespace Technolithic
                     break;
                 case BuildingType.Tree:
                     buildingCmp = new TreeBuilding(this, direction, interactablesManager);
+                    break;
+                case BuildingType.Plow:
+                    buildingCmp = new Plow(this, direction, interactablesManager);
                     break;
                 case BuildingType.None:
                     buildingCmp = new BuildingCmp(this, direction, interactablesManager);

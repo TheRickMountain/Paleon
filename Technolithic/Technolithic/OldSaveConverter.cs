@@ -234,6 +234,23 @@ namespace Technolithic
                         creatureSaveData.LaborTypePriorityPair.Remove("Mine");
                         creatureSaveData.LaborTypePriorityPair.Add(LaborType.Mining.ToString(), value);
                     }
+
+                    if (creatureSaveData.LaborTypePriorityPair != null && creatureSaveData.LaborTypePriorityPair.ContainsKey("Harvest"))
+                    {
+                        var value = creatureSaveData.LaborTypePriorityPair["Harvest"];
+                        creatureSaveData.LaborTypePriorityPair.Remove("Harvest");
+                        creatureSaveData.LaborTypePriorityPair.Add(LaborType.Agriculture.ToString(), value);
+                    }
+
+                    if (creatureSaveData.LaborTypePriorityPair != null && creatureSaveData.LaborTypePriorityPair.ContainsKey("Plant"))
+                    {
+                        var value = creatureSaveData.LaborTypePriorityPair["Plant"];
+                        creatureSaveData.LaborTypePriorityPair.Remove("Plant");
+                        if (creatureSaveData.LaborTypePriorityPair.ContainsKey(LaborType.Agriculture.ToString()) == false)
+                        {
+                            creatureSaveData.LaborTypePriorityPair.Add(LaborType.Agriculture.ToString(), value);
+                        }
+                    }
                 }
 
                 #region Wall

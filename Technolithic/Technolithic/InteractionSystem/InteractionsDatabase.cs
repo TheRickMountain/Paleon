@@ -28,7 +28,8 @@ namespace Technolithic
         Hunt,
         AutoHarvest,
         Uproot,
-        Plant
+        Plant,
+        Plow
     }
 
     public class InteractionsDatabase
@@ -198,6 +199,13 @@ namespace Technolithic
                 InteractionType.Plant,
                 Localization.GetLocalizedText("plant_action"),
                 ResourceManager.PlantIcon,
+                Color.Orange,
+                InteractionIconDisplayState.Never));
+
+            AddInteractionData(new InteractionData(
+                InteractionType.Plow,
+                Localization.GetLocalizedText("plow"),
+                RenderManager.Pixel, // Draw ucon
                 Color.Orange,
                 InteractionIconDisplayState.Never));
         }

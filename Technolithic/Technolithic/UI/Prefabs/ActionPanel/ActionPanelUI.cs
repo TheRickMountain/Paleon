@@ -26,6 +26,7 @@ namespace Technolithic
         GatherWood,
         BuildIrrigationCanal,
         DestructIrrigationCanal,
+        Plow,
         None
     }
 

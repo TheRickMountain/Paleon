@@ -16,8 +16,6 @@ namespace Technolithic
         private MyPanelUI panel;
 
         private BigButton cloneButton;
-        private BigButton irrigateButton;
-        private BigButton fertilizeButton;
         private BigButton copySettingsButton; // TODO: эту кнопку нужно перенести в дополнительные окна, где непосредственно расположены все настройки
         private BigButton priorityButton; 
         private BigButton autoMineSpawnedDepositsButton;
@@ -46,14 +44,6 @@ namespace Technolithic
             cloneButton = new BigButton(ParentNode.Scene, RenderManager.Pixel, false);
             cloneButton.Tooltips = Localization.GetLocalizedText("clone") + " [Q]";
             cloneButton.GetComponent<ButtonScript>().AddOnClickedCallback(CloneBuilding);
-
-            irrigateButton = new BigButton(ParentNode.Scene, ResourceManager.IrrigationIcon, true);
-            irrigateButton.GetComponent<ButtonScript>().AddOnClickedCallback(IrrigateBuilding);
-            irrigateButton.Tooltips = Localization.GetLocalizedText("irrigate");
-
-            fertilizeButton = new BigButton(ParentNode.Scene, ResourceManager.FertilizeIcon, true);
-            fertilizeButton.GetComponent<ButtonScript>().AddOnClickedCallback(FertilizeBuilding);
-            fertilizeButton.Tooltips = Localization.GetLocalizedText("fertilize");
 
             copySettingsButton = new BigButton(ParentNode.Scene, ResourceManager.CopyIcon, false);
             copySettingsButton.GetComponent<ButtonScript>().AddOnClickedCallback(OnCopySettingsButtonPressedCallback);
@@ -183,22 +173,6 @@ namespace Technolithic
             timeMachine.ReturnHome = true;
         }
 
-        public void FertilizeBuilding(bool value, ButtonScript sender)
-        {
-            FarmPlot wildFarmPlot = selectedBuilding as FarmPlot;
-            wildFarmPlot.Fertilize = !wildFarmPlot.Fertilize;
-
-            UpdateButtons();
-        }
-
-        public void IrrigateBuilding(bool value, ButtonScript sender)
-        {
-            FarmPlot wildFarmPlot = selectedBuilding as FarmPlot;
-            wildFarmPlot.Irrigate = !wildFarmPlot.Irrigate;
-
-            UpdateButtons();
-        }
-
         public void CloneBuilding(bool value, ButtonScript sender)
         {
             GameplayScene.WorldManager.SetMyAction(MyAction.Build, null);
@@ -260,21 +234,7 @@ namespace Technolithic
 
                     if (farmPlot.IsWild == false)
                     {
-                        ProgressTree levelSystem = GameplayScene.Instance.ProgressTree;
-
                         buttonsListView.AddItem(copySettingsButton);
-
-                        if (levelSystem.IsTechnologyUnlocked(TechnologyDatabase.Irrigation))
-                        {
-                            irrigateButton.GetComponent<ButtonScript>().IsSelected = farmPlot.Irrigate;
-                            buttonsListView.AddItem(irrigateButton);
-                        }
-
-                        if (levelSystem.IsTechnologyUnlocked(TechnologyDatabase.Fertilizing))
-                        {
-                            fertilizeButton.GetComponent<ButtonScript>().IsSelected = farmPlot.Fertilize;
-                            buttonsListView.AddItem(fertilizeButton);
-                        }
                     }
                 }
                 else if (selectedBuilding.BuildingTemplate.BuildingType == BuildingType.TimeMachine)

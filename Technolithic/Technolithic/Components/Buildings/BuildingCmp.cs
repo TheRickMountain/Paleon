@@ -656,7 +656,7 @@ namespace Technolithic
             // Выкидываем все вложенные предметы
             ThrowAllItems();
 
-            if (ThrowBuildingRecipeItemsAfterDestructing)
+            if (ThrowBuildingRecipeItemsAfterDestructing && BuildingTemplate.ConstructionData != null)
             {
                 ThrowItems(BuildingTemplate.ConstructionData.RealIngredients);
             }

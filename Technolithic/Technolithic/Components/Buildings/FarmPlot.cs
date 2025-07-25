@@ -8,49 +8,6 @@ namespace Technolithic
 {
     public class FarmPlot : BuildingCmp
     {
-        private bool fertilize;
-        private bool irrigate;
-
-        public bool Fertilize
-        {
-            get { return fertilize; }
-            set
-            {
-                if (fertilize == value)
-                    return;
-
-                fertilize = value;
-
-                if (fertilize == false)
-                {
-                    if (Inventory.GetInventoryRequiredWeight(manure) >= 1)
-                    {
-                        Inventory.AddRequiredWeight(manure, -1);
-                    }
-                }
-            }
-        }
-
-        public bool Irrigate
-        {
-            get { return irrigate; }
-            set
-            {
-                if (irrigate == value)
-                    return;
-
-                irrigate = value;
-
-                if (irrigate == false)
-                {
-                    if (Inventory.GetInventoryRequiredWeight(potOfWater) >= 1)
-                    {
-                        Inventory.AddRequiredWeight(potOfWater, -1);
-                    }
-                }
-            }
-        }
-
         protected float growthPercent = 0;
 
         private int lastGrowthPercent = -1;
@@ -68,9 +25,6 @@ namespace Technolithic
         public bool IsWild { get; private set; }
 
         private int additionalHarvestScore = 0;
-
-        private Item potOfWater;
-        private Item manure;
 
         private Tile centerTile;
 
@@ -95,16 +49,25 @@ namespace Technolithic
             AddAvailableInteraction(InteractionType.Uproot, LaborType.Agriculture, ToolUsageStatus.Optional);
             ActivateInteraction(InteractionType.Uproot);
 
-            potOfWater = ItemDatabase.GetItemByName("pot_of_water");
-            manure = ItemDatabase.GetItemByName("manure");
-
             centerTile = GetCenterTile();
+            centerTile.PlantData = PlantData;
+
+            if(centerTile.GroundType == GroundType.FarmPlot)
+            {
+                // TODO: эти взаимодействия должны быть доступны только при открытии соответствующих технологий
+                AddAvailableInteraction(InteractionType.Irrigate, LaborType.Agriculture, ToolUsageStatus.NotUsed);
+                SetInteractionItems(InteractionType.Irrigate, true, ItemDatabase.GetItemByName("pot_of_water"));
+                SetInteractionDuration(InteractionType.Irrigate, 0.2f * WorldState.MINUTES_PER_HOUR);
+
+                // TODO: эти взаимодействия должны быть доступны только при открытии соответствующих технологий
+                AddAvailableInteraction(InteractionType.Fertilize, LaborType.Agriculture, ToolUsageStatus.NotUsed);
+                SetInteractionItems(InteractionType.Fertilize, true, ItemDatabase.GetItemByName("manure"));
+                SetInteractionDuration(InteractionType.Fertilize, 0.4f * WorldState.MINUTES_PER_HOUR);
+            }
 
             additionalHarvestScore = 0;
 
             growthPercent = 0;
-
-            GetCenterTile().PlantData = PlantData;
 
             if (PlantData.Fruits != null)
             {
@@ -197,14 +160,34 @@ namespace Technolithic
 
                 UpdateGrowing();
 
-                if (irrigate && centerTile.MoistureLevel <= 0 && Inventory.GetInventoryRequiredWeight(potOfWater) == 0)
+                if(centerTile.MoistureLevel <= 0)
                 {
-                    Inventory.AddRequiredWeight(potOfWater, 1);
+                    if (IsInteractionActivated(InteractionType.Irrigate) == false)
+                    {
+                        ActivateInteraction(InteractionType.Irrigate);
+                    }
+                }
+                else
+                {
+                    if(IsInteractionActivated(InteractionType.Irrigate))
+                    {
+                        DeactivateInteraction(InteractionType.Irrigate);
+                    }
                 }
 
-                if (fertilize && centerTile.FertilizerLevel <= 0 && Inventory.GetInventoryRequiredWeight(manure) == 0)
+                if (centerTile.FertilizerLevel <= 0)
                 {
-                    Inventory.AddRequiredWeight(manure, 1);
+                    if (IsInteractionActivated(InteractionType.Fertilize) == false)
+                    {
+                        ActivateInteraction(InteractionType.Fertilize);
+                    }
+                }
+                else
+                {
+                    if (IsInteractionActivated(InteractionType.Fertilize))
+                    {
+                        DeactivateInteraction(InteractionType.Fertilize);
+                    }
                 }
             }
         }
@@ -250,8 +233,16 @@ namespace Technolithic
                                 Entity newFarmPlotEntity = GameplayScene.WorldManager.TryToBuild(BuildingTemplate,
                                     GetCenterTile().X, GetCenterTile().Y, Direction);
                                 FarmPlot newFarmPlot = newFarmPlotEntity.Get<FarmPlot>();
-                                newFarmPlot.Irrigate = Irrigate;
-                                newFarmPlot.Fertilize = Fertilize;
+
+                                if (IsInteractionMarked(InteractionType.Irrigate))
+                                {
+                                    newFarmPlot.MarkInteraction(InteractionType.Irrigate);
+                                }
+                                
+                                if (IsInteractionMarked(InteractionType.Fertilize))
+                                {
+                                    newFarmPlot.MarkInteraction(InteractionType.Fertilize);
+                                }
                             }
                         }
                         else
@@ -269,6 +260,23 @@ namespace Technolithic
                         HarvestPlant();
 
                         DestructBuilding();
+                    }
+                    break;
+                case InteractionType.Irrigate:
+                    {
+                        GetCenterTile().MoistureLevel = 100;
+
+                        Item ceramicPot = ItemDatabase.GetItemByName("ceramic_pot");
+                        GetCenterTile().Inventory.AddCargo(new ItemContainer(ceramicPot, 1, ceramicPot.Durability));
+
+                        UpdateFarmPlotView();
+                    }
+                    break;
+                case InteractionType.Fertilize:
+                    {
+                        GetCenterTile().FertilizerLevel = 100;
+
+                        UpdateFarmPlotView();
                     }
                     break;
             }
@@ -324,9 +332,6 @@ namespace Technolithic
         public void MakeWild()
         {
             IsWild = true;
-
-            Irrigate = false;
-            Fertilize = false;
         }
 
         private float GetGrowthSpeedPerMinute()
@@ -401,31 +406,6 @@ namespace Technolithic
             Sprite.CurrentAnimation.Frames[0] = PlantData.VariationsTextures[textureVariationId][currentStage];
         }
 
-        protected override void OnItemAdded(Inventory senderInventory, Item item, int weight)
-        {
-            base.OnItemAdded(senderInventory, item, weight);
-
-            if (IsBuilt)
-            {
-                if (item == potOfWater)
-                {
-                    centerTile.MoistureLevel = 100;
-                    Inventory.PopItem(potOfWater, 1);
-                    Item ceramicPot = ItemDatabase.GetItemByName("ceramic_pot");
-                    GetCenterTile().Inventory.AddCargo(new ItemContainer(ceramicPot, 1, ceramicPot.Durability));
-
-                    UpdateFarmPlotView();
-                }
-                else if (item == manure)
-                {
-                    centerTile.FertilizerLevel = 100;
-                    Inventory.PopItem(manure, 1);
-
-                    UpdateFarmPlotView();
-                }
-            }
-        }
-
         public override void DestructBuilding()
         {
             base.DestructBuilding();
@@ -459,8 +439,6 @@ namespace Technolithic
             if (IsBuilt)
             {
                 buildingSaveData.IsWild = IsWild;
-                buildingSaveData.Irrigate = Irrigate;
-                buildingSaveData.Fertilize = Fertilize;
                 buildingSaveData.GrowthPercent = growthPercent;
                 buildingSaveData.AdditionalHarvestScrore = additionalHarvestScore;
             }

@@ -18,8 +18,6 @@ namespace Technolithic
 
         public bool IsWild { get; set; }
 
-        public bool Fertilize { get; set; }
-        public bool Irrigate { get; set; }
         public float GrowthPercent { get; set; }
         public int AdditionalHarvestScrore { get; set; }
 

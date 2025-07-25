@@ -29,7 +29,9 @@ namespace Technolithic
         AutoHarvest,
         Uproot,
         Plant,
-        Plow
+        Plow,
+        Irrigate,
+        Fertilize
     }
 
     public class InteractionsDatabase
@@ -205,7 +207,21 @@ namespace Technolithic
             AddInteractionData(new InteractionData(
                 InteractionType.Plow,
                 Localization.GetLocalizedText("plow"),
-                RenderManager.Pixel, // Draw ucon
+                RenderManager.Pixel, // Draw icon
+                Color.Orange,
+                InteractionIconDisplayState.Never));
+
+            AddInteractionData(new InteractionData(
+                InteractionType.Irrigate,
+                Localization.GetLocalizedText("irrigate"),
+                ResourceManager.IrrigationIcon,
+                Color.Orange,
+                InteractionIconDisplayState.Never));
+
+            AddInteractionData(new InteractionData(
+                InteractionType.Fertilize,
+                Localization.GetLocalizedText("fertilize"),
+                ResourceManager.FertilizeIcon,
                 Color.Orange,
                 InteractionIconDisplayState.Never));
         }

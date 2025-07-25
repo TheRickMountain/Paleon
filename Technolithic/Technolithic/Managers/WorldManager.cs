@@ -1214,8 +1214,15 @@ namespace Technolithic
 
                                                     GameplayScene.Instance.MessageManager.ShowMessage($"+", farmPlot.Entity.Position);
 
-                                                    farmPlot.Irrigate = BuildingSaveDataForCopy.Irrigate;
-                                                    farmPlot.Fertilize = BuildingSaveDataForCopy.Fertilize;
+                                                    if(BuildingSaveDataForCopy.MarkedInteractions.Contains(InteractionType.Irrigate))
+                                                    {
+                                                        farmPlot.MarkInteraction(InteractionType.Irrigate);
+                                                    }
+
+                                                    if(BuildingSaveDataForCopy.MarkedInteractions.Contains(InteractionType.Fertilize))
+                                                    {
+                                                        farmPlot.MarkInteraction(InteractionType.Fertilize);
+                                                    }
                                                 }
                                             }
                                             break;

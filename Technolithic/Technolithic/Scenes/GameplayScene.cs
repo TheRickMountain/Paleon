@@ -404,9 +404,6 @@ namespace Technolithic
                                     {
                                         farmPlot.MakeWild();
                                     }
-
-                                    farmPlot.Fertilize = buildingSaveData.Fertilize;
-                                    farmPlot.Irrigate = buildingSaveData.Irrigate;
                                 }
                                 break;
                             case BuildingType.Gate:

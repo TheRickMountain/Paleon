@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MonoGame.Extended;
+using System.Collections.Generic;
 
 namespace Technolithic
 {
@@ -356,10 +357,15 @@ namespace Technolithic
                         {
                             string depositName = $"{groundType.ToString().ToLower()}_deposit";
 
-                            BuildingTemplate depositBuildingTemplate;
-                            if (Engine.Instance.Buildings.TryGetValue(depositName, out depositBuildingTemplate))
+                            if (Engine.Instance.Buildings.TryGetValue(depositName, out BuildingTemplate depositBT))
                             {
-                                GameplayScene.WorldManager.TryToBuild(depositBuildingTemplate, tile.X, tile.Y, Direction.DOWN, true);
+                                Entity depositEntity = GameplayScene.WorldManager.TryToBuild(depositBT, tile.X, tile.Y, Direction.DOWN, true);
+                                
+                                if (depositEntity != null)
+                                {
+                                    DepositCmp depositCmp = depositEntity.Get<DepositCmp>();
+                                    depositCmp.SetStage(Calc.Random.Next(depositBT.DepositData.Stages));
+                                }
                             }
                             else
                             {

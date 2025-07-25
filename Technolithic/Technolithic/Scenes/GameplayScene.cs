@@ -466,7 +466,7 @@ namespace Technolithic
                             case BuildingType.Deposit:
                                 {
                                     DepositCmp depositCmp = buildingCmp as DepositCmp;
-                                    depositCmp.CurrentStage = buildingSaveData.DepositCurrentStage;
+                                    depositCmp.SetStage(buildingSaveData.DepositCurrentStage);
                                 }
                                 break;
                             case BuildingType.AnimalPen:

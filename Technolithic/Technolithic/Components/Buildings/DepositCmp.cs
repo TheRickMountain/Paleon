@@ -2,23 +2,14 @@
 {
     public class DepositCmp : BuildingCmp
     {
-        public int CurrentStage { get; set; }
+        private int _currentStage;
 
         private DepositData _depositData;
 
         public DepositCmp(BuildingTemplate buildingTemplate, Direction direction, InteractablesManager interactablesManager) 
             : base(buildingTemplate, direction, interactablesManager)
         {
-            CurrentStage = 0;
-
             _depositData = buildingTemplate.DepositData;
-        }
-
-        public override void Begin()
-        {
-            base.Begin();
-
-            Sprite.CurrentAnimation.Frames[0] = _depositData.StagesTextures[CurrentStage];
         }
 
         public override void CompleteInteraction(InteractionType interactionType)
@@ -32,15 +23,15 @@
                     GetCenterTile().Inventory.AddCargo(kvp.Key, kvp.Value);
                 }
 
-                CurrentStage++;
+                _currentStage++;
 
-                if (CurrentStage == _depositData.Stages)
+                if (_currentStage == _depositData.Stages)
                 {
                     DestructBuilding();
                 }
                 else
                 {
-                    Sprite.CurrentAnimation.Frames[0] = _depositData.StagesTextures[CurrentStage];
+                    Sprite.CurrentAnimation.Frames[0] = _depositData.StagesTextures[_currentStage];
                 }
             }
         }
@@ -48,6 +39,8 @@
         public override void CompleteBuilding()
         {
             base.CompleteBuilding();
+
+            SetStage(0);
 
             DepositData depositData = BuildingTemplate.DepositData;
 
@@ -57,13 +50,24 @@
             ActivateInteraction(depositData.InteractionType);
         }
 
+        public void SetStage(int stage)
+        {
+            if (_currentStage == stage) return;
+
+            if (stage >= _depositData.Stages) return;
+            
+            _currentStage = stage;
+
+            Sprite.CurrentAnimation.Frames[0] = _depositData.StagesTextures[_currentStage];
+        }
+
         public override BuildingSaveData GetSaveData()
         {
             var saveData = base.GetSaveData();
 
             if (IsBuilt)
             {
-                saveData.DepositCurrentStage = CurrentStage;
+                saveData.DepositCurrentStage = _currentStage;
             }
 
             return saveData;

@@ -25,10 +25,5 @@ namespace Technolithic
             DestructBuilding();
         }
 
-        public override void DestructBuilding()
-        {
-            base.DestructBuilding();
-        }
-
     }
 }

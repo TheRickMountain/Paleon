@@ -8,16 +8,8 @@
   "animated": false,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 100,
-  "constructionTime": 10,
-  "ingredients": [
-    {
-      "item": "wood",
-      "weight": 2
-    }
-  ],
   "ground_pattern": [
     [
       "I"
@@ -31,5 +23,14 @@
   "SurfaceData":
   {
     "Id": 2
+  },
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 0.4,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "wood": 2
+    }
   }
 }

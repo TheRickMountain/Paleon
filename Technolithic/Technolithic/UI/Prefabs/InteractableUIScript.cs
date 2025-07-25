@@ -115,25 +115,43 @@ namespace Technolithic
 
             tooltip += $"\n{Localization.GetLocalizedText("labor_type")}: {Labor.GetLaborString(laborType)}";
 
-            if (interactable.DoesInteractionRequireTool(interactionType))
+            switch (interactable.GetInteractionToolUsageStatus(interactionType))
             {
-                tooltip += $"\n{Localization.GetLocalizedText("tool_required")}:".Paint(Color.Yellow);
+                case ToolUsageStatus.Required:
+                    {
+                        tooltip += $"\n{Localization.GetLocalizedText("tool_required")}:".Paint(Color.Yellow);
+                    }
+                    break;
+                case ToolUsageStatus.Optional:
+                    {
+                        tooltip += $"\n{Localization.GetLocalizedText("tool_optional")}:".Paint(Color.Yellow);
+                    }
+                    break;
+            }
 
-                var itemsList = ItemDatabase.GetInteractionTypeTools(CreatureType.Settler, interactionType);
-                for (int i = itemsList.Count - 1; i >= 0; i--)
-                {
-                    Item item = itemsList[i];
+            switch (interactable.GetInteractionToolUsageStatus(interactionType))
+            {
+                case ToolUsageStatus.Required:
+                case ToolUsageStatus.Optional:
+                    {
+                        // TODO: show animal tools too
+                        var itemsList = ItemDatabase.GetInteractionTypeTools(CreatureType.Settler, interactionType);
+                        for (int i = itemsList.Count - 1; i >= 0; i--)
+                        {
+                            Item item = itemsList[i];
 
-                    tooltip += $"\n- {item.Name}";
-                }
+                            tooltip += $"\n- {item.Name}";
+                        }
+                    }
+                    break;
             }
 
             var interactionItems = interactable.GetInteractionItems(interactionType);
-            if(interactionItems != null)
+            if (interactionItems != null)
             {
                 tooltip += $"\n{Localization.GetLocalizedText("item_required")}:".Paint(Color.Yellow);
 
-                foreach(Item item in interactionItems)
+                foreach (Item item in interactionItems)
                 {
                     tooltip += $"\n- {item.Name}";
                 }

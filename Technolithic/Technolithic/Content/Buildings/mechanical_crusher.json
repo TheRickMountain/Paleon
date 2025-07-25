@@ -8,10 +8,8 @@
   "animated": true,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 50,
-  "constructionTime": 35,
   "EnergyConsumer": {
     "RequiredPower": 10,
     "EnergyType": "Kinetic"
@@ -105,14 +103,14 @@
       "A"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "stone",
-      "weight": 6
-    },
-    {
-      "item": "wood",
-      "weight": 6
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 1.4,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "stone": 6,
+      "wood": 6
     }
-  ]
+  }
 }

@@ -8,10 +8,8 @@
   "animated": false,
   "rotatable": true,
   "cloneable": true,
-  "requireBuilding": false,
   "destructible": true,
   "movementSpeed": -1,
-  "constructionTime": 1,
   "crafter": {
     "laborType": "Craft",
     "autocrafter": false,
@@ -62,5 +60,6 @@
     [
       "H"
     ]
-  ]
+  ],
+  "ConstructionData": null
 }

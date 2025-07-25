@@ -8,10 +8,8 @@
   "animated": true,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 50,
-  "constructionTime": 50,
   "range": 4,
   "EnergySourceData":{
     "GeneratedPower": 20,
@@ -58,14 +56,14 @@
       "A"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "mudbrick",
-      "weight": 4
-    },
-    {
-      "item": "wood",
-      "weight": 8
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 2.0,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "mudbrick": 4,
+      "wood": 8
     }
-  ]
+  }
 }

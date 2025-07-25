@@ -8,11 +8,9 @@
   "animated": false,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "show_item_on_top": false,
   "destructible": true,
   "movementSpeed": 50,
-  "constructionTime": 30,
   "storage": {
     "canCopySettings": false,
     "capacity": 6,
@@ -58,10 +56,13 @@
       "A"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "stone",
-      "weight": 10
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 1.2,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "stone": 10,
     }
-  ]
+  }
 }

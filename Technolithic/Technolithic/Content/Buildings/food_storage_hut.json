@@ -8,11 +8,9 @@
   "animated": false,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "show_item_on_top": false,
   "destructible": true,
   "movementSpeed": 50,
-  "constructionTime": 30,
   "storage": {
     "canCopySettings": true,
     "capacity": 400,
@@ -81,18 +79,15 @@
       "A"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "wood",
-      "weight": 4
-    },
-    {
-      "item": "clay",
-      "weight": 6
-    },
-    {
-      "item": "stone",
-      "weight": 3
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 1.2,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "wood": 4,
+      "clay": 6,
+      "stone": 3,
     }
-  ],
+  }
 }

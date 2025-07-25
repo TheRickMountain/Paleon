@@ -8,10 +8,8 @@
   "animated": false,
   "cloneable": true,
   "rotatable": false,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 50,
-  "constructionTime": 50,
   "texture": {
     "name": "trading_post",
     "width": 48,
@@ -62,14 +60,14 @@
       "A","A","A"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "wood",
-      "weight": 8
-    },
-    {
-      "item": "dry_skin",
-      "weight": 8
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 2.0,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "wood": 8,
+      "dry_skin": 8
     }
-  ]
+  }
 }

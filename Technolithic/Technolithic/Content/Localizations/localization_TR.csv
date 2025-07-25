@@ -133,6 +133,7 @@ clothes,Giysiler
 come_here,Buraya gel
 command_line,komut satiri
 connected,Baglandi
+construct,Construct
 consumption,Tüketim
 containers,Containers
 cooked_fish,Pismis balik
@@ -378,6 +379,7 @@ per_day,Günlük
 pets,Hayvanlar
 pig,Domuz
 plant,Bitki
+plant_action,Plant
 planting,Ekim
 plowing,ciftcilik
 point_of_entry_to_a_space_which_is_enclosed_by_walls,Duvarlarla cevrili bir yere giris noktasi
@@ -499,7 +501,8 @@ time_machine_description,Zaman makinesi cihazi
 tin_deposit,Kalay yatagi
 tin_ore,Kalay cevheri
 to_do_the_job_of_x_you_need_tools,{0} isini yapmak icin bir alete ihtiyaciniz var.
-tool_required,Tool required
+tool_optional,Tool (Optional)
+tool_required,Tool (Required)
 tool_type,Alet türü
 tools,Aletler
 torch,Mesale

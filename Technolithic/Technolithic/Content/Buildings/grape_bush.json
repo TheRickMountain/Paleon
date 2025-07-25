@@ -5,14 +5,10 @@
   "height": 1,
   "type": "FarmPlot",
   "category": "Agriculture",
-  "buildingLaborType": "Plant",
-  "buildingToolType": "Plowing",
   "animated": false,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "destructible": false,
-  "constructionTime": 30,
   "movementSpeed": 75,
   "plant": {
     "key": "grape_bush",
@@ -68,5 +64,11 @@
       "A"
     ]
   ],
-  "ingredients": []
+  "ConstructionData": {
+    "LaborType": "Agriculture",
+    "InteractionType": "Plant",
+    "DurationInHours": 0.1,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {}
+  }
 }

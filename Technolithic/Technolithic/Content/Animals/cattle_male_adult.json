@@ -46,8 +46,7 @@
                  }
              ],
     "allowedLabors":  [
-                          "Harvest",
-                          "Plant",
+                          "Agriculture",
                           "Supply",
                           "Haul",
                           "Craft",

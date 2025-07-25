@@ -8,10 +8,8 @@
   "animated": false,
   "cloneable": true,
   "rotatable": false,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 50,
-  "constructionTime": 30,
   "assignable": {
     "slots": 3,
     "ApplyStatusEffect": "CozyHut"
@@ -66,16 +64,6 @@
       "A","A","A"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "wood",
-      "weight": 8
-    },
-    {
-      "item": "clay",
-      "weight": 8
-    }
-  ],
   "fuelConsumer": {
     "fuel": [
       "wood",
@@ -83,5 +71,15 @@
       "dry_manure_fuel"
     ],
     "energy_consumption": 0.06
+  },
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 1.2,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "wood": 8,
+      "clay": 8
+    }
   }
 }

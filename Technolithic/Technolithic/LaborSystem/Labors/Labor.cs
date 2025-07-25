@@ -10,11 +10,10 @@ namespace Technolithic
     {
         None = 0,
         Build = 2,
-        Plant = 28,
+        Agriculture = 28,
         Craft = 3,
         Supply = 4,
         Haul = 5,
-        Harvest = 27,
         Fish = 7,
         Hunt = 9,
         Ranching = 11,
@@ -200,10 +199,8 @@ namespace Technolithic
                     return Localization.GetLocalizedText("learning");
                 case LaborType.Medicine:
                     return Localization.GetLocalizedText("medicine");
-                case LaborType.Harvest:
-                    return Localization.GetLocalizedText("harvesting");
-                case LaborType.Plant:
-                    return Localization.GetLocalizedText("planting");
+                case LaborType.Agriculture:
+                    return Localization.GetLocalizedText("agriculture");
                 case LaborType.EnergyProduction:
                     return Localization.GetLocalizedText("energy_production");
                 case LaborType.Metallurgy:
@@ -246,9 +243,7 @@ namespace Technolithic
                     return ResourceManager.LampIcon;
                 case LaborType.Medicine:
                     return ResourceManager.MedicineIcon;
-                case LaborType.Harvest:
-                    return ResourceManager.GetTexture("ui").GetSubtexture(32, 208, 16, 16);
-                case LaborType.Plant:
+                case LaborType.Agriculture:
                     return ResourceManager.GetTexture("ui").GetSubtexture(96, 224, 16, 16);
                 case LaborType.EnergyProduction:
                     return ResourceManager.EnergyProductionIcon;

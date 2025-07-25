@@ -8,10 +8,8 @@
   "animated": true,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 50,
-  "constructionTime": 25,
   "crafter": {
     "laborType": "Metallurgy",
     "autocrafter": false,
@@ -399,13 +397,16 @@
       "A"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "stone",
-      "weight": 4
-    }
-  ],
   "lightEmitter": {
     "radius": 100
+  },
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 1.0,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "stone": 4
+    }
   }
 }

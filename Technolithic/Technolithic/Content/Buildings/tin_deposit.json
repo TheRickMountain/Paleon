@@ -8,15 +8,13 @@
   "animated": false,
   "rotatable": false,
   "cloneable": false,
-  "requireBuilding": false,
   "destructible": false,
   "movementSpeed": 50,
-  "constructionTime": 1,
   "DepositData": {
     "LaborType": "Mining",
     "InteractionType": "Mine",
     "InteractionDurationInHours": 3,
-    "ToolRequired": true,
+    "ToolUsageStatus": "Required",
     "Loot": {
       "tin_ore": 3
     },
@@ -57,5 +55,5 @@
       "A"
     ]
   ],
-  "ingredients": []
+  "ConstructionData": null
 }

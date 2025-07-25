@@ -8,10 +8,8 @@
   "animated": true,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 50,
-  "constructionTime": 15,
   "crafter": {
     "laborType": "Cook",
     "autocrafter": false,
@@ -54,10 +52,13 @@
       "A"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "stone",
-      "weight": 2
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 0.6,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "stone": 2
     }
-  ]
+  }
 }

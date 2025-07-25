@@ -33,6 +33,7 @@ namespace Technolithic
         public static MyTexture FertilizeIcon { get; private set; }
         public static MyTexture TurnOnIcon { get; private set; }
         public static MyTexture DestructIcon { get; private set; }
+        public static MyTexture ConstructIcon { get; private set; }
         public static MyTexture ChopIcon { get; private set; }
         public static MyTexture AutoHarvestIcon { get; private set; }
         public static MyTexture UprootIcon { get; private set; }
@@ -130,6 +131,7 @@ namespace Technolithic
         public static MyTexture DisableIcon { get; private set; }
         public static MyTexture ProduceEnergyIcon { get; private set; }
         public static MyTexture CraftIcon { get; private set; }
+        public static MyTexture PlantIcon { get; private set; }
 
         public static SoundEffectInstance BuildingSoundEffect { get; private set; }
         public static SoundEffectInstance ClickSoundEffect { get; private set; }
@@ -194,6 +196,7 @@ namespace Technolithic
             FertilizeIcon = uiSpriteSheet.GetSubtexture(208, 48, 16, 16);
             TurnOnIcon = uiSpriteSheet.GetSubtexture(240, 48, 16, 16);
             DestructIcon = uiSpriteSheet.GetSubtexture(0, 16, 16, 16);
+            ConstructIcon = uiSpriteSheet.GetSubtexture(16, 16, 16, 16);
             ChopIcon = uiSpriteSheet.GetSubtexture(16, 0, 16, 16);
             AutoHarvestIcon = uiSpriteSheet.GetSubtexture(64, 0, 16, 16);
             UprootIcon = uiSpriteSheet.GetSubtexture(48, 16, 16, 16);
@@ -258,6 +261,7 @@ namespace Technolithic
             DisableIcon = uiSpriteSheet.GetSubtexture(32, 176, 16, 16);
             ProduceEnergyIcon = uiSpriteSheet.GetSubtexture(32, 192, 16, 16);
             CraftIcon = uiSpriteSheet.GetSubtexture(176, 144, 16, 16);
+            PlantIcon = uiSpriteSheet.GetSubtexture(48, 160, 16, 16);
 
             MyTexture emotest = GetTexture("emotest");
             HungerThought = emotest.GetSubtexture(16, 0, 16, 16);

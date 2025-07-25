@@ -20,11 +20,7 @@ namespace Technolithic
         public Action<BuildingCmp> OnBuildingCanceledCallback { get; set; }
         public Action<BuildingCmp> OnBuildingDestructedCallback { get; set; }
 
-        public float ConstructionProgress { get; set; }
-
         public Inventory Inventory { get; private set; }
-
-        private BuildLabor buildLabor;
 
         public bool IsTurnedOn { get; set; }
 
@@ -350,22 +346,28 @@ namespace Technolithic
             }
             else
             {
-                bool hasRequiredItems = false;
+                ConstructionData constructionData = BuildingTemplate.ConstructionData;
 
-                foreach (var buildingRecipe in BuildingTemplate.BuildingRecipe)
+                AddAvailableInteraction(constructionData.InteractionType, constructionData.LaborType,
+                        constructionData.ToolUsageStatus);
+
+                SetInteractionDuration(constructionData.InteractionType,
+                    constructionData.DurationInHours * WorldState.MINUTES_PER_HOUR);
+
+                MarkInteraction(constructionData.InteractionType);
+
+                bool isRequireItems = constructionData.RealIngredients.Count > 0;
+
+                if (isRequireItems)
                 {
-                    Item item = buildingRecipe.Key;
-                    int weight = buildingRecipe.Value;
-
-                    Inventory.AddRequiredWeight(item, weight);
-                    hasRequiredItems = true;
+                    foreach (var kvp in constructionData.RealIngredients)
+                    {
+                        Inventory.AddRequiredWeight(kvp.Key, kvp.Value);
+                    }
                 }
-
-                // Если строение не требует предметов, то строим сразу
-                if (hasRequiredItems == false)
+                else
                 {
-                    buildLabor = new BuildLabor(this, BuildingTemplate.BuildingLaborType);
-                    GameplayScene.WorldManager.LaborManager.Add(buildLabor);
+                    ActivateInteraction(constructionData.InteractionType);
                 }
             }
 
@@ -394,8 +396,8 @@ namespace Technolithic
             // Если строение не построено, но доставлены все необходимые ресурсы, то создаем работу по строительству
             if (!IsBuilt && IsSupplyCompleted())
             {
-                buildLabor = new BuildLabor(this, BuildingTemplate.BuildingLaborType);
-                GameplayScene.WorldManager.LaborManager.Add(buildLabor);
+                ConstructionData constructionData = BuildingTemplate.ConstructionData;
+                ActivateInteraction(constructionData.InteractionType);
             }
         }
 
@@ -406,12 +408,12 @@ namespace Technolithic
 
         private bool IsSupplyCompleted()
         {
-            foreach (var recipe in BuildingTemplate.BuildingRecipe)
+            ConstructionData constructionData = BuildingTemplate.ConstructionData;
+            foreach (var kvp in constructionData.RealIngredients)
             {
-                int factWeight = Inventory.GetInventoryFactWeight(recipe.Key);
+                int factWeight = Inventory.GetInventoryFactWeight(kvp.Key);
 
-                if (factWeight != recipe.Value)
-                    return false;
+                if (factWeight != kvp.Value) return false;
             }
 
             return true;
@@ -430,9 +432,18 @@ namespace Technolithic
             if(BuildingTemplate.IsDestructible)
             {
                 // TODO: some buildings may require a tool for deconstruction
-                AddAvailableInteraction(InteractionType.Destruct, LaborType.Build, false);
+                AddAvailableInteraction(InteractionType.Destruct, LaborType.Build, ToolUsageStatus.NotUsed);
 
-                SetInteractionDuration(InteractionType.Destruct, BuildingTemplate.ConstructionTime);
+                if (BuildingTemplate.ConstructionData != null)
+                {
+                    SetInteractionDuration(InteractionType.Destruct,
+                        BuildingTemplate.ConstructionData.DurationInHours * WorldState.MINUTES_PER_HOUR);
+                }
+                else
+                {
+                    SetInteractionDuration(InteractionType.Destruct, WorldState.MINUTES_PER_HOUR);
+                }
+                
                 ActivateInteraction(InteractionType.Destruct);
             }
 
@@ -539,6 +550,11 @@ namespace Technolithic
                 RangeTiles = TryToGetRangeTiles();
             }
 
+            if (BuildingTemplate.ConstructionData != null)
+            {
+                RemoveInteraction(BuildingTemplate.ConstructionData.InteractionType);
+            }
+
             OnBuildingCompletedCallback?.Invoke(this);
         }
 
@@ -554,6 +570,14 @@ namespace Technolithic
                     }
                     break;
             }
+
+            if (BuildingTemplate.ConstructionData != null)
+            {
+                if (interactionType == BuildingTemplate.ConstructionData.InteractionType)
+                {
+                    CompleteBuilding();
+                }
+            }    
         }
 
         private HashSet<Tile> TryToGetRangeTiles()
@@ -580,29 +604,35 @@ namespace Technolithic
             return tiles;
         }
 
-        public void CancelBuilding()
+        protected override void OnInteractionUnmarked(InteractionType interactionType)
         {
-            IsBuilt = false;
+            base.OnInteractionUnmarked(interactionType);
 
-            // Если строительство уже начато
-            if (buildLabor != null)
+            if(BuildingTemplate.ConstructionData != null)
             {
-                buildLabor.CancelAndClearAllTasksAndComplete();
-                buildLabor = null;
+                if (interactionType == BuildingTemplate.ConstructionData.InteractionType)
+                {
+                    // INFO: this building is completed already, we can't canel it
+                    if (IsBuilt) return;
+
+                    Destroy();
+
+                    IsBuilt = false;
+
+                    RemoveBuildingFromTiles();
+
+                    ThrowAllItems();
+
+                    Entity.RemoveSelf();
+
+                    ClearInventoryRequiredWeight();
+
+                    OnBuildingCanceledCallback?.Invoke(this);
+
+                    Inventory.OnItemAddedCallback -= OnItemAdded;
+                    Inventory.OnItemRemovedCallback -= OnItemRemoved;
+                }
             }
-
-            RemoveBuildingFromTiles();
-
-            ThrowAllItems();
-
-            Entity.RemoveSelf();
-
-            ClearInventoryRequiredWeight();
-
-            OnBuildingCanceledCallback?.Invoke(this);
-
-            Inventory.OnItemAddedCallback -= OnItemAdded;
-            Inventory.OnItemRemovedCallback -= OnItemRemoved;
         }
 
         public virtual void DestructBuilding()
@@ -628,7 +658,7 @@ namespace Technolithic
 
             if (ThrowBuildingRecipeItemsAfterDestructing)
             {
-                ThrowItems(BuildingTemplate.BuildingRecipe);
+                ThrowItems(BuildingTemplate.ConstructionData.RealIngredients);
             }
 
             Entity.RemoveSelf();
@@ -686,7 +716,7 @@ namespace Technolithic
             }
         }
 
-        protected void ThrowItems(Dictionary<Item, int> items)
+        protected void ThrowItems(IReadOnlyDictionary<Item, int> items)
         {
             foreach (var kvp in items)
             {
@@ -801,7 +831,7 @@ namespace Technolithic
             {
                 string info = $"{Localization.GetLocalizedText("ingredients")}:\n";
 
-                var buildingRecipe = BuildingTemplate.BuildingRecipe;
+                var buildingRecipe = BuildingTemplate.ConstructionData.RealIngredients;
 
                 foreach (var kvp in buildingRecipe)
                 {
@@ -839,7 +869,6 @@ namespace Technolithic
             FillSaveData(buildingSaveData);
 
             buildingSaveData.BuildingTemplateName = BuildingTemplate.Json;
-            buildingSaveData.BuildingProgress = ConstructionProgress;
 
             buildingSaveData.CurrentFuelCondition = CurrentFuelCondition;
 

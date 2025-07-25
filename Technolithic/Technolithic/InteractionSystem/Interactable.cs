@@ -46,7 +46,8 @@ namespace Technolithic
             _interactionHandler = new InteractionHandler();
         }
 
-        protected void AddAvailableInteraction(InteractionType interactionType, LaborType associatedLaborType, bool toolRequired)
+        protected void AddAvailableInteraction(InteractionType interactionType, LaborType associatedLaborType, 
+            ToolUsageStatus toolUsageStatus = ToolUsageStatus.NotUsed)
         {
             if (_isDestroyed) return;
 
@@ -55,7 +56,22 @@ namespace Technolithic
 
             _interactionLaborMap.Add(interactionType, associatedLaborType);
 
-            _interactionHandler.AddAvailableInteraction(interactionType, toolRequired);
+            _interactionHandler.AddAvailableInteraction(interactionType, toolUsageStatus);
+        }
+
+        protected void RemoveInteraction(InteractionType interactionType)
+        {
+            if (_isDestroyed) return;
+
+            if (_interactionHandler.AvailableInteractions.Contains(interactionType) == false) return;
+
+            LaborType associatedLaborType = _interactionLaborMap[interactionType];
+
+            _interactablesManager.RemoveInteractable(this, associatedLaborType, interactionType);
+
+            _interactionLaborMap.Remove(interactionType);
+
+            _interactionHandler.RemoveInteraction(interactionType);
         }
 
         protected void SetInteractionItems(InteractionType interactionType, bool isItemRequired, params Item[] items)
@@ -90,9 +106,9 @@ namespace Technolithic
             return _interactionLaborMap[interactionType];
         }
 
-        public bool DoesInteractionRequireTool(InteractionType interactionType)
+        public ToolUsageStatus GetInteractionToolUsageStatus(InteractionType interactionType)
         {
-            return _interactionHandler.DoesInteractionRequireTool(interactionType);
+            return _interactionHandler.GetInteractionToolUsageStatus(interactionType);
         }
 
         public bool IsInteractionActivated(InteractionType interactionType)
@@ -155,12 +171,16 @@ namespace Technolithic
 
             _interactionHandler.UnmarkInteraction(interactionType);
 
+            OnInteractionUnmarked(interactionType);
+
             if (ShouldRemoveFromManager(interactionType) == false) return;
 
             LaborType associatedLaborType = _interactionLaborMap[interactionType];
 
             _interactablesManager.RemoveInteractable(this, associatedLaborType, interactionType);
         }
+
+        protected virtual void OnInteractionUnmarked(InteractionType interactionType) {}
 
         public float GetInteractionDuration(InteractionType interactionType)
         {

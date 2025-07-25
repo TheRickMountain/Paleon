@@ -1,12 +1,8 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Technolithic
 {
@@ -70,8 +66,6 @@ namespace Technolithic
 
         public BuildingType BuildingType { get; private set; }
         public BuildingCategory BuildingCategory { get; private set; }
-        public LaborType BuildingLaborType { get; private set; }
-        public ToolType BuildingToolType { get; private set; }
 
         public bool Animated { get; private set; }
         public bool Rotatable { get; private set; }
@@ -80,12 +74,8 @@ namespace Technolithic
         public int TextureWidth { get; private set; }
         public int TextureHeight { get; private set; }
 
-        public Dictionary<Item, int> BuildingRecipe { get; private set; }
-
-        public bool RequireBuilding { get; private set; }
-
-        public int ConstructionTime { get; private set; }
-
+        public ConstructionData ConstructionData { get; private set; }
+        
         public bool[,] TargetPattern;
         public char[,] GroundPattern;
 
@@ -168,10 +158,13 @@ namespace Technolithic
 
             BuildingType = (BuildingType)Enum.Parse(typeof(BuildingType), JObject["type"].Value<string>());
             BuildingCategory = (BuildingCategory)Enum.Parse(typeof(BuildingCategory), JObject["category"].Value<string>());
-            BuildingLaborType = GetJsonParameter(JObject, "buildingLaborType", LaborType.Build);
-            BuildingToolType = GetJsonParameter(JObject, "buildingToolType", ToolType.None);
 
-            ConstructionTime = JObject["constructionTime"].Value<int>();
+            if (!JObject["ConstructionData"].IsNullOrEmpty())
+            {
+                ConstructionData = JsonSerializer.CreateDefault().Deserialize<ConstructionData>(JObject["ConstructionData"]
+                    .CreateReader());
+                ConstructionData.Initialize();
+            }
 
             Icons = new Dictionary<Direction, MyTexture>();
 
@@ -219,7 +212,6 @@ namespace Technolithic
                         Textures.Add(Direction.DOWN, texture);
 
                         TargetPattern = new bool[,] { { false } };
-                        RequireBuilding = true;
                     }
                     break;
                 case BuildingType.Wall:
@@ -234,7 +226,6 @@ namespace Technolithic
                         Textures.Add(Direction.DOWN, texture);
 
                         TargetPattern = new bool[,] { { false } };
-                        RequireBuilding = true;
                     }
                     break;
                 default:
@@ -278,7 +269,6 @@ namespace Technolithic
                         }
 
                         Animated = JObject["animated"].Value<bool>();
-                        RequireBuilding = JObject["requireBuilding"].Value<bool>();
                     }
                     break;
             }
@@ -303,19 +293,6 @@ namespace Technolithic
             if (!JObject["show_item_on_top"].IsNullOrEmpty())
             {
                 ShowItemOnTop = JObject["show_item_on_top"].Value<bool>();
-            }
-
-            BuildingRecipe = new Dictionary<Item, int>();
-
-            if (JObject["ingredients"].IsNullOrEmpty() == false)
-            {
-                foreach (var ingredient in JObject["ingredients"])
-                {
-                    Item item = ItemDatabase.GetItemByName(ingredient["item"].Value<string>());
-                    int weight = ingredient["weight"].Value<int>();
-
-                    BuildingRecipe.Add(item, weight);
-                }
             }
 
             if(!JObject["fuelConsumer"].IsNullOrEmpty())
@@ -527,7 +504,8 @@ namespace Technolithic
             }
             else
             {
-                buildingCmp.SetToBuild(tiles, RequireBuilding, currentFuelCondition);
+                bool isConstructionRequired = ConstructionData != null;
+                buildingCmp.SetToBuild(tiles, isConstructionRequired, currentFuelCondition);
             }
 
             return entity;

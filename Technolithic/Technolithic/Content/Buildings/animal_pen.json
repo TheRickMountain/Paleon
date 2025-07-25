@@ -8,10 +8,8 @@
   "animated": true,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 50,
-  "constructionTime": 50,
   "animalPen": {
     "filters": [
       "cattle_male_baby",
@@ -127,11 +125,14 @@
       "A"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "wood",
-      "weight": 8
+  "fuelConsumer": null,
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 2.0,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "wood": 8
     }
-  ],
-  "fuelConsumer": null
+  }
 }

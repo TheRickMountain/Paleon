@@ -46,7 +46,7 @@
       "RechargeTime": 0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Plant"]
+      "LaborTypes": ["Agriculture"]
     }
   },
   "copper_reaper": {
@@ -71,7 +71,8 @@
       "RechargeTime": 0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Harvest"]
+      "LaborTypes": ["Agriculture"],
+      "InteractionTypes": ["AutoHarvest", "Uproot"]
     }
   },
   "copper": {
@@ -316,7 +317,8 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Harvest"]
+      "LaborTypes": ["Agriculture"],
+      "InteractionTypes": ["AutoHarvest", "Uproot"]
     }
   },
   "bone_sickle": {
@@ -341,7 +343,8 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Harvest"]
+      "LaborTypes": ["Agriculture"],
+      "InteractionTypes": ["AutoHarvest", "Uproot"]
     }
   },
   "copper_sickle": {
@@ -366,7 +369,8 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Harvest"]
+      "LaborTypes": ["Agriculture"],
+      "InteractionTypes": ["AutoHarvest", "Uproot"]
     }
   },
   "bronze_sickle": {
@@ -391,7 +395,8 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Harvest"]
+      "LaborTypes": ["Agriculture"],
+      "InteractionTypes": ["AutoHarvest", "Uproot"]
     }
   },
   "iron_sickle": {
@@ -416,7 +421,8 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Harvest"]
+      "LaborTypes": ["Agriculture"],
+      "InteractionTypes": ["AutoHarvest", "Uproot"]
     }
   },
   "stone_axe": {
@@ -545,7 +551,7 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Plant"]
+      "LaborTypes": ["Agriculture"]
     }
   },
   "copper_hoe": {
@@ -570,7 +576,7 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Plant"]
+      "LaborTypes": ["Agriculture"]
     }
   },
   "bronze_hoe": {
@@ -595,7 +601,7 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Plant"]
+      "LaborTypes": ["Agriculture"]
     }
   },
   "iron_hoe": {
@@ -620,7 +626,7 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Plant"]
+      "LaborTypes": ["Agriculture"]
     }
   },
   "stone_pick": {

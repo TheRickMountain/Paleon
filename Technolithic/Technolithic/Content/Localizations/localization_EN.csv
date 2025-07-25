@@ -133,6 +133,7 @@ clothes,Clothes
 come_here,Come here
 command_line,command line
 connected,Connected
+construct,Construct
 consumption,Consumption
 containers,Containers
 cooked_fish,Cooked fish
@@ -378,6 +379,7 @@ per_day,per day
 pets,Pets
 pig,Pig
 plant,Plant
+plant_action,Plant
 planting,Planting
 plowing,Plowing
 point_of_entry_to_a_space_which_is_enclosed_by_walls,Point of entry to a space which is enclosed by walls
@@ -499,7 +501,8 @@ time_machine_description,Time travel device
 tin_deposit,Tin deposit
 tin_ore,Tin ore
 to_do_the_job_of_x_you_need_tools,To do the job of {0} you need tools
-tool_required,Tool required
+tool_optional,Tool (Optional)
+tool_required,Tool (Required)
 tool_type,Tool type
 tools,Tools
 torch,Torch

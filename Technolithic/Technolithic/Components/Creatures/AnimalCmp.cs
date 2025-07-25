@@ -138,12 +138,12 @@ namespace Technolithic
         {
             if (AnimalTemplate.IsWild)
             {
-                AddAvailableInteraction(InteractionType.Hunt, LaborType.Hunt, true);
+                AddAvailableInteraction(InteractionType.Hunt, LaborType.Hunt, ToolUsageStatus.Required);
                 ActivateInteraction(InteractionType.Hunt);
 
                 if(AnimalTemplate.DomesticationData != null)
                 {
-                    AddAvailableInteraction(InteractionType.Domesticate, LaborType.Ranching, false);
+                    AddAvailableInteraction(InteractionType.Domesticate, LaborType.Ranching, ToolUsageStatus.NotUsed);
                     SetInteractionDuration(InteractionType.Domesticate, 1.0f);
                     Item[] interactionItems = AnimalTemplate.Ration.ToArray();
                     SetInteractionItems(InteractionType.Domesticate, true, interactionItems);
@@ -153,7 +153,7 @@ namespace Technolithic
             }
             else
             {
-                AddAvailableInteraction(InteractionType.Slaughter, LaborType.Ranching, false);
+                AddAvailableInteraction(InteractionType.Slaughter, LaborType.Ranching, ToolUsageStatus.NotUsed);
                 SetInteractionDuration(InteractionType.Slaughter, 1.0f);
 
                 ActivateInteraction(InteractionType.Slaughter);
@@ -161,7 +161,7 @@ namespace Technolithic
                 AnimalProduct animalProduct = AnimalTemplate.AnimalProduct;
                 if (animalProduct != null)
                 {
-                    AddAvailableInteraction(InteractionType.GatherAnimalProduct, LaborType.Ranching, false);
+                    AddAvailableInteraction(InteractionType.GatherAnimalProduct, LaborType.Ranching, ToolUsageStatus.NotUsed);
                     SetInteractionDuration(InteractionType.GatherAnimalProduct, 1.0f);
 
                     Item requiredItem = animalProduct.RequiredItem;

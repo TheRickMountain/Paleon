@@ -6,7 +6,6 @@
   "cloneable": true,
   "destructible": true,
   "movementSpeed": -1,
-  "constructionTime": 10,
   "WallData":
   {
     "Id": 8
@@ -21,5 +20,14 @@
     [
       "A"
     ]
-  ]
+  ],
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 0.4,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "brick": 4
+    }
+  }
 }

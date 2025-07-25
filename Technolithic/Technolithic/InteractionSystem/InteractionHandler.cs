@@ -13,7 +13,7 @@ namespace Technolithic
 
         private Dictionary<InteractionType, float> interactionDuration;
         private Dictionary<InteractionType, float> interactionProgress;
-        private Dictionary<InteractionType, bool> interactionRequiredTool;
+        private Dictionary<InteractionType, ToolUsageStatus> interactionToolUsageStatus;
 
         public IReadOnlySet<InteractionType> AvailableInteractions => availableInteractions;
 
@@ -26,23 +26,35 @@ namespace Technolithic
 
             interactionDuration = new();
             interactionProgress = new();
-            interactionRequiredTool = new();
+            interactionToolUsageStatus = new();
         }
 
-        public void AddAvailableInteraction(InteractionType interactionType, bool toolRequired)
+        public void AddAvailableInteraction(InteractionType interactionType, ToolUsageStatus toolUsageStatus)
         {
             availableInteractions.Add(interactionType);
 
             interactionDuration.Add(interactionType, 1.0f);
             interactionProgress.Add(interactionType, 0.0f);
-            interactionRequiredTool.Add(interactionType, toolRequired);
+            interactionToolUsageStatus.Add(interactionType, toolUsageStatus);
         }
 
-        public bool DoesInteractionRequireTool(InteractionType interactionType)
+        public void RemoveInteraction(InteractionType interactionType)
         {
-            if (interactionRequiredTool.ContainsKey(interactionType) == false) return false;
+            availableInteractions.Remove(interactionType);
 
-            return interactionRequiredTool[interactionType];
+            activatedInteractions.Remove(interactionType);
+            markedInteractions.Remove(interactionType);
+
+            interactionDuration.Remove(interactionType);
+            interactionProgress.Remove(interactionType);
+            interactionToolUsageStatus.Remove(interactionType);
+        }
+
+        public ToolUsageStatus GetInteractionToolUsageStatus(InteractionType interactionType)
+        {
+            if (interactionToolUsageStatus.ContainsKey(interactionType) == false) return ToolUsageStatus.NotUsed;
+
+            return interactionToolUsageStatus[interactionType];
         }
 
         public bool IsInteractionActivated(InteractionType interactionType)

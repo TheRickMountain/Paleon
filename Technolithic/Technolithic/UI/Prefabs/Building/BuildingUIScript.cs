@@ -15,7 +15,6 @@ namespace Technolithic
         private BuildingCmp selectedBuilding;
         private MyPanelUI panel;
 
-        private BigButton cancelButton;
         private BigButton cloneButton;
         private BigButton irrigateButton;
         private BigButton fertilizeButton;
@@ -43,10 +42,6 @@ namespace Technolithic
         public override void Begin()
         {
             panel = (MyPanelUI)ParentNode;
-
-            cancelButton = new BigButton(ParentNode.Scene, ResourceManager.CancelIcon, true);
-            cancelButton.GetComponent<ButtonScript>().AddOnClickedCallback(CancelBuilding);
-            cancelButton.Tooltips = Localization.GetLocalizedText("cancel");
 
             cloneButton = new BigButton(ParentNode.Scene, RenderManager.Pixel, false);
             cloneButton.Tooltips = Localization.GetLocalizedText("clone") + " [Q]";
@@ -211,12 +206,6 @@ namespace Technolithic
             CloseUI(selectedBuilding);
         }
 
-        public void CancelBuilding(bool value, ButtonScript sender)
-        {
-            selectedBuilding.CancelBuilding();
-            CloseUI(selectedBuilding);
-        }
-
         private void UpdateStatsListView(BuildingCmp building)
         {
             MNode listView = ParentNode.GetChildByName("StatsListView");
@@ -263,17 +252,13 @@ namespace Technolithic
             ListViewUIScript buttonsListView = ParentNode.GetChildByName("ButtonsListView").GetComponent<ListViewUIScript>();
             buttonsListView.Clear();
 
-            if (selectedBuilding.IsBuilt == false)
-            {
-                buttonsListView.AddItem(cancelButton);
-            }
-            else
+            if (selectedBuilding.IsBuilt)
             {
                 if (selectedBuilding.BuildingTemplate.BuildingType == BuildingType.FarmPlot)
                 {
                     FarmPlot farmPlot = selectedBuilding as FarmPlot;
 
-                    if(farmPlot.IsWild == false)
+                    if (farmPlot.IsWild == false)
                     {
                         ProgressTree levelSystem = GameplayScene.Instance.ProgressTree;
 
@@ -292,13 +277,13 @@ namespace Technolithic
                         }
                     }
                 }
-                else if(selectedBuilding.BuildingTemplate.BuildingType == BuildingType.TimeMachine)
+                else if (selectedBuilding.BuildingTemplate.BuildingType == BuildingType.TimeMachine)
                 {
                     returnHomeButton.X = 8;
                     returnHomeButton.Y = 48;
                     ParentNode.AddChildNode(returnHomeButton);
                 }
-                else if(selectedBuilding.BuildingTemplate.BuildingType == BuildingType.Stockpile)
+                else if (selectedBuilding.BuildingTemplate.BuildingType == BuildingType.Stockpile)
                 {
                     if (selectedBuilding.BuildingTemplate.Storage.CanCopySettings)
                     {
@@ -307,22 +292,22 @@ namespace Technolithic
 
                     buttonsListView.AddItem(priorityButton);
                 }
-                else if(selectedBuilding.BuildingTemplate.BuildingType == BuildingType.AnimalPen)
+                else if (selectedBuilding.BuildingTemplate.BuildingType == BuildingType.AnimalPen)
                 {
                     buttonsListView.AddItem(copySettingsButton);
                 }
-                else if(selectedBuilding.BuildingTemplate.BuildingType == BuildingType.Crafter)
+                else if (selectedBuilding.BuildingTemplate.BuildingType == BuildingType.Crafter)
                 {
                     buttonsListView.AddItem(copySettingsButton);
                 }
-                else if(selectedBuilding.BuildingTemplate.BuildingType == BuildingType.Mine)
+                else if (selectedBuilding.BuildingTemplate.BuildingType == BuildingType.Mine)
                 {
                     MineBuildingCmp mineBuilding = selectedBuilding as MineBuildingCmp;
 
                     autoMineSpawnedDepositsButton.GetComponent<ButtonScript>().IsSelected = mineBuilding.AutoMineSpawnedDeposits;
                     buttonsListView.AddItem(autoMineSpawnedDepositsButton);
                 }
-                else if(selectedBuilding.BuildingTemplate.BuildingType == BuildingType.TradingPost)
+                else if (selectedBuilding.BuildingTemplate.BuildingType == BuildingType.TradingPost)
                 {
                     buttonsListView.AddItem(tradeButton);
                 }

@@ -8,10 +8,8 @@
   "animated": true,
   "cloneable": true,
   "rotatable": false,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 50,
-  "constructionTime": 10,
   "smokeGenerator": {
     "x": 8,
     "y": 0
@@ -177,10 +175,13 @@
       "A"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "stone",
-      "weight": 1
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 0.4,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "stone": 1 
     }
-  ]
+  }
 }

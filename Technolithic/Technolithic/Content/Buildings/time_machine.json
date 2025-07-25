@@ -8,10 +8,8 @@
   "animated": false,
   "cloneable": true,
   "rotatable": false,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 50,
-  "constructionTime": 75,
   "texture": {
     "name": "time_machine",
     "width": 48,
@@ -68,10 +66,13 @@
       "A"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "iron",
-      "weight": 100
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 3.0,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "iron": 100
     }
-  ]
+  }
 }

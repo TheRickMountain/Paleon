@@ -8,10 +8,8 @@
   "animated": false,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 50,
-  "constructionTime": 50,
   "assignable": {
     "slots": 4,
     "ApplyStatusEffect": "CozyHut"
@@ -81,16 +79,6 @@
       "A"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "wood",
-      "weight": 4
-    },
-    {
-      "item": "mudbrick",
-      "weight": 12
-    }
-  ],
   "fuelConsumer": {
     "fuel": [
       "wood",
@@ -98,5 +86,15 @@
       "dry_manure_fuel"
     ],
     "energy_consumption": 0.06
+  },
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 2.0,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "wood": 4,
+      "mudbrick": 12
+    }
   }
 }

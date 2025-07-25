@@ -19,7 +19,7 @@
 
             BuildingTemplate surfaceBuildingTemplate = Engine.Instance.SurfaceIdBuildingTemplate[surfaceId];
 
-            ThrowItems(surfaceBuildingTemplate.BuildingRecipe);
+            ThrowItems(surfaceBuildingTemplate.ConstructionData.RealIngredients);
 
             centerTile.SurfaceId = -1;
 

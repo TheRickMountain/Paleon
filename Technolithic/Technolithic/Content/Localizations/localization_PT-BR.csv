@@ -133,6 +133,7 @@ clothes,Roupas
 come_here,Venha aqui
 command_line,linha de comando
 connected,Conectado
+construct,Construct
 consumption,Consumo
 containers,Recipientes
 cooked_fish,Peixe cozido
@@ -378,6 +379,7 @@ per_day,por dia
 pets,Pets
 pig,Porco
 plant,Plantar
+plant_action,Plant
 planting,Planting
 plowing,Arar
 point_of_entry_to_a_space_which_is_enclosed_by_walls,Ponto de entrada em um local que está clausurado por muros
@@ -499,7 +501,8 @@ time_machine_description,Dispositivo de viagem no tempo
 tin_deposit,Depósito de estanho
 tin_ore,Minério de estanho
 to_do_the_job_of_x_you_need_tools,To do the job of {0} you need tools
-tool_required,Tool required
+tool_optional,Tool (Optional)
+tool_required,Tool (Required)
 tool_type,Tipo de ferramenta
 tools,Ferramentas
 torch,Tocha

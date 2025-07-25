@@ -8,10 +8,8 @@
   "animated": true,
   "cloneable": true,
   "rotatable": false,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": -1,
-  "constructionTime": 10,
   "lightEmitter": {
     "radius": 200
   },
@@ -46,5 +44,14 @@
       "animal_fat"
     ],
     "energy_consumption": 0.02
+  },
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 0.4,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "stone": 1
+    }
   }
 }

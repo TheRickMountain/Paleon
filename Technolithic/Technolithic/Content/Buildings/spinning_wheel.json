@@ -8,10 +8,8 @@
   "animated": true,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 50,
-  "constructionTime": 20,
   "crafter": {
     "laborType": "Craft",
     "autocrafter": false,
@@ -72,10 +70,13 @@
       "A"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "wood",
-      "weight": 2
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 0.8,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "wood": 2
     }
-  ]
+  }
 }

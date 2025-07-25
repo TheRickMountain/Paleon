@@ -8,18 +8,13 @@
   "animated": false,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 100,
-  "constructionTime": 5,
-  "toolRequired": false,
-  "connectWithOtherBlocks": false,
   "texture": {
     "name": "destruct_wall",
     "width": 16,
     "height": 16
   },
-  "ingredients": [],
   "ground_pattern": [
     [
       "N"
@@ -34,5 +29,12 @@
     [
       false
     ]
-  ]
+  ],
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "DestructWall",
+    "DurationInHours": 0.5,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {}
+  }
 }

@@ -8,11 +8,8 @@
   "animated": false,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 95,
-  "constructionTime": 5,
-  "ingredients": [],
   "ground_pattern": [
     [
       "J"
@@ -26,5 +23,12 @@
   "SurfaceData":
   {
     "Id": 0
+  },
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 0.2,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {}
   }
 }

@@ -5,14 +5,10 @@
   "height": 1,
   "type": "Tree",
   "category": "Agriculture",
-  "buildingLaborType": "Plant",
-  "buildingToolType": "Plowing",
   "animated": false,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "destructible": false,
-  "constructionTime": 10,
   "movementSpeed": 75,
   "TreeData": {
     "GrowthRateInDays": 8,
@@ -55,5 +51,11 @@
       "A"
     ]
   ],
-  "ingredients": []
+  "ConstructionData": {
+    "LaborType": "Agriculture",
+    "InteractionType": "Plant",
+    "DurationInHours": 0.4,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {}
+  }
 }

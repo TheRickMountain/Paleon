@@ -373,8 +373,6 @@ namespace Technolithic
 
                     BuildingCmp buildingCmp = buildingEntity.Get<BuildingCmp>();
 
-                    buildingCmp.ConstructionProgress = buildingSaveData.BuildingProgress;
-
                     if (buildingCmp.IsBuilt)
                     {
                         if (buildingCmp.BuildingTemplate.FuelConsumer != null)
@@ -1380,6 +1378,10 @@ namespace Technolithic
                             }
                         }
                         break;
+                    case InteractionIconDisplayState.Never:
+                        {
+                            continue;
+                        }
                 }
             }
         }

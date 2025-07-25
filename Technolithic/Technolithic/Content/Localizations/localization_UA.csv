@@ -133,6 +133,7 @@ clothes,Одяг
 come_here,Піти сюди
 command_line,командна лінія
 connected,Під'єднаний
+construct,Construct
 consumption,Споживання
 containers,Контейнери
 cooked_fish,Смажена риба
@@ -378,6 +379,7 @@ per_day,за день
 pets,Вихованці
 pig,Свиня
 plant,Рослинка
+plant_action,Plant
 planting,Planting
 plowing,Оранка
 point_of_entry_to_a_space_which_is_enclosed_by_walls,Прохід в стіні що зачиняється
@@ -499,7 +501,8 @@ time_machine_description,Прилад для подорожей в часі
 tin_deposit,Родовище олова
 tin_ore,Оловяна руда
 to_do_the_job_of_x_you_need_tools,Для роботи {0} потрібні інструменти
-tool_required,Tool required
+tool_optional,Tool (Optional)
+tool_required,Tool (Required)
 tool_type,Тип інструменту
 tools,Приладдя
 torch,Смолоскип

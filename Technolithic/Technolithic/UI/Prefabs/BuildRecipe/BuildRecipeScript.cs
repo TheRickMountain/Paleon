@@ -41,25 +41,26 @@ namespace Technolithic
 
             listViewScript.AddItem(CreateTextNode($"{Localization.GetLocalizedText("ingredients")}:"));
 
-            // Устанавливаем новые количества для предметов
-            foreach (var kvp in buildingTemplate.BuildingRecipe)
+            if (buildingTemplate.ConstructionData != null)
             {
-                Item item = kvp.Key;
-                float weight = kvp.Value;
-                
-                // Создаем ноду, если предмет не был на складе
-                if (!itemsNodes.ContainsKey(item))
+                // Устанавливаем новые количества для предметов
+                foreach (var kvp in buildingTemplate.ConstructionData.RealIngredients)
                 {
-                    MNode itemNode = CreateItemNode(item);
-                    itemsNodes.Add(item, itemNode);
+                    Item item = kvp.Key;
+                    int weight = kvp.Value;
+
+                    // Создаем ноду, если предмет не был на складе
+                    if (!itemsNodes.ContainsKey(item))
+                    {
+                        MNode itemNode = CreateItemNode(item);
+                        itemsNodes.Add(item, itemNode);
+                    }
+
+                    listViewScript.AddItem(itemsNodes[item]);
+
+                    ((MyText)itemsNodes[item].GetChildByName("Name")).Text = $"{item.Name} [{weight}]";
                 }
-
-                listViewScript.AddItem(itemsNodes[item]);
-
-                ((MyText)itemsNodes[item].GetChildByName("Name")).Text = $"{item.Name} [{weight}]";
             }
-
-           // listViewScript.UpdateView();
         }
 
         private MNode CreateTextNode(string text)

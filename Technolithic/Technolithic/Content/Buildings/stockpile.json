@@ -8,11 +8,9 @@
   "animated": false,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": false,
   "show_item_on_top": true,
   "destructible": true,
   "movementSpeed": -1,
-  "constructionTime": 1,
   "storage": {
     "canCopySettings": true,
     "capacity": 200,
@@ -69,5 +67,6 @@
       "A",
       "A"
     ]
-  ]
+  ],
+  "ConstructionData": null
 }

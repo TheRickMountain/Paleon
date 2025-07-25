@@ -133,6 +133,7 @@ clothes,服装
 come_here,来这里
 command_line,指令列
 connected,已连接
+construct,Construct
 consumption,消耗
 containers,容器
 cooked_fish,熟鱼
@@ -378,6 +379,7 @@ per_day,每天
 pets,宠物
 pig,猪
 plant,植物
+plant_action,Plant
 planting,种植
 plowing,耕作
 point_of_entry_to_a_space_which_is_enclosed_by_walls,被墙壁包围的空间出入口。
@@ -498,7 +500,8 @@ time_machine_description,时间旅行装置
 tin_deposit,錫矿床
 tin_ore,錫矿
 to_do_the_job_of_x_you_need_tools,你需要 {0} 工具才能工作。
-tool_required,Tool required
+tool_optional,Tool (Optional)
+tool_required,Tool (Required)
 tool_type,工具种类
 tools,工具
 torch,火炬

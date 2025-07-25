@@ -87,14 +87,12 @@ namespace Technolithic
         {
             base.CompleteBuilding();
 
-            // TODO: для этого действия МОЖНО (но необязательно использовать инструмент)
             if (PlantData.Fruits != null)
             {
-                AddAvailableInteraction(InteractionType.AutoHarvest, LaborType.Harvest, false);
+                AddAvailableInteraction(InteractionType.AutoHarvest, LaborType.Agriculture, ToolUsageStatus.Optional);
             }
 
-            // TODO: для этого действия МОЖНО (но необязательно использовать инструмент)
-            AddAvailableInteraction(InteractionType.Uproot, LaborType.Harvest, false);
+            AddAvailableInteraction(InteractionType.Uproot, LaborType.Agriculture, ToolUsageStatus.Optional);
             ActivateInteraction(InteractionType.Uproot);
 
             potOfWater = ItemDatabase.GetItemByName("pot_of_water");
@@ -478,7 +476,7 @@ namespace Technolithic
 
         private float GetHarvestOrUprootInteractionDuration()
         {
-            float duration = PlantData.MaxStrength * (growthPercent / 100f);
+            float duration = (int)(PlantData.MaxStrength * (growthPercent / 100f));
 
             if (duration <= 0)
             {

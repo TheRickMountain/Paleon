@@ -133,6 +133,7 @@ clothes,衣類
 come_here,こっちに来い
 command_line,コマンドライン
 connected,接続中
+construct,Construct
 consumption,消費
 containers,容器
 cooked_fish,調理した魚
@@ -380,6 +381,7 @@ per_day,/日
 pets,ペット
 pig,豚
 plant,植物
+plant_action,Plant
 planting,植付
 plowing,耕起
 point_of_entry_to_a_space_which_is_enclosed_by_walls,壁に囲まれた場所への入口
@@ -501,7 +503,8 @@ time_machine_description,タイムトラベル装置
 tin_deposit,錫鉱床
 tin_ore,錫鉱石
 to_do_the_job_of_x_you_need_tools,{0}をするには道具が必要
-tool_required,Tool required
+tool_optional,Tool (Optional)
+tool_required,Tool (Required)
 tool_type,道具タイプ
 tools,道具
 torch,松明

@@ -8,10 +8,8 @@
   "animated": true,
   "rotatable": true,
   "cloneable": true,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 50,
-  "constructionTime": 50,
   "EnergyConsumer": {
     "RequiredPower": 15,
     "EnergyType": "Kinetic"
@@ -72,18 +70,15 @@
       "A"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "mudbrick",
-      "weight": 9
-    },
-    {
-      "item": "ceramic_pot",
-      "weight": 8
-    },
-    {
-      "item": "wood",
-      "weight": 6
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 2.0,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "mudbrick": 9,
+      "ceramic_pot": 8,
+      "wood": 6
     }
-  ]
+  }
 }

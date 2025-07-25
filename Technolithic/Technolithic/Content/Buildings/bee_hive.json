@@ -7,11 +7,9 @@
   "category": "Food",
   "animated": true,
   "rotatable": false,
-  "requireBuilding": true,
   "destructible": true,
   "cloneable": true,
   "movementSpeed": 50,
-  "constructionTime": 25,
   "range": 3,
   "BeeHiveData": {
     "IsWild": false,
@@ -37,14 +35,14 @@
       "A"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "wood",
-      "weight": 1
-    },
-    {
-      "item": "honeycomb",
-      "weight": 1
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 1.0,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "wood": 1,
+      "honeycomb": 1
     }
-  ]
+  }
 }

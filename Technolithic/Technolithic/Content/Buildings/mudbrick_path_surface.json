@@ -8,16 +8,8 @@
   "animated": false,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 100,
-  "constructionTime": 5,
-  "ingredients": [
-    {
-      "item": "mudbrick",
-      "weight": 1
-    }
-  ],
   "ground_pattern": [
     [
       "J"
@@ -31,5 +23,14 @@
   "SurfaceData":
   {
     "Id": 3
+  },
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 0.2,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "mudbrick": 1
+    }
   }
 }

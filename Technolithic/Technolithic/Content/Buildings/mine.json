@@ -8,10 +8,8 @@
   "animated": false,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 50,
-  "constructionTime": 30,
   "range": 6,
   "texture": {
     "name": "mine",
@@ -52,14 +50,14 @@
       "C"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "wood",
-      "weight": 4
-    },
-    {
-      "item": "stone",
-      "weight": 4
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 1.2,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "wood": 4,
+      "stone": 4
     }
-  ]
+  }
 }

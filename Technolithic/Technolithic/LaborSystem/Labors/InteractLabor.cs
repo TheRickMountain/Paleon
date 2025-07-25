@@ -85,19 +85,22 @@ namespace Technolithic
                     Inventory inventoryWithTool = null;
                     Item requiredTool = null;
 
-                    if (creature.CreatureEquipment.HasTool(interactionType) == false)
+                    if (interactable.GetInteractionToolUsageStatus(interactionType) != ToolUsageStatus.NotUsed)
                     {
-                        var invToolTuple = TryFindTool(creature, interactionType);
-                        if (invToolTuple.Item1 != null)
+                        if (creature.CreatureEquipment.HasTool(interactionType) == false)
                         {
-                            inventoryWithTool = invToolTuple.Item1;
-                            requiredTool = invToolTuple.Item2;
-                        }
-                        else
-                        {
-                            if (interactable.DoesInteractionRequireTool(interactionType))
+                            var invToolTuple = TryFindTool(creature, interactionType);
+                            if (invToolTuple.Item1 != null)
                             {
-                                continue;
+                                inventoryWithTool = invToolTuple.Item1;
+                                requiredTool = invToolTuple.Item2;
+                            }
+                            else
+                            {
+                                if (interactable.GetInteractionToolUsageStatus(interactionType) == ToolUsageStatus.Required)
+                                {
+                                    continue;
+                                }
                             }
                         }
                     }

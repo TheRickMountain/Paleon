@@ -1071,10 +1071,15 @@ namespace Technolithic
                                 interactable.UnmarkInteraction(InteractionType.GatherStone);
                                 interactable.UnmarkInteraction(InteractionType.GatherWood);
                                 interactable.UnmarkInteraction(InteractionType.Destruct);
+                                interactable.UnmarkInteraction(InteractionType.DestructWall);
+                                interactable.UnmarkInteraction(InteractionType.DestructSurface);
+                                interactable.UnmarkInteraction(InteractionType.DestructIrrigationCanal);
                                 interactable.UnmarkInteraction(InteractionType.Slaughter);
                                 interactable.UnmarkInteraction(InteractionType.Hunt);
                                 interactable.UnmarkInteraction(InteractionType.AutoHarvest);
                                 interactable.UnmarkInteraction(InteractionType.Uproot);
+                                interactable.UnmarkInteraction(InteractionType.Construct);
+                                interactable.UnmarkInteraction(InteractionType.Plant);
                             }
                             break;
                     }
@@ -1273,27 +1278,6 @@ namespace Technolithic
                                             break;
                                     }
                                     
-                                }
-                            }
-                        }
-                        break;
-                    case MyAction.Cancel:
-                        for (int x = 0; x < tiles.GetLength(0); x++)
-                        {
-                            for (int y = 0; y < tiles.GetLength(1); y++)
-                            {
-                                Tile tile = tiles[x, y];
-
-                                if (tile.Entity != null)
-                                {
-                                    if (tile.Entity.Has<BuildingCmp>())
-                                    {
-                                        BuildingCmp building = tile.Entity.Get<BuildingCmp>();
-                                        if (!building.IsBuilt)
-                                        {
-                                            building.CancelBuilding();
-                                        }
-                                    }
                                 }
                             }
                         }

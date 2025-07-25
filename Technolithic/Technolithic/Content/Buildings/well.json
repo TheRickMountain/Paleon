@@ -7,11 +7,9 @@
   "category": "Production",
   "animated": false,
   "rotatable": false,
-  "requireBuilding": true,
   "destructible": true,
   "cloneable": true,
   "movementSpeed": 50,
-  "constructionTime": 30,
   "crafter": {
     "laborType": "Craft",
     "autocrafter": false,
@@ -69,10 +67,13 @@
       "A"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "clay",
-      "weight": "4"
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 1.2,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "clay": 4
     }
-  ]
+  }
 }

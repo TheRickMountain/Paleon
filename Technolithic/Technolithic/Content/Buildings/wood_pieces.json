@@ -8,15 +8,13 @@
   "animated": false,
   "rotatable": false,
   "cloneable": false,
-  "requireBuilding": false,
   "destructible": false,
   "movementSpeed": 50,
-  "constructionTime": 1,
   "DepositData": {
     "LaborType": "Gathering",
     "InteractionType": "GatherWood",
     "InteractionDurationInHours": 0.8,
-    "ToolRequired": false,
+    "ToolUsageStatus": "NotUsed",
     "Loot": {
       "wood": 3
     },
@@ -57,5 +55,5 @@
       "A"
     ]
   ],
-  "ingredients": []
+  "ConstructionData": null
 }

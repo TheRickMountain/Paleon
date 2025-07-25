@@ -116,7 +116,7 @@ namespace Technolithic
         {
             base.CompleteBuilding();
 
-            AddAvailableInteraction(InteractionType.AutoCleanPen, LaborType.Ranching, false);
+            AddAvailableInteraction(InteractionType.AutoCleanPen, LaborType.Ranching);
             SetInteractionDuration(InteractionType.AutoCleanPen, 1 * WorldState.MINUTES_PER_HOUR);
 
             MarkInteraction(InteractionType.AutoCleanPen);

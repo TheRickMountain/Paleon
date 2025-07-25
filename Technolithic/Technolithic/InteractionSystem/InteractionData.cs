@@ -2,12 +2,6 @@
 
 namespace Technolithic
 {
-    public enum InteractionIconDisplayState
-    {
-        OnMarked,
-        OnUnmarked
-    }
-
     public class InteractionData
     {
         public InteractionType InteractionType { get; private set; }

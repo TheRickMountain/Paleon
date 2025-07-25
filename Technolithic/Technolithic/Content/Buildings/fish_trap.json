@@ -8,11 +8,9 @@
   "animated": false,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "show_item_on_top": false,
   "destructible": true,
   "movementSpeed": -1,
-  "constructionTime": 10,
   "texture": {
     "name": "fish_trap",
     "width": 32,
@@ -48,10 +46,13 @@
       "B"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "basket",
-      "weight": 1
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 0.4,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "basket": 1
     }
-  ]
+  }
 }

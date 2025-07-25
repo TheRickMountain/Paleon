@@ -8,12 +8,8 @@
   "animated": false,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 100,
-  "constructionTime": 5,
-  "toolRequired": false,
-  "connectWithOtherBlocks": false,
   "texture": {
     "name": "destruct_surface",
     "width": 16,
@@ -34,5 +30,12 @@
     [
       false
     ]
-  ]
+  ],
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "DestructSurface",
+    "DurationInHours": 0.2,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {}
+  }
 }

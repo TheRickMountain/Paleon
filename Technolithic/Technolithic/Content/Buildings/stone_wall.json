@@ -6,20 +6,22 @@
   "cloneable": true,
   "destructible": true,
   "movementSpeed": -1,
-  "constructionTime": 10,
   "WallData":
   {
     "Id": 3
   },
-  "ingredients": [
-    {
-      "item": "stone",
-      "weight": 4
-    }
-  ],
   "ground_pattern": [
     [
       "A"
     ]
-  ]
+  ],
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 0.4,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "stone": 4
+    }
+  }
 }

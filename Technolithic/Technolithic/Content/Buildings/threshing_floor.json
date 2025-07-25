@@ -8,10 +8,8 @@
   "animated": true,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 50,
-  "constructionTime": 40,
   "crafter": {
     "laborType": "Craft",
     "creatureType": "Animal",
@@ -159,10 +157,13 @@
       "A"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "stone",
-      "weight": 9
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 1.6,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "stone": 9
     }
-  ]
+  }
 }

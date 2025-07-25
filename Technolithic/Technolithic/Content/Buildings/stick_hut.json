@@ -8,10 +8,8 @@
   "animated": false,
   "rotatable": false,
   "cloneable": true,
-  "requireBuilding": true,
   "movementSpeed": 50,
   "destructible": true,
-  "constructionTime": 25,
   "assignable": {
     "slots": 1,
     "ApplyStatusEffect": "None"
@@ -51,12 +49,6 @@
       "A"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "wood",
-      "weight": 4
-    }
-  ],
   "fuelConsumer": {
     "fuel": [
       "wood",
@@ -64,5 +56,14 @@
       "dry_manure_fuel"
     ],
     "energy_consumption": 0.06
+  },
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 1.0,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "wood": 4
+    }
   }
 }

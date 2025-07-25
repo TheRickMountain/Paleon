@@ -8,7 +8,11 @@ namespace Technolithic
     {
         Chop,
         EmptyFishTrap,
+        Construct,
         Destruct,
+        DestructWall,
+        DestructSurface,
+        DestructIrrigationCanal,
         CollectWildHoney,
         CollectHoney,
         CatchFish,
@@ -23,7 +27,8 @@ namespace Technolithic
         Domesticate,
         Hunt,
         AutoHarvest,
-        Uproot
+        Uproot,
+        Plant
     }
 
     public class InteractionsDatabase
@@ -50,11 +55,39 @@ namespace Technolithic
                 InteractionIconDisplayState.OnMarked));
 
             AddInteractionData(new InteractionData(
+                InteractionType.Construct,
+                Localization.GetLocalizedText("construct"),
+                ResourceManager.ConstructIcon,
+                Color.Orange,
+                InteractionIconDisplayState.Never));
+
+            AddInteractionData(new InteractionData(
                 InteractionType.Destruct,
                 Localization.GetLocalizedText("destruct"),
                 ResourceManager.DestructIcon,
                 Color.Red,
                 InteractionIconDisplayState.OnMarked));
+
+            AddInteractionData(new InteractionData(
+                InteractionType.DestructWall,
+                Localization.GetLocalizedText("destruct_wall"),
+                ResourceManager.DestructWallIcon,
+                Color.Red,
+                InteractionIconDisplayState.Never));
+
+            AddInteractionData(new InteractionData(
+                InteractionType.DestructSurface,
+                Localization.GetLocalizedText("destruct_surface"),
+                ResourceManager.DestructSurfaceIcon,
+                Color.Red,
+                InteractionIconDisplayState.Never));
+
+            AddInteractionData(new InteractionData(
+                InteractionType.DestructIrrigationCanal,
+                Localization.GetLocalizedText("destruct_irrigation_canal"),
+                RenderManager.Pixel, // TODO: icon
+                Color.Red,
+                InteractionIconDisplayState.Never));
 
             AddInteractionData(new InteractionData(
                 InteractionType.CollectWildHoney,
@@ -160,6 +193,13 @@ namespace Technolithic
                 ResourceManager.UprootIcon,
                 Color.Red,
                 InteractionIconDisplayState.OnMarked));
+
+            AddInteractionData(new InteractionData(
+                InteractionType.Plant,
+                Localization.GetLocalizedText("plant_action"),
+                ResourceManager.PlantIcon,
+                Color.Orange,
+                InteractionIconDisplayState.Never));
         }
 
         private void AddInteractionData(InteractionData interactionData)

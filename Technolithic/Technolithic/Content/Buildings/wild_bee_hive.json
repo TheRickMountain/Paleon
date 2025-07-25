@@ -7,11 +7,9 @@
   "category": "None",
   "animated": true,
   "rotatable": false,
-  "requireBuilding": true,
   "destructible": true,
   "cloneable": false,
   "movementSpeed": 50,
-  "constructionTime": 1,
   "range": 3,
   "BeeHiveData": {
     "IsWild": true,
@@ -36,5 +34,6 @@
     [
       "A"
     ]
-  ]
+  ],
+  "ConstructionData": null
 }

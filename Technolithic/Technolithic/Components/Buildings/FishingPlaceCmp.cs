@@ -61,7 +61,7 @@ namespace Technolithic
         {
             base.CompleteBuilding();
 
-            AddAvailableInteraction(InteractionType.CatchFish, LaborType.Fish, true);
+            AddAvailableInteraction(InteractionType.CatchFish, LaborType.Fish, ToolUsageStatus.Required);
 
             // TODO: загружать данные из json файла
             SetInteractionDuration(InteractionType.CatchFish, 125);

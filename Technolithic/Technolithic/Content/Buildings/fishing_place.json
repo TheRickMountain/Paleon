@@ -8,11 +8,9 @@
   "animated": false,
   "rotatable": true,
   "cloneable": true,
-  "requireBuilding": false,
   "show_item_on_top": false,
   "destructible": true,
   "movementSpeed": -1,
-  "constructionTime": 1,
   "texture": {
     "name": "fishing_place",
     "width": 16,
@@ -41,5 +39,6 @@
     [
       "H"
     ]
-  ]
+  ],
+  "ConstructionData": null
 }

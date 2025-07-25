@@ -99,9 +99,9 @@ namespace Technolithic
 
                         if (interactionProgress >= interactionDuration)
                         {
-                            _interactable.CompleteInteraction(_interactionType);
-
                             _interactable.ResetProgress(_interactionType);
+
+                            _interactable.CompleteInteraction(_interactionType);
 
                             Owner.Inventory.ClearCargo();
 
@@ -168,6 +168,8 @@ namespace Technolithic
 
         private bool IsTaskValid()
         {
+            if (_interactable.AvailableInteractions.Contains(_interactionType) == false) return false;
+
             return _interactable.IsInteractionMarked(_interactionType) &&
                 _interactable.IsInteractionActivated(_interactionType);
         }

@@ -42,7 +42,7 @@ namespace Technolithic
         {
             base.CompleteBuilding();
 
-            AddAvailableInteraction(InteractionType.ProduceEnergy, LaborType.EnergyProduction, false);
+            AddAvailableInteraction(InteractionType.ProduceEnergy, LaborType.EnergyProduction);
             ActivateInteraction(InteractionType.ProduceEnergy);
             SetInteractionDuration(InteractionType.ProduceEnergy, 0);
             MarkInteraction(InteractionType.ProduceEnergy);

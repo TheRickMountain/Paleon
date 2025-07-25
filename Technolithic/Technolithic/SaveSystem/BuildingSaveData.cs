@@ -10,7 +10,6 @@ namespace Technolithic
         public Point[,] Tiles { get; set; }
         public bool IsBuilt { get; set; }
         public Direction Direction { get; set; }
-        public float BuildingProgress { get; set; }
 
         public float CurrentFuelCondition { get; set; }
         public Dictionary<int, bool> ConsumableFuel { get; set; }

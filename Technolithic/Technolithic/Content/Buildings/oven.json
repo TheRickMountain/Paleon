@@ -8,10 +8,8 @@
   "animated": true,
   "cloneable": true,
   "rotatable": false,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 50,
-  "constructionTime": 25,
   "smokeGenerator": {
     "x": 16,
     "y": 11
@@ -627,10 +625,13 @@
       "A","A"
     ]
   ],
-  "ingredients": [
-    {
-      "item": "clay",
-      "weight": 4
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 1.0,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "clay": 4
     }
-  ]
+  }
 }

@@ -561,7 +561,7 @@ namespace Technolithic
             }
             else
             {
-                AddAvailableInteraction(InteractionType.Craft, Crafter.LaborType, false);
+                AddAvailableInteraction(InteractionType.Craft, Crafter.LaborType);
 
                 MarkInteraction(InteractionType.Craft);
             }

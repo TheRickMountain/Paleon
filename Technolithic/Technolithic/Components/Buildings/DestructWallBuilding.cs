@@ -21,7 +21,7 @@
 
             centerTile.WallId = -1;
 
-            ThrowItems(buildingTemplate.BuildingRecipe);
+            ThrowItems(buildingTemplate.ConstructionData.RealIngredients);
 
             DestructBuilding();
         }

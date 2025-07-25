@@ -8,7 +8,7 @@ namespace Technolithic
         public LaborType LaborType { get; init; }
         public InteractionType InteractionType { get; init; }
         public float InteractionDurationInHours { get; init; }
-        public bool ToolRequired { get; init; }
+        public ToolUsageStatus ToolUsageStatus { get; init; }
         public IReadOnlyDictionary<string, int> Loot { get; init; }
         public int Stages { get; init; }
 

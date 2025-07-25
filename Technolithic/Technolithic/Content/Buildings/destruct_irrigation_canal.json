@@ -8,10 +8,8 @@
   "animated": false,
   "rotatable": false,
   "cloneable": false,
-  "requireBuilding": true,
   "destructible": true,
   "movementSpeed": -1,
-  "constructionTime": 25,
   "texture": {
     "name": "destruct_irrigation_canal",
     "width": 16,
@@ -31,5 +29,12 @@
     [
       "D"
     ]
-  ]
+  ],
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "DestructIrrigationCanal",
+    "DurationInHours": 1.0,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {}
+  }
 }

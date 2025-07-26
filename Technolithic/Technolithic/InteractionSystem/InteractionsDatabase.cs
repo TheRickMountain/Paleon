@@ -13,6 +13,7 @@ namespace Technolithic
         DestructWall,
         DestructSurface,
         DestructIrrigationCanal,
+        Remove,
         CollectWildHoney,
         CollectHoney,
         CatchFish,
@@ -222,6 +223,13 @@ namespace Technolithic
                 InteractionType.Fertilize,
                 Localization.GetLocalizedText("fertilize"),
                 ResourceManager.FertilizeIcon,
+                Color.Orange,
+                InteractionIconDisplayState.Never));
+
+            AddInteractionData(new InteractionData(
+                InteractionType.Remove,
+                Localization.GetLocalizedText("remove"),
+                ResourceManager.CancelIcon,
                 Color.Orange,
                 InteractionIconDisplayState.Never));
         }

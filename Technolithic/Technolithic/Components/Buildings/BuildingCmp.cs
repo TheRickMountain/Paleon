@@ -429,22 +429,22 @@ namespace Technolithic
         {
             IsBuilt = true;
 
-            if(BuildingTemplate.IsDestructible)
+            if (BuildingTemplate.IsDestructible)
             {
-                // TODO: some buildings may require a tool for deconstruction
-                AddAvailableInteraction(InteractionType.Destruct, LaborType.Build, ToolUsageStatus.NotUsed);
-
-                if (BuildingTemplate.ConstructionData != null)
+                if(BuildingTemplate.ConstructionData != null)
                 {
+                    // TODO: some buildings may require a tool for deconstruction
+                    AddAvailableInteraction(InteractionType.Destruct, LaborType.Build, ToolUsageStatus.NotUsed);
+
                     SetInteractionDuration(InteractionType.Destruct,
-                        BuildingTemplate.ConstructionData.DurationInHours * WorldState.MINUTES_PER_HOUR);
+                            BuildingTemplate.ConstructionData.DurationInHours * WorldState.MINUTES_PER_HOUR);
+
+                    ActivateInteraction(InteractionType.Destruct);
                 }
                 else
                 {
-                    SetInteractionDuration(InteractionType.Destruct, WorldState.MINUTES_PER_HOUR);
+                    AddAvailableInteraction(InteractionType.Remove, LaborType.None, ToolUsageStatus.NotUsed);
                 }
-                
-                ActivateInteraction(InteractionType.Destruct);
             }
 
             if (BuildingTemplate.SmokeGeneratorData != null)
@@ -604,11 +604,21 @@ namespace Technolithic
             return tiles;
         }
 
+        protected override void OnInteractionMarked(InteractionType interactionType)
+        {
+            base.OnInteractionMarked(interactionType);
+
+            if(interactionType == InteractionType.Remove)
+            {
+                DestructBuilding();
+            }
+        }
+
         protected override void OnInteractionUnmarked(InteractionType interactionType)
         {
             base.OnInteractionUnmarked(interactionType);
 
-            if(BuildingTemplate.ConstructionData != null)
+            if (BuildingTemplate.ConstructionData != null)
             {
                 if (interactionType == BuildingTemplate.ConstructionData.InteractionType)
                 {

@@ -155,6 +155,8 @@ namespace Technolithic
 
             _interactionHandler.MarkInteraction(interactionType);
 
+            OnInteractionMarked(interactionType);
+
             // INFO: Since interactable is reserved, it should not be available for interaction. 
             if (_isReserved) return;
 
@@ -164,6 +166,8 @@ namespace Technolithic
 
             _interactablesManager.AddInteractable(this, associatedLaborType, interactionType);
         }
+
+        protected virtual void OnInteractionMarked(InteractionType interactionType) { }
 
         public void UnmarkInteraction(InteractionType interactionType)
         {

@@ -112,8 +112,10 @@ namespace Technolithic
             }
 
             LaborType laborType = interactable.GetAssociatedLaborType(interactionType);
-
-            tooltip += $"\n{Localization.GetLocalizedText("labor_type")}: {Labor.GetLaborString(laborType)}";
+            if (laborType != LaborType.None)
+            {
+                tooltip += $"\n{Localization.GetLocalizedText("labor_type")}: {Labor.GetLaborString(laborType)}";
+            }
 
             switch (interactable.GetInteractionToolUsageStatus(interactionType))
             {

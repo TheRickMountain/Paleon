@@ -9,7 +9,9 @@ namespace Technolithic
     {
         public static Dictionary<int, Technology> Technologies { get; private set; } = new Dictionary<int, Technology>();
 
-        private static Dictionary<InteractionType, Technology> interactionTypeUnlockTechnology = new();
+        private static Dictionary<InteractionType, Technology> interactionUnlockTechnology = new();
+
+        private static Dictionary<AnimalTemplate, Technology> animalUnlockTechnology = new();
 
         public static void Initialize(string contentDirectory)
         {
@@ -54,14 +56,37 @@ namespace Technolithic
 
                 foreach (InteractionType interactionType in technology.UnlockInteractionTypes)
                 {
-                    interactionTypeUnlockTechnology.Add(interactionType, technology);
+                    interactionUnlockTechnology.Add(interactionType, technology);
+                }
+
+                if (technology.UnlockedAnimals != null)
+                {
+                    foreach (AnimalTemplate animalTemplate in technology.UnlockedAnimals)
+                    {
+                        animalUnlockTechnology.Add(animalTemplate, technology);
+                    }
                 }
             }
         }
 
         public static Technology GetTechnologyThatUnlocksInteraction(InteractionType interactionType)
         {
-            return interactionTypeUnlockTechnology[interactionType];
+            if (interactionUnlockTechnology.TryGetValue(interactionType, out var technology))
+            {
+                return technology;
+            }
+
+            return null;
+        }
+
+        public static Technology GetTechnologyThatUnlocksAnimal(AnimalTemplate animalTemplate)
+        {
+            if (animalUnlockTechnology.TryGetValue(animalTemplate, out var technology))
+            {
+                return technology;
+            }
+
+            return null;
         }
 
     }

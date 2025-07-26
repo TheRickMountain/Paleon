@@ -147,6 +147,7 @@ namespace Technolithic
                     SetInteractionDuration(InteractionType.Domesticate, 1.0f);
                     Item[] interactionItems = AnimalTemplate.Ration.ToArray();
                     SetInteractionItems(InteractionType.Domesticate, true, interactionItems);
+                    SetInteractionValidator(InteractionType.Domesticate, ValidateDomestication);
 
                     ActivateInteraction(InteractionType.Domesticate);
                 }
@@ -173,6 +174,27 @@ namespace Technolithic
                     MarkInteraction(InteractionType.GatherAnimalProduct);
                 }
             }
+        }
+
+        private InteractionValidationResult ValidateDomestication(Interactable interactable)
+        {
+            AnimalTemplate tamedAnimalTemplate = AnimalTemplate.DomesticationData.TamedFormAnimalTemplate;
+            Technology technology = TechnologyDatabase.GetTechnologyThatUnlocksAnimal(tamedAnimalTemplate);
+            if (technology != null)
+            {
+                if(GameplayScene.Instance.ProgressTree.IsTechnologyUnlocked(technology) == false)
+                {
+                    return InteractionValidationResult.Block(Localization.GetLocalizedText("x_technology_is_required", 
+                        technology.Name));
+                }
+            }
+
+            if (WasAttacked)
+            {
+                return InteractionValidationResult.Block(Localization.GetLocalizedText("the_animal_was_attacked"));
+            }
+
+            return InteractionValidationResult.Allow();
         }
 
         public override void Begin()

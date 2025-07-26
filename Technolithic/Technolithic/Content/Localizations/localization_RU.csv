@@ -186,6 +186,7 @@ destruct_wall,Разрушить стену
 dirt_path,Грунтовая тропинка
 dirty_animal_pen,Грязный загон
 disable_all,Запретить все
+disabled_x,Заблокировано: {0}
 disband,Распустить
 disconnected,Отключен
 dog,Собака
@@ -604,5 +605,6 @@ x_died_of_starvation,{0} умер от голода
 x_got_the_y_effect,{0} получил эффект {1}
 x_is_already_assigned_to_another_hut,{0} уже назначен к другой хижине
 x_is_already_assigned_to_this_hut,{0} уже назначен к этой хижине
+x_technology_is_required,"Требуется технология ""{0}"""
 yarn,Пряжа
 сut_automatically_description,Автоматически срезать растение после полного произрастания

@@ -19,6 +19,7 @@ namespace Technolithic
         public List<BuildingTemplate> UnlockedBuildings { get; set; }
         public List<AnimalTemplate> UnlockedAnimals { get; set; }
         public List<MyAction> UnlockedActions { get; set; }
+        public IReadOnlyList<InteractionType> UnlockInteractionTypes { get; init; } = new List<InteractionType>();
 
         public int[] Parents { get; set; }
 

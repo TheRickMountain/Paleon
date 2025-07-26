@@ -186,6 +186,7 @@ destruct_wall,Destruct wall
 dirt_path,Toprak yol
 dirty_animal_pen,Kirli hayvan agili
 disable_all,Hepsini etkisiz hale getir
+disabled_x,Disabled: {0}
 disband,Dagit
 disconnected,Baglanti kesildi
 dog,Kopek
@@ -604,5 +605,6 @@ x_died_of_starvation,{0} acliktan oldü
 x_got_the_y_effect,{0} got the {1} effect
 x_is_already_assigned_to_another_hut,{0} is already assigned to another hut
 x_is_already_assigned_to_this_hut,{0} is already assigned to this hut
+x_technology_is_required,"""{0}"" technology is required"
 yarn,Iplik
 сut_automatically_description,Yetistikten sonra otomatik kes

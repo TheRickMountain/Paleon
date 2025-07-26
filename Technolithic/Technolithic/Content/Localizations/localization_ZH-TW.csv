@@ -186,6 +186,7 @@ destruct_wall,Destruct wall
 dirt_path,土路
 dirty_animal_pen,骯髒的畜欄
 disable_all,全部停用
+disabled_x,Disabled: {0}
 disband,解散
 disconnected,未連接
 dog,狗
@@ -603,5 +604,6 @@ x_died_of_starvation,{0} 餓死
 x_got_the_y_effect,{0} 得到 {1} 效果
 x_is_already_assigned_to_another_hut,{0} is already assigned to another hut
 x_is_already_assigned_to_this_hut,{0} is already assigned to this hut
+x_technology_is_required,"""{0}"" technology is required"
 yarn,紗線
 сut_automatically_description,自動收割成熟植物。

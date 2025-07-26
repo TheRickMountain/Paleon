@@ -212,7 +212,8 @@
     "HasIcon": true,
     "Age": "Neolithic",
     "RequiredXP": 500,
-    "Parents": [8, 5]
+    "Parents": [8, 5],
+    "UnlockInteractionTypes": ["Irrigate"]
   },
   {
     "Id": 46,
@@ -409,7 +410,8 @@
     "Age": "Neolithic",
     "RequiredXP": 500,
     "UnlockedItems": ["manure"],
-    "Parents": [8, 9]
+    "Parents": [8, 9],
+    "UnlockInteractionTypes": ["Fertilize"]
   },
   {
     "Id": 67,

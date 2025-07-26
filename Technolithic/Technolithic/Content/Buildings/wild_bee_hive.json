@@ -35,5 +35,13 @@
       "A"
     ]
   ],
-  "ConstructionData": null
+  "ConstructionData": {
+    "LaborType": "Build",
+    "InteractionType": "Construct",
+    "DurationInHours": 0.4,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {
+      "honeycomb": 1
+    }
+  }
 }

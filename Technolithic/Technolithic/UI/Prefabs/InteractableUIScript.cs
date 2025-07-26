@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Technolithic
 {
@@ -37,12 +38,23 @@ namespace Technolithic
                 interactionButton = interactionButtonDict[interactionType];
                 interactionButton.SetMetadata("interactable", selectedInteractable);
 
-                if (selectedInteractable.IsInteractionMarked(interactionType))
+                if (selectedInteractable.ValidateInteraction(interactionType).IsAllowed)
                 {
-                    interactionButton.ExtraIcon = ResourceManager.DisableIcon;
+                    interactionButton.Disabled = false;
+
+                    if (selectedInteractable.IsInteractionMarked(interactionType))
+                    {
+                        interactionButton.ExtraIcon = ResourceManager.DisableIcon;
+                    }
+                    else
+                    {
+                        interactionButton.ExtraIcon = null;
+                    }
                 }
                 else
                 {
+                    interactionButton.Disabled = true;
+
                     interactionButton.ExtraIcon = null;
                 }
 
@@ -90,34 +102,42 @@ namespace Technolithic
 
             if (interactable.AvailableInteractions.Contains(interactionType) == false) return "";
 
-            string tooltip = "";
+            StringBuilder sb = new StringBuilder();
+
+            var validationResult = interactable.ValidateInteraction(interactionType);
+            
+            if (validationResult.IsAllowed == false)
+            {
+                sb.AppendLine($"{Localization.GetLocalizedText("disabled_x", validationResult.BlockingReason)}"
+                    .Paint(Color.Red));
+            }
 
             if (interactable.IsInteractionMarked(interactionType))
             {
-                tooltip += Localization.GetLocalizedText("cancel_x", interactionData.DisplayName.Paint(Color.Orange))
-                    .Paint(Color.Red);
+                sb.AppendLine(Localization.GetLocalizedText("cancel_x", interactionData.DisplayName.Paint(Color.Orange))
+                    .Paint(Color.Red));
             }
             else
             {
-                tooltip += interactionData.DisplayName.Paint(Color.Orange);
+                sb.AppendLine(interactionData.DisplayName.Paint(Color.Orange));
             }
 
             LaborType laborType = interactable.GetAssociatedLaborType(interactionType);
             if (laborType != LaborType.None)
             {
-                tooltip += $"\n{Localization.GetLocalizedText("labor_type")}: {Labor.GetLaborString(laborType)}";
+                sb.AppendLine($"{Localization.GetLocalizedText("labor_type")}: {Labor.GetLaborString(laborType)}");
             }
 
             switch (interactable.GetInteractionToolUsageStatus(interactionType))
             {
                 case ToolUsageStatus.Required:
                     {
-                        tooltip += $"\n{Localization.GetLocalizedText("tool_required")}:".Paint(Color.Yellow);
+                        sb.AppendLine($"{Localization.GetLocalizedText("tool_required")}:".Paint(Color.Yellow));
                     }
                     break;
                 case ToolUsageStatus.Optional:
                     {
-                        tooltip += $"\n{Localization.GetLocalizedText("tool_optional")}:".Paint(Color.Yellow);
+                        sb.AppendLine($"{Localization.GetLocalizedText("tool_optional")}:".Paint(Color.Yellow));
                     }
                     break;
             }
@@ -133,7 +153,7 @@ namespace Technolithic
                         {
                             Item item = itemsList[i];
 
-                            tooltip += $"\n- {item.Name}";
+                            sb.AppendLine($"- {item.Name}");
                         }
                     }
                     break;
@@ -142,15 +162,15 @@ namespace Technolithic
             var interactionItems = interactable.GetInteractionItems(interactionType);
             if (interactionItems != null)
             {
-                tooltip += $"\n{Localization.GetLocalizedText("item_required")}:".Paint(Color.Yellow);
+                sb.AppendLine($"{Localization.GetLocalizedText("item_required")}:".Paint(Color.Yellow));
 
                 foreach (Item item in interactionItems)
                 {
-                    tooltip += $"\n- {item.Name}";
+                    sb.AppendLine($"- {item.Name}");
                 }
             }
 
-            return tooltip;
+            return sb.ToString();
         }
     }
 }

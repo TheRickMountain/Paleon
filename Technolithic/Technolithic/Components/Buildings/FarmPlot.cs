@@ -54,15 +54,15 @@ namespace Technolithic
 
             if(centerTile.GroundType == GroundType.FarmPlot)
             {
-                // TODO: эти взаимодействия должны быть доступны только при открытии соответствующих технологий
                 AddAvailableInteraction(InteractionType.Irrigate, LaborType.Agriculture, ToolUsageStatus.NotUsed);
                 SetInteractionItems(InteractionType.Irrigate, true, ItemDatabase.GetItemByName("pot_of_water"));
                 SetInteractionDuration(InteractionType.Irrigate, 0.2f * WorldState.MINUTES_PER_HOUR);
+                SetInteractionValidator(InteractionType.Irrigate, ValidateIrrigation);
 
-                // TODO: эти взаимодействия должны быть доступны только при открытии соответствующих технологий
                 AddAvailableInteraction(InteractionType.Fertilize, LaborType.Agriculture, ToolUsageStatus.NotUsed);
                 SetInteractionItems(InteractionType.Fertilize, true, ItemDatabase.GetItemByName("manure"));
                 SetInteractionDuration(InteractionType.Fertilize, 0.4f * WorldState.MINUTES_PER_HOUR);
+                SetInteractionValidator(InteractionType.Fertilize, ValidateFertilizing);
             }
 
             additionalHarvestScore = 0;
@@ -89,6 +89,30 @@ namespace Technolithic
             UpdateFarmPlotView();
         }
 
+        private InteractionValidationResult ValidateIrrigation(Interactable interactable)
+        {
+            Technology technology = TechnologyDatabase.GetTechnologyThatUnlocksInteraction(InteractionType.Irrigate);
+            if (GameplayScene.Instance.ProgressTree.IsTechnologyUnlocked(technology) == false)
+            {
+                return InteractionValidationResult.Block(Localization.GetLocalizedText("x_technology_is_required",
+                    technology.Name));
+            }
+
+            return InteractionValidationResult.Allow();
+        }
+
+        private InteractionValidationResult ValidateFertilizing(Interactable interactable)
+        {
+            Technology technology = TechnologyDatabase.GetTechnologyThatUnlocksInteraction(InteractionType.Fertilize);
+            if (GameplayScene.Instance.ProgressTree.IsTechnologyUnlocked(technology) == false)
+            {
+                return InteractionValidationResult.Block(Localization.GetLocalizedText("x_technology_is_required",
+                    technology.Name));
+            }
+
+            return InteractionValidationResult.Allow();
+        }
+
         public override void UpdateCompleted()
         {
             base.UpdateCompleted();
@@ -108,6 +132,36 @@ namespace Technolithic
                     {
                         DeactivateInteraction(InteractionType.AutoHarvest);
                     }
+                }
+            }
+
+            if (centerTile.MoistureLevel <= 0)
+            {
+                if (IsInteractionActivated(InteractionType.Irrigate) == false)
+                {
+                    ActivateInteraction(InteractionType.Irrigate);
+                }
+            }
+            else
+            {
+                if (IsInteractionActivated(InteractionType.Irrigate))
+                {
+                    DeactivateInteraction(InteractionType.Irrigate);
+                }
+            }
+
+            if (centerTile.FertilizerLevel <= 0)
+            {
+                if (IsInteractionActivated(InteractionType.Fertilize) == false)
+                {
+                    ActivateInteraction(InteractionType.Fertilize);
+                }
+            }
+            else
+            {
+                if (IsInteractionActivated(InteractionType.Fertilize))
+                {
+                    DeactivateInteraction(InteractionType.Fertilize);
                 }
             }
 
@@ -159,36 +213,6 @@ namespace Technolithic
                 }
 
                 UpdateGrowing();
-
-                if(centerTile.MoistureLevel <= 0)
-                {
-                    if (IsInteractionActivated(InteractionType.Irrigate) == false)
-                    {
-                        ActivateInteraction(InteractionType.Irrigate);
-                    }
-                }
-                else
-                {
-                    if(IsInteractionActivated(InteractionType.Irrigate))
-                    {
-                        DeactivateInteraction(InteractionType.Irrigate);
-                    }
-                }
-
-                if (centerTile.FertilizerLevel <= 0)
-                {
-                    if (IsInteractionActivated(InteractionType.Fertilize) == false)
-                    {
-                        ActivateInteraction(InteractionType.Fertilize);
-                    }
-                }
-                else
-                {
-                    if (IsInteractionActivated(InteractionType.Fertilize))
-                    {
-                        DeactivateInteraction(InteractionType.Fertilize);
-                    }
-                }
             }
         }
 

@@ -186,6 +186,7 @@ destruct_wall,Destruct wall
 dirt_path,Грунтова стежина
 dirty_animal_pen,Брудний загін
 disable_all,Заборонити все
+disabled_x,Disabled: {0}
 disband,Розпустити
 disconnected,Від'єднаний
 dog,Собака
@@ -604,5 +605,6 @@ x_died_of_starvation,{0} помер з голоду
 x_got_the_y_effect,{0} отримав ефект {1}
 x_is_already_assigned_to_another_hut,{0} вже призначений до іншої хатини
 x_is_already_assigned_to_this_hut,{0} вже призначений до цієї хатини
+x_technology_is_required,"""{0}"" technology is required"
 yarn,Пряжа
 сut_automatically_description,Автоматично зрізати рослинку після повного дозрівання

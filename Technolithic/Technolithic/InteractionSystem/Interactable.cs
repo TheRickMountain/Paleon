@@ -18,6 +18,7 @@ namespace Technolithic
         private bool _isReserved = false;
         private bool _isDestroyed = false;
 
+        private Dictionary<InteractionType, InteractionConfig> _interactionConfigs = new();
         private Dictionary<InteractionType, LaborType> _interactionLaborMap = new();
         private Dictionary<InteractionType, List<Item>> _interactionItemsMap = new();
         private HashSet<InteractionType> _interactionsThatRequireItems = new();
@@ -54,9 +55,36 @@ namespace Technolithic
             Debug.Assert(_interactionLaborMap.ContainsKey(interactionType) == false,
                 "The interaction type is already associated with another labor type");
 
+            InteractionConfig interactionConfig = new InteractionConfig();
+            _interactionConfigs.Add(interactionType, interactionConfig);
+
             _interactionLaborMap.Add(interactionType, associatedLaborType);
 
             _interactionHandler.AddAvailableInteraction(interactionType, toolUsageStatus);
+        }
+
+        protected void SetInteractionValidator(InteractionType interactionType, InteractionValidator validator)
+        {
+            if (_isDestroyed) return;
+
+            if (_interactionConfigs.ContainsKey(interactionType) == false) return;
+
+            _interactionConfigs[interactionType].Validator = validator;
+        }
+
+        public InteractionValidationResult ValidateInteraction(InteractionType interactionType)
+        {
+            if (_isDestroyed)
+            {
+                return InteractionValidationResult.Block("[Error] Object is destroyed");
+            }
+
+            if (_interactionConfigs.ContainsKey(interactionType) == false)
+            {
+                return InteractionValidationResult.Block("[Error] Interaction not available");
+            }
+
+            return _interactionConfigs[interactionType].ValidateInteraction(this);
         }
 
         protected void RemoveInteraction(InteractionType interactionType)

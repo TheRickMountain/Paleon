@@ -186,6 +186,7 @@ destruct_wall,Destruct wall
 dirt_path,土砂の道
 dirty_animal_pen,汚れた動物の囲い
 disable_all,全て無効
+disabled_x,Disabled: {0}
 disband,解散
 disconnected,切断中
 dog,犬
@@ -606,5 +607,6 @@ x_died_of_starvation,{0}は飢えで死亡しました
 x_got_the_y_effect,{0}は{1}の影響を受けています
 x_is_already_assigned_to_another_hut,{0}はすでに別の小屋に割り当てられています
 x_is_already_assigned_to_this_hut,{0}はすでにこの小屋に割り当てられています
+x_technology_is_required,"""{0}"" technology is required"
 yarn,糸
 сut_automatically_description,完全に成長した植物を自動的に収穫

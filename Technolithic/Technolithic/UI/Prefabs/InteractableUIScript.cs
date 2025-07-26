@@ -7,7 +7,7 @@ namespace Technolithic
     {
         private Interactable selectedInteractable;
 
-        private Dictionary<InteractionType, BigButton> interactionButtonDict = new();
+        private Dictionary<InteractionType, TBigButtonUI> interactionButtonDict = new();
 
         public InteractableUIScript() : base(true)
         {
@@ -21,26 +21,17 @@ namespace Technolithic
             // TODO: refactoring required
             foreach (InteractionType interactionType in selectedInteractable.AvailableInteractions)
             {
-                BigButton interactionButton;
+                TBigButtonUI interactionButton;
 
                 InteractionData interactionData = Engine.InteractionsDatabase.GetInteractionData(interactionType);
 
                 if (interactionButtonDict.ContainsKey(interactionType) == false)
                 {
-                    interactionButton = new BigButton(ParentNode.Scene, interactionData.Icon, false);
+                    interactionButton = new TBigButtonUI(ParentNode.Scene);
+                    interactionButton.Icon = interactionData.Icon;
                     interactionButtonDict[interactionType] = interactionButton;
-                    interactionButton.ButtonScript.Pressed += Interactable_InteractionButton_Pressed;
+                    interactionButton.ButtonUp += Interactable_InteractionButton_Pressed;
                     interactionButton.SetMetadata("interaction_data", interactionData);
-
-                    MImageUI disableIcon = new MImageUI(interactionButton.Scene);
-                    disableIcon.X = 8;
-                    disableIcon.Y = 8;
-                    disableIcon.Width = 32;
-                    disableIcon.Height = 32;
-                    disableIcon.Name = "disable_icon";
-                    disableIcon.Image.Texture = ResourceManager.DisableIcon;
-
-                    interactionButton.AddChildNode(disableIcon);
                 }
 
                 interactionButton = interactionButtonDict[interactionType];
@@ -48,11 +39,11 @@ namespace Technolithic
 
                 if (selectedInteractable.IsInteractionMarked(interactionType))
                 {
-                    (interactionButton.GetChildByName("disable_icon") as MImageUI).Image.Visible = true;
+                    interactionButton.ExtraIcon = ResourceManager.DisableIcon;
                 }
                 else
                 {
-                    (interactionButton.GetChildByName("disable_icon") as MImageUI).Image.Visible = false;
+                    interactionButton.ExtraIcon = null;
                 }
 
                 interactionButton.Tooltips = GenerateInteractionTooltip(selectedInteractable, interactionData);
@@ -62,10 +53,10 @@ namespace Technolithic
             }
         }
 
-        private void Interactable_InteractionButton_Pressed(ButtonScript buttonScript)
+        private void Interactable_InteractionButton_Pressed(TButtonUI button)
         {
-            InteractionData interactionData = buttonScript.ParentNode.GetMetadata<InteractionData>("interaction_data");
-            Interactable interactable = buttonScript.ParentNode.GetMetadata<Interactable>("interactable");
+            InteractionData interactionData = button.GetMetadata<InteractionData>("interaction_data");
+            Interactable interactable = button.GetMetadata<Interactable>("interactable");
             InteractionType interactionType = interactionData.InteractionType;
 
             if (selectedInteractable.IsInteractionMarked(interactionType))
@@ -79,14 +70,14 @@ namespace Technolithic
 
             if (selectedInteractable.IsInteractionMarked(interactionData.InteractionType))
             {
-                (buttonScript.ParentNode.GetChildByName("disable_icon") as MImageUI).Image.Visible = true;
+                button.ExtraIcon = ResourceManager.DisableIcon;
             }
             else
             {
-                (buttonScript.ParentNode.GetChildByName("disable_icon") as MImageUI).Image.Visible = false;
+                button.ExtraIcon = null;
             }
 
-            buttonScript.ParentNode.Tooltips = GenerateInteractionTooltip(interactable, interactionData);
+            button.Tooltips = GenerateInteractionTooltip(interactable, interactionData);
         }
 
         private string GenerateInteractionTooltip(Interactable interactable, InteractionData interactionData)

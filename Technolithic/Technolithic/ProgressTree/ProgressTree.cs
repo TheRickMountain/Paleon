@@ -405,11 +405,6 @@ namespace Technolithic
             return unlockedBuildings[buildingTemplate];
         }
 
-        public bool IsAnimalUnlocked(AnimalTemplate animalTemplate)
-        {
-            return unlockedAnimals.Contains(animalTemplate);
-        }
-
         public bool AreAllTechnologiesUnlocked()
         {
             foreach (var kvp in TechnologiesStates)

@@ -11,33 +11,6 @@ namespace Technolithic
     {
         public AnimalPenBuildingCmp TargetAnimalPen { get; set; }
 
-        public bool CanHunt
-        {
-            get
-            {
-                if (IsHidden)
-                    return false;
-
-                return true;
-            }
-        }
-
-        public bool CanDomesticate
-        {
-            get
-            {
-                if (WasAttacked) // нельзя приручить атакованное животное
-                    return false;
-
-                DomesticationData domesticationData = AnimalTemplate.DomesticationData;
-
-                if (domesticationData == null)
-                    return false;
-
-                return GameplayScene.Instance.ProgressTree.IsAnimalUnlocked(domesticationData.TamedFormAnimalTemplate);
-            }
-        }
-
         public AnimalTemplate AnimalTemplate { get; private set; }
 
         public float ProductReadyPercent { get; set; } = 0;
@@ -318,7 +291,7 @@ namespace Technolithic
 
             if (IsDead == false)
             {
-                if(TargetAnimalPen != null && TargetAnimalPen.IsFullOfManure())
+                if (TargetAnimalPen != null && TargetAnimalPen.IsFullOfManure())
                 {
                     StatusEffectsManager.AddStatusEffect(StatusEffectId.DirtyAnimalPen);
                 }
@@ -327,7 +300,7 @@ namespace Technolithic
                     StatusEffectsManager.RemoveStatusEffect(StatusEffectId.DirtyAnimalPen);
                 }
 
-                if(CreatureStats.Hunger.IsDissatisfied())
+                if (CreatureStats.Hunger.IsDissatisfied())
                 {
                     StatusEffectsManager.AddStatusEffect(StatusEffectId.Hunger);
                 }
@@ -336,11 +309,16 @@ namespace Technolithic
                     StatusEffectsManager.RemoveStatusEffect(StatusEffectId.Hunger);
                 }
 
-                if(AnimalTemplate.AnimalProduct != null)
+                if (WasAttacked && IsInteractionMarked(InteractionType.Domesticate))
+                {
+                    UnmarkInteraction(InteractionType.Domesticate);
+                }
+
+                if (AnimalTemplate.AnimalProduct != null)
                 {
                     if (ProductReadyPercent >= 100)
                     {
-                        if(IsInteractionActivated(InteractionType.GatherAnimalProduct) == false)
+                        if (IsInteractionActivated(InteractionType.GatherAnimalProduct) == false)
                         {
                             ActivateInteraction(InteractionType.GatherAnimalProduct);
                         }
@@ -356,7 +334,7 @@ namespace Technolithic
 
                 if (AnimalTemplate.AnimalProduct != null)
                 {
-                    if(ProductReadyPercent < 100)
+                    if (ProductReadyPercent < 100)
                     {
                         float productivityModificator = CreatureStats.Productivity.CurrentValue / 100f;
                         ProductReadyPercent += (percentPerMinute * productivityModificator) * Engine.GameDeltaTime;
@@ -409,7 +387,7 @@ namespace Technolithic
                         CurrentLabor = LookForLabor(GameplayScene.WorldManager.LaborManager.LaborsByType);
                         if (CurrentLabor != null)
                         {
-                            if(CurrentLabor.LaborType != LaborType.Eat &&
+                            if (CurrentLabor.LaborType != LaborType.Eat &&
                                 CurrentLabor.LaborType != LaborType.Waner &&
                                 CurrentLabor.LaborType != LaborType.Sleep &&
                                 CurrentLabor.LaborType != LaborType.Fertilization)
@@ -444,7 +422,7 @@ namespace Technolithic
                         switch (CurrentTask.Update())
                         {
                             case TaskState.Success:
-                                if(CurrentTask != null)
+                                if (CurrentTask != null)
                                 {
                                     CurrentTask.Complete();
                                 }

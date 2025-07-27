@@ -132,6 +132,7 @@ namespace Technolithic
         public static MyTexture ProduceEnergyIcon { get; private set; }
         public static MyTexture CraftIcon { get; private set; }
         public static MyTexture PlantIcon { get; private set; }
+        public static MyTexture PlowIcon { get; private set; }
 
         public static SoundEffectInstance BuildingSoundEffect { get; private set; }
         public static SoundEffectInstance ClickSoundEffect { get; private set; }
@@ -262,6 +263,7 @@ namespace Technolithic
             ProduceEnergyIcon = uiSpriteSheet.GetSubtexture(32, 192, 16, 16);
             CraftIcon = uiSpriteSheet.GetSubtexture(176, 144, 16, 16);
             PlantIcon = uiSpriteSheet.GetSubtexture(48, 160, 16, 16);
+            PlowIcon = uiSpriteSheet.GetSubtexture(32, 16, 16, 16);
 
             MyTexture emotest = GetTexture("emotest");
             HungerThought = emotest.GetSubtexture(16, 0, 16, 16);

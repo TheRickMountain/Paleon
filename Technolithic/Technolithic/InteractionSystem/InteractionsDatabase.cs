@@ -208,7 +208,7 @@ namespace Technolithic
             AddInteractionData(new InteractionData(
                 InteractionType.Plow,
                 Localization.GetLocalizedText("plow"),
-                RenderManager.Pixel, // Draw icon
+                ResourceManager.PlowIcon,
                 Color.Orange,
                 InteractionIconDisplayState.Never));
 

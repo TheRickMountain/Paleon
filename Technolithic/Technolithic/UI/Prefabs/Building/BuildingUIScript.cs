@@ -105,8 +105,6 @@ namespace Technolithic
             selectedBuilding.OnBuildingCompletedCallback += CloseUI;
             selectedBuilding.OnBuildingDestructedCallback += CloseUI;
 
-            ((RichTextUI)panel.GetChildByName("Label")).Text = building.BuildingTemplate.Name;
-
             UpdateStatsListView(building);
 
             (ParentNode.GetChildByName("InventoryListView") as InventoryListViewUI).SetInventory(selectedBuilding.Inventory);
@@ -124,9 +122,9 @@ namespace Technolithic
 
             SetTab(true, ParentNode.GetChildByName("StatsTab").GetComponent<ButtonScript>());
 
-            UpdateButtons();
-
             SetInteractable(building);
+
+            UpdateButtons();
         }
 
         public void CloseUI(BuildingCmp buildingCmp)
@@ -224,7 +222,6 @@ namespace Technolithic
             ParentNode.RemoveChild(returnHomeButton);
 
             ListViewUIScript buttonsListView = ParentNode.GetChildByName("ButtonsListView").GetComponent<ListViewUIScript>();
-            buttonsListView.Clear();
 
             if (selectedBuilding.IsBuilt)
             {

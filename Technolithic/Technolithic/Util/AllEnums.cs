@@ -13,4 +13,13 @@
         OnMarked,
         OnUnmarked
     }
+
+    public enum CauseOfDeath
+    {
+        Slaughtered,
+        Slain,
+        OldAge,
+        Other,
+        None
+    }
 }

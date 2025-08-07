@@ -553,9 +553,9 @@ namespace Technolithic
             }
         }
 
-        public override void Die(string reasonMessage, bool throwLoot = true)
+        public override void Die(CauseOfDeath causeOfDeath, string reasonMessage)
         {
-            base.Die(reasonMessage);
+            base.Die(causeOfDeath, reasonMessage);
 
             if(OccupiedTile != null)
             {
@@ -567,7 +567,7 @@ namespace Technolithic
                 OccupiedTile = null;
             }
 
-            if (throwLoot)
+            if (causeOfDeath != CauseOfDeath.None)
             {
                 Item corpse = ItemDatabase.GetItemByName("settler_corpse");
                 Movement.CurrentTile.Inventory.AddCargo(new ItemContainer(corpse, 1, corpse.Durability));
@@ -657,6 +657,11 @@ namespace Technolithic
             }
 
             return settlerSaveData;
+        }
+
+        public override string GetUILabelText()
+        {
+            return Name;
         }
     }
 }

@@ -324,13 +324,13 @@ namespace Technolithic
 
                     if (status.DeadlyIfLower && status.CurrentValue <= 0)
                     {
-                        Die(Localization.GetLocalizedText(status.DeadMessage, Name));
+                        Die(CauseOfDeath.Other, Localization.GetLocalizedText(status.DeadMessage, Name));
                         break;
                     }
 
                     if (status.DeadlyIfMore && status.CurrentValue >= status.MaxValue)
                     {
-                        Die(Localization.GetLocalizedText(status.DeadMessage, Name));
+                        Die(CauseOfDeath.Other, Localization.GetLocalizedText(status.DeadMessage, Name));
                         break;
                     }
                 }
@@ -479,7 +479,7 @@ namespace Technolithic
 
                 if (health.CurrentValue <= health.MinValue)
                 {
-                    Die(Localization.GetLocalizedText("was_killed_by", Name, damager.Name));
+                    Die(CauseOfDeath.Slain, Localization.GetLocalizedText("was_killed_by", Name, damager.Name));
                 }
 
                 return damage;
@@ -653,7 +653,7 @@ namespace Technolithic
             }
         }
 
-        public virtual void Die(string reasonMessage, bool throwLoot = true)
+        public virtual void Die(CauseOfDeath causeOfDeath, string reasonMessage)
         {
             Destroy();
 

@@ -27,23 +27,15 @@
                    "raw_meat",
                    "raw_fish"
                ],
-    "drop":  [
-                 {
-                     "item":  "raw_meat",
-                     "count":  1
-                 },
-                 {
-                     "item":  "raw_skin",
-                     "count":  1
-                 },
-                 {
-                     "item":  "bone",
-                     "count":  1
-                 }
-             ],
-    "allowedLabors":  [
-
-                      ],
+    "ButcheringData": {
+        "Loot": {
+            "raw_meat": 1,
+            "raw_skin": 1,
+            "bone": 1
+        },
+        "DurationInHours": 0.5
+    },
+    "allowedLabors": [],
     "attackChance":  "100",
     "PregnancyData":  {
                           "DurationInDays":  6,

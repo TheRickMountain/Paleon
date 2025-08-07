@@ -31,27 +31,16 @@
     "ration":  [
                    "hay"
                ],
-    "drop":  [
-                 {
-                     "item":  "raw_meat",
-                     "count":  2
-                 },
-                 {
-                     "item":  "animal_fat",
-                     "count":  2
-                 },
-                 {
-                     "item":  "raw_skin",
-                     "count":  2
-                 },
-                 {
-                     "item":  "bone",
-                     "count":  1
-                 }
-             ],
-    "allowedLabors":  [
-
-                      ],
+    "ButcheringData": {
+        "Loot": {
+            "raw_meat": 2,
+            "raw_skin": 2,
+            "bone": 1,
+            "animal_fat": 2
+        },
+        "DurationInHours": 0.5
+    },
+    "allowedLabors": [],
     "attackChance":  "100",
     "Price":  68,
     "AgeState":  "Adult"

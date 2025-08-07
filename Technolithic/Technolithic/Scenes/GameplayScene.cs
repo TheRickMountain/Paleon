@@ -58,6 +58,7 @@ namespace Technolithic
         public World World { get; private set; } 
 
         private Layer entityLayer;
+        public Layer AnimalCorpseLayer { get; private set; }
         public Layer CreatureLayer { get; private set; }
 
         public PenumbraComponent Penumbra { get; private set; }
@@ -106,6 +107,9 @@ namespace Technolithic
 
             entityLayer = CreateLayer("Entity");
             entityLayer.Entities.SortByYAxisWhenAdded = true;
+            
+            AnimalCorpseLayer = CreateLayer("AnimalCorpse");
+
             CreatureLayer = CreateLayer("Creature");
             CreatureLayer.Entities.SortByYAxisAlways = true;
 
@@ -275,6 +279,9 @@ namespace Technolithic
 
             entityLayer = CreateLayer("Entity");
             entityLayer.Entities.SortByYAxisWhenAdded = true;
+
+            AnimalCorpseLayer = CreateLayer("AnimalCorpse");
+
             CreatureLayer = CreateLayer("Creature");
             CreatureLayer.Entities.SortByYAxisAlways = true;
 
@@ -341,6 +348,8 @@ namespace Technolithic
                 }
 
                 Dictionary<HutBuildingCmp, List<Guid>> hutAssignedCreaturesPairs = new Dictionary<HutBuildingCmp, List<Guid>>();
+
+                List<(Interactable, InteractableSaveData)> interactables = new();
 
                 foreach (var buildingSaveData in saveManager.Data.BuildingSaveDatas)
                 {
@@ -562,37 +571,16 @@ namespace Technolithic
                         }
                     }
 
-                    if (buildingSaveData.MarkedInteractions != null)
-                    {
-                        foreach(InteractionType interactionType in buildingCmp.AvailableInteractions)
-                        {
-                            if(buildingSaveData.MarkedInteractions.Contains(interactionType))
-                            {
-                                buildingCmp.MarkInteraction(interactionType);
-                            }
-                            else
-                            {
-                                buildingCmp.UnmarkInteraction(interactionType);
-                            }
-                        }
-                    }
+                    interactables.Add((buildingCmp, buildingSaveData));
+                }
 
-                    if (buildingSaveData.InteractionPercentProgressDict != null)
-                    {
-                        foreach(InteractionType interactionType in buildingCmp.AvailableInteractions)
-                        {
-                            float percentProgress = 0.0f;
+                foreach (var saveData in saveManager.Data.AnimalCorpseSaveDatas)
+                {
+                    AnimalTemplate animalTemplate = AnimalTemplateDatabase.GetAnimalTemplateByName(saveData.AnimalKey);
+                    var animalCorpse = SpawnAnimalCorpse(saveData.TileX, saveData.TileY, animalTemplate);
+                    animalCorpse.SpoilageProgress = saveData.SpoilageProgress;
 
-                            if(buildingSaveData.InteractionPercentProgressDict.ContainsKey(interactionType))
-                            {
-                                percentProgress = buildingSaveData.InteractionPercentProgressDict[interactionType];
-                            }
-
-                            buildingCmp.SetInteractionProgressPercent(interactionType, percentProgress);
-                        }
-                    }
-
-                    buildingCmp.Priority = buildingSaveData.Priority;
+                    interactables.Add((animalCorpse, saveData));
                 }
 
                 Dictionary<Guid, CreatureCmp> creaturesById = new Dictionary<Guid, CreatureCmp>();
@@ -821,38 +809,46 @@ namespace Technolithic
 
                     if(creature != null)
                     {
-                        if (creatureSaveData.MarkedInteractions != null)
-                        {
-                            foreach (InteractionType interactionType in creature.AvailableInteractions)
-                            {
-                                if (creatureSaveData.MarkedInteractions.Contains(interactionType))
-                                {
-                                    creature.MarkInteraction(interactionType);
-                                }
-                                else
-                                {
-                                    creature.UnmarkInteraction(interactionType);
-                                }
-                            }
-                        }
-
-                        if (creatureSaveData.InteractionPercentProgressDict != null)
-                        {
-                            foreach (InteractionType interactionType in creature.AvailableInteractions)
-                            {
-                                float percentProgress = 0.0f;
-
-                                if (creatureSaveData.InteractionPercentProgressDict.ContainsKey(interactionType))
-                                {
-                                    percentProgress = creatureSaveData.InteractionPercentProgressDict[interactionType];
-                                }
-
-                                creature.SetInteractionProgressPercent(interactionType, percentProgress);
-                            }
-                        }
-
-                        creature.Priority = creatureSaveData.Priority;
+                        interactables.Add((creature, creatureSaveData));
                     }
+                }
+
+                foreach (var interactablaAndSaveData in interactables)
+                {
+                    Interactable interactable = interactablaAndSaveData.Item1;
+                    InteractableSaveData interactableSaveData = interactablaAndSaveData.Item2;
+
+                    if (interactableSaveData.MarkedInteractions != null)
+                    {
+                        foreach (InteractionType interactionType in interactable.AvailableInteractions)
+                        {
+                            if (interactableSaveData.MarkedInteractions.Contains(interactionType))
+                            {
+                                interactable.MarkInteraction(interactionType);
+                            }
+                            else
+                            {
+                                interactable.UnmarkInteraction(interactionType);
+                            }
+                        }
+                    }
+
+                    if (interactableSaveData.InteractionPercentProgressDict != null)
+                    {
+                        foreach (InteractionType interactionType in interactable.AvailableInteractions)
+                        {
+                            float percentProgress = 0.0f;
+
+                            if (interactableSaveData.InteractionPercentProgressDict.ContainsKey(interactionType))
+                            {
+                                percentProgress = interactableSaveData.InteractionPercentProgressDict[interactionType];
+                            }
+
+                            interactable.SetInteractionProgressPercent(interactionType, percentProgress);
+                        }
+                    }
+
+                    interactable.Priority = interactableSaveData.Priority;
                 }
 
                 int tilemapHalf = (WorldSize * Engine.TILE_SIZE) / 2;
@@ -1241,6 +1237,8 @@ namespace Technolithic
 
             entityLayer.Render();
 
+            AnimalCorpseLayer.Render();
+
             // Предметы
             World.RenderItemTileMap();
 
@@ -1307,6 +1305,15 @@ namespace Technolithic
             {
                 Interactable interactable = entity.Get<Interactable>();
                 if(interactable != null)
+                {
+                    RenderInteractableMarks(interactable);
+                }
+            }
+
+            foreach (Entity entity in AnimalCorpseLayer.Entities)
+            {
+                Interactable interactable = entity.Get<Interactable>();
+                if (interactable != null)
                 {
                     RenderInteractableMarks(interactable);
                 }
@@ -1436,6 +1443,21 @@ namespace Technolithic
             return settler;
         }
 
+        public AnimalCorpseCmp SpawnAnimalCorpse(int tileX, int tileY, AnimalTemplate animalTemplate)
+        {
+            Tile spawnTile = World.GetTileAt(tileX, tileY);
+            Entity entity = WorldManager.SpawnAnimalCorpse(animalTemplate, spawnTile);
+
+            AnimalCorpseLayer.Add(entity);
+
+            return entity.Get<AnimalCorpseCmp>();
+        }
+
+        public void RemoveAnimalCorpse(AnimalCorpse animalCorpse)
+        {
+            AnimalCorpseLayer.Remove(animalCorpse);
+        }
+
         public AnimalCmp SpawnAnimal(int tileX, int tileY, AnimalTemplate animalTemplate, int daysUntilAging)
         {
             Tile spawnTile = World.GetTileAt(tileX, tileY);
@@ -1541,6 +1563,16 @@ namespace Technolithic
                 if (animalCmp != null)
                 {
                     saveManager.Data.CreatureSaveDatas.Add(animalCmp.GetSaveData());
+                }
+            }
+
+            saveManager.Data.AnimalCorpseSaveDatas = new();
+            foreach (var entity in AnimalCorpseLayer.Entities)
+            {
+                AnimalCorpseCmp animalCorpseCmp = entity.Get<AnimalCorpseCmp>();
+                if (animalCorpseCmp != null)
+                {
+                    saveManager.Data.AnimalCorpseSaveDatas.Add(animalCorpseCmp.GetSaveData());
                 }
             }
 

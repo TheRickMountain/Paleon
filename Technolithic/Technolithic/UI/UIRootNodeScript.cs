@@ -42,6 +42,7 @@ namespace Technolithic
         private LevelUI levelUI;
         private UnitCommandUI unitCommandUI;
         private RenameCreatureUI renameCreatureUI;
+        private InteractableUI interactableUI;
 
         public NotificationsUI NotificationsUI { get; private set; }
 
@@ -133,6 +134,10 @@ namespace Technolithic
             renameCreatureUI = new RenameCreatureUI(ParentNode.Scene);
             renameCreatureUI.Active = false;
             ParentNode.AddChildNode(renameCreatureUI);
+
+            interactableUI = new InteractableUI(ParentNode.Scene);
+            interactableUI.Active = false;
+            ParentNode.AddChildNode(interactableUI);
 
             var laborPriorityButton = (BigButton)ParentNode.GetChildByName("LaborPriorityButton");
             laborPriorityButton.GetComponent<ButtonScript>().AddOnClickedCallback(OpenLaborPriorityUI);
@@ -508,6 +513,14 @@ namespace Technolithic
 
             statusEffectsUI.GetComponent<StatusEffectsUIScript>().Open(creature.StatusEffectsManager);
             OpenEntityPanel(statusEffectsUI);
+        }
+
+        public void OpenInteractableUI(Interactable interactable)
+        {
+            CloseEntityPanel();
+
+            interactableUI.GetComponent<InteractableUIScript>().SetInteractable(interactable);
+            OpenEntityPanel(interactableUI);
         }
 
         public void OpenAttachPetUI(CreatureCmp parentCreature)

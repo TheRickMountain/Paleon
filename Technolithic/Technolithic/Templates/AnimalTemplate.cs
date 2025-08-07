@@ -29,6 +29,7 @@ namespace Technolithic
 
         public MyTexture Texture { get; private set; }
         public MyTexture SleepTexture { get; private set; }
+        public MyTexture DeadTexture { get; private set; }
 
         public float MovementSpeed { get; private set; }
         public bool CanProtect { get; private set; }
@@ -45,8 +46,6 @@ namespace Technolithic
 
         public List<Item> Ration { get; private set; }
 
-        public Dictionary<Item, int> Drop { get; private set; }
-
         public int AttackChance { get; private set; }
 
         public List<LaborType> AllowedLabors { get; private set; }
@@ -62,6 +61,7 @@ namespace Technolithic
 
         public PregnancyData PregnancyData { get; private set; }
         public DomesticationData DomesticationData { get; private set; }
+        public ButcheringData ButcheringData { get; private set; }
 
         public int Price { get; private set; }
 
@@ -91,6 +91,7 @@ namespace Technolithic
 
             Texture = tileset[0];
             SleepTexture = tileset[1];
+            DeadTexture = tileset[2];
 
             MovementSpeed = JObject["movementSpeed"].Value<float>();
 
@@ -131,17 +132,6 @@ namespace Technolithic
                 Ration.Add(ItemDatabase.GetItemByName(value.Value<string>()));
             }
 
-            Drop = new Dictionary<Item, int>();
-
-            foreach(var value in JObject["drop"])
-            {
-                string itemName = value["item"].Value<string>();
-                int count = value["count"].Value<int>();
-                Item item = ItemDatabase.GetItemByName(itemName);
-
-                Drop.Add(item, count);
-            }
-
             attributes = new List<AttributeType>();
 
             foreach(var value in JObject["attributes"])
@@ -153,6 +143,8 @@ namespace Technolithic
 
             PregnancyData = JObject["PregnancyData"]?.ToObject<PregnancyData>();
             DomesticationData = JObject["DomesticationData"]?.ToObject<DomesticationData>();
+            ButcheringData = JObject["ButcheringData"].ToObject<ButcheringData>();
+            ButcheringData.Initialize();
 
             Price = JObject["Price"].IsNullOrEmpty() ? 0 : JObject["Price"].Value<int>();
         }

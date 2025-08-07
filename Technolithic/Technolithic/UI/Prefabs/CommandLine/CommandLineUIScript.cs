@@ -239,7 +239,7 @@ namespace Technolithic
         {
             Entity entity = GameplayScene.WorldManager.GetSelectedEntity();
             CreatureCmp creature = entity?.Get<CreatureCmp>();
-            creature?.Die(null);
+            creature?.Die(CauseOfDeath.Slain, null);
         }
 
         [Command("rename")]
@@ -380,6 +380,15 @@ namespace Technolithic
             int y = GameplayScene.MouseTile.Y;
             AnimalTemplate animalTemplate = AnimalTemplateDatabase.GetAnimalTemplateByName(animalName);
             GameplayScene.Instance.SpawnAnimal(x, y, animalTemplate, animalTemplate.DaysUntilAging);
+        }
+
+        [Command("spawn_animal_corpse")]
+        private static void SpawnAnimalCorpse(string animalName)
+        {
+            int x = GameplayScene.MouseTile.X;
+            int y = GameplayScene.MouseTile.Y;
+            AnimalTemplate animalTemplate = AnimalTemplateDatabase.GetAnimalTemplateByName(animalName);
+            GameplayScene.Instance.SpawnAnimalCorpse(x, y, animalTemplate);
         }
 
         [Command("add_item")]

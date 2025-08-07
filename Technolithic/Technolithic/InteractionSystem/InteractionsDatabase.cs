@@ -32,7 +32,8 @@ namespace Technolithic
         Plant,
         Plow,
         Irrigate,
-        Fertilize
+        Fertilize,
+        Butcher
     }
 
     public class InteractionsDatabase
@@ -232,6 +233,13 @@ namespace Technolithic
                 ResourceManager.CancelIcon,
                 Color.Orange,
                 InteractionIconDisplayState.Never));
+
+            AddInteractionData(new InteractionData(
+                InteractionType.Butcher,
+                Localization.GetLocalizedText("butcher"),
+                AssetManager.GetTexture("Sprites", "ui").GetSubtexture(80, 96, 16, 16),
+                Color.Orange,
+                InteractionIconDisplayState.OnMarked));
         }
 
         private void AddInteractionData(InteractionData interactionData)

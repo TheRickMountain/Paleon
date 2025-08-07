@@ -310,6 +310,8 @@ namespace Technolithic
 
             ResourceManager.Initialize(Content);
 
+            AssetManager.LoadContent(GraphicsDevice, Content, ContentDirectory);
+
             TextureBank.Initialize();
         }
 

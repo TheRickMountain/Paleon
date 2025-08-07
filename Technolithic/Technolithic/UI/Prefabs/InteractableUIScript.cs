@@ -1,23 +1,40 @@
 ﻿using Microsoft.Xna.Framework;
+using Penumbra;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Technolithic
 {
-    public abstract class InteractableUIScript : MScript
+    public class InteractableUIScript : MScript
     {
         private Interactable selectedInteractable;
 
         private Dictionary<InteractionType, TBigButtonUI> interactionButtonDict = new();
+
+        private ListViewUI buttonsListView;
 
         public InteractableUIScript() : base(true)
         {
             
         }
 
+        public override void Begin()
+        {
+            buttonsListView = new ListViewUI(ParentNode.Scene, 48, 48, 1, 6, false, false);
+            buttonsListView.Name = "ButtonsListView";
+            buttonsListView.X = 8;
+            buttonsListView.Y = ParentNode.Height - buttonsListView.Height - 8;
+            ParentNode.AddChildNode(buttonsListView);
+        }
+
         public void SetInteractable(Interactable interactable)
         {
+            ((RichTextUI)ParentNode.GetChildByName("Label")).Text = interactable.GetUILabelText();
+
             selectedInteractable = interactable;
+
+            ListViewUIScript buttonsListView = ParentNode.GetChildByName("ButtonsListView").GetComponent<ListViewUIScript>();
+            buttonsListView.Clear();
 
             // TODO: refactoring required
             foreach (InteractionType interactionType in selectedInteractable.AvailableInteractions)
@@ -60,7 +77,6 @@ namespace Technolithic
 
                 interactionButton.Tooltips = GenerateInteractionTooltip(selectedInteractable, interactionData);
 
-                ListViewUIScript buttonsListView = ParentNode.GetChildByName("ButtonsListView").GetComponent<ListViewUIScript>();
                 buttonsListView.AddItem(interactionButton);
             }
         }
@@ -171,6 +187,14 @@ namespace Technolithic
             }
 
             return sb.ToString();
+        }
+
+        public override void Awake()
+        {
+        }
+
+        public override void Update(int mouseX, int mouseY)
+        {
         }
     }
 }

@@ -924,5 +924,10 @@ namespace Technolithic
 
             return buildingSaveData;
         }
+
+        public override string GetUILabelText()
+        {
+            return BuildingTemplate.Name;
+        }
     }
 }

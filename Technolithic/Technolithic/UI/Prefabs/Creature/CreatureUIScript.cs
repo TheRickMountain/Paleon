@@ -91,15 +91,6 @@ namespace Technolithic
 
             renameButton.Active = selectedCreature.CanBeRenamed;
 
-            RichTextUI uiLabel = ((RichTextUI)ParentNode.GetChildByName("Label"));
-
-            uiLabel.Text = $"{creature.Name}";
-
-            if (creature.CreatureType == CreatureType.Animal)
-            {
-                uiLabel.Text = (creature as AnimalCmp).AnimalTemplate.GetNameWithAgeAndSex();
-            }
-
             UpdateStatsListView(creature);
 
             (ParentNode.GetChildByName("InventoryListView") as InventoryListViewUI).SetInventory(creature.Inventory);
@@ -107,15 +98,14 @@ namespace Technolithic
             (ParentNode.GetChildByName("EquipmentListView") as EquipmentListViewUI)
                 .SetEquipment(creature, creature.CreatureEquipment);
 
+            SetInteractable(creature);
+
             ListViewUIScript buttonsListView = ParentNode.GetChildByName("ButtonsListView").GetComponent<ListViewUIScript>();
-            buttonsListView.Clear();
 
             if (creature is SettlerCmp)
             {
                 buttonsListView.AddItem(assignPetButton);
             }
-
-            SetInteractable(creature);
         }
 
         private void OnAssignPetButtonPressed(bool value, ButtonScript script)

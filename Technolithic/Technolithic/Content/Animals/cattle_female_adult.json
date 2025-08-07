@@ -35,20 +35,14 @@
                     "item":  8,
                     "requiredItem":  1
                 },
-    "drop":  [
-                 {
-                     "item":  "raw_meat",
-                     "count":  3
-                 },
-                 {
-                     "item":  "raw_skin",
-                     "count":  3
-                 },
-                 {
-                     "item":  "bone",
-                     "count":  2
-                 }
-             ],
+    "ButcheringData": {
+        "Loot": {
+            "raw_meat": 3,
+            "raw_skin": 3,
+            "bone": 2
+        },
+        "DurationInHours": 0.5
+    },
     "ration":  [
                    "hay"
                ],

@@ -10,9 +10,9 @@ namespace Technolithic
     public class PregnancyData
     {
 
-        public int DurationInDays { get; set; }
+        public int DurationInDays { get; init; }
 
-        public List<string> Offspring { get; set; }
+        public List<string> Offspring { get; init; }
 
         [JsonIgnore]
         public List<AnimalTemplate> OffspringTemplates { get; set; }

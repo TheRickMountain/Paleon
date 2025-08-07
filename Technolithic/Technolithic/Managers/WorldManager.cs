@@ -229,6 +229,12 @@ namespace Technolithic
             pickSprite.Active = false;
         }
 
+        public Entity SpawnAnimalCorpse(AnimalTemplate animalTemplate, Tile spawnTile)
+        {
+            Entity entity = new AnimalCorpse(animalTemplate, spawnTile, interactablesManager);
+            return entity;
+        }
+
         public Entity SpawnAnimal(AnimalTemplate animalTemplate, Tile spawnTile, int daysUntilAging)
         {
             Entity entity = animalTemplate.CreateEntity(daysUntilAging, interactablesManager, spawnTile);
@@ -828,7 +834,6 @@ namespace Technolithic
             {
                 case SelectableType.Animal:
                 case SelectableType.Settler:
-                case SelectableType.Trader:
                     GameplayScene.UIRootNodeScript.OpenCreatureUI(selectable.Entity.Get<CreatureCmp>());
                     break;
                 case SelectableType.Building:
@@ -836,6 +841,9 @@ namespace Technolithic
                     break;
                 case SelectableType.ItemContainers:
                     GameplayScene.UIRootNodeScript.OpenItemStackUI(GameplayScene.MouseTile);
+                    break;
+                case SelectableType.AnimalCorpse:
+                    GameplayScene.UIRootNodeScript.OpenInteractableUI(selectable.Entity.Get<Interactable>());
                     break;
             }
         }
@@ -1433,6 +1441,15 @@ namespace Technolithic
             foreach (var creatureSelectable in GetCreature((int)GameplayScene.MouseWorldPosition.X, (int)GameplayScene.MouseWorldPosition.Y))
             {
                 queue.Enqueue(creatureSelectable);
+            }
+
+            foreach (Entity entity in GameplayScene.Instance.AnimalCorpseLayer.Entities)
+            {
+                SelectableCmp selectable = entity.Get<SelectableCmp>();
+                if (selectable != null && selectable.Intersects((int)GameplayScene.MouseWorldPosition.X, (int)GameplayScene.MouseWorldPosition.Y))
+                {
+                    queue.Enqueue(selectable);
+                }
             }
 
             SelectableCmp itemsSelectable = GameplayScene.MouseTile.Inventory.TotalItemsCount > 0 ? new SelectableCmp(tile.X * Engine.TILE_SIZE,

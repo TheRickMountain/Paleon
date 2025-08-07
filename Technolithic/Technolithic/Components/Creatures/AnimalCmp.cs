@@ -193,7 +193,7 @@ namespace Technolithic
             {
                 case InteractionType.Slaughter:
                     {
-                        Die("");
+                        Die(CauseOfDeath.Slaughtered, null);
                     }
                     break;
                 case InteractionType.GatherAnimalProduct:
@@ -503,7 +503,7 @@ namespace Technolithic
                                 }
                             }
 
-                            Die(null, false);
+                            Die(CauseOfDeath.None, null);
                         }
                         break;
                     case AgeState.Adult:
@@ -523,18 +523,18 @@ namespace Technolithic
                                 }
                             }
 
-                            Die(null, false);
+                            Die(CauseOfDeath.None, null);
                         }
                         break;
                     case AgeState.Old:
                         {
-                            if (IsDomesticated)
+                            if (AnimalTemplate.IsWild == false)
                             {
-                                Die(Localization.GetLocalizedText("x_died_of_old_age", Name), true);
+                                Die(CauseOfDeath.OldAge, Localization.GetLocalizedText("x_died_of_old_age", Name));
                             }
                             else
                             {
-                                Die("", false);
+                                Die(CauseOfDeath.OldAge, null);
                             }
                         }
                         break;
@@ -737,35 +737,39 @@ namespace Technolithic
         {
             AnimalTemplate tamedAnimalTemplate = AnimalTemplate.DomesticationData.TamedFormAnimalTemplate;
             Tile spawnTile = Movement.CurrentTile;
-            Die(null, false);
+            Die(CauseOfDeath.None, null);
             return GameplayScene.Instance.SpawnAnimal(spawnTile.X, spawnTile.Y, tamedAnimalTemplate, DaysUntilAging);
         }
 
-        public override void Die(string reasonMessage, bool throwLoot = true)
+        public override void Die(CauseOfDeath causeOfDeath, string reasonMessage)
         {
             GameplayScene.Instance.WorldState.OnNextDayStartedCallback -= OnNextDayStarted;
             GameplayScene.Instance.WorldState.NextHourStarted -= OnNextHourStarted;
 
-            base.Die(reasonMessage);
+            base.Die(causeOfDeath, reasonMessage);
 
             if(TargetAnimalPen != null)
             {
                 TargetAnimalPen.RemoveAnimal(this);
             }
 
-            if (throwLoot)
-            {
-                Tile tile = Movement.CurrentTile;
-                foreach (var kvp in AnimalTemplate.Drop)
-                {
-                    Item item = kvp.Key;
-                    int count = kvp.Value;
+            AnimalCorpseCmp animalCorpseCmp = null;
 
-                    tile.Inventory.AddCargo(new ItemContainer(item, count, item.Durability));
-                }
+            if(causeOfDeath != CauseOfDeath.None)
+            {
+                animalCorpseCmp = GameplayScene.Instance.SpawnAnimalCorpse(Movement.CurrentTile.X, Movement.CurrentTile.Y, AnimalTemplate);
             }
 
-            if(AnimalTemplate.IsWild)
+            if (AnimalTemplate.IsWild == false)
+            {
+                animalCorpseCmp?.MarkInteraction(InteractionType.Butcher);
+            }
+            else if(causeOfDeath == CauseOfDeath.Slain)
+            {
+                animalCorpseCmp?.MarkInteraction(InteractionType.Butcher);
+            }
+
+            if (AnimalTemplate.IsWild)
             {
                 GameplayScene.WorldManager.WildAnimalsNumber--;
             }
@@ -923,6 +927,11 @@ namespace Technolithic
             }
 
             return creatureSaveData;
+        }
+
+        public override string GetUILabelText()
+        {
+            return AnimalTemplate.GetNameWithAgeAndSex();
         }
     }
 }

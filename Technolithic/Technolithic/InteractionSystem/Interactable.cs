@@ -305,6 +305,8 @@ namespace Technolithic
 
         public abstract IEnumerable<Tile> GetApproachableTiles();
 
+        public abstract string GetUILabelText();
+
         public void Destroy()
         {
             if (_isDestroyed) return;

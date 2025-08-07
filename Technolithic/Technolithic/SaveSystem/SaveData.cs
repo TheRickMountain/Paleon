@@ -16,6 +16,7 @@ namespace Technolithic
         public ProgressTreeSaveData ProgressTreeSaveData { get; set; }
         public List<BuildingSaveData> BuildingSaveDatas { get; set; }
         public List<CreatureSaveData> CreatureSaveDatas { get; set; }
+        public List<AnimalCorpseSaveData> AnimalCorpseSaveDatas { get; set; }
         public List<WaterChunkSaveData> WaterChunkSaveDatas { get; set; }
         public NomadsManagerSaveData NomadsManagerSaveData { get; set; }
         public int WorldSize { get; set; }

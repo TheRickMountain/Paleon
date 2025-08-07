@@ -24,26 +24,18 @@
     "DaysUntilAging":  8,
     "damage":  10,
     "defense":  0,
-    "drop":  [
-                 {
-                     "item":  "raw_meat",
-                     "count":  15
-                 },
-                 {
-                     "item":  "raw_skin",
-                     "count":  10
-                 },
-                 {
-                     "item":  "bone",
-                     "count":  4
-                 }
-             ],
+    "ButcheringData": {
+        "Loot": {
+            "raw_meat": 15,
+            "raw_skin": 10,
+            "bone": 4
+        },
+        "DurationInHours": 1.0
+    },
     "ration":  [
                    "hay"
                ],
-    "allowedLabors":  [
-
-                      ],
+    "allowedLabors": [],
     "attackChance":  "75",
     "AgeState":  "Old"
 }

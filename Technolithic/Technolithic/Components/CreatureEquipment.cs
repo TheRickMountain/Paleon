@@ -262,27 +262,6 @@ namespace Technolithic
             return interactionToolDict[interactionType];
         }
 
-        public ItemContainer TryGetTool(LaborType laborType)
-        {
-            foreach(var kvp in tools)
-            {
-                ItemContainer itemContainer = kvp.Value;
-
-                if (itemContainer == null)
-                    continue;
-
-                Tool tool = itemContainer.Item.Tool;
-
-                for (int i = 0; i < tool.LaborTypes.Length; i++)
-                {
-                    if (tool.LaborTypes[i] == laborType)
-                        return itemContainer;
-                }
-            }
-
-            return null;
-        }
-
         public bool HasTool(InteractionType interactionType)
         {
             return interactionToolDict[interactionType] != null;
@@ -291,27 +270,6 @@ namespace Technolithic
         public bool HasTool(ToolType toolType)
         {
             return tools[toolType] != null;
-        }
-
-        public bool HasTool(LaborType laborType)
-        {
-            foreach(var kvp in tools)
-            {
-                ItemContainer itemContainer = kvp.Value;
-
-                if (itemContainer == null)
-                    continue;
-
-                Tool tool = itemContainer.Item.Tool;
-
-                for (int i = 0; i < tool.LaborTypes.Length; i++)
-                {
-                    if (tool.LaborTypes[i] == laborType)
-                        return true;
-                }
-            }
-
-            return false;
         }
 
         public void ThrowAllTools(Tile tile)

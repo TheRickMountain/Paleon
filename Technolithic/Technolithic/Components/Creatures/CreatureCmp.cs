@@ -396,38 +396,8 @@ namespace Technolithic
 
             SortedLaborTypes = LaborTypePriorityPair.OrderByDescending(x => x.Value).Where(x => x.Value > -1).Select(x => x.Key).ToList();
 
-            if(value == -1)
+            if (value == -1)
             {
-                if (CreatureEquipment.HasTool(labor))
-                {
-                    ItemContainer toolItemContainer = CreatureEquipment.TryGetTool(labor);
-
-                    Tool tool = toolItemContainer.Item.Tool;
-
-                    // Проверяем, все ли типы работ заблокированы для этого инструмента, чтобы его выкинуть
-
-                    bool allLaborTypesForbidden = true;
-
-                    for (int i = 0; i < tool.LaborTypes.Length; i++)
-                    {
-                        LaborType checkLaborType = tool.LaborTypes[i];
-
-                        if (GetLaborPriority(checkLaborType) != -1)
-                        {
-                            allLaborTypesForbidden = false;
-                            break;
-                        }
-                    }
-
-                    if (allLaborTypesForbidden)
-                    {
-                        if (Movement != null && Movement.CurrentTile != null)
-                        {
-                            CreatureEquipment.ThrowTool(tool.ToolType, Movement.CurrentTile);
-                        }
-                    }
-                }
-
                 if (CurrentLabor != null && CurrentLabor.LaborType == labor)
                 {
                     CancelLabor();

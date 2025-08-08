@@ -21,7 +21,6 @@
       "RechargeTime": 0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Haul", "Supply"]
     }
   },
   "wooden_plow": {
@@ -46,7 +45,6 @@
       "RechargeTime": 0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Agriculture"],
       "InteractionTypes": ["Plow"]
     }
   },
@@ -72,7 +70,6 @@
       "RechargeTime": 0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Agriculture"],
       "InteractionTypes": ["AutoHarvest", "Uproot"]
     }
   },
@@ -318,7 +315,6 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Agriculture"],
       "InteractionTypes": ["AutoHarvest", "Uproot"]
     }
   },
@@ -344,7 +340,6 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Agriculture"],
       "InteractionTypes": ["AutoHarvest", "Uproot"]
     }
   },
@@ -370,7 +365,6 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Agriculture"],
       "InteractionTypes": ["AutoHarvest", "Uproot"]
     }
   },
@@ -396,7 +390,6 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Agriculture"],
       "InteractionTypes": ["AutoHarvest", "Uproot"]
     }
   },
@@ -422,7 +415,6 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Agriculture"],
       "InteractionTypes": ["AutoHarvest", "Uproot"]
     }
   },
@@ -448,7 +440,6 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Chop"],
       "InteractionTypes": ["Chop"]
     }
   },
@@ -474,7 +465,6 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Chop"],
       "InteractionTypes": ["Chop"]
     }
   },
@@ -500,7 +490,6 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Chop"],
       "InteractionTypes": ["Chop"]
     }
   },
@@ -526,7 +515,6 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Chop"],
       "InteractionTypes": ["Chop"]
     }
   },
@@ -552,7 +540,6 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Agriculture"],
       "InteractionTypes": ["Plow"]
     }
   },
@@ -578,7 +565,6 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Agriculture"],
       "InteractionTypes": ["Plow"]
     }
   },
@@ -604,7 +590,6 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Agriculture"],
       "InteractionTypes": ["Plow"]
     }
   },
@@ -630,7 +615,6 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Agriculture"],
       "InteractionTypes": ["Plow"]
     }
   },
@@ -656,7 +640,6 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Mining"],
       "InteractionTypes": ["Mine"]
     }
   },
@@ -682,7 +665,6 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Mining"],
       "InteractionTypes": ["Mine"]
     }
   },
@@ -708,7 +690,6 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Mining"],
       "InteractionTypes": ["Mine"]
     }
   },
@@ -734,7 +715,6 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Mining"],
       "InteractionTypes": ["Mine"]
     }
   },
@@ -760,7 +740,6 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Hunt"]
     }
   },
   "stone_spear": {
@@ -785,7 +764,6 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Hunt"]
     }
   },
   "bone_spear": {
@@ -810,7 +788,6 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Hunt"]
     }
   },
   "copper_spear": {
@@ -835,7 +812,6 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Hunt"]
     }
   },
   "bronze_spear": {
@@ -860,7 +836,6 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Hunt"]
     }
   },
   "iron_spear": {
@@ -885,7 +860,6 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Hunt"]
     }
   },
   "wooden_harpoon": {
@@ -910,7 +884,6 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Fish"],
       "InteractionTypes": ["CatchFish"]
     }
   },
@@ -936,7 +909,6 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Fish"],
       "InteractionTypes": ["CatchFish"]
     }
   },
@@ -962,7 +934,6 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Fish"],
       "InteractionTypes": ["CatchFish"]
     }
   },
@@ -988,7 +959,6 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Fish"],
       "InteractionTypes": ["CatchFish"]
     }
   },
@@ -1014,7 +984,6 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Fish"],
       "InteractionTypes": ["CatchFish"]
     }
   },
@@ -1040,7 +1009,6 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Fish"],
       "InteractionTypes": ["CatchFish"]
     }
   },
@@ -1066,7 +1034,6 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "LaborTypes": ["Fish"],
       "InteractionTypes": ["CatchFish"]
     }
   },
@@ -1092,7 +1059,6 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": 255,
       "ProjectileSpeed": 1,
-      "LaborTypes": ["Hunt"]
     }
   },
   "bow": {
@@ -1117,7 +1083,6 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": 254,
       "ProjectileSpeed": 1,
-      "LaborTypes": ["Hunt"]
     }
   },
   "crossbow": {
@@ -1142,7 +1107,6 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": 254,
       "ProjectileSpeed": 1,
-      "LaborTypes": ["Hunt"]
     }
   },
   "barley_seeds": {

@@ -31,7 +31,6 @@ namespace Technolithic
         public float RechargeTime { get; init; }
         public int AmmoTextureId { get; init; }
         public float ProjectileSpeed { get; init; }
-        public LaborType[] LaborTypes { get; init; }
         public InteractionType[] InteractionTypes { get; init; } = new InteractionType[0];
 
         [JsonIgnore]
@@ -68,21 +67,7 @@ namespace Technolithic
                 info += $"\n{Localization.GetLocalizedText("recharge_time")}: {RechargeTime}";
             }
 
-            info += $"\n{Localization.GetLocalizedText("tool_type")}: ";
-
-            for (int i = 0; i < LaborTypes.Length; i++)
-            {
-                LaborType laborType = LaborTypes[i];
-
-                if(i == LaborTypes.Length - 1)
-                {
-                    info += Labor.GetLaborString(laborType);
-                }
-                else
-                {
-                    info += $"{Labor.GetLaborString(laborType)}, ";
-                }
-            }
+            info += $"\n{Localization.GetLocalizedText("tool_type")}: {ToolType}"; // TODO: temp
 
             if(Efficiency > 0)
             {

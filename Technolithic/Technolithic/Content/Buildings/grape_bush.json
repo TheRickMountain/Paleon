@@ -11,10 +11,7 @@
   "destructible": false,
   "movementSpeed": 75,
   "plant": {
-    "key": "grape_bush",
     "growthSpeed": 7.14,
-    "toolType": "Harvesting",
-    "toolRequired": false,
     "maxStrength": 30,
     "isFlower": false,
     "harvestable":

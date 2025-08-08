@@ -1,20 +1,13 @@
 ﻿using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Technolithic
 {
     public class PlantData
     {
-
-        public string Name { get; private set; }
         public MyTexture Icon { get; private set; }
         public bool RemoveAfterHarvest { get; private set; }
-        public ToolType ToolType { get; private set; } = ToolType.None;
-        public bool ToolRequired { get; private set; }
         public int MaxStrength { get; private set; }
 
         public Dictionary<int, MyTexture[]> VariationsTextures { get; private set; }
@@ -33,11 +26,6 @@ namespace Technolithic
         {
             JToken jtoken = jobject["plant"];
 
-            Name = Localization.GetLocalizedText(jtoken["key"].Value<string>());
-
-            string toolTypeStr = jtoken["toolType"].Value<string>();
-            ToolType = Utils.ParseEnum<ToolType>(toolTypeStr);
-            ToolRequired = jtoken["toolRequired"].Value<bool>();
             MaxStrength = jtoken["maxStrength"].Value<int>();
             Stages = jtoken["stages"].Value<int>();
             int variations = jtoken["variations"].Value<int>();

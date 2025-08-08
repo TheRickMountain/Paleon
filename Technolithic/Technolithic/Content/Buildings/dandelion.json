@@ -11,10 +11,7 @@
   "destructible": false,
   "movementSpeed": 75,
   "plant": {
-    "key": "dandelion",
     "growthSpeed": 20,
-    "toolType": "Harvesting",
-    "toolRequired": false,
     "maxStrength": 30,
     "isFlower": true,
     "harvestable": null,

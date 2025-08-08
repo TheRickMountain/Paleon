@@ -11,10 +11,7 @@
   "destructible": false,
   "movementSpeed": 75,
   "plant": {
-    "key": "barley",
     "growthSpeed": 10,
-    "toolType": "Harvesting",
-    "toolRequired": false,
     "stages": 6,
     "variations": 2,
     "maxStrength": 30,

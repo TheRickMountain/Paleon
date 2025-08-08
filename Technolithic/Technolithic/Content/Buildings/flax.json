@@ -11,10 +11,7 @@
   "destructible": false,
   "movementSpeed": 75,
   "plant": {
-    "key": "flax",
     "growthSpeed": 12.5,
-    "toolType": "Harvesting",
-    "toolRequired": false,
     "maxStrength": 30,
     "isFlower": false,
     "harvestable": 

@@ -33,7 +33,9 @@ namespace Technolithic
         Plow,
         Irrigate,
         Fertilize,
-        Butcher
+        Butcher,
+        HuntMelee,
+        HuntRange
     }
 
     public class InteractionsDatabase

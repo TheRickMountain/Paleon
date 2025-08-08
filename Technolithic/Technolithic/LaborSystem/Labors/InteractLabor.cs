@@ -31,14 +31,14 @@ namespace Technolithic
                     // его для каждого взаимодействия (это относится и для поиска обычного взаимодействия)
                     bool hasAnyWeapon = false;
 
-                    if (creature.CreatureEquipment.HasTool(ToolType.HuntingMelee) == false)
+                    if (creature.CreatureEquipment.HasTool(InteractionType.HuntMelee) == false)
                     {
-                        var tuplePair = GameplayScene.WorldManager.FindTool(creature, ToolType.HuntingMelee);
+                        var invToolTuple = TryFindTool(creature, InteractionType.HuntMelee);
 
-                        if (tuplePair?.Item1 != null)
+                        if (invToolTuple.Item1 != null)
                         {
-                            Inventory inventory = tuplePair.Item1;
-                            Item item = tuplePair.Item2;
+                            Inventory inventory = invToolTuple.Item1;
+                            Item item = invToolTuple.Item2;
 
                             EquipItemTask equipTask = new EquipItemTask(creature, inventory, item);
                             AddTask(creature, equipTask);
@@ -51,14 +51,14 @@ namespace Technolithic
                         hasAnyWeapon = true;
                     }
 
-                    if (creature.CreatureEquipment.HasTool(ToolType.HuntingRange) == false)
+                    if (creature.CreatureEquipment.HasTool(InteractionType.HuntRange) == false)
                     {
-                        var tuplePair = GameplayScene.WorldManager.FindTool(creature, ToolType.HuntingRange);
+                        var invToolTuple = TryFindTool(creature, InteractionType.HuntRange);
 
-                        if (tuplePair?.Item1 != null)
+                        if (invToolTuple.Item1 != null)
                         {
-                            Inventory inventory = tuplePair.Item1;
-                            Item item = tuplePair.Item2;
+                            Inventory inventory = invToolTuple.Item1;
+                            Item item = invToolTuple.Item2;
 
                             EquipItemTask equipTask = new EquipItemTask(creature, inventory, item);
                             AddTask(creature, equipTask);

@@ -511,9 +511,9 @@ namespace Technolithic
 
                 target.TakeDamage(this, CreatureEquipment.MeleeDamage);
 
-                if(CreatureEquipment.HasTool(ToolType.HuntingMelee))
+                if (CreatureEquipment.HasTool(InteractionType.HuntMelee))
                 {
-                    CreatureEquipment.DegradeTool(ToolType.HuntingMelee, 1);
+                    CreatureEquipment.DecreaseToolDurability(InteractionType.HuntMelee, 1);
                 }
             }
         }
@@ -527,11 +527,11 @@ namespace Technolithic
 
                 canAttack = false;
 
-                Tool tool = CreatureEquipment.TryGetTool(ToolType.HuntingRange).Item.Tool;
+                Tool tool = CreatureEquipment.TryGetTool(InteractionType.HuntRange).Item.Tool;
 
                 GameplayScene.WorldManager.AddAttackInfo(new AttackInfo(this, target, tool));
 
-                CreatureEquipment.DegradeTool(ToolType.HuntingRange, 1);
+                CreatureEquipment.DecreaseToolDurability(InteractionType.HuntRange, 1);
             }
         }
 

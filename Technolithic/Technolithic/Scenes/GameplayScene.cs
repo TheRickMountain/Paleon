@@ -574,13 +574,16 @@ namespace Technolithic
                     interactables.Add((buildingCmp, buildingSaveData));
                 }
 
-                foreach (var saveData in saveManager.Data.AnimalCorpseSaveDatas)
+                if (saveManager.Data.AnimalCorpseSaveDatas != null)
                 {
-                    AnimalTemplate animalTemplate = AnimalTemplateDatabase.GetAnimalTemplateByName(saveData.AnimalKey);
-                    var animalCorpse = SpawnAnimalCorpse(saveData.TileX, saveData.TileY, animalTemplate);
-                    animalCorpse.SpoilageProgress = saveData.SpoilageProgress;
+                    foreach (var saveData in saveManager.Data.AnimalCorpseSaveDatas)
+                    {
+                        AnimalTemplate animalTemplate = AnimalTemplateDatabase.GetAnimalTemplateByName(saveData.AnimalKey);
+                        var animalCorpse = SpawnAnimalCorpse(saveData.TileX, saveData.TileY, animalTemplate);
+                        animalCorpse.SpoilageProgress = saveData.SpoilageProgress;
 
-                    interactables.Add((animalCorpse, saveData));
+                        interactables.Add((animalCorpse, saveData));
+                    }
                 }
 
                 Dictionary<Guid, CreatureCmp> creaturesById = new Dictionary<Guid, CreatureCmp>();

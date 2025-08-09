@@ -14,7 +14,7 @@ namespace Technolithic
         private int itemWeightToTake;
 
         public TakeItemFromInventoryTask(CreatureCmp creature, Inventory inventoryToTake, Item itemToTake, int itemWeightToTake) 
-            : base(creature, ToolType.Hauling)
+            : base(creature, InteractionType.Haul)
         {
             this.inventoryToTake = inventoryToTake;
             this.itemToTake = itemToTake;

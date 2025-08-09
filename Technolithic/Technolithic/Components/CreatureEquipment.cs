@@ -30,11 +30,11 @@ namespace Technolithic
         private Sprite clothingImage;
         private Sprite topClothingImage;
 
-        private Dictionary<ToolType, ItemContainer> tools = new();
-
         private Dictionary<InteractionType, ItemContainer> interactionToolDict = new();
 
-        private Dictionary<InteractionType, float> interactionEfficiencyDict = new();
+        private List<ItemContainer> _allTools = new();
+
+        public IReadOnlyList<ItemContainer> AllTools => _allTools;
 
         public CreatureEquipment(int nativeDefense, int nativeMeleeDamage, float nativeRechargeTime)
         {
@@ -42,15 +42,9 @@ namespace Technolithic
             this.nativeMeleeDamage = nativeMeleeDamage;
             this.nativeRechargeTime = nativeRechargeTime;
 
-            foreach(ToolType toolType in Enum.GetValues(typeof(ToolType)))
-            {
-                tools.Add(toolType, null);
-            }
-
             foreach (InteractionType interactionType in Enum.GetValues(typeof(InteractionType)))
             {
                 interactionToolDict.Add(interactionType, null);
-                interactionEfficiencyDict.Add(interactionType, DEFAULT_INTERACTION_EFFICIENCY);
             }
 
             CalculateStats();
@@ -173,35 +167,6 @@ namespace Technolithic
             sprite.CenterOrigin();
         }
 
-        public IEnumerable<ItemContainer> GetTools()
-        {
-            foreach(var kvp in tools)
-            {
-                ItemContainer itemContainer = kvp.Value;
-
-                if (itemContainer == null)
-                    continue;
-
-                yield return itemContainer;
-            }
-        }
-
-        public void DegradeTool(ToolType toolType, float value)
-        {
-            ItemContainer itemContainer = tools[toolType];
-
-            itemContainer.Durability -= value;
-            if(itemContainer.Durability <= 0)
-            {
-                tools[toolType] = null;
-
-                if (ToolItemContainer == itemContainer)
-                {
-                    ToolItemContainer = null;
-                }
-            }
-        }
-
         public void DecreaseToolDurability(InteractionType interactionType, float value)
         {
             ItemContainer itemContainer = interactionToolDict[interactionType];
@@ -209,52 +174,32 @@ namespace Technolithic
             if (itemContainer == null) return;
 
             itemContainer.Durability -= value;
+            
             if(itemContainer.Durability <= 0)
             {
-                interactionToolDict[interactionType] = null;
+                _allTools.Remove(itemContainer);
+
+                ResortTools();
 
                 if (ToolItemContainer == itemContainer)
                 {
                     ToolItemContainer = null;
                 }
-
-                // TODO: temp
-                tools[itemContainer.Item.Tool.ToolType] = null;
             }
         }
 
         public void EquipTool(ItemContainer itemContainer)
         {
-            ToolType toolType = itemContainer.Item.Tool.ToolType;
+            _allTools.Add(itemContainer);
 
-            tools[toolType] = itemContainer;
-
-            foreach(InteractionType interactionType in itemContainer.Item.Tool.InteractionTypes)
-            {
-                interactionToolDict[interactionType] = itemContainer;
-                interactionEfficiencyDict[interactionType] = itemContainer.Item.Tool.Efficiency;
-            }
+            ResortTools();
 
             // Achievement
-            int toolsAmount = 0;
-            foreach(var kvp in tools)
-            {
-                if(kvp.Value != null)
-                {
-                    toolsAmount++;
-                }
-            }
-
-            if(toolsAmount >= 3)
+            if(_allTools.Count >= 3)
             {
                 GameplayScene.Instance.AchievementManager.UnlockAchievement(AchievementId.MULTITOOL);
             }
             // Achievement
-        }
-
-        public ItemContainer TryGetTool(ToolType toolType)
-        {
-            return tools[toolType];
         }
 
         public ItemContainer TryGetTool(InteractionType interactionType)
@@ -267,46 +212,32 @@ namespace Technolithic
             return interactionToolDict[interactionType] != null;
         }
 
-        public bool HasTool(ToolType toolType)
-        {
-            return tools[toolType] != null;
-        }
-
         public void ThrowAllTools(Tile tile)
         {
             ToolItemContainer = null;
 
-            foreach(var kvp in tools)
+            foreach (ItemContainer itemContainer in _allTools)
             {
-                ToolType toolType = kvp.Key;
-                ItemContainer itemContainer = kvp.Value;
-
-                if (itemContainer == null)
-                    continue;
-
                 tile.Inventory.AddCargo(itemContainer);
-
-                tools[toolType] = null;
             }
+
+            _allTools.Clear();
+
+            ResortTools();
         }
 
-        public void ThrowTool(ToolType toolType, Tile tile)
+        public void ThrowTool(ItemContainer itemContainer, Tile tile)
         {
-            ItemContainer itemContainer = tools[toolType];
-
             if(ToolItemContainer == itemContainer)
             {
                 ToolItemContainer = null;
             }
 
-            if(itemContainer == null)
-            {
-                throw new InvalidOperationException($"Creature has no '{toolType}' tool");
-            }
-
             tile.Inventory.AddCargo(itemContainer);
 
-            tools[toolType] = null;
+            _allTools.Remove(itemContainer);
+
+            ResortTools();
         }
 
         public void ThrowClothing(Tile tile)
@@ -415,13 +346,9 @@ namespace Technolithic
 
         public void UpdateDurability(float deltaTime)
         {
-            foreach(var kvp in tools)
+            for (int i = _allTools.Count - 1; i >= 0; i--)
             {
-                ToolType toolType = kvp.Key;
-                ItemContainer itemContainer = kvp.Value;
-               
-                if (itemContainer == null)
-                    continue;
+                ItemContainer itemContainer = _allTools[i];
 
                 Item item = itemContainer.Item;
 
@@ -437,12 +364,14 @@ namespace Technolithic
                             ToolItemContainer = null;
                         }
 
-                        tools[toolType] = null;
+                        _allTools.Remove(itemContainer);
+
+                        ResortTools();
                     }
                 }
             }
 
-            if(ClothingItemContainer != null)
+            if (ClothingItemContainer != null)
             {
                 Item item = ClothingItemContainer.Item;
                 if (item.IsDecayable)
@@ -475,7 +404,11 @@ namespace Technolithic
 
         public float GetInteractionEfficiency(InteractionType interactionType)
         {
-            return interactionEfficiencyDict[interactionType];
+            var ic = interactionToolDict[interactionType];
+
+            if (ic == null) return DEFAULT_INTERACTION_EFFICIENCY;
+
+            return ic.Item.Tool.Efficiency;
         }
 
         public void Render()
@@ -483,6 +416,32 @@ namespace Technolithic
             for (int i = 0; i < sprites.Count; i++)
             {
                 sprites[i].Render();
+            }
+        }
+
+        private void ResortTools()
+        {
+            // Сбрасываем все данные по всем типам взаимодействий
+            foreach (InteractionType interactionType in Enum.GetValues(typeof(InteractionType)))
+            {
+                interactionToolDict[interactionType] = null;
+            }
+
+            // Проходимся по всем текущим инструментам
+            foreach (ItemContainer itemContainer in _allTools)
+            {
+                Tool tool = itemContainer.Item.Tool;
+                foreach (InteractionType interactionType in tool.InteractionTypes)
+                {
+                    var prevItemContainer = interactionToolDict[interactionType];
+
+                    // Если предыдущий инструмент взаимодействия отсутствует или его эффективность меньше текущей, то
+                    // заменяем его на текущий
+                    if (prevItemContainer == null || prevItemContainer.Item.Tool.Efficiency < tool.Efficiency)
+                    {
+                        interactionToolDict[interactionType] = itemContainer;
+                    }
+                }
             }
         }
 

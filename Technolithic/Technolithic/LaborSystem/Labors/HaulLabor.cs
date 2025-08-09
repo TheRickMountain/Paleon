@@ -54,11 +54,11 @@ namespace Technolithic
             if (itemToTake == null || takeFromTile == null || putToStorage == null)
                 return false;
 
-            if (creature.CreatureEquipment.HasTool(ToolType.Hauling) == false)
+            if (creature.CreatureEquipment.HasTool(InteractionType.Haul) == false)
             {
-                var tuplePair = GameplayScene.WorldManager.FindTool(creature, ToolType.Hauling);
+                var tuplePair = GameplayScene.WorldManager.FindTool(creature, InteractionType.Haul);
 
-                if (tuplePair?.Item1 != null)
+                if (tuplePair.Item1 != null)
                 {
                     Inventory inventory = tuplePair.Item1;
                     Item item = tuplePair.Item2;

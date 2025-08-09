@@ -19,7 +19,7 @@ namespace Technolithic
         private bool cancelWasCalled = false;
 
         public SupplyFromTileTask(CreatureCmp creature, Tile takeFromTile, BuildingCmp putToBuilding, Item item, int weight) 
-            : base(creature, ToolType.Hauling)
+            : base(creature, InteractionType.Haul)
         {
             takeFromTile.Inventory.ReserveItemWeight(item, weight);
             putToBuilding.Inventory.AddToAddWeight(item, weight);

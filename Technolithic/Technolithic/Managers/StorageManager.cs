@@ -41,21 +41,6 @@ namespace Technolithic
             return null;
         }
 
-        public StorageBuildingCmp GetStorageWithToolItem(CreatureCmp creature, ToolType toolType)
-        {
-            if (ItemDatabase.Tools[creature.CreatureType].ContainsKey(toolType) == false)
-                return null;
-
-            foreach (var item in ItemDatabase.Tools[creature.CreatureType][toolType])
-            {
-                StorageBuildingCmp storageBuildingCmp = GetStorageWith(creature, item);
-                if (storageBuildingCmp != null)
-                    return storageBuildingCmp;
-            }
-
-            return null;
-        }
-
         public StorageBuildingCmp GetStorageWithTool(CreatureCmp creature, InteractionType interactionType)
         {
             foreach(Item item in ItemDatabase.GetInteractionTypeTools(creature.CreatureType, interactionType))

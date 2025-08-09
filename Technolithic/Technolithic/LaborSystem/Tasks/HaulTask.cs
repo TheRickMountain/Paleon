@@ -18,7 +18,7 @@ namespace Technolithic
         private bool itemWasTaken = false;
 
         public HaulTask(CreatureCmp creature, StorageBuildingCmp putToStorage, Tile takeFromTile, Item item, int weight) 
-            : base(creature, ToolType.Hauling)
+            : base(creature, InteractionType.Haul)
         {
             putToStorage.Inventory.AddToAddWeight(item, weight);
             takeFromTile.Inventory.ReserveItemWeight(item, weight);

@@ -14,13 +14,12 @@
     "Tool": {
       "MeleeDamage": 0,
       "RangeDamage": 0,
-      "Level": 1,
       "Efficiency": 1.0,
-      "ToolType": 6,
       "CreatureType": 1,
       "RechargeTime": 0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
+      "InteractionTypes": ["Haul"]
     }
   },
   "wooden_plow": {
@@ -38,9 +37,7 @@
     "Tool": {
       "MeleeDamage": 0,
       "RangeDamage": 0,
-      "Level": 1,
       "Efficiency": 1.0,
-      "ToolType": 4,
       "CreatureType": 1,
       "RechargeTime": 0,
       "AmmoTextureId": -1,
@@ -63,9 +60,7 @@
     "Tool": {
       "MeleeDamage": 0,
       "RangeDamage": 0,
-      "Level": 1,
       "Efficiency": 1.0,
-      "ToolType": 3,
       "CreatureType": 1,
       "RechargeTime": 0,
       "AmmoTextureId": -1,
@@ -308,9 +303,7 @@
     "Tool": {
       "MeleeDamage": 4,
       "RangeDamage": 0,
-      "Level": 1,
       "Efficiency": 1.0,
-      "ToolType": 3,
       "CreatureType": 0,
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
@@ -333,9 +326,7 @@
     "Tool": {
       "MeleeDamage": 4,
       "RangeDamage": 0,
-      "Level": 1,
       "Efficiency": 1.5,
-      "ToolType": 3,
       "CreatureType": 0,
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
@@ -358,9 +349,7 @@
     "Tool": {
       "MeleeDamage": 6,
       "RangeDamage": 0,
-      "Level": 3,
       "Efficiency": 2.0,
-      "ToolType": 3,
       "CreatureType": 0,
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
@@ -383,9 +372,7 @@
     "Tool": {
       "MeleeDamage": 8,
       "RangeDamage": 0,
-      "Level": 4,
       "Efficiency": 3.0,
-      "ToolType": 3,
       "CreatureType": 0,
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
@@ -408,9 +395,7 @@
     "Tool": {
       "MeleeDamage": 12,
       "RangeDamage": 0,
-      "Level": 5,
       "Efficiency": 5.0,
-      "ToolType": 3,
       "CreatureType": 0,
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
@@ -433,9 +418,7 @@
     "Tool": {
       "MeleeDamage": 4,
       "RangeDamage": 0,
-      "Level": 1,
       "Efficiency": 1.0,
-      "ToolType": 0,
       "CreatureType": 0,
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
@@ -458,9 +441,7 @@
     "Tool": {
       "MeleeDamage": 6,
       "RangeDamage": 0,
-      "Level": 2,
       "Efficiency": 2.0,
-      "ToolType": 0,
       "CreatureType": 0,
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
@@ -483,9 +464,7 @@
     "Tool": {
       "MeleeDamage": 8,
       "RangeDamage": 0,
-      "Level": 3,
       "Efficiency": 3.0,
-      "ToolType": 0,
       "CreatureType": 0,
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
@@ -508,9 +487,7 @@
     "Tool": {
       "MeleeDamage": 12,
       "RangeDamage": 0,
-      "Level": 5,
       "Efficiency": 5.0,
-      "ToolType": 0,
       "CreatureType": 0,
       "RechargeTime": 1.25,
       "AmmoTextureId": -1,
@@ -533,9 +510,7 @@
     "Tool": {
       "MeleeDamage": 4,
       "RangeDamage": 0,
-      "Level": 1,
       "Efficiency": 1.0,
-      "ToolType": 4,
       "CreatureType": 0,
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
@@ -558,9 +533,7 @@
     "Tool": {
       "MeleeDamage": 6,
       "RangeDamage": 0,
-      "Level": 2,
       "Efficiency": 2.0,
-      "ToolType": 4,
       "CreatureType": 0,
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
@@ -583,9 +556,7 @@
     "Tool": {
       "MeleeDamage": 8,
       "RangeDamage": 0,
-      "Level": 3,
       "Efficiency": 3.0,
-      "ToolType": 4,
       "CreatureType": 0,
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
@@ -608,9 +579,7 @@
     "Tool": {
       "MeleeDamage": 12,
       "RangeDamage": 0,
-      "Level": 5,
       "Efficiency": 5.0,
-      "ToolType": 4,
       "CreatureType": 0,
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
@@ -633,9 +602,7 @@
     "Tool": {
       "MeleeDamage": 4,
       "RangeDamage": 0,
-      "Level": 1,
       "Efficiency": 1.0,
-      "ToolType": 1,
       "CreatureType": 0,
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
@@ -658,9 +625,7 @@
     "Tool": {
       "MeleeDamage": 6,
       "RangeDamage": 0,
-      "Level": 2,
       "Efficiency": 2.0,
-      "ToolType": 1,
       "CreatureType": 0,
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
@@ -683,9 +648,7 @@
     "Tool": {
       "MeleeDamage": 8,
       "RangeDamage": 0,
-      "Level": 3,
       "Efficiency": 3.0,
-      "ToolType": 1,
       "CreatureType": 0,
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
@@ -708,9 +671,7 @@
     "Tool": {
       "MeleeDamage": 12,
       "RangeDamage": 0,
-      "Level": 5,
       "Efficiency": 5.0,
-      "ToolType": 1,
       "CreatureType": 0,
       "RechargeTime": 1.5,
       "AmmoTextureId": -1,
@@ -733,9 +694,7 @@
     "Tool": {
       "MeleeDamage": 4,
       "RangeDamage": 0,
-      "Level": 1,
-      "Efficiency": 0.0,
-      "ToolType": 2,
+      "Efficiency": 4.0,
       "CreatureType": 0,
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
@@ -758,9 +717,7 @@
     "Tool": {
       "MeleeDamage": 6,
       "RangeDamage": 0,
-      "Level": 2,
-      "Efficiency": 0.0,
-      "ToolType": 2,
+      "Efficiency": 6.0,
       "CreatureType": 0,
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
@@ -783,9 +740,7 @@
     "Tool": {
       "MeleeDamage": 7,
       "RangeDamage": 0,
-      "Level": 3,
-      "Efficiency": 0.0,
-      "ToolType": 2,
+      "Efficiency": 7.0,
       "CreatureType": 0,
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
@@ -808,9 +763,7 @@
     "Tool": {
       "MeleeDamage": 8,
       "RangeDamage": 0,
-      "Level": 4,
-      "Efficiency": 0.0,
-      "ToolType": 2,
+      "Efficiency": 8.0,
       "CreatureType": 0,
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
@@ -833,9 +786,7 @@
     "Tool": {
       "MeleeDamage": 10,
       "RangeDamage": 0,
-      "Level": 5,
-      "Efficiency": 0.0,
-      "ToolType": 2,
+      "Efficiency": 10.0,
       "CreatureType": 0,
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
@@ -858,9 +809,7 @@
     "Tool": {
       "MeleeDamage": 14,
       "RangeDamage": 0,
-      "Level": 6,
-      "Efficiency": 0.0,
-      "ToolType": 2,
+      "Efficiency": 14.0,
       "CreatureType": 0,
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
@@ -883,9 +832,7 @@
     "Tool": {
       "MeleeDamage": 2,
       "RangeDamage": 0,
-      "Level": 1,
       "Efficiency": 0.25,
-      "ToolType": 5,
       "CreatureType": 0,
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
@@ -908,9 +855,7 @@
     "Tool": {
       "MeleeDamage": 4,
       "RangeDamage": 0,
-      "Level": 2,
       "Efficiency": 0.3,
-      "ToolType": 5,
       "CreatureType": 0,
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
@@ -933,9 +878,7 @@
     "Tool": {
       "MeleeDamage": 4,
       "RangeDamage": 0,
-      "Level": 3,
       "Efficiency": 0.35,
-      "ToolType": 5,
       "CreatureType": 0,
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
@@ -958,9 +901,7 @@
     "Tool": {
       "MeleeDamage": 6,
       "RangeDamage": 0,
-      "Level": 4,
       "Efficiency": 0.4,
-      "ToolType": 5,
       "CreatureType": 0,
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
@@ -983,9 +924,7 @@
     "Tool": {
       "MeleeDamage": 8,
       "RangeDamage": 0,
-      "Level": 5,
       "Efficiency": 0.5,
-      "ToolType": 5,
       "CreatureType": 0,
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
@@ -1008,9 +947,7 @@
     "Tool": {
       "MeleeDamage": 12,
       "RangeDamage": 0,
-      "Level": 6,
       "Efficiency": 0.6,
-      "ToolType": 5,
       "CreatureType": 0,
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
@@ -1033,9 +970,7 @@
     "Tool": {
       "MeleeDamage": 2,
       "RangeDamage": 0,
-      "Level": 7,
       "Efficiency": 1.0,
-      "ToolType": 5,
       "CreatureType": 0,
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
@@ -1058,9 +993,7 @@
     "Tool": {
       "MeleeDamage": 3,
       "RangeDamage": 4,
-      "Level": 1,
-      "Efficiency": 0.0,
-      "ToolType": 7,
+      "Efficiency": 4.0,
       "CreatureType": 0,
       "RechargeTime": 1.5,
       "AmmoTextureId": 255,
@@ -1083,9 +1016,7 @@
     "Tool": {
       "MeleeDamage": 4,
       "RangeDamage": 6,
-      "Level": 2,
-      "Efficiency": 0.0,
-      "ToolType": 7,
+      "Efficiency": 6.0,
       "CreatureType": 0,
       "RechargeTime": 1.25,
       "AmmoTextureId": 254,
@@ -1108,9 +1039,7 @@
     "Tool": {
       "MeleeDamage": 6,
       "RangeDamage": 10,
-      "Level": 3,
-      "Efficiency": 0.0,
-      "ToolType": 7,
+      "Efficiency": 10.0,
       "CreatureType": 0,
       "RechargeTime": 1.5,
       "AmmoTextureId": 254,

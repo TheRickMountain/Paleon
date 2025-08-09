@@ -805,9 +805,6 @@
     <None Update="Content\Technologies\technologies_data.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Content\toolTypes.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="Content\world_generation.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

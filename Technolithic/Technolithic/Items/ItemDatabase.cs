@@ -18,7 +18,6 @@ namespace Technolithic
         public static List<Item> Clothes = new List<Item>();
         public static List<Item> TopClothes = new List<Item>();
         public static List<Item> Decayable = new List<Item>();
-        public static Dictionary<CreatureType, Dictionary<ToolType, List<Item>>> Tools = new Dictionary<CreatureType, Dictionary<ToolType, List<Item>>>();
         public static Dictionary<int, string> ItemCategories = new Dictionary<int, string>();
         public static Dictionary<StatusEffectId, List<Item>> StatusEffectRemovers = new Dictionary<StatusEffectId, List<Item>>();
         
@@ -26,15 +25,6 @@ namespace Technolithic
 
         public static void Initialize()
         {
-            Tools.Add(CreatureType.Animal, new Dictionary<ToolType, List<Item>>());
-            Tools.Add(CreatureType.Settler, new Dictionary<ToolType, List<Item>>());
-
-            foreach(ToolType toolType in Enum.GetValues(typeof(ToolType)))
-            {
-                Tools[CreatureType.Animal].Add(toolType, new List<Item>());
-                Tools[CreatureType.Settler].Add(toolType, new List<Item>());
-            }
-
             foreach(CreatureType creatureType in  Enum.GetValues(typeof(CreatureType)))
             {
                 interactionTypeTools.Add(creatureType, new Dictionary<InteractionType, List<Item>>());
@@ -82,8 +72,6 @@ namespace Technolithic
                     tool.Initialize();
                     item.SetAsTool(tool);
 
-                    Tools[tool.CreatureType][tool.ToolType].Add(item);
-                    
                     foreach(InteractionType interactionType in tool.InteractionTypes)
                     {
                         interactionTypeTools[tool.CreatureType][interactionType].Add(item);
@@ -119,23 +107,6 @@ namespace Technolithic
                 }
 
                 AddItem(key, item);
-            }
-
-            foreach (var toolType in Enum.GetValues(typeof(ToolType)))
-            {
-                if (Tools[CreatureType.Settler].ContainsKey((ToolType)toolType))
-                {
-                    List<Item> settlerToolsItems = Tools[CreatureType.Settler][(ToolType)toolType];
-                    Tools[CreatureType.Settler][(ToolType)toolType] = settlerToolsItems.OrderBy(x => x.Tool.Level).ToList();
-                    Tools[CreatureType.Settler][(ToolType)toolType].Reverse();
-                }
-
-                if (Tools[CreatureType.Animal].ContainsKey((ToolType)toolType))
-                {
-                    List<Item> animalToolsItems = Tools[CreatureType.Animal][(ToolType)toolType];
-                    Tools[CreatureType.Animal][(ToolType)toolType] = animalToolsItems.OrderBy(x => x.Tool.Level).ToList();
-                    Tools[CreatureType.Animal][(ToolType)toolType].Reverse();
-                }
             }
 
             SortInteractionTypeToolsByEfficiency();

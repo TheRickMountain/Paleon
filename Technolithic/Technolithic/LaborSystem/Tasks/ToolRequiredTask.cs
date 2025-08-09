@@ -9,17 +9,17 @@ namespace Technolithic
     public abstract class ToolRequiredTask : Task
     {
 
-        private ToolType toolType;
+        private InteractionType interactionType;
         private Tool tool;
 
-        public ToolRequiredTask(CreatureCmp owner, ToolType toolType) : base(owner)
+        public ToolRequiredTask(CreatureCmp owner, InteractionType interactionType) : base(owner)
         {
-            this.toolType = toolType;
+            this.interactionType = interactionType;
         }
 
         public override void BeforeUpdate()
         {
-            ItemContainer itemContainer = Owner.CreatureEquipment.TryGetTool(toolType);
+            ItemContainer itemContainer = Owner.CreatureEquipment.TryGetTool(interactionType);
 
             if (itemContainer != null)
             {
@@ -31,9 +31,9 @@ namespace Technolithic
 
         public override void Complete()
         {
-            if (Owner.CreatureEquipment.TryGetTool(toolType) != null)
+            if (Owner.CreatureEquipment.TryGetTool(interactionType) != null)
             {
-                Owner.CreatureEquipment.DegradeTool(toolType, 1);
+                Owner.CreatureEquipment.DecreaseToolDurability(interactionType, 1);
             }
 
             Owner.CreatureEquipment.ToolItemContainer = null;

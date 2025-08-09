@@ -14,7 +14,7 @@ namespace Technolithic
         private int weightToTake;
 
         public SupplyFuelTask(CreatureCmp creatureCmp, BuildingCmp buildingToSupply, Item itemToTake) 
-            : base(creatureCmp, ToolType.Hauling)
+            : base(creatureCmp, InteractionType.Haul)
         {
             this.buildingToSupply = buildingToSupply;
             this.itemToTake = itemToTake;

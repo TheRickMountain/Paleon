@@ -41,7 +41,7 @@ namespace Technolithic
             {
                 TBigButtonUI interactionButton;
 
-                InteractionData interactionData = Engine.InteractionsDatabase.GetInteractionData(interactionType);
+                InteractionData interactionData = Engine.InteractionsDatabase.TryGetInteractionData(interactionType);
 
                 if (interactionButtonDict.ContainsKey(interactionType) == false)
                 {

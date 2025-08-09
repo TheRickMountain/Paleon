@@ -150,6 +150,8 @@ namespace Technolithic
 
             AchievementDatabase.Initialize(new Tileset(ResourceManager.GetTexture("achievements_icons"), 16, 16));
 
+            InteractionsDatabase = new InteractionsDatabase();
+
             ItemDatabase.Initialize();
 
             ImportSettlerRation();
@@ -165,8 +167,6 @@ namespace Technolithic
             ImportSeasons();
 
             TechnologyDatabase.Initialize(ContentDirectory);
-
-            InteractionsDatabase = new InteractionsDatabase();
 
             MainMenuScene = new MainMenuScene();
 

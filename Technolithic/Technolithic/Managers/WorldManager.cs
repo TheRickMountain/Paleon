@@ -360,38 +360,6 @@ namespace Technolithic
             return (null, null);
         }
 
-        public Tuple<Inventory, Item> FindTool(CreatureCmp creature, ToolType toolType)
-        {
-            int creatureRoomId = creature.Movement.CurrentTile.Room.ZoneId;
-
-            // Сначала ищем на складе
-            StorageBuildingCmp storage = StorageManager.GetStorageWithToolItem(creature, toolType);
-            if (storage != null)
-            {
-                Item item = storage.GetAvailableToolItem(creature, toolType);
-                return Tuple.Create(storage.Inventory, item);
-            }
-
-            if (TilesThatHaveItems[creatureRoomId].Count != 0)
-            {
-                // Теперь ищем на тайлах
-                foreach (var item in ItemDatabase.Tools[creature.CreatureType][toolType])
-                {
-                    if (!TilesThatHaveItems[creatureRoomId].ContainsKey(item))
-                        continue;
-
-                    if (TilesThatHaveItems[creatureRoomId][item].Count == 0)
-                        continue;
-
-                    Inventory inventory = TilesThatHaveItems[creatureRoomId][item][0];
-
-                    return Tuple.Create(inventory, item);
-                }
-            }
-
-            return null;
-        }
-
         public bool IsCraftingRecipeOpened(CraftingRecipe craftingRecipe)
         {
             if (openedCraftingRecipes.ContainsKey(craftingRecipe) == false)

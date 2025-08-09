@@ -37,20 +37,20 @@ namespace Technolithic
             {
                 case MovementState.Success:
                     {
-                        if (Owner.CreatureEquipment.HasTool(ToolType.HuntingRange))
+                        if (Owner.CreatureEquipment.HasTool(InteractionType.HuntRange))
                         {
                             int realDistance = Utils.GetDistance(Owner.Movement.CurrentTile, targetCreatureCmp.Movement.CurrentTile);
                             if(realDistance <= 15)
                             {
                                 if (realDistance > 1)
                                 {
-                                    Owner.CreatureEquipment.ToolItemContainer = Owner.CreatureEquipment.TryGetTool(ToolType.HuntingRange);
+                                    Owner.CreatureEquipment.ToolItemContainer = Owner.CreatureEquipment.TryGetTool(InteractionType.HuntRange);
 
                                     Owner.DoRangeAttack(targetCreatureCmp);
                                 }
                                 else
                                 {
-                                    Owner.CreatureEquipment.ToolItemContainer = Owner.CreatureEquipment.TryGetTool(ToolType.HuntingMelee);
+                                    Owner.CreatureEquipment.ToolItemContainer = Owner.CreatureEquipment.TryGetTool(InteractionType.HuntMelee);
 
                                     Owner.DoMeleeAttack(targetCreatureCmp);
                                 }
@@ -70,7 +70,7 @@ namespace Technolithic
                             }
                             else
                             {
-                                Owner.CreatureEquipment.ToolItemContainer = Owner.CreatureEquipment.TryGetTool(ToolType.HuntingMelee);
+                                Owner.CreatureEquipment.ToolItemContainer = Owner.CreatureEquipment.TryGetTool(InteractionType.HuntMelee);
 
                                 Owner.DoMeleeAttack(targetCreatureCmp);
                             }
@@ -86,7 +86,7 @@ namespace Technolithic
                     break;
                 case MovementState.Running:
                     {
-                        if (Owner.CreatureEquipment.HasTool(ToolType.HuntingRange))
+                        if (Owner.CreatureEquipment.HasTool(InteractionType.HuntRange))
                         {
                             Tile targetCreatureTile = targetCreatureCmp.Movement.NextTile;
 

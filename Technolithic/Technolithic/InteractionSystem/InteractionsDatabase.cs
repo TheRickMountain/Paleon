@@ -35,7 +35,8 @@ namespace Technolithic
         Fertilize,
         Butcher,
         HuntMelee,
-        HuntRange
+        HuntRange,
+        Haul
     }
 
     public class InteractionsDatabase
@@ -253,9 +254,14 @@ namespace Technolithic
             interactionTypeDataDict.Add(interactionData.InteractionType, interactionData);
         }
 
-        public InteractionData GetInteractionData(InteractionType interactionType)
+        public InteractionData TryGetInteractionData(InteractionType interactionType)
         {
-            return interactionTypeDataDict[interactionType];
+            if(interactionTypeDataDict.ContainsKey(interactionType))
+            {
+                return interactionTypeDataDict[interactionType];
+            }
+
+            return null;
         }
     }
 }

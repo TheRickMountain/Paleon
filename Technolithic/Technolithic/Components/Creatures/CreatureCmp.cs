@@ -466,6 +466,39 @@ namespace Technolithic
             CreatureStats.IsAsleep = value;
         }
 
+        public void EquipItem(ItemContainer itemContainer)
+        {
+            Item item = itemContainer.Item;
+            
+            if (item.Outfit != null)
+            {
+                if (item.Outfit.IsTop)
+                {
+                    if (CreatureEquipment.TopClothingItemContainer != null)
+                    {
+                        Movement.CurrentTile.Inventory.AddCargo(CreatureEquipment.TopClothingItemContainer);
+                    }
+
+                    CreatureEquipment.TopClothingItemContainer = itemContainer;
+                }
+                else
+                {
+                    if (CreatureEquipment.ClothingItemContainer != null)
+                    {
+                        Movement.CurrentTile.Inventory.AddCargo(CreatureEquipment.ClothingItemContainer);
+                    }
+
+                    CreatureEquipment.ClothingItemContainer = itemContainer;
+                }
+            }
+            else if (item.Tool != null)
+            {
+                CreatureEquipment.EquipTool(itemContainer);
+
+                // TODO: выкинуть инструмент который больше не используется
+            }
+        }
+
         public override void Render()
         {
             if (BodyImage != null && BodyImage.Active)
@@ -753,7 +786,7 @@ namespace Technolithic
 
             creatureSaveData.Tools = new List<Tuple<int, int, float>>();
 
-            foreach(ItemContainer toolItemContainer in CreatureEquipment.GetTools())
+            foreach(ItemContainer toolItemContainer in CreatureEquipment.AllTools)
             {
                 int itemId = toolItemContainer.Item.Id;
                 int itemAmount = toolItemContainer.FactWeight;

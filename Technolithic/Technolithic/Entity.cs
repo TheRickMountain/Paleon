@@ -82,7 +82,7 @@ namespace Technolithic
         {
             IsRemoved = true;
 
-            Layer.Remove(this);
+            Layer?.Remove(this);
 
             Layer = null;
         }

@@ -132,7 +132,7 @@ namespace Technolithic
                         AddTask(creature, new TakeItemFromInventoryTask(creature, inventoryWithItem, requiredItem, 1));
                     }
 
-                    InteractionData interactionData = Engine.InteractionsDatabase.GetInteractionData(interactionType);
+                    InteractionData interactionData = Engine.InteractionsDatabase.TryGetInteractionData(interactionType);
 
                     InteractTask interactTask = new InteractTask(creature, interactable, interactionData);
                     AddTask(creature, interactTask);

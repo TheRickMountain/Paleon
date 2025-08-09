@@ -13,6 +13,7 @@ namespace Technolithic
         private CreatureEquipment creatureEquipment;
         private CreatureCmp creature;
 
+        // TODO: обновлять список экипировки подписавшись на изменения в CreatureEquipment
         public EquipmentListViewUI(Scene scene, int elementWidth, int elementHeight, int rowsCount, int columnsCount = 1,
             bool scrollable = true, bool showBackground = true, bool scrollerLeft = false) :
             base(scene, elementWidth, elementHeight, rowsCount, columnsCount, scrollable, showBackground, scrollerLeft)
@@ -32,7 +33,7 @@ namespace Technolithic
             ListViewUIScript listView = GetComponent<ListViewUIScript>();
             listView.Clear();
 
-            foreach (ItemContainer toolItemContainer in creatureEquipment.GetTools())
+            foreach (ItemContainer toolItemContainer in creatureEquipment.AllTools)
             {
                 AddItemContainer(listView, toolItemContainer);
             }
@@ -49,22 +50,30 @@ namespace Technolithic
             Item item = itemContainer.Item;
             int factWeight = itemContainer.FactWeight;
 
+            MNode itemNode;
+
             if (!itemsNodes.ContainsKey(item))
             {
-                MNode itemNode = CreateItemNode(item);
+                itemNode = CreateItemNode(item);
                 itemsNodes.Add(item, itemNode);
             }
+            else
+            {
+                itemNode = itemsNodes[item];
+            }
 
-            MNode iconNode = itemsNodes[item].GetChildByName("Icon");
+            itemNode.SetMetadata("item_container", itemContainer);
+
+            MNode iconNode = itemNode.GetChildByName("Icon");
 
             iconNode.Tooltips = item.GetInformation();
 
             float durability = itemContainer.Durability;
             iconNode.Tooltips += $"\n{Localization.GetLocalizedText("durability")}: {(int)durability}/{item.Durability}";
 
-            listView.AddItem(itemsNodes[item]);
+            listView.AddItem(itemNode);
 
-            ((MyText)itemsNodes[item].GetChildByName("Name")).Text = $"{item.Name} [{factWeight}]";
+            ((MyText)itemNode.GetChildByName("Name")).Text = $"{item.Name} [{factWeight}]";
         }
 
         private MNode CreateItemNode(Item item)
@@ -77,7 +86,6 @@ namespace Technolithic
             removeEquipmentButton.Height = 32;
             removeEquipmentButton.Tooltips = Localization.GetLocalizedText("remove_equipment");
             removeEquipmentButton.ButtonScript.AddOnClickedCallback(OnRemoveEquipmentButtonPressed);
-            removeEquipmentButton.SetMetadata("equipment", item);
 
             MImageUI itemIcon = new MImageUI(ParentNode.Scene);
             itemIcon.Image.Texture = item.Icon;
@@ -105,24 +113,21 @@ namespace Technolithic
 
         private void OnRemoveEquipmentButtonPressed(bool value, ButtonScript buttonScript)
         {
-            Item item = buttonScript.ParentNode.GetMetadata<Item>("equipment");
+            ItemContainer itemContainer = buttonScript.ParentNode.ParentNode.GetMetadata<ItemContainer>("item_container");
+
+            Item item = itemContainer.Item;
 
             Tile tile = creature.Movement.CurrentTile;
 
             if (item.Tool != null)
             {
-                ItemContainer toolItemContainer = creature.CreatureEquipment.ToolItemContainer;
-
-                if (toolItemContainer != null)
+                if (creature.CreatureEquipment.ToolItemContainer == itemContainer)
                 {
-                    // Попытка снять инструмент, который используется на данный момент
-                    if (toolItemContainer.Item.Tool.ToolType == item.Tool.ToolType)
-                    {
-                        creature.CancelLabor();
-                    }
+                    // INFO: отменяем работу, так как инструмент был использован в текущей работе
+                    creature.CancelLabor();
                 }
 
-                creatureEquipment.ThrowTool(item.Tool.ToolType, tile);
+                creatureEquipment.ThrowTool(itemContainer, tile);
             }
             else if (item.Outfit != null)
             {

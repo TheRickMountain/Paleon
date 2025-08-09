@@ -1354,7 +1354,7 @@ namespace Technolithic
             float iconScale = 0.5f;
             foreach (InteractionType interactionType in interactable.AvailableInteractions)
             {
-                InteractionData interactionData = Engine.InteractionsDatabase.GetInteractionData(interactionType);
+                InteractionData interactionData = Engine.InteractionsDatabase.TryGetInteractionData(interactionType);
 
                 if (interactionData == null) continue;
 

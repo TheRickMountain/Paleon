@@ -56,15 +56,15 @@ namespace Technolithic
                     {
                         int distance = Utils.GetDistance(Owner.Movement.CurrentTile, TargetAnimal.Movement.CurrentTile);
 
-                        if (distance <= 12 && distance > 1 && Owner.CreatureEquipment.HasTool(ToolType.HuntingRange))
+                        if (distance <= 12 && distance > 1 && Owner.CreatureEquipment.HasTool(InteractionType.HuntRange))
                         {
-                            Owner.CreatureEquipment.ToolItemContainer = Owner.CreatureEquipment.TryGetTool(ToolType.HuntingRange);
+                            Owner.CreatureEquipment.ToolItemContainer = Owner.CreatureEquipment.TryGetTool(InteractionType.HuntRange);
 
                             Owner.DoRangeAttack(TargetAnimal);
                         }
                         else if (distance <= 1)
                         {
-                            Owner.CreatureEquipment.ToolItemContainer = Owner.CreatureEquipment.TryGetTool(ToolType.HuntingMelee);
+                            Owner.CreatureEquipment.ToolItemContainer = Owner.CreatureEquipment.TryGetTool(InteractionType.HuntMelee);
 
                             Owner.DoMeleeAttack(TargetAnimal);
                         }
@@ -85,7 +85,7 @@ namespace Technolithic
                     {
                         int distance = Utils.GetDistance(Owner.Movement.CurrentTile, TargetAnimal.Movement.CurrentTile);
 
-                        if (distance <= 12 && distance > 1 && Owner.CreatureEquipment.HasTool(ToolType.HuntingRange))
+                        if (distance <= 12 && distance > 1 && Owner.CreatureEquipment.HasTool(InteractionType.HuntRange))
                         {
                             Owner.Movement.ResetPath();
                         }

@@ -1,32 +1,12 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Technolithic
 {
-    public enum ToolType
-    {
-        Woodcutting,
-        Pick,
-        HuntingMelee,
-        Harvesting,
-        Plowing,
-        Fishing,
-        Hauling,
-        HuntingRange,
-        None
-    }
-
     public class Tool 
     {
         public int MeleeDamage { get; init; }
         public int RangeDamage { get; init; }
-        public int Level { get; init; }
         public float Efficiency { get; init; }
-        public ToolType ToolType { get; init; }
         public CreatureType CreatureType { get; init; }
         public float RechargeTime { get; init; }
         public int AmmoTextureId { get; init; }
@@ -67,7 +47,19 @@ namespace Technolithic
                 info += $"\n{Localization.GetLocalizedText("recharge_time")}: {RechargeTime}";
             }
 
-            info += $"\n{Localization.GetLocalizedText("tool_type")}: {ToolType}"; // TODO: temp
+            if (InteractionTypes.Length > 0)
+            {
+                info += $"\n{Localization.GetLocalizedText("available_interactions")}:";
+
+                foreach (InteractionType interactionType in InteractionTypes)
+                {
+                    InteractionData interaction = Engine.InteractionsDatabase.TryGetInteractionData(interactionType);
+
+                    if (interaction == null) continue;
+
+                    info += $"\n- {interaction.DisplayName}";
+                }
+            }
 
             if(Efficiency > 0)
             {

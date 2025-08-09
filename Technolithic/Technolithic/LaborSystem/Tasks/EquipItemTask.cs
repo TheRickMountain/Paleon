@@ -71,48 +71,9 @@ namespace Technolithic
                             {
                                 Owner.Slider.Active = false;
 
-                                ItemContainer oldEquipmentItemContainer = TryGetOldEquipmentItemContainer();
-
                                 ItemContainer equipmentItemContainer = Owner.Inventory.PopItem(itemToEquip, weightToEquip)[0];
 
-                                if (itemToEquip.Outfit != null)
-                                {
-                                    if (itemToEquip.Outfit.IsTop)
-                                    {
-                                        Owner.CreatureEquipment.TopClothingItemContainer = equipmentItemContainer;
-                                    }
-                                    else
-                                    {
-                                        Owner.CreatureEquipment.ClothingItemContainer = equipmentItemContainer;
-                                    }
-                                }
-                                else if(itemToEquip.Tool != null)
-                                {
-                                    Owner.CreatureEquipment.EquipTool(equipmentItemContainer);
-                                }
-
-                                // Старую экипировку пробуем выложить либо на тайл, либо в склад
-                                if(oldEquipmentItemContainer != null)
-                                {
-                                    // Предмет был взят со склада
-                                    if(inventory.BuildingCmp != null)
-                                    {
-                                        StorageBuildingCmp storage = (StorageBuildingCmp)inventory.BuildingCmp;
-
-                                        if (storage.EmptySpaceCount > 0 && storage.IsItemAllowed(oldEquipmentItemContainer.Item))
-                                        {
-                                            storage.Inventory.AddCargo(oldEquipmentItemContainer);
-                                        }
-                                        else
-                                        {
-                                            Owner.Movement.CurrentTile.Inventory.AddCargo(oldEquipmentItemContainer);
-                                        }
-                                    }
-                                    else // Предмет был взят с тайла
-                                    {
-                                        Owner.Movement.CurrentTile.Inventory.AddCargo(oldEquipmentItemContainer);
-                                    }
-                                }
+                                Owner.EquipItem(equipmentItemContainer);
 
                                 State = TaskState.Success;
                             }
@@ -159,29 +120,6 @@ namespace Technolithic
                     }
                     break;
             }
-        }
-
-        private ItemContainer TryGetOldEquipmentItemContainer()
-        {
-            CreatureEquipment creatureEquipment = Owner.CreatureEquipment;
-
-            if (itemToEquip.Outfit != null)
-            {
-                if (itemToEquip.Outfit.IsTop)
-                {
-                    return creatureEquipment.TopClothingItemContainer;
-                }
-                else
-                {
-                    return creatureEquipment.ClothingItemContainer;
-                }
-            }
-            else if (itemToEquip.Tool != null)
-            {
-                return creatureEquipment.TryGetTool(itemToEquip.Tool.ToolType);
-            }
-
-            throw new NotImplementedException($"Item '{itemToEquip.Name}' is not equipment");
         }
 
         public override void Cancel()

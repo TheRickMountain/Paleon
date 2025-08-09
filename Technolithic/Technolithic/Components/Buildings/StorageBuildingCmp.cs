@@ -355,20 +355,6 @@ namespace Technolithic
             return 0;
         }
 
-        public Item GetAvailableToolItem(CreatureCmp creature, ToolType toolType)
-        {
-            if (ItemDatabase.Tools[creature.CreatureType].ContainsKey(toolType) == false)
-                return null;
-
-            foreach(var item in ItemDatabase.Tools[creature.CreatureType][toolType])
-            {
-                if (Inventory.GetAvailableItemCount(item) > 0)
-                    return item;
-            }
-
-            return null;
-        }
-
         public Item GetAvailableTool(CreatureCmp creature, InteractionType interactionType)
         {
             foreach(Item item in ItemDatabase.GetInteractionTypeTools(creature.CreatureType, interactionType))

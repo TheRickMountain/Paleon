@@ -12,6 +12,8 @@ namespace Technolithic
         public Item Product { get; private set; }
         public float PercentPerDay { get; private set; }
         public Item RequiredItem { get; private set; }
+        public InteractionType InteractionType { get; set; }
+        public ToolUsageStatus ToolUsageStatus { get; set; }
 
         public AnimalProduct(Item product, float percentPerDay, Item requiredItem)
         {
@@ -116,13 +118,16 @@ namespace Technolithic
 
             if (JObject["product"].IsNullOrEmpty() == false)
             {
-                JToken productJToken = JObject["product"];
+                JToken jtoken = JObject["product"];
 
-                Item item = ItemDatabase.GetItemById(productJToken["item"].Value<int>());
-                float percentPerDay = productJToken["percentPerDay"].Value<float>();
-                Item requiredItem = ItemDatabase.GetItemById(productJToken["requiredItem"].Value<int>());
+                Item item = ItemDatabase.GetItemByName(jtoken["item"].Value<string>());
+                float percentPerDay = jtoken["percentPerDay"].Value<float>();
+                Item requiredItem = ItemDatabase.GetItemByName(jtoken["requiredItem"].Value<string>());
 
                 AnimalProduct = new AnimalProduct(item, percentPerDay, requiredItem);
+
+                AnimalProduct.InteractionType = Utils.ParseEnum<InteractionType>(jtoken["InteractionType"].Value<string>());
+                AnimalProduct.ToolUsageStatus = Utils.ParseEnum<ToolUsageStatus>(jtoken["ToolUsageStatus"].Value<string>());
             }
 
             Ration = new List<Item>();

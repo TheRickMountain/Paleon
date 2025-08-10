@@ -32,8 +32,10 @@
     "defense":  0,
     "product":  {
                     "percentPerDay":  33.33,
-                    "item":  18,
-                    "requiredItem":  -1
+                    "item":  "wool",
+                    "requiredItem":  null,
+                    "InteractionType": "AutoShear",
+                    "ToolUsageStatus": "Required"
                 },
     "ButcheringData": {
         "Loot": {

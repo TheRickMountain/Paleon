@@ -47,6 +47,8 @@ namespace Technolithic
 
         private bool isFrozen = false; // INFO: Animal can't work, eat, sleep when it's frozen
 
+        private AnimalProduct _animalProduct;
+
         public AnimalCmp(CreatureStats stats, AnimalTemplate animalTemplate, Tile spawnTile, InteractablesManager interactablesManager) 
             : base(animalTemplate.Texture, null, animalTemplate.Name, stats, animalTemplate.MovementSpeed, CreatureType.Animal,
                   spawnTile, interactablesManager)
@@ -88,7 +90,8 @@ namespace Technolithic
 
             if (AnimalTemplate.AnimalProduct != null)
             {
-                percentPerMinute = AnimalTemplate.AnimalProduct.PercentPerDay / (WorldState.HOURS_PER_CYCLE * WorldState.MINUTES_PER_HOUR);
+                _animalProduct = AnimalTemplate.AnimalProduct;
+                percentPerMinute = _animalProduct.PercentPerDay / (WorldState.HOURS_PER_CYCLE * WorldState.MINUTES_PER_HOUR);
             }
 
             BodyImage.Width = AnimalTemplate.TextureWidth;
@@ -127,24 +130,23 @@ namespace Technolithic
             }
             else
             {
-                AddAvailableInteraction(InteractionType.Slaughter, LaborType.Ranching, ToolUsageStatus.NotUsed);
+                AddAvailableInteraction(InteractionType.Slaughter, LaborType.Ranching, ToolUsageStatus.Required);
                 SetInteractionDuration(InteractionType.Slaughter, 1.0f);
 
                 ActivateInteraction(InteractionType.Slaughter);
 
-                AnimalProduct animalProduct = AnimalTemplate.AnimalProduct;
-                if (animalProduct != null)
+                if (_animalProduct != null)
                 {
-                    AddAvailableInteraction(InteractionType.GatherAnimalProduct, LaborType.Ranching, ToolUsageStatus.NotUsed);
-                    SetInteractionDuration(InteractionType.GatherAnimalProduct, 1.0f);
+                    AddAvailableInteraction(_animalProduct.InteractionType, LaborType.Ranching, _animalProduct.ToolUsageStatus);
+                    SetInteractionDuration(_animalProduct.InteractionType, 1.0f);
 
-                    Item requiredItem = animalProduct.RequiredItem;
+                    Item requiredItem = _animalProduct.RequiredItem;
                     if (requiredItem != null)
                     {
-                        SetInteractionItems(InteractionType.GatherAnimalProduct, true, requiredItem);
+                        SetInteractionItems(_animalProduct.InteractionType, true, requiredItem);
                     }
 
-                    MarkInteraction(InteractionType.GatherAnimalProduct);
+                    MarkInteraction(_animalProduct.InteractionType);
                 }
             }
         }
@@ -189,35 +191,29 @@ namespace Technolithic
         {
             base.CompleteInteraction(interactionType);
 
-            switch (interactionType)
+            if (_animalProduct != null && _animalProduct.InteractionType == interactionType)
             {
-                case InteractionType.Slaughter:
-                    {
-                        Die(CauseOfDeath.Slaughtered, null);
-                    }
-                    break;
-                case InteractionType.GatherAnimalProduct:
-                    {
-                        ProductReadyPercent = 0;
+                ProductReadyPercent = 0;
 
-                        Item product = AnimalTemplate.AnimalProduct.Product;
-                        Movement.CurrentTile.Inventory.AddCargo(new ItemContainer(product, 1, product.Durability));
-                    }
-                    break;
-                case InteractionType.Domesticate:
-                    {
-                        float domesticationChance = AnimalTemplate.DomesticationData.Chance;
+                Item product = _animalProduct.Product;
+                Movement.CurrentTile.Inventory.AddCargo(new ItemContainer(product, 1, product.Durability));
+            }
+            else if (interactionType == InteractionType.Slaughter)
+            {
+                Die(CauseOfDeath.Slaughtered, null);
+            }
+            else if (interactionType == InteractionType.Domesticate)
+            {
+                float domesticationChance = AnimalTemplate.DomesticationData.Chance;
 
-                        if (Calc.Random.Chance(domesticationChance))
-                        {
-                            TurnToDomesticated();
-                        }
-                        else
-                        {
-                            CreatureThoughts?.AddThought("nevermind", 3);
-                        }
-                    }
-                    break;
+                if (Calc.Random.Chance(domesticationChance))
+                {
+                    TurnToDomesticated();
+                }
+                else
+                {
+                    CreatureThoughts?.AddThought("nevermind", 3);
+                }
             }
         }
 
@@ -225,10 +221,14 @@ namespace Technolithic
         {
             base.OnInteractionStarted(interactionType, creature);
 
+            if (_animalProduct != null && _animalProduct.InteractionType == interactionType)
+            {
+                isFrozen = true;
+            }
+
             switch(interactionType)
             {
                 case InteractionType.Domesticate:
-                case InteractionType.GatherAnimalProduct:
                 case InteractionType.Slaughter:
                     {
                         isFrozen = true;
@@ -243,10 +243,14 @@ namespace Technolithic
         {
             base.OnInteractionEnded(interactionType, creature);
 
+            if (_animalProduct != null && _animalProduct.InteractionType == interactionType)
+            {
+                isFrozen = false;
+            }
+
             switch (interactionType)
             {
                 case InteractionType.Domesticate:
-                case InteractionType.GatherAnimalProduct:
                 case InteractionType.Slaughter:
                     {
                         isFrozen = false;
@@ -314,25 +318,25 @@ namespace Technolithic
                     UnmarkInteraction(InteractionType.Domesticate);
                 }
 
-                if (AnimalTemplate.AnimalProduct != null)
+                if (_animalProduct != null)
                 {
                     if (ProductReadyPercent >= 100)
                     {
-                        if (IsInteractionActivated(InteractionType.GatherAnimalProduct) == false)
+                        if (IsInteractionActivated(_animalProduct.InteractionType) == false)
                         {
-                            ActivateInteraction(InteractionType.GatherAnimalProduct);
+                            ActivateInteraction(_animalProduct.InteractionType);
                         }
                     }
                     else
                     {
-                        if (IsInteractionActivated(InteractionType.GatherAnimalProduct))
+                        if (IsInteractionActivated(_animalProduct.InteractionType))
                         {
-                            DeactivateInteraction(InteractionType.GatherAnimalProduct);
+                            DeactivateInteraction(_animalProduct.InteractionType);
                         }
                     }
                 }
 
-                if (AnimalTemplate.AnimalProduct != null)
+                if (_animalProduct != null)
                 {
                     if (ProductReadyPercent < 100)
                     {
@@ -488,9 +492,12 @@ namespace Technolithic
                             AnimalCmp adultAnimal = GameplayScene.Instance.SpawnAnimal(spawnTile.X, spawnTile.Y, adultAnimalTemplate, adultAnimalTemplate.DaysUntilAging);
                             if (IsDomesticated)
                             {
-                                adultAnimal.MarkInteraction(InteractionType.GatherAnimalProduct);
+                                if (_animalProduct != null)
+                                {
+                                    adultAnimal.MarkInteraction(_animalProduct.InteractionType);
+                                }
 
-                                if(IsInteractionMarked(InteractionType.Slaughter))
+                                if (IsInteractionMarked(InteractionType.Slaughter))
                                 {
                                     adultAnimal.MarkInteraction(InteractionType.Slaughter);
                                 }
@@ -809,9 +816,9 @@ namespace Technolithic
                 }
             }
 
-            if (AnimalTemplate.AnimalProduct != null)
+            if (_animalProduct != null)
             {
-                baseInfo += $"\n{AnimalTemplate.AnimalProduct.Product.Name}: {(int)ProductReadyPercent}%";
+                baseInfo += $"\n{_animalProduct.Product.Name}: {(int)ProductReadyPercent}%";
             }
 
             baseInfo += $"\n{Localization.GetLocalizedText("food")}: ";

@@ -141,6 +141,8 @@ namespace Technolithic
 
         public static Item GetItemByName(string name)
         {
+            if (string.IsNullOrEmpty(name)) return null;
+
             return Items[name];
         }
 

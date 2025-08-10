@@ -24,8 +24,7 @@ namespace Technolithic
 
             _butcheringData = animalTemplate.ButcheringData;
 
-            // TODO: для разделки туши нужен инструмент
-            AddAvailableInteraction(InteractionType.Butcher, LaborType.Cook);
+            AddAvailableInteraction(InteractionType.Butcher, LaborType.Cook, ToolUsageStatus.Required);
 
             SetInteractionDuration(InteractionType.Butcher, _butcheringData.DurationInHours * WorldState.MINUTES_PER_HOUR);
 

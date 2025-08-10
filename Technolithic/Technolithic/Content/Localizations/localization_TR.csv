@@ -64,6 +64,8 @@ auto_clean_pen,Auto-clean pen
 auto_collect_honey,Automatically collect honey
 auto_collect_wild_honey,Automatically collect wild honey
 auto_harvest,Auto-harvest
+auto_milk,
+auto_shear,
 automatically_empty_the_trap,Automatically empty the trap
 automatically_mine_spawned_deposits,Kaynaklar otomatik olarak olusturulacak
 autumn,Sonbahar
@@ -78,10 +80,12 @@ bee_hive,Ari kovani
 bee_hive_description,Yabani ari kovanindan iki kat verimli bal üretir
 beekeeping,Aricilik
 beeswax,Balmumu
+biface,
 bloomery,Eritme firini
 boar,Yaban domuzu
 bone,Kemik
 bone_harpoon,Kemik zipkin
+bone_knife,
 bone_sickle,Kemik orak
 bone_spear,Kemik mizrak
 bone_tools,Kemikten aletler
@@ -96,6 +100,7 @@ bronze_age,Bronz cagi
 bronze_axe,Bronz balta
 bronze_harpoon,Bronz zipkin
 bronze_hoe,Bronz capa
+bronze_knife,
 bronze_pick,Bronz kazma
 bronze_sickle,Bronz orak
 bronze_smelting,Bronz eritme
@@ -146,6 +151,7 @@ copper_axe,Bakir balta
 copper_deposit,Bakir yatagi
 copper_harpoon,Bakir zipkin
 copper_hoe,Bakir capa
+copper_knife,
 copper_ore,Bakir cevheri
 copper_pick,Bakir kazma
 copper_reaper,Copper reaper
@@ -293,6 +299,7 @@ iron_bloom,Ham demir
 iron_deposit,Demir yatagi
 iron_harpoon,Demir zipkin
 iron_hoe,Demir capa
+iron_knife,
 iron_ore,Demir cevheri
 iron_pick,Demir kazma
 iron_sickle,Demir orak
@@ -474,6 +481,7 @@ stone_deposit,Tas yatagi
 stone_floor,Tas zemin
 stone_harpoon,Tas zipkin
 stone_hoe,Tas capa
+stone_knife,
 stone_pick,Tas kazma
 stone_pieces,Tas parcalari
 stone_sickle,Tas orak

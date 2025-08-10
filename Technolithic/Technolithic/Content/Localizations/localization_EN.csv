@@ -64,6 +64,8 @@ auto_clean_pen,Auto-clean pen
 auto_collect_honey,Automatically collect honey
 auto_collect_wild_honey,Automatically collect wild honey
 auto_harvest,Auto-harvest
+auto_milk,Auto-milk
+auto_shear,Auto-shear
 automatically_empty_the_trap,Automatically empty the trap
 automatically_mine_spawned_deposits,Automatically mine spawned deposits
 autumn,Autumn
@@ -78,10 +80,12 @@ bee_hive,Bee hive
 bee_hive_description,Produces honey twice as efficiently as a wild hive
 beekeeping,Beekeeping
 beeswax,Beeswax
+biface,Biface
 bloomery,Bloomery
 boar,Boar
 bone,Bone
 bone_harpoon,Bone harpoon
+bone_knife,Bone knife
 bone_sickle,Bone sickle
 bone_spear,Bone spear
 bone_tools,Bone tools
@@ -96,6 +100,7 @@ bronze_age,Bronze Age
 bronze_axe,Bronze axe
 bronze_harpoon,Bronze harpoon
 bronze_hoe,Bronze hoe
+bronze_knife,Bronze knife
 bronze_pick,Bronze pick
 bronze_sickle,Bronze sickle
 bronze_smelting,Bronze smelting
@@ -146,6 +151,7 @@ copper_axe,Copper axe
 copper_deposit,Copper deposit
 copper_harpoon,Copper harpoon
 copper_hoe,Copper hoe
+copper_knife,Copper knife
 copper_ore,Copper ore
 copper_pick,Copper pick
 copper_reaper,Copper reaper
@@ -293,6 +299,7 @@ iron_bloom,Iron bloom
 iron_deposit,Iron deposit
 iron_harpoon,Iron harpoon
 iron_hoe,Iron hoe
+iron_knife,Iron knife
 iron_ore,Iron ore
 iron_pick,Iron pick
 iron_sickle,Iron sickle
@@ -474,6 +481,7 @@ stone_deposit,Stone deposit
 stone_floor,Stone floor
 stone_harpoon,Stone harpoon
 stone_hoe,Stone hoe
+stone_knife,Stone knife
 stone_pick,Stone pick
 stone_pieces,Stone pieces
 stone_sickle,Stone sickle

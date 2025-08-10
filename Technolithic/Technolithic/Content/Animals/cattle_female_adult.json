@@ -32,8 +32,10 @@
     "defense":  0,
     "product":  {
                     "percentPerDay":  100,
-                    "item":  8,
-                    "requiredItem":  1
+                    "item":  "pot_of_milk",
+                    "requiredItem":  "ceramic_pot",
+                    "InteractionType": "AutoMilk",
+                    "ToolUsageStatus": "NotUsed"
                 },
     "ButcheringData": {
         "Loot": {

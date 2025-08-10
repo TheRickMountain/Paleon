@@ -64,6 +64,8 @@ auto_clean_pen,Auto-clean pen
 auto_collect_honey,Automatically collect honey
 auto_collect_wild_honey,Automatically collect wild honey
 auto_harvest,Auto-harvest
+auto_milk,
+auto_shear,
 automatically_empty_the_trap,Automatically empty the trap
 automatically_mine_spawned_deposits,Automatischer Abbau von gespawnten Vorkommen
 autumn,Herbst
@@ -78,10 +80,12 @@ bee_hive,Bienenstock
 bee_hive_description,Produziert doppelt so viel Honig wie ein wilder Bienenstock
 beekeeping,Imkerei
 beeswax,Bienenwachs
+biface,
 bloomery,Rennofen
 boar,Wildschwein
 bone,Knochen
 bone_harpoon,Knochenharpune
+bone_knife,
 bone_sickle,Knochensichel
 bone_spear,Knochenspeer
 bone_tools,Knochenwerkzege
@@ -96,6 +100,7 @@ bronze_age,Bronzezeit
 bronze_axe,Bronzeaxt
 bronze_harpoon,Bronzeharpune
 bronze_hoe,Bronzehacke
+bronze_knife,
 bronze_pick,Bronzespitzhacke
 bronze_sickle,Bronzesichel
 bronze_smelting,Bronze schmelzen
@@ -146,6 +151,7 @@ copper_axe,Kupferaxt
 copper_deposit,Kupfervorkommen
 copper_harpoon,Kupferharpune
 copper_hoe,Kupferhacke
+copper_knife,
 copper_ore,Kupfererz
 copper_pick,Kupferspitzhacke
 copper_reaper,Drescher aus Kupfer
@@ -293,6 +299,7 @@ iron_bloom,Luppe
 iron_deposit,Eisenvorkommen
 iron_harpoon,Eisenharpune
 iron_hoe,Eisenhacke
+iron_knife,
 iron_ore,Eisenerz
 iron_pick,Eisenspitzhacke
 iron_sickle,Eisensichel
@@ -474,6 +481,7 @@ stone_deposit,Steinvorkommen
 stone_floor,Steinboden
 stone_harpoon,Steinharpune
 stone_hoe,Steinhacke
+stone_knife,
 stone_pick,Steinspitzhacke
 stone_pieces,Kiesel
 stone_sickle,Steinsichel

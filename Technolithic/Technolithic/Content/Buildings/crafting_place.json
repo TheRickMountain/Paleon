@@ -303,6 +303,23 @@
         ]
       },
       {
+        "main_item": "biface",
+        "time": 20,
+        "result": [
+          {
+            "item": "biface",
+            "weight": 2
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "stone",
+            "weight": 1,
+            "show": true
+          }
+        ]
+      },
+      {
         "main_item": "wooden_spear",
         "time": 30,
         "result": [

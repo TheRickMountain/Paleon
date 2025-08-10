@@ -64,6 +64,8 @@ auto_clean_pen,Авто-чистка загона
 auto_collect_honey,Автоматически собирать мед
 auto_collect_wild_honey,Автоматически собирать дикий мед
 auto_harvest,Авто-сбор урожая
+auto_milk,Авто-доение
+auto_shear,Авто-стрижка
 automatically_empty_the_trap,Автоматически опустошать ловушку
 automatically_mine_spawned_deposits,Automatically mine spawned deposits
 autumn,Осень
@@ -78,10 +80,12 @@ bee_hive,Пчелиный улей
 bee_hive_description,Производит мед в 2 раза эффективнее дикого улья
 beekeeping,Пчеловодство
 beeswax,Пчелиный воск
+biface,Бифас
 bloomery,Сыродутная печь
 boar,Кабан
 bone,Кость
 bone_harpoon,Костяной гарпун
+bone_knife,Костяной нож
 bone_sickle,Костяной серп
 bone_spear,Костяное копье
 bone_tools,Костяные инструменты
@@ -96,6 +100,7 @@ bronze_age,Бронзовый век
 bronze_axe,Бронзовый топор
 bronze_harpoon,Бронзовый гарпун
 bronze_hoe,Бронзовая мотыга
+bronze_knife,Бронзовый нож
 bronze_pick,Бронзовая кирка
 bronze_sickle,Бронзовый серп
 bronze_smelting,Выплавка бронзы
@@ -104,7 +109,7 @@ build_irrigation_canal,Построить оросительный канал
 building,Строительство
 bunch_of_peas,Связка гороха
 burial,Захоронение
-butcher,Разделать
+butcher,Разделать тушу
 buying,Покупка
 calm,Безветренно
 cancel,Отменить
@@ -146,6 +151,7 @@ copper_axe,Медный топор
 copper_deposit,Залежь меди
 copper_harpoon,Медный гарпун
 copper_hoe,Медная мотыга
+copper_knife,Медный нож
 copper_ore,Медная руда
 copper_pick,Медная кирка
 copper_reaper,Медная жатвенная машина
@@ -293,6 +299,7 @@ iron_bloom,Крица
 iron_deposit,Залежь железа
 iron_harpoon,Железный гарпун
 iron_hoe,Железная мотыга
+iron_knife,Железный нож
 iron_ore,Железная руда
 iron_pick,Железная кирка
 iron_sickle,Железный серп
@@ -450,7 +457,7 @@ side_item,Побочный предмет
 skin_drying_rack,Сушилка для шкур
 skin_tent,Хижина из шкур
 skins_outfit,Одежда из шкур
-slaughter,Забить
+slaughter,Забить животное
 sleep,Сон
 sleeping,Сон
 sleeping_on_the_ground,Сон на земле
@@ -474,6 +481,7 @@ stone_deposit,Залежь камня
 stone_floor,Каменный пол
 stone_harpoon,Каменный гарпун
 stone_hoe,Каменная мотыга
+stone_knife,Каменный нож
 stone_pick,Каменная кирка
 stone_pieces,Кусочки камней
 stone_sickle,Каменный серп

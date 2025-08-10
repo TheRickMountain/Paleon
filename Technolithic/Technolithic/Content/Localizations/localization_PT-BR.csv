@@ -64,6 +64,8 @@ auto_clean_pen,Auto-clean pen
 auto_collect_honey,Automatically collect honey
 auto_collect_wild_honey,Automatically collect wild honey
 auto_harvest,Auto-harvest
+auto_milk,
+auto_shear,
 automatically_empty_the_trap,Automatically empty the trap
 automatically_mine_spawned_deposits,Automatically mine spawned deposits
 autumn,Outono
@@ -78,10 +80,12 @@ bee_hive,Colmeia de abelhas
 bee_hive_description,Produz mel duas vezes mais eficientemente que uma colmeia selvagem
 beekeeping,Apicultura
 beeswax,Cera de abelha
+biface,
 bloomery,Forja catalã
 boar,Javali
 bone,Osso
 bone_harpoon,Arpão de osso
+bone_knife,
 bone_sickle,Foice de osso
 bone_spear,Lança de osso
 bone_tools,Ferramentas de osso
@@ -96,6 +100,7 @@ bronze_age,Era do Bronze
 bronze_axe,Machado de bronze
 bronze_harpoon,Arpão de bronze
 bronze_hoe,Enxada de bronze
+bronze_knife,
 bronze_pick,Picareta de bronze
 bronze_sickle,Foice de bronze
 bronze_smelting,Fundição de bronze
@@ -146,6 +151,7 @@ copper_axe,Machado de cobre
 copper_deposit,Depósito de cobre
 copper_harpoon,Arpão de cobre
 copper_hoe,Enxada de cobre
+copper_knife,
 copper_ore,Minério de cobre
 copper_pick,Picareta de cobre
 copper_reaper,Foice de cobre
@@ -293,6 +299,7 @@ iron_bloom,Lupa
 iron_deposit,Depósito de ferro
 iron_harpoon,Arpão de ferro
 iron_hoe,Enxada de ferro
+iron_knife,
 iron_ore,Minério de ferro
 iron_pick,Picareta de ferro
 iron_sickle,Foice de ferro
@@ -474,6 +481,7 @@ stone_deposit,Depósito de pedra
 stone_floor,Piso de pedra
 stone_harpoon,Arpão de pedra
 stone_hoe,Enxada de pedra
+stone_knife,
 stone_pick,Picareta de pedra
 stone_pieces,Pedaços de pedra
 stone_sickle,Foice de pedra

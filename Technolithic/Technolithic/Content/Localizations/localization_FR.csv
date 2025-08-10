@@ -64,6 +64,8 @@ auto_clean_pen,Auto-clean pen
 auto_collect_honey,Automatically collect honey
 auto_collect_wild_honey,Automatically collect wild honey
 auto_harvest,Auto-harvest
+auto_milk,
+auto_shear,
 automatically_empty_the_trap,Automatically empty the trap
 automatically_mine_spawned_deposits,Miner automatiquement les gisements créés
 autumn,Automne
@@ -78,10 +80,12 @@ bee_hive,Ruche d'abeilles
 bee_hive_description,Produit du miel deux fois plus efficacement qu'une ruche sauvage
 beekeeping,Apiculture
 beeswax,Cire d'abeille
+biface,
 bloomery,Bas fourneau
 boar,Sanglier
 bone,Os
 bone_harpoon,Harpon en os
+bone_knife,
 bone_sickle,Faucille en os
 bone_spear,Lance en os
 bone_tools,Outils en os
@@ -96,6 +100,7 @@ bronze_age,Âge du Bronze
 bronze_axe,Hache en bronze
 bronze_harpoon,Harpon en bronze
 bronze_hoe,Houe en bronze
+bronze_knife,
 bronze_pick,Pioche en bronze
 bronze_sickle,Faucille en bronze
 bronze_smelting,Fonderie de bronze
@@ -146,6 +151,7 @@ copper_axe,Hache en cuivre
 copper_deposit,Gisement de cuivre
 copper_harpoon,Harpon en cuivre
 copper_hoe,Houe en cuivre
+copper_knife,
 copper_ore,Minerai de cuivre
 copper_pick,Pioche en cuivre
 copper_reaper,Faucheuse en cuivre
@@ -293,6 +299,7 @@ iron_bloom,Fleur de fer
 iron_deposit,Gisement de fer
 iron_harpoon,Harpon en fer
 iron_hoe,Houe en fer
+iron_knife,
 iron_ore,Minerai de fer
 iron_pick,Pioche en fer
 iron_sickle,Faucille en fer
@@ -474,6 +481,7 @@ stone_deposit,Gisement de pierres
 stone_floor,Sol en pierre
 stone_harpoon,Harpon en pierre
 stone_hoe,Houe en pierre
+stone_knife,
 stone_pick,Pioche en pierre
 stone_pieces,Morceaux de pierre
 stone_sickle,Faucille en pierre

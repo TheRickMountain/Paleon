@@ -64,6 +64,8 @@ auto_clean_pen,Auto-clean pen
 auto_collect_honey,Automatically collect honey
 auto_collect_wild_honey,Automatically collect wild honey
 auto_harvest,Auto-harvest
+auto_milk,
+auto_shear,
 automatically_empty_the_trap,Automatically empty the trap
 automatically_mine_spawned_deposits,Автоматично добувати поклади
 autumn,Осінь
@@ -78,10 +80,12 @@ bee_hive,Бджолиний вулик
 bee_hive_description,Виробляє мід в 2 рази ефективніше ніж дикий вулик
 beekeeping,Бджолярство
 beeswax,Бджолиний віск
+biface,
 bloomery,Доменна піч
 boar,Кабан
 bone,Кістка
 bone_harpoon,Костяний гарпун
+bone_knife,
 bone_sickle,Костяний серп
 bone_spear,Кістяний спис
 bone_tools,Кісткові інструменти
@@ -96,6 +100,7 @@ bronze_age,Бронзовий вік
 bronze_axe,Бронзова сокира
 bronze_harpoon,Бронзовий гарпун
 bronze_hoe, Бронзова мотика
+bronze_knife,
 bronze_pick,Бронзове кайло
 bronze_sickle,Бронзовий серп
 bronze_smelting,Виплавлення бронзи
@@ -146,6 +151,7 @@ copper_axe,Мідна сокира
 copper_deposit,Родовище міді
 copper_harpoon,Мідний гарпун
 copper_hoe,Мідна мотика
+copper_knife,
 copper_ore,Мідна руда
 copper_pick,Мідне кайло
 copper_reaper,Мідна жатка
@@ -293,6 +299,7 @@ iron_bloom,Криця
 iron_deposit,Родовище заліза
 iron_harpoon,Залізний гарпун
 iron_hoe,Залізна мотика
+iron_knife,
 iron_ore,Залізна руда
 iron_pick,Залізне кайло
 iron_sickle,Залізний серп
@@ -474,6 +481,7 @@ stone_deposit,Родовище каміння
 stone_floor,Камяна підлога
 stone_harpoon,Камяний гарпун
 stone_hoe,Камяна мотика
+stone_knife,
 stone_pick,Камяне кайло
 stone_pieces,Шматочки каміння
 stone_sickle,Камяний серп

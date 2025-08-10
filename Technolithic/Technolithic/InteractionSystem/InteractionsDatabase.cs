@@ -24,7 +24,6 @@ namespace Technolithic
         ProduceEnergy,
         Craft,
         Slaughter,
-        GatherAnimalProduct,
         Domesticate,
         Hunt,
         AutoHarvest,
@@ -36,7 +35,9 @@ namespace Technolithic
         Butcher,
         HuntMelee,
         HuntRange,
-        Haul
+        Haul,
+        AutoShear,
+        AutoMilk
     }
 
     public class InteractionsDatabase
@@ -168,9 +169,16 @@ namespace Technolithic
                 InteractionIconDisplayState.OnMarked));
 
             AddInteractionData(new InteractionData(
-                InteractionType.GatherAnimalProduct,
-                "gather_animal_product", // TODO: localization
-                RenderManager.Pixel, // TODO: icon
+                InteractionType.AutoShear,
+                Localization.GetLocalizedText("auto_shear"),
+                AssetManager.GetTexture("Sprites", "ui").GetSubtexture(144, 176, 16, 16),
+                Color.Orange,
+                InteractionIconDisplayState.OnMarked));
+
+            AddInteractionData(new InteractionData(
+                InteractionType.AutoMilk,
+                Localization.GetLocalizedText("auto_milk"),
+                AssetManager.GetTexture("Sprites", "ui").GetSubtexture(128, 176, 16, 16),
                 Color.Orange,
                 InteractionIconDisplayState.OnMarked));
 

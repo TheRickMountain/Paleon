@@ -5,7 +5,7 @@
     "HasIcon": false,
     "Age": "Paleolithic",
     "RequiredXP": 50,
-    "UnlockedItems": ["stone_spear", "stone_harpoon", "stone_axe", "stone_pick", "stone_sickle", "stone_hoe"],
+    "UnlockedItems": ["stone_spear", "stone_harpoon", "stone_axe", "stone_pick", "stone_sickle", "stone_hoe", "stone_knife"],
     "UnlockedActions": ["Chop", "Mine"],
     "Parents": []
   },
@@ -100,7 +100,7 @@
     "HasIcon": false,
     "Age": "Mesolithic",
     "RequiredXP": 175,
-    "UnlockedItems": ["bone_sickle", "bone_spear", "bone_harpoon"],
+    "UnlockedItems": ["bone_sickle", "bone_spear", "bone_harpoon", "bone_knife"],
     "Parents": [0]
   },
   {
@@ -316,7 +316,7 @@
     "Age": "Chalcolithic",
     "RequiredXP": 1000,
     "UnlockedBuildings": ["bloomery", "stone_anvil", "mortar", "clay_charcoal_kiln"],
-    "UnlockedItems": ["copper_ore", "crushed_copper_ore", "copper", "copper_spear", "copper_harpoon", "copper_axe", "copper_pick", "copper_sickle", "copper_hoe", "charcoal"],
+    "UnlockedItems": ["copper_ore", "crushed_copper_ore", "copper", "copper_spear", "copper_harpoon", "copper_axe", "copper_pick", "copper_sickle", "copper_hoe", "copper_knife", "charcoal"],
     "Parents": [0, 6, 5]
   },
   {
@@ -325,7 +325,7 @@
     "HasIcon": false,
     "Age": "BronzeAge",
     "RequiredXP": 2000,
-    "UnlockedItems": ["tin_ore", "crushed_tin_ore", "bronze", "bronze_spear", "bronze_harpoon", "bronze_axe", "bronze_pick", "bronze_sickle", "bronze_hoe"],
+    "UnlockedItems": ["tin_ore", "crushed_tin_ore", "bronze", "bronze_spear", "bronze_harpoon", "bronze_axe", "bronze_pick", "bronze_sickle", "bronze_hoe", "bronze_knife"],
     "Parents": [15]
   },
   {
@@ -344,7 +344,7 @@
     "Age": "IronAge",
     "RequiredXP": 4000,
     "UnlockedBuildings": ["copper_anvil"],
-    "UnlockedItems": ["iron_ore", "crushed_iron_ore", "iron_bloom", "iron", "iron_spear", "iron_harpoon", "iron_axe", "iron_pick", "iron_sickle", "iron_hoe"],
+    "UnlockedItems": ["iron_ore", "crushed_iron_ore", "iron_bloom", "iron", "iron_spear", "iron_harpoon", "iron_axe", "iron_pick", "iron_sickle", "iron_hoe", "iron_knife"],
     "Parents": [16]
   },
   {

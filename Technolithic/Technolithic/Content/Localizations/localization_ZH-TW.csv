@@ -64,6 +64,8 @@ auto_clean_pen,Auto-clean pen
 auto_collect_honey,Automatically collect honey
 auto_collect_wild_honey,Automatically collect wild honey
 auto_harvest,Auto-harvest
+auto_milk,
+auto_shear,
 automatically_empty_the_trap,Automatically empty the trap
 automatically_mine_spawned_deposits,自動開採生成的礦物。
 autumn,秋
@@ -78,10 +80,12 @@ bee_hive,蜂巢
 bee_hive_description,生產蜂蜜的效率是野生蜂巢的兩倍。
 beekeeping,養蜂
 beeswax,蜂蠟
+biface,
 bloomery,鍛造爐
 boar,野豬
 bone,骨頭
 bone_harpoon,骨魚叉
+bone_knife,
 bone_sickle,骨鐮刀
 bone_spear,骨矛
 bone_tools,骨製工具
@@ -96,6 +100,7 @@ bronze_age,青銅時代
 bronze_axe,青銅斧
 bronze_harpoon,青銅魚叉
 bronze_hoe,青銅鋤頭
+bronze_knife,
 bronze_pick,青銅鎬
 bronze_sickle,青銅鐮刀
 bronze_smelting,冶煉青銅礦
@@ -146,6 +151,7 @@ copper_axe,銅斧
 copper_deposit,銅礦床
 copper_harpoon,銅魚叉
 copper_hoe,銅鋤頭
+copper_knife,
 copper_ore,銅礦
 copper_pick,銅鎬
 copper_reaper,銅收割機
@@ -293,6 +299,7 @@ iron_bloom,鐵坯
 iron_deposit,鐵礦床
 iron_harpoon,鐵魚叉
 iron_hoe,鐵鋤頭
+iron_knife,
 iron_ore,鐵礦
 iron_pick,鐵鎬
 iron_sickle,鐵鐮刀
@@ -474,6 +481,7 @@ stone_deposit,石礦
 stone_floor,石路
 stone_harpoon,石魚叉
 stone_hoe,石鋤頭
+stone_knife,
 stone_pick,石鎬
 stone_pieces,石塊
 stone_sickle,石鐮刀

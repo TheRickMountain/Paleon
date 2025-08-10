@@ -288,6 +288,144 @@
     "ItemCategory": 4,
     "Value": 0
   },
+  "biface": {
+    "Id": 128,
+    "key": "biface",
+    "Durability": 20,
+    "ItemCategory": 7,
+    "Value": 2,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 2,
+      "RangeDamage": 0,
+      "Efficiency": 0.5,
+      "CreatureType": 0,
+      "RechargeTime": 1.25,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "InteractionTypes": ["Butcher"]
+    }
+  },
+  "stone_knife": {
+    "Id": 165,
+    "key": "stone_knife",
+    "Durability": 30,
+    "ItemCategory": 7,
+    "Value": 3,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 2,
+      "RangeDamage": 0,
+      "Efficiency": 1.0,
+      "CreatureType": 0,
+      "RechargeTime": 1.25,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "InteractionTypes": ["Butcher", "Slaughter", "AutoShear"]
+    }
+  },
+  "bone_knife": {
+    "Id": 166,
+    "key": "bone_knife",
+    "Durability": 35,
+    "ItemCategory": 7,
+    "Value": 3,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 2,
+      "RangeDamage": 0,
+      "Efficiency": 1.5,
+      "CreatureType": 0,
+      "RechargeTime": 1.25,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "InteractionTypes": ["Butcher", "Slaughter", "AutoShear"]
+    }
+  },
+  "copper_knife": {
+    "Id": 167,
+    "key": "copper_knife",
+    "Durability": 40,
+    "ItemCategory": 7,
+    "Value": 4,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 2,
+      "RangeDamage": 0,
+      "Efficiency": 2.0,
+      "CreatureType": 0,
+      "RechargeTime": 1.25,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "InteractionTypes": ["Butcher", "Slaughter", "AutoShear"]
+    }
+  },
+  "bronze_knife": {
+    "Id": 168,
+    "key": "bronze_knife",
+    "Durability": 50,
+    "ItemCategory": 7,
+    "Value": 5,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 2,
+      "RangeDamage": 0,
+      "Efficiency": 3.0,
+      "CreatureType": 0,
+      "RechargeTime": 1.25,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "InteractionTypes": ["Butcher", "Slaughter", "AutoShear"]
+    }
+  },
+  "iron_knife": {
+    "Id": 169,
+    "key": "iron_knife",
+    "Durability": 70,
+    "ItemCategory": 7,
+    "Value": 7,
+    "Equipment": {
+      "TextureData": null,
+      "PositionX": -22,
+      "PositionY": 10,
+      "Rotation": 40
+    },
+    "Tool": {
+      "MeleeDamage": 2,
+      "RangeDamage": 0,
+      "Efficiency": 5.0,
+      "CreatureType": 0,
+      "RechargeTime": 1.25,
+      "AmmoTextureId": -1,
+      "ProjectileSpeed": 0,
+      "InteractionTypes": ["Butcher", "Slaughter", "AutoShear"]
+    }
+  },
   "stone_sickle": {
     "Id": 139,
     "key": "stone_sickle",

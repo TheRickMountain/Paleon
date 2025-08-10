@@ -63,7 +63,7 @@ namespace Technolithic
 
             if(Efficiency > 0)
             {
-                info += $"\n{Localization.GetLocalizedText("efficiency")}: +{(int)(Efficiency * 100)}%";
+                info += $"\n{Localization.GetLocalizedText("efficiency")}: {(int)(Efficiency * 100)}%";
             }
 
             if(ProjectileSpeed != 0)

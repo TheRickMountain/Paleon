@@ -64,6 +64,8 @@ auto_clean_pen,Auto-clean pen
 auto_collect_honey,Automatically collect honey
 auto_collect_wild_honey,Automatically collect wild honey
 auto_harvest,Auto-harvest
+auto_milk,
+auto_shear,
 automatically_empty_the_trap,Automatically empty the trap
 automatically_mine_spawned_deposits,生成された鉱床を自動的に採掘
 autumn,秋
@@ -78,10 +80,12 @@ bee_hive,ミツバチの巣
 bee_hive_description,野生のハチの巣の２倍の効率でハチミツを生産
 beekeeping,養蜂
 beeswax,蜜ろう
+biface,
 bloomery,塊鉄炉
 boar,イノシシ
 bone,骨
 bone_harpoon,骨の銛
+bone_knife,
 bone_sickle,骨の鎌
 bone_spear,骨の槍
 bone_tools,骨の道具
@@ -96,6 +100,7 @@ bronze_age,青銅器時代
 bronze_axe,青銅の斧
 bronze_harpoon,青銅の銛
 bronze_hoe,青銅の鍬
+bronze_knife,
 bronze_pick,青銅のツルハシ
 bronze_sickle,青銅の鎌
 bronze_smelting,青銅の製錬
@@ -146,6 +151,7 @@ copper_axe,銅の斧
 copper_deposit,銅鉱床
 copper_harpoon,銅の銛
 copper_hoe,銅の鍬
+copper_knife,
 copper_ore,銅鉱石
 copper_pick,銅のツルハシ
 copper_reaper,銅の刈り取り機
@@ -293,6 +299,7 @@ iron_bloom,鉄の華
 iron_deposit,鉄鉱床
 iron_harpoon,鉄の銛
 iron_hoe,鉄の鍬
+iron_knife,
 iron_ore,鉄鉱石
 iron_pick,鉄のツルハシ
 iron_sickle,鉄の鎌
@@ -476,6 +483,7 @@ stone_deposit,石鉱床
 stone_floor,石床
 stone_harpoon,石の銛
 stone_hoe,石の鍬
+stone_knife,
 stone_pick,石のツルハシ
 stone_pieces,石片
 stone_sickle,石の鎌

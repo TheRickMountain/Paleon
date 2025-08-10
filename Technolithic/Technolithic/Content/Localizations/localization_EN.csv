@@ -501,6 +501,7 @@ tarpan,Tarpan
 technologies,Technologies
 temperature,Temperature
 the_animal_was_attacked,The animal was attacked
+the_plant_x_failed_to_germinate,"The plant ""{0}"" failed to germinate"
 the_settlers_are_freezing,The settlers are freezing
 the_settlers_are_starving,The settlers are starving
 the_settlers_are_unhappy,The settlers are unhappy

@@ -390,7 +390,28 @@ namespace Technolithic
         {
             float growthSpeedPerMinute = GetGrowthSpeedPerMinute();
 
+            int lastGrowthStage = currentStage;
+
             AddGrowingProgress(growthSpeedPerMinute);
+
+            // INFO: A plant planted in unplowed land has a 50% chance of germinating from seed.
+            if (currentStage != lastGrowthStage)
+            {
+                if (lastGrowthStage == 0 && currentStage == 1)
+                {
+                    if(GetCenterTile().GroundType != GroundType.FarmPlot)
+                    {
+                        if (Calc.Random.Chance(0.5f))
+                        {
+                            DestructBuilding();
+
+                            string msg = Localization.GetLocalizedText("the_plant_x_failed_to_germinate", BuildingTemplate.Name);
+                            GameplayScene.UIRootNodeScript?.NotificationsUI.GetComponent<NotificationsUIScript>()
+                                .AddNotification(msg, NotificationLevel.WARNING, null);
+                        }
+                    }
+                }
+            }
         }
 
         public void AddGrowingProgress(float value)

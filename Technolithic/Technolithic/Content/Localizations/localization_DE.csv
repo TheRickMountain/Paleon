@@ -119,7 +119,6 @@ catch_fish,Catch fish
 cattle,Rind
 causes,Ursachen
 ceramic_pot,Keramikkrug
-chainmail,Kettenhemd
 chalcolithic,Chalkolithikum
 chance,Chance
 charcoal,Holzkohle
@@ -518,7 +517,6 @@ tin_ore,Zinnerz
 to_do_the_job_of_x_you_need_tools,To do the job of {0} you need tools
 tool_optional,Tool (Optional)
 tool_required,Tool (Required)
-tool_type,Art von Werkzeug
 tools,Werkzeug
 torch,Fackel
 torch_description,Used to illuminate a space

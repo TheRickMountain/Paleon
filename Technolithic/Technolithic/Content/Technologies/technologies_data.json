@@ -488,15 +488,6 @@
     "Parents": [20, 69]
   },
   {
-    "Id": 32,
-    "Name": "chainmail",
-    "HasIcon": false,
-    "Age": "IronAge",
-    "RequiredXP": 4000,
-    "UnlockedItems": ["chainmail"],
-    "Parents": [17]
-  },
-  {
     "Id": 33,
     "Name": "crossbow",
     "HasIcon": false,

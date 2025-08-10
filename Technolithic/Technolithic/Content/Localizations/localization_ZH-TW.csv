@@ -119,7 +119,6 @@ catch_fish,Catch fish
 cattle,牛
 causes,原因
 ceramic_pot,陶罐
-chainmail,鏈甲
 chalcolithic,紅銅時代
 chance,機會
 charcoal,木炭
@@ -517,7 +516,6 @@ tin_ore,錫礦
 to_do_the_job_of_x_you_need_tools,你需要 {0} 工具才能工作。
 tool_optional,Tool (Optional)
 tool_required,Tool (Required)
-tool_type,工具種類
 tools,工具
 torch,火炬
 torch_description,用木材照明。

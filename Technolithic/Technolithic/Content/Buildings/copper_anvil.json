@@ -184,27 +184,6 @@
             "weight": 1
           }
         ]
-      },
-      {
-        "main_item": "chainmail",
-        "time": 50,
-        "result": [
-          {
-            "item": "chainmail",
-            "weight": 1
-          }
-        ],
-        "ingredients": [
-          {
-            "item": "iron",
-            "weight": 1,
-            "show": true
-          },
-          {
-            "item": "charcoal",
-            "weight": 1
-          }
-        ]
       }
     ]
   },

@@ -119,7 +119,6 @@ catch_fish,Catch fish
 cattle,牛
 causes,誘発
 ceramic_pot,陶磁器の壺
-chainmail,チェインメイル
 chalcolithic,金石併用時代
 chance,チャンス
 charcoal,木炭
@@ -520,7 +519,6 @@ tin_ore,錫鉱石
 to_do_the_job_of_x_you_need_tools,{0}をするには道具が必要
 tool_optional,Tool (Optional)
 tool_required,Tool (Required)
-tool_type,道具タイプ
 tools,道具
 torch,松明
 torch_description,空間を照らすために使用

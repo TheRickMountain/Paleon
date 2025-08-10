@@ -1309,30 +1309,6 @@
       "IsTop": false
     }
   },
-  "chainmail": {
-    "Id": 30,
-    "key": "chainmail",
-    "Durability": 150,
-    "IsDecayable": true,
-    "ItemCategory": 8,
-    "Value": 9,
-    "Equipment": {
-      "TextureData": {
-        "Source": "clothes",
-        "X": 0,
-        "Y": 24,
-        "Width": 24,
-        "Height": 24
-      },
-      "PositionX": -12,
-      "PositionY": 12,
-      "Rotation": 0
-    },
-    "Outfit": {
-      "Defense": 8,
-      "IsTop": false
-    }
-  },
   "leather_outfit": {
     "Id": 24,
     "key": "leather_outfit",

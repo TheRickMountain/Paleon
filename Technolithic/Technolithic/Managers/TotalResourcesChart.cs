@@ -31,17 +31,9 @@ namespace Technolithic
                 TotalSettlersFoodCount += weight;
             }
 
-            foreach (CrafterBuildingCmp crafter in GameplayScene.WorldManager.ManualCrafters)
+            foreach (CrafterBuildingCmp crafter in GameplayScene.WorldManager.Crafters)
             {
                 crafter.UpdateTargetCraftingRecipe();
-            }
-
-            foreach (var kvp in GameplayScene.WorldManager.AutoCrafterBuildings)
-            {
-                foreach (var crafter in kvp.Value)
-                {
-                    crafter.UpdateTargetCraftingRecipe();
-                }
             }
 
             CbOnItemCountChanged?.Invoke(item, GetItemCount(item));

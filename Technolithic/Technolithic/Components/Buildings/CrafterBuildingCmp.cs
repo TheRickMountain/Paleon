@@ -115,6 +115,24 @@ namespace Technolithic
                 }
             }
 
+            if (Crafter.IsAutocrafter)
+            {
+                if (CanCraft && IsPrepared == false)
+                {
+                    if (IsInteractionActivated(InteractionType.PrepareCrafter) == false)
+                    {
+                        ActivateInteraction(InteractionType.PrepareCrafter);
+                    }
+                }
+                else
+                {
+                    if (IsInteractionActivated(InteractionType.PrepareCrafter))
+                    {
+                        DeactivateInteraction(InteractionType.PrepareCrafter);
+                    }
+                }
+            }
+
             if (Crafter.IsAutocrafter && CanCraft && IsPrepared)
             {
                 ProcessCraft(null);
@@ -140,6 +158,11 @@ namespace Technolithic
                 case InteractionType.Craft:
                     {
                         CraftItem();
+                    }
+                    break;
+                case InteractionType.PrepareCrafter:
+                    {
+                        IsPrepared = true;
                     }
                     break;
             }
@@ -557,7 +580,11 @@ namespace Technolithic
 
             if(Crafter.IsAutocrafter)
             {
+                AddAvailableInteraction(InteractionType.PrepareCrafter, Crafter.LaborType);
 
+                SetInteractionDuration(InteractionType.PrepareCrafter, 0.1f * WorldState.MINUTES_PER_HOUR);
+
+                MarkInteraction(InteractionType.PrepareCrafter);
             }
             else
             {
@@ -566,14 +593,7 @@ namespace Technolithic
                 MarkInteraction(InteractionType.Craft);
             }
 
-            if (Crafter.IsAutocrafter == false)
-            {
-                GameplayScene.WorldManager.ManualCrafters.Add(this);
-            }
-            else
-            {
-                GameplayScene.WorldManager.AutoCrafterBuildings[Crafter.LaborType].Add(this);
-            }
+            GameplayScene.WorldManager.Crafters.Add(this);
 
             var craftersSortedByMainItems = GameplayScene.WorldManager.CraftersSortedByMainItems;
 
@@ -598,14 +618,7 @@ namespace Technolithic
         {
             base.DestructBuilding();
 
-            if (Crafter.IsAutocrafter == false)
-            {
-                GameplayScene.WorldManager.ManualCrafters.Remove(this);
-            }
-            else
-            {
-                GameplayScene.WorldManager.AutoCrafterBuildings[Crafter.LaborType].Remove(this);
-            }
+            GameplayScene.WorldManager.Crafters.Remove(this);
 
             var craftersSortedByMainItems = GameplayScene.WorldManager.CraftersSortedByMainItems;
 

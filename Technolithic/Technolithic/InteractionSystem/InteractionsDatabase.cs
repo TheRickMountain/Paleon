@@ -23,6 +23,7 @@ namespace Technolithic
         AutoCleanPen,
         ProduceEnergy,
         Craft,
+        PrepareCrafter,
         Slaughter,
         Domesticate,
         Hunt,
@@ -156,6 +157,13 @@ namespace Technolithic
 
             AddInteractionData(new InteractionData(
                 InteractionType.Craft,
+                Localization.GetLocalizedText("craft_an_item"),
+                ResourceManager.CraftIcon,
+                Color.Orange,
+                InteractionIconDisplayState.OnUnmarked));
+
+            AddInteractionData(new InteractionData(
+                InteractionType.PrepareCrafter,
                 Localization.GetLocalizedText("craft_an_item"),
                 ResourceManager.CraftIcon,
                 Color.Orange,

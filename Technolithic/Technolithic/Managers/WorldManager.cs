@@ -48,9 +48,7 @@ namespace Technolithic
         public List<BuildingCmp> FuelConsumerBuildings { get; set; } = new List<BuildingCmp>();
         public List<AnimalPenBuildingCmp> AnimalPenBuildings { get; set; } = new List<AnimalPenBuildingCmp>();
 
-        public List<CrafterBuildingCmp> ManualCrafters { get; private set; } = new();
-
-        public Dictionary<LaborType, List<CrafterBuildingCmp>> AutoCrafterBuildings { get; set; } = new Dictionary<LaborType, List<CrafterBuildingCmp>>();
+        public List<CrafterBuildingCmp> Crafters { get; private set; } = new();
 
         public int TotalSettlersCount { get; private set; } = 0;
 
@@ -122,25 +120,6 @@ namespace Technolithic
             supplyFuelLabor.Repeat = true;
             supplyFuelLabor.IsMultiCreatureLabor = true;
             LaborManager.Add(supplyFuelLabor);
-
-            // Создание CraftLabor на основе LaborType крафтеров
-            foreach (var kvp in Engine.Instance.Buildings)
-            {
-                if (kvp.Value.BuildingType == BuildingType.Crafter)
-                {
-                    Crafter crafter = kvp.Value.Crafter;
-
-                    if (AutoCrafterBuildings.ContainsKey(crafter.LaborType) == false)
-                    {
-                        AutoCrafterBuildings.Add(crafter.LaborType, new List<CrafterBuildingCmp>());
-
-                        PrepareCrafterLabor prepareCrafterLabor = new PrepareCrafterLabor(crafter.LaborType);
-                        prepareCrafterLabor.Repeat = true;
-                        prepareCrafterLabor.IsMultiCreatureLabor = true;
-                        LaborManager.Add(prepareCrafterLabor);
-                    }
-                }
-            }
 
             tileSelector = new NewSprite();
             tileSelector.Texture = TextureBank.UITexture.GetSubtexture(176, 0, 16, 16);

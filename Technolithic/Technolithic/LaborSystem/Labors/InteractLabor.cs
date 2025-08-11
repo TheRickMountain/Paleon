@@ -1,6 +1,4 @@
-﻿using Steamworks.Ugc;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Technolithic
 {
@@ -13,17 +11,43 @@ namespace Technolithic
             _interactablesManager = interactablesManager;
         }
 
+        private List<(Interactable interactable, InteractionType interactionType, int distance, int priority)> _sortedInteractionPairs = new();
+
         public override bool Check(CreatureCmp creature)
         {
             int creatureZoneId = creature.GetRoomId();
+            Room creatureRoom = creature.Movement.CurrentTile.Room;
 
             var interactionPairs = _interactablesManager.GetInteractionPairs(creatureZoneId, LaborType);
 
-            if (interactionPairs == null) return false;
+            if (interactionPairs == null || interactionPairs.Count == 0) return false;
 
-            // TODO: выбрать наиближайшую сущность (по комнате) для взаимодействия
-            // TODO: временно выбираем первую сущность из списка
+            _sortedInteractionPairs.Clear();
+
             foreach ((Interactable interactable, InteractionType interactionType) in interactionPairs)
+            {
+                Tile approachableTile = interactable.GetApproachableTile(creature);
+                if (approachableTile == null) continue;
+
+                Room interactableRoom = approachableTile.Room;
+                if (interactableRoom == null) continue;
+
+                int? distance = RoomPathfinder.FindDistance(creatureRoom, interactableRoom);
+                if (distance == null) continue;
+
+                _sortedInteractionPairs.Add((interactable, interactionType, distance.Value, interactable.Priority));
+            }
+
+            _sortedInteractionPairs.Sort((a, b) =>
+            {
+                int priorityComparison = b.priority.CompareTo(a.priority);
+                if (priorityComparison != 0)
+                    return priorityComparison;
+
+                return a.distance.CompareTo(b.distance);
+            });
+
+            foreach (var (interactable, interactionType, distance, priority) in _sortedInteractionPairs)
             {
                 if (interactionType == InteractionType.Hunt)
                 {

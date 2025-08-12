@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Penumbra;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -158,21 +159,23 @@ namespace Technolithic
                     break;
             }
 
-            switch (interactable.GetInteractionToolUsageStatus(interactionType))
+            if (interactable.GetInteractionToolUsageStatus(interactionType) != ToolUsageStatus.NotUsed)
             {
-                case ToolUsageStatus.Required:
-                case ToolUsageStatus.Optional:
-                    {
-                        // TODO: show animal tools too
-                        var itemsList = ItemDatabase.GetInteractionTypeTools(CreatureType.Settler, interactionType);
-                        for (int i = itemsList.Count - 1; i >= 0; i--)
-                        {
-                            Item item = itemsList[i];
+                foreach (CreatureType creatureType in Enum.GetValues<CreatureType>())
+                {
+                    var itemsList = ItemDatabase.GetInteractionTypeTools(creatureType, interactionType);
 
-                            sb.AppendLine($"- {item.Name}");
-                        }
+                    if (itemsList == null || itemsList.Count == 0) continue;
+
+                    sb.AppendLine($" {CreatureTypesData.GetCreatureTypeMultipleDisplayText(creatureType)}:");
+
+                    for (int i = itemsList.Count - 1; i >= 0; i--)
+                    {
+                        Item item = itemsList[i];
+
+                        sb.AppendLine($"   - {item.Name}");
                     }
-                    break;
+                }
             }
 
             var interactionItems = interactable.GetInteractionItems(interactionType);

@@ -72,6 +72,7 @@ namespace Technolithic
             base.CompleteBuilding();
 
             AddAvailableInteraction(InteractionType.Chop, LaborType.Chop, ToolUsageStatus.Required);
+            SetInteractionValidator(InteractionType.Chop, ValidateChop);
 
             // INFO: The tree can be cut down at any stage of growth
             ActivateInteraction(InteractionType.Chop);
@@ -81,6 +82,18 @@ namespace Technolithic
             UpdateSprite();
 
             lastSeason = GameplayScene.Instance.WorldState.CurrentSeason;
+        }
+
+        private InteractionValidationResult ValidateChop(Interactable interactable)
+        {
+            Technology technology = TechnologyDatabase.GetTechnologyThatUnlocksInteraction(InteractionType.Chop);
+            if (GameplayScene.Instance.ProgressTree.IsTechnologyUnlocked(technology) == false)
+            {
+                return InteractionValidationResult.Block(Localization.GetLocalizedText("x_technology_is_required",
+                    technology.Name));
+            }
+
+            return InteractionValidationResult.Allow();
         }
 
         public override void CompleteInteraction(InteractionType interactionType)

@@ -47,7 +47,24 @@
             AddAvailableInteraction(depositData.InteractionType, depositData.LaborType, depositData.ToolUsageStatus);
             SetInteractionDuration(depositData.InteractionType, depositData.InteractionDurationInHours * WorldState.MINUTES_PER_HOUR);
 
+            if(depositData.InteractionType == InteractionType.Mine)
+            {
+                SetInteractionValidator(InteractionType.Mine, ValidateMine);
+            }
+
             ActivateInteraction(depositData.InteractionType);
+        }
+
+        private InteractionValidationResult ValidateMine(Interactable interactable)
+        {
+            Technology technology = TechnologyDatabase.GetTechnologyThatUnlocksInteraction(InteractionType.Mine);
+            if (GameplayScene.Instance.ProgressTree.IsTechnologyUnlocked(technology) == false)
+            {
+                return InteractionValidationResult.Block(Localization.GetLocalizedText("x_technology_is_required",
+                    technology.Name));
+            }
+
+            return InteractionValidationResult.Allow();
         }
 
         public void SetStage(int stage)

@@ -12,6 +12,7 @@ namespace Technolithic
         public string Name { get; set; }
         public Scene Scene { get; private set; }
         public bool ClipContent { get; set; } = false;
+        public Color SelfColor { get; set; } = Color.White;
 
         private Action<MNode> cbOnIntersects;
 

@@ -1,15 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Technolithic
 {
     public class WorldSettingsUI : MyPanelUI
     {
-
         public WorldSettingsUI(Scene scene, string title) : base(scene, title, Color.White)
         {
             ListViewUI listView = new ListViewUI(scene, 300, 40, 8);

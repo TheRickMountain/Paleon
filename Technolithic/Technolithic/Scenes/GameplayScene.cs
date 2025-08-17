@@ -98,7 +98,7 @@ namespace Technolithic
 
             WorldName = worldSettings.Name;
 
-            WorldSize = worldSettings.Size;
+            WorldSize = worldSettings.HeightMap.GetLength(0);
 
             MouseOnUI = false;
             OnGameMenu = false;

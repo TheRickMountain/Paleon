@@ -8,14 +8,12 @@ namespace Technolithic
         private World world;
         private WorldManager worldManager;
         private readonly WorldSettings _worldSettings;
-        private readonly FastNoiseLite _noise;
 
         public WorldGenerator(World world, WorldManager worldManager, WorldSettings worldSettings)
         {
             this.world = world;
             this.worldManager = worldManager;
             _worldSettings = worldSettings;
-            _noise = new FastNoiseLite(worldSettings.Seed);
         }
 
         public void GenerateWorld()
@@ -52,9 +50,12 @@ namespace Technolithic
 
         private void CreateGround()
         {
-            for (int x = 0; x < _worldSettings.Size; x++)
+            int width = _worldSettings.HeightMap.GetLength(0);
+            int height = _worldSettings.HeightMap.GetLength(1);
+
+            for (int x = 0; x < width; x++)
             {
-                for (int y = 0; y < _worldSettings.Size; y++)
+                for (int y = 0; y < height; y++)
                 {
                     Tile tile = world.GetTileAt(x, y);
                     tile.GroundType = GroundType.Ground;
@@ -64,33 +65,34 @@ namespace Technolithic
 
         private void GenerateWater()
         {
-            _noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
-            _noise.SetFrequency(0.01f);
+            float[,] heightMap = _worldSettings.HeightMap;
+            int width = _worldSettings.HeightMap.GetLength(0);
+            int height = _worldSettings.HeightMap.GetLength(1);
 
-            for (int x = 0; x < _worldSettings.Size; x++)
+            for (int x = 0; x < width; x++)
             {
-                for (int y = 0; y < _worldSettings.Size; y++)
+                for (int y = 0; y < height; y++)
                 {
                     Tile tile = world.GetTileAt(x, y);
 
-                    float height = _noise.GetNoise(x, y);
+                    float heightValue = heightMap[x, y];
 
-                    if(height < -0.23f)
+                    if (heightValue < _worldSettings.GroundHeight)
                     {
                         tile.GroundTopType = GroundTopType.Water;
                     }
                 }
             }
 
-            for (int x = 0; x < _worldSettings.Size; x++)
+            for (int x = 0; x < width; x++)
             {
-                for (int y = 0; y < _worldSettings.Size; y++)
+                for (int y = 0; y < height; y++)
                 {
                     Tile tile = world.GetTileAt(x, y);
 
-                    float height = _noise.GetNoise(x, y);
+                    float heightValue = heightMap[x, y];
 
-                    if (height < -0.26f)
+                    if (heightValue < _worldSettings.GroundHeight - 0.005f)
                     {
                         tile.GroundTopType = GroundTopType.DeepWater;
                     }
@@ -156,9 +158,9 @@ namespace Technolithic
 
         private void GenerateGrass()
         {
-            for (int x = 0; x < _worldSettings.Size; x++)
+            for (int x = 0; x < _worldSettings.HeightMap.GetLength(0); x++)
             {
-                for (int y = 0; y < _worldSettings.Size; y++)
+                for (int y = 0; y < _worldSettings.HeightMap.GetLength(1); y++)
                 {
                     Tile tile = world.GetTileAt(x, y);
 

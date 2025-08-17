@@ -10,14 +10,11 @@ namespace Technolithic
 {
     public class WorldSettingsUIScript : MScript
     {
+        public event Action<WorldSettings> NextButtonPressed;
 
         private SmallButton closeButton;
 
-        private Dictionary<MNode, int> nodeWorldSizePair = new Dictionary<MNode, int>();
-
         private MNode createButton;
-
-        private int selectedWorldSize = 0;
 
         private MTextInput worldSeedInput;
 
@@ -78,19 +75,6 @@ namespace Technolithic
             worldNameInput.GetComponent<MTextInputScript>().OnCurrentTextChanges += OnWorldNameChangedCallback;
             listViewScript.AddItem(worldNameInput);
 
-            MyText worldSizeText = new MyText(ParentNode.Scene);
-            worldSizeText.Text = Localization.GetLocalizedText("world_size");
-            worldSizeText.Color = Color.LightGreen;
-            listViewScript.AddItem(worldSizeText);
-
-            MNode node128 = CreateElement(128);
-            nodeWorldSizePair.Add(node128, 128);
-            listViewScript.AddItem(node128);
-
-            MNode node256 = CreateElement(256);
-            nodeWorldSizePair.Add(node256, 256);
-            listViewScript.AddItem(node256);
-
             createButton = CreateButton(Localization.GetLocalizedText("create"));
             createButton.X = ParentNode.Width / 2 - createButton.Width / 2;
             createButton.Y = ParentNode.Height - createButton.Height - 5;
@@ -139,11 +123,6 @@ namespace Technolithic
         {
             bool isDisabled = false;
 
-            if (selectedWorldSize == 0)
-            {
-                isDisabled = true;
-            }
-
             if (string.IsNullOrEmpty(worldNameInput.GetComponent<MTextInputScript>().CurrentText))
             {
                 isDisabled = true;
@@ -174,47 +153,6 @@ namespace Technolithic
 
         public override void Update(int mouseX, int mouseY)
         {
-        }
-
-        private MNode CreateElement(int worldSize)
-        {
-            MButtonUI element = new MButtonUI(ParentNode.Scene);
-
-            element.Image.Texture = TextureBank.UITexture.GetSubtexture(192, 192, 24, 24);
-            element.Image.ImageType = ImageType.Sliced;
-            element.Image.SetBorder(8, 8, 8, 8);
-            element.Image.BackgroundOverlap = 2;
-
-            element.ButtonScript.AddOnClickedCallback(SelectWorldSize);
-            element.ButtonScript.SetDefaultColor(Color.White * 0.0f, Color.White, Color.White);
-            element.Width = ParentNode.Width - (16 + 16);
-            element.Height = 34;
-
-            MyText itemName = new MyText(ParentNode.Scene);
-            itemName.Text = worldSize + "x" + worldSize;
-            itemName.Name = "Name";
-            itemName.Width = 100;
-            itemName.Height = 32;
-            itemName.X = 8;
-            itemName.Y = 2;
-
-            element.AddChildNode(itemName);
-
-            return element;
-        }
-
-        public void SelectWorldSize(bool value, ButtonScript sender)
-        {
-            foreach (var kvp in nodeWorldSizePair)
-            {
-                kvp.Key.GetComponent<ButtonScript>().SetDefaultColor(Color.White * 0.0f, Color.White, Color.White);
-            }
-
-            selectedWorldSize = nodeWorldSizePair[sender.ParentNode];
-
-            sender.ParentNode.GetComponent<ButtonScript>().SetDefaultColor(Color.Orange, Color.Orange, Color.Orange);
-
-            RecheckCreateButton();
         }
 
         public void Close(bool value, ButtonScript buttonScript)
@@ -255,16 +193,12 @@ namespace Technolithic
 
             WorldSettings worldSettings = new WorldSettings()
             {
-                Size = selectedWorldSize,
                 Name = worldNameInput.GetComponent<MTextInputScript>().CurrentText,
                 Seed = int.Parse(seedString),
                 StartSeason = Season.Summer
             };
 
-            Engine.Scene = new GameplayScene(worldSettings);
-
-            worldNameInput.GetComponent<MTextInputScript>().ResetText();
-            worldSeedInput.GetComponent<MTextInputScript>().ResetText();
+            NextButtonPressed?.Invoke(worldSettings);
         }
     }
 }

@@ -22,6 +22,7 @@ namespace Technolithic
         private LoadGameUI loadGameUI;
         private WorldSettingsUI worldSettingsUI;
         private CreditsUI creditsUI;
+        private WorldMapUI worldMapUI;
 
         private MButtonUI newGameButton;
         private MButtonUI languageButton;
@@ -159,7 +160,15 @@ namespace Technolithic
             worldSettingsUI.X = Engine.Width / 2 - worldSettingsUI.Width / 2;
             worldSettingsUI.Y = Engine.Height / 2 - worldSettingsUI.Height / 2;
             worldSettingsUI.Active = false;
+            worldSettingsUI.GetComponent<WorldSettingsUIScript>().NextButtonPressed += WorldSettingsUI_NextButtonPressed;
             uiNode.AddChildNode(worldSettingsUI);
+
+            worldMapUI = new WorldMapUI(this);
+            worldMapUI.X = Engine.Width / 2 - worldMapUI.Width / 2;
+            worldMapUI.X = Engine.Height / 2 - worldMapUI.Height / 2;
+            worldMapUI.Active = false;
+            worldMapUI.CloseButtonPressed += WorldMapUI_CloseButtonPressed;
+            uiNode.AddChildNode(worldMapUI);
 
             gameVersionText = new MyText(this);
             gameVersionText.Text = Engine.GAME_NAME + " " + Engine.VERSION_STRING;
@@ -176,6 +185,11 @@ namespace Technolithic
             {
                 MediaPlayer.IsMuted = true;
             }
+        }
+
+        private void WorldMapUI_CloseButtonPressed()
+        {
+            worldMapUI.Active = false;
         }
 
         private void CreateStars(int count, float layer, MyTexture texture)
@@ -236,6 +250,9 @@ namespace Technolithic
 
             worldSettingsUI.X = Engine.Width / 2 - worldSettingsUI.Width / 2;
             worldSettingsUI.Y = Engine.Height / 2 - worldSettingsUI.Height / 2;
+
+            worldMapUI.X = Engine.Width / 2 - worldMapUI.Width / 2;
+            worldMapUI.Y = Engine.Height / 2 - worldMapUI.Height / 2;
 
             creditsUI.X = Engine.Width / 2 - creditsUI.Width / 2;
             creditsUI.Y = Engine.Height / 2 - creditsUI.Height / 2;
@@ -399,6 +416,13 @@ namespace Technolithic
             UpdatePositions();
         }
 
+        private void WorldSettingsUI_NextButtonPressed(WorldSettings obj)
+        {
+            worldSettingsUI.Active = false;
+
+            worldMapUI.Active = true;
+            worldMapUI.SetWorldSettings(obj);
+        }
 
         public override void Update()
         {
@@ -452,6 +476,5 @@ namespace Technolithic
 
             RenderManager.SpriteBatch.End();
         }
-
     }
 }

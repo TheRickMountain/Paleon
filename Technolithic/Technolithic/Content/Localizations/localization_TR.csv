@@ -308,6 +308,7 @@ iron_spear,Demir mizrak
 irrigate,Sulama
 irrigation,Sulama yapmak
 irrigation_canals,Sulama kanali
+it_is_impossible_to_land_on_water,
 item_required,Item required
 items,Esyalar
 kiln,Seramik firini
@@ -425,6 +426,8 @@ raw_skin,Ham deri
 recharge_time,Bekleme süresi
 recipe,Tarif
 recipes,Tarifler
+region_information,
+region_size,
 remove,Remove
 remove_equipment,Remove equipment
 rename,Isimlendir
@@ -472,6 +475,7 @@ spoilage_rate,Bozulma orani
 spoiled,Cürüdü
 spring,Ilkbahar
 spruce,Spruce
+start,
 stick_hut,cubuktan kulübe
 stockpile,Depolama
 stone,Tas

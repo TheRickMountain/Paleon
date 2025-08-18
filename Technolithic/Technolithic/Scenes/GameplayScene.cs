@@ -98,7 +98,7 @@ namespace Technolithic
 
             WorldName = worldSettings.Name;
 
-            WorldSize = worldSettings.Size;
+            WorldSize = worldSettings.HeightMap.GetLength(0);
 
             MouseOnUI = false;
             OnGameMenu = false;
@@ -117,6 +117,7 @@ namespace Technolithic
             Penumbra.Initialize();
 
             GameplayCamera = new GameplayCamera(false);
+            GameplayCamera.Get<CameraMovementScript>().Bounds = new Rectangle(0, 0, WorldSize * Engine.TILE_SIZE, WorldSize * Engine.TILE_SIZE);
             entityLayer.Add(GameplayCamera);
 
             ProgressTree = new ProgressTree(null);
@@ -289,6 +290,7 @@ namespace Technolithic
             Penumbra.Initialize();
 
             GameplayCamera = new GameplayCamera(false);
+            GameplayCamera.Get<CameraMovementScript>().Bounds = new Rectangle(0, 0, WorldSize * Engine.TILE_SIZE, WorldSize * Engine.TILE_SIZE);
             entityLayer.Add(GameplayCamera);
 
             if (string.IsNullOrEmpty(saveFileName))

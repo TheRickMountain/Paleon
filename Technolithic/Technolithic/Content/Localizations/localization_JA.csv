@@ -308,6 +308,7 @@ iron_spear,鉄の槍
 irrigate,水まき
 irrigation,灌漑
 irrigation_canals,灌漑用水路
+it_is_impossible_to_land_on_water,
 item_required,Item required
 items,アイテム
 kiln,窯
@@ -427,6 +428,8 @@ raw_skin,無加工の皮
 recharge_time,再チャージ時間
 recipe,レシピ
 recipes,レシピ
+region_information,
+region_size,
 remove,Remove
 remove_equipment,装備を取り除く
 rename,名前の変更
@@ -474,6 +477,7 @@ spoilage_rate,腐敗率
 spoiled,が腐敗
 spring,春
 spruce,Spruce
+start,
 stick_hut,小枝の小屋
 stockpile,備蓄所
 stone,石

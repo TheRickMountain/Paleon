@@ -2104,6 +2104,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/rain_drop.png
 
+#begin Sprites/short_text_button_ui.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/short_text_button_ui.png
+
 #begin Sprites/smoke.png
 /importer:TextureImporter
 /processor:TextureProcessor

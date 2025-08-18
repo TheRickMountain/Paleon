@@ -48,12 +48,12 @@ namespace Technolithic
             Components.Begin();
         }
 
-        public void Update()
+        public virtual void Update()
         {
             Components.Update();
         }
 
-        public void Render()
+        public virtual void Render()
         {
             Components.Render();
         }

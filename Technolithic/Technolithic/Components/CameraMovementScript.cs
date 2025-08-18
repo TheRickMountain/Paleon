@@ -11,6 +11,7 @@ namespace Technolithic
 {
     public class CameraMovementScript : Component
     {
+        public Rectangle Bounds { get; set; }
 
         private Vector2 mouseLastPosition;
         private const int MAX_SPEED = 1000;
@@ -116,7 +117,9 @@ namespace Technolithic
                 Vector2 mouseNewPosition = new Vector2(MInput.Mouse.X / RenderManager.MainCamera.Zoom, MInput.Mouse.Y / RenderManager.MainCamera.Zoom);
 
                 RenderManager.MainCamera.Position = RenderManager.MainCamera.Position - (mouseNewPosition - mouseLastPosition);
-                RenderManager.MainCamera.Position = Vector2.Clamp(RenderManager.MainCamera.Position, Vector2.Zero, new Vector2(GameplayScene.WorldSize * Engine.TILE_SIZE));
+                RenderManager.MainCamera.Position = Vector2.Clamp(RenderManager.MainCamera.Position, 
+                    new Vector2(Bounds.X, Bounds.Y),
+                    new Vector2(Bounds.Right, Bounds.Bottom));
 
                 mouseLastPosition = mouseNewPosition;
 
@@ -166,7 +169,9 @@ namespace Technolithic
 
                 ghostPlayerPosition += motion * currentSpeed * Engine.DeltaTime;
 
-                ghostPlayerPosition = Vector2.Clamp(ghostPlayerPosition, Vector2.Zero, new Vector2(GameplayScene.WorldSize * Engine.TILE_SIZE));
+                ghostPlayerPosition = Vector2.Clamp(ghostPlayerPosition, 
+                    new Vector2(Bounds.X, Bounds.Y), 
+                    new Vector2(Bounds.Right, Bounds.Bottom));
 
                 lastCameraPosition = RenderManager.MainCamera.Position;
 

@@ -308,6 +308,7 @@ iron_spear,Iron spear
 irrigate,Irrigate
 irrigation,Irrigation
 irrigation_canals,Irrigation canals
+it_is_impossible_to_land_on_water,It is impossible to land on water
 item_required,Item required
 items,Items
 kiln,Kiln
@@ -425,6 +426,8 @@ raw_skin,Raw skin
 recharge_time,Recharge time
 recipe,Recipe
 recipes,Recipes
+region_information,Region information
+region_size,Region size
 remove,Remove
 remove_equipment,Remove equipment
 rename,Rename
@@ -472,6 +475,7 @@ spoilage_rate,Spoilage rate
 spoiled,Spoiled
 spring,Spring
 spruce,Spruce
+start,Start
 stick_hut,Stick hut
 stockpile,Stockpile
 stone,Stone

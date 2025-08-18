@@ -308,6 +308,7 @@ iron_spear,Eisenspeer
 irrigate,Bewässern
 irrigation,Bewässerung
 irrigation_canals,Bewässerungskanäle
+it_is_impossible_to_land_on_water,
 item_required,Item required
 items,Items
 kiln,Brennofen
@@ -425,6 +426,8 @@ raw_skin,Rohe Haut
 recharge_time,Wiederaufladezeit
 recipe,Rezept
 recipes,Rezepte
+region_information,
+region_size,
 remove,Remove
 remove_equipment,Remove equipment
 rename,Umbenennen
@@ -472,6 +475,7 @@ spoilage_rate,Verderblichkeitsrate
 spoiled,Verdorben
 spring,Frühling
 spruce,Spruce
+start,
 stick_hut,Hütte aus Stöckern
 stockpile,Vorratslager
 stone,Stein

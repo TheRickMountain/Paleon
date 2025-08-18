@@ -308,6 +308,7 @@ iron_spear,Залізний спис
 irrigate,Зрошувати
 irrigation,Зрошення
 irrigation_canals,Орошувальні канали
+it_is_impossible_to_land_on_water,
 item_required,Item required
 items,Предмети
 kiln,Піч для випалювання
@@ -425,6 +426,8 @@ raw_skin,Сира шкіра
 recharge_time,Час перезаряджання
 recipe,Рецепт
 recipes,Рецепти
+region_information,
+region_size,
 remove,Remove
 remove_equipment,Зняти екіпірування
 rename,Перейменувати
@@ -472,6 +475,7 @@ spoilage_rate,Швидкість псування
 spoiled,Зіпсований
 spring,Весна
 spruce,Spruce
+start,
 stick_hut,Хатина з палиць
 stockpile,Склад
 stone,Камінь

@@ -30,9 +30,9 @@ namespace Technolithic
         private Dictionary<ButtonState, Color> stateColors = new()
         {
             { ButtonState.Default, Color.White },
-            { ButtonState.Hovered, new Color(200, 200, 200) },
-            { ButtonState.Pressed, new Color(150, 150, 150) },
-            { ButtonState.Disabled, Color.White * 0.5f }
+            { ButtonState.Hovered, Color.White },
+            { ButtonState.Pressed, Color.White },
+            { ButtonState.Disabled, Color.White }
         };
 
         private ButtonState _currentState = ButtonState.Default;
@@ -47,6 +47,7 @@ namespace Technolithic
         // TODO: придумать способ корректировать размер иконок
         public TButtonUI(Scene scene) : base(scene)
         {
+            SetButtonColor(Color.White);
         }
 
         public override void Update(int mouseX, int mouseY)
@@ -102,6 +103,14 @@ namespace Technolithic
             ExtraIcon?.Draw(new Rectangle(X, Y, Width, Height), Vector2.Zero, _currentColor, 0, SpriteEffects.None);
 
             base.Render();
+        }
+
+        public void SetButtonColor(Color color)
+        {
+            stateColors[ButtonState.Default] = color;
+            stateColors[ButtonState.Hovered] = new Color(Color.Multiply(color, 0.7845f), 1f);
+            stateColors[ButtonState.Pressed] = new Color(Color.Multiply(color, 0.5885f), 1f);
+            stateColors[ButtonState.Disabled] = color * 0.5f;
         }
 
     }

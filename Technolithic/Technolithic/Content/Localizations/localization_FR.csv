@@ -308,6 +308,7 @@ iron_spear,Lance en fer
 irrigate,Arroser
 irrigation,Irrigation
 irrigation_canals,Canaux d'irrigation
+it_is_impossible_to_land_on_water,
 item_required,Item required
 items,Objets
 kiln,Four
@@ -425,6 +426,8 @@ raw_skin,Peau brute
 recharge_time,Temps de recharge
 recipe,Recette
 recipes,Recettes
+region_information,
+region_size,
 remove,Remove
 remove_equipment,Remove equipment
 rename,Renommer
@@ -472,6 +475,7 @@ spoilage_rate,Taux de détérioration
 spoiled,Pourri
 spring,Printemps
 spruce,Spruce
+start,
 stick_hut,Hutte en bois
 stockpile,Réserve
 stone,Pierre

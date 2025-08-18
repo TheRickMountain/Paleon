@@ -308,6 +308,7 @@ iron_spear,Lança de ferro
 irrigate,Irrigar
 irrigation,Irrigação
 irrigation_canals,Canais de irrigação
+it_is_impossible_to_land_on_water,
 item_required,Item required
 items,Itens
 kiln,Forno
@@ -425,6 +426,8 @@ raw_skin,Pele crua
 recharge_time,Tempo de recarga
 recipe,Receita
 recipes,Receitas
+region_information,
+region_size,
 remove,Remove
 remove_equipment,Remove equipment
 rename,Renomear
@@ -472,6 +475,7 @@ spoilage_rate,Taxa de deterioração
 spoiled,Estragado
 spring,Primavera
 spruce,Spruce
+start,
 stick_hut,Barraca de gravetos
 stockpile,Reserva
 stone,Pedra

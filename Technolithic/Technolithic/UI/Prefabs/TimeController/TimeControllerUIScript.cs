@@ -1,26 +1,29 @@
 ﻿using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Technolithic
 {
     public class TimeControllerUIScript : MScript
     {
 
+        public enum GameSpeed
+        {
+            X1 = 1,
+            X2 = 2,
+            X4 = 4
+        }
+
         private SmallButton firstButton;
         private SmallButton secondButton;
         private SmallButton fourthButton;
         private SmallButton pauseButton;
 
-        private Dictionary<SmallButton, int> speeds = new Dictionary<SmallButton, int>();
-
         private SmallButton lastSelectedButton;
 
-        private int currentSpeed = 1;
+        private GameSpeed _currentGameSpeed = GameSpeed.X1;
         private bool inPause = false;
+
+        private Dictionary<GameSpeed, SmallButton> gameSpeedButtons = new();
 
         public TimeControllerUIScript() : base(true)
         {
@@ -34,26 +37,27 @@ namespace Technolithic
         public override void Begin()
         {
             firstButton = (SmallButton)ParentNode.GetChildByName("First");
-            firstButton.GetComponent<ButtonScript>().AddOnClickedCallback(SetTimeSpeed);
-            firstButton.Tooltips = Localization.GetLocalizedText("speed") + $" x1 [1]";
+            AssociateButtonWithSpeed(firstButton, GameSpeed.X1);
 
             secondButton = (SmallButton)ParentNode.GetChildByName("Second");
-            secondButton.GetComponent<ButtonScript>().AddOnClickedCallback(SetTimeSpeed);
-            secondButton.Tooltips = Localization.GetLocalizedText("speed") + $" x2 [2]";
+            AssociateButtonWithSpeed(secondButton, GameSpeed.X2);
 
             fourthButton = (SmallButton)ParentNode.GetChildByName("Fourth");
-            fourthButton.GetComponent<ButtonScript>().AddOnClickedCallback(SetTimeSpeed);
-            fourthButton.Tooltips = Localization.GetLocalizedText("speed") + $" x4 [3]";
+            AssociateButtonWithSpeed(fourthButton, GameSpeed.X4);
 
             pauseButton = (SmallButton)ParentNode.GetChildByName("Pause");
             pauseButton.GetComponent<ButtonScript>().AddOnClickedCallback(SetPause);
             pauseButton.Tooltips = Localization.GetLocalizedText("pause") + $" [Space]";
 
-            speeds.Add(firstButton, 1);
-            speeds.Add(secondButton, 2);
-            speeds.Add(fourthButton, 4);
-
             SetTimeSpeed(firstButton);
+        }
+
+        private void AssociateButtonWithSpeed(SmallButton button, GameSpeed gameSpeed)
+        {
+            button.GetComponent<ButtonScript>().AddOnClickedCallback(SetTimeSpeed);
+            button.Tooltips = Localization.GetLocalizedText("speed") + $" {gameSpeed.ToString()} [Tab]";
+            button.SetMetadata("game_speed", gameSpeed);
+            gameSpeedButtons.Add(gameSpeed, button);
         }
 
         public override void Update(int mouseX, int mouseY)
@@ -63,19 +67,14 @@ namespace Technolithic
                 GameplayScene.MouseOnUI = true;
             }
 
-            if (MInput.Keyboard.Pressed(Keys.D1))
+            if (MInput.Keyboard.Pressed(Keys.Tab))
             {
-                SetTimeSpeed(firstButton);
+                _currentGameSpeed = _currentGameSpeed.NextEnum();
+
+                SetTimeSpeed(gameSpeedButtons[_currentGameSpeed]);
             }
-            else if (MInput.Keyboard.Pressed(Keys.D2))
-            {
-                SetTimeSpeed(secondButton);
-            }
-            else if (MInput.Keyboard.Pressed(Keys.D3))
-            {
-                SetTimeSpeed(fourthButton);
-            }
-            else if (MInput.Keyboard.Pressed(Keys.Space))
+            
+            if (MInput.Keyboard.Pressed(Keys.Space))
             {
                 SetPause(true, null);
             }
@@ -92,7 +91,7 @@ namespace Technolithic
             {
                 pauseButton.GetComponent<ButtonScript>().IsSelected = false;
 
-                Engine.GameSpeed = currentSpeed;
+                Engine.GameSpeed = (int)_currentGameSpeed;
 
                 inPause = false;
             }
@@ -115,9 +114,9 @@ namespace Technolithic
             lastSelectedButton.GetComponent<ButtonScript>().IsSelected = true;
 
             if(inPause == false)
-                Engine.GameSpeed = speeds[button];
+                Engine.GameSpeed = (int)button.GetMetadata<GameSpeed>("game_speed");
 
-            currentSpeed = speeds[button];
+            _currentGameSpeed = button.GetMetadata<GameSpeed>("game_speed");
         }
     }
 }

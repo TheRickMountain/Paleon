@@ -837,7 +837,7 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "InteractionTypes": ["HuntMelee"]
+      "InteractionTypes": ["HuntMelee", "Hunt"]
     }
   },
   "stone_spear": {
@@ -860,7 +860,7 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "InteractionTypes": ["HuntMelee"]
+      "InteractionTypes": ["HuntMelee", "Hunt"]
     }
   },
   "bone_spear": {
@@ -883,7 +883,7 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "InteractionTypes": ["HuntMelee"]
+      "InteractionTypes": ["HuntMelee", "Hunt"]
     }
   },
   "copper_spear": {
@@ -906,7 +906,7 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "InteractionTypes": ["HuntMelee"]
+      "InteractionTypes": ["HuntMelee", "Hunt"]
     }
   },
   "bronze_spear": {
@@ -929,7 +929,7 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "InteractionTypes": ["HuntMelee"]
+      "InteractionTypes": ["HuntMelee", "Hunt"]
     }
   },
   "iron_spear": {
@@ -952,7 +952,7 @@
       "RechargeTime": 1.0,
       "AmmoTextureId": -1,
       "ProjectileSpeed": 0,
-      "InteractionTypes": ["HuntMelee"]
+      "InteractionTypes": ["HuntMelee", "Hunt"]
     }
   },
   "wooden_harpoon": {
@@ -1136,7 +1136,7 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": 255,
       "ProjectileSpeed": 1,
-      "InteractionTypes": ["HuntRange"]
+      "InteractionTypes": ["HuntRange", "Hunt"]
     }
   },
   "bow": {
@@ -1159,7 +1159,7 @@
       "RechargeTime": 1.25,
       "AmmoTextureId": 254,
       "ProjectileSpeed": 1,
-      "InteractionTypes": ["HuntRange"]
+      "InteractionTypes": ["HuntRange", "Hunt"]
     }
   },
   "crossbow": {
@@ -1182,7 +1182,7 @@
       "RechargeTime": 1.5,
       "AmmoTextureId": 254,
       "ProjectileSpeed": 1,
-      "InteractionTypes": ["HuntRange"]
+      "InteractionTypes": ["HuntRange", "Hunt"]
     }
   },
   "barley_seeds": {

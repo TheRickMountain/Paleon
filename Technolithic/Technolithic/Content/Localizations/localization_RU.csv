@@ -48,6 +48,7 @@ allows_creatures_to_move_faster,Позволяет поселенцам пере
 animal_fat,Животный жир
 animal_female,Самка
 animal_filter,Фильтр животных
+animal_husbandry_and_hunting,Животноводство и охота
 animal_male,Самец
 animal_pen,Загон для животных
 animal_pen_description,Используется для отдыха и подкормки животных
@@ -136,6 +137,7 @@ clone,Клонировать
 close,Закрыть
 cloth,Ткань
 clothes,Одежда
+collection_and_extraction_of_resources,Сбор и добыча ресурсов
 come_here,Отправиться сюда
 command_line,командная строка
 connected,Подключен
@@ -187,6 +189,7 @@ defense,Защита
 depends_on_wind_speed,Зависит от скорости ветра
 deposit,Залежь
 destruct,Разрушить
+destruct_construction,Разрушить строение
 destruct_irrigation_canal,Разрушить оросительный канал
 destruct_surface,Разрушить покрытие
 destruct_wall,Разрушить стену

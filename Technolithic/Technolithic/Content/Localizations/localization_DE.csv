@@ -48,6 +48,7 @@ allows_creatures_to_move_faster,Erlaubt sich schneller fortzubewegen
 animal_fat,Tierfett
 animal_female,Weiblich
 animal_filter,Tierfilter
+animal_husbandry_and_hunting,
 animal_male,Männlich
 animal_pen,Tierpferch
 animal_pen_description,Zum Ausruhen und Füttern der Tiere
@@ -136,6 +137,7 @@ clone,Klonen
 close,Schließen
 cloth,Stoff
 clothes,Kleidung
+collection_and_extraction_of_resources,
 come_here,Komm her
 command_line,Befehlslinie
 connected,Verbunden
@@ -187,6 +189,7 @@ defense,Verteidigung
 depends_on_wind_speed,Depends on wind speed
 deposit,Vorkommen
 destruct,Zerstören
+destruct_construction,
 destruct_irrigation_canal,Bewässerungskanal zerstören
 destruct_surface,Destruct surface
 destruct_wall,Destruct wall

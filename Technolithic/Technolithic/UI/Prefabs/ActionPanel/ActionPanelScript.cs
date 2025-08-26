@@ -1,19 +1,57 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Technolithic
 {
     public class ActionPanelScript : MScript
     {
-        private BigButton lastSelectedAction;
+        public enum ButtonType
+        {
+            Category,
+            Action,
+            Back
+        }
 
-        private Dictionary<MyAction, BigButton> actionsButtons;
-        private Dictionary<BigButton, MyAction> buttonsActions;
+        private Dictionary<GameActionCategory?, List<MyAction>> categoryActionsDict = new()
+        {
+            { GameActionCategory.CollectionAndExtractionOfResources, [
+                MyAction.GatherWood,
+                MyAction.GatherStone,
+                MyAction.Chop,
+                MyAction.Mine] },
 
+            { GameActionCategory.AnimalHusbandryAndHunting, [
+                MyAction.Hunt,
+                MyAction.Slaughter ] },
+
+            { GameActionCategory.Agriculture, [
+                MyAction.AutoHarvest,
+                MyAction.Uproot,
+                MyAction.BuildIrrigationCanal,
+                MyAction.Plow ] },
+
+            { GameActionCategory.Destruct, [
+                MyAction.DestructConstruction,
+                MyAction.DestructSurface,
+                MyAction.DestructWall,
+                MyAction.DestructIrrigationCanal
+                ] },
+
+            { GameActionCategory.Cancel, [
+                MyAction.Cancel 
+                ] }
+        };
+
+        private List<TBigButtonUI> categoriesButtonsList = new();
+        private List<TBigButtonUI> actionsButtonsList = new();
+
+        private Dictionary<GameActionCategory, TBigButtonUI> categoriesButtonsDict = new();
+        private Dictionary<MyAction, TBigButtonUI> actionsButtonsDict = new();
+
+        private TBigButtonUI backButton;
+
+        // TODO: show required technology in tooltips for locked technology
         public ActionPanelScript() : base(true)
         {
 
@@ -26,174 +64,236 @@ namespace Technolithic
 
         public override void Begin()
         {
-            actionsButtons = new Dictionary<MyAction, BigButton>();
-            buttonsActions = new Dictionary<BigButton, MyAction>();
+            CreateGameActionCategoryButtons();
 
-            CreateActionButton(MyAction.GatherStone, ResourceManager.GatherStoneIcon, Localization.GetLocalizedText("gather_stone"), 
-                true, Keys.G);
+            CreateGameActionButtons();
 
-            CreateActionButton(MyAction.GatherWood, ResourceManager.GatherWoodIcon, Localization.GetLocalizedText("gather_wood"),
-                true, Keys.Y);
+            LinkButtonsWithHotkeys();
 
-            CreateActionButton(MyAction.Mine, ResourceManager.MineIcon, Localization.GetLocalizedText("mine"), 
-                false, Keys.M);
-            
-            CreateActionButton(MyAction.Chop, ResourceManager.ChopIcon, Localization.GetLocalizedText("chop"),
-                false, Keys.N);
-            
-            CreateActionButton(MyAction.AutoHarvest, ResourceManager.AutoHarvestIcon, Localization.GetLocalizedText("auto_harvest") + "\n" +
-                "/c[#919090]" + Localization.GetLocalizedText("сut_automatically_description") + "/cd", 
-                true, Keys.B);
-            
-            CreateActionButton(MyAction.Uproot, ResourceManager.UprootIcon, Localization.GetLocalizedText("uproot"), 
-                true, Keys.F);
-            
-            CreateActionButton(MyAction.Hunt, ResourceManager.HuntIcon, Localization.GetLocalizedText("hunt"), 
-                true, Keys.H);
-            
-            CreateActionButton(MyAction.Slaughter, ResourceManager.SlaughterIcon, Localization.GetLocalizedText("slaughter"), 
-                false, Keys.V);
-            
-            CreateActionButton(MyAction.BuildIrrigationCanal, TextureBank.UITexture.GetSubtexture(112, 160, 16, 16),
-                Localization.GetLocalizedText("build_irrigation_canal"), 
-                false, Keys.K);
-            
-            CreateActionButton(MyAction.DestructIrrigationCanal, TextureBank.UITexture.GetSubtexture(128, 160, 16, 16), 
-                Localization.GetLocalizedText("destruct_irrigation_canal"), 
-                false, Keys.J);
-            
-            CreateActionButton(MyAction.Cancel, TextureBank.UITexture.GetSubtexture(48, 0, 16, 16), Localization.GetLocalizedText("cancel"), 
-                true, Keys.C);
-            
-            CreateActionButton(MyAction.Destruct, ResourceManager.DestructIcon, Localization.GetLocalizedText("destruct"), 
-                true, Keys.X);
-            
-            CreateActionButton(MyAction.DestructSurface, ResourceManager.DestructSurfaceIcon, Localization.GetLocalizedText("destruct_surface"), 
-                true, Keys.Z);
+            backButton = new TBigButtonUI(ParentNode.Scene);
+            backButton.Icon = TextureBank.UITexture.GetSubtexture(144, 64, 16, 16);
+            backButton.ButtonUp += BackButton_ButtonUp;
+            backButton.Tooltips = Localization.GetLocalizedText("back") + $" [{Keys.C.ToString()}]";
+            backButton.SetMetadata("hotkey", Keys.C);
+            backButton.SetMetadata("button_type", ButtonType.Back);
 
-            CreateActionButton(MyAction.DestructWall, ResourceManager.DestructWallIcon, Localization.GetLocalizedText("destruct_wall"),
-                true, Keys.U);
-
-            CreateActionButton(MyAction.Plow, ResourceManager.PlowIcon, Localization.GetLocalizedText("plow"),
-                false, Keys.I);
+            ArrangeButtons();
 
             GameplayScene.WorldManager.SetMyAction(MyAction.None, null);
 
             GameplayScene.Instance.ProgressTree.TechnologyUnlocked += UpdateButtons;
 
-            foreach(var kvp in GameplayScene.Instance.ProgressTree.UnlockedActions)
+            foreach (var kvp in GameplayScene.Instance.ProgressTree.UnlockedActions)
             {
-                if(kvp.Value)
+                if (kvp.Value)
                 {
-                    actionsButtons[kvp.Key].Active = true;
+                    actionsButtonsDict[kvp.Key].Disabled = false;
                 }
+            }
+        }
+
+        private void CreateGameActionCategoryButtons()
+        {
+            foreach (GameActionCategory category in Enum.GetValues(typeof(GameActionCategory)))
+            {
+                EnumData data = EnumDatabase<GameActionCategory>.GetData(category);
+
+                TBigButtonUI categoryButton = new TBigButtonUI(ParentNode.Scene);
+                categoryButton.Icon = data.Icon;
+                categoryButton.Tooltips = data.DisplayText;
+                categoryButton.ButtonUp += CategoryButton_ButtonUp;
+                categoryButton.SetMetadata("category", category);
+                categoryButton.SetMetadata("button_type", ButtonType.Category);
+                ParentNode.AddChildNode(categoryButton);
+                categoriesButtonsList.Add(categoryButton);
+                categoriesButtonsDict.Add(category, categoryButton);
+            }
+        }
+
+        private void CreateGameActionButtons()
+        {
+            foreach (MyAction myAction in Enum.GetValues(typeof(MyAction)))
+            {
+                // TODO: fix it
+                if (myAction == MyAction.None ||
+                    myAction == MyAction.CopySettings ||
+                    myAction == MyAction.Build) continue;
+
+                EnumData data = EnumDatabase<MyAction>.GetData(myAction);
+
+                TBigButtonUI actionButton = new TBigButtonUI(ParentNode.Scene);
+                actionButton.Icon = data.Icon;
+                actionButton.Tooltips = data.DisplayText;
+                actionButton.ButtonUp += ActionButton_ButtonUp;
+                actionButton.SetMetadata("action", myAction);
+                actionButton.SetMetadata("button_type", ButtonType.Action);
+
+                // TODO: fix it
+                if (myAction == MyAction.AutoHarvest ||
+                    myAction == MyAction.Hunt ||
+                    myAction == MyAction.DestructConstruction ||
+                    myAction == MyAction.DestructSurface ||
+                    myAction == MyAction.Cancel ||
+                    myAction == MyAction.DestructWall ||
+                    myAction == MyAction.GatherStone ||
+                    myAction == MyAction.GatherWood ||
+                    myAction == MyAction.Uproot)
+                {
+                    actionButton.Disabled = false;
+
+                }
+                else
+                {
+                    actionButton.Disabled = true;
+                }
+
+                actionsButtonsList.Add(actionButton);
+                actionsButtonsDict.Add(myAction, actionButton);
+            }
+        }
+
+        private void LinkButtonsWithHotkeys()
+        {
+            int categoryNumber = 0;
+            int actionNumber = 0;
+
+            foreach (GameActionCategory gameActionCategory in Enum.GetValues(typeof(GameActionCategory)))
+            {
+                MNode categoryButton = categoriesButtonsDict[gameActionCategory];
+                LinkNodeWithHotkey(categoryButton, Keys.D1 + categoryNumber);
+
+                foreach (MyAction myAction in categoryActionsDict[gameActionCategory])
+                {
+                    MNode actionButton = actionsButtonsDict[myAction];
+                    LinkNodeWithHotkey(actionButton, Keys.D1 + actionNumber);
+
+                    actionNumber++;
+                }
+
+                categoryNumber++;
+                actionNumber = 0;
+            }
+        }
+
+        private void LinkNodeWithHotkey(MNode button, Keys key)
+        {
+            button.Tooltips += $" [{key.ToString()[1]}]";
+            button.SetMetadata("hotkey", key);
+        }
+
+        private void BackButton_ButtonUp(TButtonUI obj)
+        {
+            ParentNode.RemoveAllChildren();
+
+            foreach(var categoryButton in categoriesButtonsList)
+            {
+                ParentNode.AddChildNode(categoryButton);
             }
 
             ArrangeButtons();
         }
 
-        private void CreateActionButton(MyAction myAction, MyTexture icon, string actionName, bool active, Keys hotkey)
+        private void ActionButton_ButtonUp(TButtonUI obj)
         {
-            BigButton actionButton = new BigButton(ParentNode.Scene, icon, false, true);
-            actionButton.GetComponent<ButtonScript>().AddOnClickedCallback(SetAction);
-            actionButton.X = buttonsActions.Count * (actionButton.Width + 5);
-            actionButton.Active = active;
-            actionButton.Tooltips = $"[{hotkey}] " + actionName;
-            actionButton.SetMetadata("hotkey", hotkey);
-            ParentNode.AddChildNode(actionButton);
+            MyAction myAction = obj.GetMetadata<MyAction>("action");
 
-            actionsButtons.Add(myAction, actionButton);
-            buttonsActions.Add(actionButton, myAction);
+            GameplayScene.WorldManager.SetMyAction(myAction, obj.Icon);
+
+            obj.ExtraIcon = null;
+
+            ArrangeButtons();
+        }
+
+        private void CategoryButton_ButtonUp(TButtonUI obj)
+        {
+            GameActionCategory category = obj.GetMetadata<GameActionCategory>("category");
+
+            if (category == GameActionCategory.Cancel)
+            {
+                GameplayScene.WorldManager.SetMyAction(MyAction.Cancel, obj.Icon);
+            }
+            else
+            {
+                ParentNode.RemoveAllChildren();
+
+                foreach (MyAction myAction in categoryActionsDict[category])
+                {
+                    var actionButton = actionsButtonsDict[myAction];
+
+                    ParentNode.AddChildNode(actionButton);
+                }
+
+                ParentNode.AddChildNode(backButton);
+
+                ArrangeButtons();
+            }
         }
 
         public override void Update(int mouseX, int mouseY)
         {
-            if(ParentNode.Intersects(mouseX, mouseY))
+            if (ParentNode.Intersects(mouseX, mouseY))
             {
                 GameplayScene.MouseOnUI = true;
             }
 
-            foreach(var kvp in buttonsActions)
+            foreach (MNode node in ParentNode.GetChidlrenEnumerable())
             {
-                BigButton button = kvp.Key;
-                if(button.Active == false)
+                TButtonUI button = node as TButtonUI;
+
+                if (button.Disabled) continue;
+
+                if (MInput.Keyboard.Released(node.GetMetadata<Keys>("hotkey")))
                 {
-                    continue;
+                    switch (node.GetMetadata<ButtonType>("button_type"))
+                    {
+                        case ButtonType.Action:
+                            ActionButton_ButtonUp(button);
+                            break;
+                        case ButtonType.Category:
+                            CategoryButton_ButtonUp(button);
+                            break;
+                        case ButtonType.Back:
+                            BackButton_ButtonUp(button);
+                            break;
+                    }
                 }
-                
-                Keys key = button.GetMetadata<Keys>("hotkey");
-                if (MInput.Keyboard.Pressed(key))
-                {
-                    SetAction(false, button.ButtonScript);
-                }
             }
-        }
-
-        public void UnselectAll()
-        {
-            if (lastSelectedAction != null)
-            {
-                lastSelectedAction.GetComponent<ButtonScript>().IsSelected = false;
-                lastSelectedAction = null;
-            }
-        }
-
-        private void SetAction(bool value, ButtonScript buttonScript)
-        {
-            if(lastSelectedAction != null)
-            {
-                lastSelectedAction.GetComponent<ButtonScript>().IsSelected = false;
-            }
-
-            BigButton pressedButton = (BigButton)buttonScript.ParentNode;
-
-            lastSelectedAction = pressedButton;
-            lastSelectedAction.GetComponent<ButtonScript>().IsSelected = true;
-            pressedButton.GetChildByName("ExclamationMark").Active = false;
-
-            MyAction selectedAction = buttonsActions[pressedButton];
-
-            MImageUI buttonIcon = (MImageUI)pressedButton.GetChildByName("Icon");
-            GameplayScene.WorldManager.SetMyAction(selectedAction, buttonIcon.GetComponent<MImageCmp>().Texture);
         }
 
         public void ArrangeButtons()
         {
+            MNode firstNode = null;
+
             int count = 0;
-            for (int i = 0; i < buttonsActions.Count; i++)
+            foreach (var node in ParentNode.GetChidlrenEnumerable())
             {
-                var kvp = buttonsActions.ElementAt(i);
-
-                MNode button = kvp.Key;
-
-                if (button.Active)
+                if (firstNode == null)
                 {
-                    button.X = count * (button.Width + 5);
-                    count++;
+                    firstNode = node;
                 }
+
+                node.X = count * (node.Width + 5);
+                count++;
             }
 
-            int totalWidth = count * buttonsActions.ElementAt(0).Key.Width + count * 5;
+            if (firstNode != null)
+            {
+                int totalWidth = count * firstNode.Width + count * 5;
 
-            ParentNode.X = Engine.Width - totalWidth;
-            ParentNode.Y = Engine.Height - buttonsActions.ElementAt(0).Key.Height - 5;
+                ParentNode.X = Engine.Width - totalWidth;
+                ParentNode.Y = Engine.Height - firstNode.Height - 5;
+            }
         }
 
         private void UpdateButtons(Technology technology)
         {
             if (technology.UnlockedActions != null)
             {
-                bool actionWasUnlocked = false;
-
                 foreach (var myAction in technology.UnlockedActions)
                 {
-                    actionsButtons[myAction].Active = true;
-                    actionsButtons[myAction].GetChildByName("ExclamationMark").Active = true;
-                    actionWasUnlocked = true;
+                    actionsButtonsDict[myAction].Disabled = false;
+                    actionsButtonsDict[myAction].ExtraIcon = ResourceManager.ExclamationMarkIcon;
                 }
-
-                if (actionWasUnlocked)
-                    ArrangeButtons();
             }
         }
 

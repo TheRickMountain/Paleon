@@ -48,6 +48,7 @@ allows_creatures_to_move_faster,Permet de se déplacer plus rapidement
 animal_fat,Graisse animale
 animal_female,Femelle
 animal_filter,Filtre animalier
+animal_husbandry_and_hunting,
 animal_male,Mâle
 animal_pen,Enclos pour animaux
 animal_pen_description,Utilisé pour le repos et l'alimentation des animaux
@@ -136,6 +137,7 @@ clone,Cloner
 close,Fermer
 cloth,Tissu
 clothes,Vêtements
+collection_and_extraction_of_resources,
 come_here,Venir ici
 command_line,ligne de commande
 connected,Connecté
@@ -187,6 +189,7 @@ defense,Défense
 depends_on_wind_speed,Dépend de la vitesse du vent
 deposit,Dépôt
 destruct,Détruire
+destruct_construction,
 destruct_irrigation_canal,Détruire canal d'irrigation
 destruct_surface,Destruct surface
 destruct_wall,Destruct wall

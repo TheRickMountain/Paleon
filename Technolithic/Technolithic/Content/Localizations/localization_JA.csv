@@ -48,6 +48,7 @@ allows_creatures_to_move_faster,生物がより速く移動することが可能
 animal_fat,動物油脂
 animal_female,メス
 animal_filter,動物の選択
+animal_husbandry_and_hunting,
 animal_male,オス
 animal_pen,動物の囲い
 animal_pen_description,動物の休息やエサやりに使用
@@ -136,6 +137,7 @@ clone,複製
 close,閉じる
 cloth,布
 clothes,衣類
+collection_and_extraction_of_resources,
 come_here,こっちに来い
 command_line,コマンドライン
 connected,接続中
@@ -187,6 +189,7 @@ defense,防御
 depends_on_wind_speed,風速により異なります
 deposit,貯蔵量
 destruct,破壊
+destruct_construction,
 destruct_irrigation_canal,灌漑用水路の破壊
 destruct_surface,路面の破壊
 destruct_wall,Destruct wall

@@ -48,6 +48,7 @@ allows_creatures_to_move_faster,Дозволяє швидше пересуват
 animal_fat,Тваринний жир
 animal_female,Самка
 animal_filter,Фільтр тваринок
+animal_husbandry_and_hunting,
 animal_male,Самець
 animal_pen,Загін для тваринок
 animal_pen_description,Використовується для відпочинку та годування тваринок
@@ -136,6 +137,7 @@ clone,Клонувати
 close,Зачинити
 cloth,Тканина
 clothes,Одяг
+collection_and_extraction_of_resources,
 come_here,Піти сюди
 command_line,командна лінія
 connected,Під'єднаний
@@ -187,6 +189,7 @@ defense,Захист
 depends_on_wind_speed,Залежить від швидкості вітру
 deposit,Родовище
 destruct,Зруйнувати
+destruct_construction,
 destruct_irrigation_canal,Зруйнувати орошувальний канал
 destruct_surface,Зруйнувати покриття
 destruct_wall,Destruct wall

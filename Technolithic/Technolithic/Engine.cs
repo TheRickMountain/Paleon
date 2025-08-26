@@ -173,6 +173,9 @@ namespace Technolithic
             Scene = MainMenuScene;
 
             GlobalUI.Initialize();
+
+            GameActionDatabase.Initialize();
+            GameActionCategoryDatabase.Initialize();
         }
 
         protected override void OnExiting(object sender, ExitingEventArgs args)

@@ -140,6 +140,7 @@
     "Age": "Mesolithic",
     "RequiredXP": 175,
     "UnlockedAnimals": ["dog_male_baby", "dog_female_baby", "dog_male_adult", "dog_female_adult", "dog_male_old", "dog_female_old"],
+    "UnlockedActions": ["Slaughter"],
     "Parents": []
   },
   {
@@ -233,7 +234,6 @@
     "RequiredXP": 500,
     "UnlockedBuildings": ["animal_pen"],
     "UnlockedAnimals": ["cattle_male_baby", "cattle_female_baby", "sheep_male_baby", "sheep_female_baby", "horse_male_baby", "horse_female_baby", "pig_male_baby", "pig_female_baby", "cattle_male_adult", "cattle_female_adult", "sheep_male_adult", "sheep_female_adult", "horse_male_adult", "horse_female_adult", "pig_male_adult", "pig_female_adult", "cattle_male_old", "cattle_female_old", "sheep_male_old", "sheep_female_old", "horse_male_old", "horse_female_old", "pig_male_old", "pig_female_old"],
-    "UnlockedActions": ["Slaughter"],
     "Parents": [54]
   },
   {

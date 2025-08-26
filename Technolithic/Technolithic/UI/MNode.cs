@@ -83,6 +83,7 @@ namespace Technolithic
 
         private List<MNode> childNodes;
         private List<MNode> childNodesToAdd;
+        private List<MNode> childNodesToRemove;
 
         private List<MComponent> components;
         private List<MComponent> scripts;
@@ -98,6 +99,7 @@ namespace Technolithic
 
             childNodes = new List<MNode>();
             childNodesToAdd = new List<MNode>();
+            childNodesToRemove = new List<MNode>();
 
             components = new List<MComponent>();
             scripts = new List<MComponent>();
@@ -108,8 +110,7 @@ namespace Technolithic
 
         public void AddChildNode(MNode node)
         {
-            if (childNodes.Contains(node) || childNodesToAdd.Contains(node))
-                throw new Exception("Node was added already!");
+            if (node.ParentNode == this) return;
 
             node.ParentNode = this;
             childNodesToAdd.Add(node);
@@ -118,7 +119,7 @@ namespace Technolithic
         public void RemoveChild(MNode node)
         {
             node.ParentNode = null;
-            childNodes.Remove(node);
+            childNodesToRemove.Remove(node);
             childNodesToAdd.Remove(node);
         }
 
@@ -206,6 +207,13 @@ namespace Technolithic
 
         public virtual void Update(int mouseX, int mouseY)
         {
+            for (int i = 0; i < childNodesToRemove.Count; i++)
+            {
+                childNodes.Remove(childNodesToRemove[i]);
+            }
+
+            childNodesToRemove.Clear();
+
             if (componentsToAdd.Count > 0 || childNodesToAdd.Count > 0)
             {
                 Awake();
@@ -267,6 +275,8 @@ namespace Technolithic
 
                     for (int i = 0; i < childNodes.Count; i++)
                     {
+                        if (childNodes[i].ParentNode != this) continue;
+
                         childNodes[i].Render();
                     }
 
@@ -283,15 +293,12 @@ namespace Technolithic
 
                     for (int i = 0; i < childNodes.Count; i++)
                     {
+                        if (childNodes[i].ParentNode != this) continue;
+
                         childNodes[i].Render();
                     }
                 }
             }
-        }
-
-        public int GetChildrenCount()
-        {
-            return childNodesToAdd.Count + childNodes.Count;
         }
 
         public MNode GetChildByName(string name)
@@ -304,6 +311,8 @@ namespace Technolithic
 
             for (int i = 0; i < childNodes.Count; i++)
             {
+                if (childNodes[i].ParentNode != this) continue;
+
                 if (childNodes[i].Name == name)
                     return childNodes[i];
             }
@@ -320,6 +329,8 @@ namespace Technolithic
 
             foreach (var node in childNodes)
             {
+                if (node.ParentNode != this) continue;
+
                 if (childNodesToAdd.Contains(node) == false)
                     yield return node;
             }

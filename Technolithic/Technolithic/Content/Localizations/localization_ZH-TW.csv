@@ -48,6 +48,7 @@ allows_creatures_to_move_faster,加快移動速度。
 animal_fat,動物脂肪
 animal_female,母
 animal_filter,篩選動物
+animal_husbandry_and_hunting,
 animal_male,公
 animal_pen,畜欄
 animal_pen_description,讓動物吃飯及休息。
@@ -136,6 +137,7 @@ clone,複製
 close,關
 cloth,布料
 clothes,服裝
+collection_and_extraction_of_resources,
 come_here,來這裡
 command_line,指令列
 connected,已連接
@@ -187,6 +189,7 @@ defense,防禦
 depends_on_wind_speed,取決於風速。
 deposit,礦床
 destruct,拆除
+destruct_construction,
 destruct_irrigation_canal,拆除水渠
 destruct_surface,拆除地板
 destruct_wall,Destruct wall

@@ -48,6 +48,7 @@ allows_creatures_to_move_faster,Yerliler daha hizli hareket eder
 animal_fat,Animal fat
 animal_female,Kadin
 animal_filter,Hayvan filtresi
+animal_husbandry_and_hunting,
 animal_male,Erkek
 animal_pen,Hayvan agili
 animal_pen_description,Hayvanlarin beslenmesi ve dinlenmesi icin kullanilir
@@ -136,6 +137,7 @@ clone,Kopyala
 close,Kapat
 cloth,Kumas
 clothes,Giysiler
+collection_and_extraction_of_resources,
 come_here,Buraya gel
 command_line,komut satiri
 connected,Baglandi
@@ -187,6 +189,7 @@ defense,Savunma
 depends_on_wind_speed,Rüzgar hizina baglidir
 deposit,Depozito
 destruct,Yik
+destruct_construction,
 destruct_irrigation_canal,Sulama kanali yik
 destruct_surface,Yüzeyi yik
 destruct_wall,Destruct wall

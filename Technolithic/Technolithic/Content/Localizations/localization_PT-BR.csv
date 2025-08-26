@@ -48,6 +48,7 @@ allows_creatures_to_move_faster,Permite que as criaturas se movimentem mais rapi
 animal_fat,Gordura animal
 animal_female,Fêmea
 animal_filter,Filtro animal
+animal_husbandry_and_hunting,
 animal_male,Macho
 animal_pen,Cercado de animais
 animal_pen_description,Usado para descanso e alimentação de animais
@@ -136,6 +137,7 @@ clone,Clone
 close,Fechar
 cloth,Tecido
 clothes,Roupas
+collection_and_extraction_of_resources,
 come_here,Venha aqui
 command_line,linha de comando
 connected,Conectado
@@ -187,6 +189,7 @@ defense,Defesa
 depends_on_wind_speed,Depends on wind speed
 deposit,Depósito
 destruct,Destruir
+destruct_construction,
 destruct_irrigation_canal,Destruir o canal de irrigação
 destruct_surface,Destruct surface
 destruct_wall,Destruct wall

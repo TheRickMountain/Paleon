@@ -161,7 +161,7 @@ namespace Technolithic
 
             var achievementsButton = (BigButton)ParentNode.GetChildByName("AchievementsButton");
             achievementsButton.GetComponent<ButtonScript>().AddOnClickedCallback(OpenAchievementsUI);
-            achievementsButton.Tooltips = Localization.GetLocalizedText("achievements") + " [?]";
+            achievementsButton.Tooltips = Localization.GetLocalizedText("achievements") + " [U]";
             uiButtons.Add(achievementsButton);
 
             gameVersionText = new MyText(ParentNode.Scene);
@@ -282,17 +282,22 @@ namespace Technolithic
                     OpenLaborPriorityUI(false, null);
                 }
 
-                if(MInput.Keyboard.Pressed(Microsoft.Xna.Framework.Input.Keys.L))
+                if (MInput.Keyboard.Pressed(Microsoft.Xna.Framework.Input.Keys.L))
                 {
                     OpenResourcesLimitUI(false, null);
                 }
 
-                if(MInput.Keyboard.Pressed(Microsoft.Xna.Framework.Input.Keys.I))
+                if (MInput.Keyboard.Pressed(Microsoft.Xna.Framework.Input.Keys.I))
                 {
                     OpenResourcesUI(false, null);
                 }
 
-                if(MInput.Keyboard.Pressed(Microsoft.Xna.Framework.Input.Keys.OemTilde))
+                if (MInput.Keyboard.Pressed(Microsoft.Xna.Framework.Input.Keys.U))
+                {
+                    OpenAchievementsUI(false, null);
+                }
+
+                if (MInput.Keyboard.Pressed(Microsoft.Xna.Framework.Input.Keys.OemTilde))
                 {
                     OpenCommandLineUI();
                 }
@@ -535,15 +540,8 @@ namespace Technolithic
             OpenEntityPanel(assignHutUI);
         }
 
-        public void CloseActionPanel()
-        {
-            actionPanelUI.GetComponent<ActionPanelScript>().UnselectAll();
-        }
-
         public void CloseAll()
         {
-            actionPanelUI.GetComponent<ActionPanelScript>().UnselectAll();
-
             CloseMainPanel();
             CloseEntityPanel();
         }

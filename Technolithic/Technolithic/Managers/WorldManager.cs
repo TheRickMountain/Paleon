@@ -713,13 +713,10 @@ namespace Technolithic
             {
                 case MyAction.Build:
                     tileSelector.Color = Color.White * 0f;
-
-                    GameplayScene.UIRootNodeScript.CloseActionPanel();
                     break;
                 case MyAction.None:
                     tileSelector.Color = Color.White;
 
-                    GameplayScene.UIRootNodeScript.CloseActionPanel();
                     GameplayScene.UIRootNodeScript.CloseEntityPanel();
                     BuildingSaveDataForCopy = null;
                     break;
@@ -1004,7 +1001,7 @@ namespace Technolithic
                         case MyAction.GatherWood:
                             interactable.MarkInteraction(InteractionType.GatherWood);
                             break;
-                        case MyAction.Destruct:
+                        case MyAction.DestructConstruction:
                             interactable.MarkInteraction(InteractionType.Destruct);
                             break;
                         case MyAction.Slaughter:

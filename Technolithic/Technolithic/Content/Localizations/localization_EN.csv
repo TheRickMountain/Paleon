@@ -48,6 +48,7 @@ allows_creatures_to_move_faster,Allows creatures to move faster
 animal_fat,Animal fat
 animal_female,Female
 animal_filter,Animal filter
+animal_husbandry_and_hunting,Animal husbandry and hunting
 animal_male,Male
 animal_pen,Animal pen
 animal_pen_description,Used for rest and feeding animals
@@ -136,6 +137,7 @@ clone,Clone
 close,Close
 cloth,Cloth
 clothes,Clothes
+collection_and_extraction_of_resources,Collection and extraction of resources
 come_here,Come here
 command_line,command line
 connected,Connected
@@ -187,6 +189,7 @@ defense,Defense
 depends_on_wind_speed,Depends on wind speed
 deposit,Deposit
 destruct,Destruct
+destruct_construction,Destruct construction
 destruct_irrigation_canal,Destruct irrigation canal
 destruct_surface,Destruct surface
 destruct_wall,Destruct wall

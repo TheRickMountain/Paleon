@@ -8,28 +8,6 @@ using System.Threading.Tasks;
 namespace Technolithic
 {
 
-    public enum MyAction
-    {
-        Build,
-        Uproot,
-        Chop,
-        AutoHarvest,
-        Hunt,
-        Slaughter,
-        Cancel,
-        Destruct,
-        DestructSurface,
-        DestructWall,
-        CopySettings,
-        Mine,
-        GatherStone,
-        GatherWood,
-        BuildIrrigationCanal,
-        DestructIrrigationCanal,
-        Plow,
-        None
-    }
-
     public class ActionPanelUI : MNode
     {
 

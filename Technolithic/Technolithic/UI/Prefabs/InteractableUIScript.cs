@@ -167,7 +167,7 @@ namespace Technolithic
 
                     if (itemsList == null || itemsList.Count == 0) continue;
 
-                    sb.AppendLine($" {CreatureTypesData.GetCreatureTypeMultipleDisplayText(creatureType)}:");
+                    sb.AppendLine($" {CreatureTypesData.GetMultipleDisplayText(creatureType)}:");
 
                     for (int i = itemsList.Count - 1; i >= 0; i--)
                     {

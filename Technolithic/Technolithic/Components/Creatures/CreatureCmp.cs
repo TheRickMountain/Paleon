@@ -15,12 +15,6 @@ namespace Technolithic
         Completion
     }
 
-    public enum CreatureType
-    {
-        Settler,
-        Animal
-    }
-
     public enum Gender
     {
         F,

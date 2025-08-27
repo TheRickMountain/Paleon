@@ -1,0 +1,40 @@
+{
+  "name_key": "destruct_farm_plot",
+  "description_key": "destruct_farm_plot",
+  "width": 1,
+  "height": 1,
+  "type": "DestructFarmPlot",
+  "category": "None",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": false,
+  "destructible": true,
+  "movementSpeed": -1,
+  "texture": {
+    "name": "destruct_farm_plot",
+    "width": 16,
+    "height": 16
+  },
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ],
+  "ground_pattern": [
+    [
+      "Q"
+    ]
+  ],
+  "ConstructionData": {
+    "LaborType": "Agriculture",
+    "InteractionType": "DestructFarmPlot",
+    "DurationInHours": 1.0,
+    "ToolUsageStatus": "NotUsed",
+    "Ingredients": {}
+  }
+}

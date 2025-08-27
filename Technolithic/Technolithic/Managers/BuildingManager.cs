@@ -155,15 +155,12 @@ namespace Technolithic
                     {
                         if (checkTile.WallId != -1) return false;
 
-                        if (checkTile.GroundTopType == GroundTopType.None)
-                        {
-                            if (checkTile.SurfaceId == -1)
-                            {
-                                return true;
-                            }
-                        }
+                        if (checkTile.SurfaceId != -1) return false;
+
+                        if (checkTile.GroundTopType != GroundTopType.None) return false;
+
+                        return checkTile.GroundType == GroundType.Ground || checkTile.GroundType == GroundType.Grass;
                     }
-                    break;
                 case 'K':
                     {
                         if (checkTile.WallId != -1) return false;
@@ -238,6 +235,19 @@ namespace Technolithic
 
                         return checkTile.GroundType == GroundType.FarmPlot || checkTile.GroundType == GroundType.Ground
                             || checkTile.GroundType == GroundType.Grass;
+                    }
+                case 'Q':
+                    {
+                        if (checkTile.WallId != -1) return false;
+
+                        if (checkTile.SurfaceId != -1) return false;
+
+                        if (checkTile.GroundTopType == GroundTopType.IrrigationCanalFull ||
+                            checkTile.GroundTopType == GroundTopType.DeepWater ||
+                            checkTile.GroundTopType == GroundTopType.Water ||
+                            checkTile.GroundTopType == GroundTopType.IrrigationCanalEmpty) return false;
+
+                        return checkTile.GroundType == GroundType.FarmPlot;
                     }
             }
 

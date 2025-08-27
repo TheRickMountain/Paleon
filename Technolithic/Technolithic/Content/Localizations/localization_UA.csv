@@ -190,6 +190,7 @@ depends_on_wind_speed,Залежить від швидкості вітру
 deposit,Родовище
 destruct,Зруйнувати
 destruct_construction,
+destruct_farm_plot,
 destruct_irrigation_canal,Зруйнувати орошувальний канал
 destruct_surface,Зруйнувати покриття
 destruct_wall,Destruct wall

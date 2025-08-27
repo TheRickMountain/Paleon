@@ -190,6 +190,7 @@ depends_on_wind_speed,風速により異なります
 deposit,貯蔵量
 destruct,破壊
 destruct_construction,
+destruct_farm_plot,
 destruct_irrigation_canal,灌漑用水路の破壊
 destruct_surface,路面の破壊
 destruct_wall,Destruct wall

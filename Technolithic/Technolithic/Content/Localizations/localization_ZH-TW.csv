@@ -190,6 +190,7 @@ depends_on_wind_speed,取決於風速。
 deposit,礦床
 destruct,拆除
 destruct_construction,
+destruct_farm_plot,
 destruct_irrigation_canal,拆除水渠
 destruct_surface,拆除地板
 destruct_wall,Destruct wall

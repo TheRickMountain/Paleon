@@ -973,6 +973,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/dandelion.png
 
+#begin Buildings/destruct_farm_plot.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/destruct_farm_plot.png
+
 #begin Buildings/destruct_irrigation_canal.png
 /importer:TextureImporter
 /processor:TextureProcessor

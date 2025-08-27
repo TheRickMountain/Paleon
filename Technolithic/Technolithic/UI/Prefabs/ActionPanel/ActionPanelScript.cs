@@ -35,7 +35,8 @@ namespace Technolithic
                 MyAction.DestructConstruction,
                 MyAction.DestructSurface,
                 MyAction.DestructWall,
-                MyAction.DestructIrrigationCanal
+                MyAction.DestructIrrigationCanal,
+                MyAction.DestructFarmPlot
                 ] },
 
             { GameActionCategory.Cancel, [

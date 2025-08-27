@@ -38,7 +38,8 @@ namespace Technolithic
         HuntRange,
         Haul,
         AutoShear,
-        AutoMilk
+        AutoMilk,
+        DestructFarmPlot
     }
 
     public class InteractionsDatabase
@@ -95,7 +96,7 @@ namespace Technolithic
             AddInteractionData(new InteractionData(
                 InteractionType.DestructIrrigationCanal,
                 Localization.GetLocalizedText("destruct_irrigation_canal"),
-                RenderManager.Pixel, // TODO: icon
+                AssetManager.GetTexture("Sprites", "ui").GetSubtexture(128, 160, 16, 16),
                 Color.Red,
                 InteractionIconDisplayState.Never));
 
@@ -259,6 +260,13 @@ namespace Technolithic
                 AssetManager.GetTexture("Sprites", "ui").GetSubtexture(80, 96, 16, 16),
                 Color.Orange,
                 InteractionIconDisplayState.OnMarked));
+
+            AddInteractionData(new InteractionData(
+                InteractionType.DestructFarmPlot,
+                Localization.GetLocalizedText("destruct_farm_plot"),
+                AssetManager.GetTexture("Sprites", "ui").GetSubtexture(192, 32, 16, 16),
+                Color.Red,
+                InteractionIconDisplayState.Never));
         }
 
         private void AddInteractionData(InteractionData interactionData)

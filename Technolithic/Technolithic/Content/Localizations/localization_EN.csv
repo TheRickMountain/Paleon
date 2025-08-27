@@ -190,6 +190,7 @@ depends_on_wind_speed,Depends on wind speed
 deposit,Deposit
 destruct,Destruct
 destruct_construction,Destruct construction
+destruct_farm_plot,Destruct farm plot
 destruct_irrigation_canal,Destruct irrigation canal
 destruct_surface,Destruct surface
 destruct_wall,Destruct wall

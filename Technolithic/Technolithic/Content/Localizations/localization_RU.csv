@@ -190,6 +190,7 @@ depends_on_wind_speed,Зависит от скорости ветра
 deposit,Залежь
 destruct,Разрушить
 destruct_construction,Разрушить строение
+destruct_farm_plot,Разрушить вспаханную землю
 destruct_irrigation_canal,Разрушить оросительный канал
 destruct_surface,Разрушить покрытие
 destruct_wall,Разрушить стену

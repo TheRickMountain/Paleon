@@ -1033,6 +1033,7 @@ namespace Technolithic
                                 interactable.UnmarkInteraction(InteractionType.Construct);
                                 interactable.UnmarkInteraction(InteractionType.Plant);
                                 interactable.UnmarkInteraction(InteractionType.Plow);
+                                interactable.UnmarkInteraction(InteractionType.DestructFarmPlot);
                             }
                             break;
                     }
@@ -1102,32 +1103,11 @@ namespace Technolithic
                         }
                         break;
                     case MyAction.Plow:
-                        {
-                            for (int x = 0; x < tiles.GetLength(0); x++)
-                            {
-                                for (int y = 0; y < tiles.GetLength(1); y++)
-                                {
-                                    Tile tile = tiles[x, y];
-
-                                    TryToBuild(Engine.Instance.Buildings["plow"], tile.X, tile.Y, Direction.DOWN);
-                                }
-                            }
-                        }
-                        break;
                     case MyAction.BuildIrrigationCanal:
-                        {
-                            for (int x = 0; x < tiles.GetLength(0); x++)
-                            {
-                                for (int y = 0; y < tiles.GetLength(1); y++)
-                                {
-                                    Tile tile = tiles[x, y];
-
-                                    TryToBuild(Engine.Instance.Buildings["build_irrigation_canal"], tile.X, tile.Y, Direction.DOWN);
-                                }
-                            }
-                        }
-                        break;
                     case MyAction.DestructIrrigationCanal:
+                    case MyAction.DestructSurface:
+                    case MyAction.DestructWall:
+                    case MyAction.DestructFarmPlot:
                         {
                             for (int x = 0; x < tiles.GetLength(0); x++)
                             {
@@ -1135,7 +1115,30 @@ namespace Technolithic
                                 {
                                     Tile tile = tiles[x, y];
 
-                                    TryToBuild(Engine.Instance.Buildings["destruct_irrigation_canal"], tile.X, tile.Y, Direction.DOWN);
+                                    if (action == MyAction.Plow)
+                                    {
+                                        TryToBuild(Engine.Instance.Buildings["plow"], tile.X, tile.Y, Direction.DOWN);
+                                    }
+                                    else if (action == MyAction.BuildIrrigationCanal)
+                                    {
+                                        TryToBuild(Engine.Instance.Buildings["build_irrigation_canal"], tile.X, tile.Y, Direction.DOWN);
+                                    }
+                                    else if (action == MyAction.DestructIrrigationCanal)
+                                    {
+                                        TryToBuild(Engine.Instance.Buildings["destruct_irrigation_canal"], tile.X, tile.Y, Direction.DOWN);
+                                    }
+                                    else if (action == MyAction.DestructSurface)
+                                    {
+                                        TryToBuild(Engine.Instance.Buildings["destruct_surface"], tile.X, tile.Y, Direction.DOWN);
+                                    }
+                                    else if(action == MyAction.DestructWall)
+                                    {
+                                        TryToBuild(Engine.Instance.Buildings["destruct_wall"], tile.X, tile.Y, Direction.DOWN);
+                                    }
+                                    else if(action == MyAction.DestructFarmPlot)
+                                    {
+                                        TryToBuild(Engine.Instance.Buildings["destruct_farm_plot"], tile.X, tile.Y, Direction.DOWN);
+                                    }
                                 }
                             }
                         }
@@ -1252,32 +1255,6 @@ namespace Technolithic
                                     }
                                     
                                 }
-                            }
-                        }
-                        break;
-                    case MyAction.DestructSurface:
-                        for (int x = 0; x < tiles.GetLength(0); x++)
-                        {
-                            for (int y = 0; y < tiles.GetLength(1); y++)
-                            {
-                                Tile tile = tiles[x, y];
-
-                                BuildingTemplate destructPathBuildingTemplate = Engine.Instance.Buildings["destruct_surface"];
-
-                                TryToBuild(destructPathBuildingTemplate, tile.X, tile.Y, Direction.DOWN);
-                            }
-                        }
-                        break;
-                    case MyAction.DestructWall:
-                        for (int x = 0; x < tiles.GetLength(0); x++)
-                        {
-                            for (int y = 0; y < tiles.GetLength(1); y++)
-                            {
-                                Tile tile = tiles[x, y];
-
-                                BuildingTemplate destructPathBuildingTemplate = Engine.Instance.Buildings["destruct_wall"];
-
-                                TryToBuild(destructPathBuildingTemplate, tile.X, tile.Y, Direction.DOWN);
                             }
                         }
                         break;

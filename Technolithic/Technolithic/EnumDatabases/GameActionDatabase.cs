@@ -6,7 +6,7 @@
         Cancel, DestructConstruction, DestructSurface, DestructWall,
         CopySettings, Mine, GatherStone, GatherWood,
         BuildIrrigationCanal, DestructIrrigationCanal,
-        Plow, None
+        Plow, DestructFarmPlot, None
     }
 
 
@@ -29,6 +29,7 @@
             EnumDatabase<MyAction>.Register(MyAction.DestructSurface, ResourceManager.DestructSurfaceIcon, "destruct_surface");
             EnumDatabase<MyAction>.Register(MyAction.DestructWall, ResourceManager.DestructWallIcon, "destruct_wall");
             EnumDatabase<MyAction>.Register(MyAction.Plow, ResourceManager.PlowIcon, "plow");
+            EnumDatabase<MyAction>.Register(MyAction.DestructFarmPlot, AssetManager.GetTexture("Sprites", "ui").GetSubtexture(192, 32, 16, 16), "destruct_farm_plot");
         }
     }
 }

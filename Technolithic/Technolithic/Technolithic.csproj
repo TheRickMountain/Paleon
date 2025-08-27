@@ -406,6 +406,9 @@
     <None Update="Content\Buildings\destillation_cube.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Content\Buildings\destruct_farm_plot.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Content\Buildings\destruct_irrigation_canal.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -190,6 +190,7 @@ depends_on_wind_speed,Depends on wind speed
 deposit,Vorkommen
 destruct,Zerstören
 destruct_construction,
+destruct_farm_plot,
 destruct_irrigation_canal,Bewässerungskanal zerstören
 destruct_surface,Destruct surface
 destruct_wall,Destruct wall

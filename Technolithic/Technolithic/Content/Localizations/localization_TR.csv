@@ -190,6 +190,7 @@ depends_on_wind_speed,Rüzgar hizina baglidir
 deposit,Depozito
 destruct,Yik
 destruct_construction,
+destruct_farm_plot,
 destruct_irrigation_canal,Sulama kanali yik
 destruct_surface,Yüzeyi yik
 destruct_wall,Destruct wall

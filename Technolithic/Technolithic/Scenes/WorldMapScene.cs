@@ -288,18 +288,18 @@ namespace Technolithic
 
                     if (heightValue > groundHeight)
                     {
-                        if (heightValue > groundHeight + 0.02)
-                        {
-                            colorData[idx] = Color.ForestGreen;
-                        }
-                        else
-                        {
-                            colorData[idx] = Color.SandyBrown;
-                        }
+                        colorData[idx] = new Color(143, 161, 77);
                     }
                     else
                     {
-                        colorData[idx] = Color.Navy;
+                        if (heightValue < groundHeight - 0.05f)
+                        {
+                            colorData[idx] = new Color(64, 82, 110);
+                        }
+                        else
+                        {
+                            colorData[idx] = new Color(76, 110, 107);
+                        }
                     }
                 }
             }

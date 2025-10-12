@@ -58,6 +58,7 @@ namespace Technolithic
         public World World { get; private set; } 
 
         private Layer entityLayer;
+        private Layer _animalCorpseLayer;
         public Layer CreatureLayer { get; private set; }
 
         public PenumbraComponent Penumbra { get; private set; }
@@ -119,6 +120,9 @@ namespace Technolithic
 
             entityLayer = CreateLayer("Entity");
             entityLayer.Entities.SortByYAxisWhenAdded = true;
+            
+            _animalCorpseLayer = CreateLayer("AnimalCorpse");
+
             CreatureLayer = CreateLayer("Creature");
             CreatureLayer.Entities.SortByYAxisAlways = true;
 
@@ -1129,6 +1133,8 @@ namespace Technolithic
 
             entityLayer.Render();
 
+            _animalCorpseLayer.Render();
+
             // Предметы
             World.RenderItemTileMap();
 
@@ -1276,6 +1282,17 @@ namespace Technolithic
             CreatureLayer.Add(animal);
 
             return animal.Get<AnimalCmp>();
+        }
+
+        public AnimalCorpse SpawnAnimalCorpse(int tileX, int tileY, AnimalTemplate animalTemplate)
+        {
+            AnimalCorpse animalCorpse = new AnimalCorpse(animalTemplate);
+            animalCorpse.X = tileX * Engine.TILE_SIZE;
+            animalCorpse.Y = tileY * Engine.TILE_SIZE;
+
+            _animalCorpseLayer.Add(animalCorpse);
+
+            return animalCorpse;
         }
 
         public void SaveGame(string saveName, bool isAutosave)

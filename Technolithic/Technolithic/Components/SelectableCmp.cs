@@ -14,7 +14,8 @@ namespace Technolithic
         Settler,
         Animal, 
         ItemContainers,
-        Trader
+        Trader,
+        AnimalCorpse
     }
 
     public class SelectableCmp : Component

@@ -382,6 +382,15 @@ namespace Technolithic
             GameplayScene.Instance.SpawnAnimal(x, y, animalTemplate, animalTemplate.DaysUntilAging);
         }
 
+        [Command("spawn_animal_corpse")]
+        private static void SpawnAnimalCorpse(string animalTemplateKey)
+        {
+            int x = GameplayScene.MouseTile.X;
+            int y = GameplayScene.MouseTile.Y;
+            AnimalTemplate animalTemplate = AnimalTemplateDatabase.GetAnimalTemplateByName(animalTemplateKey);
+            GameplayScene.Instance.SpawnAnimalCorpse(x, y, animalTemplate);
+        }
+
         [Command("add_item")]
         private static void AddItem(string itemName, int weight)
         {

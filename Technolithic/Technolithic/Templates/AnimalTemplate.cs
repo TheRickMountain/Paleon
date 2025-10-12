@@ -29,6 +29,7 @@ namespace Technolithic
 
         public MyTexture Texture { get; private set; }
         public MyTexture SleepTexture { get; private set; }
+        public MyTexture CorpseTexture { get; private set; }
 
         public float MovementSpeed { get; private set; }
         public bool CanProtect { get; private set; }
@@ -90,6 +91,7 @@ namespace Technolithic
 
             Texture = tileset[0];
             SleepTexture = tileset[1];
+            CorpseTexture = tileset[2];
 
             MovementSpeed = JObject["movementSpeed"].Value<float>();
 

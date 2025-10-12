@@ -29,20 +29,15 @@
     "damage":  6,
     "defense":  0,
     "product":  null,
-    "drop":  [
-                 {
-                     "item":  "raw_meat",
-                     "count":  3
-                 },
-                 {
-                     "item":  "raw_skin",
-                     "count":  3
-                 },
-                 {
-                     "item":  "bone",
-                     "count":  2
-                 }
-             ],
+    "ButcheringData": {
+        "RawLoot": {
+            "raw_meat": 3,
+            "raw_skin": 3,
+            "bone": 2
+        },
+        "ButcheringTimeInHours": 0.5,
+        "FreshnessTimeInHours": 1.0
+    },
     "ration":  [
                    "hay"
                ],

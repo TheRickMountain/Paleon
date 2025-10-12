@@ -1,54 +1,47 @@
 {
-    "key":  "wolf",
-    "kind":  "wolf",
-    "texture":  {
-                    "name":  "wolf_female_baby",
-                    "width":  24,
-                    "height":  24
-                },
-    "attributes":  [
-                       {
-                           "name":  "Energy"
-                       },
-                       {
-                           "name":  "Health"
-                       }
-                   ],
-    "movementSpeed":  4.6,
-    "DomesticationData":  {
-                              "TamedForm":  "dog_female_baby",
-                              "Chance":  100
-                          },
-    "canProtect":  true,
-    "isWild":  true,
-    "gender":  "F",
-    "health":  30,
-    "hunger":  100,
-    "energy":  100,
-    "DaysUntilAging":  6,
-    "damage":  3,
-    "defense":  0,
-    "ration":  [
-                   "raw_meat",
-                   "raw_fish"
-               ],
-    "drop":  [
-                 {
-                     "item":  "raw_meat",
-                     "count":  1
-                 },
-                 {
-                     "item":  "raw_skin",
-                     "count":  1
-                 },
-                 {
-                     "item":  "bone",
-                     "count":  1
-                 }
-             ],
-    "allowedLabors":  [
-
-                      ],
-    "attackChance":  0,
-    "AgeState":  "Baby"
+    "key": "wolf",
+    "kind": "wolf",
+    "texture": {
+        "name": "wolf_female_baby",
+        "width": 24,
+        "height": 24
+    },
+    "attributes": [
+        {
+            "name": "Energy"
+        },
+        {
+            "name": "Health"
+        }
+    ],
+    "movementSpeed": 4.6,
+    "DomesticationData": {
+        "TamedForm": "dog_female_baby",
+        "Chance": 100
+    },
+    "canProtect": true,
+    "isWild": true,
+    "gender": "F",
+    "health": 30,
+    "hunger": 100,
+    "energy": 100,
+    "DaysUntilAging": 6,
+    "damage": 3,
+    "defense": 0,
+    "ration": [
+        "raw_meat",
+        "raw_fish"
+    ],
+    "allowedLabors": [],
+    "attackChance": 0,
+    "AgeState": "Baby",
+    "ButcheringData": {
+        "RawLoot": {
+            "raw_meat": 1,
+            "raw_skin": 1,
+            "bone": 1
+        },
+        "ButcheringTimeInHours": 0.5,
+        "FreshnessTimeInHours": 1.0
+    }
 }

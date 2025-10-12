@@ -827,7 +827,9 @@ namespace Technolithic
             if (throwLoot)
             {
                 Tile tile = Movement.CurrentTile;
-                foreach (var kvp in AnimalTemplate.Drop)
+
+                // TODO: временный код, так как скоро животное будет оставлять после себя труп
+                foreach (var kvp in AnimalTemplate.ButcheringData.RealLoot)
                 {
                     Item item = kvp.Key;
                     int count = kvp.Value;

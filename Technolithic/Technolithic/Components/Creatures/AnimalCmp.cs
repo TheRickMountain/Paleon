@@ -576,7 +576,7 @@ namespace Technolithic
                             }
                             else
                             {
-                                Die("", false);
+                                Die("", true);
                             }
                         }
                         break;
@@ -807,7 +807,7 @@ namespace Technolithic
             Movement.CurrentTile.Inventory.AddCargo(new ItemContainer(product, 1, product.Durability));
         }
 
-        public override void Die(string reasonMessage, bool throwLoot = true)
+        public override void Die(string reasonMessage, bool leftCorpse = true)
         {
             indicator.Active = false;
 
@@ -824,18 +824,10 @@ namespace Technolithic
                 TargetAnimalPen.RemoveAnimal(this);
             }
 
-            if (throwLoot)
+            if (leftCorpse)
             {
                 Tile tile = Movement.CurrentTile;
-
-                // TODO: временный код, так как скоро животное будет оставлять после себя труп
-                foreach (var kvp in AnimalTemplate.ButcheringData.RealLoot)
-                {
-                    Item item = kvp.Key;
-                    int count = kvp.Value;
-
-                    tile.Inventory.AddCargo(new ItemContainer(item, count, item.Durability));
-                }
+                GameplayScene.Instance.SpawnAnimalCorpse(tile.X, tile.Y, AnimalTemplate);
             }
 
             if(AnimalTemplate.IsWild)

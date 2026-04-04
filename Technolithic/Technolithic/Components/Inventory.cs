@@ -8,6 +8,8 @@ namespace Technolithic
 {
     public class Inventory
     {
+        private const float ALLOWED_DURABILITY_DIFFERENCE = 0.2f;
+
         public Dictionary<Item, List<ItemContainer>> ItemItemContainerPair = new Dictionary<Item, List<ItemContainer>>();
         public Dictionary<Item, int> InventoryToAdd { get; private set; }
         public Dictionary<Item, int> InventoryRequired { get; private set; }
@@ -181,24 +183,16 @@ namespace Technolithic
             // Если инвентарь уже имеет предмет, то удаляем добавляемый itemContainer и прибавляем его общий вес к старому itemContainer
             if (ItemItemContainerPair.ContainsKey(item))
             {
-                // Для предметов, которые являются IsStackable вычисляется средняя прочность
                 if (item.IsStackable)
                 {
-                    if (ItemItemContainerPair[item].Count > 0)
+                    ItemContainer oldIC = FindItemContainerToStackWith(newIC, ItemItemContainerPair[item]);
+
+                    if (oldIC != null)
                     {
-                        ItemContainer oldIC = ItemItemContainerPair[item][0];
+                        oldIC.FactWeight = oldIC.FactWeight + newIC.FactWeight;
 
-                        int oldICFactWeight = oldIC.FactWeight;
-                        float oldICDurability = oldIC.Durability;
-                        int newICFactWeight = newIC.FactWeight;
-                        float newICDurability = newIC.Durability;
-
-                        int totalFactWeight = oldICFactWeight + newICFactWeight;
-
-                        int averageDurability = (int)((oldICFactWeight * oldICDurability + newICFactWeight * newICDurability) / totalFactWeight);
-
-                        oldIC.FactWeight = totalFactWeight;
-                        oldIC.Durability = averageDurability;
+                        oldIC.Durability = CalculateAverageDurability(oldIC.FactWeight, oldIC.Durability,
+                                newIC.FactWeight, newIC.Durability);
                     }
                     else
                     {
@@ -245,6 +239,38 @@ namespace Technolithic
                     GameplayScene.WorldManager.StoragesThatHaveItemsV2[newIC.Item].Add(this);
                 }
             }
+        }
+
+        private ItemContainer FindItemContainerToStackWith(ItemContainer ic, List<ItemContainer> icList)
+        {
+            for (int i = 0; i < icList.Count; i++)
+            {
+                ItemContainer oldIc = icList[i];
+
+                if (CanStack(ic, oldIc, ALLOWED_DURABILITY_DIFFERENCE)) return oldIc;
+            }
+
+            return null;
+        }
+
+        private float CalculateAverageDurability(int amount1, float durability1, int amount2, float durability2)
+        {
+            int totalAmount = amount1 + amount2;
+
+            return (amount1 * durability1 + amount2 * durability2) / totalAmount;
+        }
+
+        private bool CanStack(ItemContainer ic1, ItemContainer ic2, float allowedDurabilityDifference)
+        {
+            if (ic1.Item.IsStackable == false || ic2.Item.IsStackable == false) return false;
+
+            float durabilityPercent1 = ic1.Durability / ic1.Item.Durability;
+
+            float durabilityPercent2 = ic2.Durability / ic2.Item.Durability;
+
+            float durabilityDiff = Math.Abs(durabilityPercent1 - durabilityPercent2);
+
+            return durabilityDiff <= allowedDurabilityDifference;
         }
 
         public void ReserveItemWeight(Item item, int weight)
@@ -475,6 +501,5 @@ namespace Technolithic
 
             return "";
         }
-
     }
 }

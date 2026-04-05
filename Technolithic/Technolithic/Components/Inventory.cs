@@ -185,7 +185,8 @@ namespace Technolithic
             {
                 if (item.IsStackable)
                 {
-                    ItemContainer oldIC = FindItemContainerToStackWith(newIC, ItemItemContainerPair[item]);
+                    List<ItemContainer> itemContainers = ItemItemContainerPair[item];
+                    ItemContainer oldIC = FindItemContainerToStackWith(newIC, itemContainers);
 
                     if (oldIC != null)
                     {
@@ -196,8 +197,12 @@ namespace Technolithic
                     }
                     else
                     {
-                        ItemItemContainerPair[item].Add(newIC);
+                        itemContainers.Add(newIC);
                     }
+
+                    // INFO: Sorting the array of products from stale to the freshest, so
+                    // that when creatures choose products, they choose the stale ones
+                    itemContainers.Sort((x, y) => x.Durability.CompareTo(y.Durability));
                 }
                 else
                 {

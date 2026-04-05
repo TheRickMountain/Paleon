@@ -1,12 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
+using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Input;
 using System.Reflection;
-using Penumbra;
+using System.Globalization;
 
 namespace Technolithic
 {
@@ -111,7 +108,11 @@ namespace Technolithic
                 int paramNum = 0;
                 foreach (var param in method.GetParameters())
                 {
-                    if (param.ParameterType == typeof(int))
+                    if (param.ParameterType == typeof(float))
+                    {
+                        parameters[paramNum] = float.Parse(args[paramNum], CultureInfo.InvariantCulture);
+                    }
+                    else if (param.ParameterType == typeof(int))
                     {
                         parameters[paramNum] = int.Parse(args[paramNum]);
                     }

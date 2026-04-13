@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Technolithic
 {
@@ -25,68 +21,65 @@ namespace Technolithic
         {
             timer += Engine.GameDeltaTime;
 
-            if (timer >= 1.0f)
+            if (timer < 1.0f) return;
+
+            timer = 0.0f;
+
+            foreach (var inventory in Inventories)
             {
-                // Looking for spoiled items
-                timer = 0;
-                foreach (var inventory in Inventories)
+                for (int i = 0; i < ItemDatabase.Decayable.Count; i++)
                 {
-                    for (int i = 0; i < ItemDatabase.Decayable.Count; i++)
+                    Item item = ItemDatabase.Decayable[i];
+                    float spoilagePerMinute = item.SpoilageRate / (float)(WorldState.MINUTES_PER_HOUR * WorldState.HOURS_PER_CYCLE);
+
+                    if (currentSeason == Season.Winter)
                     {
-                        Item item = ItemDatabase.Decayable[i];
-                        float spoilagePerMinute = item.SpoilageRate / (float)(WorldState.MINUTES_PER_HOUR * WorldState.HOURS_PER_CYCLE);
-                        
-                        if(currentSeason == Season.Winter)
+                        spoilagePerMinute /= 3f;
+                    }
+                    else
+                    {
+                        if (inventory.BuildingCmp != null && inventory.BuildingCmp.BuildingTemplate.BuildingType == BuildingType.Stockpile)
                         {
-                            spoilagePerMinute /= 3f;
+                            spoilagePerMinute /= inventory.BuildingCmp.BuildingTemplate.Storage.ShelfLifeOfProducts;
                         }
-                        else
-                        {
-                            if (inventory.BuildingCmp != null && inventory.BuildingCmp.BuildingTemplate.BuildingType == BuildingType.Stockpile)
-                            {
-                                spoilagePerMinute /= inventory.BuildingCmp.BuildingTemplate.Storage.ShelfLifeOfProducts;
-                            }
-                        }
+                    }
 
-                        List<ItemContainer> itemContainers;
-                        inventory.ItemItemContainerPair.TryGetValue(item, out itemContainers);
-                        if(itemContainers != null)
+                    if (inventory.ItemItemContainerPair.TryGetValue(item, out List<ItemContainer> itemContainers))
+                    {
+                        foreach (var itemContainer in itemContainers)
                         {
-                            foreach (var itemContainer in itemContainers)
-                            {
-                                itemContainer.Durability -= spoilagePerMinute;
+                            itemContainer.Durability -= spoilagePerMinute;
 
-                                if (itemContainer.Durability <= 0)
+                            if (itemContainer.Durability <= 0)
+                            {
+                                GameplayScene.UIRootNodeScript.NotificationsUI.GetComponent<NotificationsUIScript>()
+                                    .AddNotification($"{item.Name} {Localization.GetLocalizedText("spoiled").ToLower()}", NotificationLevel.WARNING);
+
+                                if (itemContainersToRemove.ContainsKey(inventory) == false)
                                 {
-                                    GameplayScene.UIRootNodeScript.NotificationsUI.GetComponent<NotificationsUIScript>()
-                                        .AddNotification($"{item.Name} {Localization.GetLocalizedText("spoiled").ToLower()}", NotificationLevel.WARNING);
-
-                                    if (itemContainersToRemove.ContainsKey(inventory) == false)
-                                    {
-                                        itemContainersToRemove.Add(inventory, new List<ItemContainer>());
-                                    }
-
-                                    itemContainersToRemove[inventory].Add(itemContainer);
+                                    itemContainersToRemove.Add(inventory, new List<ItemContainer>());
                                 }
+
+                                itemContainersToRemove[inventory].Add(itemContainer);
                             }
                         }
                     }
                 }
-            
-                // Removing spoiled items
-                foreach(var kvp in itemContainersToRemove)
-                {
-                    Inventory inventory = kvp.Key;
-                    List<ItemContainer> itemContainers = kvp.Value;
-
-                    foreach(var itemContainer in itemContainers)
-                    {
-                        inventory.PopItemContainer(itemContainer);
-                    }
-                }
-
-                itemContainersToRemove.Clear();
             }
+
+            // Removing spoiled items
+            foreach (var kvp in itemContainersToRemove)
+            {
+                Inventory inventory = kvp.Key;
+                List<ItemContainer> itemContainers = kvp.Value;
+
+                foreach (var itemContainer in itemContainers)
+                {
+                    inventory.PopItemContainer(itemContainer);
+                }
+            }
+
+            itemContainersToRemove.Clear();
         }
     }
 }

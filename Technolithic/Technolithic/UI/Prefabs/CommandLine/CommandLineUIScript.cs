@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Globalization;
+using System;
 
 namespace Technolithic
 {
@@ -384,12 +385,14 @@ namespace Technolithic
         }
 
         [Command("add_item")]
-        private static void AddItem(string itemName, int weight)
+        private static void AddItem(string itemName, int weight, float durabilityPercent)
         {
-            Item item;
-            if(ItemDatabase.Items.TryGetValue(itemName, out item))
+            if (ItemDatabase.Items.TryGetValue(itemName, out Item item))
             {
-                GameplayScene.MouseTile.Inventory.AddCargo(item, weight);
+                durabilityPercent = Math.Clamp(durabilityPercent, 0f, 1f);
+
+                float realDurability = item.Durability * durabilityPercent;
+                GameplayScene.MouseTile.Inventory.AddCargo(item, weight, realDurability);
             }
         }
 

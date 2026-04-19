@@ -636,22 +636,24 @@ namespace Technolithic
                 return;
             }
 
+            int minX = Math.Max(0, centerX - radius);
+            int minY = Math.Max(0, centerY - radius);
+
+            int maxX = Math.Min(Width - 1, centerX + radius);
+            int maxY = Math.Min(Height - 1, centerY + radius);
+
             int radiusPow = radius * radius;
 
-            for (int x = centerX - radius; x < centerX + radius; x++)
+            for (int x = minX; x <= maxX; x++)
             {
-                for (int y = centerY - radius; y < centerY + radius; y++)
+                for (int y = minY; y <= maxY; y++)
                 {
                     int dx = centerX - x;
                     int dy = centerY - y;
 
                     if ((dx * dx + dy * dy) < radiusPow)
                     {
-                        Tile tile = GetTileAt(x, y);
-
-                        if (tile == null) continue;
-
-                        returnTiles.Add(tile);
+                        returnTiles.Add(tiles[x, y]);
                     }
                 }
             }
@@ -665,22 +667,24 @@ namespace Technolithic
                 return;
             }
 
+            int minX = Math.Max(0, centerX - radius);
+            int minY = Math.Max(0, centerY - radius);
+
+            int maxX = Math.Min(Width - 1, centerX + radius);
+            int maxY = Math.Min(Height - 1, centerY + radius);
+
             int radiusPow = radius * radius;
 
-            for (int x = centerX - radius; x < centerX + radius; x++)
+            for (int x = minX; x <= maxX; x++)
             {
-                for (int y = centerY - radius; y < centerY + radius; y++)
+                for (int y = minY; y <= maxY; y++)
                 {
                     int dx = centerX - x;
                     int dy = centerY - y;
 
                     if ((dx * dx + dy * dy) < radiusPow)
                     {
-                        Tile tile = GetTileAt(x, y);
-
-                        if (tile == null) continue;
-
-                        action.Invoke(tile);
+                        action.Invoke(tiles[x, y]);
                     }
                 }
             }

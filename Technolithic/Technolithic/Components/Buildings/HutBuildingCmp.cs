@@ -40,7 +40,10 @@ namespace Technolithic
 
             Tile centerTile = TilesInfosArray[BuildingTemplate.Width / 2, BuildingTemplate.Height / 2].Tile;
 
-            foreach (var tile in Utils.GetTilesInCircle(centerTile, 6))
+            List<Tile> tilesInRadius = new List<Tile>();
+            centerTile.World.TryGetTilesInRadius(centerTile.X, centerTile.Y, 6, tilesInRadius);
+
+            foreach (var tile in tilesInRadius)
             {
                 homeAreaTiles.Add(tile);
                 tile.HomeArea++;

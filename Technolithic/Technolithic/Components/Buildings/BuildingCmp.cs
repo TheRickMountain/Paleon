@@ -262,10 +262,11 @@ namespace Technolithic
 
                             Tile centerTile = GetRealCenterTile();
 
-                            foreach (var tilesToIlluminate in Utils.GetTilesInCircle(centerTile, (int)(BuildingTemplate.LightEmitter.Radius / 33.33f)))
-                            {
-                                tilesToIlluminate.IsIlluminated = true;
-                            }
+                            centerTile.World.DoForTilesInRadius(
+                                centerTile.X, 
+                                centerTile.Y, 
+                                (int)(BuildingTemplate.LightEmitter.Radius / 33.33f),
+                                tile => tile.IsIlluminated = true);
                         }
 
                         if (flickeringTimer.GetTime() >= 0.1f)
@@ -298,10 +299,11 @@ namespace Technolithic
 
                             Tile centerTile = GetRealCenterTile();
 
-                            foreach (var tilesToIlluminate in Utils.GetTilesInCircle(centerTile, (int)(BuildingTemplate.LightEmitter.Radius / 33.33f)))
-                            {
-                                tilesToIlluminate.IsIlluminated = false;
-                            }
+                            centerTile.World.DoForTilesInRadius(
+                                centerTile.X,
+                                centerTile.Y,
+                                (int)(BuildingTemplate.LightEmitter.Radius / 33.33f),
+                                tile => tile.IsIlluminated = false);
                         }
                     }
                 }
@@ -653,10 +655,7 @@ namespace Technolithic
             {
                 Tile centerTile = tileInfo.Tile;
 
-                foreach (var rangeTile in Utils.GetTilesInCircle(centerTile, BuildingTemplate.Range))
-                {
-                    tiles.Add(rangeTile);
-                }
+                centerTile.World.TryGetTilesInRadius(centerTile.X, centerTile.Y, BuildingTemplate.Range, tiles);
             }
 
             foreach (var tileInfo in TilesInfosList)

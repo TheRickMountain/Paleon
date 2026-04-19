@@ -139,12 +139,7 @@ namespace Technolithic
                         {
                             if (lastGroundTopType != GroundTopType.Water)
                             {
-                                IrrigationLevel++;
-
-                                foreach (var tile in Utils.GetTilesInCircle(this, 3))
-                                {
-                                    tile.IrrigationLevel++;
-                                }
+                                World.DoForTilesInRadius(X, Y, 3, tile => tile.IrrigationLevel++);
                             }
                         }
                         break;
@@ -152,12 +147,7 @@ namespace Technolithic
                         {
                             if (lastGroundTopType != GroundTopType.IrrigationCanalFull)
                             {
-                                IrrigationLevel++;
-
-                                foreach (var tile in Utils.GetTilesInCircle(this, 3))
-                                {
-                                    tile.IrrigationLevel++;
-                                }
+                                World.DoForTilesInRadius(X, Y, 3, tile => tile.IrrigationLevel++);
                             }
                         }
                         break;
@@ -165,12 +155,7 @@ namespace Technolithic
                         {
                             if (lastGroundTopType == GroundTopType.Water || lastGroundTopType == GroundTopType.IrrigationCanalFull)
                             {
-                                IrrigationLevel--;
-
-                                foreach (var tile in Utils.GetTilesInCircle(this, 3))
-                                {
-                                    tile.IrrigationLevel--;
-                                }
+                                World.DoForTilesInRadius(X, Y, 3, tile => tile.IrrigationLevel--);
                             }
                         }
                         break;
@@ -291,11 +276,14 @@ namespace Technolithic
 
         public bool IsIlluminated { get; set; } = false;
 
-        public Tile(int x, int y, TileMap summerGroundTileMap, TileMap autumnGroundTileMap, TileMap winterGroundTileMap, TileMap springGroundTileMap, TileMap groundTopTileMap, TileMap surfaceTileMap, TileMap blockTileMap, 
+        public World World { get; private set; }
+
+        public Tile(int x, int y, World world, TileMap summerGroundTileMap, TileMap autumnGroundTileMap, TileMap winterGroundTileMap, TileMap springGroundTileMap, TileMap groundTopTileMap, TileMap surfaceTileMap, TileMap blockTileMap, 
             TileMap itemTileMap, TileMap markTileMap)
         {
             X = x;
             Y = y;
+            this.World = world;
 
             point = new Point(X, Y);
             vector = new Vector2(X, Y);

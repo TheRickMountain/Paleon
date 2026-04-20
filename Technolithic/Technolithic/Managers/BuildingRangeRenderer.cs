@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Technolithic
 {
@@ -11,6 +9,8 @@ namespace Technolithic
     {
 
         private HashSet<Tile> tiles = new HashSet<Tile>();
+
+        private List<Tile> _tilesInRadius = new List<Tile>();
 
         public BuildingRangeRenderer()
         {
@@ -58,7 +58,11 @@ namespace Technolithic
 
                 foreach (var centerTile in tilesCoveredByBuildingTemplate)
                 {
-                    foreach (var checkTile in Utils.GetTilesInCircle(centerTile, worldManager.CurrentBuildingTemplate.Range))
+                    _tilesInRadius.Clear();
+                    centerTile.World.TryGetTilesInRadius(centerTile.X, centerTile.Y, worldManager.CurrentBuildingTemplate.Range,
+                        _tilesInRadius);
+
+                    foreach (var checkTile in _tilesInRadius)
                     {
                         if (tilesCoveredByBuildingTemplate.Contains(checkTile))
                             continue;

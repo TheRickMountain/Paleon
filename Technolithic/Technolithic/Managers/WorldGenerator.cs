@@ -46,19 +46,23 @@ namespace Technolithic
 
             Tile[] randomTiles = GetRandomTiles(pointsAmount);
 
+            List<Tile> tilesInRadius = new List<Tile>();
+
             foreach (Tile centerTile in randomTiles)
             {
-                foreach (Tile spawnTile in Utils.GetTilesInCircle(centerTile, radius))
+                tilesInRadius.Clear();
+                centerTile.World.TryGetTilesInRadius(centerTile.X, centerTile.Y, radius, tilesInRadius);
+                foreach (Tile spawnTile in tilesInRadius)
                 {
                     if (MyRandom.ProbabilityChance(50)) continue;
 
                     Entity entity = worldManager.TryToBuild(buildingTemplate, spawnTile.X, spawnTile.Y, Direction.DOWN, true);
-                    if (entity != null)
-                    {
-                        FarmPlot wildFarmPlot = entity.Get<FarmPlot>();
-                        wildFarmPlot.SetPlantParameters(MyRandom.Range(3) == 2 ? 100 : MyRandom.Range(75, 100), 0);
-                        wildFarmPlot.MakeWild();
-                    }
+
+                    if (entity == null) continue;
+
+                    FarmPlot wildFarmPlot = entity.Get<FarmPlot>();
+                    wildFarmPlot.SetPlantParameters(MyRandom.Range(3) == 2 ? 100 : MyRandom.Range(75, 100), 0);
+                    wildFarmPlot.MakeWild();
                 }
             }
         }

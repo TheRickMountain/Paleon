@@ -202,32 +202,6 @@ namespace Technolithic
 
             return newMatrix;
         }
-
-        public static IEnumerable<Tile> GetTilesInCircle(Tile centerTile, int radius)
-        {
-            int centerX = centerTile.X;
-            int centerY = centerTile.Y;
-
-            int rr = radius * radius;
-
-            for (int x = centerX - radius; x < centerX + radius; x++)
-            {
-                for (int y = centerY - radius; y < centerY + radius; y++)
-                {
-                    int dx = centerX - x;
-                    int dy = centerY - y;
-
-                    if ((dx * dx + dy * dy) < rr)
-                    {
-                        Tile tile = GameplayScene.Instance.World.GetTileAt(x, y);
-                        if (tile != null)
-                        {
-                            yield return tile;
-                        }
-                    }
-                }
-            }
-        }
     }
 }
 

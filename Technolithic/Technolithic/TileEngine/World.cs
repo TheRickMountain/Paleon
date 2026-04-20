@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Technolithic
 {
@@ -319,6 +320,8 @@ namespace Technolithic
                 }
             }
 
+            List<Tile> tilesInRadius = new List<Tile>();
+
             // Генерация залежей вокруг жил
             foreach (var kvp in depositsTiles)
             {
@@ -326,7 +329,10 @@ namespace Technolithic
 
                 foreach (var randomTile in kvp.Value)
                 {
-                    foreach (var tile in Utils.GetTilesInCircle(randomTile, 8))
+                    tilesInRadius.Clear();
+                    TryGetTilesInRadius(randomTile.X, randomTile.Y, 8, tilesInRadius);
+
+                    foreach (var tile in tilesInRadius)
                     {
                         if (MyRandom.ProbabilityChance(10))
                         {
@@ -419,7 +425,7 @@ namespace Technolithic
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    Tile tile = new Tile(x, y, summerGroundTileMap, autumnGroundTileMap, winterGroundTileMap, springGroundTileMap, groundTopTileMap, surfaceTileMap, blockTileMap, itemTileMap, markTileMap);
+                    Tile tile = new Tile(x, y, this, summerGroundTileMap, autumnGroundTileMap, winterGroundTileMap, springGroundTileMap, groundTopTileMap, surfaceTileMap, blockTileMap, itemTileMap, markTileMap);
                     tiles[x, y] = tile;
                 }
             }
@@ -602,11 +608,7 @@ namespace Technolithic
 
         public Tile GetTileAt(int x, int y)
         {
-            if (x < 0 || x >= Width)
-                return null;
-
-            if (y < 0 || y >= Height)
-                return null;
+            if (IsTileWithinBounds(x, y) == false) return null;
 
             return tiles[x, y];
         }
@@ -616,6 +618,8 @@ namespace Technolithic
             return GetTileAt(point.X, point.Y);
         }
 
+        #region Handlers
+
         public Tile GetRandomTile()
         {
             int randomX = MyRandom.Range(0, Width);
@@ -623,6 +627,72 @@ namespace Technolithic
 
             return GetTileAt(randomX, randomY);
         }
+
+        public void TryGetTilesInRadius(int centerX, int centerY, int radius, ICollection<Tile> returnTiles)
+        {
+            if (IsTileWithinBounds(centerX, centerY) == false)
+            {
+                Program.WriteWarningLog($"Trying to get tiles outside of the bounds: ({centerX}, {centerY})");
+                return;
+            }
+
+            int minX = Math.Max(0, centerX - radius);
+            int minY = Math.Max(0, centerY - radius);
+
+            int maxX = Math.Min(Width - 1, centerX + radius);
+            int maxY = Math.Min(Height - 1, centerY + radius);
+
+            int radiusPow = radius * radius;
+
+            for (int x = minX; x <= maxX; x++)
+            {
+                for (int y = minY; y <= maxY; y++)
+                {
+                    int dx = centerX - x;
+                    int dy = centerY - y;
+
+                    if ((dx * dx + dy * dy) < radiusPow)
+                    {
+                        returnTiles.Add(tiles[x, y]);
+                    }
+                }
+            }
+        }
+
+        public void DoForTilesInRadius(int centerX, int centerY, int radius, Action<Tile> action)
+        {
+            if (IsTileWithinBounds(centerX, centerY) == false)
+            {
+                Program.WriteWarningLog($"Trying to get tiles outside of the bounds: ({centerX}, {centerY})");
+                return;
+            }
+
+            int minX = Math.Max(0, centerX - radius);
+            int minY = Math.Max(0, centerY - radius);
+
+            int maxX = Math.Min(Width - 1, centerX + radius);
+            int maxY = Math.Min(Height - 1, centerY + radius);
+
+            int radiusPow = radius * radius;
+
+            for (int x = minX; x <= maxX; x++)
+            {
+                for (int y = minY; y <= maxY; y++)
+                {
+                    int dx = centerX - x;
+                    int dy = centerY - y;
+
+                    if ((dx * dx + dy * dy) < radiusPow)
+                    {
+                        action.Invoke(tiles[x, y]);
+                    }
+                }
+            }
+        }
+
+        public bool IsTileWithinBounds(int x, int y) => x >= 0 && x < Width && y >= 0 && y < Height;
+
+        #endregion
 
         public WorldSaveData GetSaveData()
         {

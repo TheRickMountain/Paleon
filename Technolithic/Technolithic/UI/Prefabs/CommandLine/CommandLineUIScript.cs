@@ -347,18 +347,6 @@ namespace Technolithic
             GameplayScene.ShowWaterChunks = value;
         }
 
-        [Command("show_irrigated_tiles")]
-        private static void SetShowIrrigatedTiles(bool value)
-        {
-            GameplayScene.ShowIrrigatedTiles = value;
-        }
-
-        [Command("show_ilm_tiles")]
-        private static void SetShowIlmTiles(bool value)
-        {
-            GameplayScene.ShowIlluminatedTiles = value;
-        }
-
         [Command("spawn_smoke")]
         private static void SpawnSmoke()
         {
@@ -498,6 +486,18 @@ namespace Technolithic
                 GameplayScene.Instance.AchievementManager.UnlockAchievement(id);
             }
             catch { }
+        }
+
+        [Command("set_game_overlay")]
+        private static void SetGameOverlay(string overlayTypeStr)
+        {
+            try
+            {
+                OverlayType overlayType = Utils.ParseEnum<OverlayType>(overlayTypeStr);
+
+                GameplayScene.Instance.OverlayManager.SetOverlay(overlayType);
+            }
+            catch {}
         }
     }
 

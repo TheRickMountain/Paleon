@@ -65,8 +65,6 @@ namespace Technolithic
         public static bool BuildingsRequiredDestructing { get; set; } = true;
         public static bool BuildingsRequiredBuilding { get; set; } = true;
         public static bool ShowWaterChunks { get; set; } = false;
-        public static bool ShowIrrigatedTiles { get; set; } = false;
-        public static bool ShowIlluminatedTiles { get; set; } = false;
 
         public GameplayCamera GameplayCamera { get; private set; }
 
@@ -79,6 +77,9 @@ namespace Technolithic
         private BackgroundSongState backgroundSongState = BackgroundSongState.Play;
         private float backgroundSongPauseTimer = 0;
         private int pauseBetweenBackgroundSongs = 600;
+
+        // *** Save system independent ***
+        public GameOverlayManager OverlayManager { get; private set; }
 
         public GameplayScene(string saveFileName, int worldSize, string worldName)
         {
@@ -772,6 +773,9 @@ namespace Technolithic
             MessageManager = new MMessageManager();
             BuildingRangeRenderer = new BuildingRangeRenderer();
 
+            // *** Save system independent ***
+            OverlayManager = new GameOverlayManager(World);
+
             uiRootNode = new UIRootNode(this);
             UIRootNodeScript = uiRootNode.GetComponent<UIRootNodeScript>();
 
@@ -1162,33 +1166,7 @@ namespace Technolithic
                 MouseTile.WaterChunk.DebugRender();
             }
 
-            if (ShowIrrigatedTiles)
-            {
-                for (int x = 0; x < World.Width; x++)
-                {
-                    for (int y = 0; y < World.Height; y++)
-                    {
-                        if (World.GetTileAt(x, y).IrrigationLevel > 0)
-                        {
-                            RenderManager.Rect(x * Engine.TILE_SIZE, y * Engine.TILE_SIZE, Engine.TILE_SIZE, Engine.TILE_SIZE, Color.Blue * 0.5f);
-                        }
-                    }
-                }
-            }
-
-            if(ShowIlluminatedTiles)
-            {
-                for (int x = 0; x < World.Width; x++)
-                {
-                    for (int y = 0; y < World.Height; y++)
-                    {
-                        if (World.GetTileAt(x, y).IsIlluminated)
-                        {
-                            RenderManager.Rect(x * Engine.TILE_SIZE, y * Engine.TILE_SIZE, Engine.TILE_SIZE, Engine.TILE_SIZE, Color.Yellow * 0.5f);
-                        }
-                    }
-                }
-            }
+            OverlayManager.Render();
 
             World.RenderMarkTileMap();
 

@@ -42,6 +42,7 @@ namespace Technolithic
         private LevelUI levelUI;
         private UnitCommandUI unitCommandUI;
         private RenameCreatureUI renameCreatureUI;
+        private GameOverlayButtons _gameOverlayButtons;
 
         public NotificationsUI NotificationsUI { get; private set; }
 
@@ -133,6 +134,8 @@ namespace Technolithic
             renameCreatureUI = new RenameCreatureUI(ParentNode.Scene);
             renameCreatureUI.Active = false;
             ParentNode.AddChildNode(renameCreatureUI);
+
+            _gameOverlayButtons = (GameOverlayButtons)ParentNode.GetChildByName("GameOverlayButtons");
 
             var laborPriorityButton = (BigButton)ParentNode.GetChildByName("LaborPriorityButton");
             laborPriorityButton.GetComponent<ButtonScript>().AddOnClickedCallback(OpenLaborPriorityUI);
@@ -560,6 +563,7 @@ namespace Technolithic
             buildingPanelUI.Active = false;
             ParentNode.GetChildByName("Notifications").Active = false;
             ParentNode.GetChildByName("ResourcesCount").Active = false;
+            _gameOverlayButtons.Active = false;
 
             foreach (var panel in entityPanels)
             {
@@ -589,6 +593,7 @@ namespace Technolithic
                 buildingPanelUI.Active = true;
                 ParentNode.GetChildByName("Notifications").Active = true;
                 ParentNode.GetChildByName("ResourcesCount").Active = true;
+                _gameOverlayButtons.Active = true;
 
                 foreach (var panel in entityPanels)
                 {

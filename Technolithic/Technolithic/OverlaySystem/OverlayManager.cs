@@ -14,7 +14,9 @@ namespace Technolithic
         private IOverlay _currentOverlay;
 
         public T CurrentOverlayType { get; private set; }
-        
+
+        public Action<T> OverlayChanged;
+
         public OverlayManager(World world, T defaultOverlayType)
         {
             _world = world;
@@ -48,6 +50,8 @@ namespace Technolithic
                 // TODO: add warning log
                 _currentOverlay = _overlays[_defaultOverlayType];
             }
+
+            OverlayChanged?.Invoke(overlayType);
         }
 
         public void Render()

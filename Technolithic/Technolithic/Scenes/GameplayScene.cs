@@ -776,7 +776,7 @@ namespace Technolithic
             // *** Save system independent ***
             OverlayManager = new GameOverlayManager(World);
 
-            uiRootNode = new UIRootNode(this);
+            uiRootNode = new UIRootNode(this, OverlayManager);
             UIRootNodeScript = uiRootNode.GetComponent<UIRootNodeScript>();
 
             uiRootNode.Awake();

@@ -18,10 +18,11 @@ namespace Technolithic
         private BigButton resourcesLimitButton;
         private BigButton resourcesButton;
         private BigButton achievementsButton;
+        private GameOverlayButtons _gameOverlayButtons;
         private ResourcesCountUI resourcesCountUI;
         private BuildingsListUI buildingListUI;
 
-        public UIRootNode(Scene scene) : base(scene)
+        public UIRootNode(Scene scene, GameOverlayManager overlayManager) : base(scene)
         {
             actionPanel = new ActionPanelUI(scene);
             actionPanel.X = Engine.Width - actionPanel.Width - 5;
@@ -98,6 +99,14 @@ namespace Technolithic
             achievementsButton.Name = "AchievementsButton";
             AddChildNode(achievementsButton);
 
+            // *** Overlay buttons ***
+
+            _gameOverlayButtons = new GameOverlayButtons(scene, overlayManager);
+            _gameOverlayButtons.X = Engine.Width - _gameOverlayButtons.Width - 5;
+            _gameOverlayButtons.Y = achievementsButton.Y + achievementsButton.Height + 5;
+            _gameOverlayButtons.Name = "GameOverlayButtons";
+            AddChildNode(_gameOverlayButtons);
+
             // *** Notifications ***
             NotificationsUI notificationsUI = new NotificationsUI(scene);
             notificationsUI.Name = "Notifications";
@@ -154,7 +163,7 @@ namespace Technolithic
             resourcesCountUI.Active = true;
             resourcesCountUI.Name = "ResourcesCount";
             resourcesCountUI.X = Engine.Width - resourcesCountUI.Width;
-            resourcesCountUI.Y = rationButton.Y + rationButton.Height + 5;
+            resourcesCountUI.Y = _gameOverlayButtons.Y + _gameOverlayButtons.Height + 5;
             AddChildNode(resourcesCountUI);
 
             buildingListUI = new BuildingsListUI(scene);
@@ -268,8 +277,11 @@ namespace Technolithic
             achievementsButton.X = resourcesButton.X - resourcesButton.Width - 5;
             achievementsButton.Y = levelUI.Y + levelUI.Height + 5;
 
+            _gameOverlayButtons.X = Engine.Width - _gameOverlayButtons.Width - 5;
+            _gameOverlayButtons.Y = achievementsButton.Y + achievementsButton.Height + 5;
+
             resourcesCountUI.X = Engine.Width - resourcesCountUI.Width;
-            resourcesCountUI.Y = rationButton.Y + rationButton.Height + 5;
+            resourcesCountUI.Y = _gameOverlayButtons.Y + _gameOverlayButtons.Height + 5;
 
             buildingListUI.X = 5;
             buildingListUI.Y = Engine.Height - buildingListUI.Height - 10 - 48;

@@ -2,9 +2,18 @@
 
 namespace Technolithic
 {
-    public class IlluminationOverlay : IOverlay
+    public class IlluminationOverlay : GameOverlay
     {
-        public void Render(World world)
+
+        public IlluminationOverlay()
+            : base(GameOverlayType.Illumination,
+                  ResourceManager.IlluminationOverlayIcon, 
+                  Localization.GetLocalizedText("illumination_overlay"))
+        {
+            
+        }
+
+        public override void Render(World world)
         {
             for (int x = 0; x < world.Width; x++)
             {

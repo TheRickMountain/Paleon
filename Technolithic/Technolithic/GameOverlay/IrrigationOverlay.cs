@@ -2,9 +2,16 @@
 
 namespace Technolithic
 {
-    public class IrrigationOverlay : IOverlay
+    public class IrrigationOverlay : GameOverlay
     {
-        public void Render(World world)
+        public IrrigationOverlay() 
+            : base(GameOverlayType.Irrigation,
+                  ResourceManager.IrrigationOverlayIcon, 
+                  Localization.GetLocalizedText("irrigation_overlay"))
+        {
+        }
+
+        public override void Render(World world)
         {
             for (int x = 0; x < world.Width; x++)
             {

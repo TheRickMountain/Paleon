@@ -493,7 +493,7 @@ namespace Technolithic
         {
             try
             {
-                OverlayType overlayType = Utils.ParseEnum<OverlayType>(overlayTypeStr);
+                GameOverlayType overlayType = Utils.ParseEnum<GameOverlayType>(overlayTypeStr);
 
                 GameplayScene.Instance.OverlayManager.SetOverlay(overlayType);
             }

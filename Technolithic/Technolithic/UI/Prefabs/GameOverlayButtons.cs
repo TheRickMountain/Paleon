@@ -24,8 +24,6 @@ namespace Technolithic
             int distanceBetweenButtons = 5;
             foreach (GameOverlay overlay in overlayManager.Overlays)
             {
-                if (overlay.Type == GameOverlayType.None) continue;
-
                 SmallButton smallButton = new SmallButton(scene, overlay.Icon);
                 smallButton.X = (smallButton.Width + distanceBetweenButtons) * buttonIndex;
                 smallButton.Tooltips = overlay.Name;

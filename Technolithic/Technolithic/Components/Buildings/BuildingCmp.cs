@@ -719,6 +719,17 @@ namespace Technolithic
             if (BuildingTemplate.LightEmitter != null)
             {
                 GameplayScene.Instance.Penumbra.Lights.Remove(light);
+
+                if (wasTurnedOn)
+                {
+                    Tile centerTile = GetRealCenterTile();
+
+                    centerTile.World.DoForTilesInRadius(
+                        centerTile.X,
+                        centerTile.Y,
+                        (int)(BuildingTemplate.LightEmitter.Radius / 33.33f),
+                        tile => tile.IsIlluminated = false);
+                }
             }
 
             RemoveBuildingFromTiles();

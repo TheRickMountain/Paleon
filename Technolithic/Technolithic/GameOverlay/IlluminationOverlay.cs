@@ -19,7 +19,7 @@ namespace Technolithic
             {
                 for (int y = 0; y < world.Height; y++)
                 {
-                    if (world.GetTileAt(x, y).IsIlluminated)
+                    if (world.GetTileAt(x, y).IlluminationStrength > 0)
                     {
                         RenderManager.Rect(x * Engine.TILE_SIZE, y * Engine.TILE_SIZE, Engine.TILE_SIZE, Engine.TILE_SIZE, Color.Yellow * 0.5f);
                     }

@@ -112,7 +112,7 @@ namespace Technolithic
             vomitingSprite.Visible = StatusEffectsManager.ContainsStatusEffect(StatusEffectId.Vomiting);
 
             if(GameplayScene.Instance.WorldState.GetCurrentHourTimeOfDay() == TimeOfDay.Night &&
-                Movement.CurrentTile.IsIlluminated == false)
+                Movement.CurrentTile.IlluminationStrength == 0)
             {
                 StatusEffectsManager.AddStatusEffect(StatusEffectId.LowLight);
             }

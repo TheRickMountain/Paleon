@@ -2,7 +2,7 @@
 using Penumbra;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics;
 
 namespace Technolithic
 {
@@ -274,7 +274,22 @@ namespace Technolithic
 
         public int IrrigationStrength { get; set; }
 
-        public bool IsIlluminated { get; set; } = false;
+        private short _illuminationStrength = 0;
+        public short IlluminationStrength 
+        {
+            get => _illuminationStrength; 
+            set
+            {
+                _illuminationStrength = value;
+                Debug.Assert(_illuminationStrength >= 0 && _illuminationStrength < short.MaxValue);
+
+                if(_illuminationStrength < 0)
+                {
+                    _illuminationStrength = 0;
+                    // TODO: add warning log
+                }
+            }
+        }
 
         public World World { get; private set; }
 

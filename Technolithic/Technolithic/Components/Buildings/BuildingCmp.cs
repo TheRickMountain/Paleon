@@ -1,10 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using Newtonsoft.Json.Linq;
 using Penumbra;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 namespace Technolithic
 {
@@ -266,7 +263,7 @@ namespace Technolithic
                                 centerTile.X, 
                                 centerTile.Y, 
                                 (int)(BuildingTemplate.LightEmitter.Radius / 33.33f),
-                                tile => tile.IsIlluminated = true);
+                                tile => tile.IlluminationStrength++);
                         }
 
                         if (flickeringTimer.GetTime() >= 0.1f)
@@ -303,7 +300,7 @@ namespace Technolithic
                                 centerTile.X,
                                 centerTile.Y,
                                 (int)(BuildingTemplate.LightEmitter.Radius / 33.33f),
-                                tile => tile.IsIlluminated = false);
+                                tile => tile.IlluminationStrength--);
                         }
                     }
                 }
@@ -728,7 +725,7 @@ namespace Technolithic
                         centerTile.X,
                         centerTile.Y,
                         (int)(BuildingTemplate.LightEmitter.Radius / 33.33f),
-                        tile => tile.IsIlluminated = false);
+                        tile => tile.IlluminationStrength--);
                 }
             }
 

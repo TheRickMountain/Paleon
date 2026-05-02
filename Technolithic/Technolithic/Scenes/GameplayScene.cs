@@ -81,6 +81,10 @@ namespace Technolithic
         // *** Save system independent ***
         public GameOverlayManager OverlayManager { get; private set; }
 
+        private RenderTarget2D _overlayRenderTarget;
+
+        private Effect _overlayGrayscaleEffect;
+
         public GameplayScene(string saveFileName, int worldSize, string worldName)
         {
             MediaPlayer.Stop();
@@ -776,6 +780,10 @@ namespace Technolithic
             // *** Save system independent ***
             OverlayManager = new GameOverlayManager(World);
 
+            _overlayRenderTarget = new RenderTarget2D(Engine.Graphics.GraphicsDevice, Engine.Width, Engine.Height);
+
+            _overlayGrayscaleEffect = Engine.Instance.Content.Load<Effect>("Effects/GrayscaleEffect");
+
             uiRootNode = new UIRootNode(this, OverlayManager);
             UIRootNodeScript = uiRootNode.GetComponent<UIRootNodeScript>();
 
@@ -794,6 +802,8 @@ namespace Technolithic
                     AchievementManager.UnlockAchievement(AchievementId.ENGINE_OF_PROGRESS);
                 }
             };
+
+            Engine.Instance.OnScreenSizeChanged += OnScreenSizeChangedCallback;
         }
 
         private void SpawnBeeHivesIfThereIsNo(int day, Season season)
@@ -1076,7 +1086,19 @@ namespace Technolithic
         {
             World.RenderUpdate();
 
-            Penumbra.BeginDraw();
+            switch (OverlayManager.CurrentOverlayType)
+            {
+                case GameOverlayType.None:
+                    {
+                        Penumbra.BeginDraw();
+                    }
+                    break;
+                default:
+                    {
+                        Engine.Graphics.GraphicsDevice.SetRenderTarget(_overlayRenderTarget);
+                    }
+                    break;
+            }
 
             // Строения
             RenderManager.SpriteBatch.Begin(
@@ -1144,7 +1166,33 @@ namespace Technolithic
 
             RenderManager.SpriteBatch.End();
 
-            Penumbra.Draw(Engine.GameTime);
+            switch (OverlayManager.CurrentOverlayType)
+            {
+                case GameOverlayType.None:
+                    {
+                        Penumbra.Draw(Engine.GameTime);
+                    }
+                    break;
+                default:
+                    {
+                        Engine.Graphics.GraphicsDevice.SetRenderTarget(null);
+                        Engine.Graphics.GraphicsDevice.Clear(Color.Black);
+
+                        RenderManager.SpriteBatch.Begin(
+                            SpriteSortMode.Deferred, 
+                            BlendState.AlphaBlend,
+                            SamplerState.PointClamp,
+                            null, null,
+                            _overlayGrayscaleEffect);
+
+                        RenderManager.SpriteBatch.Draw(_overlayRenderTarget, new Rectangle(0, 0, Engine.Width, Engine.Height), Color.White);
+
+                        RenderManager.SpriteBatch.End();
+                    }
+                    break;
+            }
+
+            
 
             RenderManager.SpriteBatch.Begin(
                 SpriteSortMode.Deferred,
@@ -1374,6 +1422,13 @@ namespace Technolithic
             saveManager.Info.IsAutosave = isAutosave;
 
             saveManager.Save();
+        }
+
+        private void OnScreenSizeChangedCallback(int width, int height)
+        {
+            _overlayRenderTarget?.Dispose();
+
+            _overlayRenderTarget = new RenderTarget2D(Engine.Graphics.GraphicsDevice, Engine.Width, Engine.Height);
         }
 
     }

@@ -17,7 +17,12 @@ namespace Technolithic
             {
                 for (int y = 0; y < world.Height; y++)
                 {
-                    if (world.GetTileAt(x, y).IrrigationLevel > 0)
+                    Tile tile = world.GetTileAt(x, y);
+
+                    if (tile.GroundTopType != GroundTopType.Water &&
+                        tile.GroundTopType != GroundTopType.DeepWater &&
+                        tile.GroundTopType != GroundTopType.IrrigationCanalFull &&
+                        tile.IrrigationLevel > 0)
                     {
                         RenderManager.Rect(x * Engine.TILE_SIZE, y * Engine.TILE_SIZE, Engine.TILE_SIZE, Engine.TILE_SIZE, Color.Blue * 0.5f);
                     }

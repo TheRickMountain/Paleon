@@ -1820,6 +1820,12 @@
 /processorParam:TextureFormat=Compressed
 /build:Console.spritefont
 
+#begin Effects/GrayscaleEffect.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Effects/GrayscaleEffect.fx
+
 #begin File.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

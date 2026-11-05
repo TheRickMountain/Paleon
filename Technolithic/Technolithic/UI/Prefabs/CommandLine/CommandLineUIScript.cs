@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Globalization;
 using System;
 
 namespace Technolithic
@@ -13,7 +12,7 @@ namespace Technolithic
 
         private MTextInputScript textInput;
 
-        private Dictionary<string, MethodInfo> commands;
+        private CommandExecutor commandExecutor;
 
         private List<string> lastEnteredCommands;
 
@@ -30,11 +29,9 @@ namespace Technolithic
 
         public override void Begin()
         {
-            commands = new Dictionary<string, MethodInfo>();
+            commandExecutor = new CommandExecutor(Assembly.GetExecutingAssembly());
 
             lastEnteredCommands = new List<string>();
-
-            GatherCommands();
 
             textInput = ParentNode.GetChildByName("TextInput").GetComponent<MTextInputScript>();
         }
@@ -59,10 +56,7 @@ namespace Technolithic
 
                     lastEnteredCommandNumber = lastEnteredCommands.Count;
 
-                    string name = GetCommandName(enteredCommand);
-                    string[] args = GetCommandArgs(enteredCommand);
-
-                    ExecuteCommand(name, args);
+                    ExecuteCommand(enteredCommand);
 
                     textInput.ResetText();
                 }
@@ -93,87 +87,31 @@ namespace Technolithic
             }
         }
 
-        private void ExecuteCommand(string name, string[] args)
+        private void ExecuteCommand(string input)
         {
-            if (commands.ContainsKey(name) == false)
-                return;
-
-            MethodInfo method = commands[name];
-
-            object[] parameters = null;
-
-            if (args != null && args.Length > 0)
+            try
             {
-                parameters = new object[args.Length];
-
-                int paramNum = 0;
-                foreach (var param in method.GetParameters())
+                if (commandExecutor.TryExecute(input, out string error))
                 {
-                    if (param.ParameterType == typeof(float))
-                    {
-                        parameters[paramNum] = float.Parse(args[paramNum], CultureInfo.InvariantCulture);
-                    }
-                    else if (param.ParameterType == typeof(int))
-                    {
-                        parameters[paramNum] = int.Parse(args[paramNum]);
-                    }
-                    else if (param.ParameterType == typeof(string))
-                    {
-                        parameters[paramNum] = args[paramNum];
-                    }
-                    else if (param.ParameterType == typeof(bool))
-                    {
-                        parameters[paramNum] = bool.Parse(args[paramNum]);
-                    }
-
-                    paramNum++;
+                    return;
                 }
+
+                ShowError(error);
             }
-
-            method.Invoke(null, parameters);
-        }
-
-        private string GetCommandName(string command)
-        {
-            string[] splitted = command.Split(new char[] { ' ' });
-
-            return splitted[0];
-        }
-
-        private string[] GetCommandArgs(string command)
-        {
-            string[] splitted = command.Split(new char[] { ' ' });
-
-            string[] args = null;
-
-            if (splitted.Length > 1)
+            catch (TargetInvocationException exception)
             {
-                args = new string[splitted.Length - 1];
+                Exception commandException = exception.InnerException ?? exception;
 
-                for (int i = 1; i < splitted.Length; i++)
-                {
-                    args[i - 1] = splitted[i];
-                }
+                Program.WriteWarningLog(commandException.ToString());
+
+                ShowError($"Command failed: {commandException.Message}");
             }
-
-            return args;
         }
 
-        private void GatherCommands()
+        private static void ShowError(string message)
         {
-            var methods = Assembly.GetCallingAssembly().GetTypes()
-                .SelectMany(t => t.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
-                .Where(m => m.GetCustomAttributes(typeof(Command), false).Length > 0)
-                .ToArray();
-
-            for (int i = 0; i < methods.Length; i++)
-            {
-                MethodInfo method = methods[i];
-
-                Command command = (Command)method.GetCustomAttribute(typeof(Command));
-
-                commands.Add(command.Name, method);
-            }
+            GameplayScene.UIRootNodeScript.NotificationsUI.GetComponent<NotificationsUIScript>()
+                .AddNotification(message, NotificationLevel.WARNING);
         }
 
         [Command("edge_scrolling")]
@@ -256,13 +194,12 @@ namespace Technolithic
         }
 
         [Command("set")]
-        private static void SetAttribute(string attributeTypeString, int value)
+        private static void SetAttribute(AttributeType attributeType, int value)
         {
             Entity entity = GameplayScene.WorldManager.GetSelectedEntity();
             CreatureCmp creature = entity?.Get<CreatureCmp>();
             if (creature != null)
             {
-                AttributeType attributeType = Utils.ParseEnum<AttributeType>(attributeTypeString);
                 var attribute = creature.CreatureStats.GetAttribute(attributeType);
                 if (attribute != null)
                 {
@@ -272,25 +209,23 @@ namespace Technolithic
         }
 
         [Command("add_status_effect")]
-        private static void AddStatusEffect(string statusEffectIdString)
+        private static void AddStatusEffect(StatusEffectId statusEffectId)
         {
             Entity entity = GameplayScene.WorldManager.GetSelectedEntity();
             CreatureCmp creature = entity?.Get<CreatureCmp>();
             if (creature != null)
             {
-                StatusEffectId statusEffectId = Utils.ParseEnum<StatusEffectId>(statusEffectIdString);
                 creature.StatusEffectsManager.AddStatusEffect(statusEffectId);
             }
         }
 
         [Command("remove_status_effect")]
-        private static void RemoveStatusEffect(string statusEffectIdString)
+        private static void RemoveStatusEffect(StatusEffectId statusEffectId)
         {
             Entity entity = GameplayScene.WorldManager.GetSelectedEntity();
             CreatureCmp creature = entity?.Get<CreatureCmp>();
             if (creature != null)
             {
-                StatusEffectId statusEffectId = Utils.ParseEnum<StatusEffectId>(statusEffectIdString);
                 creature.StatusEffectsManager.RemoveStatusEffect(statusEffectId);
             }
         }
@@ -373,7 +308,7 @@ namespace Technolithic
         }
 
         [Command("add_item")]
-        private static void AddItem(string itemName, int weight, float durabilityPercent)
+        private static void AddItem(string itemName, int weight, float durabilityPercent = 1f)
         {
             if (ItemDatabase.Items.TryGetValue(itemName, out Item item))
             {
@@ -468,36 +403,22 @@ namespace Technolithic
         }
 
         [Command("trigger_notif")]
-        private static void TriggerNotif(string notifLevelString, string message)
+        private static void TriggerNotif(NotificationLevel notificationLevel, string message)
         {
-            NotificationLevel notificationLevel = Utils.ParseEnum<NotificationLevel>(notifLevelString);
-
             GameplayScene.UIRootNodeScript.NotificationsUI.GetComponent<NotificationsUIScript>()
                                         .AddNotification(message, notificationLevel);
         }
 
         [Command("unlock_achv")]
-        private static void UnlockAchievement(string achievementIdString)
+        private static void UnlockAchievement(AchievementId id)
         {
-            try
-            {
-                AchievementId id = Utils.ParseEnum<AchievementId>(achievementIdString);
-
-                GameplayScene.Instance.AchievementManager.UnlockAchievement(id);
-            }
-            catch { }
+            GameplayScene.Instance.AchievementManager.UnlockAchievement(id);
         }
 
         [Command("set_game_overlay")]
-        private static void SetGameOverlay(string overlayTypeStr)
+        private static void SetGameOverlay(GameOverlayType overlayType)
         {
-            try
-            {
-                GameOverlayType overlayType = Utils.ParseEnum<GameOverlayType>(overlayTypeStr);
-
-                GameplayScene.Instance.OverlayManager.SetOverlay(overlayType);
-            }
-            catch {}
+            GameplayScene.Instance.OverlayManager.SetOverlay(overlayType);
         }
     }
 

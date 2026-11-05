@@ -139,7 +139,7 @@ namespace Technolithic
                         {
                             if (lastGroundTopType != GroundTopType.Water)
                             {
-                                World.DoForTilesInRadius(X, Y, 3, tile => tile.IrrigationLevel++);
+                                World.TryDoForTilesInRadius(X, Y, 3, tile => tile.IrrigationLevel++);
                             }
                         }
                         break;
@@ -147,7 +147,7 @@ namespace Technolithic
                         {
                             if (lastGroundTopType != GroundTopType.IrrigationCanalFull)
                             {
-                                World.DoForTilesInRadius(X, Y, 3, tile => tile.IrrigationLevel++);
+                                World.TryDoForTilesInRadius(X, Y, 3, tile => tile.IrrigationLevel++);
                             }
                         }
                         break;
@@ -155,7 +155,7 @@ namespace Technolithic
                         {
                             if (lastGroundTopType == GroundTopType.Water || lastGroundTopType == GroundTopType.IrrigationCanalFull)
                             {
-                                World.DoForTilesInRadius(X, Y, 3, tile => tile.IrrigationLevel--);
+                                World.TryDoForTilesInRadius(X, Y, 3, tile => tile.IrrigationLevel--);
                             }
                         }
                         break;

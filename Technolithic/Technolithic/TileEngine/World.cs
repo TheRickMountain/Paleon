@@ -318,9 +318,9 @@ namespace Technolithic
             List<Tile> tilesInRadius = new List<Tile>();
 
             // Генерация залежей вокруг жил
-            foreach ((GroundTopType groundTopType, List<Tile> tiles) in depositsTiles)
+            foreach ((GroundTopType groundTopType, List<Tile> veinTiles) in depositsTiles)
             {
-                foreach (Tile randomTile in tiles)
+                foreach (Tile randomTile in veinTiles)
                 {
                     tilesInRadius.Clear();
                     TryGetTilesInRadius(randomTile.X, randomTile.Y, 8, tilesInRadius);
@@ -623,6 +623,11 @@ namespace Technolithic
 
         public bool TryGetTilesInRadius(int centerX, int centerY, int radius, ICollection<Tile> returnTiles)
         {
+            return TryDoForTilesInRadius(centerX, centerY, radius, returnTiles.Add);
+        }
+
+        public bool TryDoForTilesInRadius(int centerX, int centerY, int radius, Action<Tile> action)
+        {
             if (IsTileWithinBounds(centerX, centerY) == false)
             {
                 Program.WriteWarningLog($"Trying to get tiles outside of the bounds: ({centerX}, {centerY})");
@@ -646,43 +651,12 @@ namespace Technolithic
 
                     if ((dx * dx + dy * dy) < radiusPow)
                     {
-                        returnTiles.Add(tiles[x, y]);
-                    }
-                }
-            }
-
-            return returnTiles.Count > 0;
-        }
-
-        public void DoForTilesInRadius(int centerX, int centerY, int radius, Action<Tile> action)
-        {
-            if (IsTileWithinBounds(centerX, centerY) == false)
-            {
-                Program.WriteWarningLog($"Trying to get tiles outside of the bounds: ({centerX}, {centerY})");
-                return;
-            }
-
-            int minX = Math.Max(0, centerX - radius);
-            int minY = Math.Max(0, centerY - radius);
-
-            int maxX = Math.Min(Width - 1, centerX + radius);
-            int maxY = Math.Min(Height - 1, centerY + radius);
-
-            int radiusPow = radius * radius;
-
-            for (int x = minX; x <= maxX; x++)
-            {
-                for (int y = minY; y <= maxY; y++)
-                {
-                    int dx = centerX - x;
-                    int dy = centerY - y;
-
-                    if ((dx * dx + dy * dy) < radiusPow)
-                    {
                         action.Invoke(tiles[x, y]);
                     }
                 }
             }
+
+            return true;
         }
 
         public bool IsTileWithinBounds(int x, int y) => x >= 0 && x < Width && y >= 0 && y < Height;

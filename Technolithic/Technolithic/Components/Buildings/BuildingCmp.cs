@@ -259,7 +259,7 @@ namespace Technolithic
 
                             Tile centerTile = GetRealCenterTile();
 
-                            centerTile.World.DoForTilesInRadius(
+                            centerTile.World.TryDoForTilesInRadius(
                                 centerTile.X, 
                                 centerTile.Y, 
                                 (int)(BuildingTemplate.LightEmitter.Radius / 33.33f),
@@ -296,7 +296,7 @@ namespace Technolithic
 
                             Tile centerTile = GetRealCenterTile();
 
-                            centerTile.World.DoForTilesInRadius(
+                            centerTile.World.TryDoForTilesInRadius(
                                 centerTile.X,
                                 centerTile.Y,
                                 (int)(BuildingTemplate.LightEmitter.Radius / 33.33f),
@@ -721,7 +721,7 @@ namespace Technolithic
                 {
                     Tile centerTile = GetRealCenterTile();
 
-                    centerTile.World.DoForTilesInRadius(
+                    centerTile.World.TryDoForTilesInRadius(
                         centerTile.X,
                         centerTile.Y,
                         (int)(BuildingTemplate.LightEmitter.Radius / 33.33f),

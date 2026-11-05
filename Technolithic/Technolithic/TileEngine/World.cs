@@ -1,11 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Collections.Specialized.BitVector32;
 
 namespace Technolithic
 {
@@ -323,11 +318,9 @@ namespace Technolithic
             List<Tile> tilesInRadius = new List<Tile>();
 
             // Генерация залежей вокруг жил
-            foreach (var kvp in depositsTiles)
+            foreach ((GroundTopType groundTopType, List<Tile> tiles) in depositsTiles)
             {
-                GroundTopType groundTopType = kvp.Key;
-
-                foreach (var randomTile in kvp.Value)
+                foreach (Tile randomTile in tiles)
                 {
                     tilesInRadius.Clear();
                     TryGetTilesInRadius(randomTile.X, randomTile.Y, 8, tilesInRadius);
@@ -628,12 +621,12 @@ namespace Technolithic
             return GetTileAt(randomX, randomY);
         }
 
-        public void TryGetTilesInRadius(int centerX, int centerY, int radius, ICollection<Tile> returnTiles)
+        public bool TryGetTilesInRadius(int centerX, int centerY, int radius, ICollection<Tile> returnTiles)
         {
             if (IsTileWithinBounds(centerX, centerY) == false)
             {
                 Program.WriteWarningLog($"Trying to get tiles outside of the bounds: ({centerX}, {centerY})");
-                return;
+                return false;
             }
 
             int minX = Math.Max(0, centerX - radius);
@@ -657,6 +650,8 @@ namespace Technolithic
                     }
                 }
             }
+
+            return returnTiles.Count > 0;
         }
 
         public void DoForTilesInRadius(int centerX, int centerY, int radius, Action<Tile> action)

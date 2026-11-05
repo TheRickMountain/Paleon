@@ -190,10 +190,10 @@ namespace Technolithic
 
                     if (oldIC != null)
                     {
-                        oldIC.FactWeight = oldIC.FactWeight + newIC.FactWeight;
-
                         oldIC.Durability = CalculateAverageDurability(oldIC.FactWeight, oldIC.Durability,
                                 newIC.FactWeight, newIC.Durability);
+
+                        oldIC.FactWeight = oldIC.FactWeight + newIC.FactWeight;
                     }
                     else
                     {
@@ -267,7 +267,11 @@ namespace Technolithic
 
         private bool CanStack(ItemContainer ic1, ItemContainer ic2, float allowedDurabilityDifference)
         {
+            if (ic1.Item != ic2.Item) return false;
+
             if (ic1.Item.IsStackable == false || ic2.Item.IsStackable == false) return false;
+
+            if (ic1.Item.Durability <= 0) return true;
 
             float durabilityPercent1 = ic1.Durability / ic1.Item.Durability;
 

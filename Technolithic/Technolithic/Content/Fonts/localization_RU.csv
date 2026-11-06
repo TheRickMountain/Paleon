@@ -585,3 +585,5 @@ yarn,Пряжа
 сhop_automatically,Срубить автоматически
 сhop_automatically_description,Автоматически срубить растение после полного произрастания
 сut_automatically_description,Автоматически срезать растение после полного произрастания
+irrigation_overlay,Оверлей: влажность
+illumination_overlay,Оверлей: освещенность

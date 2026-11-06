@@ -585,3 +585,5 @@ yarn,Yarn
 сhop_automatically,Chop automatically
 сhop_automatically_description,Automatically chop the plant after full growth
 сut_automatically_description,Automatically cut the plant after full growth
+irrigation_overlay,Overlay: Moisture
+illumination_overlay,Overlay: Illumination

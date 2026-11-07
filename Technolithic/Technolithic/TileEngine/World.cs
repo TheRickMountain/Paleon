@@ -611,7 +611,7 @@ namespace Technolithic
             return GetTileAt(point.X, point.Y);
         }
 
-        #region Handlers
+        #region Helpers
 
         public Tile GetRandomTile()
         {
@@ -660,6 +660,19 @@ namespace Technolithic
         }
 
         public bool IsTileWithinBounds(int x, int y) => x >= 0 && x < Width && y >= 0 && y < Height;
+
+        public Rectangle GetVisibleTileBounds()
+        {
+            Rectangle viewport = RenderManager.MainCamera.GetViewport();
+
+            int minX = Math.Max(0, viewport.Left / Engine.TILE_SIZE);
+            int minY = Math.Max(0, viewport.Top / Engine.TILE_SIZE);
+
+            int maxX = Math.Min(Width, viewport.Right / Engine.TILE_SIZE + 1);
+            int maxY = Math.Min(Height, viewport.Bottom / Engine.TILE_SIZE + 1);
+
+            return new Rectangle(minX, minY, maxX - minX, maxY - minY);
+        }
 
         #endregion
 

@@ -1086,18 +1086,16 @@ namespace Technolithic
         {
             World.RenderUpdate();
 
-            switch (OverlayManager.CurrentOverlayType)
+            bool isOverlayActive = OverlayManager.IsDefaultOverlayActive == false;
+
+            if (isOverlayActive)
             {
-                case GameOverlayType.None:
-                    {
-                        Penumbra.BeginDraw();
-                    }
-                    break;
-                default:
-                    {
-                        Engine.Graphics.GraphicsDevice.SetRenderTarget(_overlayRenderTarget);
-                    }
-                    break;
+                Engine.Graphics.GraphicsDevice.SetRenderTarget(_overlayRenderTarget);
+                Engine.Graphics.GraphicsDevice.Clear(Engine.ClearColor);
+            }
+            else
+            {
+                Penumbra.BeginDraw();
             }
 
             // Строения
@@ -1166,33 +1164,26 @@ namespace Technolithic
 
             RenderManager.SpriteBatch.End();
 
-            switch (OverlayManager.CurrentOverlayType)
+            if (isOverlayActive)
             {
-                case GameOverlayType.None:
-                    {
-                        Penumbra.Draw(Engine.GameTime);
-                    }
-                    break;
-                default:
-                    {
-                        Engine.Graphics.GraphicsDevice.SetRenderTarget(null);
-                        Engine.Graphics.GraphicsDevice.Clear(Color.Black);
+                Engine.Graphics.GraphicsDevice.SetRenderTarget(null);
+                Engine.Graphics.GraphicsDevice.Clear(Engine.ClearColor);
 
-                        RenderManager.SpriteBatch.Begin(
-                            SpriteSortMode.Deferred, 
-                            BlendState.AlphaBlend,
-                            SamplerState.PointClamp,
-                            null, null,
-                            _overlayGrayscaleEffect);
+                RenderManager.SpriteBatch.Begin(
+                    SpriteSortMode.Deferred,
+                    BlendState.AlphaBlend,
+                    SamplerState.PointClamp,
+                    null, null,
+                    _overlayGrayscaleEffect);
 
-                        RenderManager.SpriteBatch.Draw(_overlayRenderTarget, new Rectangle(0, 0, Engine.Width, Engine.Height), Color.White);
+                RenderManager.SpriteBatch.Draw(_overlayRenderTarget, new Rectangle(0, 0, Engine.Width, Engine.Height), Color.White);
 
-                        RenderManager.SpriteBatch.End();
-                    }
-                    break;
+                RenderManager.SpriteBatch.End();
             }
-
-            
+            else
+            {
+                Penumbra.Draw(Engine.GameTime);
+            }
 
             RenderManager.SpriteBatch.Begin(
                 SpriteSortMode.Deferred,

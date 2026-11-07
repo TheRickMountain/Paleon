@@ -2,32 +2,23 @@
 
 namespace Technolithic
 {
-    public class IrrigationOverlay : GameOverlay
+    public class IrrigationOverlay : TileOverlay
     {
-        public IrrigationOverlay() 
-            : base(GameOverlayType.Irrigation,
-                  ResourceManager.IrrigationOverlayIcon, 
-                  Localization.GetLocalizedText("irrigation_overlay"))
+        public IrrigationOverlay(World world)
+            : base(world,
+                  GameOverlayType.Irrigation,
+                  ResourceManager.IrrigationOverlayIcon,
+                  Localization.GetLocalizedText("irrigation_overlay"),
+                  Color.Blue * 0.5f)
         {
         }
 
-        public override void Render(World world)
+        protected override bool IsHighlighted(Tile tile)
         {
-            for (int x = 0; x < world.Width; x++)
-            {
-                for (int y = 0; y < world.Height; y++)
-                {
-                    Tile tile = world.GetTileAt(x, y);
-
-                    if (tile.GroundTopType != GroundTopType.Water &&
-                        tile.GroundTopType != GroundTopType.DeepWater &&
-                        tile.GroundTopType != GroundTopType.IrrigationCanalFull &&
-                        tile.IrrigationLevel > 0)
-                    {
-                        RenderManager.Rect(x * Engine.TILE_SIZE, y * Engine.TILE_SIZE, Engine.TILE_SIZE, Engine.TILE_SIZE, Color.Blue * 0.5f);
-                    }
-                }
-            }
+            return tile.GroundTopType != GroundTopType.Water &&
+                tile.GroundTopType != GroundTopType.DeepWater &&
+                tile.GroundTopType != GroundTopType.IrrigationCanalFull &&
+                tile.IrrigationLevel > 0;
         }
     }
 }

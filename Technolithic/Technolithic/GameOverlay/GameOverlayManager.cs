@@ -16,17 +16,17 @@ namespace Technolithic
         public IReadOnlyList<GameOverlay> Overlays => _overlays;
 
         public GameOverlayManager(World world) 
-            : base(world, GameOverlayType.None)
+            : base(GameOverlayType.None)
         {
             _overlays = new List<GameOverlay>();
 
-            AddOverlay(new IrrigationOverlay());
-            AddOverlay(new IlluminationOverlay());
+            RegisterOverlay(new IrrigationOverlay(world));
+            RegisterOverlay(new IlluminationOverlay(world));
         }
 
-        private void AddOverlay(GameOverlay gameOverlay)
+        private void RegisterOverlay(GameOverlay gameOverlay)
         {
-            AddOverlay(gameOverlay.Type, gameOverlay);
+            RegisterOverlay(gameOverlay.Type, gameOverlay);
 
             _overlays.Add(gameOverlay);
         }

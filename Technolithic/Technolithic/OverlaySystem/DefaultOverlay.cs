@@ -2,7 +2,7 @@
 {
     public class DefaultOverlay : IOverlay
     {
-        public void Render(World world)
+        public void Render()
         {
         }
     }

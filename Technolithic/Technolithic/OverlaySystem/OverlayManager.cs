@@ -5,8 +5,6 @@ namespace Technolithic
 {
     public class OverlayManager<T> where T : Enum
     {
-        private World _world;
-
         private Dictionary<T, IOverlay> _overlays;
 
         private T _defaultOverlayType;
@@ -17,20 +15,19 @@ namespace Technolithic
 
         public Action<T> OverlayChanged;
 
-        public OverlayManager(World world, T defaultOverlayType)
-        {
-            _world = world;
+        public event Action<T> OverlayChanged;
 
+        public OverlayManager(T defaultOverlayType)
+        {
             _overlays = new Dictionary<T, IOverlay>();
 
             _defaultOverlayType = defaultOverlayType;
-            
-            AddOverlay(_defaultOverlayType, new DefaultOverlay());
 
             SetOverlay(_defaultOverlayType);
         }
 
         protected void AddOverlay(T overlayType, IOverlay overlay)
+        protected void RegisterOverlay(T overlayType, IOverlay overlay)
         {
             if (overlay == null) return;
 
@@ -39,6 +36,10 @@ namespace Technolithic
 
         public void SetOverlay(T overlayType)
         {
+            {
+                Program.WriteWarningLog($"Overlay {overlayType} is not registered, the default overlay is used instead");
+
+                overlayType = _defaultOverlayType;
             CurrentOverlayType = overlayType;
 
             if (_overlays.TryGetValue(overlayType, out IOverlay overlay))
@@ -49,6 +50,7 @@ namespace Technolithic
             {
                 // TODO: add warning log
                 _currentOverlay = _overlays[_defaultOverlayType];
+                SetOverlay(overlayType);
             }
 
             OverlayChanged?.Invoke(overlayType);

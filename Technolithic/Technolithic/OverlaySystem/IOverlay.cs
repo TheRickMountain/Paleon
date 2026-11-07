@@ -2,6 +2,6 @@
 {
     public interface IOverlay
     {
-        void Render(World world);
+        void Render();
     }
 }

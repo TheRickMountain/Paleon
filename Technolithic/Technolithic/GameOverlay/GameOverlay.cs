@@ -13,6 +13,6 @@
             Name = name;
         }
 
-        public abstract void Render(World world);
+        public abstract void Render();
     }
 }

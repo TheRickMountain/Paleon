@@ -2,29 +2,20 @@
 
 namespace Technolithic
 {
-    public class IlluminationOverlay : GameOverlay
+    public class IlluminationOverlay : TileOverlay
     {
-
-        public IlluminationOverlay()
-            : base(GameOverlayType.Illumination,
-                  ResourceManager.IlluminationOverlayIcon, 
-                  Localization.GetLocalizedText("illumination_overlay"))
+        public IlluminationOverlay(World world)
+            : base(world,
+                  GameOverlayType.Illumination,
+                  ResourceManager.IlluminationOverlayIcon,
+                  Localization.GetLocalizedText("illumination_overlay"),
+                  Color.Yellow * 0.5f)
         {
-            
         }
 
-        public override void Render(World world)
+        protected override bool IsHighlighted(Tile tile)
         {
-            for (int x = 0; x < world.Width; x++)
-            {
-                for (int y = 0; y < world.Height; y++)
-                {
-                    if (world.GetTileAt(x, y).IlluminationStrength > 0)
-                    {
-                        RenderManager.Rect(x * Engine.TILE_SIZE, y * Engine.TILE_SIZE, Engine.TILE_SIZE, Engine.TILE_SIZE, Color.Yellow * 0.5f);
-                    }
-                }
-            }
+            return tile.IlluminationStrength > 0;
         }
     }
 }

@@ -1,9 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Audio;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Technolithic
 {
@@ -14,7 +10,7 @@ namespace Technolithic
         SWITCHING_TO_NEW_SOUND
     }
 
-    public class WeatherSoundManager
+    public class WeatherSoundManager : IDisposable
     {
 
         private WorldState worldState;
@@ -46,8 +42,6 @@ namespace Technolithic
 
             lastSoundEffect = GetNextWeatherSound();
             lastSoundEffect.Play();
-
-            Engine.Instance.OnSceneLoadedCallback += NewSceneLoaded;
         }
 
         private SoundEffectInstance CreateSoundEffect(string name, bool loop)
@@ -59,7 +53,7 @@ namespace Technolithic
 
         public void Update()
         {
-            switch(soundSwitchState)
+            switch (soundSwitchState)
             {
                 case SoundSwitchState.WAITING_FOR_NEW_SOUND:
                     {
@@ -75,7 +69,7 @@ namespace Technolithic
                     break;
                 case SoundSwitchState.SWITCHING_TO_NEW_SOUND:
                     {
-                        if(switchingTimer < switchTime)
+                        if (switchingTimer < switchTime)
                         {
                             float alpha = switchingTimer / switchTime;
 
@@ -151,26 +145,13 @@ namespace Technolithic
 
             return null;
         }
-    
-        private void NewSceneLoaded(Scene scene)
-        {
-            if (scene is MainMenuScene)
-            {
-                CleanUp();
-            }
-        }
 
-        private void CleanUp()
+        public void Dispose()
         {
-            if(lastSoundEffect != null)
-            {
-                lastSoundEffect.Stop();
-            }
-
-            if(newSoundEffect != null)
-            {
-                newSoundEffect.Stop();
-            }
+            daySoundEffect?.Dispose();
+            nightSoundEffect?.Dispose();
+            rainSoundEffect?.Dispose();
+            winterSoundEffect?.Dispose();
         }
     }
 }

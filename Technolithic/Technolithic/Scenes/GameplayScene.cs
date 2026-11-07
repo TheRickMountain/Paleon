@@ -1431,5 +1431,18 @@ namespace Technolithic
             _overlayRenderTarget = new RenderTarget2D(Engine.Graphics.GraphicsDevice, Engine.Width, Engine.Height);
         }
 
+        public override void End()
+        {
+            base.End();
+
+            WeatherSoundManager.Dispose();
+
+            _overlayRenderTarget?.Dispose();
+
+            _overlayRenderTarget = null;
+
+            Engine.Instance.OnScreenSizeChanged -= OnScreenSizeChangedCallback;
+        }
+
     }
 }

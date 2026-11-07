@@ -21,7 +21,7 @@ namespace Technolithic
 
         public override void UpdateTask()
         {
-            if (buildingToSupply.IsBuilt == false || buildingToSupply.IsFuelAllowed(itemToTake) == false
+            if (buildingToSupply.IsDestroyed ||buildingToSupply.IsFuelAllowed(itemToTake) == false
                            || buildingToSupply.GetCenterTile().Room.Id != Owner.Movement.CurrentTile.Room.Id)
             {
                 State = TaskState.Failed;

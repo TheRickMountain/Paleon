@@ -17,6 +17,7 @@ namespace Technolithic
         public HashSet<Tile> RangeTiles { get; private set; }
 
         public bool IsBuilt { get; protected set; }
+        public bool IsDestroyed { get; private set; }
 
         public Action<BuildingCmp> OnBuildingCompletedCallback { get; set; }
         public Action<BuildingCmp> OnBuildingCanceledCallback { get; set; }
@@ -668,6 +669,7 @@ namespace Technolithic
         public void CancelBuilding()
         {
             IsBuilt = false;
+            IsDestroyed = true;
 
             // Если строительство уже начато
             if (buildLabor != null)
@@ -712,6 +714,7 @@ namespace Technolithic
             RemoveBuildingFromBuildingsToDestruct();
 
             IsBuilt = false;
+            IsDestroyed = true;
 
             if (BuildingTemplate.LightEmitter != null)
             {

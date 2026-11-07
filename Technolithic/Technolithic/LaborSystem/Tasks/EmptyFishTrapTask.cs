@@ -29,7 +29,7 @@ namespace Technolithic
 
         public override void UpdateTask()
         {
-            if (targetFishTrap.IsBuilt == false)
+            if (targetFishTrap.IsDestroyed)
             {
                 State = TaskState.Failed;
                 return;
@@ -74,7 +74,7 @@ namespace Technolithic
                     break;
                 case MovementState.Running:
                     {
-                        if (targetFishTrap.IsBuilt == false)
+                        if (targetFishTrap.IsDestroyed)
                         {
                             State = TaskState.Failed;
                         }

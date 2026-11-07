@@ -30,7 +30,7 @@ namespace Technolithic
 
         public override void UpdateTask()
         {
-            if (targetAnimalPen.IsBuilt == false || targetAnimalPen.IsFlaggedToCleanManure == false)
+            if (targetAnimalPen.IsDestroyed || targetAnimalPen.IsFlaggedToCleanManure == false)
             {
                 State = TaskState.Failed;
                 return;
@@ -77,7 +77,7 @@ namespace Technolithic
                     break;
                 case MovementState.Running:
                     {
-                        if (targetAnimalPen.IsBuilt == false)
+                        if (targetAnimalPen.IsDestroyed)
                         {
                             State = TaskState.Failed;
                         }

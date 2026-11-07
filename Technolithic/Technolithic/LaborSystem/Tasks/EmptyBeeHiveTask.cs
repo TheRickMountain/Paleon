@@ -33,7 +33,7 @@ namespace Technolithic
 
         public override void UpdateTask()
         {
-            if (targetBeeHive.IsBuilt == false || targetBeeHive.GatherResources == false)
+            if (targetBeeHive.IsDestroyed ||targetBeeHive.GatherResources == false)
             {
                 State = TaskState.Failed;
                 return;

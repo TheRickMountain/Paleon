@@ -53,7 +53,7 @@ namespace Technolithic
             {
                 case MovementState.Success:
                     {
-                        if(putToStorage.IsBuilt == false || putToStorage.Inventory.GetRoom().Id != Owner.Movement.CurrentTile.Room.Id
+                        if(putToStorage.IsDestroyed ||putToStorage.Inventory.GetRoom().Id != Owner.Movement.CurrentTile.Room.Id
                             || putToStorage.IsItemAllowed(item) == false)
                         {
                             State = TaskState.Failed;
@@ -97,7 +97,7 @@ namespace Technolithic
                     break;
                 case MovementState.Running:
                     {
-                        if (putToStorage.IsBuilt == false || putToStorage.Inventory.GetRoom().Id != Owner.Movement.CurrentTile.Room.Id
+                        if (putToStorage.IsDestroyed ||putToStorage.Inventory.GetRoom().Id != Owner.Movement.CurrentTile.Room.Id
                             || putToStorage.IsItemAllowed(item) == false)
                         {
                             State = TaskState.Failed;

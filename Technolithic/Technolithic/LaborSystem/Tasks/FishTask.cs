@@ -45,7 +45,7 @@ namespace Technolithic
             {
                 case MovementState.Success:
                     {
-                        if (targetFishingPlace.IsBuilt == false || targetFishingPlace.IsWaterChunkHasFish() == false)
+                        if (targetFishingPlace.IsDestroyed ||targetFishingPlace.IsWaterChunkHasFish() == false)
                         {
                             State = TaskState.Failed;
                             return;
@@ -92,7 +92,7 @@ namespace Technolithic
                     break;
                 case MovementState.Running:
                     {
-                        if (targetFishingPlace.IsBuilt == false || targetFishingPlace.IsWaterChunkHasFish() == false)
+                        if (targetFishingPlace.IsDestroyed ||targetFishingPlace.IsWaterChunkHasFish() == false)
                         {
                             State = TaskState.Failed;
                         }

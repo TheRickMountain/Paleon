@@ -39,7 +39,7 @@ namespace Technolithic
 
         public override void UpdateTask()
         {
-            if(crafter.CanCraft == false || crafter.IsBuilt == false)
+            if(crafter.CanCraft == false || crafter.IsDestroyed)
             {
                 State = TaskState.Failed;
                 return;

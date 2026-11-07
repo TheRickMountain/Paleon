@@ -20,7 +20,7 @@ namespace Technolithic
         
             foreach(CreaturePoweredEnergySource energySource in GameplayScene.WorldManager.CreaturePoweredEnergySources)
             {
-                if(energySource.IsBuilt == false)
+                if(energySource.IsDestroyed)
                     continue;
 
                 if (energySource.IsReserved)

@@ -32,7 +32,7 @@ namespace Technolithic
 
         public override void UpdateTask()
         {
-            if (animalPen.IsBuilt == false)
+            if (animalPen.IsDestroyed)
             {
                 State = TaskState.Failed;
                 return;

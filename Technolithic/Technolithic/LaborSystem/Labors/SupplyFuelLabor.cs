@@ -29,7 +29,7 @@ namespace Technolithic
                 if (building.ReservedToSupplyFuel)
                     continue;
 
-                if (building.IsBuilt == false)
+                if (building.IsDestroyed)
                     continue;
 
                 if (building.GetReachableTile(creature) == null)

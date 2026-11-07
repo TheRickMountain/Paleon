@@ -330,7 +330,7 @@ namespace Technolithic
 
         private void UpdateFarmPlotView()
         {
-            if (IsWild || IsBuilt == false)
+            if (IsWild || IsDestroyed)
             {
                 centerTile.GroundType = GroundType.Ground;
             }

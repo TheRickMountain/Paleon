@@ -29,7 +29,7 @@ namespace Technolithic
 
         public override void UpdateTask()
         {
-            if (energySource.IsBuilt == false)
+            if (energySource.IsDestroyed)
             {
                 State = TaskState.Failed;
                 return;

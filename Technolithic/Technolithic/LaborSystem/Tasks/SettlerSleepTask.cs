@@ -75,7 +75,7 @@ namespace Technolithic
             {
                 case MovementState.Success:
                     {
-                        if(hutBuildingCmp != null && hutBuildingCmp.IsBuilt == false)
+                        if(hutBuildingCmp != null && hutBuildingCmp.IsDestroyed)
                         {
                             hutBuildingCmp = null;
                         }

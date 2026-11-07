@@ -11,9 +11,9 @@ namespace Technolithic
     {
         public AnimatedSprite Sprite { get; private set; }
 
-        protected List<Tile> TargetTiles = new List<Tile>();
-        public TileInfo[,] TilesInfosArray { get; private set; }
-        public List<TileInfo> TilesInfosList { get; private set; }
+        public BuildingPlacement Placement { get; }
+        public TileInfo[,] TilesInfosArray => Placement.TilesInfosArray;
+        public List<TileInfo> TilesInfosList => Placement.TilesInfosList;
         public HashSet<Tile> RangeTiles { get; private set; }
 
         public bool IsBuilt { get; protected set; }
@@ -46,10 +46,7 @@ namespace Technolithic
                 {
                     if (BuildingTemplate.RequireBuilding)
                     {
-                        foreach (var tileInfo in TilesInfosList)
-                        {
-                            tileInfo.Tile.MarkType = MarkType.Destruct;
-                        }
+                        Placement.SetMarkType(MarkType.Destruct);
 
                         AddBuildingToBuildingsToDestruct();
                     }
@@ -60,10 +57,7 @@ namespace Technolithic
                 }
                 else
                 {
-                    foreach (var tileInfo in TilesInfosList)
-                    {
-                        tileInfo.Tile.MarkType = MarkType.None;
-                    }
+                    Placement.SetMarkType(MarkType.None);
 
                     RemoveBuildingFromBuildingsToDestruct();
                 }
@@ -85,14 +79,12 @@ namespace Technolithic
         private float lastSum = 0;
 
         public BuildingTemplate BuildingTemplate { get; private set; }
-        public Direction Direction { get; private set; }
+        public Direction Direction => Placement.Direction;
 
         private int popUpPositionX;
         private int popUpPositionY;
 
         public Vector2 CenterPosition { get; private set; }
-
-        private Tile[,] tiles;
 
         private string fuelString;
         private string consumptionString;
@@ -113,14 +105,7 @@ namespace Technolithic
         public BuildingCmp(BuildingTemplate buildingTemplate, Direction direction) : base(true, true)
         {
             BuildingTemplate = buildingTemplate;
-            if (BuildingTemplate.Rotatable == false)
-            {
-                Direction = Direction.DOWN;
-            }
-            else
-            {
-                Direction = direction;
-            }
+            Placement = new BuildingPlacement(buildingTemplate, direction);
 
             fuelString = Localization.GetLocalizedText("fuel");
             consumptionString = Localization.GetLocalizedText("consumption");
@@ -164,27 +149,6 @@ namespace Technolithic
                     }
                     break;
             }
-
-            TilesInfosArray = new TileInfo[buildingTemplate.Width, buildingTemplate.Height];
-            TilesInfosList = new List<TileInfo>();
-
-            for (int x = 0; x < TilesInfosArray.GetLength(0); x++)
-            {
-                for (int y = 0; y < TilesInfosArray.GetLength(1); y++)
-                {
-                    TileInfo tileInfo = new TileInfo(
-                        buildingTemplate.WalkablePattern[x, y],
-                        buildingTemplate.TargetPattern[x, y],
-                        buildingTemplate.GroundPattern[x, y]);
-
-                    TilesInfosArray[x, y] = tileInfo;
-                    TilesInfosList.Add(tileInfo);
-                }
-            }
-
-            if (BuildingTemplate.Rotatable)
-                TilesInfosArray = Utils.RotateMatrix(TilesInfosArray, Direction);
-
         }
 
         protected void PlayIdleAnimation()
@@ -363,34 +327,12 @@ namespace Technolithic
 
         public void SetToBuild(Tile[,] tiles, bool requireBuilding, float currentFuelCondition)
         {
-            this.tiles = tiles;
-
             Entity.X = tiles[0, 0].X * Engine.TILE_SIZE;
             Entity.Y = tiles[0, 0].Y * Engine.TILE_SIZE;
 
             CurrentFuelCondition = currentFuelCondition;
 
-            // Инициализируем Tile info и назначаем entity для каждого тайла
-            for (int column = 0; column < TilesInfosArray.GetLength(0); ++column)
-            {
-                for (int row = 0; row < TilesInfosArray.GetLength(1); ++row)
-                {
-                    Tile tile = tiles[column, row];
-                    TileInfo tileInfo = TilesInfosArray[column, row];
-
-                    tileInfo.Tile = tile;
-
-                    switch (BuildingTemplate.BuildingType)
-                    {
-                        case BuildingType.Wall:
-                            tileInfo.Tile.Entity = Entity;
-                            break;
-                        default:
-                            tileInfo.Tile.Entity = Entity;
-                            break;
-                    }
-                }
-            }
+            Placement.Place(tiles, Entity);
 
             switch (BuildingTemplate.BuildingType)
             {
@@ -415,13 +357,7 @@ namespace Technolithic
                     break;
             }
 
-            // Добавляем все соседние тайлы занятые строением для доставки ресурсов
-            foreach (var tileInfo in TilesInfosArray)
-            {
-                foreach (var neigh in tileInfo.Tile.GetNeighbourTiles())
-                    if (!ContainsTile(TilesInfosList, neigh))
-                        TargetTiles.Add(neigh);
-            }
+            Placement.UseNeighbourTilesAsTargets();
 
             // Если строение не требует строительства, то завершаем постройку сразу
             if (requireBuilding == false)
@@ -453,17 +389,6 @@ namespace Technolithic
 
             Inventory.OnItemAddedCallback += OnItemAdded;
             Inventory.OnItemRemovedCallback += OnItemRemoved;
-        }
-
-        private bool ContainsTile(List<TileInfo> tilesInfos, Tile tile)
-        {
-            foreach (var item in tilesInfos)
-            {
-                if (item.Tile == tile)
-                    return true;
-            }
-
-            return false;
         }
 
         protected virtual void OnItemAdded(Inventory senderInventory, Item item, int weight)
@@ -549,37 +474,7 @@ namespace Technolithic
                     break;
             }
 
-            TargetTiles.Clear();
-
-            List<Tile> reservedTiles = new List<Tile>();
-
-            // Проверяем, имеет ли строение целевые тайлы
-            foreach (var reservedTileInfo in TilesInfosArray)
-            {
-                Tile tile = reservedTileInfo.Tile;
-                bool target = reservedTileInfo.IsTarget;
-
-                reservedTiles.Add(tile);
-
-                if (target)
-                {
-                    TargetTiles.Add(tile);
-                }
-            }
-
-            if (TargetTiles.Count == 0)
-            {
-                foreach (var reservedTileInfo in TilesInfosArray)
-                {
-                    foreach (var neighTile in reservedTileInfo.Tile.GetNeighbourTiles())
-                    {
-                        if (!reservedTiles.Contains(neighTile) && !TargetTiles.Contains(neighTile))
-                        {
-                            TargetTiles.Add(neighTile);
-                        }
-                    }
-                }
-            }
+            Placement.UseTargetPatternAsTargets();
 
             // Удаляем все предметы из Inventory
             Inventory.ClearCargo();
@@ -639,31 +534,10 @@ namespace Technolithic
 
             if (BuildingTemplate.Range > 0)
             {
-                RangeTiles = TryToGetRangeTiles();
+                RangeTiles = Placement.GetTilesInRange(BuildingTemplate.Range);
             }
 
             OnBuildingCompletedCallback?.Invoke(this);
-        }
-
-        private HashSet<Tile> TryToGetRangeTiles()
-        {
-            HashSet<Tile> tiles = new HashSet<Tile>();
-
-            foreach (var tileInfo in TilesInfosList)
-            {
-                Tile centerTile = tileInfo.Tile;
-
-                centerTile.World.TryGetTilesInRadius(centerTile.X, centerTile.Y, BuildingTemplate.Range, tiles);
-            }
-
-            foreach (var tileInfo in TilesInfosList)
-            {
-                Tile centerTile = tileInfo.Tile;
-
-                tiles.Remove(centerTile);
-            }
-
-            return tiles;
         }
 
         public void CancelBuilding()
@@ -678,7 +552,7 @@ namespace Technolithic
                 buildLabor = null;
             }
 
-            RemoveBuildingFromTiles();
+            Placement.Release();
 
             ThrowAllItems();
 
@@ -706,10 +580,7 @@ namespace Technolithic
                 smokeTimer.OnTimeout -= OnSmokeTimerTimeout;
             }
 
-            foreach (var tileInfo in TilesInfosList)
-            {
-                tileInfo.Tile.MarkType = MarkType.None;
-            }
+            Placement.SetMarkType(MarkType.None);
 
             RemoveBuildingFromBuildingsToDestruct();
 
@@ -732,7 +603,7 @@ namespace Technolithic
                 }
             }
 
-            RemoveBuildingFromTiles();
+            Placement.Release();
 
             // Выкидываем все вложенные предметы
             ThrowAllItems();
@@ -789,36 +660,6 @@ namespace Technolithic
             Inventory.ThrowCargo(TilesInfosArray[0, 0].Tile);
         }
 
-        private void RemoveBuildingFromTiles()
-        {
-            // Удаляем строение из тайлов
-            for (int c = 0; c < TilesInfosArray.GetLength(0); c++)
-            {
-                for (int r = 0; r < TilesInfosArray.GetLength(1); r++)
-                {
-
-                    Tile tile = TilesInfosArray[c, r].Tile;
-
-                    switch (BuildingTemplate.BuildingType)
-                    {
-                        case BuildingType.Wall:
-                            {
-                                tile.Entity = null;
-                                tile.IsWalkable = true;
-                                tile.StrengthValue = 0;
-                            }
-                            break;
-                        default:
-                            {
-                                tile.Entity = null;
-                                tile.IsWalkable = true;
-                            }
-                            break;
-                    }
-                }
-            }
-        }
-
         protected void ThrowItems(Dictionary<Item, int> items)
         {
             foreach (var kvp in items)
@@ -833,52 +674,13 @@ namespace Technolithic
             }
         }
 
-        public Tile GetReachableTile(CreatureCmp creature)
-        {
-            for (int i = 0; i < TargetTiles.Count; ++i)
-            {
-                Tile tile = TargetTiles[i];
+        public Tile GetReachableTile(CreatureCmp creature) => Placement.GetReachableTile(creature);
 
-                if (tile.IsWalkable && creature.Movement.CurrentTile.Room.Id == tile.Room.Id)
-                    return tile;
-            }
+        public Tile GetReachableTile() => Placement.GetReachableTile();
 
-            return null;
-        }
+        public Tile GetCenterTile() => Placement.GetCenterTile();
 
-        // TODO: переделать
-        public Tile GetCenterTile()
-        {
-            return TilesInfosArray[0, 0].Tile;
-        }
-
-        public Tile GetRealCenterTile()
-        {
-            switch(Direction)
-            {
-                case Direction.LEFT:
-                case Direction.RIGHT:
-                    return TilesInfosArray[(int)(BuildingTemplate.Height / 2), (int)(BuildingTemplate.Width / 2)].Tile;
-                case Direction.UP: 
-                case Direction.DOWN:
-                    return TilesInfosArray[(int)(BuildingTemplate.Width / 2), (int)(BuildingTemplate.Height / 2)].Tile;
-            }
-
-            return null;
-        }
-
-        public Tile GetReachableTile()
-        {
-            for (int i = 0; i < TargetTiles.Count; ++i)
-            {
-                Tile tile = TargetTiles[i];
-
-                if (tile.IsWalkable)
-                    return tile;
-            }
-
-            return null;
-        }
+        public Tile GetRealCenterTile() => Placement.GetRealCenterTile();
 
         public bool IsFuelAllowed(Item fuel)
         {
@@ -958,28 +760,7 @@ namespace Technolithic
             CurrentFuelCondition = item.Consumable.Statistics[AttributeType.Fuel];
         }
 
-        public bool IsCanBeAchieved()
-        {
-            Tile centerTile = GetCenterTile();
-
-            Tile leftTile = centerTile.LeftTile;
-            if (leftTile != null && leftTile.Room != null)
-                return true;
-
-            Tile rightTile = centerTile.RightTile;
-            if (rightTile != null && rightTile.Room != null)
-                return true;
-
-            Tile topTile = centerTile.TopTile;
-            if (topTile != null && topTile.Room != null)
-                return true;
-
-            Tile bottomTile = centerTile.BottomTile;
-            if (bottomTile != null && bottomTile.Room != null)
-                return true;
-
-            return false;
-        }
+        public bool IsCanBeAchieved() => Placement.IsCanBeAchieved();
 
         public void AddBuildingToBuildingsToDestruct()
         {
@@ -1113,16 +894,7 @@ namespace Technolithic
                 }
             }
 
-            buildingSaveData.Tiles = new Point[tiles.GetLength(0), tiles.GetLength(1)];
-
-            // Инициализируем Tile info и назначаем entity для каждого тайла
-            for (int column = 0; column < tiles.GetLength(0); column++)
-            {
-                for (int row = 0; row < tiles.GetLength(1); row++)
-                {
-                    buildingSaveData.Tiles[column, row] = tiles[column, row].GetAsPoint();
-                }
-            }
+            buildingSaveData.Tiles = Placement.GetTilesAsPoints();
 
             buildingSaveData.IsBuilt = IsBuilt;
             buildingSaveData.Direction = Direction;

@@ -42,15 +42,12 @@ namespace Technolithic
 
                 if(circleTile.Entity != null)
                 {
-                    BuildingCmp buildingCmp = circleTile.Entity.Get<BuildingCmp>();
+                    BuildingCmp buildingCmp = circleTile.Entity.GetCompletedBuilding();
 
                     if (buildingCmp == energySource)
                         continue;
 
                     if (buildingCmp == null)
-                        continue;
-
-                    if (buildingCmp.IsBuilt == false)
                         continue;
 
                     if (buildingCmp.BuildingTemplate.EnergyConsumer == null)

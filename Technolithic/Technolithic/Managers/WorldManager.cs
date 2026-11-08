@@ -1278,8 +1278,8 @@ namespace Technolithic
 
                                 if(tile.Entity != null)
                                 {
-                                    FarmPlot wildFarmPlot = tile.Entity.Get<FarmPlot>();
-                                    if(wildFarmPlot != null && wildFarmPlot.IsBuilt && wildFarmPlot.PlantData.ToolType == ToolType.Woodcutting)
+                                    FarmPlot wildFarmPlot = tile.Entity.GetCompletedBuilding<FarmPlot>();
+                                    if(wildFarmPlot != null &&wildFarmPlot.PlantData.ToolType == ToolType.Woodcutting)
                                     {
                                         wildFarmPlot.Chop = true;
                                     }
@@ -1296,8 +1296,8 @@ namespace Technolithic
 
                                 if (tile.Entity != null)
                                 {
-                                    FarmPlot wildFarmPlot = tile.Entity.Get<FarmPlot>();
-                                    if (wildFarmPlot != null && wildFarmPlot.IsBuilt && wildFarmPlot.PlantData.ToolType == ToolType.Harvesting)
+                                    FarmPlot wildFarmPlot = tile.Entity.GetCompletedBuilding<FarmPlot>();
+                                    if (wildFarmPlot != null &&wildFarmPlot.PlantData.ToolType == ToolType.Harvesting)
                                     {
                                         wildFarmPlot.Chop = true;
                                     }
@@ -1314,8 +1314,8 @@ namespace Technolithic
 
                                 if (tile.Entity != null)
                                 {
-                                    FarmPlot wildFarmPlot = tile.Entity.Get<FarmPlot>();
-                                    if (wildFarmPlot != null && wildFarmPlot.IsBuilt && wildFarmPlot.PlantData.ToolType == ToolType.Harvesting)
+                                    FarmPlot wildFarmPlot = tile.Entity.GetCompletedBuilding<FarmPlot>();
+                                    if (wildFarmPlot != null &&wildFarmPlot.PlantData.ToolType == ToolType.Harvesting)
                                     {
                                         wildFarmPlot.Harvest = true;
                                     }
@@ -1332,8 +1332,8 @@ namespace Technolithic
 
                                 if (tile.Entity != null)
                                 {
-                                    FarmPlot wildFarmPlot = tile.Entity.Get<FarmPlot>();
-                                    if (wildFarmPlot != null && wildFarmPlot.IsBuilt && wildFarmPlot.PlantData.ToolType == ToolType.Woodcutting)
+                                    FarmPlot wildFarmPlot = tile.Entity.GetCompletedBuilding<FarmPlot>();
+                                    if (wildFarmPlot != null &&wildFarmPlot.PlantData.ToolType == ToolType.Woodcutting)
                                     {
                                         wildFarmPlot.Harvest = true;
                                     }
@@ -1359,8 +1359,8 @@ namespace Technolithic
                                     {
                                         case BuildingType.FarmPlot:
                                             {
-                                                FarmPlot farmPlot = tile.Entity.Get<FarmPlot>();
-                                                if (farmPlot != null && farmPlot.IsWild == false && farmPlot.IsBuilt 
+                                                FarmPlot farmPlot = tile.Entity.GetCompletedBuilding<FarmPlot>();
+                                                if (farmPlot != null && farmPlot.IsWild == false 
                                                     && wasPastedBuildings.Contains(farmPlot) == false)
                                                 {
                                                     wasPastedBuildings.Add(farmPlot);
@@ -1374,8 +1374,8 @@ namespace Technolithic
                                             break;
                                         case BuildingType.AnimalPen:
                                             {
-                                                AnimalPenBuildingCmp animalPenBuilding = tile.Entity.Get<AnimalPenBuildingCmp>();
-                                                if(animalPenBuilding != null && animalPenBuilding.IsBuilt
+                                                AnimalPenBuildingCmp animalPenBuilding = tile.Entity.GetCompletedBuilding<AnimalPenBuildingCmp>();
+                                                if(animalPenBuilding != null
                                                     && wasPastedBuildings.Contains(animalPenBuilding) == false
                                                     && animalPenBuilding.BuildingTemplate == copiedBuildingTemplate)
                                                 {
@@ -1394,8 +1394,8 @@ namespace Technolithic
                                             break;
                                         case BuildingType.Stockpile:
                                             {
-                                                StorageBuildingCmp storage = tile.Entity.Get<StorageBuildingCmp>();
-                                                if(storage != null && storage.IsBuilt 
+                                                StorageBuildingCmp storage = tile.Entity.GetCompletedBuilding<StorageBuildingCmp>();
+                                                if(storage != null 
                                                     && wasPastedBuildings.Contains(storage) == false
                                                     && storage.BuildingTemplate == copiedBuildingTemplate)
                                                 {
@@ -1419,8 +1419,8 @@ namespace Technolithic
                                             break;
                                         case BuildingType.Crafter:
                                             {
-                                                CrafterBuildingCmp crafter = tile.Entity.Get<CrafterBuildingCmp>();
-                                                if (crafter != null && crafter.IsBuilt 
+                                                CrafterBuildingCmp crafter = tile.Entity.GetCompletedBuilding<CrafterBuildingCmp>();
+                                                if (crafter != null 
                                                     && wasPastedBuildings.Contains(crafter) == false 
                                                     && crafter.BuildingTemplate == copiedBuildingTemplate)
                                                 {
@@ -1456,39 +1456,35 @@ namespace Technolithic
                             {
                                 Tile tile = tiles[x, y];
 
-                                if (tile.Entity != null)
+                                BuildingCmp constructionSite = tile.Entity.GetConstructionSite();
+                                BuildingCmp building = tile.Entity.GetCompletedBuilding();
+
+                                if (constructionSite != null)
                                 {
-                                    if (tile.Entity.Has<BuildingCmp>())
+                                    constructionSite.CancelBuilding();
+                                }
+                                else if (building != null)
+                                {
+                                    if(building is FarmPlot)
                                     {
-                                        BuildingCmp building = tile.Entity.Get<BuildingCmp>();
-                                        if (!building.IsBuilt)
+                                        FarmPlot farmPlot = building as FarmPlot;
+                                        if(farmPlot.Chop)
                                         {
-                                            building.CancelBuilding();
+                                            farmPlot.Chop = false;
                                         }
-                                        else
+
+                                        if(farmPlot.Harvest)
                                         {
-                                            if(building is FarmPlot)
-                                            {
-                                                FarmPlot farmPlot = building as FarmPlot;
-                                                if(farmPlot.Chop)
-                                                {
-                                                    farmPlot.Chop = false;
-                                                }
-
-                                                if(farmPlot.Harvest)
-                                                {
-                                                    farmPlot.Harvest = false;
-                                                }
-                                            }
-                                            else if(building is DepositCmp)
-                                            {
-                                                DepositCmp deposit = building as DepositCmp;
-                                                deposit.IsMarkedToObtain = false;
-                                            }
-
-                                            building.Destruct = false;
+                                            farmPlot.Harvest = false;
                                         }
                                     }
+                                    else if(building is DepositCmp)
+                                    {
+                                        DepositCmp deposit = building as DepositCmp;
+                                        deposit.IsMarkedToObtain = false;
+                                    }
+
+                                    building.Destruct = false;
                                 }
                             }
                         }
@@ -1500,22 +1496,16 @@ namespace Technolithic
                             {
                                 Tile tile = tiles[x, y];
 
-                                if (tile.Entity != null)
+                                BuildingCmp building = tile.Entity.GetCompletedBuilding();
+                                if (building != null && building.BuildingTemplate.IsDestructible)
                                 {
-                                    if (tile.Entity.Has<BuildingCmp>())
-                                    {
-                                        BuildingCmp building = tile.Entity.Get<BuildingCmp>();
-                                        if (building.IsBuilt && building.BuildingTemplate.IsDestructible)
-                                        {
-                                            if (building is FarmPlot && (building as FarmPlot).IsWild)
-                                                continue;
+                                    if (building is FarmPlot && (building as FarmPlot).IsWild)
+                                        continue;
 
-                                            if (GameplayScene.BuildingsRequiredDestructing)
-                                                building.Destruct = true;
-                                            else
-                                                building.DestructBuilding();
-                                        }
-                                    }
+                                    if (GameplayScene.BuildingsRequiredDestructing)
+                                        building.Destruct = true;
+                                    else
+                                        building.DestructBuilding();
                                 }
                             }
                         }

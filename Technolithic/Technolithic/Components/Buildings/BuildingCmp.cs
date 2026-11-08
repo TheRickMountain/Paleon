@@ -14,7 +14,7 @@ namespace Technolithic
         public BuildingPlacement Placement { get; }
         public TileInfo[,] TilesInfosArray => Placement.TilesInfosArray;
         public List<TileInfo> TilesInfosList => Placement.TilesInfosList;
-        public HashSet<Tile> RangeTiles { get; private set; }
+        public HashSet<Tile> RangeTiles => Placement.RangeTiles;
 
         public bool IsBuilt { get; protected set; }
         public bool IsDestroyed { get; private set; }
@@ -532,11 +532,6 @@ namespace Technolithic
 
             CenterPosition = new Vector2(Entity.X + (BuildingTemplate.Width * Engine.TILE_SIZE) / 2,
             Entity.Y + (BuildingTemplate.Height * Engine.TILE_SIZE) / 2);
-
-            if (BuildingTemplate.Range > 0)
-            {
-                RangeTiles = Placement.GetTilesInRange(BuildingTemplate.Range);
-            }
 
             OnBuildingCompletedCallback?.Invoke(this);
         }

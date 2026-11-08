@@ -26,18 +26,18 @@ namespace Technolithic
             Entity selectedEntity = worldManager.GetSelectedEntity();
             if (selectedEntity != null)
             {
-                BuildingCmp buildingCmp = selectedEntity.Get<BuildingCmp>();
-
-                if (buildingCmp == null)
+                if (selectedEntity.IsRemoved)
                     return;
 
-                if (buildingCmp.IsBuilt == false)
+                BuildingPlacement placement = selectedEntity.GetBuildingPlacement();
+
+                if (placement == null)
                     return;
 
-                if (buildingCmp.BuildingTemplate.Range <= 0)
+                if (placement.Template.Range <= 0)
                     return;
 
-                foreach (var tile in buildingCmp.RangeTiles)
+                foreach (var tile in placement.RangeTiles)
                 {
                     tiles.Add(tile);
                 }

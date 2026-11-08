@@ -205,7 +205,8 @@ namespace Technolithic
 
                 if (entity != null && entity.Get<WallCmp>() != null)
                 {
-                    if (entity.Get<BuildingCmp>().IsBuilt && !entity.Get<BuildingCmp>().BuildingTemplate.LetLight)
+                    BuildingCmp wall = entity.GetCompletedBuilding();
+                    if (wall != null && !wall.BuildingTemplate.LetLight)
                     {
                         hull = new Hull(new Vector2(0.5f), new Vector2(-0.5f, 0.5f), new Vector2(-0.5f), new Vector2(0.5f, -0.5f))
                         {
@@ -230,7 +231,7 @@ namespace Technolithic
                 foreach (Tile tile in GetAllNeighbourTiles())
                     UpdateBlock(tile);
 
-                if (entity == null || entity.Get<BuildingCmp>().IsBuilt)
+                if (entity == null || entity.GetCompletedBuilding() != null)
                     UpdateMovementSpeedPercent();
             }
         }
@@ -485,57 +486,20 @@ namespace Technolithic
      
         private void UpdateBlock(Tile tile)
         {
-            BuildingCmp building = tile?.Entity?.Get<BuildingCmp>();
+            BuildingTemplate wallTemplate = GetWallTemplate(tile);
 
-            if (building != null && (building.BuildingTemplate.BuildingType == BuildingType.Wall))
+            if (wallTemplate != null)
             {
-                int top;
-                int left;
-                int right;
-                int bottom;
-
-                if (building.BuildingTemplate.ConnectWithOtherBlocks == true)
-                {
-                    BuildingCmp topBuilding = tile.TopTile?.Entity?.Get<BuildingCmp>();
-                    top = (topBuilding != null && (topBuilding.BuildingTemplate.BuildingType == BuildingType.Wall) 
-                        && topBuilding.BuildingTemplate.ConnectWithOtherBlocks) ? 1 : 0;
-
-                    BuildingCmp leftBuilding = tile.LeftTile?.Entity?.Get<BuildingCmp>();
-                    left = (leftBuilding != null && (leftBuilding.BuildingTemplate.BuildingType == BuildingType.Wall) 
-                        && leftBuilding.BuildingTemplate.ConnectWithOtherBlocks) ? 2 : 0;
-
-                    BuildingCmp rightBuilding = tile.RightTile?.Entity?.Get<BuildingCmp>();
-                    right = (rightBuilding != null && (rightBuilding.BuildingTemplate.BuildingType == BuildingType.Wall) 
-                        && rightBuilding.BuildingTemplate.ConnectWithOtherBlocks) ? 4 : 0;
-
-                    BuildingCmp bottomBuilding = tile.BottomTile?.Entity?.Get<BuildingCmp>();
-                    bottom = (bottomBuilding != null && (bottomBuilding.BuildingTemplate.BuildingType == BuildingType.Wall) 
-                        && bottomBuilding.BuildingTemplate.ConnectWithOtherBlocks) ? 8 : 0;
-                }
-                else
-                {
-                    BuildingCmp topBuilding = tile.TopTile?.Entity?.Get<BuildingCmp>();
-                    top = (topBuilding != null && (topBuilding.BuildingTemplate.BuildingType == BuildingType.Wall) && 
-                        topBuilding.BuildingTemplate.Name == building.BuildingTemplate.Name) ? 1 : 0;
-
-                    BuildingCmp leftBuilding = tile.LeftTile?.Entity?.Get<BuildingCmp>();
-                    left = (leftBuilding != null && (leftBuilding.BuildingTemplate.BuildingType == BuildingType.Wall) &&
-                        leftBuilding.BuildingTemplate.Name == building.BuildingTemplate.Name) ? 2 : 0;
-
-                    BuildingCmp rightBuilding = tile.RightTile?.Entity?.Get<BuildingCmp>();
-                    right = (rightBuilding != null && (rightBuilding.BuildingTemplate.BuildingType == BuildingType.Wall) &&
-                        rightBuilding.BuildingTemplate.Name == building.BuildingTemplate.Name) ? 4 : 0;
-
-                    BuildingCmp bottomBuilding = tile.BottomTile?.Entity?.Get<BuildingCmp>();
-                    bottom = (bottomBuilding != null && (bottomBuilding.BuildingTemplate.BuildingType == BuildingType.Wall) &&
-                        bottomBuilding.BuildingTemplate.Name == building.BuildingTemplate.Name) ? 8 : 0;
-                }
+                int top = IsWallConnected(wallTemplate, tile.TopTile) ? 1 : 0;
+                int left = IsWallConnected(wallTemplate, tile.LeftTile) ? 2 : 0;
+                int right = IsWallConnected(wallTemplate, tile.RightTile) ? 4 : 0;
+                int bottom = IsWallConnected(wallTemplate, tile.BottomTile) ? 8 : 0;
 
                 int bitmask = top + left + right + bottom;
 
-                bitmask += building.BuildingTemplate.TilesetOffset;
+                bitmask += wallTemplate.TilesetOffset;
 
-                if (building.IsBuilt == false)
+                if (tile.Entity.GetConstructionSite() != null)
                 {
                     blockTileMap.SetCell(tile.X, tile.Y, bitmask, Color.White * 0.5f);
                 }
@@ -548,7 +512,27 @@ namespace Technolithic
             {
                 blockTileMap.SetCell(tile.X, tile.Y, 0);
             }
-        }  
+        }
+
+        private static BuildingTemplate GetWallTemplate(Tile tile)
+        {
+            BuildingTemplate template = tile?.Entity.GetBuildingPlacement()?.Template;
+
+            return template != null && template.BuildingType == BuildingType.Wall ? template : null;
+        }
+
+        private static bool IsWallConnected(BuildingTemplate wallTemplate, Tile neighbourTile)
+        {
+            BuildingTemplate neighbourTemplate = GetWallTemplate(neighbourTile);
+
+            if (neighbourTemplate == null)
+                return false;
+
+            if (wallTemplate.ConnectWithOtherBlocks)
+                return neighbourTemplate.ConnectWithOtherBlocks;
+
+            return neighbourTemplate.Name == wallTemplate.Name;
+        }
 
         private void OnItemAddedCallback(Inventory senderInventory, Item item, int weight)
         {
@@ -627,7 +611,7 @@ namespace Technolithic
 
             if(Entity != null)
             {
-                buildingTemplate = Entity.Get<BuildingCmp>().BuildingTemplate;
+                buildingTemplate = Entity.GetBuildingPlacement().Template;
             }
             else if(SurfaceId != -1)
             {

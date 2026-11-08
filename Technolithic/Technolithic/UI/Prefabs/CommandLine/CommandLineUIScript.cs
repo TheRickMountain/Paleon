@@ -234,8 +234,8 @@ namespace Technolithic
         private static void CleanManure()
         {
             Entity entity = GameplayScene.WorldManager.GetSelectedEntity();
-            AnimalPenBuildingCmp animalPen = entity?.Get<AnimalPenBuildingCmp>();
-            if (animalPen != null && animalPen.IsBuilt)
+            AnimalPenBuildingCmp animalPen = entity.GetCompletedBuilding<AnimalPenBuildingCmp>();
+            if (animalPen != null)
             {
                 animalPen.CleanManure();
             }

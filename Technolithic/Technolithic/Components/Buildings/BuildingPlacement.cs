@@ -11,6 +11,7 @@ namespace Technolithic
         public Tile[,] Tiles { get; private set; }
         public TileInfo[,] TilesInfosArray { get; }
         public List<TileInfo> TilesInfosList { get; }
+        public HashSet<Tile> RangeTiles { get; private set; }
 
         private readonly List<Tile> targetTiles = new List<Tile>();
 
@@ -52,6 +53,11 @@ namespace Technolithic
                     tileInfo.Tile = tiles[column, row];
                     tileInfo.Tile.Entity = entity;
                 }
+            }
+
+            if (Template.Range > 0)
+            {
+                RangeTiles = GetTilesInRange(Template.Range);
             }
         }
 
@@ -191,7 +197,7 @@ namespace Technolithic
             return false;
         }
 
-        public HashSet<Tile> GetTilesInRange(int range)
+        private HashSet<Tile> GetTilesInRange(int range)
         {
             HashSet<Tile> tilesInRange = new HashSet<Tile>();
 

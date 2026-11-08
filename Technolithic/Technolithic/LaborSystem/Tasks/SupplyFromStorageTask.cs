@@ -10,7 +10,7 @@ namespace Technolithic
     {
 
         private StorageBuildingCmp takeFromStorage;
-        private BuildingCmp putToBuilding;
+        private ISupplyTarget putToBuilding;
         private Item itemToSupply;
         private int weightToSupply;
 
@@ -18,7 +18,7 @@ namespace Technolithic
 
         private bool cancelWasCalled = false;
 
-        public SupplyFromStorageTask(CreatureCmp creature, StorageBuildingCmp takeFromStorage, BuildingCmp putToBuilding, Item item, int weight) 
+        public SupplyFromStorageTask(CreatureCmp creature, StorageBuildingCmp takeFromStorage, ISupplyTarget putToBuilding, Item item, int weight)
             : base(creature, ToolType.Hauling)
         {
             takeFromStorage.Inventory.ReserveItemWeight(item, weight);
@@ -37,8 +37,7 @@ namespace Technolithic
             takeFromStorage.OnBuildingDestructedCallback += OnTakeFromStorageDeletedCallback;
 
             putToBuilding.Inventory.OnRequiredItemWeightChanged += OnPutToBuildingRequiredWeightChanged;
-            putToBuilding.OnBuildingDestructedCallback += OnBuildingDeleted;
-            putToBuilding.OnBuildingCanceledCallback += OnBuildingDeleted;
+            putToBuilding.OnRemovedCallback += OnSupplyTargetRemoved;
         }
 
         public override void BeforeUpdate()
@@ -64,7 +63,7 @@ namespace Technolithic
             {
                 case MovementState.Success:
                     {
-                        if (putToBuilding.GetReachableTile(Owner) == null)
+                        if (putToBuilding.GetApproachableTile(Owner) == null)
                         {
                             State = TaskState.Failed;
                             CustomCancel();
@@ -84,15 +83,14 @@ namespace Technolithic
 
                             itemWasTaken = true;
 
-                            Owner.Movement.SetPath(putToBuilding.GetReachableTile(Owner), false);
+                            Owner.Movement.SetPath(putToBuilding.GetApproachableTile(Owner), false);
 
                             takeFromStorage.OnBuildingDestructedCallback -= OnTakeFromStorageDeletedCallback;
                         }
                         else
                         {
                             putToBuilding.Inventory.OnRequiredItemWeightChanged -= OnPutToBuildingRequiredWeightChanged;
-                            putToBuilding.OnBuildingDestructedCallback -= OnBuildingDeleted;
-                            putToBuilding.OnBuildingCanceledCallback -= OnBuildingDeleted;
+                            putToBuilding.OnRemovedCallback -= OnSupplyTargetRemoved;
 
                             putToBuilding.Inventory.AddToAddWeight(itemToSupply, -weightToSupply);
 
@@ -109,7 +107,7 @@ namespace Technolithic
                     {
                         if(itemWasTaken)
                         {
-                            Tile tile = putToBuilding.GetReachableTile(Owner);
+                            Tile tile = putToBuilding.GetApproachableTile(Owner);
                             if (tile != null)
                             {
                                 Owner.Movement.SetPath(tile, false);
@@ -137,7 +135,7 @@ namespace Technolithic
                     break;
                 case MovementState.Running:
                     {
-                        if (putToBuilding.GetReachableTile(Owner) == null)
+                        if (putToBuilding.GetApproachableTile(Owner) == null)
                         {
                             State = TaskState.Failed;
                             CustomCancel();
@@ -199,8 +197,7 @@ namespace Technolithic
                 takeFromStorage.OnBuildingDestructedCallback -= OnTakeFromStorageDeletedCallback;
                
                 putToBuilding.Inventory.OnRequiredItemWeightChanged -= OnPutToBuildingRequiredWeightChanged;
-                putToBuilding.OnBuildingDestructedCallback -= OnBuildingDeleted;
-                putToBuilding.OnBuildingCanceledCallback -= OnBuildingDeleted;
+                putToBuilding.OnRemovedCallback -= OnSupplyTargetRemoved;
 
                 if (itemWasTaken == false)
                 {
@@ -216,7 +213,7 @@ namespace Technolithic
             }
         }
 
-        private void OnBuildingDeleted(BuildingCmp buildingCmp)
+        private void OnSupplyTargetRemoved(ISupplyTarget supplyTarget)
         {
             State = TaskState.Failed;
             CustomCancel();

@@ -148,6 +148,11 @@ namespace Technolithic
             return TilesInfosArray[0, 0].Tile;
         }
 
+        public Room GetRoom()
+        {
+            return GetCenterTile().Room;
+        }
+
         public Tile GetRealCenterTile()
         {
             switch (Direction)

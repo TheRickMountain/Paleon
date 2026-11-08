@@ -7,7 +7,7 @@ namespace Technolithic
 {
 
 
-    public class BuildingCmp : Component
+    public class BuildingCmp : Component, ISupplyTarget
     {
         public AnimatedSprite Sprite { get; private set; }
 
@@ -22,6 +22,7 @@ namespace Technolithic
         public Action<BuildingCmp> OnBuildingCompletedCallback { get; set; }
         public Action<BuildingCmp> OnBuildingCanceledCallback { get; set; }
         public Action<BuildingCmp> OnBuildingDestructedCallback { get; set; }
+        public Action<ISupplyTarget> OnRemovedCallback { get; set; }
 
         public float ConstructionProgress { get; set; }
 
@@ -568,6 +569,7 @@ namespace Technolithic
             ClearInventoryRequiredWeight();
 
             OnBuildingCanceledCallback?.Invoke(this);
+            OnRemovedCallback?.Invoke(this);
 
             Inventory.OnItemAddedCallback -= OnItemAdded;
             Inventory.OnItemRemovedCallback -= OnItemRemoved;
@@ -635,6 +637,7 @@ namespace Technolithic
             }
 
             OnBuildingDestructedCallback?.Invoke(this);
+            OnRemovedCallback?.Invoke(this);
 
             Inventory.OnItemAddedCallback -= OnItemAdded;
             Inventory.OnItemRemovedCallback -= OnItemRemoved;
@@ -681,6 +684,10 @@ namespace Technolithic
         public Tile GetCenterTile() => Placement.GetCenterTile();
 
         public Tile GetRealCenterTile() => Placement.GetRealCenterTile();
+
+        Tile IApproachable.GetApproachableTile(CreatureCmp creature) => Placement.GetReachableTile(creature);
+
+        Room IApproachable.GetRoom() => Placement.GetRoom();
 
         public bool IsFuelAllowed(Item fuel)
         {

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Technolithic
 {
@@ -24,7 +22,8 @@ namespace Technolithic
         public Action<Inventory, Item, int> OnItemToAddAddedCallback { get; set; }
 
         public Tile Tile { get; private set; }
-        public BuildingCmp BuildingCmp { get; private set; }
+        public ISupplyTarget SupplyTarget { get; private set; }
+        public BuildingCmp BuildingCmp => SupplyTarget as BuildingCmp;
         public CreatureCmp CreatureCmp { get; private set; }
 
         public int TotalItemsCount { get; private set; }
@@ -35,24 +34,23 @@ namespace Technolithic
         public Inventory(Tile tile)
         {
             Tile = tile;
-            InventoryToAdd = new Dictionary<Item, int>();
-            InventoryRequired = new Dictionary<Item, int>();
-            inventoryReserved = new Dictionary<Item, int>();
-            inventoryFactWeight = new Dictionary<Item, int>();
+            Initialize();
         }
 
-        public Inventory(BuildingCmp buildingCmp)
+        public Inventory(ISupplyTarget supplyTarget)
         {
-            BuildingCmp = buildingCmp;
-            InventoryToAdd = new Dictionary<Item, int>();
-            InventoryRequired = new Dictionary<Item, int>();
-            inventoryReserved = new Dictionary<Item, int>();
-            inventoryFactWeight = new Dictionary<Item, int>();
+            SupplyTarget = supplyTarget;
+            Initialize();
         }
 
         public Inventory(CreatureCmp creatureCmp)
         {
             CreatureCmp = creatureCmp;
+            Initialize();
+        }
+
+        private void Initialize()
+        {
             InventoryToAdd = new Dictionary<Item, int>();
             InventoryRequired = new Dictionary<Item, int>();
             inventoryReserved = new Dictionary<Item, int>();
@@ -371,7 +369,7 @@ namespace Technolithic
             else
                 InventoryRequired[item] += weight;
 
-            if(BuildingCmp != null)
+            if(SupplyTarget != null)
             {
                 if (GameplayScene.WorldManager.BuildingsThatRequireItemsV2.ContainsKey(item) == false)
                     GameplayScene.WorldManager.BuildingsThatRequireItemsV2.Add(item, new List<Inventory>());
@@ -462,9 +460,9 @@ namespace Technolithic
                 return Tile;
             }
 
-            if(BuildingCmp != null)
+            if(SupplyTarget != null)
             {
-                return BuildingCmp.GetReachableTile(creatureCmp);
+                return SupplyTarget.GetApproachableTile(creatureCmp);
             }
 
             return null;
@@ -477,9 +475,9 @@ namespace Technolithic
                 return Tile.Room;
             }
 
-            if (BuildingCmp != null)
+            if (SupplyTarget != null)
             {
-                return BuildingCmp.GetCenterTile().Room;
+                return SupplyTarget.GetRoom();
             }
 
             return null;

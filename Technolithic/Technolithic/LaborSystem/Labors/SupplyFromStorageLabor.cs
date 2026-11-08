@@ -16,7 +16,7 @@ namespace Technolithic
         {
             Item itemToTake = null;
             StorageBuildingCmp takeFromStorage = null;
-            BuildingCmp putToBuilding = null;
+            ISupplyTarget putToBuilding = null;
 
             foreach (var kvp in GameplayScene.WorldManager.StoragesThatHaveItemsV2)
             {
@@ -54,7 +54,7 @@ namespace Technolithic
                     if (buildingThatMaybeRequireItem.GetInventoryRequiredMinusToAddWeight(item) > 0 &&
                             buildingThatMaybeRequireItem.GetReachableTile(creature) != null)
                     {
-                        putToBuilding = buildingThatMaybeRequireItem.BuildingCmp;
+                        putToBuilding = buildingThatMaybeRequireItem.SupplyTarget;
                         break;
                     }
                 }

@@ -16,7 +16,7 @@ namespace Technolithic
         {
             Item itemToTake = null;
             Tile takeFromTile = null;
-            BuildingCmp putToBuilding = null;
+            ISupplyTarget putToBuilding = null;
             int creatureRoomId = creature.Movement.CurrentTile.Room.Id;
 
             foreach (var kvp in GameplayScene.WorldManager.TilesThatHaveItems[creatureRoomId])
@@ -40,7 +40,7 @@ namespace Technolithic
                     {
                         if (buildingThatMaybeRequireItem.GetInventoryRequiredMinusToAddWeight(item) > 0)
                         {
-                            putToBuilding = buildingThatMaybeRequireItem.BuildingCmp;
+                            putToBuilding = buildingThatMaybeRequireItem.SupplyTarget;
                             break;
                         }
                     }

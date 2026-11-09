@@ -397,82 +397,19 @@ namespace Technolithic
         {
             Entity entity = new Entity();
 
+            ConstructionSiteCmp constructionSite = null;
             BuildingCmp buildingCmp = null;
 
-            switch (BuildingType)
+            if (completeImmediately == false && RequireBuilding)
             {
-                case BuildingType.Hut:
-                    buildingCmp = new HutBuildingCmp(this, direction);
-                    break;
-                case BuildingType.Crafter:
-                    buildingCmp = new CrafterBuildingCmp(this, direction);
-                    break;
-                case BuildingType.Stockpile:
-                    buildingCmp = new StorageBuildingCmp(this, direction);
-                    break;
-                case BuildingType.Wall:
-                    buildingCmp = new WallCmp(this, direction);
-                    break;
-                case BuildingType.FarmPlot:
-                    buildingCmp = new FarmPlot(this, direction);
-                    break;
-                case BuildingType.Gate:
-                    buildingCmp = new GateCmp(this, direction);
-                    break;
-                case BuildingType.FishingPlace:
-                    buildingCmp = new FishingPlaceCmp(this, direction);
-                    break;
-                case BuildingType.FishTrap:
-                    buildingCmp = new FishTrap(this, direction);
-                    break;
-                case BuildingType.Deposit:
-                    buildingCmp = new DepositCmp(this, direction);
-                    break;
-                case BuildingType.BuildIrrigationCanal:
-                    buildingCmp = new BuildIrrigationCanalCmp(this, direction);
-                    break;
-                case BuildingType.DestructIrrigationCanal:
-                    buildingCmp = new DestructIrrigationCanalCmp(this, direction);
-                    break;
-                case BuildingType.WindPoweredEnergySource:
-                    buildingCmp = new WindPoweredEnergySourceCmp(this, direction);
-                    break;
-                case BuildingType.CreaturePoweredEnergySource:
-                    buildingCmp = new CreaturePoweredEnergySource(this, direction);
-                    break;
-                case BuildingType.BeeHive:
-                    buildingCmp = new BeeHiveBuildingCmp(this, direction);
-                    break;
-                case BuildingType.TimeMachine:
-                    buildingCmp = new TimeMachine(this, direction);
-                    break;
-                case BuildingType.AnimalPen:
-                    buildingCmp = new AnimalPenBuildingCmp(this, direction);
-                    break;
-                case BuildingType.Mine:
-                    buildingCmp = new MineBuildingCmp(this, direction);
-                    break;
-                case BuildingType.Lighter:
-                    buildingCmp = new LighterCmp(this, direction);
-                    break;
-                case BuildingType.Noria:
-                    buildingCmp = new NoriaBuildingCmp(this, direction);
-                    break;
-                case BuildingType.Surface:
-                    buildingCmp = new SurfaceBuilding(this, direction);
-                    break;
-                case BuildingType.DestructSurface:
-                    buildingCmp = new DestructSurfaceBuilding(this, direction);
-                    break;
-                case BuildingType.TradingPost:
-                    buildingCmp = new TradingPostBuildingCmp(this, direction);
-                    break;
-                case BuildingType.None:
-                    buildingCmp = new BuildingCmp(this, direction);
-                    break;
+                constructionSite = new ConstructionSiteCmp(this, direction);
+                entity.Add(constructionSite);
             }
-            
-            entity.Add(buildingCmp);
+            else
+            {
+                buildingCmp = CreateBuildingCmp(direction);
+                entity.Add(buildingCmp);
+            }
 
             switch(direction)
             {
@@ -486,16 +423,72 @@ namespace Technolithic
                     break;
             }
 
-            if (completeImmediately)
+            if (constructionSite != null)
             {
-                buildingCmp.SetToBuild(tiles, false, currentFuelCondition);
+                constructionSite.Place(tiles);
             }
             else
             {
-                buildingCmp.SetToBuild(tiles, RequireBuilding, currentFuelCondition);
+                buildingCmp.Place(tiles, currentFuelCondition);
+                buildingCmp.CompleteBuilding();
             }
 
             return entity;
+        }
+
+        public BuildingCmp CreateBuildingCmp(Direction direction)
+        {
+            switch (BuildingType)
+            {
+                case BuildingType.Hut:
+                    return new HutBuildingCmp(this, direction);
+                case BuildingType.Crafter:
+                    return new CrafterBuildingCmp(this, direction);
+                case BuildingType.Stockpile:
+                    return new StorageBuildingCmp(this, direction);
+                case BuildingType.Wall:
+                    return new WallCmp(this, direction);
+                case BuildingType.FarmPlot:
+                    return new FarmPlot(this, direction);
+                case BuildingType.Gate:
+                    return new GateCmp(this, direction);
+                case BuildingType.FishingPlace:
+                    return new FishingPlaceCmp(this, direction);
+                case BuildingType.FishTrap:
+                    return new FishTrap(this, direction);
+                case BuildingType.Deposit:
+                    return new DepositCmp(this, direction);
+                case BuildingType.BuildIrrigationCanal:
+                    return new BuildIrrigationCanalCmp(this, direction);
+                case BuildingType.DestructIrrigationCanal:
+                    return new DestructIrrigationCanalCmp(this, direction);
+                case BuildingType.WindPoweredEnergySource:
+                    return new WindPoweredEnergySourceCmp(this, direction);
+                case BuildingType.CreaturePoweredEnergySource:
+                    return new CreaturePoweredEnergySource(this, direction);
+                case BuildingType.BeeHive:
+                    return new BeeHiveBuildingCmp(this, direction);
+                case BuildingType.TimeMachine:
+                    return new TimeMachine(this, direction);
+                case BuildingType.AnimalPen:
+                    return new AnimalPenBuildingCmp(this, direction);
+                case BuildingType.Mine:
+                    return new MineBuildingCmp(this, direction);
+                case BuildingType.Lighter:
+                    return new LighterCmp(this, direction);
+                case BuildingType.Noria:
+                    return new NoriaBuildingCmp(this, direction);
+                case BuildingType.Surface:
+                    return new SurfaceBuilding(this, direction);
+                case BuildingType.DestructSurface:
+                    return new DestructSurfaceBuilding(this, direction);
+                case BuildingType.TradingPost:
+                    return new TradingPostBuildingCmp(this, direction);
+                case BuildingType.None:
+                    return new BuildingCmp(this, direction);
+            }
+
+            return null;
         }
 
     }

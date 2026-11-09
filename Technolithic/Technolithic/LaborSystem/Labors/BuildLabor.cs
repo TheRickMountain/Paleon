@@ -9,11 +9,11 @@ namespace Technolithic
     public class BuildLabor : Labor
     {
 
-        private BuildingCmp building;
+        private ConstructionSiteCmp constructionSite;
 
-        public BuildLabor(BuildingCmp building, LaborType laborType) : base(laborType)
+        public BuildLabor(ConstructionSiteCmp constructionSite, LaborType laborType) : base(laborType)
         {
-            this.building = building;
+            this.constructionSite = constructionSite;
         }
 
         public override bool Check(CreatureCmp creature)
@@ -21,11 +21,11 @@ namespace Technolithic
             if (CreatureTasks.Count > 0)
                 return false;
 
-            Tile targetTile = building.GetReachableTile(creature);
+            Tile targetTile = constructionSite.GetApproachableTile(creature);
             if (targetTile == null)
                 return false;
 
-            ToolType requiredToolType = building.BuildingTemplate.BuildingToolType;
+            ToolType requiredToolType = constructionSite.BuildingTemplate.BuildingToolType;
 
             if (requiredToolType != ToolType.None)
             {
@@ -48,7 +48,7 @@ namespace Technolithic
                 }
             }
 
-            BuildTask buildTask = new BuildTask(creature, building);
+            BuildTask buildTask = new BuildTask(creature, constructionSite);
             AddTask(creature, buildTask);
 
             return true;

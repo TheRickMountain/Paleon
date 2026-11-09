@@ -13,7 +13,12 @@ namespace Technolithic
         private Dictionary<MNode, Item> nodesFuels;
 
         private BuildingCmp selectedBuilding;
+        private ConstructionSiteCmp selectedConstructionSite;
         private MyPanelUI panel;
+
+        private BuildingTemplate SelectedTemplate => selectedConstructionSite != null
+            ? selectedConstructionSite.BuildingTemplate
+            : selectedBuilding.BuildingTemplate;
 
         private BigButton cancelButton;
         private BigButton destructButton;
@@ -131,25 +136,45 @@ namespace Technolithic
 
             if(MInput.Keyboard.Pressed(Microsoft.Xna.Framework.Input.Keys.Q))
             {
-                if (selectedBuilding.BuildingTemplate.Cloneable &&
-                GameplayScene.Instance.ProgressTree.IsBuildingUnlocked(selectedBuilding.BuildingTemplate))
+                if (SelectedTemplate.Cloneable &&
+                GameplayScene.Instance.ProgressTree.IsBuildingUnlocked(SelectedTemplate))
                 {
                     CloneBuilding(true, null);
                 }
             }
         }
 
+        public void SetConstructionSite(ConstructionSiteCmp constructionSite)
+        {
+            selectedBuilding = null;
+            selectedConstructionSite = constructionSite;
+
+            selectedConstructionSite.OnCanceledCallback += OnConstructionSiteCanceled;
+            selectedConstructionSite.OnCompletedCallback += OnConstructionSiteCompleted;
+
+            ((RichTextUI)panel.GetChildByName("Label")).Text = constructionSite.BuildingTemplate.Name;
+
+            UpdateStatsListView(constructionSite.GetInformation());
+
+            (ParentNode.GetChildByName("InventoryListView") as InventoryListViewUI).SetInventory(constructionSite.Inventory);
+
+            ParentNode.GetChildByName("FuelTab").Active = false;
+
+            SetTab(true, ParentNode.GetChildByName("StatsTab").GetComponent<ButtonScript>());
+
+            UpdateButtons();
+        }
+
         public void SetBuilding(BuildingCmp building)
         {
+            selectedConstructionSite = null;
             selectedBuilding = building;
 
-            selectedBuilding.OnBuildingCanceledCallback += CloseUI;
-            selectedBuilding.OnBuildingCompletedCallback += CloseUI;
-            selectedBuilding.OnBuildingDestructedCallback += CloseUI;
+            selectedBuilding.OnBuildingDestructedCallback += OnBuildingDestructed;
 
             ((RichTextUI)panel.GetChildByName("Label")).Text = building.BuildingTemplate.Name;
 
-            UpdateStatsListView(building);
+            UpdateStatsListView(building.GetInformation());
 
             (ParentNode.GetChildByName("InventoryListView") as InventoryListViewUI).SetInventory(selectedBuilding.Inventory);
 
@@ -169,18 +194,37 @@ namespace Technolithic
             UpdateButtons();
         }
 
-        public void CloseUI(BuildingCmp buildingCmp)
+        private void CloseUI()
         {
             GameplayScene.UIRootNodeScript.CloseEntityPanel();
+        }
+
+        private void OnBuildingDestructed(BuildingCmp building)
+        {
+            CloseUI();
+        }
+
+        private void OnConstructionSiteCanceled(ConstructionSiteCmp constructionSite)
+        {
+            CloseUI();
+        }
+
+        private void OnConstructionSiteCompleted(ConstructionSiteCmp constructionSite, BuildingCmp building)
+        {
+            CloseUI();
         }
 
         public void Close()
         {
             if (selectedBuilding != null)
             {
-                selectedBuilding.OnBuildingCanceledCallback -= CloseUI;
-                selectedBuilding.OnBuildingCompletedCallback -= CloseUI;
-                selectedBuilding.OnBuildingDestructedCallback -= CloseUI;
+                selectedBuilding.OnBuildingDestructedCallback -= OnBuildingDestructed;
+            }
+
+            if (selectedConstructionSite != null)
+            {
+                selectedConstructionSite.OnCanceledCallback -= OnConstructionSiteCanceled;
+                selectedConstructionSite.OnCompletedCallback -= OnConstructionSiteCompleted;
             }
         }
 
@@ -258,8 +302,8 @@ namespace Technolithic
         public void CloneBuilding(bool value, ButtonScript sender)
         {
             GameplayScene.WorldManager.SetMyAction(MyAction.Build, null);
-            GameplayScene.WorldManager.SetBuilding(selectedBuilding.BuildingTemplate);
-            CloseUI(selectedBuilding);
+            GameplayScene.WorldManager.SetBuilding(SelectedTemplate);
+            CloseUI();
         }
 
         public void ChopBuilding(bool value, ButtonScript sender)
@@ -280,8 +324,8 @@ namespace Technolithic
 
         public void CancelBuilding(bool value, ButtonScript sender)
         {
-            selectedBuilding.CancelBuilding();
-            CloseUI(selectedBuilding);
+            selectedConstructionSite.Cancel();
+            CloseUI();
         }
 
         public void DestructBuilding(bool value, ButtonScript sender)
@@ -291,13 +335,13 @@ namespace Technolithic
             UpdateButtons();
         }
 
-        private void UpdateStatsListView(BuildingCmp building)
+        private void UpdateStatsListView(string information)
         {
             MNode listView = ParentNode.GetChildByName("StatsListView");
             ListViewUIScript listViewScript = listView.GetComponent<ListViewUIScript>();
             listViewScript.Clear();
 
-            infoText.Text = building.GetInformation();
+            infoText.Text = information;
             infoText.Height = infoText.TextHeight;
             listViewScript.AddItem(infoText);
         }
@@ -337,7 +381,7 @@ namespace Technolithic
             ListViewUIScript buttonsListView = ParentNode.GetChildByName("ButtonsListView").GetComponent<ListViewUIScript>();
             buttonsListView.Clear();
 
-            if (selectedBuilding.IsBuilt == false)
+            if (selectedConstructionSite != null)
             {
                 buttonsListView.AddItem(cancelButton);
             }
@@ -529,10 +573,10 @@ namespace Technolithic
 
             }
 
-            if (selectedBuilding.BuildingTemplate.Cloneable &&
-                GameplayScene.Instance.ProgressTree.IsBuildingUnlocked(selectedBuilding.BuildingTemplate))
+            if (SelectedTemplate.Cloneable &&
+                GameplayScene.Instance.ProgressTree.IsBuildingUnlocked(SelectedTemplate))
             {
-                cloneButton.GetChildByName("Icon").GetComponent<MImageCmp>().Texture = selectedBuilding.BuildingTemplate.Icons[Direction.DOWN];
+                cloneButton.GetChildByName("Icon").GetComponent<MImageCmp>().Texture = SelectedTemplate.Icons[Direction.DOWN];
                 buttonsListView.AddItem(cloneButton);
             }
         }

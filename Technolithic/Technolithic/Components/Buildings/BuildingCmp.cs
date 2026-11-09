@@ -19,18 +19,12 @@ namespace Technolithic
         public bool IsBuilt { get; protected set; }
         public bool IsDestroyed { get; private set; }
 
-        public Action<BuildingCmp> OnBuildingCompletedCallback { get; set; }
-        public Action<BuildingCmp> OnBuildingCanceledCallback { get; set; }
         public Action<BuildingCmp> OnBuildingDestructedCallback { get; set; }
         public Action<ISupplyTarget> OnRemovedCallback { get; set; }
-
-        public float ConstructionProgress { get; set; }
 
         public float DeconstructionProgress { get; set; }
 
         public Inventory Inventory { get; private set; }
-
-        private BuildLabor buildLabor;
 
         private bool destruct;
         public bool Destruct
@@ -114,42 +108,7 @@ namespace Technolithic
             Inventory = new Inventory(this);
             Inventory.IsStorage = false;
 
-            switch (buildingTemplate.BuildingType)
-            {
-                case BuildingType.Wall:
-                    break;
-                default:
-                    {
-                        MyTexture texture = buildingTemplate.Textures[Direction];
-
-                        int textureWidth = -1;
-                        int textureHeight = -1;
-
-                        switch (Direction)
-                        {
-                            case Direction.DOWN:
-                            case Direction.UP:
-                                textureWidth = buildingTemplate.TextureWidth;
-                                textureHeight = buildingTemplate.TextureHeight;
-                                break;
-                            case Direction.LEFT:
-                            case Direction.RIGHT:
-                                textureWidth = buildingTemplate.TextureHeight;
-                                textureHeight = buildingTemplate.TextureWidth;
-                                break;
-                        }
-
-                        Sprite = new AnimatedSprite(textureWidth, textureHeight);
-                        Sprite.Add("Idle", new Animation(texture, 1, 0, textureWidth, textureHeight, 0, 0, 1));
-
-                        if (buildingTemplate.Animated)
-                        {
-                            int frameCount = buildingTemplate.Textures[Direction].Width / textureWidth;
-                            Sprite.Add("Process", new Animation(texture, frameCount, 0, textureWidth, textureHeight, 0, textureHeight, 5));
-                        }
-                    }
-                    break;
-            }
+            Sprite = BuildingSprite.Create(buildingTemplate, Direction);
         }
 
         protected void PlayIdleAnimation()
@@ -326,7 +285,7 @@ namespace Technolithic
             }
         }
 
-        public void SetToBuild(Tile[,] tiles, bool requireBuilding, float currentFuelCondition)
+        public void Place(Tile[,] tiles, float currentFuelCondition)
         {
             Entity.X = tiles[0, 0].X * Engine.TILE_SIZE;
             Entity.Y = tiles[0, 0].Y * Engine.TILE_SIZE;
@@ -335,57 +294,9 @@ namespace Technolithic
 
             Placement.Place(tiles, Entity);
 
-            switch (BuildingTemplate.BuildingType)
+            if (Sprite != null)
             {
-                case BuildingType.Wall:
-                    break;
-                default:
-                    {
-                        Sprite.Entity = Entity;
-
-                        Sprite.Color = Color.White * 0.5f;
-
-                        Sprite.SetOrigin(Sprite.Width / 2, Sprite.Height / 2);
-
-                        int imageYOffset = TilesInfosArray.GetLength(1) * Engine.TILE_SIZE - Sprite.Height;
-                        int imageXOffset = (TilesInfosArray.GetLength(0) * Engine.TILE_SIZE - Sprite.Width) / 2;
-
-                        Sprite.X = imageXOffset + Sprite.Width / 2;
-                        Sprite.Y = imageYOffset + Sprite.Height / 2;
-
-                        Sprite.Play("Idle");
-                    }
-                    break;
-            }
-
-            Placement.UseNeighbourTilesAsTargets();
-
-            // Если строение не требует строительства, то завершаем постройку сразу
-            if (requireBuilding == false)
-            {
-                Inventory.InventoryRequired.Clear();
-
-                CompleteBuilding();
-            }
-            else
-            {
-                bool hasRequiredItems = false;
-
-                foreach (var buildingRecipe in BuildingTemplate.BuildingRecipe)
-                {
-                    Item item = buildingRecipe.Key;
-                    int weight = buildingRecipe.Value;
-
-                    Inventory.AddRequiredWeight(item, weight);
-                    hasRequiredItems = true;
-                }
-
-                // Если строение не требует предметов, то строим сразу
-                if (hasRequiredItems == false)
-                {
-                    buildLabor = new BuildLabor(this, BuildingTemplate.BuildingLaborType);
-                    GameplayScene.WorldManager.LaborManager.Add(buildLabor);
-                }
+                BuildingSprite.AttachTo(Sprite, Entity, Placement);
             }
 
             Inventory.OnItemAddedCallback += OnItemAdded;
@@ -398,31 +309,11 @@ namespace Technolithic
             {
                 Inventory.AddRequiredWeight(item, -weight);
             }
-
-            // Если строение не построено, но доставлены все необходимые ресурсы, то создаем работу по строительству
-            if (!IsBuilt && IsSupplyCompleted())
-            {
-                buildLabor = new BuildLabor(this, BuildingTemplate.BuildingLaborType);
-                GameplayScene.WorldManager.LaborManager.Add(buildLabor);
-            }
         }
 
         protected virtual void OnItemRemoved(Inventory senderInventory, Item item, int weight)
         {
 
-        }
-
-        private bool IsSupplyCompleted()
-        {
-            foreach (var recipe in BuildingTemplate.BuildingRecipe)
-            {
-                int factWeight = Inventory.GetInventoryFactWeight(recipe.Key);
-
-                if (factWeight != recipe.Value)
-                    return false;
-            }
-
-            return true;
         }
 
         private void OnSmokeTimerTimeout()
@@ -477,9 +368,6 @@ namespace Technolithic
 
             Placement.UseTargetPatternAsTargets();
 
-            // Удаляем все предметы из Inventory
-            Inventory.ClearCargo();
-
             if (BuildingTemplate.FuelConsumer != null)
             {
                 ConsumableFuelDictionary = new Dictionary<Item, bool>();
@@ -532,42 +420,6 @@ namespace Technolithic
 
             CenterPosition = new Vector2(Entity.X + (BuildingTemplate.Width * Engine.TILE_SIZE) / 2,
             Entity.Y + (BuildingTemplate.Height * Engine.TILE_SIZE) / 2);
-
-            OnBuildingCompletedCallback?.Invoke(this);
-        }
-
-        public void CancelBuilding()
-        {
-            IsBuilt = false;
-            IsDestroyed = true;
-
-            // Если строительство уже начато
-            if (buildLabor != null)
-            {
-                buildLabor.CancelAndClearAllTasksAndComplete();
-                buildLabor = null;
-            }
-
-            Placement.Release();
-
-            ThrowAllItems();
-
-            if (BuildingTemplate.BuildingType != BuildingType.Wall)
-            {
-                Entity.RemoveSelf();
-            }
-            else
-            {
-                GameplayScene.WorldManager.WallsList.Remove(this);
-            }
-
-            ClearInventoryRequiredWeight();
-
-            OnBuildingCanceledCallback?.Invoke(this);
-            OnRemovedCallback?.Invoke(this);
-
-            Inventory.OnItemAddedCallback -= OnItemAdded;
-            Inventory.OnItemRemovedCallback -= OnItemRemoved;
         }
 
         public virtual void DestructBuilding()
@@ -616,10 +468,10 @@ namespace Technolithic
             }
             else
             {
-                GameplayScene.WorldManager.WallsList.Remove(this);
+                GameplayScene.WorldManager.WallsList.Remove(Entity);
             }
 
-            ClearInventoryRequiredWeight();
+            Inventory.ClearRequiredWeight();
 
             if (BuildingTemplate.FuelConsumer != null)
             {
@@ -636,21 +488,6 @@ namespace Technolithic
 
             Inventory.OnItemAddedCallback -= OnItemAdded;
             Inventory.OnItemRemovedCallback -= OnItemRemoved;
-        }
-
-        private void ClearInventoryRequiredWeight()
-        {
-            List<Item> keys = new List<Item>(Inventory.InventoryRequired.Keys);
-
-            foreach (var keyItem in keys)
-            {
-                int requiredWeight = Inventory.InventoryRequired[keyItem];
-
-                if (requiredWeight > 0)
-                {
-                    Inventory.AddRequiredWeight(keyItem, -requiredWeight);
-                }
-            }
         }
 
         protected void ThrowAllItems()
@@ -696,56 +533,34 @@ namespace Technolithic
 
         public virtual string GetInformation()
         {
-            if (IsBuilt)
+            string info = "";
+
+            if (BuildingTemplate.FuelConsumer != null)
             {
-                string info = "";
-
-                if (BuildingTemplate.FuelConsumer != null)
-                {
-                    info += $"- {fuelString}: {string.Format("{0:0.00}", CurrentFuelCondition)} MJ\n" +
-                        $"- {consumptionString}: {BuildingTemplate.FuelConsumer.EnergyConsumption} MJ/s\n\n";
-                }
-
-                if (BuildingTemplate.EnergyConsumer != null)
-                {
-                    info += $"\n{Localization.GetLocalizedText("energy_type")}: " +
-                        $"{Localization.GetLocalizedText(BuildingTemplate.EnergyConsumer.EnergyType.ToString().ToLower())}";
-
-                    info += $"\n{Localization.GetLocalizedText("energy_consumption")}: {BuildingTemplate.EnergyConsumer.RequiredPower}";
-
-                    if (IsPowered)
-                    {
-                        info += $"\n{Localization.GetLocalizedText("energy_source")}: " +
-                            $"/c[#00FF00]{Localization.GetLocalizedText("connected")}/cd\n";
-                    }
-                    else
-                    {
-                        info += $"\n{Localization.GetLocalizedText("energy_source")}: " +
-                            $"/c[#FF0000]{Localization.GetLocalizedText("disconnected")}/cd\n";
-                    }
-                }
-
-                return info;
+                info += $"- {fuelString}: {string.Format("{0:0.00}", CurrentFuelCondition)} MJ\n" +
+                    $"- {consumptionString}: {BuildingTemplate.FuelConsumer.EnergyConsumption} MJ/s\n\n";
             }
-            else
+
+            if (BuildingTemplate.EnergyConsumer != null)
             {
-                string info = $"{Localization.GetLocalizedText("ingredients")}:\n";
+                info += $"\n{Localization.GetLocalizedText("energy_type")}: " +
+                    $"{Localization.GetLocalizedText(BuildingTemplate.EnergyConsumer.EnergyType.ToString().ToLower())}";
 
-                var buildingRecipe = BuildingTemplate.BuildingRecipe;
+                info += $"\n{Localization.GetLocalizedText("energy_consumption")}: {BuildingTemplate.EnergyConsumer.RequiredPower}";
 
-                foreach (var kvp in buildingRecipe)
+                if (IsPowered)
                 {
-                    Item item = kvp.Key;
-
-                    int requiredWeight = kvp.Value;
-
-                    int factWeight = Inventory.GetInventoryFactWeight(item);
-
-                    info += $"- {item.Name}: {factWeight} / {requiredWeight}\n";
+                    info += $"\n{Localization.GetLocalizedText("energy_source")}: " +
+                        $"/c[#00FF00]{Localization.GetLocalizedText("connected")}/cd\n";
                 }
-
-                return info + "\n";
+                else
+                {
+                    info += $"\n{Localization.GetLocalizedText("energy_source")}: " +
+                        $"/c[#FF0000]{Localization.GetLocalizedText("disconnected")}/cd\n";
+                }
             }
+
+            return info;
         }
 
         public void SupplyFuel(Item item)
@@ -880,7 +695,6 @@ namespace Technolithic
         {
             BuildingSaveData buildingSaveData = new BuildingSaveData();
             buildingSaveData.BuildingTemplateName = BuildingTemplate.Json;
-            buildingSaveData.BuildingProgress = ConstructionProgress;
             buildingSaveData.DestructingProgress = DeconstructionProgress;
             buildingSaveData.Destruct = Destruct;
 
@@ -901,21 +715,7 @@ namespace Technolithic
             buildingSaveData.IsBuilt = IsBuilt;
             buildingSaveData.Direction = Direction;
 
-            buildingSaveData.InventoryItems = new List<Tuple<int, int, float>>();
-            foreach (var kvp in Inventory.ItemItemContainerPair)
-            {
-                List<ItemContainer> itemContainers = kvp.Value;
-
-                foreach (var itemContainer in itemContainers)
-                {
-                    buildingSaveData.InventoryItems.Add(Tuple.Create(itemContainer.Item.Id, itemContainer.FactWeight, itemContainer.Durability));
-                }
-            }
-
-            if (buildingSaveData.InventoryItems.Count == 0)
-            {
-                buildingSaveData.InventoryItems = null;
-            }
+            buildingSaveData.InventoryItems = Inventory.GetItemsSaveData();
 
             return buildingSaveData;
         }

@@ -60,7 +60,6 @@ namespace Technolithic
         {
             Storages.Add(stockpileBuilding);
 
-            stockpileBuilding.OnBuildingCanceledCallback += OnStorageDeletedCallback;
             stockpileBuilding.OnBuildingDestructedCallback += OnStorageDeletedCallback;
 
             stockpileBuilding.Inventory.OnItemAddedCallback += OnItemAddedCallback;
@@ -80,7 +79,6 @@ namespace Technolithic
             Storages.Remove(storageBuildingCmp);
             RemoveStorageFromAllCollections(storageBuildingCmp);
 
-            storageBuildingCmp.OnBuildingCanceledCallback -= OnStorageDeletedCallback;
             storageBuildingCmp.OnBuildingDestructedCallback -= OnStorageDeletedCallback;
 
             storageBuildingCmp.Inventory.OnItemAddedCallback -= OnItemAddedCallback;

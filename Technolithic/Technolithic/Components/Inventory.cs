@@ -422,6 +422,36 @@ namespace Technolithic
             ItemItemContainerPair.Clear();
         }
 
+        public void ClearRequiredWeight()
+        {
+            List<Item> keys = new List<Item>(InventoryRequired.Keys);
+
+            foreach (var keyItem in keys)
+            {
+                int requiredWeight = InventoryRequired[keyItem];
+
+                if (requiredWeight > 0)
+                {
+                    AddRequiredWeight(keyItem, -requiredWeight);
+                }
+            }
+        }
+
+        public List<Tuple<int, int, float>> GetItemsSaveData()
+        {
+            List<Tuple<int, int, float>> items = new List<Tuple<int, int, float>>();
+
+            foreach (var kvp in ItemItemContainerPair)
+            {
+                foreach (var itemContainer in kvp.Value)
+                {
+                    items.Add(Tuple.Create(itemContainer.Item.Id, itemContainer.FactWeight, itemContainer.Durability));
+                }
+            }
+
+            return items.Count > 0 ? items : null;
+        }
+
         public void ThrowCargo(Tile tile)
         {
             foreach(var kvp in ItemItemContainerPair)

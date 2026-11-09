@@ -98,7 +98,7 @@ namespace Technolithic
 
         public List<Tile> HomeArea = new List<Tile>();
 
-        public List<BuildingCmp> WallsList = new List<BuildingCmp>();
+        public List<Entity> WallsList = new List<Entity>();
 
         public BuildingSaveData BuildingSaveDataForCopy { get; set; } // used to copy settings
 
@@ -887,7 +887,17 @@ namespace Technolithic
                     GameplayScene.UIRootNodeScript.OpenCreatureUI(selectable.Entity.Get<CreatureCmp>());
                     break;
                 case SelectableType.Building:
-                    GameplayScene.UIRootNodeScript.OpenBuildingUI(selectable.Entity.Get<BuildingCmp>());
+                    {
+                        ConstructionSiteCmp constructionSite = selectable.Entity.GetConstructionSite();
+                        if (constructionSite != null)
+                        {
+                            GameplayScene.UIRootNodeScript.OpenConstructionSiteUI(constructionSite);
+                        }
+                        else
+                        {
+                            GameplayScene.UIRootNodeScript.OpenBuildingUI(selectable.Entity.Get<BuildingCmp>());
+                        }
+                    }
                     break;
                 case SelectableType.ItemContainers:
                     GameplayScene.UIRootNodeScript.OpenItemStackUI(GameplayScene.MouseTile);
@@ -1456,12 +1466,12 @@ namespace Technolithic
                             {
                                 Tile tile = tiles[x, y];
 
-                                BuildingCmp constructionSite = tile.Entity.GetConstructionSite();
+                                ConstructionSiteCmp constructionSite = tile.Entity.GetConstructionSite();
                                 BuildingCmp building = tile.Entity.GetCompletedBuilding();
 
                                 if (constructionSite != null)
                                 {
-                                    constructionSite.CancelBuilding();
+                                    constructionSite.Cancel();
                                 }
                                 else if (building != null)
                                 {
@@ -1566,16 +1576,14 @@ namespace Technolithic
 
             Entity entity = buildingTemplate.CreateEntity(tiles, buildingDirection,
                      GameplayScene.BuildingsRequiredBuilding ? completeImmediately : true, 0);
-                
-            BuildingCmp newBuilding = entity.Get<BuildingCmp>();
 
-            if (entity.Get<BuildingCmp>().BuildingTemplate.BuildingType != BuildingType.Wall)
+            if (buildingTemplate.BuildingType != BuildingType.Wall)
             {
                 GameplayScene.Instance.AddEntity(entity);
             }
             else
             {
-                WallsList.Add(newBuilding);
+                WallsList.Add(entity);
             }
 
             return entity;

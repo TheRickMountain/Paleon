@@ -290,9 +290,18 @@ namespace Technolithic
                         continue;
                     }
 
+                    ConstructionSiteCmp constructionSite = buildingEntity.GetConstructionSite();
+                    if (constructionSite != null)
+                    {
+                        constructionSite.ConstructionProgress = buildingSaveData.BuildingProgress;
+
+                        LoadInventoryItems(constructionSite.Inventory, buildingSaveData.InventoryItems);
+
+                        continue;
+                    }
+
                     BuildingCmp buildingCmp = buildingEntity.Get<BuildingCmp>();
 
-                    buildingCmp.ConstructionProgress = buildingSaveData.BuildingProgress;
                     buildingCmp.DeconstructionProgress = buildingSaveData.DestructingProgress;
 
                     if (buildingCmp.IsBuilt)
@@ -467,27 +476,7 @@ namespace Technolithic
                         }
                     }
 
-                    if (buildingSaveData.InventoryItems != null)
-                    {
-                        foreach (var itemContainer in buildingSaveData.InventoryItems)
-                        {
-                            Item item = ItemDatabase.GetItemById(itemContainer.Item1);
-
-                            if (item == null)
-                                continue;
-
-                            int factWeight = itemContainer.Item2;
-                            if (factWeight == 0)
-                                continue;
-
-                            float durability = itemContainer.Item3;
-
-                            if (factWeight != 0)
-                            {
-                                buildingCmp.Inventory.AddCargo(new ItemContainer(item, factWeight, durability));
-                            }
-                        }
-                    }
+                    LoadInventoryItems(buildingCmp.Inventory, buildingSaveData.InventoryItems);
 
                     buildingCmp.Destruct = buildingSaveData.Destruct;
                 }
@@ -1225,6 +1214,28 @@ namespace Technolithic
             RenderManager.SpriteBatch.End();
         }
 
+        private static void LoadInventoryItems(Inventory inventory, List<Tuple<int, int, float>> items)
+        {
+            if (items == null)
+                return;
+
+            foreach (var itemContainer in items)
+            {
+                Item item = ItemDatabase.GetItemById(itemContainer.Item1);
+
+                if (item == null)
+                    continue;
+
+                int factWeight = itemContainer.Item2;
+                if (factWeight == 0)
+                    continue;
+
+                float durability = itemContainer.Item3;
+
+                inventory.AddCargo(new ItemContainer(item, factWeight, durability));
+            }
+        }
+
         public void AddEntity(Entity entity)
         {
             entityLayer.Add(entity);
@@ -1366,16 +1377,16 @@ namespace Technolithic
                 if (entity.IsRemoved)
                     continue;
 
-                BuildingCmp buildingCmp = entity.Get<BuildingCmp>();
-                if (buildingCmp != null)
+                BuildingSaveData buildingSaveData = entity.GetBuildingSaveData();
+                if (buildingSaveData != null)
                 {
-                    saveManager.Data.BuildingSaveDatas.Add(buildingCmp.GetSaveData());
+                    saveManager.Data.BuildingSaveDatas.Add(buildingSaveData);
                 }
             }
 
             foreach(var wall in GameplayScene.WorldManager.WallsList)
             {
-                saveManager.Data.BuildingSaveDatas.Add(wall.GetSaveData());
+                saveManager.Data.BuildingSaveDatas.Add(wall.GetBuildingSaveData());
             }
 
             saveManager.Data.CreatureSaveDatas = new List<CreatureSaveData>();

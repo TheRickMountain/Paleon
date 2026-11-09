@@ -287,11 +287,22 @@ namespace Technolithic
                 // Если растение было посажено поселенцем, то после сбора урожая это же растения будет посажено заново
                 if (IsWild == false)
                 {
-                    Entity newFarmPlotEntity = GameplayScene.WorldManager.TryToBuild(BuildingTemplate, 
+                    bool irrigate = Irrigate;
+                    bool fertilize = Fertilize;
+
+                    Entity newFarmPlotEntity = GameplayScene.WorldManager.TryToBuild(BuildingTemplate,
                         GetCenterTile().X, GetCenterTile().Y, Direction);
-                    FarmPlot newFarmPlot = newFarmPlotEntity.Get<FarmPlot>();
-                    newFarmPlot.Irrigate = Irrigate;
-                    newFarmPlot.Fertilize = Fertilize;
+
+                    ConstructionSiteCmp constructionSite = newFarmPlotEntity.GetConstructionSite();
+                    if (constructionSite != null)
+                    {
+                        constructionSite.OnCompletedCallback += (site, building) =>
+                            SetCareSettings(building as FarmPlot, irrigate, fertilize);
+                    }
+                    else
+                    {
+                        SetCareSettings(newFarmPlotEntity.Get<FarmPlot>(), irrigate, fertilize);
+                    }
                 }
             }
             else
@@ -300,6 +311,12 @@ namespace Technolithic
                 growthPercent = 70;
                 AddGrowingProgress(0);
             }
+        }
+
+        private static void SetCareSettings(FarmPlot farmPlot, bool irrigate, bool fertilize)
+        {
+            farmPlot.Irrigate = irrigate;
+            farmPlot.Fertilize = fertilize;
         }
 
         private void HarvestPlant()

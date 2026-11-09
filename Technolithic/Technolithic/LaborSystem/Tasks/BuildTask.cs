@@ -9,12 +9,12 @@ namespace Technolithic
 {
     public class BuildTask : ToolRequiredTask
     {
-        private BuildingCmp building;
+        private ConstructionSiteCmp constructionSite;
 
-        public BuildTask(CreatureCmp creature, BuildingCmp building) 
-            : base(creature, building.BuildingTemplate.BuildingToolType)
+        public BuildTask(CreatureCmp creature, ConstructionSiteCmp constructionSite)
+            : base(creature, constructionSite.BuildingTemplate.BuildingToolType)
         {
-            this.building = building;
+            this.constructionSite = constructionSite;
         }
 
         public override void Begin()
@@ -26,10 +26,10 @@ namespace Technolithic
         {
             base.BeforeUpdate();
 
-            Tile tile = building.GetReachableTile(Owner);
+            Tile tile = constructionSite.GetApproachableTile(Owner);
             Owner.Movement.SetPath(tile, false);
 
-            Owner.Slider.SetValue(0, building.BuildingTemplate.ConstructionTime, building.ConstructionProgress, Color.Orange);
+            Owner.Slider.SetValue(0, constructionSite.BuildingTemplate.ConstructionTime, constructionSite.ConstructionProgress, Color.Orange);
         }
 
         public override void UpdateTask()
@@ -40,13 +40,13 @@ namespace Technolithic
                     {
                         float additionalBuff = Engine.GameDeltaTime * GetEfficiency();
 
-                        building.ConstructionProgress += Engine.GameDeltaTime + additionalBuff;
+                        constructionSite.ConstructionProgress += Engine.GameDeltaTime + additionalBuff;
 
-                        Owner.Slider.SetValue(0, building.BuildingTemplate.ConstructionTime, building.ConstructionProgress, Color.Orange);
+                        Owner.Slider.SetValue(0, constructionSite.BuildingTemplate.ConstructionTime, constructionSite.ConstructionProgress, Color.Orange);
 
-                        if(building.ConstructionProgress >= building.BuildingTemplate.ConstructionTime)
+                        if(constructionSite.ConstructionProgress >= constructionSite.BuildingTemplate.ConstructionTime)
                         {
-                            building.CompleteBuilding();
+                            BuildingCmp building = constructionSite.Complete();
 
                             if(building.BuildingTemplate.PlantData != null)
                             {
@@ -66,7 +66,7 @@ namespace Technolithic
                     break;
                 case MovementState.Failed:
                     {
-                        Tile tile = building.GetReachableTile(Owner);
+                        Tile tile = constructionSite.GetApproachableTile(Owner);
                         if (tile != null)
                         {
                             Owner.Movement.SetPath(tile, false);

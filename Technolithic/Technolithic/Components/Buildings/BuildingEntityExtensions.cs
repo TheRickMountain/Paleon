@@ -14,16 +14,19 @@
             return entity.GetCompletedBuilding<BuildingCmp>();
         }
 
-        public static BuildingCmp GetConstructionSite(this Entity entity)
+        public static ConstructionSiteCmp GetConstructionSite(this Entity entity)
         {
-            BuildingCmp building = entity?.Get<BuildingCmp>();
-
-            return building != null && building.IsBuilt == false ? building : null;
+            return entity?.Get<ConstructionSiteCmp>();
         }
 
         public static BuildingPlacement GetBuildingPlacement(this Entity entity)
         {
-            return entity?.Get<BuildingCmp>()?.Placement;
+            return entity?.Get<BuildingCmp>()?.Placement ?? entity.GetConstructionSite()?.Placement;
+        }
+
+        public static BuildingSaveData GetBuildingSaveData(this Entity entity)
+        {
+            return entity?.Get<BuildingCmp>()?.GetSaveData() ?? entity.GetConstructionSite()?.GetSaveData();
         }
     }
 }

@@ -466,6 +466,14 @@ namespace Technolithic
             OpenEntityPanel(buildingListUI, true);
         }
 
+        public void OpenConstructionSiteUI(ConstructionSiteCmp constructionSite)
+        {
+            CloseEntityPanel();
+
+            buildingUI.GetComponent<BuildingUIScript>().SetConstructionSite(constructionSite);
+            OpenEntityPanel(buildingUI);
+        }
+
         public void OpenBuildingUI(BuildingCmp building)
         {
             CloseEntityPanel();

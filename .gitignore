@@ -4,3 +4,4 @@ obj/
 /bin/
 /obj/
 *.md
+*.csproj.user

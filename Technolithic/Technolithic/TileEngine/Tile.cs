@@ -176,6 +176,7 @@ namespace Technolithic
         }
 
         private Hull hull;
+        public bool HasHull => hull != null;
 
         private Entity entity;
         public Entity Entity 

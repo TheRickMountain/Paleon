@@ -91,6 +91,8 @@ namespace Technolithic
 
         protected virtual bool RefundsRecipeOnDestruct => true;
 
+        public virtual bool IsTileWalkable(TileInfo tileInfo) => tileInfo.IsWalkable;
+
         public bool IsPowered { get; set; } = true;
 
         private MyTimer smokeTimer;

@@ -1238,6 +1238,15 @@ namespace Technolithic
             entityLayer.Add(entity);
         }
 
+        public IEnumerable<Entity> GetSceneBuildingEntities()
+        {
+            foreach (Entity entity in entityLayer.Entities)
+            {
+                if (entity.IsRemoved == false && entity.GetBuildingPlacement() != null)
+                    yield return entity;
+            }
+        }
+
         public void AddEntity(Entity entity, Tile tile)
         {
             tile.Entity = entity;

@@ -20,6 +20,8 @@ namespace Technolithic
         {
         }
 
+        public override bool IsTileWalkable(TileInfo tileInfo) => State == GateState.Opened;
+
         public void SetState(GateState state)
         {
             if (State == state)

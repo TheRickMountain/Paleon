@@ -297,6 +297,14 @@ namespace Technolithic
                 }
             }
 
+            if (technology.UnlockedActions != null)
+            {
+                foreach (var techAction in technology.UnlockedActions)
+                {
+                    UnlockedActions[techAction] = true;
+                }
+            }
+
             // Возможность разблокировать дочерние технологии (только если все родительские технологии были разблокированы)
             foreach (var child in parentAndChildren[technology])
             {

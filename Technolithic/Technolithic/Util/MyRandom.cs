@@ -11,6 +11,11 @@ namespace Technolithic
 
         private static Random random = new Random();
 
+        public static void SetSeed(int seed)
+        {
+            random = new Random(seed);
+        }
+
         public static int Range(int min, int max)
         {
             return random.Next(min, max);

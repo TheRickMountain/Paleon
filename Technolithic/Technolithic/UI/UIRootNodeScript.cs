@@ -35,6 +35,7 @@ namespace Technolithic
         private AssignPetUI attachPetUI;
         private AssignHutUI assignHutUI;
         private ItemsStackUI itemsStackUI;
+        private DestructFiltersUI destructFiltersUI;
         private BuildRecipeUI buildingRecipeUI;
         private PriorityUI priorityUI;
         private TimeControllerUI timeControllerUI;
@@ -111,6 +112,8 @@ namespace Technolithic
             assignHutUI = (AssignHutUI)ParentNode.GetChildByName("AssignHut");
 
             itemsStackUI = (ItemsStackUI)ParentNode.GetChildByName("ItemsStack");
+
+            destructFiltersUI = (DestructFiltersUI)ParentNode.GetChildByName("DestructFilters");
 
             buildingRecipeUI = (BuildRecipeUI)ParentNode.GetChildByName("BuildingRecipe");
 
@@ -456,6 +459,13 @@ namespace Technolithic
 
             itemsStackUI.GetComponent<ItemsStackUIScript>().SetItems(tile);
             OpenEntityPanel(itemsStackUI);
+        }
+
+        public void OpenDestructFiltersUI()
+        {
+            CloseEntityPanel();
+
+            OpenEntityPanel(destructFiltersUI);
         }
 
         public void OpenBuildingListUI(BuildingCategory category, string name)

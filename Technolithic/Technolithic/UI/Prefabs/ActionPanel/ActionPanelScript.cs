@@ -69,9 +69,6 @@ namespace Technolithic
             CreateActionButton(MyAction.Destruct, ResourceManager.DestructIcon, Localization.GetLocalizedText("destruct"), 
                 true, Keys.X);
             
-            CreateActionButton(MyAction.DestructSurface, ResourceManager.DestructSurfaceIcon, Localization.GetLocalizedText("destruct_surface"), 
-                true, Keys.Z);
-            
 
             GameplayScene.WorldManager.SetMyAction(MyAction.None, null);
 

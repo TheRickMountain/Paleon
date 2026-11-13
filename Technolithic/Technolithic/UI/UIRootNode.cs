@@ -228,6 +228,11 @@ namespace Technolithic
             itemsStackUI.Name = "ItemsStack";
             AddChildNode(itemsStackUI);
 
+            DestructFiltersUI destructFiltersUI = new DestructFiltersUI(scene);
+            destructFiltersUI.Active = false;
+            destructFiltersUI.Name = "DestructFilters";
+            AddChildNode(destructFiltersUI);
+
             BuildRecipeUI buildingRecipeUI = new BuildRecipeUI(scene);
             buildingRecipeUI.Active = false;
             buildingRecipeUI.Name = "BuildingRecipe";

@@ -19,7 +19,6 @@ namespace Technolithic
         Slaughter,
         Cancel,
         Destruct,
-        DestructSurface,
         CopySettings,
         Mine,
         Gather,

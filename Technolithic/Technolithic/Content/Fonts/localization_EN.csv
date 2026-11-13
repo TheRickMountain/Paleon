@@ -588,3 +588,8 @@ yarn,Yarn
 irrigation_overlay,Overlay: Moisture
 illumination_overlay,Overlay: Illumination
 movement_speed_overlay,Overlay: Movement speed
+buildings,Buildings
+destruct_filters,Destruction filters
+destruct_filter_toggle_hotkey,[{0}] Turn on or off
+destruct_filter_only_hotkey,[Shift+{0}] Keep only this filter
+destruct_filter_all_hotkey,[0] Turn on all filters

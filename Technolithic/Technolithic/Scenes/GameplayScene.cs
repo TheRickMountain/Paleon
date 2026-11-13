@@ -282,7 +282,7 @@ namespace Technolithic
                         }
                     }
 
-                    Entity buildingEntity = WorldManager.TryToBuild(buildingTemplateToCheck, tiles[0, 0].X, tiles[0, 0].Y, 
+                    Entity buildingEntity = WorldManager.TryToPlace(buildingTemplateToCheck, tiles[0, 0].X, tiles[0, 0].Y,
                         buildingSaveData.Direction, buildingSaveData.IsBuilt);
 
                     if(buildingEntity == null)

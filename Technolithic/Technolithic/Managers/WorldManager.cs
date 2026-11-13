@@ -828,6 +828,11 @@ namespace Technolithic
                 default:
                     GameplayScene.UIRootNodeScript.CloseEntityPanel();
 
+                    if (myAction == MyAction.Destruct)
+                    {
+                        GameplayScene.UIRootNodeScript.OpenDestructFiltersUI();
+                    }
+
                     tileSelector.Color = Color.White * 0f;
 
                     tileSelectorIcon.Color = Color.White;
@@ -1500,38 +1505,7 @@ namespace Technolithic
                         }
                         break;
                     case MyAction.Destruct:
-                        for (int x = 0; x < tiles.GetLength(0); x++)
-                        {
-                            for (int y = 0; y < tiles.GetLength(1); y++)
-                            {
-                                Tile tile = tiles[x, y];
-
-                                BuildingCmp building = tile.Entity.GetCompletedBuilding();
-                                if (building != null && building.BuildingTemplate.IsDestructible)
-                                {
-                                    if (building is FarmPlot && (building as FarmPlot).IsWild)
-                                        continue;
-
-                                    if (GameplayScene.BuildingsRequiredDestructing)
-                                        building.Destruct = true;
-                                    else
-                                        building.DestructBuilding();
-                                }
-                            }
-                        }
-                        break;
-                    case MyAction.DestructSurface:
-                        for (int x = 0; x < tiles.GetLength(0); x++)
-                        {
-                            for (int y = 0; y < tiles.GetLength(1); y++)
-                            {
-                                Tile tile = tiles[x, y];
-
-                                BuildingTemplate destructPathBuildingTemplate = Engine.Instance.Buildings["destruct_surface"];
-
-                                TryToBuild(destructPathBuildingTemplate, tile.X, tile.Y, Direction.DOWN);
-                            }
-                        }
+                        DestructFilters.MarkForDestruction(tiles);
                         break;
                 }
             }
@@ -1543,6 +1517,12 @@ namespace Technolithic
         }
 
         public Entity TryToBuild(BuildingTemplate buildingTemplate, int x, int y, Direction buildingDirection, bool completeImmediately = false)
+        {
+            return TryToPlace(buildingTemplate, x, y, buildingDirection, GameplayScene.BuildingsRequiredBuilding ? completeImmediately : true);
+        }
+
+        // Unlike TryToBuild, ignores the instant_build debug option, e.g. when restoring a save.
+        public Entity TryToPlace(BuildingTemplate buildingTemplate, int x, int y, Direction buildingDirection, bool isCompleted)
         {
             var localGroundPatternMatrix = Utils.RotateMatrix(buildingTemplate.GroundPattern, buildingDirection);
 
@@ -1574,8 +1554,7 @@ namespace Technolithic
                     return null;
             }
 
-            Entity entity = buildingTemplate.CreateEntity(tiles, buildingDirection,
-                     GameplayScene.BuildingsRequiredBuilding ? completeImmediately : true, 0);
+            Entity entity = buildingTemplate.CreateEntity(tiles, buildingDirection, isCompleted, 0);
 
             if (entity == null)
                 return null;

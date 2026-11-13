@@ -89,6 +89,12 @@ namespace Technolithic
 
         private bool isSteamRunning = false;
 
+        // Startup options for debug tools; they must be set before the game is created.
+        public static bool IsSteamEnabled { get; set; } = true;
+        public static Point? WindowedStartupSize { get; set; }
+
+        public static event Action<Engine> Initialized;
+
         public Engine()
         {
             Instance = this;
@@ -110,14 +116,17 @@ namespace Technolithic
 
             FrameCounter = new FrameCounter();
 
-            try
+            if (IsSteamEnabled)
             {
-                SteamClient.Init(1554220);
-                isSteamRunning = true;
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.ToString());
+                try
+                {
+                    SteamClient.Init(1554220);
+                    isSteamRunning = true;
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
             }
         }
 
@@ -129,7 +138,10 @@ namespace Technolithic
         /// </summary>
         protected override void Initialize()
         {
-            ChangeScreenSize(0, 0, true);
+            if (WindowedStartupSize is Point windowSize)
+                ChangeScreenSize(windowSize.X, windowSize.Y, false);
+            else
+                ChangeScreenSize(0, 0, true);
 
             RasterizerState = new RasterizerState() { ScissorTestEnable = true };
 
@@ -168,6 +180,8 @@ namespace Technolithic
             Scene = MainMenuScene;
 
             GlobalUI.Initialize();
+
+            Initialized?.Invoke(this);
         }
 
         protected override void OnExiting(object sender, ExitingEventArgs args)

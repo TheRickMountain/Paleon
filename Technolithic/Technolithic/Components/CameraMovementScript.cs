@@ -55,6 +55,18 @@ namespace Technolithic
                 .Easing(EasingFunctions.SineOut);
         }
 
+        public void LookAt(Vector2 position, float zoom)
+        {
+            followEntity = null;
+
+            zoomLevel = MathHelper.Clamp(zoom, minZoom, maxZoom);
+            RenderManager.MainCamera.Zoom = zoomLevel;
+
+            RenderManager.MainCamera.Position = position;
+            lastCameraPosition = position;
+            ghostPlayerPosition = position;
+        }
+
         private void OnSceneLoaded(Scene scene)
         {
             RenderManager.MainCamera.Zoom = lastCameraZoom;

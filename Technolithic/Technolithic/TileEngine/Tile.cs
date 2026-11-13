@@ -133,32 +133,16 @@ namespace Technolithic
                 foreach (Tile tile in GetAllNeighbourTiles())
                     UpdateGroundTop(tile);
 
-                switch(groundTopType)
+                bool wasIrrigationSource = IsIrrigationSource(lastGroundTopType);
+                bool isIrrigationSource = IsIrrigationSource(groundTopType);
+
+                if (isIrrigationSource && wasIrrigationSource == false)
                 {
-                    case GroundTopType.Water:
-                        {
-                            if (lastGroundTopType != GroundTopType.Water)
-                            {
-                                World.TryDoForTilesInRadius(X, Y, 3, tile => tile.IrrigationLevel++);
-                            }
-                        }
-                        break;
-                    case GroundTopType.IrrigationCanalFull:
-                        {
-                            if (lastGroundTopType != GroundTopType.IrrigationCanalFull)
-                            {
-                                World.TryDoForTilesInRadius(X, Y, 3, tile => tile.IrrigationLevel++);
-                            }
-                        }
-                        break;
-                    default:
-                        {
-                            if (lastGroundTopType == GroundTopType.Water || lastGroundTopType == GroundTopType.IrrigationCanalFull)
-                            {
-                                World.TryDoForTilesInRadius(X, Y, 3, tile => tile.IrrigationLevel--);
-                            }
-                        }
-                        break;
+                    World.TryDoForTilesInRadius(X, Y, IrrigationRadius, tile => tile.IrrigationLevel++);
+                }
+                else if (isIrrigationSource == false && wasIrrigationSource)
+                {
+                    World.TryDoForTilesInRadius(X, Y, IrrigationRadius, tile => tile.IrrigationLevel--);
                 }
 
                 UpdateMovementSpeedPercent();
@@ -260,6 +244,8 @@ namespace Technolithic
         public CreatureCmp OccupiedBy { get; set; }
 
         public int HomeArea { get; set; } = 0;
+
+        public const int IrrigationRadius = 3;
 
         public int IrrigationLevel { get; set; }
 
@@ -606,11 +592,15 @@ namespace Technolithic
 
         public void UpdateMovementSpeedPercent()
         {
+            MovementSpeedPercent = CalculateMovementSpeedPercent();
+        }
+
+        public int CalculateMovementSpeedPercent()
+        {
             BuildingCmp building = Entity.GetCompletedBuilding();
             if (building != null && building.BuildingTemplate.MovementSpeed != -1)
             {
-                MovementSpeedPercent = building.BuildingTemplate.MovementSpeed;
-                return;
+                return building.BuildingTemplate.MovementSpeed;
             }
 
             if (SurfaceId != -1)
@@ -618,8 +608,7 @@ namespace Technolithic
                 BuildingTemplate surfaceTemplate = Engine.Instance.SurfaceIdBuildingTemplate[SurfaceId];
                 if (surfaceTemplate.MovementSpeed != -1)
                 {
-                    MovementSpeedPercent = surfaceTemplate.MovementSpeed;
-                    return;
+                    return surfaceTemplate.MovementSpeed;
                 }
             }
 
@@ -628,12 +617,15 @@ namespace Technolithic
                 case GroundTopType.Water:
                 case GroundTopType.DeepWater:
                 case GroundTopType.IrrigationCanalFull:
-                    MovementSpeedPercent = 30;
-                    break;
+                    return 30;
                 default:
-                    MovementSpeedPercent = 87;
-                    break;
+                    return 87;
             }
+        }
+
+        public static bool IsIrrigationSource(GroundTopType groundTopType)
+        {
+            return groundTopType == GroundTopType.Water || groundTopType == GroundTopType.IrrigationCanalFull;
         }
 
         public List<Tile> GetNeighbourTiles()

@@ -2,7 +2,7 @@
 
 namespace Technolithic
 {
-    public class IrrigationOverlay : TileOverlay
+    public class IrrigationOverlay : HighlightTileOverlay
     {
         public IrrigationOverlay(World world)
             : base(world,

@@ -123,6 +123,7 @@ namespace Technolithic
         public static MyTexture HutIcon { get; private set; }
 
         public static MyTexture IrrigationOverlayIcon { get; private set; }
+        public static MyTexture MovementSpeedOverlayIcon { get; private set; }
         public static MyTexture IlluminationOverlayIcon { get; private set; }
 
         public static SoundEffectInstance BuildingSoundEffect { get; private set; }
@@ -246,6 +247,7 @@ namespace Technolithic
 
             IrrigationOverlayIcon = uiSpriteSheet.GetSubtexture(208, 160, 16, 16);
             IlluminationOverlayIcon = uiSpriteSheet.GetSubtexture(224, 160, 16, 16);
+            MovementSpeedOverlayIcon = uiSpriteSheet.GetSubtexture(240, 160, 16, 16);
 
             MyTexture emotest = GetTexture("emotest");
             HungerThought = emotest.GetSubtexture(16, 0, 16, 16);

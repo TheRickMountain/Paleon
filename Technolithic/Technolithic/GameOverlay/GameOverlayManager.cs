@@ -6,7 +6,8 @@ namespace Technolithic
     {
         None,
         Irrigation,
-        Illumination
+        Illumination,
+        MovementSpeed
     }
 
     public class GameOverlayManager : OverlayManager<GameOverlayType>
@@ -22,6 +23,7 @@ namespace Technolithic
 
             RegisterOverlay(new IrrigationOverlay(world));
             RegisterOverlay(new IlluminationOverlay(world));
+            RegisterOverlay(new MovementSpeedOverlay(world));
         }
 
         private void RegisterOverlay(GameOverlay gameOverlay)

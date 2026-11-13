@@ -587,3 +587,4 @@ yarn,Yarn
 сut_automatically_description,Automatically cut the plant after full growth
 irrigation_overlay,Overlay: Moisture
 illumination_overlay,Overlay: Illumination
+movement_speed_overlay,Overlay: Movement speed

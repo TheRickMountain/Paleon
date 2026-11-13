@@ -231,8 +231,7 @@ namespace Technolithic
                 foreach (Tile tile in GetAllNeighbourTiles())
                     UpdateBlock(tile);
 
-                if (entity == null || entity.GetCompletedBuilding() != null)
-                    UpdateMovementSpeedPercent();
+                UpdateMovementSpeedPercent();
             }
         }
 
@@ -605,36 +604,35 @@ namespace Technolithic
             itemTileMap.SetCell(X, Y, 0);
         }
 
-        private void UpdateMovementSpeedPercent()
+        public void UpdateMovementSpeedPercent()
         {
-            BuildingTemplate buildingTemplate = null;
-
-            if(Entity != null)
+            BuildingCmp building = Entity.GetCompletedBuilding();
+            if (building != null && building.BuildingTemplate.MovementSpeed != -1)
             {
-                buildingTemplate = Entity.GetBuildingPlacement().Template;
-            }
-            else if(SurfaceId != -1)
-            {
-                buildingTemplate = Engine.Instance.SurfaceIdBuildingTemplate[SurfaceId];
+                MovementSpeedPercent = building.BuildingTemplate.MovementSpeed;
+                return;
             }
 
-            if(buildingTemplate != null && buildingTemplate.MovementSpeed != -1)
+            if (SurfaceId != -1)
             {
-                MovementSpeedPercent = buildingTemplate.MovementSpeed;
-            }
-            else
-            {
-                switch (GroundTopType)
+                BuildingTemplate surfaceTemplate = Engine.Instance.SurfaceIdBuildingTemplate[SurfaceId];
+                if (surfaceTemplate.MovementSpeed != -1)
                 {
-                    case GroundTopType.Water:
-                    case GroundTopType.DeepWater:
-                    case GroundTopType.IrrigationCanalFull:
-                        MovementSpeedPercent = 30;
-                        break;
-                    default:
-                        MovementSpeedPercent = 87;
-                        break;
+                    MovementSpeedPercent = surfaceTemplate.MovementSpeed;
+                    return;
                 }
+            }
+
+            switch (GroundTopType)
+            {
+                case GroundTopType.Water:
+                case GroundTopType.DeepWater:
+                case GroundTopType.IrrigationCanalFull:
+                    MovementSpeedPercent = 30;
+                    break;
+                default:
+                    MovementSpeedPercent = 87;
+                    break;
             }
         }
 

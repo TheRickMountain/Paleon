@@ -6,16 +6,13 @@ namespace Technolithic
     {
         private readonly World _world;
 
-        private readonly Color _highlightColor;
-
-        protected TileOverlay(World world, GameOverlayType type, MyTexture icon, string name, Color highlightColor)
+        protected TileOverlay(World world, GameOverlayType type, MyTexture icon, string name)
             : base(type, icon, name)
         {
             _world = world;
-            _highlightColor = highlightColor;
         }
 
-        protected abstract bool IsHighlighted(Tile tile);
+        protected abstract bool TryGetTileColor(Tile tile, out Color color);
 
         public override void Render()
         {
@@ -25,9 +22,9 @@ namespace Technolithic
             {
                 for (int y = visibleTiles.Top; y < visibleTiles.Bottom; y++)
                 {
-                    if (IsHighlighted(_world.GetTileAt(x, y)))
+                    if (TryGetTileColor(_world.GetTileAt(x, y), out Color color))
                     {
-                        RenderManager.Rect(x * Engine.TILE_SIZE, y * Engine.TILE_SIZE, Engine.TILE_SIZE, Engine.TILE_SIZE, _highlightColor);
+                        RenderManager.Rect(x * Engine.TILE_SIZE, y * Engine.TILE_SIZE, Engine.TILE_SIZE, Engine.TILE_SIZE, color);
                     }
                 }
             }

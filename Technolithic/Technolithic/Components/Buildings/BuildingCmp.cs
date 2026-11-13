@@ -348,6 +348,7 @@ namespace Technolithic
                                 Tile tile = tileInfo.Tile;
 
                                 tile.IsWalkable = tileInfo.IsWalkable;
+                                tile.UpdateMovementSpeedPercent();
                             }
                         }
                     }

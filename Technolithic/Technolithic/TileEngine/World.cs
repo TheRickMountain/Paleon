@@ -75,6 +75,7 @@ namespace Technolithic
                         tile.GroundType = Utils.CheckAndGetCorrectEnum(tileSaveData.GroundType, GroundType.Ground);
                         tile.GroundTopType = Utils.CheckAndGetCorrectEnum(tileSaveData.GroundTopType, GroundTopType.None);
                         tile.SurfaceId = tileSaveData.SurfaceId;
+                        tile.WallId = Engine.Instance.WallIdBuildingTemplate.ContainsKey(tileSaveData.WallId) ? tileSaveData.WallId : -1;
                         tile.MarkType = Utils.CheckAndGetCorrectEnum(tileSaveData.MarkType, MarkType.None);
 
                         tile.MoistureLevel = tileSaveData.MoistureLevel;

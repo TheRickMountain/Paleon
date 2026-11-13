@@ -1390,11 +1390,6 @@ namespace Technolithic
                 }
             }
 
-            foreach(var wall in GameplayScene.WorldManager.WallsList)
-            {
-                saveManager.Data.BuildingSaveDatas.Add(wall.GetBuildingSaveData());
-            }
-
             saveManager.Data.CreatureSaveDatas = new List<CreatureSaveData>();
             foreach (var entity in CreatureLayer.Entities)
             {

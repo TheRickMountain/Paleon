@@ -1,0 +1,38 @@
+{
+  "name_key": "destruct_wall",
+  "description_key": "destruct_wall",
+  "width": 1,
+  "height": 1,
+  "type": "DestructWall",
+  "category": "None",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 100,
+  "constructionTime": 5,
+  "toolRequired": false,
+  "connectWithOtherBlocks": false,
+  "texture": {
+    "name": "destruct_wall",
+    "width": 16,
+    "height": 16
+  },
+  "ingredients": [],
+  "ground_pattern": [
+    [
+      "W"
+    ]
+  ],
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ]
+}

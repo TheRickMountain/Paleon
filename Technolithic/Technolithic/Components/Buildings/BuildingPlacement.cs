@@ -68,12 +68,7 @@ namespace Technolithic
                 Tile tile = tileInfo.Tile;
 
                 tile.Entity = null;
-                tile.IsWalkable = true;
-
-                if (Template.BuildingType == BuildingType.Wall)
-                {
-                    tile.StrengthValue = 0;
-                }
+                tile.IsWalkable = tile.IsWalkableWithoutBuilding;
             }
         }
 

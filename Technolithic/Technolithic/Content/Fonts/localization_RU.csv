@@ -593,3 +593,4 @@ destruct_filters,Фильтры разрушения
 destruct_filter_toggle_hotkey,[{0}] Включить или выключить
 destruct_filter_only_hotkey,[Shift+{0}] Оставить только этот фильтр
 destruct_filter_all_hotkey,[0] Включить все фильтры
+destruct_wall,Разрушить стену

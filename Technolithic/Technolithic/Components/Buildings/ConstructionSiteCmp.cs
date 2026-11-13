@@ -202,14 +202,7 @@ namespace Technolithic
 
         private void RemoveFromWorld()
         {
-            if (BuildingTemplate.BuildingType != BuildingType.Wall)
-            {
-                Entity.RemoveSelf();
-            }
-            else
-            {
-                GameplayScene.WorldManager.WallsList.Remove(Entity);
-            }
+            Entity.RemoveSelf();
         }
 
         private void AddBuildLabor()

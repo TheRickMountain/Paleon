@@ -10,6 +10,9 @@
   "letLight": false,
   "destructible": true,
   "movementSpeed": -1,
+  "WallData": {
+    "Id": 3
+  },
   "constructionTime": 10,
   "ingredients": [
     {

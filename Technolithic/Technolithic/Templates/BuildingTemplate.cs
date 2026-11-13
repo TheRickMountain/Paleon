@@ -32,6 +32,7 @@ namespace Technolithic
         Noria,
         Surface,
         DestructSurface,
+        DestructWall,
         TradingPost,
         None
     }
@@ -116,6 +117,7 @@ namespace Technolithic
         public PlantData PlantData { get; private set; }
         public SmokeGeneratorData SmokeGeneratorData { get; private set; }
         public SurfaceData SurfaceData { get; private set; }
+        public WallData WallData { get; private set; }
 
         public bool IsDestructible { get; private set; }
         
@@ -377,6 +379,11 @@ namespace Technolithic
                 SurfaceData = JsonSerializer.CreateDefault().Deserialize<SurfaceData>(JObject["SurfaceData"].CreateReader());
             }
 
+            if (!JObject["WallData"].IsNullOrEmpty())
+            {
+                WallData = JsonSerializer.CreateDefault().Deserialize<WallData>(JObject["WallData"].CreateReader());
+            }
+
             if(PlantData != null)
             {
                 Icons[Direction.DOWN] = PlantData.Icon;
@@ -456,6 +463,10 @@ namespace Technolithic
                     return new PlaceTileLayer(TileLayers.Surface, this);
                 case BuildingType.DestructSurface:
                     return new RemoveTileLayer(TileLayers.Surface);
+                case BuildingType.Wall:
+                    return new PlaceTileLayer(TileLayers.Wall, this);
+                case BuildingType.DestructWall:
+                    return new RemoveTileLayer(TileLayers.Wall);
                 case BuildingType.BuildIrrigationCanal:
                     return new PlaceTileLayer(TileLayers.IrrigationCanal, this);
                 case BuildingType.DestructIrrigationCanal:
@@ -475,8 +486,6 @@ namespace Technolithic
                     return new CrafterBuildingCmp(this, direction);
                 case BuildingType.Stockpile:
                     return new StorageBuildingCmp(this, direction);
-                case BuildingType.Wall:
-                    return new WallCmp(this, direction);
                 case BuildingType.FarmPlot:
                     return new FarmPlot(this, direction);
                 case BuildingType.Gate:

@@ -5,13 +5,12 @@ namespace Technolithic
 {
     public static class DestructFilters
     {
-        // Buildings come first: a surface can only be removed from a free tile.
+        // Buildings come first: a wall or a surface can only be removed from a free tile.
         public static IReadOnlyList<DestructFilter> All { get; } = new DestructFilter[]
         {
-            new BuildingDestructFilter("buildings", "buildings", () => TextureBank.UITexture.GetSubtexture(208, 80, 16, 16),
-                true, type => IsWall(type) == false),
-            new BuildingDestructFilter("walls", "walls", () => TextureBank.UITexture.GetSubtexture(144, 80, 16, 16),
-                true, IsWall),
+            new BuildingDestructFilter("buildings", "buildings", () => TextureBank.UITexture.GetSubtexture(208, 80, 16, 16), true),
+            new TileLayerDestructFilter("walls", "walls", () => TextureBank.UITexture.GetSubtexture(144, 80, 16, 16),
+                true, TileLayers.Wall, "destruct_wall"),
             new TileLayerDestructFilter("surfaces", "floor", () => TextureBank.UITexture.GetSubtexture(240, 80, 16, 16),
                 false, TileLayers.Surface, "destruct_surface")
         };
@@ -57,11 +56,6 @@ namespace Technolithic
                     filter.MarkForDestruction(tile);
                 }
             }
-        }
-
-        private static bool IsWall(BuildingType type)
-        {
-            return type == BuildingType.Wall || type == BuildingType.Gate;
         }
     }
 }

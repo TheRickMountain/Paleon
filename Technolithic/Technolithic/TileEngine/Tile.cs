@@ -175,41 +175,53 @@ namespace Technolithic
             }
         }
 
+        private int wallId = -1;
+        public int WallId
+        {
+            get => wallId;
+            set
+            {
+                if (wallId == value)
+                    return;
+
+                wallId = value;
+
+                BuildingTemplate wallTemplate = TileLayers.Wall.GetTemplate(this);
+
+                IsWalkable = IsWalkableWithoutBuilding;
+                StrengthValue = IsWalkable ? 0 : 100;
+                UpdateHull(wallTemplate);
+
+                UpdateBlock(this);
+
+                foreach (Tile tile in GetAllNeighbourTiles())
+                    UpdateBlock(tile);
+
+                UpdateMovementSpeedPercent();
+            }
+        }
+
+        public bool IsWalkableWithoutBuilding
+        {
+            get
+            {
+                BuildingTemplate wallTemplate = TileLayers.Wall.GetTemplate(this);
+                return wallTemplate == null || wallTemplate.WalkablePattern[0, 0];
+            }
+        }
+
         private Hull hull;
         public bool HasHull => hull != null;
 
         private Entity entity;
-        public Entity Entity 
-        { 
-            get { return entity; } 
+        public Entity Entity
+        {
+            get { return entity; }
             set
             {
                 entity = value;
 
                 OnEntityChangedCallback?.Invoke(entity);
-
-                if (entity != null && entity.Get<WallCmp>() != null)
-                {
-                    BuildingCmp wall = entity.GetCompletedBuilding();
-                    if (wall != null && !wall.BuildingTemplate.LetLight)
-                    {
-                        hull = new Hull(new Vector2(0.5f), new Vector2(-0.5f, 0.5f), new Vector2(-0.5f), new Vector2(0.5f, -0.5f))
-                        {
-                            Position = new Vector2(X * Engine.TILE_SIZE + Engine.TILE_SIZE / 2, 
-                            Y * Engine.TILE_SIZE + Engine.TILE_SIZE / 2),
-                            Scale = new Vector2(Engine.TILE_SIZE)
-                        };
-
-                        GameplayScene.Instance.Penumbra.Hulls.Add(hull);
-                    }
-                }
-                else
-                {
-                    if (hull != null)
-                        GameplayScene.Instance.Penumbra.Hulls.Remove(hull);
-
-                    hull = null;
-                }
 
                 UpdateBlock(this);
 
@@ -485,13 +497,13 @@ namespace Technolithic
 
                 bitmask += wallTemplate.TilesetOffset;
 
-                if (tile.Entity.GetConstructionSite() != null)
+                if (TileLayers.Wall.IsPresent(tile))
                 {
-                    blockTileMap.SetCell(tile.X, tile.Y, bitmask, Color.White * 0.5f);
+                    blockTileMap.SetCell(tile.X, tile.Y, bitmask);
                 }
                 else
                 {
-                    blockTileMap.SetCell(tile.X, tile.Y, bitmask);
+                    blockTileMap.SetCell(tile.X, tile.Y, bitmask, Color.White * 0.5f);
                 }
             }
             else
@@ -500,11 +512,38 @@ namespace Technolithic
             }
         }
 
+        private void UpdateHull(BuildingTemplate wallTemplate)
+        {
+            bool needsHull = wallTemplate != null && wallTemplate.LetLight == false;
+
+            if (needsHull && hull == null)
+            {
+                hull = new Hull(new Vector2(0.5f), new Vector2(-0.5f, 0.5f), new Vector2(-0.5f), new Vector2(0.5f, -0.5f))
+                {
+                    Position = new Vector2(X * Engine.TILE_SIZE + Engine.TILE_SIZE / 2,
+                        Y * Engine.TILE_SIZE + Engine.TILE_SIZE / 2),
+                    Scale = new Vector2(Engine.TILE_SIZE)
+                };
+
+                GameplayScene.Instance.Penumbra.Hulls.Add(hull);
+            }
+            else if (needsHull == false && hull != null)
+            {
+                GameplayScene.Instance.Penumbra.Hulls.Remove(hull);
+                hull = null;
+            }
+        }
+
+        // A finished wall or a wall construction site, which is drawn as a ghost.
         private static BuildingTemplate GetWallTemplate(Tile tile)
         {
-            BuildingTemplate template = tile?.Entity.GetBuildingPlacement()?.Template;
+            if (tile == null)
+                return null;
 
-            return template != null && template.BuildingType == BuildingType.Wall ? template : null;
+            BuildingTemplate siteTemplate = tile.Entity.GetConstructionSite()?.BuildingTemplate;
+            BuildingTemplate plannedWall = siteTemplate?.BuildingType == BuildingType.Wall ? siteTemplate : null;
+
+            return TileLayers.Wall.GetTemplate(tile) ?? plannedWall;
         }
 
         private static bool IsWallConnected(BuildingTemplate wallTemplate, Tile neighbourTile)
@@ -694,6 +733,7 @@ namespace Technolithic
             tileData.GroundType = (int)GroundType;
             tileData.GroundTopType = (int)GroundTopType;
             tileData.SurfaceId = SurfaceId;
+            tileData.WallId = WallId;
             tileData.MarkType = (int)MarkType;
             tileData.MoistureLevel = MoistureLevel;
             tileData.FertilizerLevel = FertilizerLevel;

@@ -415,6 +415,9 @@
     <None Update="Content\Buildings\destruct_surface.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Content\Buildings\destruct_wall.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Content\Buildings\dirt_path.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

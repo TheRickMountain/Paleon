@@ -324,37 +324,19 @@ namespace Technolithic
                 smokeTimer.SetInterval(1.5f);
             }
 
-            switch (BuildingTemplate.BuildingType)
+            Sprite.Color = Color.White;
+
+            // Устанавливаем проходимость тайлов
+            for (int c = 0; c < TilesInfosArray.GetLength(0); c++)
             {
-                case BuildingType.Wall:
-                    {
-                        TileInfo tileInfo = TilesInfosArray[0, 0];
-                        tileInfo.Tile.IsWalkable = tileInfo.IsWalkable;
+                for (int r = 0; r < TilesInfosArray.GetLength(1); r++)
+                {
+                    TileInfo tileInfo = TilesInfosArray[c, r];
+                    Tile tile = tileInfo.Tile;
 
-                        if (tileInfo.Tile.IsWalkable == false)
-                            tileInfo.Tile.StrengthValue = 100;
-
-                        tileInfo.Tile.Entity = Entity;
-                    }
-                    break;
-                default:
-                    {
-                        Sprite.Color = Color.White;
-
-                        // Устанавливаем проходимость тайлов
-                        for (int c = 0; c < TilesInfosArray.GetLength(0); c++)
-                        {
-                            for (int r = 0; r < TilesInfosArray.GetLength(1); r++)
-                            {
-                                TileInfo tileInfo = TilesInfosArray[c, r];
-                                Tile tile = tileInfo.Tile;
-
-                                tile.IsWalkable = tileInfo.IsWalkable;
-                                tile.UpdateMovementSpeedPercent();
-                            }
-                        }
-                    }
-                    break;
+                    tile.IsWalkable = tileInfo.IsWalkable;
+                    tile.UpdateMovementSpeedPercent();
+                }
             }
 
             Placement.UseTargetPatternAsTargets();
@@ -455,14 +437,7 @@ namespace Technolithic
                 ThrowItems(BuildingTemplate.BuildingRecipe);
             }
 
-            if (BuildingTemplate.BuildingType != BuildingType.Wall)
-            {
-                Entity.RemoveSelf();
-            }
-            else
-            {
-                GameplayScene.WorldManager.WallsList.Remove(Entity);
-            }
+            Entity.RemoveSelf();
 
             Inventory.ClearRequiredWeight();
 
@@ -571,7 +546,7 @@ namespace Technolithic
 
         public void AddBuildingToBuildingsToDestruct()
         {
-            if (BuildingTemplate.BuildingType == BuildingType.Wall || BuildingTemplate.BuildingType == BuildingType.Gate)
+            if (BuildingTemplate.BuildingType == BuildingType.Gate)
             {
                 Tile centerTile = GetCenterTile();
 
@@ -633,7 +608,7 @@ namespace Technolithic
 
         public void RemoveBuildingFromBuildingsToDestruct()
         {
-            if (BuildingTemplate.BuildingType == BuildingType.Wall || BuildingTemplate.BuildingType == BuildingType.Gate)
+            if (BuildingTemplate.BuildingType == BuildingType.Gate)
             {
                 Tile centerTile = GetCenterTile();
 

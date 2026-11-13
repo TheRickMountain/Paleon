@@ -10,6 +10,9 @@ namespace Technolithic
     public class BuildingManager
     {
 
+        // The only ground pattern that may be placed on a wall, e.g. to remove it.
+        private const char WallPatternId = 'W';
+
         public bool CheckTileByGroundPattern(BuildingTemplate buildingTemplate, char[,] groundPatternMatrix, Tile mouseTile, Tile checkTile)
         {
             if (mouseTile == null)
@@ -30,6 +33,11 @@ namespace Technolithic
                         }
 
                         if (checkTile.Entity != null)
+                        {
+                            return false;
+                        }
+
+                        if (checkTile.WallId != -1 && groundPatternId != WallPatternId)
                         {
                             return false;
                         }
@@ -182,6 +190,8 @@ namespace Technolithic
                     break;
                 case 'M':
                     return checkTile.SurfaceId != -1;
+                case WallPatternId:
+                    return checkTile.WallId != -1;
             }
 
             return false;

@@ -199,6 +199,15 @@ namespace Technolithic
                     }
                 }
             }
+
+            WallsToTileLayerMigration.Apply(saveManager.Data, GetWallId);
+        }
+
+        private static int? GetWallId(string templateName)
+        {
+            return Engine.Instance.Buildings.TryGetValue(templateName, out BuildingTemplate template)
+                ? template.WallData?.Id
+                : null;
         }
 
     }

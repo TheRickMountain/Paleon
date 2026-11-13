@@ -98,7 +98,6 @@ namespace Technolithic
 
         public List<Tile> HomeArea = new List<Tile>();
 
-        public List<Entity> WallsList = new List<Entity>();
 
         public BuildingSaveData BuildingSaveDataForCopy { get; set; } // used to copy settings
 
@@ -1559,14 +1558,7 @@ namespace Technolithic
             if (entity == null)
                 return null;
 
-            if (buildingTemplate.BuildingType != BuildingType.Wall)
-            {
-                GameplayScene.Instance.AddEntity(entity);
-            }
-            else
-            {
-                WallsList.Add(entity);
-            }
+            GameplayScene.Instance.AddEntity(entity);
 
             return entity;
         }

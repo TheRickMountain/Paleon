@@ -4,13 +4,9 @@ namespace Technolithic
 {
     public class BuildingDestructFilter : DestructFilter
     {
-        private readonly Func<BuildingType, bool> coversType;
-
-        public BuildingDestructFilter(string id, string nameKey, Func<MyTexture> getIcon, bool isEnabledByDefault,
-            Func<BuildingType, bool> coversType)
+        public BuildingDestructFilter(string id, string nameKey, Func<MyTexture> getIcon, bool isEnabledByDefault)
             : base(id, nameKey, getIcon, isEnabledByDefault)
         {
-            this.coversType = coversType;
         }
 
         public override bool Covers(Tile tile)
@@ -19,7 +15,6 @@ namespace Technolithic
 
             return building != null
                 && building.BuildingTemplate.IsDestructible
-                && coversType(building.BuildingTemplate.BuildingType)
                 && IsWildPlant(building) == false;
         }
 

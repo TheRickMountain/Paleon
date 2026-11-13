@@ -55,9 +55,9 @@ namespace Technolithic
             currentPercentProgress = percentProgress;
         }
 
-        public override void UpdateCompleted()
+        public override void Update()
         {
-            base.UpdateCompleted();
+            base.Update();
 
             // Улей генерирует мед только в солнечную погоду и в любой сезон, кроме зимы
             if (IsEmpty && GameplayScene.Instance.WorldState.CurrentWeather == Weather.Sun &&
@@ -140,12 +140,9 @@ namespace Technolithic
         {
             var saveData = base.GetSaveData();
 
-            if (IsBuilt)
-            {
-                saveData.IsBeeHiveEmpty = IsEmpty;
-                saveData.GatherBeeHiveResources = GatherResources;
-                saveData.BeeHiveCurrentPercentProgress = currentPercentProgress;
-            }
+            saveData.IsBeeHiveEmpty = IsEmpty;
+            saveData.GatherBeeHiveResources = GatherResources;
+            saveData.BeeHiveCurrentPercentProgress = currentPercentProgress;
 
             return saveData;
         }
@@ -154,26 +151,23 @@ namespace Technolithic
         {
             string info = base.GetInformation();
 
-            if(IsBuilt)
+            info += $"/c[#FFA500]{Localization.GetLocalizedText("honey")}/cd";
+
+            if (GameplayScene.Instance.WorldState.CurrentSeason == Season.Winter)
             {
-                info += $"/c[#FFA500]{Localization.GetLocalizedText("honey")}/cd";
-
-                if (GameplayScene.Instance.WorldState.CurrentSeason == Season.Winter)
-                {
-                    info += $"\n/c[#DB4E4E]{Localization.GetLocalizedText("stopped_due_to", Localization.GetLocalizedText("winter"))}";
-                }
-                else if (GameplayScene.Instance.WorldState.CurrentWeather != Weather.Sun)
-                {
-                    info += $"\n/c[#DB4E4E]{Localization.GetLocalizedText("stopped_due_to", Localization.GetLocalizedText("rain"))}";
-                }
-
-                info += $"\n/c[#1FD655]{Localization.GetLocalizedText("progress")}: {(int)currentPercentProgress}%/cd"; 
-                info += $"\n/c[#63E5FF]{Localization.GetLocalizedText("total_speed")}: " +
-                $"+{BuildingTemplate.BeeHiveData.HoneyGenerationSpeed + (flowersNumber * PERCENT_PER_FLOWER)}% " +
-                    $"{Localization.GetLocalizedText("per_day")}/cd";
-                info += $"\n- {Localization.GetLocalizedText("base_speed")}: +{BuildingTemplate.BeeHiveData.HoneyGenerationSpeed}% {Localization.GetLocalizedText("per_day")}";
-                info += $"\n- {Localization.GetLocalizedText("flowers")}: +{flowersNumber * PERCENT_PER_FLOWER}% {Localization.GetLocalizedText("per_day")}";
+                info += $"\n/c[#DB4E4E]{Localization.GetLocalizedText("stopped_due_to", Localization.GetLocalizedText("winter"))}";
             }
+            else if (GameplayScene.Instance.WorldState.CurrentWeather != Weather.Sun)
+            {
+                info += $"\n/c[#DB4E4E]{Localization.GetLocalizedText("stopped_due_to", Localization.GetLocalizedText("rain"))}";
+            }
+
+            info += $"\n/c[#1FD655]{Localization.GetLocalizedText("progress")}: {(int)currentPercentProgress}%/cd";
+            info += $"\n/c[#63E5FF]{Localization.GetLocalizedText("total_speed")}: " +
+            $"+{BuildingTemplate.BeeHiveData.HoneyGenerationSpeed + (flowersNumber * PERCENT_PER_FLOWER)}% " +
+                $"{Localization.GetLocalizedText("per_day")}/cd";
+            info += $"\n- {Localization.GetLocalizedText("base_speed")}: +{BuildingTemplate.BeeHiveData.HoneyGenerationSpeed}% {Localization.GetLocalizedText("per_day")}";
+            info += $"\n- {Localization.GetLocalizedText("flowers")}: +{flowersNumber * PERCENT_PER_FLOWER}% {Localization.GetLocalizedText("per_day")}";
 
             return info;
         }

@@ -44,9 +44,9 @@ namespace Technolithic
             }
         }
 
-        public override void UpdateCompleted()
+        public override void Update()
         {
-            base.UpdateCompleted();
+            base.Update();
 
             IsTurnedOn = State == GateState.Closed;
         }
@@ -62,10 +62,7 @@ namespace Technolithic
         {
             BuildingSaveData saveData = base.GetSaveData();
 
-            if (IsBuilt)
-            {
-                saveData.GateState = State;
-            }
+            saveData.GateState = State;
 
             return saveData;
         }

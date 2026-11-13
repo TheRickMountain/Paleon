@@ -178,7 +178,7 @@ namespace Technolithic
 
             (ParentNode.GetChildByName("InventoryListView") as InventoryListViewUI).SetInventory(selectedBuilding.Inventory);
 
-            if (building.BuildingTemplate.FuelConsumer != null && building.IsBuilt)
+            if (building.BuildingTemplate.FuelConsumer != null)
             {
                 ParentNode.GetChildByName("FuelTab").Active = true;
 

@@ -41,9 +41,9 @@ namespace Technolithic
             manureItem = ItemDatabase.GetItemByName("manure");
         }
 
-        public override void UpdateCompleted()
+        public override void Update()
         {
-            base.UpdateCompleted();
+            base.Update();
 
             IsTurnedOn = Inventory.GetInventoryFactWeight(hayItem) > 0;
 
@@ -198,13 +198,10 @@ namespace Technolithic
         {
             string info = base.GetInformation();
 
-            if (IsBuilt)
-            {
-                float percentPerDay = GetPercentPerDayValueBasedOnInsideAnimalsAmount();
+            float percentPerDay = GetPercentPerDayValueBasedOnInsideAnimalsAmount();
 
-                info += $"{manureItem.Name}:\n" +
-                    $"- {Localization.GetLocalizedText("progress")}: {(int)CurrentManureProgress}% (+{percentPerDay}% {Localization.GetLocalizedText("per_day")})\n";
-            }
+            info += $"{manureItem.Name}:\n" +
+                $"- {Localization.GetLocalizedText("progress")}: {(int)CurrentManureProgress}% (+{percentPerDay}% {Localization.GetLocalizedText("per_day")})\n";
 
             return info;
         }

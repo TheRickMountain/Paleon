@@ -6,7 +6,7 @@
         {
             T building = entity?.Get<T>();
 
-            return building != null && building.IsBuilt ? building : null;
+            return building != null && building.IsCompleted && building.IsDestroyed == false ? building : null;
         }
 
         public static BuildingCmp GetCompletedBuilding(this Entity entity)

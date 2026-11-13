@@ -23,9 +23,9 @@ namespace Technolithic
 
         }
 
-        public override void UpdateCompleted()
+        public override void Update()
         {
-            base.UpdateCompleted();
+            base.Update();
 
             IsTurnedOn = IsPowered;
 
@@ -64,16 +64,11 @@ namespace Technolithic
             depositToSpawn = FindDepositToSpawn();
         }
 
-        public override void DestructBuilding()
-        {
-            base.DestructBuilding();
-        }
-
         public override void Render()
         {
             base.Render();
 
-            if (IsBuilt && IsPowered)
+            if (IsPowered)
             {
                 miningProgressSlider.SetValue(0, BuildingTemplate.MineData.SpawnTime, Timer, Color.Orange);
                 miningProgressSlider.Position = new Vector2(Entity.Position.X, Entity.Position.Y - 15);
@@ -93,10 +88,7 @@ namespace Technolithic
         {
             string baseInfo = base.GetInformation();
 
-            if (IsBuilt)
-            {
-                baseInfo += $"\n{depositToSpawn.Name}\n- {Localization.GetLocalizedText("progress")}: {(int)Timer}/{BuildingTemplate.MineData.SpawnTime}";
-            }
+            baseInfo += $"\n{depositToSpawn.Name}\n- {Localization.GetLocalizedText("progress")}: {(int)Timer}/{BuildingTemplate.MineData.SpawnTime}";
 
             return baseInfo;
         }

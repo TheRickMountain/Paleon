@@ -25,6 +25,8 @@ namespace Technolithic
         private const int MAX_NUMBER_OF_USES = 6;
         public int CurrentNumberOfUses { get; set; } = 6;
 
+        private bool isWornOut;
+
         public FishTrap(BuildingTemplate buildingTemplate, Direction direction) : base(buildingTemplate, direction)
         {
 
@@ -35,9 +37,9 @@ namespace Technolithic
             base.Begin();
         }
 
-        public override void UpdateCompleted()
+        public override void Update()
         {
-            base.UpdateCompleted();
+            base.Update();
 
             if (CatchedItem == null)
             {
@@ -121,7 +123,7 @@ namespace Technolithic
 
             if(CurrentNumberOfUses <= 0)
             {
-                ThrowBuildingRecipeItemsAfterDestructing = false;
+                isWornOut = true;
 
                 DestructBuilding();
 
@@ -129,23 +131,22 @@ namespace Technolithic
             }
         }
 
+        protected override bool RefundsRecipeOnDestruct => isWornOut == false;
+
         public override void Render()
         {
             base.Render();
 
-            if (IsBuilt)
+            if (CatchedItem != null)
             {
-                if (CatchedItem != null)
-                {
-                    ResourceManager.CloudTexture.DrawCentered(catchedItemDrawPosition, Color.White * 0.75f);
-                    CatchedItem.Icon.DrawCentered(catchedItemDrawPosition, Color.White * 0.75f);
-                }
-                else
-                {
-                    progressSlider.SetValue(0, TRY_TIME, CurrentTime, Color.Orange);
-                    progressSlider.Position = new Vector2(Entity.Position.X, Entity.Position.Y - 5);
-                    progressSlider.Render();
-                }
+                ResourceManager.CloudTexture.DrawCentered(catchedItemDrawPosition, Color.White * 0.75f);
+                CatchedItem.Icon.DrawCentered(catchedItemDrawPosition, Color.White * 0.75f);
+            }
+            else
+            {
+                progressSlider.SetValue(0, TRY_TIME, CurrentTime, Color.Orange);
+                progressSlider.Position = new Vector2(Entity.Position.X, Entity.Position.Y - 5);
+                progressSlider.Render();
             }
         }
 
@@ -153,11 +154,8 @@ namespace Technolithic
         {
             string baseInfo = base.GetInformation();
 
-            if (IsBuilt)
-            {
-                baseInfo += $"- {Localization.GetLocalizedText("progress")}: {(int)CurrentTime}/{TRY_TIME}";
-                baseInfo += $"\n- {Localization.GetLocalizedText("number_of_uses")}: {CurrentNumberOfUses}/{MAX_NUMBER_OF_USES}";
-            }
+            baseInfo += $"- {Localization.GetLocalizedText("progress")}: {(int)CurrentTime}/{TRY_TIME}";
+            baseInfo += $"\n- {Localization.GetLocalizedText("number_of_uses")}: {CurrentNumberOfUses}/{MAX_NUMBER_OF_USES}";
 
             return baseInfo;
         }
@@ -166,19 +164,16 @@ namespace Technolithic
         {
             var saveData = base.GetSaveData();
 
-            if (IsBuilt)
+            if (CatchedItem != null)
             {
-                if (CatchedItem != null)
-                {
-                    saveData.FishTrapCatchedItemId = CatchedItem.Id;
-                }
-                else
-                {
-                    saveData.FishTrapCatchedItemId = -1;
-                }
-                saveData.FishTrapCurrentTime = CurrentTime;
-                saveData.FishTrapCurrentNumberOfUses = CurrentNumberOfUses;
+                saveData.FishTrapCatchedItemId = CatchedItem.Id;
             }
+            else
+            {
+                saveData.FishTrapCatchedItemId = -1;
+            }
+            saveData.FishTrapCurrentTime = CurrentTime;
+            saveData.FishTrapCurrentNumberOfUses = CurrentNumberOfUses;
 
             return saveData;
         }

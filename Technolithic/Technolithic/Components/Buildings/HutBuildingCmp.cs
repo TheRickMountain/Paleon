@@ -81,9 +81,9 @@ namespace Technolithic
             }
         }
 
-        public override void UpdateCompleted()
+        public override void Update()
         {
-            base.UpdateCompleted();
+            base.Update();
 
             if (GameplayScene.Instance.WorldState.CurrentSeason == Season.Winter)
             {
@@ -146,10 +146,7 @@ namespace Technolithic
         {
             string info = base.GetInformation();
 
-            if (IsBuilt)
-            {
-                info += Assignable.GetInformation() + "\n";
-            }
+            info += Assignable.GetInformation() + "\n";
 
             return info;
         }

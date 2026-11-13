@@ -42,13 +42,13 @@ namespace Technolithic
 
         }
 
+        protected override bool RefundsRecipeOnDestruct => false;
+
         public override void Begin()
         {
             base.Begin();
 
             spriteStartPosition = Sprite.Position;
-
-            ThrowBuildingRecipeItemsAfterDestructing = false;
 
             explosionSprite = new AnimatedSprite(48, 48);
             explosionSprite.Add("explosion", new Animation(ResourceManager.GetTexture("explosion"), 4, 0, 48, 48, 0, 48));
@@ -57,14 +57,14 @@ namespace Technolithic
             explosionSprite.Entity = Entity;
         }
 
-        public override void UpdateCompleted()
+        public override void Update()
         {
             if(ReturnHome)
             {
                 explosionSprite.Update();
             }
 
-            base.UpdateCompleted();
+            base.Update();
 
             switch(currentState)
             {

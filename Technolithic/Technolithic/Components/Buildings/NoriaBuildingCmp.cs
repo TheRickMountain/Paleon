@@ -38,9 +38,9 @@ namespace Technolithic
             centerTile.GroundTopType = GroundTopType.Water;
         }
 
-        public override void UpdateCompleted()
+        public override void Update()
         {
-            base.UpdateCompleted();
+            base.Update();
 
             IsTurnedOn = IsPowered;
 

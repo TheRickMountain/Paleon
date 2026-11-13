@@ -15,9 +15,9 @@ namespace Technolithic
 
         }
 
-        public override void UpdateCompleted()
+        public override void Update()
         {
-            base.UpdateCompleted();
+            base.Update();
 
             IsTurnedOn = IsPowered;
         }

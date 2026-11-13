@@ -25,10 +25,7 @@ namespace Technolithic
         {
             string info = base.GetInformation();
 
-            if (IsBuilt)
-            {
-                info += $"\n{Localization.GetLocalizedText("depends_on_wind_speed")}";
-            }
+            info += $"\n{Localization.GetLocalizedText("depends_on_wind_speed")}";
 
             return info;
         }

@@ -105,32 +105,26 @@ namespace Technolithic
         {
             base.OnItemAdded(senderInventory, item, weight);
 
-            if (IsBuilt)
-            {
-                if (GameplayScene.WorldManager.ItemsDecayer.Inventories.Contains(Inventory) == false)
-                    GameplayScene.WorldManager.ItemsDecayer.Inventories.Add(Inventory);
+            if (GameplayScene.WorldManager.ItemsDecayer.Inventories.Contains(Inventory) == false)
+                GameplayScene.WorldManager.ItemsDecayer.Inventories.Add(Inventory);
 
-                UpdateImages();
-            }
+            UpdateImages();
         }
 
         protected override void OnItemRemoved(Inventory senderInventory, Item item, int weight)
         {
             base.OnItemRemoved(senderInventory, item, weight);
 
-            if (IsBuilt)
+            if (Inventory.TotalItemsCount <= 0)
             {
-                if (Inventory.TotalItemsCount <= 0)
-                {
-                    GameplayScene.WorldManager.ItemsDecayer.Inventories.Remove(Inventory);
-                }
+                GameplayScene.WorldManager.ItemsDecayer.Inventories.Remove(Inventory);
+            }
 
-                int factWeight = Inventory.GetInventoryFactWeight(item);
+            int factWeight = Inventory.GetInventoryFactWeight(item);
 
-                if (factWeight == 0)
-                {
-                    UpdateImages();
-                }
+            if (factWeight == 0)
+            {
+                UpdateImages();
             }
         }
 
@@ -383,18 +377,15 @@ namespace Technolithic
         {
             BuildingSaveData buildingSaveData = base.GetSaveData();
 
-            if (IsBuilt)
+            buildingSaveData.StorageFilters = new Dictionary<int, bool>();
+            foreach (var kvp in filters)
             {
-                buildingSaveData.StorageFilters = new Dictionary<int, bool>();
-                foreach (var kvp in filters)
-                {
-                    buildingSaveData.StorageFilters.Add(kvp.Key.Id, kvp.Value);
-                }
-
-                buildingSaveData.AllowanceMode = AllowanceMode;
-                buildingSaveData.StorageCapacity = CurrentCapacity;
-                buildingSaveData.StoragePriority = Priority;
+                buildingSaveData.StorageFilters.Add(kvp.Key.Id, kvp.Value);
             }
+
+            buildingSaveData.AllowanceMode = AllowanceMode;
+            buildingSaveData.StorageCapacity = CurrentCapacity;
+            buildingSaveData.StoragePriority = Priority;
 
             return buildingSaveData;
         }
@@ -403,12 +394,9 @@ namespace Technolithic
         {
             string info = base.GetInformation();
 
-            if (IsBuilt)
-            {
-                info += Storage.GetInformation();
+            info += Storage.GetInformation();
 
-                info += $"\n{Localization.GetLocalizedText("priority")}: {Priority}";
-            }
+            info += $"\n{Localization.GetLocalizedText("priority")}: {Priority}";
 
             return info;
         }

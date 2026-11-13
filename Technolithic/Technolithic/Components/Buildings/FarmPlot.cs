@@ -189,9 +189,9 @@ namespace Technolithic
             UpdateFarmPlotView();
         }
 
-        public override void UpdateCompleted()
+        public override void Update()
         {
-            base.UpdateCompleted();
+            base.Update();
 
             if (timer.GetTime() > 1.0f)
             {
@@ -480,24 +480,21 @@ namespace Technolithic
         {
             base.OnItemAdded(senderInventory, item, weight);
 
-            if (IsBuilt)
+            if (item == potOfWater)
             {
-                if (item == potOfWater)
-                {
-                    centerTile.MoistureLevel = 100;
-                    Inventory.PopItem(potOfWater, 1);
-                    Item ceramicPot = ItemDatabase.GetItemByName("ceramic_pot");
-                    GetReachableTile().Inventory.AddCargo(new ItemContainer(ceramicPot, 1, ceramicPot.Durability));
+                centerTile.MoistureLevel = 100;
+                Inventory.PopItem(potOfWater, 1);
+                Item ceramicPot = ItemDatabase.GetItemByName("ceramic_pot");
+                GetReachableTile().Inventory.AddCargo(new ItemContainer(ceramicPot, 1, ceramicPot.Durability));
 
-                    UpdateFarmPlotView();
-                }
-                else if (item == manure)
-                {
-                    centerTile.FertilizerLevel = 100;
-                    Inventory.PopItem(manure, 1);
+                UpdateFarmPlotView();
+            }
+            else if (item == manure)
+            {
+                centerTile.FertilizerLevel = 100;
+                Inventory.PopItem(manure, 1);
 
-                    UpdateFarmPlotView();
-                }
+                UpdateFarmPlotView();
             }
         }
 
@@ -514,15 +511,12 @@ namespace Technolithic
         {
             string info = base.GetInformation();
 
-            if (IsBuilt)
-            {
-                info += $"- {Localization.GetLocalizedText("growth_progress")}: {(int)growthPercent}%\n";
-                info += $"- {Localization.GetLocalizedText("growth_speed")}: {GetGrowthSpeedPerDay()}% {Localization.GetLocalizedText("per_day")}\n\n";
+            info += $"- {Localization.GetLocalizedText("growth_progress")}: {(int)growthPercent}%\n";
+            info += $"- {Localization.GetLocalizedText("growth_speed")}: {GetGrowthSpeedPerDay()}% {Localization.GetLocalizedText("per_day")}\n\n";
 
-                info += $"{Localization.GetLocalizedText("soil")}\n";
-                info += $"- {Localization.GetLocalizedText("fertilizer")}: {(int)centerTile.FertilizerLevel}%\n";
-                info += $"- {Localization.GetLocalizedText("moisture")}: {(int)centerTile.MoistureLevel}%\n\n";
-            }
+            info += $"{Localization.GetLocalizedText("soil")}\n";
+            info += $"- {Localization.GetLocalizedText("fertilizer")}: {(int)centerTile.FertilizerLevel}%\n";
+            info += $"- {Localization.GetLocalizedText("moisture")}: {(int)centerTile.MoistureLevel}%\n\n";
 
             return info;
         }
@@ -531,18 +525,15 @@ namespace Technolithic
         {
             BuildingSaveData buildingSaveData = base.GetSaveData();
 
-            if (IsBuilt)
-            {
-                buildingSaveData.IsWild = IsWild;
-                buildingSaveData.Irrigate = Irrigate;
-                buildingSaveData.Fertilize = Fertilize;
-                buildingSaveData.Chop = Chop;
-                buildingSaveData.Harvest = Harvest;
-                buildingSaveData.GrowthPercent = growthPercent;
-                buildingSaveData.AdditionalHarvestScrore = additionalHarvestScore;
-                buildingSaveData.HarvestingCurrentProgress = DestructingCurrentProgress;
-                buildingSaveData.Destruct = false;
-            }
+            buildingSaveData.IsWild = IsWild;
+            buildingSaveData.Irrigate = Irrigate;
+            buildingSaveData.Fertilize = Fertilize;
+            buildingSaveData.Chop = Chop;
+            buildingSaveData.Harvest = Harvest;
+            buildingSaveData.GrowthPercent = growthPercent;
+            buildingSaveData.AdditionalHarvestScrore = additionalHarvestScore;
+            buildingSaveData.HarvestingCurrentProgress = DestructingCurrentProgress;
+            buildingSaveData.Destruct = false;
 
             return buildingSaveData;
         }

@@ -16,7 +16,7 @@ namespace Technolithic
         public List<TileInfo> TilesInfosList => Placement.TilesInfosList;
         public HashSet<Tile> RangeTiles => Placement.RangeTiles;
 
-        public bool IsBuilt { get; protected set; }
+        public bool IsCompleted { get; private set; }
         public bool IsDestroyed { get; private set; }
 
         public Action<BuildingCmp> OnBuildingDestructedCallback { get; set; }
@@ -89,7 +89,7 @@ namespace Technolithic
 
         public bool IsReserved { get; set; }
 
-        public bool ThrowBuildingRecipeItemsAfterDestructing { get; set; } = true;
+        protected virtual bool RefundsRecipeOnDestruct => true;
 
         public bool IsPowered { get; set; } = true;
 
@@ -126,19 +126,10 @@ namespace Technolithic
 
         private bool wasTurnedOn = false;
 
-        // Этот метод нельзя наследовать, только UpdateCompleted!!!
         public override void Update()
         {
             Sprite?.Update();
 
-            if (IsBuilt)
-            {
-                UpdateCompleted();
-            }
-        }
-
-        public virtual void UpdateCompleted()
-        {
             if (BuildingTemplate.EnergyConsumer != null)
             {
                 if (IsTurnedOn)
@@ -150,94 +141,94 @@ namespace Technolithic
 
         public override void LateUpdate()
         {
-            if (IsBuilt)
+            if (IsDestroyed)
+                return;
+
+            if (BuildingTemplate.FuelConsumer != null)
             {
-                if (BuildingTemplate.FuelConsumer != null)
+                // Если строение не имеет топлива, то выключаем ее
+                if (CurrentFuelCondition <= 0)
+                    IsTurnedOn = false;
+
+                // Если строение включено и имеет достаточно топлива
+                if (IsTurnedOn && CurrentFuelCondition > 0)
                 {
-                    // Если строение не имеет топлива, то выключаем ее
-                    if (CurrentFuelCondition <= 0)
-                        IsTurnedOn = false;
+                    CurrentFuelCondition -= (BuildingTemplate.FuelConsumer.EnergyConsumption * Engine.GameDeltaTime);
 
-                    // Если строение включено и имеет достаточно топлива
-                    if (IsTurnedOn && CurrentFuelCondition > 0)
-                    {
-                        CurrentFuelCondition -= (BuildingTemplate.FuelConsumer.EnergyConsumption * Engine.GameDeltaTime);
+                }
+            }
 
-                    }
+            if (IsTurnedOn)
+            {
+                if (BuildingTemplate.SmokeGeneratorData != null)
+                {
+                    smokeTimer.Update(Engine.GameDeltaTime);
                 }
 
-                if (IsTurnedOn)
+                // Включаем освещение
+                if (BuildingTemplate.LightEmitter != null)
                 {
-                    if (BuildingTemplate.SmokeGeneratorData != null)
+                    if (wasTurnedOn == false)
                     {
-                        smokeTimer.Update(Engine.GameDeltaTime);
+                        light.Intensity = 1.0f;
+
+                        wasTurnedOn = true;
+
+                        Tile centerTile = GetRealCenterTile();
+
+                        centerTile.World.TryDoForTilesInRadius(
+                            centerTile.X,
+                            centerTile.Y,
+                            (int)(BuildingTemplate.LightEmitter.Radius / 33.33f),
+                            tile => tile.IlluminationStrength++);
                     }
 
-                    // Включаем освещение
-                    if (BuildingTemplate.LightEmitter != null)
+                    if (flickeringTimer.GetTime() >= 0.1f)
                     {
-                        if (wasTurnedOn == false)
+                        flickeringTimer.Reset();
+
+                        while (smoothQueue.Count >= 5)
                         {
-                            light.Intensity = 1.0f;
-
-                            wasTurnedOn = true;
-
-                            Tile centerTile = GetRealCenterTile();
-
-                            centerTile.World.TryDoForTilesInRadius(
-                                centerTile.X, 
-                                centerTile.Y, 
-                                (int)(BuildingTemplate.LightEmitter.Radius / 33.33f),
-                                tile => tile.IlluminationStrength++);
+                            lastSum -= smoothQueue.Dequeue();
                         }
 
-                        if (flickeringTimer.GetTime() >= 0.1f)
-                        {
-                            flickeringTimer.Reset();
+                        float newVal = MyRandom.Range(0.5f, 1.2f);
+                        smoothQueue.Enqueue(newVal);
+                        lastSum += newVal;
 
-                            while (smoothQueue.Count >= 5)
-                            {
-                                lastSum -= smoothQueue.Dequeue();
-                            }
-
-                            float newVal = MyRandom.Range(0.5f, 1.2f);
-                            smoothQueue.Enqueue(newVal);
-                            lastSum += newVal;
-
-                            light.Intensity = lastSum / (float)smoothQueue.Count;
-                        }
+                        light.Intensity = lastSum / (float)smoothQueue.Count;
                     }
                 }
-                else
+            }
+            else
+            {
+                // Выключить освещение
+                if (BuildingTemplate.LightEmitter != null)
                 {
-                    // Выключить освещение
-                    if (BuildingTemplate.LightEmitter != null)
+                    if (wasTurnedOn)
                     {
-                        if (wasTurnedOn)
-                        {
-                            light.Intensity = 0;
+                        light.Intensity = 0;
 
-                            wasTurnedOn = false;
+                        wasTurnedOn = false;
 
-                            Tile centerTile = GetRealCenterTile();
+                        Tile centerTile = GetRealCenterTile();
 
-                            centerTile.World.TryDoForTilesInRadius(
-                                centerTile.X,
-                                centerTile.Y,
-                                (int)(BuildingTemplate.LightEmitter.Radius / 33.33f),
-                                tile => tile.IlluminationStrength--);
-                        }
+                        centerTile.World.TryDoForTilesInRadius(
+                            centerTile.X,
+                            centerTile.Y,
+                            (int)(BuildingTemplate.LightEmitter.Radius / 33.33f),
+                            tile => tile.IlluminationStrength--);
                     }
                 }
+            }
 
-                if (IsTurnedOn)
-                {
-                    PlayProcessAnimation();
-                }
-                else
-                {
-                    PlayIdleAnimation();
-                }
+            if (IsTurnedOn)
+            {
+                PlayProcessAnimation();
+            }
+            else
+            {
+                PlayIdleAnimation();
             }
         }
 
@@ -245,41 +236,38 @@ namespace Technolithic
         {
             Sprite?.Render();
 
-            if (IsBuilt)
+            if (BuildingTemplate.FuelConsumer != null)
             {
-                if (BuildingTemplate.FuelConsumer != null)
+                if (CurrentFuelCondition <= 0)
                 {
-                    if (CurrentFuelCondition <= 0)
-                    {
-                        ResourceManager.NoFuelIcon.Draw(new Rectangle(popUpPositionX, popUpPositionY, 16, 16), Color.White * 0.75f);
-                    }
+                    ResourceManager.NoFuelIcon.Draw(new Rectangle(popUpPositionX, popUpPositionY, 16, 16), Color.White * 0.75f);
                 }
+            }
 
-                if (BuildingTemplate.EnergyConsumer != null && BuildingTemplate.EnergyConsumer.EnergyType == EnergyType.Kinetic)
-                {
-                    Tile rightBottomTile = TilesInfosArray[BuildingTemplate.Width - 1, BuildingTemplate.Height - 1].Tile;
-                    ResourceManager.GearIcon.Draw(new Vector2(
-                        rightBottomTile.X * Engine.TILE_SIZE + 8,
-                        rightBottomTile.Y * Engine.TILE_SIZE + 8), new Vector2(8, 8), Color.White, 1, gearRotation);
-                }
+            if (BuildingTemplate.EnergyConsumer != null && BuildingTemplate.EnergyConsumer.EnergyType == EnergyType.Kinetic)
+            {
+                Tile rightBottomTile = TilesInfosArray[BuildingTemplate.Width - 1, BuildingTemplate.Height - 1].Tile;
+                ResourceManager.GearIcon.Draw(new Vector2(
+                    rightBottomTile.X * Engine.TILE_SIZE + 8,
+                    rightBottomTile.Y * Engine.TILE_SIZE + 8), new Vector2(8, 8), Color.White, 1, gearRotation);
+            }
 
-                if (IsPowered == false)
+            if (IsPowered == false)
+            {
+                if (BuildingTemplate.EnergyConsumer != null)
                 {
-                    if (BuildingTemplate.EnergyConsumer != null)
+                    switch (BuildingTemplate.EnergyConsumer.EnergyType)
                     {
-                        switch (BuildingTemplate.EnergyConsumer.EnergyType)
-                        {
-                            case EnergyType.Gas:
-                                {
-                                    ResourceManager.NoGasIcon.Draw(new Rectangle(popUpPositionX, popUpPositionY, 16, 16), Color.White * 0.75f);
-                                }
-                                break;
-                            case EnergyType.Kinetic:
-                                {
-                                    ResourceManager.NoEnergyIcon.Draw(new Rectangle(popUpPositionX, popUpPositionY, 16, 16), Color.White * 0.75f);
-                                }
-                                break;
-                        }
+                        case EnergyType.Gas:
+                            {
+                                ResourceManager.NoGasIcon.Draw(new Rectangle(popUpPositionX, popUpPositionY, 16, 16), Color.White * 0.75f);
+                            }
+                            break;
+                        case EnergyType.Kinetic:
+                            {
+                                ResourceManager.NoEnergyIcon.Draw(new Rectangle(popUpPositionX, popUpPositionY, 16, 16), Color.White * 0.75f);
+                            }
+                            break;
                     }
                 }
             }
@@ -324,7 +312,7 @@ namespace Technolithic
 
         public virtual void CompleteBuilding()
         {
-            IsBuilt = true;
+            IsCompleted = true;
 
             if (BuildingTemplate.SmokeGeneratorData != null)
             {
@@ -433,8 +421,10 @@ namespace Technolithic
 
             RemoveBuildingFromBuildingsToDestruct();
 
-            IsBuilt = false;
             IsDestroyed = true;
+
+            Inventory.OnItemAddedCallback -= OnItemAdded;
+            Inventory.OnItemRemovedCallback -= OnItemRemoved;
 
             if (BuildingTemplate.LightEmitter != null)
             {
@@ -457,7 +447,7 @@ namespace Technolithic
             // Выкидываем все вложенные предметы
             ThrowAllItems();
 
-            if (ThrowBuildingRecipeItemsAfterDestructing)
+            if (RefundsRecipeOnDestruct)
             {
                 ThrowItems(BuildingTemplate.BuildingRecipe);
             }
@@ -485,9 +475,6 @@ namespace Technolithic
 
             OnBuildingDestructedCallback?.Invoke(this);
             OnRemovedCallback?.Invoke(this);
-
-            Inventory.OnItemAddedCallback -= OnItemAdded;
-            Inventory.OnItemRemovedCallback -= OnItemRemoved;
         }
 
         protected void ThrowAllItems()
@@ -712,7 +699,7 @@ namespace Technolithic
 
             buildingSaveData.Tiles = Placement.GetTilesAsPoints();
 
-            buildingSaveData.IsBuilt = IsBuilt;
+            buildingSaveData.IsBuilt = true;
             buildingSaveData.Direction = Direction;
 
             buildingSaveData.InventoryItems = Inventory.GetItemsSaveData();

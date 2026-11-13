@@ -17,9 +17,9 @@ namespace Technolithic
 
         }
 
-        public override void UpdateCompleted()
+        public override void Update()
         {
-            base.UpdateCompleted();
+            base.Update();
 
             IsTurnedOn = GetActualEnergyOutput() > 0;
         }
@@ -42,13 +42,10 @@ namespace Technolithic
         {
             string info = base.GetInformation();
 
-            if (IsBuilt)
-            {
-                info += $"\n{Localization.GetLocalizedText("energy_type")}: " +
-                        $"{Localization.GetLocalizedText(BuildingTemplate.EnergySourceData.EnergyType.ToString().ToLower())}";
-                info += $"\n{Localization.GetLocalizedText("energy_output")}: {GetActualEnergyOutput()}/{BuildingTemplate.EnergySourceData.GeneratedPower}";
-                info += $"\n{Localization.GetLocalizedText("energy_available")}: {AvailablePower}";
-            }
+            info += $"\n{Localization.GetLocalizedText("energy_type")}: " +
+                    $"{Localization.GetLocalizedText(BuildingTemplate.EnergySourceData.EnergyType.ToString().ToLower())}";
+            info += $"\n{Localization.GetLocalizedText("energy_output")}: {GetActualEnergyOutput()}/{BuildingTemplate.EnergySourceData.GeneratedPower}";
+            info += $"\n{Localization.GetLocalizedText("energy_available")}: {AvailablePower}";
 
             return info;
         }

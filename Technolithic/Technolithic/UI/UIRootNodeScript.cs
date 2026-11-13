@@ -481,33 +481,30 @@ namespace Technolithic
             buildingUI.GetComponent<BuildingUIScript>().SetBuilding(building);
             OpenEntityPanel(buildingUI);
 
-            if (building.IsBuilt)
+            if (building is CrafterBuildingCmp)
             {
-                if (building is CrafterBuildingCmp)
-                {
-                    crafterUI.GetComponent<CrafterUIScript>().SetCrafter((CrafterBuildingCmp)building);
-                    OpenEntityPanel(crafterUI);
-                }
-                else if (building is StorageBuildingCmp && building.BuildingTemplate.Storage.IsEditable)
-                {
-                    storageUI.GetComponent<StorageUIScript>().SetStockpile((StorageBuildingCmp)building);
-                    OpenEntityPanel(storageUI);
-                }
-                else if(building is AnimalPenBuildingCmp)
-                {
-                    animalPenUI.GetComponent<AnimalPenUIScript>().SetAnimalPen((AnimalPenBuildingCmp)building);
-                    OpenEntityPanel(animalPenUI);
-                }
-                else if (building is HutBuildingCmp)
-                {
-                    hutUI.GetComponent<HutUIScript>().SetHut((HutBuildingCmp)building);
-                    OpenEntityPanel(hutUI);
-                }
-                else if (building is GateCmp)
-                {
-                    gateUI.GetComponent<GateUIScript>().Open((GateCmp)building);
-                    OpenEntityPanel(gateUI);
-                }
+                crafterUI.GetComponent<CrafterUIScript>().SetCrafter((CrafterBuildingCmp)building);
+                OpenEntityPanel(crafterUI);
+            }
+            else if (building is StorageBuildingCmp && building.BuildingTemplate.Storage.IsEditable)
+            {
+                storageUI.GetComponent<StorageUIScript>().SetStockpile((StorageBuildingCmp)building);
+                OpenEntityPanel(storageUI);
+            }
+            else if(building is AnimalPenBuildingCmp)
+            {
+                animalPenUI.GetComponent<AnimalPenUIScript>().SetAnimalPen((AnimalPenBuildingCmp)building);
+                OpenEntityPanel(animalPenUI);
+            }
+            else if (building is HutBuildingCmp)
+            {
+                hutUI.GetComponent<HutUIScript>().SetHut((HutBuildingCmp)building);
+                OpenEntityPanel(hutUI);
+            }
+            else if (building is GateCmp)
+            {
+                gateUI.GetComponent<GateUIScript>().Open((GateCmp)building);
+                OpenEntityPanel(gateUI);
             }
         }
 

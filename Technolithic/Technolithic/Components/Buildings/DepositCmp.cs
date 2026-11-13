@@ -139,12 +139,9 @@ namespace Technolithic
         {
             var saveData = base.GetSaveData();
 
-            if (IsBuilt)
-            {
-                saveData.DepositCurrentStage = CurrentStage;
-                saveData.IsMarkedToObtain = IsMarkedToObtain;
-                saveData.MiningCurrentTime = MiningCurrentTime;
-            }
+            saveData.DepositCurrentStage = CurrentStage;
+            saveData.IsMarkedToObtain = IsMarkedToObtain;
+            saveData.MiningCurrentTime = MiningCurrentTime;
 
             return saveData;
         }

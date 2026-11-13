@@ -304,176 +304,173 @@ namespace Technolithic
 
                     buildingCmp.DeconstructionProgress = buildingSaveData.DestructingProgress;
 
-                    if (buildingCmp.IsBuilt)
+                    if (buildingCmp.BuildingTemplate.FuelConsumer != null)
                     {
-                        if (buildingCmp.BuildingTemplate.FuelConsumer != null)
+                        if (buildingSaveData.ConsumableFuel != null)
                         {
-                            if (buildingSaveData.ConsumableFuel != null)
-                            {
-                                buildingCmp.CurrentFuelCondition = buildingSaveData.CurrentFuelCondition;
+                            buildingCmp.CurrentFuelCondition = buildingSaveData.CurrentFuelCondition;
 
-                                foreach (var kvp in buildingSaveData.ConsumableFuel)
+                            foreach (var kvp in buildingSaveData.ConsumableFuel)
+                            {
+                                if (ItemDatabase.GetItemById(kvp.Key) != null)
                                 {
-                                    if (ItemDatabase.GetItemById(kvp.Key) != null)
-                                    {
-                                        buildingCmp.SetFuelFilter(ItemDatabase.GetItemById(kvp.Key), kvp.Value);
-                                    }
+                                    buildingCmp.SetFuelFilter(ItemDatabase.GetItemById(kvp.Key), kvp.Value);
                                 }
                             }
                         }
+                    }
 
-                        switch (buildingCmp.BuildingTemplate.BuildingType)
-                        {
-                            case BuildingType.FarmPlot:
+                    switch (buildingCmp.BuildingTemplate.BuildingType)
+                    {
+                        case BuildingType.FarmPlot:
+                            {
+                                FarmPlot farmPlot = buildingCmp as FarmPlot;
+                                farmPlot.SetPlantParameters(
+                                        buildingSaveData.GrowthPercent,
+                                        buildingSaveData.AdditionalHarvestScrore);
+
+                                if (buildingSaveData.IsWild)
                                 {
-                                    FarmPlot farmPlot = buildingCmp as FarmPlot;
-                                    farmPlot.SetPlantParameters(
-                                            buildingSaveData.GrowthPercent,
-                                            buildingSaveData.AdditionalHarvestScrore);
+                                    farmPlot.MakeWild();
+                                }
 
-                                    if (buildingSaveData.IsWild)
+                                farmPlot.Harvest = buildingSaveData.Harvest;
+                                farmPlot.Chop = buildingSaveData.Chop;
+                                farmPlot.Fertilize = buildingSaveData.Fertilize;
+                                farmPlot.Irrigate = buildingSaveData.Irrigate;
+                                farmPlot.DestructingCurrentProgress = buildingSaveData.HarvestingCurrentProgress;
+                            }
+                            break;
+                        case BuildingType.Gate:
+                            {
+                                GateCmp gateCmp = buildingCmp as GateCmp;
+                                gateCmp.SetState(buildingSaveData.GateState);
+                            }
+                            break;
+                        case BuildingType.Stockpile:
+                            {
+                                StorageBuildingCmp storageBuildingCmp = buildingCmp as StorageBuildingCmp;
+
+                                foreach (var filterKVP in buildingSaveData.StorageFilters)
+                                {
+                                    if (ItemDatabase.GetItemById(filterKVP.Key) == null)
+                                        continue;
+
+                                    storageBuildingCmp.SetItemFilter(ItemDatabase.GetItemById(filterKVP.Key), filterKVP.Value);
+                                }
+
+                                storageBuildingCmp.SetAllowanceMode(buildingSaveData.AllowanceMode);
+                                storageBuildingCmp.CurrentCapacity = buildingSaveData.StorageCapacity;
+                                storageBuildingCmp.SetPriority(buildingSaveData.StoragePriority);
+                            }
+                            break;
+                        case BuildingType.Crafter:
+                            {
+                                CrafterBuildingCmp crafterBuildingCmp = buildingCmp as CrafterBuildingCmp;
+
+                                crafterBuildingCmp.CurrentCraftingProgress = buildingSaveData.CurrentCraftingProgress;
+                                crafterBuildingCmp.IsPrepared = buildingSaveData.IsCrafterPrepared;
+
+                                foreach (var kvp in buildingSaveData.CraftingRecipesToCraft)
+                                {
+                                    if (!crafterBuildingCmp.Crafter.IdCraftingRecipePair.ContainsKey(kvp.Key))
+                                        continue;
+
+                                    CraftingRecipe craftingRecipe = crafterBuildingCmp.Crafter.IdCraftingRecipePair[kvp.Key];
+
+                                    if (kvp.Value == 100)
                                     {
-                                        farmPlot.MakeWild();
+                                        crafterBuildingCmp.RepeatCraftingRecipe(craftingRecipe);
                                     }
-
-                                    farmPlot.Harvest = buildingSaveData.Harvest;
-                                    farmPlot.Chop = buildingSaveData.Chop;
-                                    farmPlot.Fertilize = buildingSaveData.Fertilize;
-                                    farmPlot.Irrigate = buildingSaveData.Irrigate;
-                                    farmPlot.DestructingCurrentProgress = buildingSaveData.HarvestingCurrentProgress;
-                                }
-                                break;
-                            case BuildingType.Gate:
-                                {
-                                    GateCmp gateCmp = buildingCmp as GateCmp;
-                                    gateCmp.SetState(buildingSaveData.GateState);
-                                }
-                                break;
-                            case BuildingType.Stockpile:
-                                {
-                                    StorageBuildingCmp storageBuildingCmp = buildingCmp as StorageBuildingCmp;
-
-                                    foreach (var filterKVP in buildingSaveData.StorageFilters)
+                                    else if (kvp.Value > 0)
                                     {
-                                        if (ItemDatabase.GetItemById(filterKVP.Key) == null)
-                                            continue;
-
-                                        storageBuildingCmp.SetItemFilter(ItemDatabase.GetItemById(filterKVP.Key), filterKVP.Value);
-                                    }
-
-                                    storageBuildingCmp.SetAllowanceMode(buildingSaveData.AllowanceMode);
-                                    storageBuildingCmp.CurrentCapacity = buildingSaveData.StorageCapacity;
-                                    storageBuildingCmp.SetPriority(buildingSaveData.StoragePriority);
-                                }
-                                break;
-                            case BuildingType.Crafter:
-                                {
-                                    CrafterBuildingCmp crafterBuildingCmp = buildingCmp as CrafterBuildingCmp;
-
-                                    crafterBuildingCmp.CurrentCraftingProgress = buildingSaveData.CurrentCraftingProgress;
-                                    crafterBuildingCmp.IsPrepared = buildingSaveData.IsCrafterPrepared;
-
-                                    foreach (var kvp in buildingSaveData.CraftingRecipesToCraft)
-                                    {
-                                        if (!crafterBuildingCmp.Crafter.IdCraftingRecipePair.ContainsKey(kvp.Key))
-                                            continue;
-
-                                        CraftingRecipe craftingRecipe = crafterBuildingCmp.Crafter.IdCraftingRecipePair[kvp.Key];
-
-                                        if (kvp.Value == 100)
-                                        {
-                                            crafterBuildingCmp.RepeatCraftingRecipe(craftingRecipe);
-                                        }
-                                        else if (kvp.Value > 0)
-                                        {
-                                            crafterBuildingCmp.SetCraftingRecipe(craftingRecipe, kvp.Value);
-                                        }
-                                    }
-                                }
-                                break;
-                            case BuildingType.FishTrap:
-                                {
-                                    FishTrap fishTrap = buildingCmp as FishTrap;
-
-                                    fishTrap.CatchedItem = ItemDatabase.GetItemById(buildingSaveData.FishTrapCatchedItemId);
-                                    fishTrap.CurrentTime = buildingSaveData.FishTrapCurrentTime;
-                                    fishTrap.CurrentNumberOfUses = buildingSaveData.FishTrapCurrentNumberOfUses;
-                                }
-                                break;
-                            case BuildingType.Deposit:
-                                {
-                                    DepositCmp depositCmp = buildingCmp as DepositCmp;
-
-                                    depositCmp.IsMarkedToObtain = buildingSaveData.IsMarkedToObtain;
-                                    depositCmp.MiningCurrentTime = buildingSaveData.MiningCurrentTime;
-                                    depositCmp.CurrentStage = buildingSaveData.DepositCurrentStage;
-                                }
-                                break;
-                            case BuildingType.AnimalPen:
-                                {
-                                    AnimalPenBuildingCmp animalPenBuilding = buildingCmp as AnimalPenBuildingCmp;
-
-                                    animalPenBuilding.IsFlaggedToCleanManure = buildingSaveData.IsFlaggedToCleanManure;
-
-                                    animalPenBuilding.CurrentManureProgress = buildingSaveData.CurrentManureProgress;
-
-                                    if (buildingSaveData.AnimalsFilters != null)
-                                    {
-                                        foreach (var kvp in buildingSaveData.AnimalsFilters)
-                                        {
-                                            AnimalTemplate animalTemplate = AnimalTemplateDatabase.GetAnimalTemplateByName(kvp.Key);
-                                            bool flag = kvp.Value;
-                                            animalPenBuilding.SetAnimalFilter(animalTemplate, flag);
-                                        }
+                                        crafterBuildingCmp.SetCraftingRecipe(craftingRecipe, kvp.Value);
                                     }
                                 }
-                                break;
-                            case BuildingType.BeeHive:
-                                {
-                                    BeeHiveBuildingCmp beeHiveBuildingCmp = buildingCmp as BeeHiveBuildingCmp;
-                                    beeHiveBuildingCmp.SetSaveData(buildingSaveData);
-                                }
-                                break;
-                            case BuildingType.Mine:
-                                {
-                                    MineBuildingCmp mineBuildingCmp = buildingCmp as MineBuildingCmp;
-                                    mineBuildingCmp.Timer = buildingSaveData.MineBuildingTimer;
-                                    mineBuildingCmp.AutoMineSpawnedDeposits = buildingSaveData.MineBuildingAutoMineSpawnedDeposits;
-                                }
-                                break;
-                            case BuildingType.TradingPost:
-                                {
-                                    TradingPostBuildingCmp tradingPost = buildingCmp as TradingPostBuildingCmp;
-                                    Dictionary<ITradable, int> goods = new Dictionary<ITradable, int>();
+                            }
+                            break;
+                        case BuildingType.FishTrap:
+                            {
+                                FishTrap fishTrap = buildingCmp as FishTrap;
 
-                                    foreach(var kvp in buildingSaveData.TradingPostAnimals)
+                                fishTrap.CatchedItem = ItemDatabase.GetItemById(buildingSaveData.FishTrapCatchedItemId);
+                                fishTrap.CurrentTime = buildingSaveData.FishTrapCurrentTime;
+                                fishTrap.CurrentNumberOfUses = buildingSaveData.FishTrapCurrentNumberOfUses;
+                            }
+                            break;
+                        case BuildingType.Deposit:
+                            {
+                                DepositCmp depositCmp = buildingCmp as DepositCmp;
+
+                                depositCmp.IsMarkedToObtain = buildingSaveData.IsMarkedToObtain;
+                                depositCmp.MiningCurrentTime = buildingSaveData.MiningCurrentTime;
+                                depositCmp.CurrentStage = buildingSaveData.DepositCurrentStage;
+                            }
+                            break;
+                        case BuildingType.AnimalPen:
+                            {
+                                AnimalPenBuildingCmp animalPenBuilding = buildingCmp as AnimalPenBuildingCmp;
+
+                                animalPenBuilding.IsFlaggedToCleanManure = buildingSaveData.IsFlaggedToCleanManure;
+
+                                animalPenBuilding.CurrentManureProgress = buildingSaveData.CurrentManureProgress;
+
+                                if (buildingSaveData.AnimalsFilters != null)
+                                {
+                                    foreach (var kvp in buildingSaveData.AnimalsFilters)
                                     {
                                         AnimalTemplate animalTemplate = AnimalTemplateDatabase.GetAnimalTemplateByName(kvp.Key);
-                                        if(animalTemplate != null)
-                                        {
-                                            goods.Add(animalTemplate, kvp.Value);
-                                        }
+                                        bool flag = kvp.Value;
+                                        animalPenBuilding.SetAnimalFilter(animalTemplate, flag);
                                     }
-
-                                    foreach(var kvp in buildingSaveData.TradingPostItems)
-                                    {
-                                        Item item = ItemDatabase.GetItemById(kvp.Key);
-                                        if (item != null)
-                                        {
-                                            goods.Add(item, kvp.Value);
-                                        }
-                                    }
-
-                                    tradingPost.SetAssortment(goods);
                                 }
-                                break;
-                            case BuildingType.Hut:
+                            }
+                            break;
+                        case BuildingType.BeeHive:
+                            {
+                                BeeHiveBuildingCmp beeHiveBuildingCmp = buildingCmp as BeeHiveBuildingCmp;
+                                beeHiveBuildingCmp.SetSaveData(buildingSaveData);
+                            }
+                            break;
+                        case BuildingType.Mine:
+                            {
+                                MineBuildingCmp mineBuildingCmp = buildingCmp as MineBuildingCmp;
+                                mineBuildingCmp.Timer = buildingSaveData.MineBuildingTimer;
+                                mineBuildingCmp.AutoMineSpawnedDeposits = buildingSaveData.MineBuildingAutoMineSpawnedDeposits;
+                            }
+                            break;
+                        case BuildingType.TradingPost:
+                            {
+                                TradingPostBuildingCmp tradingPost = buildingCmp as TradingPostBuildingCmp;
+                                Dictionary<ITradable, int> goods = new Dictionary<ITradable, int>();
+
+                                foreach(var kvp in buildingSaveData.TradingPostAnimals)
                                 {
-                                    HutBuildingCmp hut = buildingCmp as HutBuildingCmp;
-                                    hutAssignedCreaturesPairs.Add(hut, buildingSaveData.HutAssignedCreatures);
+                                    AnimalTemplate animalTemplate = AnimalTemplateDatabase.GetAnimalTemplateByName(kvp.Key);
+                                    if(animalTemplate != null)
+                                    {
+                                        goods.Add(animalTemplate, kvp.Value);
+                                    }
                                 }
-                                break;
-                        }
+
+                                foreach(var kvp in buildingSaveData.TradingPostItems)
+                                {
+                                    Item item = ItemDatabase.GetItemById(kvp.Key);
+                                    if (item != null)
+                                    {
+                                        goods.Add(item, kvp.Value);
+                                    }
+                                }
+
+                                tradingPost.SetAssortment(goods);
+                            }
+                            break;
+                        case BuildingType.Hut:
+                            {
+                                HutBuildingCmp hut = buildingCmp as HutBuildingCmp;
+                                hutAssignedCreaturesPairs.Add(hut, buildingSaveData.HutAssignedCreatures);
+                            }
+                            break;
                     }
 
                     LoadInventoryItems(buildingCmp.Inventory, buildingSaveData.InventoryItems);

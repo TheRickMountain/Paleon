@@ -65,9 +65,9 @@ namespace Technolithic
             }
         }
 
-        public override void UpdateCompleted()
+        public override void Update()
         {
-            base.UpdateCompleted();
+            base.Update();
 
             if (Crafter.IsAutocrafter && CanCraft && IsPrepared)
             {
@@ -467,13 +467,10 @@ namespace Technolithic
         {
             base.OnItemAdded(senderInventory, item, weight);
 
-            if (IsBuilt)
+            // Проверяем, все ли предметы доставлены для крафта
+            if (TargetCraftingRecipe == null)
             {
-                // Проверяем, все ли предметы доставлены для крафта
-                if (TargetCraftingRecipe == null)
-                {
-                    TargetCraftingRecipe = GetNewTargetCraftingRecipe(null);
-                }
+                TargetCraftingRecipe = GetNewTargetCraftingRecipe(null);
             }
         }
 
@@ -537,15 +534,12 @@ namespace Technolithic
         {
             string info = base.GetInformation();
 
-            if (IsBuilt)
+            if (TargetCraftingRecipe != null)
             {
-                if (TargetCraftingRecipe != null)
-                {
-                    Item mainItem = TargetCraftingRecipe.MainItem;
-                    info += $"{Localization.GetLocalizedText("crafting")}";
-                    info += $"\n- {Localization.GetLocalizedText("recipe")}: {mainItem.Name} x{TargetCraftingRecipe.Result[mainItem]}";
-                    info += $"\n- {Localization.GetLocalizedText("progress")}: {(int)CurrentCraftingProgress}/{TargetCraftingRecipe.Time}";
-                }
+                Item mainItem = TargetCraftingRecipe.MainItem;
+                info += $"{Localization.GetLocalizedText("crafting")}";
+                info += $"\n- {Localization.GetLocalizedText("recipe")}: {mainItem.Name} x{TargetCraftingRecipe.Result[mainItem]}";
+                info += $"\n- {Localization.GetLocalizedText("progress")}: {(int)CurrentCraftingProgress}/{TargetCraftingRecipe.Time}";
             }
 
             return info;
@@ -555,18 +549,15 @@ namespace Technolithic
         {
             var saveData = base.GetSaveData();
 
-            if (IsBuilt)
+            saveData.CurrentCraftingProgress = CurrentCraftingProgress;
+            saveData.CraftingRecipesToCraft = new Dictionary<int, int>();
+
+            foreach (var kvp in craftingRecipesToCraft)
             {
-                saveData.CurrentCraftingProgress = CurrentCraftingProgress;
-                saveData.CraftingRecipesToCraft = new Dictionary<int, int>();
-
-                foreach (var kvp in craftingRecipesToCraft)
-                {
-                    saveData.CraftingRecipesToCraft.Add(kvp.Key.Id, kvp.Value);
-                }
-
-                saveData.IsCrafterPrepared = IsPrepared;
+                saveData.CraftingRecipesToCraft.Add(kvp.Key.Id, kvp.Value);
             }
+
+            saveData.IsCrafterPrepared = IsPrepared;
 
             return saveData;
         }

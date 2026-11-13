@@ -1577,6 +1577,9 @@ namespace Technolithic
             Entity entity = buildingTemplate.CreateEntity(tiles, buildingDirection,
                      GameplayScene.BuildingsRequiredBuilding ? completeImmediately : true, 0);
 
+            if (entity == null)
+                return null;
+
             if (buildingTemplate.BuildingType != BuildingType.Wall)
             {
                 GameplayScene.Instance.AddEntity(entity);

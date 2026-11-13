@@ -48,7 +48,7 @@ namespace Technolithic
                         {
                             BuildingCmp building = constructionSite.Complete();
 
-                            if(building.BuildingTemplate.PlantData != null)
+                            if(building?.BuildingTemplate.PlantData != null)
                             {
                                 (building as FarmPlot).Harvest = true;
                             }

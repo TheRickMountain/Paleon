@@ -78,6 +78,30 @@ namespace Technolithic
             Inventory.ClearRequiredWeight();
             Inventory.ClearCargo();
 
+            BuildingCmp building = BuildingTemplate.TileChange != null ? ApplyTileChange() : ReplaceWithBuilding();
+
+            OnCompletedCallback?.Invoke(this, building);
+            OnRemovedCallback?.Invoke(this);
+
+            return building;
+        }
+
+        private BuildingCmp ApplyTileChange()
+        {
+            foreach (TileInfo tileInfo in Placement.TilesInfosList)
+            {
+                BuildingTemplate.TileChange.Apply(tileInfo.Tile);
+            }
+
+            Placement.Release();
+
+            RemoveFromWorld();
+
+            return null;
+        }
+
+        private BuildingCmp ReplaceWithBuilding()
+        {
             Entity entity = Entity;
             entity.Remove(this);
 
@@ -87,9 +111,6 @@ namespace Technolithic
             building.Place(Placement.Tiles, 0);
             building.Begin();
             building.CompleteBuilding();
-
-            OnCompletedCallback?.Invoke(this, building);
-            OnRemovedCallback?.Invoke(this);
 
             return building;
         }
@@ -108,14 +129,7 @@ namespace Technolithic
 
             Inventory.ThrowCargo(Placement.GetCenterTile());
 
-            if (BuildingTemplate.BuildingType != BuildingType.Wall)
-            {
-                Entity.RemoveSelf();
-            }
-            else
-            {
-                GameplayScene.WorldManager.WallsList.Remove(Entity);
-            }
+            RemoveFromWorld();
 
             Inventory.ClearRequiredWeight();
 
@@ -184,6 +198,18 @@ namespace Technolithic
             }
 
             return true;
+        }
+
+        private void RemoveFromWorld()
+        {
+            if (BuildingTemplate.BuildingType != BuildingType.Wall)
+            {
+                Entity.RemoveSelf();
+            }
+            else
+            {
+                GameplayScene.WorldManager.WallsList.Remove(Entity);
+            }
         }
 
         private void AddBuildLabor()

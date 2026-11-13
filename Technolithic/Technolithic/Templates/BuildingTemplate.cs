@@ -66,6 +66,7 @@ namespace Technolithic
         public int Height { get; private set; }
 
         public BuildingType BuildingType { get; private set; }
+        public ITileChange TileChange { get; private set; }
         public BuildingCategory BuildingCategory { get; private set; }
         public LaborType BuildingLaborType { get; private set; }
         public ToolType BuildingToolType { get; private set; }
@@ -169,6 +170,7 @@ namespace Technolithic
             Description = Localization.GetLocalizedText(JObject["description_key"].Value<string>());
 
             BuildingType = (BuildingType)Enum.Parse(typeof(BuildingType), JObject["type"].Value<string>());
+            TileChange = CreateTileChange();
             BuildingCategory = (BuildingCategory)Enum.Parse(typeof(BuildingCategory), JObject["category"].Value<string>());
             BuildingLaborType = GetJsonParameter(JObject, "buildingLaborType", LaborType.Build);
             BuildingToolType = GetJsonParameter(JObject, "buildingToolType", ToolType.None);
@@ -395,6 +397,16 @@ namespace Technolithic
 
         public Entity CreateEntity(Tile[,] tiles, Direction direction, bool completeImmediately, float currentFuelCondition)
         {
+            if (TileChange != null && (completeImmediately || RequireBuilding == false))
+            {
+                foreach (Tile tile in tiles)
+                {
+                    TileChange.Apply(tile);
+                }
+
+                return null;
+            }
+
             Entity entity = new Entity();
 
             ConstructionSiteCmp constructionSite = null;
@@ -436,6 +448,23 @@ namespace Technolithic
             return entity;
         }
 
+        private ITileChange CreateTileChange()
+        {
+            switch (BuildingType)
+            {
+                case BuildingType.Surface:
+                    return new PlaceTileLayer(TileLayers.Surface, this);
+                case BuildingType.DestructSurface:
+                    return new RemoveTileLayer(TileLayers.Surface);
+                case BuildingType.BuildIrrigationCanal:
+                    return new PlaceTileLayer(TileLayers.IrrigationCanal, this);
+                case BuildingType.DestructIrrigationCanal:
+                    return new RemoveTileLayer(TileLayers.IrrigationCanal);
+            }
+
+            return null;
+        }
+
         public BuildingCmp CreateBuildingCmp(Direction direction)
         {
             switch (BuildingType)
@@ -458,10 +487,6 @@ namespace Technolithic
                     return new FishTrap(this, direction);
                 case BuildingType.Deposit:
                     return new DepositCmp(this, direction);
-                case BuildingType.BuildIrrigationCanal:
-                    return new BuildIrrigationCanalCmp(this, direction);
-                case BuildingType.DestructIrrigationCanal:
-                    return new DestructIrrigationCanalCmp(this, direction);
                 case BuildingType.WindPoweredEnergySource:
                     return new WindPoweredEnergySourceCmp(this, direction);
                 case BuildingType.CreaturePoweredEnergySource:
@@ -478,10 +503,6 @@ namespace Technolithic
                     return new LighterCmp(this, direction);
                 case BuildingType.Noria:
                     return new NoriaBuildingCmp(this, direction);
-                case BuildingType.Surface:
-                    return new SurfaceBuilding(this, direction);
-                case BuildingType.DestructSurface:
-                    return new DestructSurfaceBuilding(this, direction);
                 case BuildingType.TradingPost:
                     return new TradingPostBuildingCmp(this, direction);
                 case BuildingType.None:

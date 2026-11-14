@@ -65,6 +65,12 @@ namespace Technolithic
                     exclamationMarkImage.Active = false;
                     buildingButton.AddChildNode(exclamationMarkImage);
 
+                    IReadOnlyList<Item> tools = building.GetBuildingTools();
+                    if (tools.Count > 0)
+                    {
+                        buildingButton.AddChildNode(CreateToolIcon(buildingButton, tools));
+                    }
+
                     buttonsBuildings.Add(buildingButton, building);
                     buildingsButtons.Add(building, buildingButton);
                 }
@@ -94,6 +100,19 @@ namespace Technolithic
             {
                 GameplayScene.MouseOnUI = true;
             }
+        }
+
+        private MImageUI CreateToolIcon(MNode buildingButton, IReadOnlyList<Item> tools)
+        {
+            MImageUI toolIcon = new MImageUI(ParentNode.Scene);
+            toolIcon.Image.Texture = tools[0].Icon;
+            toolIcon.Width = tools[0].Icon.Width * 2;
+            toolIcon.Height = tools[0].Icon.Height * 2;
+            toolIcon.X = buildingButton.Width - toolIcon.Width - 4;
+            toolIcon.Y = buildingButton.Height - toolIcon.Height - 4;
+            toolIcon.AddComponent(new CyclingImageScript(tools.Select(tool => tool.Icon).ToList()));
+
+            return toolIcon;
         }
 
         private void OnBuildingButtonPressed(bool value, ButtonScript buttonScript)

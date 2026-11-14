@@ -159,7 +159,25 @@ namespace Technolithic
                 baseInfo += $"\n/c[#3690FF]{Localization.GetLocalizedText("travel_speed")}: " + MovementSpeed + "%/cd";
             }
 
+            IReadOnlyList<Item> tools = GetBuildingTools();
+            if (tools.Count > 0)
+            {
+                baseInfo += $"\n/c[#3690FF]{Localization.GetLocalizedText("optional_tools")}: {string.Join(", ", tools.Select(tool => tool.Name))}/cd";
+            }
+
             return baseInfo;
+        }
+
+        // Tools that speed up building it; for now none of them is required.
+        public IReadOnlyList<Item> GetBuildingTools()
+        {
+            if (BuildingToolType == ToolType.None)
+                return Array.Empty<Item>();
+
+            return ItemDatabase.Tools[CreatureType.Settler][BuildingToolType]
+                .Concat(ItemDatabase.Tools[CreatureType.Animal][BuildingToolType])
+                .OrderBy(tool => tool.Tool.Level)
+                .ToList();
         }
 
         public BuildingTemplate(string json)

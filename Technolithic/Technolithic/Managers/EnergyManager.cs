@@ -9,8 +9,7 @@ namespace Technolithic
 {
     public enum EnergyType
     {
-        Kinetic,
-        Gas
+        Kinetic
     }
 
     public class EnergyManager

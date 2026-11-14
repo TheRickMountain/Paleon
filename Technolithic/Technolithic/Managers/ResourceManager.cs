@@ -42,7 +42,6 @@ namespace Technolithic
         public static MyTexture ExclamationMarkIcon { get; private set; }
         public static MyTexture NoFuelIcon { get; private set; }
         public static MyTexture NoEnergyIcon { get; private set; }
-        public static MyTexture NoGasIcon { get; private set; }
         public static MyTexture FuelIcon { get; private set; }
         public static MyTexture ResourcesLimitIcon { get; private set; }
         public static MyTexture ResourcesIcon { get; private set; }
@@ -201,7 +200,6 @@ namespace Technolithic
             NoFuelIcon = uiSpriteSheet.GetSubtexture(0, 176, 16, 16);
             FuelIcon = uiSpriteSheet.GetSubtexture(16, 176, 16, 16);
             NoEnergyIcon = uiSpriteSheet.GetSubtexture(0, 192, 16, 16);
-            NoGasIcon = uiSpriteSheet.GetSubtexture(16, 192, 16, 16);
             ResourcesLimitIcon = uiSpriteSheet.GetSubtexture(128, 96, 16, 16);
             ResourcesIcon = uiSpriteSheet.GetSubtexture(192, 80, 16, 16);
             DestructSurfaceIcon = uiSpriteSheet.GetSubtexture(0, 32, 16, 16);

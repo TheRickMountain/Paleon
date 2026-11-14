@@ -260,11 +260,6 @@ namespace Technolithic
                 {
                     switch (BuildingTemplate.EnergyConsumer.EnergyType)
                     {
-                        case EnergyType.Gas:
-                            {
-                                ResourceManager.NoGasIcon.Draw(new Rectangle(popUpPositionX, popUpPositionY, 16, 16), Color.White * 0.75f);
-                            }
-                            break;
                         case EnergyType.Kinetic:
                             {
                                 ResourceManager.NoEnergyIcon.Draw(new Rectangle(popUpPositionX, popUpPositionY, 16, 16), Color.White * 0.75f);

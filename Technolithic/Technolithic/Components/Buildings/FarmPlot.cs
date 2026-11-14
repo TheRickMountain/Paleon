@@ -11,8 +11,6 @@ namespace Technolithic
 
         private bool harvest;
         private bool chop;
-        private bool fertilize;
-        private bool irrigate;
 
         public bool Harvest
         {
@@ -84,15 +82,15 @@ namespace Technolithic
 
         public bool Fertilize
         {
-            get { return fertilize; }
+            get { return GetCenterTile().FertilizeFarmland; }
             set
             {
-                if (fertilize == value)
+                if (Fertilize == value)
                     return;
 
-                fertilize = value;
+                GetCenterTile().FertilizeFarmland = value;
 
-                if (fertilize == false)
+                if (value == false)
                 {
                     if (Inventory.GetInventoryRequiredWeight(manure) >= 1)
                     {
@@ -104,15 +102,15 @@ namespace Technolithic
 
         public bool Irrigate
         {
-            get { return irrigate; }
+            get { return GetCenterTile().IrrigateFarmland; }
             set
             {
-                if (irrigate == value)
+                if (Irrigate == value)
                     return;
 
-                irrigate = value;
+                GetCenterTile().IrrigateFarmland = value;
 
-                if (irrigate == false)
+                if (value == false)
                 {
                     if (Inventory.GetInventoryRequiredWeight(potOfWater) >= 1)
                     {
@@ -242,12 +240,12 @@ namespace Technolithic
 
                 UpdateGrowing();
 
-                if (irrigate && centerTile.MoistureLevel <= 0 && Inventory.GetInventoryRequiredWeight(potOfWater) == 0)
+                if (Irrigate && centerTile.MoistureLevel <= 0 && Inventory.GetInventoryRequiredWeight(potOfWater) == 0)
                 {
                     Inventory.AddRequiredWeight(potOfWater, 1);
                 }
 
-                if (fertilize && centerTile.FertilizerLevel <= 0 && Inventory.GetInventoryRequiredWeight(manure) == 0)
+                if (Fertilize && centerTile.FertilizerLevel <= 0 && Inventory.GetInventoryRequiredWeight(manure) == 0)
                 {
                     Inventory.AddRequiredWeight(manure, 1);
                 }
@@ -287,22 +285,7 @@ namespace Technolithic
                 // Если растение было посажено поселенцем, то после сбора урожая это же растения будет посажено заново
                 if (IsWild == false)
                 {
-                    bool irrigate = Irrigate;
-                    bool fertilize = Fertilize;
-
-                    Entity newFarmPlotEntity = GameplayScene.WorldManager.TryToBuild(BuildingTemplate,
-                        GetCenterTile().X, GetCenterTile().Y, Direction);
-
-                    ConstructionSiteCmp constructionSite = newFarmPlotEntity.GetConstructionSite();
-                    if (constructionSite != null)
-                    {
-                        constructionSite.OnCompletedCallback += (site, building) =>
-                            SetCareSettings(building as FarmPlot, irrigate, fertilize);
-                    }
-                    else
-                    {
-                        SetCareSettings(newFarmPlotEntity.Get<FarmPlot>(), irrigate, fertilize);
-                    }
+                    GameplayScene.WorldManager.TryToBuild(BuildingTemplate, GetCenterTile().X, GetCenterTile().Y, Direction);
                 }
             }
             else
@@ -311,12 +294,6 @@ namespace Technolithic
                 growthPercent = 70;
                 AddGrowingProgress(0);
             }
-        }
-
-        private static void SetCareSettings(FarmPlot farmPlot, bool irrigate, bool fertilize)
-        {
-            farmPlot.Irrigate = irrigate;
-            farmPlot.Fertilize = fertilize;
         }
 
         private void HarvestPlant()
@@ -347,29 +324,7 @@ namespace Technolithic
 
         private void UpdateFarmPlotView()
         {
-            if (IsWild || IsDestroyed)
-            {
-                centerTile.GroundType = GroundType.Ground;
-            }
-            else
-            {
-                if (centerTile.MoistureLevel > 0 && centerTile.FertilizerLevel > 0)
-                {
-                    centerTile.GroundType = GroundType.FarmPlotWetFertilized;
-                }
-                else if (centerTile.MoistureLevel > 0)
-                {
-                    centerTile.GroundType = GroundType.FarmPlotWet;
-                }
-                else if (centerTile.FertilizerLevel > 0)
-                {
-                    centerTile.GroundType = GroundType.FarmPlotFertilized;
-                }
-                else
-                {
-                    centerTile.GroundType = GroundType.FarmPlot;
-                }
-            }
+            centerTile.UpdateFarmlandView();
         }
 
         public void MakeWild()
@@ -378,8 +333,6 @@ namespace Technolithic
 
             Irrigate = false;
             Fertilize = false;
-
-            UpdateFarmPlotView();
         }
 
         private float GetGrowthSpeedPerMinute()

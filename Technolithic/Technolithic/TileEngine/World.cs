@@ -80,6 +80,8 @@ namespace Technolithic
 
                         tile.MoistureLevel = tileSaveData.MoistureLevel;
                         tile.FertilizerLevel = tileSaveData.FertilizerLevel;
+                        tile.IrrigateFarmland = tileSaveData.IrrigateFarmland;
+                        tile.FertilizeFarmland = tileSaveData.FertilizeFarmland;
                         tile.IrrigationStrength = tileSaveData.IrrigationStrength;
 
                         if (tileSaveData.InventoryItems != null)

@@ -16,6 +16,8 @@ namespace Technolithic
         public List<Tuple<int, int, float>> InventoryItems { get; set; }
         public float MoistureLevel { get; set; }
         public float FertilizerLevel { get; set; }
+        public bool IrrigateFarmland { get; set; }
+        public bool FertilizeFarmland { get; set; }
         public int IrrigationStrength { get; set; }
     }
 }

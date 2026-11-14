@@ -270,6 +270,35 @@ namespace Technolithic
         public float MoistureLevel { get; set; }
         public float FertilizerLevel { get; set; }
 
+        public bool IrrigateFarmland { get; set; }
+        public bool FertilizeFarmland { get; set; }
+
+        public bool IsFarmland => IsFarmlandGround(GroundType);
+
+        public static bool IsFarmlandGround(GroundType groundType)
+        {
+            return groundType == GroundType.FarmPlot || groundType == GroundType.FarmPlotWet
+                || groundType == GroundType.FarmPlotFertilized || groundType == GroundType.FarmPlotWetFertilized;
+        }
+
+        public void UpdateFarmlandView()
+        {
+            if (IsFarmland == false)
+                return;
+
+            bool isWet = MoistureLevel > 0;
+            bool isFertilized = FertilizerLevel > 0;
+
+            if (isWet && isFertilized)
+                GroundType = GroundType.FarmPlotWetFertilized;
+            else if (isWet)
+                GroundType = GroundType.FarmPlotWet;
+            else if (isFertilized)
+                GroundType = GroundType.FarmPlotFertilized;
+            else
+                GroundType = GroundType.FarmPlot;
+        }
+
 
         public int IrrigationStrength { get; set; }
 
@@ -737,6 +766,8 @@ namespace Technolithic
             tileData.MarkType = (int)MarkType;
             tileData.MoistureLevel = MoistureLevel;
             tileData.FertilizerLevel = FertilizerLevel;
+            tileData.IrrigateFarmland = IrrigateFarmland;
+            tileData.FertilizeFarmland = FertilizeFarmland;
             tileData.IrrigationStrength = IrrigationStrength;
             tileData.InventoryItems = new List<Tuple<int, int, float>>();
 

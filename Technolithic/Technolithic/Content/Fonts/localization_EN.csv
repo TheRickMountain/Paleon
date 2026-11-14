@@ -94,7 +94,6 @@ bronze_pick,Bronze pick
 bronze_sickle,Bronze sickle
 bronze_smelting,Bronze smelting
 bronze_spear,Bronze spear
-build_irrigation_canal,Build irrigation canal
 building,Building
 buildings,Buildings
 bunch_of_peas,Bunch of peas
@@ -297,6 +296,8 @@ iron_smithy,Iron smithy
 iron_spear,Iron spear
 irrigate,Irrigate
 irrigation,Irrigation
+irrigation_canal,Irrigation canal
+irrigation_canal_description,Carries water from a reservoir. A filled canal moistens the soil around it
 irrigation_canals,Irrigation canals
 irrigation_overlay,Overlay: Moisture
 items,Items

@@ -94,7 +94,6 @@ bronze_pick,Бронзовая кирка
 bronze_sickle,Бронзовый серп
 bronze_smelting,Выплавка бронзы
 bronze_spear,Бронзовое копье
-build_irrigation_canal,Построить оросительный канал
 building,Строительство
 buildings,Строения
 bunch_of_peas,Связка гороха
@@ -297,6 +296,8 @@ iron_smithy,Железная кузница
 iron_spear,Железное копье
 irrigate,Орошать
 irrigation,Орошение
+irrigation_canal,Оросительный канал
+irrigation_canal_description,Проводит воду от водоёма. Заполненный канал увлажняет землю вокруг себя
 irrigation_canals,Оросительные каналы
 irrigation_overlay,Оверлей: влажность
 items,Предметы

@@ -96,6 +96,7 @@ bronze_smelting,Bronz eritme
 bronze_spear,Bronz mizrak
 build_irrigation_canal,Sulama kanali insa et
 building,Insa etmek
+buildings,
 bunch_of_peas,Bir avuc bezelye
 burial,Cenaze
 buying,Satin al
@@ -174,8 +175,14 @@ defense,Savunma
 depends_on_wind_speed,Rüzgar hizina baglidir
 deposit,Depozito
 destruct,Yik
+destruct_farmland,
+destruct_filter_all_hotkey,
+destruct_filter_only_hotkey,
+destruct_filter_toggle_hotkey,
+destruct_filters,
 destruct_irrigation_canal,Sulama kanali yik
 destruct_surface,Yüzeyi yik
+destruct_wall,
 dirt_path,Toprak yol
 dirty_animal_pen,Kirli hayvan agili
 disable_all,Hepsini etkisiz hale getir
@@ -211,6 +218,8 @@ exit_to_main_menu,Ana menüye cik
 experience_points,Tecrübe puanlari
 farm_plot,Tarla bolgesi
 farming,Tarim
+farmland,
+farmland_description,
 felling,Odunculuk
 fermenting_pot,Fermantasyon kabi
 fertilize,Gübreleme
@@ -269,6 +278,7 @@ hunger,Aclik
 hunt,Avla
 hunting,Avcilik
 hut,Kulübe
+illumination_overlay,
 information,Information
 ingredients,Icindekiler
 inventory,Inventory
@@ -288,6 +298,7 @@ iron_spear,Demir mizrak
 irrigate,Sulama
 irrigation,Sulama yapmak
 irrigation_canals,Sulama kanali
+irrigation_overlay,
 items,Esyalar
 kiln,Seramik firini
 kinetic,Kinetik
@@ -328,6 +339,7 @@ moisture,Nem
 mortar_and_pestle,Havan tokmagi
 mouflon,Yabani koyun
 movement_speed,Hareket hizi
+movement_speed_overlay,
 mudbrick,Kerpic
 mudbrick_dryer,Kerpic kurutucusu
 mudbrick_floor,Kerpic zemin
@@ -351,6 +363,7 @@ oil_lamp_description,"Aydınlatma için kullanılır, yakıt olarak yağlar ve h
 old,Yasli
 open,Ac
 open_game_data_folder,Oyunun dosyalarini ac
+optional_tools,
 oven,Firin
 paleolithic,Paleolitik
 palisade,cit

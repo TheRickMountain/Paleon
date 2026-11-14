@@ -96,6 +96,7 @@ bronze_smelting,Bronze smelting
 bronze_spear,Bronze spear
 build_irrigation_canal,Build irrigation canal
 building,Building
+buildings,Buildings
 bunch_of_peas,Bunch of peas
 burial,Burial
 buying,Buying
@@ -174,8 +175,14 @@ defense,Defense
 depends_on_wind_speed,Depends on wind speed
 deposit,Deposit
 destruct,Destruct
+destruct_farmland,Remove farmland
+destruct_filter_all_hotkey,[0] Turn on all filters
+destruct_filter_only_hotkey,[Shift+{0}] Keep only this filter
+destruct_filter_toggle_hotkey,[{0}] Turn on or off
+destruct_filters,Destruction filters
 destruct_irrigation_canal,Destruct irrigation canal
 destruct_surface,Destruct surface
+destruct_wall,Destruct wall
 dirt_path,Dirt path
 dirty_animal_pen,Dirty animal pen
 disable_all,Disable all
@@ -211,6 +218,8 @@ exit_to_main_menu,Exit to main menu
 experience_points,Experience points
 farm_plot,Farm plot
 farming,Farming
+farmland,Farmland
+farmland_description,Plowed land. Plants can only be sown on farmland
 felling,Felling
 fermenting_pot,Fermenting pot
 fertilize,Fertilize
@@ -269,6 +278,7 @@ hunger,Hunger
 hunt,Hunt
 hunting,Hunting
 hut,Hut
+illumination_overlay,Overlay: Illumination
 information,Information
 ingredients,Ingredients
 inventory,Inventory
@@ -288,6 +298,7 @@ iron_spear,Iron spear
 irrigate,Irrigate
 irrigation,Irrigation
 irrigation_canals,Irrigation canals
+irrigation_overlay,Overlay: Moisture
 items,Items
 kiln,Kiln
 kinetic,Kinetic
@@ -328,6 +339,7 @@ moisture,Moisture
 mortar_and_pestle,Mortar and pestle
 mouflon,Mouflon
 movement_speed,Movement speed
+movement_speed_overlay,Overlay: Movement speed
 mudbrick,Mudbrick
 mudbrick_dryer,Mudbrick dryer
 mudbrick_floor,Mudbrick floor
@@ -351,6 +363,7 @@ oil_lamp_description,"Used for lighting, uses oils and animal fats as fuel"
 old,Old
 open,Open
 open_game_data_folder,Open game data folder
+optional_tools,Optional tools
 oven,Oven
 paleolithic,Paleolithic
 palisade,Palisade
@@ -585,12 +598,3 @@ yarn,Yarn
 сhop_automatically,Chop automatically
 сhop_automatically_description,Automatically chop the plant after full growth
 сut_automatically_description,Automatically cut the plant after full growth
-irrigation_overlay,Overlay: Moisture
-illumination_overlay,Overlay: Illumination
-movement_speed_overlay,Overlay: Movement speed
-buildings,Buildings
-destruct_filters,Destruction filters
-destruct_filter_toggle_hotkey,[{0}] Turn on or off
-destruct_filter_only_hotkey,[Shift+{0}] Keep only this filter
-destruct_filter_all_hotkey,[0] Turn on all filters
-destruct_wall,Destruct wall

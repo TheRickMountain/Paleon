@@ -96,6 +96,7 @@ bronze_smelting,Выплавка бронзы
 bronze_spear,Бронзовое копье
 build_irrigation_canal,Построить оросительный канал
 building,Строительство
+buildings,Строения
 bunch_of_peas,Связка гороха
 burial,Захоронение
 buying,Покупка
@@ -174,8 +175,14 @@ defense,Защита
 depends_on_wind_speed,Зависит от скорости ветра
 deposit,Залежь
 destruct,Разрушить
+destruct_farmland,Убрать пашню
+destruct_filter_all_hotkey,[0] Включить все фильтры
+destruct_filter_only_hotkey,[Shift+{0}] Оставить только этот фильтр
+destruct_filter_toggle_hotkey,[{0}] Включить или выключить
+destruct_filters,Фильтры разрушения
 destruct_irrigation_canal,Разрушить оросительный канал
 destruct_surface,Разрушить покрытие
+destruct_wall,Разрушить стену
 dirt_path,Грунтовая тропинка
 dirty_animal_pen,Грязный загон
 disable_all,Запретить все
@@ -211,6 +218,8 @@ exit_to_main_menu,Выйти в главное меню
 experience_points,Очки опыта
 farm_plot,Фермерский участок
 farming,Земледелие
+farmland,Пашня
+farmland_description,Вспаханная земля. Растения можно сеять только на пашне
 felling,Рубка
 fermenting_pot,Бродильный котел
 fertilize,Удобрять
@@ -269,6 +278,7 @@ hunger,Голод
 hunt,Охотиться
 hunting,Охота
 hut,Хижина
+illumination_overlay,Оверлей: освещенность
 information,Информация
 ingredients,Ингредиенты
 inventory,Инвентарь
@@ -288,6 +298,7 @@ iron_spear,Железное копье
 irrigate,Орошать
 irrigation,Орошение
 irrigation_canals,Оросительные каналы
+irrigation_overlay,Оверлей: влажность
 items,Предметы
 kiln,Печь для обжига
 kinetic,Кинетический
@@ -328,6 +339,7 @@ moisture,Влажность
 mortar_and_pestle,Ступа
 mouflon,Муфлон
 movement_speed,Скорость перемещения
+movement_speed_overlay,Оверлей: скорость перемещения
 mudbrick,Саман
 mudbrick_dryer,Сушилка для самана
 mudbrick_floor,Саманный пол
@@ -351,6 +363,7 @@ oil_lamp_description,"Используется для освещения, исп
 old,Старый
 open,Открыть
 open_game_data_folder,Открыть папку с данными игры
+optional_tools,Опциональные инструменты
 oven,Печь
 paleolithic,Палеолит
 palisade,Частокол
@@ -585,12 +598,3 @@ yarn,Пряжа
 сhop_automatically,Срубить автоматически
 сhop_automatically_description,Автоматически срубить растение после полного произрастания
 сut_automatically_description,Автоматически срезать растение после полного произрастания
-irrigation_overlay,Оверлей: влажность
-illumination_overlay,Оверлей: освещенность
-movement_speed_overlay,Оверлей: скорость перемещения
-buildings,Строения
-destruct_filters,Фильтры разрушения
-destruct_filter_toggle_hotkey,[{0}] Включить или выключить
-destruct_filter_only_hotkey,[Shift+{0}] Оставить только этот фильтр
-destruct_filter_all_hotkey,[0] Включить все фильтры
-destruct_wall,Разрушить стену

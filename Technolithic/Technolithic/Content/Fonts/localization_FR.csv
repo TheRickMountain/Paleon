@@ -96,6 +96,7 @@ bronze_smelting,Fonderie de bronze
 bronze_spear,Lance en bronze
 build_irrigation_canal,Construire canal d'irrigation
 building,Construction
+buildings,
 bunch_of_peas,Botte de petits pois
 burial,Enterrement
 buying,Buying
@@ -174,8 +175,14 @@ defense,Défense
 depends_on_wind_speed,Dépend de la vitesse du vent
 deposit,Dépôt
 destruct,Détruire
+destruct_farmland,
+destruct_filter_all_hotkey,
+destruct_filter_only_hotkey,
+destruct_filter_toggle_hotkey,
+destruct_filters,
 destruct_irrigation_canal,Détruire canal d'irrigation
 destruct_surface,Destruct surface
+destruct_wall,
 dirt_path,Chemin de terre
 dirty_animal_pen,Enclos pour animal sale
 disable_all,Désactiver tout
@@ -211,6 +218,8 @@ exit_to_main_menu,Retourner au Menu Principal
 experience_points,Points d'expérience
 farm_plot,Parcelle agricole
 farming,Agriculture
+farmland,
+farmland_description,
 felling,Abattage
 fermenting_pot,Jarre de fermentation
 fertilize,Fertiliser
@@ -269,6 +278,7 @@ hunger,Faim
 hunt,Chasser
 hunting,Chasse
 hut,Hutte
+illumination_overlay,
 information,Information
 ingredients,Ingrédients
 inventory,Inventory
@@ -288,6 +298,7 @@ iron_spear,Lance en fer
 irrigate,Arroser
 irrigation,Irrigation
 irrigation_canals,Canaux d'irrigation
+irrigation_overlay,
 items,Objets
 kiln,Four
 kinetic,Cinétique
@@ -328,6 +339,7 @@ moisture,Humidité
 mortar_and_pestle,Mortier et pilon
 mouflon,Mouflon
 movement_speed,Vitesse de déplacement
+movement_speed_overlay,
 mudbrick,Brique en argile
 mudbrick_dryer,Séchoir à briques
 mudbrick_floor,Sol en argile
@@ -351,6 +363,7 @@ oil_lamp_description,"Utilisée pour l'éclairage, utilise des huiles et des gra
 old,Vieux
 open,Ouvrir
 open_game_data_folder,Ouvrir dossier données du jeu
+optional_tools,
 oven,Four
 paleolithic,Paléolithique
 palisade,Palissade

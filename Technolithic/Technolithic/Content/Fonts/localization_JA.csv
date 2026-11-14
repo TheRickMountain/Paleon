@@ -96,6 +96,7 @@ bronze_smelting,青銅の製錬
 bronze_spear,青銅の槍
 build_irrigation_canal,灌漑用水路の建設
 building,建物
+buildings,
 bunch_of_peas,エンドウ豆の束
 burial,埋葬
 buying,購入
@@ -174,8 +175,14 @@ defense,防御
 depends_on_wind_speed,風速により異なります
 deposit,貯蔵量
 destruct,破壊
+destruct_farmland,
+destruct_filter_all_hotkey,
+destruct_filter_only_hotkey,
+destruct_filter_toggle_hotkey,
+destruct_filters,
 destruct_irrigation_canal,灌漑用水路の破壊
 destruct_surface,路面の破壊
+destruct_wall,
 dirt_path,土砂の道
 dirty_animal_pen,汚れた動物の囲い
 disable_all,全て無効
@@ -211,6 +218,8 @@ exit_to_main_menu,メインメニューへ戻る
 experience_points,経験値
 farm_plot,農場区画
 farming,農業
+farmland,
+farmland_description,
 felling,伐採
 fermenting_pot,発酵用の壺
 fertilize,肥料
@@ -269,6 +278,7 @@ hunger,飢餓
 hunt,狩猟
 hunting,狩猟
 hut,小屋
+illumination_overlay,
 information,情報
 ingredients,材料
 inventory,所持品
@@ -288,6 +298,7 @@ iron_spear,鉄の槍
 irrigate,水まき
 irrigation,灌漑
 irrigation_canals,灌漑用水路
+irrigation_overlay,
 items,アイテム
 kiln,窯
 kinetic,運動的
@@ -329,6 +340,7 @@ moisture,水分
 mortar_and_pestle,すり鉢とすりこぎ
 mouflon,ムフロン
 movement_speed,移動速度
+movement_speed_overlay,
 mudbrick,泥レンガ
 mudbrick_dryer,泥レンガ乾燥機
 mudbrick_floor,日干しレンガの床
@@ -353,6 +365,7 @@ oil_lamp_description,照明に用いられ、燃料として油や動物性油�
 old,老年
 open,開く
 open_game_data_folder,ゲームデータフォルダを開く
+optional_tools,
 oven,かまど
 paleolithic,旧石器時代
 palisade,くい柵

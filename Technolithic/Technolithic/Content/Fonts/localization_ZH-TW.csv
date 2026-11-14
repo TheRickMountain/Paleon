@@ -96,6 +96,7 @@ bronze_smelting,冶煉青銅礦
 bronze_spear,青銅矛
 build_irrigation_canal,修建水渠
 building,建造
+buildings,
 bunch_of_peas,一把豌豆
 burial,葬禮
 buying,購買
@@ -174,8 +175,14 @@ defense,防禦
 depends_on_wind_speed,取決於風速。
 deposit,礦床
 destruct,拆除
+destruct_farmland,
+destruct_filter_all_hotkey,
+destruct_filter_only_hotkey,
+destruct_filter_toggle_hotkey,
+destruct_filters,
 destruct_irrigation_canal,拆除水渠
 destruct_surface,拆除地板
+destruct_wall,
 dirt_path,土路
 dirty_animal_pen,骯髒的畜欄
 disable_all,全部停用
@@ -211,6 +218,8 @@ exit_to_main_menu,回到主選單
 experience_points,經驗值
 farm_plot,農地
 farming,農耕
+farmland,
+farmland_description,
 felling,砍伐
 fermenting_pot,釀造罐
 fertilize,施肥
@@ -269,6 +278,7 @@ hunger,飢餓
 hunt,狩獵
 hunting,狩獵
 hut,房屋
+illumination_overlay,
 information,Information
 ingredients,原料
 inventory,Inventory
@@ -288,6 +298,7 @@ iron_spear,鐵矛
 irrigate,澆水
 irrigation,澆水
 irrigation_canals,水渠
+irrigation_overlay,
 items,物品
 kiln,陶窯
 kinetic,動力學
@@ -328,6 +339,7 @@ moisture,水分
 mortar_and_pestle,石臼和杵
 mouflon,摩弗倫羊
 movement_speed,移動速度
+movement_speed_overlay,
 mudbrick,泥磚
 mudbrick_dryer,泥磚乾燥處
 mudbrick_floor,泥磚地板
@@ -351,6 +363,7 @@ oil_lamp_description,使用油或動物脂肪照明。
 old,老年
 open,開
 open_game_data_folder,開啟遊戲資料夾
+optional_tools,
 oven,窯爐
 paleolithic,舊石器時代
 palisade,柵欄

@@ -7,7 +7,7 @@
   "category": "Floor",
   "animated": false,
   "rotatable": false,
-  "cloneable": true,
+  "cloneable": false,
   "requireBuilding": true,
   "destructible": true,
   "movementSpeed": 100,

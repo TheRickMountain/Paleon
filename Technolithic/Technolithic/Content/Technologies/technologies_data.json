@@ -207,7 +207,7 @@
   {
     "Id": 46,
     "Name": "irrigation_canals",
-    "HasIcon": true,
+    "HasIcon": false,
     "Age": "Neolithic",
     "RequiredXP": 500,
     "UnlockedBuildings": ["build_irrigation_canal"],

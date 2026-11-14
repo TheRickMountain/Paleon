@@ -13,7 +13,6 @@ namespace Technolithic
         private const char WallPatternId = 'W';
         private const char PlowablePatternId = 'O';
         private const char FarmlandPatternId = 'F';
-        private const char DiggablePatternId = 'E';
 
         public bool CheckTileByGroundPattern(BuildingTemplate buildingTemplate, char[,] groundPatternMatrix, Tile mouseTile, Tile checkTile,
             bool isConstructionSite = true)
@@ -41,6 +40,11 @@ namespace Technolithic
                         }
 
                         if (checkTile.WallId != -1 && groundPatternId != WallPatternId)
+                        {
+                            return false;
+                        }
+
+                        if (checkTile.IsFarmland && buildingTemplate.IsAllowedOnFarmland == false)
                         {
                             return false;
                         }
@@ -205,8 +209,6 @@ namespace Technolithic
                         && (checkTile.GroundType == GroundType.Ground || checkTile.GroundType == GroundType.Grass);
                 case FarmlandPatternId:
                     return checkTile.IsFarmland;
-                case DiggablePatternId:
-                    return checkTile.GroundTopType == GroundTopType.None && checkTile.SurfaceId == -1 && checkTile.IsFarmland == false;
             }
 
             return false;

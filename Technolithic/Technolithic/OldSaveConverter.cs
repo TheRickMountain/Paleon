@@ -201,13 +201,20 @@ namespace Technolithic
             }
 
             WallsToTileLayerMigration.Apply(saveManager.Data, GetWallId);
-            FarmlandMigration.Apply(saveManager.Data, IsCrop);
+            FarmlandMigration.Apply(saveManager.Data, IsCrop, IsAllowedOnFarmland);
         }
 
         private static bool IsCrop(string templateName)
         {
             return Engine.Instance.Buildings.TryGetValue(templateName, out BuildingTemplate template)
                 && template.BuildingType == BuildingType.FarmPlot;
+        }
+
+        // Unknown templates are dropped on load anyway, so their ground is left as is.
+        private static bool IsAllowedOnFarmland(string templateName)
+        {
+            return Engine.Instance.Buildings.TryGetValue(templateName, out BuildingTemplate template) == false
+                || template.IsAllowedOnFarmland;
         }
 
         private static int? GetWallId(string templateName)

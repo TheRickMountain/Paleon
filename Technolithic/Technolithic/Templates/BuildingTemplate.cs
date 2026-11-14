@@ -71,6 +71,7 @@ namespace Technolithic
         public BuildingType BuildingType { get; private set; }
         public ITileChange TileChange { get; private set; }
         public bool RemovesTileLayer => TileChange is RemoveTileLayer;
+        public bool IsAllowedOnFarmland => BuildingType == BuildingType.FarmPlot || BuildingType == BuildingType.DestructFarmland;
         public BuildingCategory BuildingCategory { get; private set; }
         public LaborType BuildingLaborType { get; private set; }
         public ToolType BuildingToolType { get; private set; }

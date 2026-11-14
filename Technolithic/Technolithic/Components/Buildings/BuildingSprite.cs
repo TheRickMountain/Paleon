@@ -4,7 +4,8 @@
     {
         public static AnimatedSprite Create(BuildingTemplate template, Direction direction)
         {
-            if (template.BuildingType == BuildingType.Wall)
+            // Walls are drawn by the tile map; removal sites show the usual destruction mark instead.
+            if (template.BuildingType == BuildingType.Wall || template.RemovesTileLayer)
                 return null;
 
             MyTexture texture = template.Textures[direction];

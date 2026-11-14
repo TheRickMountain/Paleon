@@ -68,6 +68,7 @@ namespace Technolithic
 
         public BuildingType BuildingType { get; private set; }
         public ITileChange TileChange { get; private set; }
+        public bool RemovesTileLayer => TileChange is RemoveTileLayer;
         public BuildingCategory BuildingCategory { get; private set; }
         public LaborType BuildingLaborType { get; private set; }
         public ToolType BuildingToolType { get; private set; }
@@ -234,28 +235,12 @@ namespace Technolithic
 
                         Textures = new Dictionary<Direction, MyTexture>();
 
-                        TextureWidth = JObject["texture"]["width"].Value<int>();
-                        TextureHeight = JObject["texture"]["height"].Value<int>();
-
-                        if (Rotatable)
+                        // Removal sites only show the destruction mark, so they have no texture.
+                        if (RemovesTileLayer == false)
                         {
-                            Textures.Add(Direction.DOWN, ResourceManager.GetTexture(JObject["texture"]["name"].Value<string>() + "_down"));
-                            Textures.Add(Direction.UP, ResourceManager.GetTexture(JObject["texture"]["name"].Value<string>() + "_up"));
-                            Textures.Add(Direction.LEFT, ResourceManager.GetTexture(JObject["texture"]["name"].Value<string>() + "_left"));
-                            Textures.Add(Direction.RIGHT, ResourceManager.GetTexture(JObject["texture"]["name"].Value<string>() + "_right"));
-                        
-                            Icons.Add(Direction.DOWN, Textures[Direction.DOWN].GetSubtexture(0, 0, TextureWidth, TextureHeight));
-                            Icons.Add(Direction.UP, Textures[Direction.UP].GetSubtexture(0, 0, TextureWidth, TextureHeight));
-                            Icons.Add(Direction.LEFT, Textures[Direction.LEFT].GetSubtexture(0, 0, TextureHeight, TextureWidth));
-                            Icons.Add(Direction.RIGHT, Textures[Direction.RIGHT].GetSubtexture(0, 0, TextureHeight, TextureWidth));
+                            LoadTextures();
                         }
-                        else
-                        {
-                            Textures.Add(Direction.DOWN, ResourceManager.GetTexture(JObject["texture"]["name"].Value<string>()));
 
-                            Icons.Add(Direction.DOWN, Textures[Direction.DOWN].GetSubtexture(0, 0, TextureWidth, TextureHeight));
-                        }
-                        
                         Width = JObject["width"].Value<int>();
                         Height = JObject["height"].Value<int>();
 
@@ -471,6 +456,32 @@ namespace Technolithic
             }
 
             return entity;
+        }
+
+        private void LoadTextures()
+        {
+            string textureName = JObject["texture"]["name"].Value<string>();
+            TextureWidth = JObject["texture"]["width"].Value<int>();
+            TextureHeight = JObject["texture"]["height"].Value<int>();
+
+            if (Rotatable)
+            {
+                Textures.Add(Direction.DOWN, ResourceManager.GetTexture(textureName + "_down"));
+                Textures.Add(Direction.UP, ResourceManager.GetTexture(textureName + "_up"));
+                Textures.Add(Direction.LEFT, ResourceManager.GetTexture(textureName + "_left"));
+                Textures.Add(Direction.RIGHT, ResourceManager.GetTexture(textureName + "_right"));
+
+                Icons.Add(Direction.DOWN, Textures[Direction.DOWN].GetSubtexture(0, 0, TextureWidth, TextureHeight));
+                Icons.Add(Direction.UP, Textures[Direction.UP].GetSubtexture(0, 0, TextureWidth, TextureHeight));
+                Icons.Add(Direction.LEFT, Textures[Direction.LEFT].GetSubtexture(0, 0, TextureHeight, TextureWidth));
+                Icons.Add(Direction.RIGHT, Textures[Direction.RIGHT].GetSubtexture(0, 0, TextureHeight, TextureWidth));
+            }
+            else
+            {
+                Textures.Add(Direction.DOWN, ResourceManager.GetTexture(textureName));
+
+                Icons.Add(Direction.DOWN, Textures[Direction.DOWN].GetSubtexture(0, 0, TextureWidth, TextureHeight));
+            }
         }
 
         private ITileChange CreateTileChange()

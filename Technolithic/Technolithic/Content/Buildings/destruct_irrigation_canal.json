@@ -12,11 +12,6 @@
   "destructible": true,
   "movementSpeed": -1,
   "constructionTime": 25,
-  "texture": {
-    "name": "destruct_irrigation_canal",
-    "width": 16,
-    "height": 16
-  },
   "walkable_pattern": [
     [
       true

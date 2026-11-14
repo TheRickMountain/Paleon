@@ -39,6 +39,11 @@ namespace Technolithic
 
             Placement.Place(tiles, Entity);
 
+            if (BuildingTemplate.RemovesTileLayer)
+            {
+                Placement.SetMarkType(MarkType.Destruct);
+            }
+
             if (Sprite != null)
             {
                 BuildingSprite.AttachTo(Sprite, Entity, Placement);
@@ -93,6 +98,7 @@ namespace Technolithic
                 BuildingTemplate.TileChange.Apply(tileInfo.Tile);
             }
 
+            Placement.SetMarkType(MarkType.None);
             Placement.Release();
 
             RemoveFromWorld();
@@ -125,6 +131,7 @@ namespace Technolithic
                 buildLabor = null;
             }
 
+            Placement.SetMarkType(MarkType.None);
             Placement.Release();
 
             Inventory.ThrowCargo(Placement.GetCenterTile());

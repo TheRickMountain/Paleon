@@ -201,6 +201,13 @@ namespace Technolithic
             }
 
             WallsToTileLayerMigration.Apply(saveManager.Data, GetWallId);
+            FarmlandMigration.Apply(saveManager.Data, IsCrop);
+        }
+
+        private static bool IsCrop(string templateName)
+        {
+            return Engine.Instance.Buildings.TryGetValue(templateName, out BuildingTemplate template)
+                && template.BuildingType == BuildingType.FarmPlot;
         }
 
         private static int? GetWallId(string templateName)

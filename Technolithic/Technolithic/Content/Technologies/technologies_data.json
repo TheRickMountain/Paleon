@@ -193,7 +193,7 @@
     "HasIcon": true,
     "Age": "Neolithic",
     "RequiredXP": 500,
-    "UnlockedBuildings": ["pea", "oak", "barley", "dandelion", "grape_bush", "flax", "haystack"],
+    "UnlockedBuildings": ["farmland", "pea", "oak", "barley", "dandelion", "grape_bush", "flax", "haystack"],
     "Parents": []
   },
   {
@@ -210,7 +210,7 @@
     "HasIcon": true,
     "Age": "Neolithic",
     "RequiredXP": 500,
-    "UnlockedActions": ["BuildIrrigationCanal", "DestructIrrigationCanal"],
+    "UnlockedBuildings": ["build_irrigation_canal"],
     "Parents": [34]
   },
   {

@@ -1,19 +1,19 @@
 {
-  "name_key": "build_irrigation_canal",
-  "description_key": "build_irrigation_canal",
+  "name_key": "irrigation_canal",
+  "description_key": "irrigation_canal_description",
   "width": 1,
   "height": 1,
-  "type": "BuildIrrigationCanal",
-  "category": "Production",
+  "type": "IrrigationCanal",
+  "category": "Agriculture",
   "animated": false,
   "rotatable": false,
-  "cloneable": false,
+  "cloneable": true,
   "requireBuilding": true,
   "destructible": true,
   "movementSpeed": -1,
   "constructionTime": 50,
   "texture": {
-    "name": "build_irrigation_canal",
+    "name": "irrigation_canal",
     "width": 16,
     "height": 16
   },
@@ -29,7 +29,7 @@
   ],
   "ground_pattern": [
     [
-      "J"
+      "E"
     ]
   ]
 }

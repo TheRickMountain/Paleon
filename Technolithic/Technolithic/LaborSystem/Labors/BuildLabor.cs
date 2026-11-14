@@ -27,6 +27,10 @@ namespace Technolithic
 
             ToolType requiredToolType = constructionSite.BuildingTemplate.BuildingToolType;
 
+            // Animals only help where they work with a tool, e.g. plowing with a plow.
+            if (creature.CreatureType == CreatureType.Animal && requiredToolType == ToolType.None)
+                return false;
+
             if (requiredToolType != ToolType.None)
             {
                 if (creature.CreatureEquipment.HasTool(requiredToolType) == false)

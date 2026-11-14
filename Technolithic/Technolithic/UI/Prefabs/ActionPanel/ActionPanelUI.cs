@@ -22,8 +22,6 @@ namespace Technolithic
         CopySettings,
         Mine,
         Gather,
-        BuildIrrigationCanal,
-        DestructIrrigationCanal,
         None
     }
 

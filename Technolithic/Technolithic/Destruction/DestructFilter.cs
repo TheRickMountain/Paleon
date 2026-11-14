@@ -22,6 +22,8 @@ namespace Technolithic
             this.getIcon = getIcon;
         }
 
+        public virtual bool IsAvailable(ProgressTree progressTree) => true;
+
         public abstract bool Covers(Tile tile);
 
         public abstract void MarkForDestruction(Tile tile);

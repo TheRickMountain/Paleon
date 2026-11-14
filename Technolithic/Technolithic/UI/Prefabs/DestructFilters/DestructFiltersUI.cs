@@ -1,58 +1,62 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Technolithic
 {
     public class DestructFiltersUI : MyPanelUI
     {
-        private const int Padding = 8;
-        private const int TitleHeight = 32;
-        private const int RowHeight = 32;
-        private const int RowSpacing = 5;
+        public const int Padding = 8;
+        public const int TitleHeight = 32;
+        public const int RowHeight = 32;
+        public const int RowSpacing = 5;
+
+        private const int _nameX = MToggleUI.WIDTH + 5 + RowHeight + 5;
 
         public DestructFiltersUI(Scene scene) : base(scene, Localization.GetLocalizedText("destruct_filters"), Color.White)
         {
-            Dictionary<DestructFilter, MToggleUI> toggles = new Dictionary<DestructFilter, MToggleUI>();
+            Width = Math.Max(Width, _nameX + DestructFilters.All.Max(filter => MeasureText(scene, filter.Name)) + Padding * 3);
 
-            int y = Padding + TitleHeight;
+            Dictionary<DestructFilter, MNode> rows = new Dictionary<DestructFilter, MNode>();
 
-            for (int i = 0; i < DestructFilters.All.Count; i++)
+            foreach (DestructFilter filter in DestructFilters.All)
             {
-                DestructFilter filter = DestructFilters.All[i];
-
-                MToggleUI toggle = new MToggleUI(scene, DestructFilters.IsEnabled(filter));
-                toggles.Add(filter, toggle);
-
-                MNode row = CreateRow(scene, filter, toggle, hotkeyNumber: i + 1);
-                row.Y = y;
+                MNode row = CreateRow(scene, filter);
+                rows.Add(filter, row);
                 AddChildNode(row);
-
-                y += RowHeight + RowSpacing;
             }
 
-            Height = y - RowSpacing + Padding;
-
-            AddComponent(new DestructFiltersUIScript(toggles));
+            AddComponent(new DestructFiltersUIScript(rows));
         }
 
-        private MNode CreateRow(Scene scene, DestructFilter filter, MToggleUI toggle, int hotkeyNumber)
+        private static int MeasureText(Scene scene, string text)
+        {
+            MyText measure = new MyText(scene);
+            measure.Text = text;
+            return measure.TextWidth;
+        }
+
+        private MNode CreateRow(Scene scene, DestructFilter filter)
         {
             MNode row = new MNode(scene);
             row.X = Padding;
             row.Width = Width - Padding * 2;
             row.Height = RowHeight;
-            row.Tooltips = GetTooltip(filter, hotkeyNumber);
+
+            MToggleUI toggle = new MToggleUI(scene, DestructFilters.IsEnabled(filter));
+            toggle.Name = "Toggle";
 
             MImageUI icon = new MImageUI(scene);
             icon.Image.Texture = filter.Icon;
             icon.Width = RowHeight;
             icon.Height = RowHeight;
-            icon.X = toggle.Width + 5;
+            icon.X = MToggleUI.WIDTH + 5;
 
             MyText name = new MyText(scene);
             name.Text = filter.Name;
-            name.X = icon.LocalX + icon.Width + 5;
-            name.Width = row.Width - name.LocalX;
+            name.X = _nameX;
+            name.Width = row.Width - _nameX;
             name.Height = RowHeight;
 
             row.AddChildNode(toggle);
@@ -60,14 +64,6 @@ namespace Technolithic
             row.AddChildNode(name);
 
             return row;
-        }
-
-        private static string GetTooltip(DestructFilter filter, int hotkeyNumber)
-        {
-            return $"{filter.Name}\n/c[#919090]" +
-                Localization.GetLocalizedText("destruct_filter_toggle_hotkey", hotkeyNumber) + "\n" +
-                Localization.GetLocalizedText("destruct_filter_only_hotkey", hotkeyNumber) + "\n" +
-                Localization.GetLocalizedText("destruct_filter_all_hotkey") + "/cd";
         }
     }
 }

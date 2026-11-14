@@ -54,15 +54,7 @@ namespace Technolithic
             
             CreateActionButton(MyAction.Slaughter, ResourceManager.SlaughterIcon, Localization.GetLocalizedText("slaughter"), 
                 false, Keys.V);
-            
-            CreateActionButton(MyAction.BuildIrrigationCanal, TextureBank.UITexture.GetSubtexture(112, 160, 16, 16),
-                Localization.GetLocalizedText("build_irrigation_canal"), 
-                false, Keys.K);
-            
-            CreateActionButton(MyAction.DestructIrrigationCanal, TextureBank.UITexture.GetSubtexture(128, 160, 16, 16), 
-                Localization.GetLocalizedText("destruct_irrigation_canal"), 
-                false, Keys.J);
-            
+
             CreateActionButton(MyAction.Cancel, TextureBank.UITexture.GetSubtexture(48, 0, 16, 16), Localization.GetLocalizedText("cancel"), 
                 true, Keys.C);
             

@@ -1,0 +1,33 @@
+{
+  "name_key": "destruct_farmland",
+  "description_key": "destruct_farmland",
+  "width": 1,
+  "height": 1,
+  "type": "DestructFarmland",
+  "category": "None",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": false,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": 100,
+  "constructionTime": 5,
+  "toolRequired": false,
+  "connectWithOtherBlocks": false,
+  "ingredients": [],
+  "ground_pattern": [
+    [
+      "F"
+    ]
+  ],
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ]
+}

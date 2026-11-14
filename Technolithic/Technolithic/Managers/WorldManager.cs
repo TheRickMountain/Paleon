@@ -1163,32 +1163,6 @@ namespace Technolithic
                             }
                         }
                         break;
-                    case MyAction.BuildIrrigationCanal:
-                        {
-                            for (int x = 0; x < tiles.GetLength(0); x++)
-                            {
-                                for (int y = 0; y < tiles.GetLength(1); y++)
-                                {
-                                    Tile tile = tiles[x, y];
-
-                                    TryToBuild(Engine.Instance.Buildings["build_irrigation_canal"], tile.X, tile.Y, Direction.DOWN);
-                                }
-                            }
-                        }
-                        break;
-                    case MyAction.DestructIrrigationCanal:
-                        {
-                            for (int x = 0; x < tiles.GetLength(0); x++)
-                            {
-                                for (int y = 0; y < tiles.GetLength(1); y++)
-                                {
-                                    Tile tile = tiles[x, y];
-
-                                    TryToBuild(Engine.Instance.Buildings["destruct_irrigation_canal"], tile.X, tile.Y, Direction.DOWN);
-                                }
-                            }
-                        }
-                        break;
                     case MyAction.Gather:
                         for (int x = 0; x < tiles.GetLength(0); x++)
                         {
@@ -1504,7 +1478,7 @@ namespace Technolithic
                         }
                         break;
                     case MyAction.Destruct:
-                        DestructFilters.MarkForDestruction(tiles);
+                        DestructFilters.MarkForDestruction(tiles, GameplayScene.Instance.ProgressTree);
                         break;
                 }
             }
@@ -1538,7 +1512,7 @@ namespace Technolithic
                 {
                     Tile checkTile = GameplayScene.Instance.World.GetTileAt(i, j);
                     isValid = buildingManager.CheckTileByGroundPattern(buildingTemplate, localGroundPatternMatrix, 
-                        GameplayScene.Instance.World.GetTileAt(x, y), checkTile);
+                        GameplayScene.Instance.World.GetTileAt(x, y), checkTile, isCompleted == false);
                     if(isValid)
                     {
                         tiles[i - x, j - y] = checkTile;

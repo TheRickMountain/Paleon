@@ -18,7 +18,7 @@ namespace Technolithic
                 return null;
 
             return canalTemplate ??= Engine.Instance.Buildings.Values
-                .FirstOrDefault(template => template.BuildingType == BuildingType.BuildIrrigationCanal);
+                .FirstOrDefault(template => template.BuildingType == BuildingType.IrrigationCanal);
         }
 
         public void Place(Tile tile, BuildingTemplate template)

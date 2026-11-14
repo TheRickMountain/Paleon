@@ -1,0 +1,40 @@
+{
+  "name_key": "farmland",
+  "description_key": "farmland_description",
+  "width": 1,
+  "height": 1,
+  "type": "Farmland",
+  "buildingLaborType": "Plant",
+  "buildingToolType": "Plowing",
+  "category": "Agriculture",
+  "animated": false,
+  "rotatable": false,
+  "cloneable": true,
+  "requireBuilding": true,
+  "destructible": true,
+  "movementSpeed": -1,
+  "constructionTime": 20,
+  "toolRequired": false,
+  "connectWithOtherBlocks": false,
+  "texture": {
+    "name": "farmland",
+    "width": 16,
+    "height": 16
+  },
+  "ingredients": [],
+  "ground_pattern": [
+    [
+      "O"
+    ]
+  ],
+  "walkable_pattern": [
+    [
+      true
+    ]
+  ],
+  "target_pattern": [
+    [
+      false
+    ]
+  ]
+}

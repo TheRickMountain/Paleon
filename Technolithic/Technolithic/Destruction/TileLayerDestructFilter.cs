@@ -6,13 +6,20 @@ namespace Technolithic
     {
         private readonly ITileLayer layer;
         private readonly string removalTemplateKey;
+        private readonly Func<ProgressTree, bool> isAvailable;
 
         public TileLayerDestructFilter(string id, string nameKey, Func<MyTexture> getIcon, bool isEnabledByDefault,
-            ITileLayer layer, string removalTemplateKey)
+            ITileLayer layer, string removalTemplateKey, Func<ProgressTree, bool> isAvailable = null)
             : base(id, nameKey, getIcon, isEnabledByDefault)
         {
             this.layer = layer;
             this.removalTemplateKey = removalTemplateKey;
+            this.isAvailable = isAvailable;
+        }
+
+        public override bool IsAvailable(ProgressTree progressTree)
+        {
+            return isAvailable == null || isAvailable(progressTree);
         }
 
         public override bool Covers(Tile tile)

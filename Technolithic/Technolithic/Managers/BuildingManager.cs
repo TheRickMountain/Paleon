@@ -10,10 +10,13 @@ namespace Technolithic
     public class BuildingManager
     {
 
-        // The only ground pattern that may be placed on a wall, e.g. to remove it.
         private const char WallPatternId = 'W';
+        private const char PlowablePatternId = 'O';
+        private const char FarmlandPatternId = 'F';
+        private const char DiggablePatternId = 'E';
 
-        public bool CheckTileByGroundPattern(BuildingTemplate buildingTemplate, char[,] groundPatternMatrix, Tile mouseTile, Tile checkTile)
+        public bool CheckTileByGroundPattern(BuildingTemplate buildingTemplate, char[,] groundPatternMatrix, Tile mouseTile, Tile checkTile,
+            bool isConstructionSite = true)
         {
             if (mouseTile == null)
                 return false;
@@ -38,6 +41,11 @@ namespace Technolithic
                         }
 
                         if (checkTile.WallId != -1 && groundPatternId != WallPatternId)
+                        {
+                            return false;
+                        }
+
+                        if (isConstructionSite && buildingTemplate.BuildingType == BuildingType.FarmPlot && checkTile.IsFarmland == false)
                         {
                             return false;
                         }
@@ -192,6 +200,13 @@ namespace Technolithic
                     return checkTile.SurfaceId != -1;
                 case WallPatternId:
                     return checkTile.WallId != -1;
+                case PlowablePatternId:
+                    return checkTile.GroundTopType == GroundTopType.None && checkTile.SurfaceId == -1
+                        && (checkTile.GroundType == GroundType.Ground || checkTile.GroundType == GroundType.Grass);
+                case FarmlandPatternId:
+                    return checkTile.IsFarmland;
+                case DiggablePatternId:
+                    return checkTile.GroundTopType == GroundTopType.None && checkTile.SurfaceId == -1 && checkTile.IsFarmland == false;
             }
 
             return false;

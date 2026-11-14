@@ -22,7 +22,7 @@ namespace Technolithic
         WindPoweredEnergySource,
         CreaturePoweredEnergySource,
         Deposit,
-        BuildIrrigationCanal,
+        IrrigationCanal,
         DestructIrrigationCanal,
         BeeHive,
         TimeMachine,
@@ -33,6 +33,8 @@ namespace Technolithic
         Surface,
         DestructSurface,
         DestructWall,
+        Farmland,
+        DestructFarmland,
         TradingPost,
         None
     }
@@ -496,7 +498,11 @@ namespace Technolithic
                     return new PlaceTileLayer(TileLayers.Wall, this);
                 case BuildingType.DestructWall:
                     return new RemoveTileLayer(TileLayers.Wall);
-                case BuildingType.BuildIrrigationCanal:
+                case BuildingType.Farmland:
+                    return new PlaceTileLayer(TileLayers.Farmland, this);
+                case BuildingType.DestructFarmland:
+                    return new RemoveTileLayer(TileLayers.Farmland);
+                case BuildingType.IrrigationCanal:
                     return new PlaceTileLayer(TileLayers.IrrigationCanal, this);
                 case BuildingType.DestructIrrigationCanal:
                     return new RemoveTileLayer(TileLayers.IrrigationCanal);

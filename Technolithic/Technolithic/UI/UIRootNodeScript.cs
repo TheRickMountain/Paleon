@@ -465,6 +465,7 @@ namespace Technolithic
         {
             CloseEntityPanel();
 
+            destructFiltersUI.GetComponent<DestructFiltersUIScript>().Refresh(GameplayScene.Instance.ProgressTree);
             OpenEntityPanel(destructFiltersUI);
         }
 

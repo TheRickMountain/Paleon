@@ -877,7 +877,7 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/brick_path.png
 
-#begin Buildings/build_irrigation_canal.png
+#begin Buildings/irrigation_canal.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -887,7 +887,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Buildings/build_irrigation_canal.png
+/build:Buildings/irrigation_canal.png
 
 #begin Buildings/clay_barn.png
 /importer:TextureImporter
@@ -985,7 +985,7 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/dandelion.png
 
-#begin Buildings/destruct_irrigation_canal.png
+#begin Buildings/farmland.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -995,31 +995,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Buildings/destruct_irrigation_canal.png
-
-#begin Buildings/destruct_surface.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Buildings/destruct_surface.png
-
-#begin Buildings/destruct_wall.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Buildings/destruct_wall.png
+/build:Buildings/farmland.png
 
 #begin Buildings/dirt_path.png
 /importer:TextureImporter

@@ -9,6 +9,7 @@ namespace Technolithic
         public static ITileLayer Wall { get; } = new WallLayer();
         public static ITileLayer Farmland { get; } = new FarmlandLayer();
 
-        public static IReadOnlyList<ITileLayer> All { get; } = new[] { Surface, IrrigationCanal, Wall, Farmland };
+        // Top to bottom, so the first present layer is the one the player sees.
+        public static IReadOnlyList<ITileLayer> All { get; } = new[] { Wall, Surface, IrrigationCanal, Farmland };
     }
 }

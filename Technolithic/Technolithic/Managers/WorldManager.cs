@@ -527,6 +527,11 @@ namespace Technolithic
                 tileSelector.Position = GameplayScene.MouseTilePosition;
                 tileSelectorIcon.Position = GameplayScene.MouseTilePosition;
 
+                if (MInput.Keyboard.Pressed(Microsoft.Xna.Framework.Input.Keys.Q) && GameplayScene.MouseTile != null)
+                {
+                    BuildingPipette.TryPick(GameplayScene.MouseTile, GameplayScene.Instance.ProgressTree);
+                }
+
                 switch (CurrentAction)
                 {
                     case MyAction.Build:
@@ -841,17 +846,17 @@ namespace Technolithic
             }
         }
 
-        public void SetBuilding(BuildingTemplate buildingTemplate)
+        public void SetBuilding(BuildingTemplate buildingTemplate, Direction direction = Direction.DOWN)
         {
-            currentBuildingDirection = Direction.DOWN;
+            currentBuildingDirection = direction;
 
             CurrentBuildingTemplate = buildingTemplate;
 
             if (CurrentBuildingTemplate != null)
             {
-                buildingImage.Texture = CurrentBuildingTemplate.Icons[Direction.DOWN];
+                buildingImage.Texture = CurrentBuildingTemplate.Icons[direction];
 
-                buildingGroundPatternMatrix = CurrentBuildingTemplate.GroundPattern;
+                buildingGroundPatternMatrix = Utils.RotateMatrix(CurrentBuildingTemplate.GroundPattern, direction);
             }
         }
 

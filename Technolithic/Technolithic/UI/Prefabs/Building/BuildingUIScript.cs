@@ -132,12 +132,10 @@ namespace Technolithic
             if(panel.Intersects(mouseX, mouseY))
             {
                 GameplayScene.MouseOnUI = true;
-            }
 
-            if(MInput.Keyboard.Pressed(Microsoft.Xna.Framework.Input.Keys.Q))
-            {
-                if (SelectedTemplate.Cloneable &&
-                GameplayScene.Instance.ProgressTree.IsBuildingUnlocked(SelectedTemplate))
+                // Over the world, Q picks what is under the cursor instead.
+                if (MInput.Keyboard.Pressed(Microsoft.Xna.Framework.Input.Keys.Q) &&
+                    BuildingPipette.CanPick(SelectedTemplate, GameplayScene.Instance.ProgressTree))
                 {
                     CloneBuilding(true, null);
                 }
@@ -301,9 +299,7 @@ namespace Technolithic
 
         public void CloneBuilding(bool value, ButtonScript sender)
         {
-            GameplayScene.WorldManager.SetMyAction(MyAction.Build, null);
-            GameplayScene.WorldManager.SetBuilding(SelectedTemplate);
-            CloseUI();
+            BuildingPipette.Pick(SelectedTemplate, selectedConstructionSite?.Direction ?? selectedBuilding.Direction);
         }
 
         public void ChopBuilding(bool value, ButtonScript sender)
@@ -573,8 +569,7 @@ namespace Technolithic
 
             }
 
-            if (SelectedTemplate.Cloneable &&
-                GameplayScene.Instance.ProgressTree.IsBuildingUnlocked(SelectedTemplate))
+            if (BuildingPipette.CanPick(SelectedTemplate, GameplayScene.Instance.ProgressTree))
             {
                 buttonsListView.AddItem(cloneButton);
             }

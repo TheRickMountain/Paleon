@@ -68,7 +68,7 @@ namespace Technolithic
             cutChopCompletelyButton = new BigButton(ParentNode.Scene, RenderManager.Pixel, true);
             cutChopCompletelyButton.GetComponent<ButtonScript>().AddOnClickedCallback(ChopBuilding);
 
-            cloneButton = new BigButton(ParentNode.Scene, RenderManager.Pixel, false);
+            cloneButton = new BigButton(ParentNode.Scene, ResourceManager.PipetteIcon, false);
             cloneButton.Tooltips = Localization.GetLocalizedText("clone") + " [Q]";
             cloneButton.GetComponent<ButtonScript>().AddOnClickedCallback(CloneBuilding);
 
@@ -576,7 +576,6 @@ namespace Technolithic
             if (SelectedTemplate.Cloneable &&
                 GameplayScene.Instance.ProgressTree.IsBuildingUnlocked(SelectedTemplate))
             {
-                cloneButton.GetChildByName("Icon").GetComponent<MImageCmp>().Texture = SelectedTemplate.Icons[Direction.DOWN];
                 buttonsListView.AddItem(cloneButton);
             }
         }

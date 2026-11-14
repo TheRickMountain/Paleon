@@ -47,6 +47,7 @@ namespace Technolithic
         public static MyTexture ResourcesIcon { get; private set; }
         public static MyTexture CopyIcon { get; private set; }
         public static MyTexture PasteIcon { get; private set; }
+        public static MyTexture PipetteIcon { get; private set; }
         public static MyTexture TradingIcon { get; private set; }
         public static MyTexture DestructSurfaceIcon { get; private set; }
         public static MyTexture FishTexture { get; private set; }
@@ -175,6 +176,7 @@ namespace Technolithic
             FullscreenModeIcon = uiSpriteSheet.GetSubtexture(128, 144, 16, 16);
             CopyIcon = uiSpriteSheet.GetSubtexture(80, 128, 16, 16);
             PasteIcon = uiSpriteSheet.GetSubtexture(80, 144, 16, 16);
+            PipetteIcon = uiSpriteSheet.GetSubtexture(112, 160, 16, 16);
             TradingIcon = uiSpriteSheet.GetSubtexture(96, 128, 16, 16);
             AcceptIcon = uiSpriteSheet.GetSubtexture(48, 48, 16, 16);
             GearIcon = uiSpriteSheet.GetSubtexture(160, 144, 16, 16);

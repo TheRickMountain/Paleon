@@ -6,7 +6,6 @@
   "type": "FarmPlot",
   "category": "Agriculture",
   "buildingLaborType": "Plant",
-  "buildingToolType": "Plowing",
   "animated": false,
   "rotatable": false,
   "cloneable": true,

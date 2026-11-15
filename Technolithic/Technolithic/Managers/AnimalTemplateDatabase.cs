@@ -16,7 +16,8 @@ namespace Technolithic
 
         public static void Initialize()
         {
-            foreach (string file in Directory.GetFiles(Path.Combine(Engine.ContentDirectory, "Animals")))
+            // Windows lists files alphabetically, Linux in file system order; sorting keeps them the same on every platform.
+            foreach (string file in Utils.GetFilesSorted(Path.Combine(Engine.ContentDirectory, "Animals")))
             {
                 if (Path.GetExtension(file) == ".json")
                 {

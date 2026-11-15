@@ -230,7 +230,8 @@ namespace Technolithic
 
         private void ImportBuildings()
         {
-            foreach (string file in Directory.GetFiles(Path.Combine(Engine.ContentDirectory, "Buildings")))
+            // Windows lists files alphabetically, Linux in file system order; sorting keeps them the same on every platform
+            foreach (string file in Utils.GetFilesSorted(Path.Combine(Engine.ContentDirectory, "Buildings")))
             {
                 if (Path.GetExtension(file) == ".json")
                 {

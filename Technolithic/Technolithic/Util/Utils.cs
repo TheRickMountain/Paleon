@@ -34,6 +34,11 @@ namespace Technolithic
             return source ?? Enumerable.Empty<T>();
         }
 
+        public static IEnumerable<string> GetFilesSorted(string directory)
+        {
+            return Directory.GetFiles(directory).OrderBy(file => file, StringComparer.OrdinalIgnoreCase);
+        }
+
         public static T CheckAndGetCorrectEnum<T>(int checkEnumNum, T defaulValue) where T : struct, IConvertible
         {
             if(Enum.IsDefined(typeof(T), checkEnumNum))

@@ -12,7 +12,7 @@ namespace Technolithic
         private Dictionary<Item, MNode> itemsNodes;
         private Dictionary<MNode, Item> nodesItemContainers;
 
-        private Tile selectedTile;
+        private Inventory _selectedInventory;
 
         public ItemsStackUIScript() : base(true)
         {
@@ -29,19 +29,19 @@ namespace Technolithic
           
         }
 
-        public void SetItems(Tile tile)
+        public void SetItems(Inventory inventory)
         {
-            selectedTile = tile;
+            _selectedInventory = inventory;
 
             MNode listView = ParentNode.GetChildByName("ListView");
             ListViewUIScript listViewScript = listView.GetComponent<ListViewUIScript>();
             listViewScript.Clear();
 
             // Устанавливаем новые количества для предметов
-            foreach(var kvp in tile.Inventory.ItemItemContainerPair)
+            foreach(var kvp in inventory.ItemItemContainerPair)
             {
                 Item item = kvp.Key;
-                int factWeight = tile.Inventory.GetInventoryFactWeight(item);
+                int factWeight = inventory.GetInventoryFactWeight(item);
                 if (factWeight > 0)
                 {
                     // Создаем ноду, если предмет не был на складе
@@ -103,7 +103,7 @@ namespace Technolithic
 
             string info = item.GetInformation();
 
-            info += selectedTile.Inventory.GetInformation(item);
+            info += _selectedInventory.GetInformation(item);
 
             GlobalUI.ShowTooltips(info);
         }

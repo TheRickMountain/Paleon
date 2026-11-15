@@ -233,6 +233,11 @@ namespace Technolithic
             destructFiltersUI.Name = "DestructFilters";
             AddChildNode(destructFiltersUI);
 
+            TileLayerUI tileLayerUI = new TileLayerUI(scene);
+            tileLayerUI.Active = false;
+            tileLayerUI.Name = "TileLayer";
+            AddChildNode(tileLayerUI);
+
             BuildRecipeUI buildingRecipeUI = new BuildRecipeUI(scene);
             buildingRecipeUI.Active = false;
             buildingRecipeUI.Name = "BuildingRecipe";

@@ -8,6 +8,8 @@ namespace Technolithic
         private readonly string removalTemplateKey;
         private readonly Func<ProgressTree, bool> isAvailable;
 
+        public ITileLayer Layer => layer;
+
         public TileLayerDestructFilter(string id, string nameKey, Func<MyTexture> getIcon, bool isEnabledByDefault,
             ITileLayer layer, string removalTemplateKey, Func<ProgressTree, bool> isAvailable = null)
             : base(id, nameKey, getIcon, isEnabledByDefault)

@@ -860,6 +860,21 @@ namespace Technolithic
             }
         }
 
+        // A click on one tile: each next click on it selects the next thing there (creature, items, building, tile layers).
+        public void SelectNext(Tile tile)
+        {
+            UnselectAllSettlers();
+
+            selectedSelectable = GetNextSelectable(tile);
+
+            OpenUIForSelectable(selectedSelectable);
+
+            if (selectedSelectable?.SelectableType == SelectableType.Settler)
+            {
+                selectedSelectable.Entity.Get<SettlerCmp>().IsSelected = true;
+            }
+        }
+
         private SelectableCmp GetNextSelectable(Tile selectedTile)
         {
             // Если был выделен другой тайл, который не был до этого, то мы очищаем список Selectable
@@ -892,7 +907,6 @@ namespace Technolithic
             {
                 case SelectableType.Animal:
                 case SelectableType.Settler:
-                case SelectableType.Trader:
                     GameplayScene.UIRootNodeScript.OpenCreatureUI(selectable.Entity.Get<CreatureCmp>());
                     break;
                 case SelectableType.Building:
@@ -909,7 +923,12 @@ namespace Technolithic
                     }
                     break;
                 case SelectableType.ItemContainers:
-                    GameplayScene.UIRootNodeScript.OpenItemStackUI(GameplayScene.MouseTile);
+                    TileInventorySelectable inventorySelectable = selectable as TileInventorySelectable;
+                    GameplayScene.UIRootNodeScript.OpenItemStackUI(inventorySelectable.Inventory);
+                    break;
+                case SelectableType.TileLayer:
+                    TileLayerSelectable layerSelectable = selectable as TileLayerSelectable;
+                    GameplayScene.UIRootNodeScript.OpenTileLayerUI(layerSelectable.Tile, layerSelectable.Layer);
                     break;
             }
         }
@@ -1116,22 +1135,7 @@ namespace Technolithic
 
                             if (IsOnlyOneTileWasSelected(tiles))
                             {
-                                UnselectAllSettlers();
-
-                                Tile lastSelectedTile = tiles[0, 0];
-
-                                selectedSelectable = GetNextSelectable(lastSelectedTile);
-
-                                OpenUIForSelectable(selectedSelectable);
-
-                                if (selectedSelectable != null)
-                                {
-                                    if (selectedSelectable.SelectableType == SelectableType.Settler)
-                                    {
-                                        Entity settlerEntity = selectedSelectable.Entity;
-                                        settlerEntity.Get<SettlerCmp>().IsSelected = true;
-                                    }
-                                }
+                                SelectNext(tiles[0, 0]);
                             }
                             else
                             {
@@ -1597,17 +1601,23 @@ namespace Technolithic
                 queue.Enqueue(creatureSelectable);
             }
 
-            SelectableCmp itemsSelectable = GameplayScene.MouseTile.Inventory.TotalItemsCount > 0 ? new SelectableCmp(tile.X * Engine.TILE_SIZE,
-                        tile.Y * Engine.TILE_SIZE, 16, 16, SelectableType.ItemContainers) : null;
-            if(itemsSelectable != null)
+            if (tile.Inventory?.TotalItemsCount > 0)
             {
-                queue.Enqueue(itemsSelectable);
+                queue.Enqueue(new TileInventorySelectable(tile, tile.Inventory));
             }
 
             SelectableCmp entitySelectable = tile.Entity?.Get<SelectableCmp>();
             if(entitySelectable != null)
             {
                 queue.Enqueue(entitySelectable);
+            }
+
+            foreach (ITileLayer layer in TileLayers.All)
+            {
+                if (layer.GetTemplate(tile) != null)
+                {
+                    queue.Enqueue(new TileLayerSelectable(tile, layer));
+                }
             }
 
             return queue;

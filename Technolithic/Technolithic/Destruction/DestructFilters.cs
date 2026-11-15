@@ -29,6 +29,11 @@ namespace Technolithic
             return All.Where(filter => filter.IsAvailable(progressTree)).ToList();
         }
 
+        public static DestructFilter ForLayer(ITileLayer layer)
+        {
+            return All.OfType<TileLayerDestructFilter>().FirstOrDefault(filter => filter.Layer == layer);
+        }
+
         public static bool IsEnabled(DestructFilter filter)
         {
             return enabledFilters.Contains(filter);

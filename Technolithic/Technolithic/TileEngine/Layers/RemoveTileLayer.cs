@@ -4,6 +4,8 @@
     {
         private readonly ITileLayer layer;
 
+        public ITileLayer Layer => layer;
+
         public RemoveTileLayer(ITileLayer layer)
         {
             this.layer = layer;

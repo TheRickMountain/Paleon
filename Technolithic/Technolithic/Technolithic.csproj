@@ -31,10 +31,24 @@
     <Message Text="Restoring dotnet tools" Importance="High" />
     <Exec Command="dotnet tool restore" />
   </Target>
-  <ItemGroup>
+  <!-- Facepunch.Steamworks 2.4.1 is built separately for each platform: Win64 for Windows, Posix for Linux.
+       The native Steam library ships only in Release, so debug runs never touch the developer's Steam achievements. -->
+  <PropertyGroup>
+    <SteamworksPlatform Condition="$(RuntimeIdentifier.StartsWith('linux'))">Posix</SteamworksPlatform>
+    <SteamworksPlatform Condition="'$(RuntimeIdentifier)' == '' And $([MSBuild]::IsOSPlatform('Linux'))">Posix</SteamworksPlatform>
+    <SteamworksPlatform Condition="'$(SteamworksPlatform)' == ''">Win64</SteamworksPlatform>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(SteamworksPlatform)' == 'Win64'">
     <Reference Include="Facepunch.Steamworks.Win64">
       <HintPath>Facepunch\Facepunch.Steamworks.Win64.dll</HintPath>
     </Reference>
+    <None Update="Facepunch\steam_api64.dll" Link="steam_api64.dll" CopyToOutputDirectory="PreserveNewest" Condition="'$(Configuration)' == 'Release'" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(SteamworksPlatform)' == 'Posix'">
+    <Reference Include="Facepunch.Steamworks.Posix">
+      <HintPath>Facepunch\Facepunch.Steamworks.Posix.dll</HintPath>
+    </Reference>
+    <None Update="Facepunch\libsteam_api.so" Link="libsteam_api.so" CopyToOutputDirectory="PreserveNewest" Condition="'$(Configuration)' == 'Release'" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Content\Animals\*.json">
@@ -126,12 +140,6 @@
     </None>
     <None Update="Content\world_generation.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="steam_api.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="steam_api64.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="steam_appid.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

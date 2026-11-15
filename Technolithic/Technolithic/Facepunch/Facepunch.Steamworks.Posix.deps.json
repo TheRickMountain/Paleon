@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Facepunch.Steamworks.Posix/1.0.0": {
+        "runtime": {
+          "Facepunch.Steamworks.Posix.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Facepunch.Steamworks.Posix/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

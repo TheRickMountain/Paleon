@@ -527,11 +527,6 @@ namespace Technolithic
                 tileSelector.Position = GameplayScene.MouseTilePosition;
                 tileSelectorIcon.Position = GameplayScene.MouseTilePosition;
 
-                if (MInput.Keyboard.Pressed(Microsoft.Xna.Framework.Input.Keys.Q) && GameplayScene.MouseTile != null)
-                {
-                    BuildingPipette.TryPick(GameplayScene.MouseTile, GameplayScene.Instance.ProgressTree);
-                }
-
                 switch (CurrentAction)
                 {
                     case MyAction.Build:

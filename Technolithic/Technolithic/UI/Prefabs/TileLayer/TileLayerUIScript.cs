@@ -66,10 +66,11 @@ namespace Technolithic
             if (ParentNode.Intersects(mouseX, mouseY))
             {
                 GameplayScene.MouseOnUI = true;
+            }
 
-                // Over the world, Q picks what is under the cursor instead.
-                if (MInput.Keyboard.Pressed(Keys.Q) && BuildingPipette.CanPick(template, GameplayScene.Instance.ProgressTree))
-                    Pick(true, null);
+            if (MInput.Keyboard.Pressed(Keys.Q) && BuildingPipette.CanPick(template, GameplayScene.Instance.ProgressTree))
+            {
+                Pick(true, null);
             }
         }
 

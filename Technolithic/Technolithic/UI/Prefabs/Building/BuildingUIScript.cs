@@ -1,9 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework.Input;
 
 namespace Technolithic
 {
@@ -131,14 +127,12 @@ namespace Technolithic
         {
             if(panel.Intersects(mouseX, mouseY))
             {
-                GameplayScene.MouseOnUI = true;
+                GameplayScene.MouseOnUI = true;   
+            }
 
-                // Over the world, Q picks what is under the cursor instead.
-                if (MInput.Keyboard.Pressed(Microsoft.Xna.Framework.Input.Keys.Q) &&
-                    BuildingPipette.CanPick(SelectedTemplate, GameplayScene.Instance.ProgressTree))
-                {
-                    CloneBuilding(true, null);
-                }
+            if (MInput.Keyboard.Pressed(Keys.Q) && BuildingPipette.CanPick(SelectedTemplate, GameplayScene.Instance.ProgressTree))
+            {
+                CloneBuilding(true, null);
             }
         }
 

@@ -1,10 +1,6 @@
-﻿using Steamworks;
-using Steamworks.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Technolithic
 {
@@ -26,6 +22,8 @@ namespace Technolithic
                 {
                     achievementUnlocks[id] = true;
                 }
+
+                SteamAchievements.Sync(saveData);
             }
         }
 
@@ -42,14 +40,7 @@ namespace Technolithic
             GameplayScene.UIRootNodeScript?.NotificationsUI.GetComponent<NotificationsUIScript>()
                         .AddNotification(notificationMessage, NotificationLevel.ACHIEVEMENT, null);
 
-            try
-            {
-                var ach = new Achievement(id.ToString());
-                ach.Trigger();
-            }
-            catch (Exception e)
-            {
-            }
+            SteamAchievements.Unlock(id);
         }
 
         public bool IsAchievementUnlocked(AchievementId id)

@@ -29,5 +29,17 @@
             tile.IrrigateFarmland = false;
             tile.FertilizeFarmland = false;
         }
+
+        public string GetInformation(Tile tile)
+        {
+            return GetSoilInformation(tile);
+        }
+
+        public static string GetSoilInformation(Tile tile)
+        {
+            return $"{Localization.GetLocalizedText("soil")}\n" +
+                $"- {Localization.GetLocalizedText("fertilizer")}: {(int)tile.FertilizerLevel}%\n" +
+                $"- {Localization.GetLocalizedText("moisture")}: {(int)tile.MoistureLevel}%";
+        }
     }
 }

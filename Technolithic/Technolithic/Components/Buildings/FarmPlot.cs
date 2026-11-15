@@ -467,9 +467,7 @@ namespace Technolithic
             info += $"- {Localization.GetLocalizedText("growth_progress")}: {(int)growthPercent}%\n";
             info += $"- {Localization.GetLocalizedText("growth_speed")}: {GetGrowthSpeedPerDay()}% {Localization.GetLocalizedText("per_day")}\n\n";
 
-            info += $"{Localization.GetLocalizedText("soil")}\n";
-            info += $"- {Localization.GetLocalizedText("fertilizer")}: {(int)centerTile.FertilizerLevel}%\n";
-            info += $"- {Localization.GetLocalizedText("moisture")}: {(int)centerTile.MoistureLevel}%\n\n";
+            info += FarmlandLayer.GetSoilInformation(centerTile) + "\n\n";
 
             return info;
         }

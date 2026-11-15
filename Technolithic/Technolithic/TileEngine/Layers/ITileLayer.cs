@@ -9,5 +9,7 @@
         void Place(Tile tile, BuildingTemplate template);
 
         void Remove(Tile tile);
+
+        string GetInformation(Tile tile) => string.Empty;
     }
 }

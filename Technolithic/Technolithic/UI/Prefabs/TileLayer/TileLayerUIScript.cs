@@ -39,6 +39,7 @@ namespace Technolithic
 
             TileLayerUI panel = (TileLayerUI)ParentNode;
             panel.LabelUI.Text = template.Name;
+            panel.Info.Text = layer.GetInformation(tile);
             panel.FitHeight();
 
             ListViewUIScript buttons = panel.Buttons.GetComponent<ListViewUIScript>();
@@ -62,6 +63,8 @@ namespace Technolithic
             }
 
             SyncDestructButton();
+
+            ((TileLayerUI)ParentNode).Info.Text = layer.GetInformation(tile);
 
             if (ParentNode.Intersects(mouseX, mouseY))
             {

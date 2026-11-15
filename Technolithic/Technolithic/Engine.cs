@@ -56,7 +56,7 @@ namespace Technolithic
         public static RasterizerState RasterizerState { get; private set; }
 
 #if !CONSOLE
-        private static string AssemblyDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+        public static string AssemblyDirectory { get; } = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 #endif
 
         public static string ContentDirectory

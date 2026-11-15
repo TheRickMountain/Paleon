@@ -61,16 +61,20 @@ namespace Technolithic
             MainCamera = new MainCamera();
             Pixel = new MyTexture(1, 1, Color.White);
 
-            var fntData = File.ReadAllText(Path.Combine("Content", "Fonts", "default.fnt"));
-            StashDefaultFont = StaticSpriteFont.FromBMFont(fntData, fileName => File.OpenRead(fileName), graphicsDevice);
-
-            fntData = File.ReadAllText(Path.Combine("Content", "Fonts", "outlined.fnt"));
-            StashOutlinedFont = StaticSpriteFont.FromBMFont(fntData, fileName => File.OpenRead(fileName), graphicsDevice);
-
-            fntData = File.ReadAllText(Path.Combine("Content", "Fonts", "default_1.fnt"));
-            StashGameFont = StaticSpriteFont.FromBMFont(fntData, fileName => File.OpenRead(fileName), graphicsDevice);
+            StashDefaultFont = LoadBMFont("default.fnt", graphicsDevice);
+            StashOutlinedFont = LoadBMFont("outlined.fnt", graphicsDevice);
+            StashGameFont = LoadBMFont("default_1.fnt", graphicsDevice);
 
             wasInitialized = true;
+        }
+
+        private static SpriteFontBase LoadBMFont(string fntFileName, GraphicsDevice graphicsDevice)
+        {
+            string fntData = File.ReadAllText(Path.Combine(Engine.ContentDirectory, "Fonts", fntFileName));
+
+            // Page paths inside .fnt files are relative to the game directory.
+            return StaticSpriteFont.FromBMFont(fntData,
+                pagePath => File.OpenRead(Path.Combine(Engine.AssemblyDirectory, pagePath)), graphicsDevice);
         }
 
         public static void Begin(SamplerState samperState, BlendState blendState)

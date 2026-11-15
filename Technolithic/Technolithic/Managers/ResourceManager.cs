@@ -315,9 +315,7 @@ namespace Technolithic
 
         private static Dictionary<string, T> LoadContent<T>(ContentManager contentManager, string contentFolder)
         {
-            DirectoryInfo dir = new DirectoryInfo(contentManager.RootDirectory + "/" + contentFolder);
-            if (!dir.Exists)
-                throw new DirectoryNotFoundException();
+            DirectoryInfo dir = GetContentFolder(contentManager, contentFolder);
 
             Dictionary<string, T> result = new Dictionary<string, T>();
             FileInfo[] files = dir.GetFiles("*.*");
@@ -337,9 +335,7 @@ namespace Technolithic
             {
                 string contentFolder = contentFolders[i];
 
-                DirectoryInfo dir = new DirectoryInfo(contentManager.RootDirectory + "/" + contentFolder);
-                if (!dir.Exists)
-                    throw new DirectoryNotFoundException();
+                DirectoryInfo dir = GetContentFolder(contentManager, contentFolder);
 
                 FileInfo[] files = dir.GetFiles("*.*");
                 foreach (FileInfo file in files)
@@ -352,8 +348,17 @@ namespace Technolithic
                 }
             }
 
-            
+
             return result;
+        }
+
+        private static DirectoryInfo GetContentFolder(ContentManager contentManager, string contentFolder)
+        {
+            DirectoryInfo dir = new DirectoryInfo(Path.Combine(Engine.AssemblyDirectory, contentManager.RootDirectory, contentFolder));
+            if (!dir.Exists)
+                throw new DirectoryNotFoundException(dir.FullName);
+
+            return dir;
         }
 
     }

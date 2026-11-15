@@ -16,6 +16,7 @@ namespace Technolithic
         private SmallButton pauseButton;
 
         private Dictionary<SmallButton, int> speeds = new Dictionary<SmallButton, int>();
+        private List<SmallButton> speedButtonsInCycleOrder = new List<SmallButton>();
 
         private SmallButton lastSelectedButton;
 
@@ -35,15 +36,15 @@ namespace Technolithic
         {
             firstButton = (SmallButton)ParentNode.GetChildByName("First");
             firstButton.GetComponent<ButtonScript>().AddOnClickedCallback(SetTimeSpeed);
-            firstButton.Tooltips = Localization.GetLocalizedText("speed") + $" x1 [1]";
+            firstButton.Tooltips = Localization.GetLocalizedText("speed") + $" x1 [Tab]";
 
             secondButton = (SmallButton)ParentNode.GetChildByName("Second");
             secondButton.GetComponent<ButtonScript>().AddOnClickedCallback(SetTimeSpeed);
-            secondButton.Tooltips = Localization.GetLocalizedText("speed") + $" x2 [2]";
+            secondButton.Tooltips = Localization.GetLocalizedText("speed") + $" x2 [Tab]";
 
             fourthButton = (SmallButton)ParentNode.GetChildByName("Fourth");
             fourthButton.GetComponent<ButtonScript>().AddOnClickedCallback(SetTimeSpeed);
-            fourthButton.Tooltips = Localization.GetLocalizedText("speed") + $" x4 [3]";
+            fourthButton.Tooltips = Localization.GetLocalizedText("speed") + $" x4 [Tab]";
 
             pauseButton = (SmallButton)ParentNode.GetChildByName("Pause");
             pauseButton.GetComponent<ButtonScript>().AddOnClickedCallback(SetPause);
@@ -52,6 +53,10 @@ namespace Technolithic
             speeds.Add(firstButton, 1);
             speeds.Add(secondButton, 2);
             speeds.Add(fourthButton, 4);
+
+            speedButtonsInCycleOrder.Add(firstButton);
+            speedButtonsInCycleOrder.Add(secondButton);
+            speedButtonsInCycleOrder.Add(fourthButton);
 
             SetTimeSpeed(firstButton);
         }
@@ -63,22 +68,22 @@ namespace Technolithic
                 GameplayScene.MouseOnUI = true;
             }
 
-            if (MInput.Keyboard.Pressed(Keys.D1))
+            bool isAltDown = MInput.Keyboard.Check(Keys.LeftAlt) || MInput.Keyboard.Check(Keys.RightAlt);
+
+            if (MInput.Keyboard.Pressed(Keys.Tab) && isAltDown == false)
             {
-                SetTimeSpeed(firstButton);
-            }
-            else if (MInput.Keyboard.Pressed(Keys.D2))
-            {
-                SetTimeSpeed(secondButton);
-            }
-            else if (MInput.Keyboard.Pressed(Keys.D3))
-            {
-                SetTimeSpeed(fourthButton);
+                SetTimeSpeed(GetNextSpeedButton());
             }
             else if (MInput.Keyboard.Pressed(Keys.Space))
             {
                 SetPause(true, null);
             }
+        }
+
+        private SmallButton GetNextSpeedButton()
+        {
+            int index = speedButtonsInCycleOrder.IndexOf(lastSelectedButton);
+            return speedButtonsInCycleOrder[(index + 1) % speedButtonsInCycleOrder.Count];
         }
 
         private void SetTimeSpeed(bool value, ButtonScript buttonScript)

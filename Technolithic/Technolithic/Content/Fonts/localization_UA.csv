@@ -95,7 +95,7 @@ bronze_sickle,Бронзовий серп
 bronze_smelting,Виплавлення бронзи
 bronze_spear,Бронзовий спис
 building,Будівництво
-buildings,
+buildings,Будівлі
 bunch_of_peas,Зв'язування гороху
 burial,Поховання
 buying,Покупка
@@ -174,14 +174,14 @@ defense,Захист
 depends_on_wind_speed,Залежить від швидкості вітру
 deposit,Родовище
 destruct,Зруйнувати
-destruct_farmland,
-destruct_filter_all_hotkey,
-destruct_filter_only_hotkey,
-destruct_filter_toggle_hotkey,
-destruct_filters,
+destruct_farmland,Прибрати ріллю
+destruct_filter_all_hotkey,[0] Увімкнути всі фільтри
+destruct_filter_only_hotkey,[Shift+{0}] Залишити лише цей фільтр
+destruct_filter_toggle_hotkey,[{0}] Увімкнути або вимкнути
+destruct_filters,Фільтри руйнування
 destruct_irrigation_canal,Зруйнувати орошувальний канал
 destruct_surface,Зруйнувати покриття
-destruct_wall,
+destruct_wall,Зруйнувати стіну
 dirt_path,Грунтова стежина
 dirty_animal_pen,Брудний загін
 disable_all,Заборонити все
@@ -217,8 +217,8 @@ exit_to_main_menu,Вийти в головне меню
 experience_points,Досвід
 farm_plot,Фермерська ділянка
 farming,Землеробство
-farmland,
-farmland_description,
+farmland,Рілля
+farmland_description,Зорана земля. Рослини можна сіяти лише на ріллі
 felling,Вирубка
 fermenting_pot,Казан для бродіння
 fertilize,Удобрювати
@@ -277,7 +277,7 @@ hunger,Голод
 hunt,Полювати
 hunting,Мисливство
 hut,Хатина
-illumination_overlay,
+illumination_overlay,Оверлей: освітленість
 information,Інформація
 ingredients,Інгредієнти
 inventory,інвентар
@@ -296,8 +296,10 @@ iron_smithy,Залізна кузня
 iron_spear,Залізний спис
 irrigate,Зрошувати
 irrigation,Зрошення
+irrigation_canal,Орошувальний канал
+irrigation_canal_description,Проводить воду від водойми. Заповнений канал зволожує землю навколо себе
 irrigation_canals,Орошувальні канали
-irrigation_overlay,
+irrigation_overlay,Оверлей: вологість
 items,Предмети
 kiln,Піч для випалювання
 kinetic,Kinetic
@@ -338,7 +340,7 @@ moisture,Вологість
 mortar_and_pestle,Ступка з товкачиком
 mouflon,Муфлон
 movement_speed,Швидкість переміщення
-movement_speed_overlay,
+movement_speed_overlay,Оверлей: швидкість переміщення
 mudbrick,Глиняна цегла
 mudbrick_dryer,Сушарка для саману
 mudbrick_floor,Саманна підлога
@@ -362,7 +364,7 @@ oil_lamp_description,"Використовується для освітленн
 old,Старий
 open,Відчинити
 open_game_data_folder,Відкрити папку з даними гри
-optional_tools,
+optional_tools,Додаткові інструменти
 oven,Піч
 paleolithic,Палеоліт
 palisade,Частокіл
@@ -559,6 +561,7 @@ weapon,Зброя
 weaving,Ткацтво
 well,Колодязь
 wild_bee_hive,Дикий вулик бджіл
+wild_bee_hive_description,Виробляє медові стільники. Квіти поблизу прискорюють виробництво меду
 wind,Вітер
 windmill,Вітряний млин
 windmill_description,Converts wind energy into mechanical energy

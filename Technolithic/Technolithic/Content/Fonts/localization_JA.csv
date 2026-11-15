@@ -1,7 +1,7 @@
 key,translation
 None,なし
 Pick,ツルハシ
-a_wild_animal_is_about_to_attack_your_settlement,野生動物があなたの開拓地を攻撃しようとしています！
+a_wild_animal_is_about_to_attack_your_settlement,野生動物があなたの開拓地を攻撃しようとしています!
 a_wild_bee_hive_has_appeared_near_you,あなたの近くに野生のミツバチの巣が現れた
 accept,承認
 achievement_unlocked,New achievement '{0}'!
@@ -69,7 +69,7 @@ barn,牛小屋
 base_speed,基本速度
 basket,カゴ
 bee_hive,ミツバチの巣
-bee_hive_description,野生のハチの巣の２倍の効率でハチミツを生産
+bee_hive_description,野生のハチの巣の2倍の効率でハチミツを生産
 beekeeping,養蜂
 beeswax,蜜ろう
 bloomery,塊鉄炉
@@ -95,7 +95,7 @@ bronze_sickle,青銅の鎌
 bronze_smelting,青銅の製錬
 bronze_spear,青銅の槍
 building,建物
-buildings,
+buildings,建物
 bunch_of_peas,エンドウ豆の束
 burial,埋葬
 buying,購入
@@ -174,14 +174,14 @@ defense,防御
 depends_on_wind_speed,風速により異なります
 deposit,貯蔵量
 destruct,破壊
-destruct_farmland,
-destruct_filter_all_hotkey,
-destruct_filter_only_hotkey,
-destruct_filter_toggle_hotkey,
-destruct_filters,
+destruct_farmland,農地を撤去
+destruct_filter_all_hotkey,[0] すべてのフィルターをオン
+destruct_filter_only_hotkey,[Shift+{0}] このフィルターのみ残す
+destruct_filter_toggle_hotkey,[{0}] オン/オフを切り替え
+destruct_filters,破壊フィルター
 destruct_irrigation_canal,灌漑用水路の破壊
 destruct_surface,路面の破壊
-destruct_wall,
+destruct_wall,壁の破壊
 dirt_path,土砂の道
 dirty_animal_pen,汚れた動物の囲い
 disable_all,全て無効
@@ -217,8 +217,8 @@ exit_to_main_menu,メインメニューへ戻る
 experience_points,経験値
 farm_plot,農場区画
 farming,農業
-farmland,
-farmland_description,
+farmland,農地
+farmland_description,耕された土地。植物は農地にのみ播種できます
 felling,伐採
 fermenting_pot,発酵用の壺
 fertilize,肥料
@@ -277,7 +277,7 @@ hunger,飢餓
 hunt,狩猟
 hunting,狩猟
 hut,小屋
-illumination_overlay,
+illumination_overlay,オーバーレイ: 照明
 information,情報
 ingredients,材料
 inventory,所持品
@@ -296,8 +296,10 @@ iron_smithy,鉄の鍛冶場
 iron_spear,鉄の槍
 irrigate,水まき
 irrigation,灌漑
+irrigation_canal,灌漑用水路
+irrigation_canal_description,水源から水を引きます。水で満たされた水路は周囲の土壌を湿らせます
 irrigation_canals,灌漑用水路
-irrigation_overlay,
+irrigation_overlay,オーバーレイ: 水分
 items,アイテム
 kiln,窯
 kinetic,運動的
@@ -339,7 +341,7 @@ moisture,水分
 mortar_and_pestle,すり鉢とすりこぎ
 mouflon,ムフロン
 movement_speed,移動速度
-movement_speed_overlay,
+movement_speed_overlay,オーバーレイ: 移動速度
 mudbrick,泥レンガ
 mudbrick_dryer,泥レンガ乾燥機
 mudbrick_floor,日干しレンガの床
@@ -364,7 +366,7 @@ oil_lamp_description,照明に用いられ、燃料として油や動物性油�
 old,老年
 open,開く
 open_game_data_folder,ゲームデータフォルダを開く
-optional_tools,
+optional_tools,任意の道具
 oven,かまど
 paleolithic,旧石器時代
 palisade,くい柵
@@ -507,8 +509,8 @@ total_speed,合計速度
 trade,取引
 trading,交易
 trading_post,交易所
-trading_post_assortment_update,交易所の品揃えが更新されました！
-trading_post_description,商品の売買ができます。品揃えは１日に１回更新されます。
+trading_post_assortment_update,交易所の品揃えが更新されました!
+trading_post_description,商品の売買ができます。品揃えは1日に1回更新されます。
 travel_speed,移動速度
 treadmill,踏み車
 treadmill_description,動物や移民のエネルギーを機械エネルギーに変換
@@ -555,12 +557,13 @@ warm_fur_clothes,暖かい毛皮の服
 warm_knitted_clothes,暖かい編んだ服
 warm_place,温かい場所
 warp_weighted_loom,たて加重織機
-was_killed_by,|0|が{1}に殺されました
+was_killed_by,{0}が{1}に殺されました
 water_gathering_place,集水所
 weapon,武器
 weaving,織工
 well,井戸
 wild_bee_hive,野生のミツバチの巣
+wild_bee_hive_description,ハチの巣を生産。近くの花がハチミツの生産を早めます
 wind,風
 windmill,風車
 windmill_description,風力エネルギーを機械エネルギーに変換

@@ -95,7 +95,7 @@ bronze_sickle,Bronz orak
 bronze_smelting,Bronz eritme
 bronze_spear,Bronz mizrak
 building,Insa etmek
-buildings,
+buildings,Binalar
 bunch_of_peas,Bir avuc bezelye
 burial,Cenaze
 buying,Satin al
@@ -174,14 +174,14 @@ defense,Savunma
 depends_on_wind_speed,Rüzgar hizina baglidir
 deposit,Depozito
 destruct,Yik
-destruct_farmland,
-destruct_filter_all_hotkey,
-destruct_filter_only_hotkey,
-destruct_filter_toggle_hotkey,
-destruct_filters,
+destruct_farmland,Tarlayı kaldır
+destruct_filter_all_hotkey,[0] Tüm filtreleri aç
+destruct_filter_only_hotkey,[Shift+{0}] Yalnızca bu filtreyi bırak
+destruct_filter_toggle_hotkey,[{0}] Aç veya kapat
+destruct_filters,Yıkım filtreleri
 destruct_irrigation_canal,Sulama kanali yik
 destruct_surface,Yüzeyi yik
-destruct_wall,
+destruct_wall,Duvarı yık
 dirt_path,Toprak yol
 dirty_animal_pen,Kirli hayvan agili
 disable_all,Hepsini etkisiz hale getir
@@ -217,8 +217,8 @@ exit_to_main_menu,Ana menüye cik
 experience_points,Tecrübe puanlari
 farm_plot,Tarla bolgesi
 farming,Tarim
-farmland,
-farmland_description,
+farmland,Tarla
+farmland_description,Sürülmüş toprak. Bitkiler yalnızca tarlaya ekilebilir
 felling,Odunculuk
 fermenting_pot,Fermantasyon kabi
 fertilize,Gübreleme
@@ -277,7 +277,7 @@ hunger,Aclik
 hunt,Avla
 hunting,Avcilik
 hut,Kulübe
-illumination_overlay,
+illumination_overlay,Katman: Aydınlatma
 information,Information
 ingredients,Icindekiler
 inventory,Inventory
@@ -296,8 +296,10 @@ iron_smithy,Demirci
 iron_spear,Demir mizrak
 irrigate,Sulama
 irrigation,Sulama yapmak
+irrigation_canal,Sulama kanalı
+irrigation_canal_description,Bir su kaynağından su taşır. Dolu bir kanal çevresindeki toprağı nemlendirir
 irrigation_canals,Sulama kanali
-irrigation_overlay,
+irrigation_overlay,Katman: Nem
 items,Esyalar
 kiln,Seramik firini
 kinetic,Kinetik
@@ -338,7 +340,7 @@ moisture,Nem
 mortar_and_pestle,Havan tokmagi
 mouflon,Yabani koyun
 movement_speed,Hareket hizi
-movement_speed_overlay,
+movement_speed_overlay,Katman: Hareket hızı
 mudbrick,Kerpic
 mudbrick_dryer,Kerpic kurutucusu
 mudbrick_floor,Kerpic zemin
@@ -362,7 +364,7 @@ oil_lamp_description,"Aydınlatma için kullanılır, yakıt olarak yağlar ve h
 old,Yasli
 open,Ac
 open_game_data_folder,Oyunun dosyalarini ac
-optional_tools,
+optional_tools,İsteğe bağlı aletler
 oven,Firin
 paleolithic,Paleolitik
 palisade,cit
@@ -553,12 +555,13 @@ warm_fur_clothes,Kürk kiyafet
 warm_knitted_clothes,Warm knitted clothes
 warm_place,Sicak mekan
 warp_weighted_loom,Warp-Dokuma tezhagi
-was_killed_by,{0}
+was_killed_by,"{0}, {1} tarafından öldürüldü"
 water_gathering_place,Su toplama noktasi
 weapon,Silah
 weaving,Dokumacilik
 well,Kuyu
 wild_bee_hive,Yabani ari kovani
+wild_bee_hive_description,Bal peteği üretir. Yakındaki çiçekler bal üretimini hızlandırır
 wind,Rüzgar
 windmill,Rüzgargülü
 windmill_description,Converts wind energy into mechanical energy

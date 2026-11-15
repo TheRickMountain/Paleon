@@ -95,7 +95,7 @@ bronze_sickle,Faucille en bronze
 bronze_smelting,Fonderie de bronze
 bronze_spear,Lance en bronze
 building,Construction
-buildings,
+buildings,Bâtiments
 bunch_of_peas,Botte de petits pois
 burial,Enterrement
 buying,Buying
@@ -174,14 +174,14 @@ defense,Défense
 depends_on_wind_speed,Dépend de la vitesse du vent
 deposit,Dépôt
 destruct,Détruire
-destruct_farmland,
-destruct_filter_all_hotkey,
-destruct_filter_only_hotkey,
-destruct_filter_toggle_hotkey,
-destruct_filters,
+destruct_farmland,Retirer la terre labourée
+destruct_filter_all_hotkey,[0] Activer tous les filtres
+destruct_filter_only_hotkey,[Shift+{0}] Garder uniquement ce filtre
+destruct_filter_toggle_hotkey,[{0}] Activer ou désactiver
+destruct_filters,Filtres de destruction
 destruct_irrigation_canal,Détruire canal d'irrigation
 destruct_surface,Destruct surface
-destruct_wall,
+destruct_wall,Détruire le mur
 dirt_path,Chemin de terre
 dirty_animal_pen,Enclos pour animal sale
 disable_all,Désactiver tout
@@ -217,8 +217,8 @@ exit_to_main_menu,Retourner au Menu Principal
 experience_points,Points d'expérience
 farm_plot,Parcelle agricole
 farming,Agriculture
-farmland,
-farmland_description,
+farmland,Terre labourée
+farmland_description,Terre labourée. Les plantes ne peuvent être semées que sur une terre labourée
 felling,Abattage
 fermenting_pot,Jarre de fermentation
 fertilize,Fertiliser
@@ -277,7 +277,7 @@ hunger,Faim
 hunt,Chasser
 hunting,Chasse
 hut,Hutte
-illumination_overlay,
+illumination_overlay,Calque : éclairage
 information,Information
 ingredients,Ingrédients
 inventory,Inventory
@@ -296,8 +296,10 @@ iron_smithy,Forge de fer
 iron_spear,Lance en fer
 irrigate,Arroser
 irrigation,Irrigation
+irrigation_canal,Canal d'irrigation
+irrigation_canal_description,Achemine l'eau depuis un plan d'eau. Un canal rempli humidifie le sol autour de lui
 irrigation_canals,Canaux d'irrigation
-irrigation_overlay,
+irrigation_overlay,Calque : humidité
 items,Objets
 kiln,Four
 kinetic,Cinétique
@@ -338,7 +340,7 @@ moisture,Humidité
 mortar_and_pestle,Mortier et pilon
 mouflon,Mouflon
 movement_speed,Vitesse de déplacement
-movement_speed_overlay,
+movement_speed_overlay,Calque : vitesse de déplacement
 mudbrick,Brique en argile
 mudbrick_dryer,Séchoir à briques
 mudbrick_floor,Sol en argile
@@ -362,7 +364,7 @@ oil_lamp_description,"Utilisée pour l'éclairage, utilise des huiles et des gra
 old,Vieux
 open,Ouvrir
 open_game_data_folder,Ouvrir dossier données du jeu
-optional_tools,
+optional_tools,Outils facultatifs
 oven,Four
 paleolithic,Paléolithique
 palisade,Palissade
@@ -380,7 +382,7 @@ pig,Cochon
 plant,Plante
 planting,Plante
 plowing,Labour
-point_of_entry_to_a_space_which_is_enclosed_by_walls,Point d'entrée d’une zone entouré de murs
+point_of_entry_to_a_space_which_is_enclosed_by_walls,Point d'entrée d'une zone entouré de murs
 pot_of_beer,Jarre de bière
 pot_of_honey,Pot de miel
 pot_of_mead,Jarre d'hydromel
@@ -554,11 +556,12 @@ warm_knitted_clothes,Vêtement chaud tricoté
 warm_place,Endroit chaud
 warp_weighted_loom,Métier à tisser à poids de chaîne
 was_killed_by,{0} a été tué par {1}
-water_gathering_place,Zone de collecte de l’eau
+water_gathering_place,Zone de collecte de l'eau
 weapon,Arme
 weaving,Tissage
 well,Puits
 wild_bee_hive,Ruche d'abeilles sauvages
+wild_bee_hive_description,Produit des rayons de miel. Les fleurs à proximité accélèrent la production de miel
 wind,Vent
 windmill,Moulin
 windmill_description,Converts wind energy into mechanical energy

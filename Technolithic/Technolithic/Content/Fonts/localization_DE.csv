@@ -95,7 +95,7 @@ bronze_sickle,Bronzesichel
 bronze_smelting,Bronze schmelzen
 bronze_spear,Bronzespeer
 building,Bauen
-buildings,
+buildings,Gebäude
 bunch_of_peas,Bunch of peas
 burial,Beerdigung
 buying,Buying
@@ -174,14 +174,14 @@ defense,Verteidigung
 depends_on_wind_speed,Depends on wind speed
 deposit,Vorkommen
 destruct,Zerstören
-destruct_farmland,
-destruct_filter_all_hotkey,
-destruct_filter_only_hotkey,
-destruct_filter_toggle_hotkey,
-destruct_filters,
+destruct_farmland,Ackerland entfernen
+destruct_filter_all_hotkey,[0] Alle Filter einschalten
+destruct_filter_only_hotkey,[Shift+{0}] Nur diesen Filter behalten
+destruct_filter_toggle_hotkey,[{0}] Ein- oder ausschalten
+destruct_filters,Zerstörungsfilter
 destruct_irrigation_canal,Bewässerungskanal zerstören
 destruct_surface,Destruct surface
-destruct_wall,
+destruct_wall,Mauer zerstören
 dirt_path,Trampelpfad
 dirty_animal_pen,Dirty animal pen
 disable_all,Alles deaktivieren
@@ -217,8 +217,8 @@ exit_to_main_menu,Zurück ins Hauptmenü
 experience_points,Erfahrungspunkte
 farm_plot,Ackerland
 farming,Landwirtschaft
-farmland,
-farmland_description,
+farmland,Ackerland
+farmland_description,Gepflügtes Land. Pflanzen können nur auf Ackerland gesät werden
 felling,Fällen
 fermenting_pot,Gärbottich
 fertilize,Düngen
@@ -277,7 +277,7 @@ hunger,Hunger
 hunt,Jagen
 hunting,Jagen
 hut,Hütte
-illumination_overlay,
+illumination_overlay,Overlay: Beleuchtung
 information,Information
 ingredients,Zutaten
 inventory,Inventory
@@ -296,8 +296,10 @@ iron_smithy,Eisenschmiede
 iron_spear,Eisenspeer
 irrigate,Bewässern
 irrigation,Bewässerung
+irrigation_canal,Bewässerungskanal
+irrigation_canal_description,Leitet Wasser aus einem Gewässer. Ein gefüllter Kanal befeuchtet den Boden um sich herum
 irrigation_canals,Bewässerungskanäle
-irrigation_overlay,
+irrigation_overlay,Overlay: Feuchtigkeit
 items,Items
 kiln,Brennofen
 kinetic,Kinetic
@@ -338,7 +340,7 @@ moisture,Feuchtigkeit
 mortar_and_pestle,Mörser und Stößel
 mouflon,Mufflon
 movement_speed,Bewegungsgeschwindigkeit
-movement_speed_overlay,
+movement_speed_overlay,Overlay: Bewegungsgeschwindigkeit
 mudbrick,Lehmziegel
 mudbrick_dryer,Lehmziegeltrockner
 mudbrick_floor,Mudbrick floor
@@ -362,7 +364,7 @@ oil_lamp_description,"Wird zur Beleuchtung verwendet, nutzt Öle und tierische F
 old,Alt
 open,Öffnen
 open_game_data_folder,Ordner mit Spieldaten öffnen
-optional_tools,
+optional_tools,Optionale Werkzeuge
 oven,Ofen
 paleolithic,Paläolithikum
 palisade,Palisade
@@ -559,6 +561,7 @@ weapon,Waffe
 weaving,Weben
 well,Brunnen
 wild_bee_hive,Wilder Bienenstock
+wild_bee_hive_description,Produziert Honigwaben. Blumen in der Nähe beschleunigen die Honigproduktion
 wind,Wind
 windmill,Windmühle
 windmill_description,Converts wind energy into mechanical energy

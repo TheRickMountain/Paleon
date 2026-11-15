@@ -95,7 +95,7 @@ bronze_sickle,Foice de bronze
 bronze_smelting,Fundição de bronze
 bronze_spear,Lança de bronze
 building,Construção
-buildings,
+buildings,Construções
 bunch_of_peas,Bunch of peas
 burial,Sepultamento
 buying,Buying
@@ -174,14 +174,14 @@ defense,Defesa
 depends_on_wind_speed,Depends on wind speed
 deposit,Depósito
 destruct,Destruir
-destruct_farmland,
-destruct_filter_all_hotkey,
-destruct_filter_only_hotkey,
-destruct_filter_toggle_hotkey,
-destruct_filters,
+destruct_farmland,Remover terra arada
+destruct_filter_all_hotkey,[0] Ativar todos os filtros
+destruct_filter_only_hotkey,[Shift+{0}] Manter apenas este filtro
+destruct_filter_toggle_hotkey,[{0}] Ativar ou desativar
+destruct_filters,Filtros de destruição
 destruct_irrigation_canal,Destruir o canal de irrigação
 destruct_surface,Destruct surface
-destruct_wall,
+destruct_wall,Destruir o muro
 dirt_path,Caminho de terra
 dirty_animal_pen,Dirty animal pen
 disable_all,Desabilitar todos
@@ -217,8 +217,8 @@ exit_to_main_menu,Sair para o menu principal
 experience_points,Pontos de experiência
 farm_plot,Plantação
 farming,Agricultura
-farmland,
-farmland_description,
+farmland,Terra arada
+farmland_description,Terra arada. As plantas só podem ser semeadas em terra arada
 felling,Abate
 fermenting_pot,Jarro de fermentação
 fertilize,Fertilizar
@@ -277,7 +277,7 @@ hunger,Hunger
 hunt,Caçar
 hunting,Caça
 hut,Barraca
-illumination_overlay,
+illumination_overlay,Sobreposição: iluminação
 information,Information
 ingredients,Ingredientes
 inventory,Inventory
@@ -296,8 +296,10 @@ iron_smithy,Forja de ferro
 iron_spear,Lança de ferro
 irrigate,Irrigar
 irrigation,Irrigação
+irrigation_canal,Canal de irrigação
+irrigation_canal_description,Leva água de um reservatório. Um canal cheio umedece o solo ao seu redor
 irrigation_canals,Canais de irrigação
-irrigation_overlay,
+irrigation_overlay,Sobreposição: umidade
 items,Itens
 kiln,Forno
 kinetic,Kinetic
@@ -338,7 +340,7 @@ moisture,Umidade
 mortar_and_pestle,Almofariz com pilão
 mouflon,Muflão
 movement_speed,Movement speed
-movement_speed_overlay,
+movement_speed_overlay,Sobreposição: velocidade de movimento
 mudbrick,Barraca de tijolo de barro
 mudbrick_dryer,Secador de tijolos de barro
 mudbrick_floor,Mudbrick floor
@@ -362,7 +364,7 @@ oil_lamp_description,"Usado para iluminação, utiliza óleos e gorduras animais
 old,Velho
 open,Abrir
 open_game_data_folder,Abra a pasta de dados do jogo
-optional_tools,
+optional_tools,Ferramentas opcionais
 oven,Forno
 paleolithic,Paleolítico
 palisade,Paliçada
@@ -559,6 +561,7 @@ weapon,Arma
 weaving,Tecelagem
 well,Poço
 wild_bee_hive,Colmeia de abelhas selvagens
+wild_bee_hive_description,Produz favos de mel. Flores próximas aceleram a produção de mel
 wind,Wind
 windmill,Moinho de vento
 windmill_description,Converts wind energy into mechanical energy

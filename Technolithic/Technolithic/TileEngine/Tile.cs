@@ -342,7 +342,6 @@ namespace Technolithic
             this.markTileMap = markTileMap;
 
             Inventory = new Inventory(this);
-            Inventory.IsStorage = true;
             Inventory.OnItemAddedCallback += OnItemAddedCallback;
             Inventory.OnItemRemovedCallback += OnItemRemovedCallback;
 

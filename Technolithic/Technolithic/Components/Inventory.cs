@@ -76,18 +76,7 @@ namespace Technolithic
 
             OnItemRemovedCallback?.Invoke(this, item, weight);
 
-            if (IsStorage)
-            {
-                int factWeight = GetInventoryFactWeight(item);
-                if (factWeight <= 0)
-                {
-                    if (GameplayScene.WorldManager.StoragesThatHaveItemsV2.ContainsKey(item) == false)
-                        GameplayScene.WorldManager.StoragesThatHaveItemsV2.Add(item, new List<Inventory>());
-
-                    if (GameplayScene.WorldManager.StoragesThatHaveItemsV2[item].Contains(this))
-                        GameplayScene.WorldManager.StoragesThatHaveItemsV2[item].Remove(this);
-                }
-            }
+            UpdateStorageListing(item);
         }
 
         public List<ItemContainer> PopItem(Item item, int weight)
@@ -131,18 +120,7 @@ namespace Technolithic
 
             OnItemRemovedCallback?.Invoke(this, item, lastWeight);
 
-            if (IsStorage)
-            {
-                int factWeight = GetInventoryFactWeight(item);
-                if (factWeight <= 0)
-                {
-                    if (GameplayScene.WorldManager.StoragesThatHaveItemsV2.ContainsKey(item) == false)
-                        GameplayScene.WorldManager.StoragesThatHaveItemsV2.Add(item, new List<Inventory>());
-
-                    if (GameplayScene.WorldManager.StoragesThatHaveItemsV2[item].Contains(this))
-                        GameplayScene.WorldManager.StoragesThatHaveItemsV2[item].Remove(this);
-                }
-            }
+            UpdateStorageListing(item);
 
             return toPopItemContainers;
         }
@@ -233,16 +211,35 @@ namespace Technolithic
 
             OnItemAddedCallback?.Invoke(this, item, weight);
 
-            if (IsStorage)
-            {
-                int factWeight = GetInventoryFactWeight(newIC.Item);
-                if (factWeight > 0)
-                {
-                    if (GameplayScene.WorldManager.StoragesThatHaveItemsV2.ContainsKey(newIC.Item) == false)
-                        GameplayScene.WorldManager.StoragesThatHaveItemsV2.Add(newIC.Item, new List<Inventory>());
+            UpdateStorageListing(item);
+        }
 
-                    GameplayScene.WorldManager.StoragesThatHaveItemsV2[newIC.Item].Add(this);
-                }
+        private void UpdateStorageListing(Item item)
+        {
+            if (IsStorage == false)
+                return;
+
+            Dictionary<Item, List<Inventory>> storagesThatHaveItems = GameplayScene.WorldManager.StoragesThatHaveItemsV2;
+            bool hasItem = GetInventoryFactWeight(item) > 0;
+
+            if (storagesThatHaveItems.TryGetValue(item, out List<Inventory> storages) == false)
+            {
+                if (hasItem == false)
+                    return;
+
+                storages = new List<Inventory>();
+                storagesThatHaveItems.Add(item, storages);
+            }
+
+            bool isListed = storages.Contains(this);
+
+            if (hasItem && isListed == false)
+            {
+                storages.Add(this);
+            }
+            else if (hasItem == false && isListed)
+            {
+                storages.Remove(this);
             }
         }
 

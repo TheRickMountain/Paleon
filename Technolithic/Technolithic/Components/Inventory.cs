@@ -20,6 +20,7 @@ namespace Technolithic
         public Action<Inventory, Item, int> OnItemAddedCallback { get; set; }
         public Action<Inventory, Item, int> OnItemRemovedCallback { get; set; }
         public Action<Inventory, Item, int> OnItemToAddAddedCallback { get; set; }
+        public Action<Inventory, Item, int> OnReservedWeightChanged { get; set; }
 
         public Tile Tile { get; private set; }
         public ISupplyTarget SupplyTarget { get; private set; }
@@ -288,25 +289,7 @@ namespace Technolithic
             else
                 inventoryReserved[item] += weight;
 
-            int availableWeight = GetAvailableItemCount(item);
-            int roomId = GetRoom() == null ? -1 : GetRoom().Id;
-
-            if(Tile != null)
-            {
-                if (availableWeight <= 0)
-                {
-                    if (GameplayScene.WorldManager.TilesThatHaveItems[roomId].ContainsKey(item))
-                        GameplayScene.WorldManager.TilesThatHaveItems[roomId][item].Remove(this);
-                }
-                else
-                {
-                    if (GameplayScene.WorldManager.TilesThatHaveItems[roomId].ContainsKey(item) == false)
-                        GameplayScene.WorldManager.TilesThatHaveItems[roomId].Add(item, new List<Inventory>());
-
-                    if (GameplayScene.WorldManager.TilesThatHaveItems[roomId][item].Contains(this) == false)
-                        GameplayScene.WorldManager.TilesThatHaveItems[roomId][item].Add(this);
-                }
-            }
+            OnReservedWeightChanged?.Invoke(this, item, weight);
         }
 
         public int GetInventoryReservedWeight(Item item)
@@ -462,7 +445,7 @@ namespace Technolithic
                     
                 foreach (var itemContainer in PopItem(item, factWeight))
                 {
-                    tile.Inventory.AddCargo(itemContainer);
+                    tile.World.TileItems.Drop(tile, itemContainer);
                 }
             }
 
@@ -473,7 +456,7 @@ namespace Technolithic
         {
             foreach (var itemContainer in PopItem(item, weight))
             {
-                tile.Inventory.AddCargo(itemContainer);
+                tile.World.TileItems.Drop(tile, itemContainer);
             }
         }
 

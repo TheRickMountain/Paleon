@@ -11,6 +11,8 @@ namespace Technolithic
 
         public PathTileGraph<Tile> PathTileGraph { get; private set; }
 
+        public TileItemStore TileItems { get; } = new TileItemStore();
+
         private Tile[,] tiles;
         private MChunk[,] chunks;
 
@@ -49,6 +51,9 @@ namespace Technolithic
             blockTileMap = new TileMap(TextureBank.BlockTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
             itemTileMap = new TileMap(TextureBank.GroundTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
             markTileMap = new TileMap(TextureBank.UiTileset, Engine.TILE_SIZE, width, height, TerrainConnection.Individual);
+
+            TileItems.ItemAdded += OnTileItemsChanged;
+            TileItems.ItemRemoved += OnTileItemsChanged;
 
             CreateTiles();
             InitTilesNeighbours();
@@ -95,7 +100,7 @@ namespace Technolithic
                                     float durability = itemContainer.Item3;
                                     if (factWeight != 0)
                                     {
-                                        tile.Inventory.AddCargo(new ItemContainer(item, factWeight, durability));
+                                        TileItems.Drop(tile, new ItemContainer(item, factWeight, durability));
                                     }
                                 }
                             }
@@ -421,7 +426,7 @@ namespace Technolithic
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    Tile tile = new Tile(x, y, this, summerGroundTileMap, autumnGroundTileMap, winterGroundTileMap, springGroundTileMap, groundTopTileMap, surfaceTileMap, blockTileMap, itemTileMap, markTileMap);
+                    Tile tile = new Tile(x, y, this, summerGroundTileMap, autumnGroundTileMap, winterGroundTileMap, springGroundTileMap, groundTopTileMap, surfaceTileMap, blockTileMap, markTileMap);
                     tiles[x, y] = tile;
                 }
             }
@@ -694,7 +699,29 @@ namespace Technolithic
                 }
             }
 
+            foreach (Inventory pile in TileItems.Piles)
+            {
+                worldSaveData.Tiles[pile.Tile.X, pile.Tile.Y].InventoryItems = pile.GetItemsSaveData();
+            }
+
             return worldSaveData;
+        }
+
+        // The tile shows the first item it holds.
+        private void OnTileItemsChanged(Inventory pile, Item item, int weight)
+        {
+            int shownItemId = 0;
+
+            foreach (Item pileItem in pile.ItemItemContainerPair.Keys)
+            {
+                if (pile.GetInventoryFactWeight(pileItem) > 0)
+                {
+                    shownItemId = pileItem.Id;
+                    break;
+                }
+            }
+
+            itemTileMap.SetCell(pile.Tile.X, pile.Tile.Y, shownItemId);
         }
     }
 }

@@ -242,7 +242,7 @@ namespace Technolithic
                 Tile tile = GetReachableTile();
                 foreach (var itemContainer in Inventory.PopItem(item, factWeight))
                 {
-                    tile.Inventory.AddCargo(itemContainer);
+                    GameplayScene.Instance.World.TileItems.Drop(tile, itemContainer);
                 }
             }
         }

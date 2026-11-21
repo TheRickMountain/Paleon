@@ -117,7 +117,7 @@ namespace Technolithic
         public void TryToEmpty(CreatureCmp creatureCmp)
         {
             ItemContainer itemContainer = new ItemContainer(CatchedItem, 1, CatchedItem.Durability);
-            creatureCmp.Movement.CurrentTile.Inventory.AddCargo(itemContainer);
+            GameplayScene.Instance.World.TileItems.Drop(creatureCmp.Movement.CurrentTile, itemContainer);
             CatchedItem = null;
             CurrentNumberOfUses--;
 

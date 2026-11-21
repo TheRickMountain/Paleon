@@ -464,7 +464,7 @@ namespace Technolithic
 
                 if (weight > 0)
                 {
-                    TilesInfosArray[0, 0].Tile.Inventory.AddCargo(new ItemContainer(item, weight, item.Durability));
+                    GameplayScene.Instance.World.TileItems.Drop(TilesInfosArray[0, 0].Tile, new ItemContainer(item, weight, item.Durability));
                 }
             }
         }

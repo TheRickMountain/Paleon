@@ -86,7 +86,6 @@ namespace Technolithic
         private TileMap groundTopTileMap;
         private TileMap surfaceTileMap;
         private TileMap blockTileMap;
-        private TileMap itemTileMap;
         private TileMap markTileMap;
 
         private Room room;
@@ -252,8 +251,6 @@ namespace Technolithic
         public int StrengthValue { get; set; }
         public Action<Entity> OnEntityChangedCallback { get; set; }
 
-        public Inventory Inventory { get; private set; }
-
         public CreatureCmp OccupiedBy { get; set; }
 
         public int HomeArea { get; set; } = 0;
@@ -321,8 +318,8 @@ namespace Technolithic
 
         public World World { get; private set; }
 
-        public Tile(int x, int y, World world, TileMap summerGroundTileMap, TileMap autumnGroundTileMap, TileMap winterGroundTileMap, TileMap springGroundTileMap, TileMap groundTopTileMap, TileMap surfaceTileMap, TileMap blockTileMap, 
-            TileMap itemTileMap, TileMap markTileMap)
+        public Tile(int x, int y, World world, TileMap summerGroundTileMap, TileMap autumnGroundTileMap, TileMap winterGroundTileMap, TileMap springGroundTileMap, TileMap groundTopTileMap, TileMap surfaceTileMap, TileMap blockTileMap,
+            TileMap markTileMap)
         {
             X = x;
             Y = y;
@@ -338,12 +335,7 @@ namespace Technolithic
             this.groundTopTileMap = groundTopTileMap;
             this.surfaceTileMap = surfaceTileMap;
             this.blockTileMap = blockTileMap;
-            this.itemTileMap = itemTileMap;
             this.markTileMap = markTileMap;
-
-            Inventory = new Inventory(this);
-            Inventory.OnItemAddedCallback += OnItemAddedCallback;
-            Inventory.OnItemRemovedCallback += OnItemRemovedCallback;
 
             foreach(EnergyType energyType in Enum.GetValues(typeof(EnergyType)))
             {
@@ -587,77 +579,6 @@ namespace Technolithic
             return neighbourTemplate.Name == wallTemplate.Name;
         }
 
-        private void OnItemAddedCallback(Inventory senderInventory, Item item, int weight)
-        {
-            GameplayScene.WorldManager.OpenItem(item);
-
-            if(GameplayScene.WorldManager.ItemsDecayer.Inventories.Contains(Inventory) == false) 
-                GameplayScene.WorldManager.ItemsDecayer.Inventories.Add(Inventory);
-
-            UpdateTileItemView();
-
-            if (Room == null)
-                return;
-
-            int roomId = Room.Id;
-
-            if(weight > 0)
-            {
-                var tilesThatHaveItems = GameplayScene.WorldManager.TilesThatHaveItems;
-
-                if (tilesThatHaveItems[roomId].ContainsKey(item) == false)
-                {
-                    tilesThatHaveItems[roomId].Add(item, new List<Inventory>());
-                }
-
-                if(tilesThatHaveItems[roomId][item].Contains(Inventory) == false)
-                {
-                    tilesThatHaveItems[roomId][item].Add(Inventory);
-                }
-            }
-        }
-
-        private void OnItemRemovedCallback(Inventory senderInventory, Item item, int weight)
-        {
-            UpdateTileItemView();
-
-            if(Inventory.TotalItemsCount <= 0)
-            {
-                GameplayScene.WorldManager.ItemsDecayer.Inventories.Remove(Inventory);
-            }
-
-            if (Room == null)
-                return;
-
-            int roomId = Room.Id;
-
-            int availableWeight = senderInventory.GetAvailableItemCount(item);
-            if(availableWeight <= 0)
-            {
-                if(GameplayScene.WorldManager.TilesThatHaveItems[roomId].ContainsKey(item))
-                    GameplayScene.WorldManager.TilesThatHaveItems[roomId][item].Remove(senderInventory);
-            }
-        }
-
-        public void UpdateTileItemView()
-        {
-            if(Inventory.ItemItemContainerPair.Count > 0)
-            {
-                foreach(var kvp in Inventory.ItemItemContainerPair)
-                {
-                    int factWeight = Inventory.GetInventoryFactWeight(kvp.Key);
-                    
-                    if (factWeight > 0)
-                    {
-                        itemTileMap.SetCell(X, Y, kvp.Key.Id);
-                        return;
-                    }
-                }
-            }
-
-            itemTileMap.SetCell(X, Y, 0);
-        }
-
         public void UpdateMovementSpeedPercent()
         {
             MovementSpeedPercent = CalculateMovementSpeedPercent();
@@ -768,22 +689,6 @@ namespace Technolithic
             tileData.IrrigateFarmland = IrrigateFarmland;
             tileData.FertilizeFarmland = FertilizeFarmland;
             tileData.IrrigationStrength = IrrigationStrength;
-            tileData.InventoryItems = new List<Tuple<int, int, float>>();
-
-            foreach (var kvp in Inventory.ItemItemContainerPair)
-            {
-                List<ItemContainer> itemContainers = kvp.Value;
-
-                foreach(var itemContainer in itemContainers)
-                {
-                    tileData.InventoryItems.Add(Tuple.Create(itemContainer.Item.Id, itemContainer.FactWeight, itemContainer.Durability));
-                }
-            }
-
-            if(tileData.InventoryItems.Count == 0)
-            {
-                tileData.InventoryItems = null;
-            }
 
             return tileData;
         }

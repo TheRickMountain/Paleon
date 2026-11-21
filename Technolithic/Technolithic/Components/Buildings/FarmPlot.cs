@@ -317,7 +317,7 @@ namespace Technolithic
                 {
                     Item item = kvp.Key;
                     int weight = kvp.Value + additionalFruitsWeight;
-                    tile.Inventory.AddCargo(new ItemContainer(item, weight, item.Durability));
+                    GameplayScene.Instance.World.TileItems.Drop(tile, new ItemContainer(item, weight, item.Durability));
                 }
             }
         }
@@ -438,7 +438,7 @@ namespace Technolithic
                 centerTile.MoistureLevel = 100;
                 Inventory.PopItem(potOfWater, 1);
                 Item ceramicPot = ItemDatabase.GetItemByName("ceramic_pot");
-                GetReachableTile().Inventory.AddCargo(new ItemContainer(ceramicPot, 1, ceramicPot.Durability));
+                GameplayScene.Instance.World.TileItems.Drop(GetReachableTile(), new ItemContainer(ceramicPot, 1, ceramicPot.Durability));
 
                 UpdateFarmPlotView();
             }

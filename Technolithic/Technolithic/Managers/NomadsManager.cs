@@ -62,7 +62,7 @@ namespace Technolithic
             foreach(var kvp in Items)
             {
                 Tile tile = GameplayScene.Instance.World.GetTileAt(30, 30);
-                tile.Inventory.AddCargo(new ItemContainer(kvp.Key, kvp.Value, kvp.Key.Durability));
+                GameplayScene.Instance.World.TileItems.Drop(tile, new ItemContainer(kvp.Key, kvp.Value, kvp.Key.Durability));
             }
 
             Reset();

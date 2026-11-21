@@ -315,7 +315,7 @@ namespace Technolithic
                 durabilityPercent = Math.Clamp(durabilityPercent, 0f, 1f);
 
                 float realDurability = item.Durability * durabilityPercent;
-                GameplayScene.MouseTile.Inventory.AddCargo(item, weight, realDurability);
+                GameplayScene.Instance.World.TileItems.Drop(GameplayScene.MouseTile, item, weight, realDurability);
             }
         }
 

@@ -218,7 +218,7 @@ namespace Technolithic
                 {
                     Item item = (Item) tradable;
 
-                    traderCurrentTile.Inventory.AddCargo(item, tradableAmount);
+                    GameplayScene.Instance.World.TileItems.Drop(traderCurrentTile, item, tradableAmount);
                 }
                 else if(tradable is AnimalTemplate)
                 {

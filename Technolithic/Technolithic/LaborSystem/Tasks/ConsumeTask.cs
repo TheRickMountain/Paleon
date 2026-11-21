@@ -71,7 +71,7 @@ namespace Technolithic
                                 {
                                     if (string.IsNullOrEmpty(consumable.Container) == false)
                                     {
-                                        Owner.Movement.CurrentTile.Inventory.AddCargo(ItemDatabase.GetItemByName(itemToTake.Consumable.Container), 1);
+                                        GameplayScene.Instance.World.TileItems.Drop(Owner.Movement.CurrentTile, ItemDatabase.GetItemByName(itemToTake.Consumable.Container), 1);
                                     }
 
                                     if(MyRandom.ProbabilityChance(consumable.StatusEffectChance))

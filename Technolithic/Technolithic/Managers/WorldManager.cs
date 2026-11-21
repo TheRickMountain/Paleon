@@ -606,7 +606,9 @@ namespace Technolithic
                 BuildingsToDestruct.Remove(roomId);
             }
 
-            if(tile.Inventory.TotalItemsCount > 0)
+            Inventory pile = tile.World.TileItems.GetPile(tile);
+
+            if(pile?.TotalItemsCount > 0)
             {
                 if(tile.IsWalkable == false)
                 {
@@ -614,7 +616,7 @@ namespace Technolithic
 
                     if(freeTile != null)
                     {
-                        tile.Inventory.ThrowCargo(freeTile);
+                        pile.ThrowCargo(freeTile);
                     }
                 }
             }
@@ -1596,9 +1598,11 @@ namespace Technolithic
                 queue.Enqueue(creatureSelectable);
             }
 
-            if (tile.Inventory?.TotalItemsCount > 0)
+            Inventory pile = tile.World.TileItems.GetPile(tile);
+
+            if (pile?.TotalItemsCount > 0)
             {
-                queue.Enqueue(new TileInventorySelectable(tile, tile.Inventory));
+                queue.Enqueue(new TileInventorySelectable(tile, pile));
             }
 
             SelectableCmp entitySelectable = tile.Entity?.Get<SelectableCmp>();

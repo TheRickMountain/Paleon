@@ -194,7 +194,7 @@ namespace Technolithic
                     Item item = kvp.Key;
                     int weight = kvp.Value;
 
-                    GetReachableTile().Inventory.AddCargo(new ItemContainer(item, weight, item.Durability));
+                    GameplayScene.Instance.World.TileItems.Drop(GetReachableTile(), new ItemContainer(item, weight, item.Durability));
                 }
             }
 
@@ -372,7 +372,7 @@ namespace Technolithic
 
                     foreach (var itemContainer in Inventory.PopItem(item, itemCount))
                     {
-                        GetReachableTile().Inventory.AddCargo(itemContainer);
+                        GameplayScene.Instance.World.TileItems.Drop(GetReachableTile(), itemContainer);
                     }
                 }
             }

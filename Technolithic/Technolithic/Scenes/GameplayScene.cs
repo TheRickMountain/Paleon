@@ -142,8 +142,7 @@ namespace Technolithic
                 TotalResourcesChart = new TotalResourcesChart();
                 ResourcesLimitManager = new ResourcesLimitManager(null);
                 ProblemIndicatorManager = new ProblemIndicatorManager();
-                World = new World(WorldSize, WorldSize, null);
-                World.Begin(null);
+                CreateWorld(null);
                 WorldState = new WorldState(null);
                 WeatherSoundManager = new WeatherSoundManager(WorldState);
                 NomadsManager = new NomadsManager(null);
@@ -223,8 +222,7 @@ namespace Technolithic
                 ResourcesLimitManager = new ResourcesLimitManager(saveManager.Data.ResourcesLimits);
                 ProblemIndicatorManager = new ProblemIndicatorManager();
 
-                World = new World(WorldSize, WorldSize, saveManager.Data.WorldSaveData);
-                World.Begin(saveManager.Data.WorldSaveData);
+                CreateWorld(saveManager.Data.WorldSaveData);
                 WorldState = new WorldState(saveManager.Data.WorldStateSaveData);
                 WeatherSoundManager = new WeatherSoundManager(WorldState);
                 NomadsManager = new NomadsManager(saveManager.Data.NomadsManagerSaveData);
@@ -576,7 +574,7 @@ namespace Technolithic
                                     {
                                         if (ItemDatabase.GetItemById(inventoryItem.Item1) != null)
                                         {
-                                            tile.Inventory.AddCargo(new ItemContainer(ItemDatabase.GetItemById(inventoryItem.Item1),
+                                            World.TileItems.Drop(tile, new ItemContainer(ItemDatabase.GetItemById(inventoryItem.Item1),
                                                 inventoryItem.Item2, inventoryItem.Item3));
                                         }
                                     }
@@ -631,7 +629,7 @@ namespace Technolithic
                                 {
                                     if (inventoryItem.Item2 != 0)
                                     {
-                                        tile.Inventory.AddCargo(new ItemContainer(ItemDatabase.GetItemById(inventoryItem.Item1),
+                                        World.TileItems.Drop(tile, new ItemContainer(ItemDatabase.GetItemById(inventoryItem.Item1),
                                         inventoryItem.Item2, inventoryItem.Item3));
                                     }
                                 }
@@ -1310,6 +1308,14 @@ namespace Technolithic
             CreatureLayer.Add(animal);
 
             return animal.Get<AnimalCmp>();
+        }
+
+        // The tracker subscribes before Begin, so the items loaded with the world are registered too
+        private void CreateWorld(WorldSaveData worldSaveData)
+        {
+            World = new World(WorldSize, WorldSize, worldSaveData);
+            new TileItemTracker(World.TileItems, WorldManager, TotalResourcesChart);
+            World.Begin(worldSaveData);
         }
 
         public void SaveGame(string saveName, bool isAutosave)

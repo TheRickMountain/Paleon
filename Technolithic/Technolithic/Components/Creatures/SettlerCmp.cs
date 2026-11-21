@@ -568,7 +568,7 @@ namespace Technolithic
             if (throwLoot)
             {
                 Item corpse = ItemDatabase.GetItemByName("settler_corpse");
-                Movement.CurrentTile.Inventory.AddCargo(new ItemContainer(corpse, 1, corpse.Durability));
+                GameplayScene.Instance.World.TileItems.Drop(Movement.CurrentTile, new ItemContainer(corpse, 1, corpse.Durability));
             }
 
             if (string.IsNullOrEmpty(reasonMessage) == false)

@@ -62,7 +62,7 @@ namespace Technolithic
                             targetFishingPlace.CatchFish();
 
                             Item fishItem = ItemDatabase.GetItemByName("raw_fish");
-                            Owner.Movement.CurrentTile.Inventory.AddCargo(new ItemContainer(fishItem, 1, fishItem.Durability));
+                            GameplayScene.Instance.World.TileItems.Drop(Owner.Movement.CurrentTile, new ItemContainer(fishItem, 1, fishItem.Durability));
 
                             targetFishingPlace.IsReserved = false;
 

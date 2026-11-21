@@ -97,12 +97,12 @@ namespace Technolithic
                                         }
                                         else
                                         {
-                                            Owner.Movement.CurrentTile.Inventory.AddCargo(oldEquipmentItemContainer);
+                                            GameplayScene.Instance.World.TileItems.Drop(Owner.Movement.CurrentTile, oldEquipmentItemContainer);
                                         }
                                     }
                                     else // Предмет был взят с тайла
                                     {
-                                        Owner.Movement.CurrentTile.Inventory.AddCargo(oldEquipmentItemContainer);
+                                        GameplayScene.Instance.World.TileItems.Drop(Owner.Movement.CurrentTile, oldEquipmentItemContainer);
                                     }
                                 }
 

@@ -804,7 +804,7 @@ namespace Technolithic
             ProductReadyPercent = 0;
 
             Item product = AnimalTemplate.AnimalProduct.Product;
-            Movement.CurrentTile.Inventory.AddCargo(new ItemContainer(product, 1, product.Durability));
+            GameplayScene.Instance.World.TileItems.Drop(Movement.CurrentTile, new ItemContainer(product, 1, product.Durability));
         }
 
         public override void Die(string reasonMessage, bool throwLoot = true)
@@ -832,7 +832,7 @@ namespace Technolithic
                     Item item = kvp.Key;
                     int count = kvp.Value;
 
-                    tile.Inventory.AddCargo(new ItemContainer(item, count, item.Durability));
+                    GameplayScene.Instance.World.TileItems.Drop(tile, new ItemContainer(item, count, item.Durability));
                 }
             }
 

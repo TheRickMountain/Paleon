@@ -74,7 +74,7 @@ namespace Technolithic
 
                 Tile lootTile = GetCenterTile();
 
-                lootTile.Inventory.AddCargo(BuildingTemplate.Deposit.DepositResource, dropPerCollect);
+                GameplayScene.Instance.World.TileItems.Drop(lootTile, BuildingTemplate.Deposit.DepositResource, dropPerCollect);
 
                 CurrentStage++;
 

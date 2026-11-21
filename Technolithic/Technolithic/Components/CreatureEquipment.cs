@@ -278,7 +278,7 @@ namespace Technolithic
                 if (itemContainer == null)
                     continue;
 
-                tile.Inventory.AddCargo(itemContainer);
+                GameplayScene.Instance.World.TileItems.Drop(tile, itemContainer);
 
                 tools[toolType] = null;
             }
@@ -298,7 +298,7 @@ namespace Technolithic
                 throw new InvalidOperationException($"Creature has no '{toolType}' tool");
             }
 
-            tile.Inventory.AddCargo(itemContainer);
+            GameplayScene.Instance.World.TileItems.Drop(tile, itemContainer);
 
             tools[toolType] = null;
         }
@@ -310,7 +310,7 @@ namespace Technolithic
                 Item item = ClothingItemContainer.Item;
                 float durability = ClothingItemContainer.Durability;
                 ClothingItemContainer = null;
-                tile.Inventory.AddCargo(new ItemContainer(item, 1, durability));
+                GameplayScene.Instance.World.TileItems.Drop(tile, new ItemContainer(item, 1, durability));
             }
         }
 
@@ -321,7 +321,7 @@ namespace Technolithic
                 Item item = TopClothingItemContainer.Item;
                 float durability = TopClothingItemContainer.Durability;
                 TopClothingItemContainer = null;
-                tile.Inventory.AddCargo(new ItemContainer(item, 1, durability));
+                GameplayScene.Instance.World.TileItems.Drop(tile, new ItemContainer(item, 1, durability));
             }
         }
 

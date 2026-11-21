@@ -73,7 +73,7 @@ namespace Technolithic
 
             ItemContainer itemContainer = new ItemContainer(manureItem, 5, manureItem.Durability);
 
-            manureThrowTile.Inventory.AddCargo(itemContainer);
+            GameplayScene.Instance.World.TileItems.Drop(manureThrowTile, itemContainer);
         }
 
         public bool IsFullOfManure()

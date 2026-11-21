@@ -132,7 +132,7 @@ namespace Technolithic
         public void TryToEmpty(CreatureCmp creatureCmp)
         {
             Item item = ItemDatabase.GetItemByName("honeycomb");
-            creatureCmp.Movement.CurrentTile.Inventory.AddCargo(new ItemContainer(item, 1, item.Durability));
+            GameplayScene.Instance.World.TileItems.Drop(creatureCmp.Movement.CurrentTile, new ItemContainer(item, 1, item.Durability));
             IsEmpty = true;
         }
 

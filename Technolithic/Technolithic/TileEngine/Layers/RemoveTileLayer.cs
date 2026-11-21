@@ -27,7 +27,7 @@
 
                     if (weight > 0)
                     {
-                        tile.Inventory.AddCargo(new ItemContainer(item, weight, item.Durability));
+                        tile.World.TileItems.Drop(tile, new ItemContainer(item, weight, item.Durability));
                     }
                 }
             }

@@ -15,7 +15,7 @@ namespace Technolithic
         public override bool Check(CreatureCmp creature)
         {
             Item itemToTake = null;
-            Tile takeFromTile = null;
+            Inventory takeFromPile = null;
             ISupplyTarget putToBuilding = null;
             int creatureRoomId = creature.Movement.CurrentTile.Room.Id;
 
@@ -50,11 +50,11 @@ namespace Technolithic
                     continue;
 
                 itemToTake = item;
-                takeFromTile = tilesInventories[0].Tile;
+                takeFromPile = tilesInventories[0];
                 break;
             }
 
-            if (itemToTake == null || takeFromTile == null || putToBuilding == null)
+            if (itemToTake == null || takeFromPile == null || putToBuilding == null)
                 return false;
 
             if (creature.CreatureEquipment.HasTool(ToolType.Hauling) == false)
@@ -75,7 +75,7 @@ namespace Technolithic
                 }
             }
 
-            int tileAvailableWeight = takeFromTile.Inventory.GetAvailableItemCount(itemToTake);
+            int tileAvailableWeight = takeFromPile.GetAvailableItemCount(itemToTake);
 
             int weightToTake;
 
@@ -100,7 +100,7 @@ namespace Technolithic
                 throw new Exception("Weight to take can't be lower than 0!");
             }
 
-            SupplyFromTileTask supplyTask = new SupplyFromTileTask(creature, takeFromTile, putToBuilding, itemToTake, weightToTake);
+            SupplyFromTileTask supplyTask = new SupplyFromTileTask(creature, takeFromPile, putToBuilding, itemToTake, weightToTake);
             AddTask(creature, supplyTask);
 
             return true;

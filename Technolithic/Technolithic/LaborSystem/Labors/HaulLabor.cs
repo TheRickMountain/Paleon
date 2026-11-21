@@ -15,7 +15,7 @@ namespace Technolithic
         public override bool Check(CreatureCmp creature)
         {
             Item itemToTake = null;
-            Tile takeFromTile = null;
+            Inventory takeFromPile = null;
             StorageBuildingCmp putToStorage = null;
             int creatureRoomId = creature.Movement.CurrentTile.Room.Id;
 
@@ -47,11 +47,11 @@ namespace Technolithic
                     continue;
 
                 itemToTake = item;
-                takeFromTile = tilesInventories[0].Tile;
+                takeFromPile = tilesInventories[0];
                 break;
             }
 
-            if (itemToTake == null || takeFromTile == null || putToStorage == null)
+            if (itemToTake == null || takeFromPile == null || putToStorage == null)
                 return false;
 
             if (creature.CreatureEquipment.HasTool(ToolType.Hauling) == false)
@@ -73,7 +73,7 @@ namespace Technolithic
             }
 
             // Вычисляем, сколько предметов может взять поселенец
-            int tileAvailableWeight = takeFromTile.Inventory.GetAvailableItemCount(itemToTake);
+            int tileAvailableWeight = takeFromPile.GetAvailableItemCount(itemToTake);
 
             int weightToTake;
 
@@ -94,7 +94,7 @@ namespace Technolithic
                 weightToTake = storageEmptySpaceCount;
             }
 
-            HaulTask haulTask = new HaulTask(creature, putToStorage, takeFromTile, itemToTake, weightToTake);
+            HaulTask haulTask = new HaulTask(creature, putToStorage, takeFromPile, itemToTake, weightToTake);
             AddTask(creature, haulTask);
 
             return true;

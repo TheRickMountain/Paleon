@@ -9,7 +9,7 @@ namespace Technolithic
     public class SupplyFromTileTask : ToolRequiredTask
     {
 
-        private Tile takeFromTile;
+        private Inventory takeFromPile;
         private ISupplyTarget putToBuilding;
         private Item itemToSupply;
         private int weightToSupply;
@@ -18,13 +18,13 @@ namespace Technolithic
 
         private bool cancelWasCalled = false;
 
-        public SupplyFromTileTask(CreatureCmp creature, Tile takeFromTile, ISupplyTarget putToBuilding, Item item, int weight)
+        public SupplyFromTileTask(CreatureCmp creature, Inventory takeFromPile, ISupplyTarget putToBuilding, Item item, int weight)
             : base(creature, ToolType.Hauling)
         {
-            takeFromTile.Inventory.ReserveItemWeight(item, weight);
+            takeFromPile.ReserveItemWeight(item, weight);
             putToBuilding.Inventory.AddToAddWeight(item, weight);
 
-            this.takeFromTile = takeFromTile;
+            this.takeFromPile = takeFromPile;
             this.putToBuilding = putToBuilding;
             itemToSupply = item;
             weightToSupply = weight;
@@ -33,7 +33,7 @@ namespace Technolithic
 
         public override void Begin()
         {
-            takeFromTile.Inventory.OnItemRemovedCallback += OnTileInventoryItemRemoved;
+            takeFromPile.OnItemRemovedCallback += OnTileInventoryItemRemoved;
             putToBuilding.Inventory.OnRequiredItemWeightChanged += OnPutToBuildingRequiredWeightChanged;
             putToBuilding.OnRemovedCallback += OnSupplyTargetRemoved;
         }
@@ -42,7 +42,7 @@ namespace Technolithic
         {
             base.BeforeUpdate();
 
-            Owner.Movement.SetPath(takeFromTile, false);
+            Owner.Movement.SetPath(takeFromPile.Tile, false);
         }
 
         public override void UpdateTask()
@@ -60,14 +60,14 @@ namespace Technolithic
 
                         if (itemWasTaken == false)
                         {
-                            takeFromTile.Inventory.OnItemRemovedCallback -= OnTileInventoryItemRemoved;
+                            takeFromPile.OnItemRemovedCallback -= OnTileInventoryItemRemoved;
 
-                            foreach (var itemContainer in takeFromTile.Inventory.PopItem(itemToSupply, weightToSupply))
+                            foreach (var itemContainer in takeFromPile.PopItem(itemToSupply, weightToSupply))
                             {
                                 Owner.Inventory.AddCargo(itemContainer);
                             }
 
-                            takeFromTile.Inventory.ReserveItemWeight(itemToSupply, -weightToSupply);
+                            takeFromPile.ReserveItemWeight(itemToSupply, -weightToSupply);
 
                             itemWasTaken = true;
 
@@ -149,7 +149,7 @@ namespace Technolithic
 
                     if (itemWasTaken == false)
                     {
-                        takeFromTile.Inventory.ReserveItemWeight(itemToSupply, -unrequiredWeight);
+                        takeFromPile.ReserveItemWeight(itemToSupply, -unrequiredWeight);
                     }
                     else
                     {
@@ -174,8 +174,8 @@ namespace Technolithic
 
                 if (itemWasTaken == false)
                 {
-                    takeFromTile.Inventory.OnItemRemovedCallback -= OnTileInventoryItemRemoved;
-                    takeFromTile.Inventory.ReserveItemWeight(itemToSupply, -weightToSupply);
+                    takeFromPile.OnItemRemovedCallback -= OnTileInventoryItemRemoved;
+                    takeFromPile.ReserveItemWeight(itemToSupply, -weightToSupply);
                 }
                 else
                 {

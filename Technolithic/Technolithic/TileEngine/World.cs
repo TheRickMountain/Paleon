@@ -417,6 +417,8 @@ namespace Technolithic
             tileMapCamMin.Y = Math.Max(0, yCamPoint);
             tileMapCamMax.X = Math.Min(xViewPort + 1, chunkColumns);
             tileMapCamMax.Y = Math.Min(yViewPort + 1, chunkRows);
+
+            TileItems.RemoveEmptyPiles();
         }
 
         private void CreateTiles()

@@ -6,6 +6,7 @@ namespace Technolithic
     public class TileItemStore
     {
         private readonly Dictionary<Tile, Inventory> piles = new Dictionary<Tile, Inventory>();
+        private readonly HashSet<Inventory> emptyPiles = new HashSet<Inventory>();
 
         public event Action<Inventory, Item, int> ItemAdded;
         public event Action<Inventory, Item, int> ItemRemoved;
@@ -31,6 +32,32 @@ namespace Technolithic
         public void Drop(Tile tile, Item item, int weight, float durability)
         {
             Drop(tile, new ItemContainer(item, weight, durability));
+        }
+
+        public void RemoveEmptyPiles()
+        {
+            if (emptyPiles.Count == 0)
+                return;
+
+            List<Inventory> candidates = new List<Inventory>(emptyPiles);
+            emptyPiles.Clear();
+
+            foreach (Inventory pile in candidates)
+            {
+                if (IsEmptyAndUnreserved(pile) == false)
+                    continue;
+
+                piles.Remove(pile.Tile);
+
+                pile.OnItemAddedCallback -= OnPileItemAdded;
+                pile.OnItemRemovedCallback -= OnPileItemRemoved;
+                pile.OnReservedWeightChanged -= OnPileReservedWeightChanged;
+            }
+        }
+
+        private static bool IsEmptyAndUnreserved(Inventory pile)
+        {
+            return pile.TotalItemsCount <= 0 && pile.TotalReservedCount <= 0;
         }
 
         private Inventory GetOrCreatePile(Tile tile)
@@ -60,11 +87,21 @@ namespace Technolithic
         private void OnPileItemRemoved(Inventory pile, Item item, int weight)
         {
             ItemRemoved?.Invoke(pile, item, weight);
+
+            RememberIfEmpty(pile);
         }
 
         private void OnPileReservedWeightChanged(Inventory pile, Item item, int weight)
         {
             ReservedWeightChanged?.Invoke(pile, item, weight);
+
+            RememberIfEmpty(pile);
+        }
+
+        private void RememberIfEmpty(Inventory pile)
+        {
+            if (IsEmptyAndUnreserved(pile))
+                emptyPiles.Add(pile);
         }
     }
 }

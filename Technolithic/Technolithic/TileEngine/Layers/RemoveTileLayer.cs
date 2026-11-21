@@ -15,6 +15,9 @@
         {
             BuildingTemplate removedTemplate = layer.GetTemplate(tile);
 
+            // Removed before the refund: a wall tile has no room yet, so haulers would never find items dropped on it
+            layer.Remove(tile);
+
             if (removedTemplate != null)
             {
                 foreach (var kvp in removedTemplate.BuildingRecipe)
@@ -28,8 +31,6 @@
                     }
                 }
             }
-
-            layer.Remove(tile);
         }
     }
 }

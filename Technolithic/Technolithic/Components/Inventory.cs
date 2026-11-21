@@ -29,7 +29,9 @@ namespace Technolithic
         public int TotalItemsCount { get; private set; }
         public int TotalReservedCount { get; private set; }
 
-        public bool IsStorage { get; set; } = true;
+        // Storages are listed in WorldManager.StoragesThatHaveItemsV2 by the items they hold
+        public bool IsStorage { get; set; }
+        public bool CountsInTotalResourcesChart { get; set; } = true;
 
         public Inventory(Tile tile)
         {
@@ -65,7 +67,7 @@ namespace Technolithic
 
             inventoryFactWeight[item] -= itemContainer.FactWeight;
 
-            if (IsStorage)
+            if (CountsInTotalResourcesChart)
                 GameplayScene.Instance.TotalResourcesChart.AddItem(item, -weight);
 
             inventoryItemContainers.Remove(itemContainer);
@@ -97,7 +99,7 @@ namespace Technolithic
 
             inventoryFactWeight[item] -= weight;
 
-            if (IsStorage)
+            if (CountsInTotalResourcesChart)
                 GameplayScene.Instance.TotalResourcesChart.AddItem(item, -weight);
 
             foreach (var itemContainer in inventoryItemContainers)
@@ -166,7 +168,7 @@ namespace Technolithic
             Item item = newIC.Item;
             int weight = newIC.FactWeight;
 
-            if(IsStorage)
+            if (CountsInTotalResourcesChart)
                 GameplayScene.Instance.TotalResourcesChart.AddItem(item, weight);
 
             if (inventoryFactWeight.ContainsKey(item) == false)

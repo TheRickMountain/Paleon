@@ -108,7 +108,7 @@ namespace Technolithic
             consumptionString = Localization.GetLocalizedText("consumption");
 
             Inventory = new Inventory(this);
-            Inventory.IsStorage = false;
+            Inventory.CountsInTotalResourcesChart = false;
 
             Sprite = BuildingSprite.Create(buildingTemplate, Direction);
         }

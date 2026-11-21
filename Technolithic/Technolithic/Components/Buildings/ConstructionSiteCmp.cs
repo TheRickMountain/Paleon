@@ -27,7 +27,7 @@ namespace Technolithic
             Placement = new BuildingPlacement(buildingTemplate, direction);
 
             Inventory = new Inventory(this);
-            Inventory.IsStorage = false;
+            Inventory.CountsInTotalResourcesChart = false;
 
             Sprite = BuildingSprite.Create(buildingTemplate, Placement.Direction);
         }

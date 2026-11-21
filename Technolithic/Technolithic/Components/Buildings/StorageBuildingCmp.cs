@@ -94,6 +94,7 @@ namespace Technolithic
 
             filters = new Dictionary<Item, bool>();
 
+            Inventory.CountsInTotalResourcesChart = true;
             Inventory.IsStorage = true;
 
             GameplayScene.WorldManager.StorageManager.AddStorage(this);
